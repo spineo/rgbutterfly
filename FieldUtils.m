@@ -1,0 +1,101 @@
+//
+//  FieldUtils.m
+//  AcrylicsColorPicker
+//
+//  Created by Stuart Pineo on 7/3/15.
+//  Copyright (c) 2015 Stuart Pineo. All rights reserved.
+//
+
+#import "FieldUtils.h"
+#import "GlobalSettings.h"
+
+@implementation FieldUtils
+
++ (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
+    
+    CGFloat width = [name length] * 8;
+    width = (width > DEF_LABEL_WIDTH) ? width : DEF_LABEL_WIDTH;
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
+
+    [label setText:name];
+    [label setBackgroundColor: DARK_TEXT_COLOR];
+    [label setTextColor: LIGHT_TEXT_COLOR];
+    [label setTextAlignment:NSTextAlignmentLeft];
+    [label setFont: ITALIC_FONT];
+
+    return label;
+}
+
++ (UILabel *)createSmallLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
+
+    UILabel *label = [self createLabel:name xOffset:x yOffset:y];
+    [label setFont: SMALL_FONT];
+    
+    return label;
+}
+
++ (UILabel *)createLargeLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
+
+    UILabel *label = [self createLabel:name xOffset:x yOffset:y];
+    [label setFont: LARGE_BOLD_FONT];
+    
+    return label;
+}
+
++ (UITextField *)createTextField:(NSString *)name tag:(NSInteger)tag {
+    
+    UITextField *textField = [[UITextField alloc] init];
+    [textField setBackgroundColor: LIGHT_BG_COLOR];
+    [textField setTextColor: DARK_TEXT_COLOR];
+    [textField.layer setCornerRadius: DEF_CORNER_RADIUS];
+    [textField.layer setBorderWidth: DEF_BORDER_WIDTH];
+    [textField setTag: tag];
+    [textField setTextAlignment:NSTextAlignmentLeft];
+    [textField setClearButtonMode: UITextFieldViewModeWhileEditing];
+    [textField setFont: TEXT_FIELD_FONT];
+    [textField setText:name];
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+    [textField      setLeftView: paddingView];
+    [textField      setLeftViewMode: UITextFieldViewModeAlways];
+    
+    // Allow for rotation
+    //
+    [textField setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+    
+    return textField;
+}
+
++ (UITextView *)createTextView:(NSString *)name tag:(NSInteger)tag {
+    
+    UITextView *textView = [[UITextView alloc] init];
+    [textView setBackgroundColor: LIGHT_BG_COLOR];
+    [textView setTextColor: DARK_TEXT_COLOR];
+    [textView.layer setCornerRadius: DEF_CORNER_RADIUS];
+    [textView.layer setBorderWidth: DEF_BORDER_WIDTH];
+    [textView setTag: tag];
+    [textView setTextAlignment:NSTextAlignmentLeft];
+    [textView setFont: TEXT_FIELD_FONT];
+    [textView setText:name];
+    [textView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
+    
+    return textView;
+}
+
++ (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag {
+    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, DEF_PICKER_HEIGHT)];
+    [pickerView setBackgroundColor: DARK_BG_COLOR];
+    [pickerView setShowsSelectionIndicator:YES];
+    [pickerView setTag:tag];
+    
+    return pickerView;
+}
+
+- (UIPickerView *)createColorPicker:(CGFloat)width tag:(int)tagnum selRow:(int)selectRow {
+    UIPickerView *colorPicker     = [FieldUtils createPickerView:width tag:tagnum];
+
+    return colorPicker;
+}
+
+@end

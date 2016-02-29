@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="GlobalSettings" syncable="YES">
+        <attribute name="backup_schedule" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="7" syncable="YES"/>
+        <attribute name="backup_time" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="23" defaultValueString="23" syncable="YES"/>
+        <attribute name="can_add_swatch_types" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="icloud_sync" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="is_ref_data_editable" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="num_matches_to_show" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tap_area_shape" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tap_area_size" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="PaintSwatches" syncable="YES">
+        <attribute name="abbr_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blue" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" syncable="YES"/>
+        <attribute name="brightness" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" syncable="YES"/>
+        <attribute name="create_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deg_hue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="360" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="green" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" syncable="YES"/>
+        <attribute name="hue" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" syncable="YES"/>
+        <attribute name="image_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="image_thumb" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="last_update" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="red" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="ref_source_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="saturation" optional="YES" attributeType="Float" minValueString="0" maxValueString="1" syncable="YES"/>
+        <attribute name="type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GlobalSettings" positionX="27" positionY="225" width="128" height="165"/>
+        <element name="PaintSwatches" positionX="-351" positionY="-99" width="128" height="300"/>
+    </elements>
+</model>

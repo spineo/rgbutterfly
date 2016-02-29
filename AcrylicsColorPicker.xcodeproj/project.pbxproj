@@ -1,0 +1,915 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
+		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
+		21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E561C8481C5001C3F05 /* MatchTableViewController.m */; };
+		21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E5A1C848259001C3F05 /* AddMixTableViewController.m */; };
+		21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E5C1C848259001C3F05 /* AddMixViewController.m */; };
+		21397E611C848272001C3F05 /* AssocTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E601C848272001C3F05 /* AssocTableViewController.m */; };
+		21397E631C8482E1001C3F05 /* colorwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 21397E621C8482E1001C3F05 /* colorwheel.png */; };
+		21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E651C848308001C3F05 /* MatchAlgorithms.m */; };
+		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
+		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
+		21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */; };
+		21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */; };
+		21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E711C848370001C3F05 /* AssocTableViewCell.m */; };
+		21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */; };
+		21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E781C84839E001C3F05 /* ACPPaintSwatches.m */; };
+		21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7C1C8483C6001C3F05 /* MixAssociations.m */; };
+		21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */; };
+		21397E831C848407001C3F05 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E821C848407001C3F05 /* CollectionViewController.m */; };
+		21397E861C848457001C3F05 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21397E841C848457001C3F05 /* PaintSwatchType.txt */; };
+		21397E871C848457001C3F05 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21397E851C848457001C3F05 /* SubjectiveColor.txt */; };
+		21397E9A1C8484D7001C3F05 /* ACPString.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E891C8484D7001C3F05 /* ACPString.m */; };
+		21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8B1C8484D7001C3F05 /* AlertUtils.m */; };
+		21397E9C1C8484D7001C3F05 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */; };
+		21397E9D1C8484D7001C3F05 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8F1C8484D7001C3F05 /* ColorUtils.m */; };
+		21397E9E1C8484D7001C3F05 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E911C8484D7001C3F05 /* CoreDataUtils.m */; };
+		21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E931C8484D7001C3F05 /* FieldUtils.m */; };
+		21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E951C8484D7001C3F05 /* GenericUtils.m */; };
+		21397EA11C8484D7001C3F05 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */; };
+		21397EA21C8484D7001C3F05 /* StringObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E991C8484D7001C3F05 /* StringObjectUtils.m */; };
+		21397EB31C848551001C3F05 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA41C848551001C3F05 /* Keyword.m */; };
+		21397EB41C848551001C3F05 /* MatchAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA61C848551001C3F05 /* MatchAssociation.m */; };
+		21397EB51C848551001C3F05 /* MixAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA81C848551001C3F05 /* MixAssociation.m */; };
+		21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAA1C848551001C3F05 /* MixAssocSwatch.m */; };
+		21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAC1C848551001C3F05 /* PaintSwatches.m */; };
+		21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */; };
+		21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EB01C848551001C3F05 /* PaintSwatchType.m */; };
+		21397EBA1C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */; };
+		21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */; };
+		21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */; };
+		21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC01C8485B6001C3F05 /* SwatchKeyword.m */; };
+		21397ECA1C8485B6001C3F05 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC21C8485B6001C3F05 /* TapArea.m */; };
+		21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */; };
+		21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */; };
+		21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ECE1C848674001C3F05 /* ImageTableViewController.m */; };
+		21397ED81C848674001C3F05 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED01C848674001C3F05 /* PickerViewController.m */; };
+		21397ED91C848674001C3F05 /* SwatchDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED21C848674001C3F05 /* SwatchDetailTableViewController.m */; };
+		21397EDA1C848674001C3F05 /* UIImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED41C848674001C3F05 /* UIImageViewController.m */; };
+		21397EDB1C848674001C3F05 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED61C848674001C3F05 /* ViewController.m */; };
+		21397EDD1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 21397EDC1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements */; };
+		21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21397EDE1C8486ED001C3F05 /* Main.storyboard */; };
+		21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EE11C84876D001C3F05 /* GlobalSettings.m */; };
+		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
+		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
+		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		210C89811A9F6C440003CC85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210C89661A9F6C440003CC85;
+			remoteInfo = AcrylicsColorPicker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcrylicsColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
+		21397E0E1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker 2 v4.0.51.xcdatamodel"; sourceTree = "<group>"; };
+		21397E0F1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.52.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker 2 v4.0.52.xcdatamodel"; sourceTree = "<group>"; };
+		21397E101C84813E001C3F05 /* AcrylicsColorPicker v3.1.10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.10.xcdatamodel"; sourceTree = "<group>"; };
+		21397E111C84813E001C3F05 /* AcrylicsColorPicker v3.1.11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.11.xcdatamodel"; sourceTree = "<group>"; };
+		21397E121C84813E001C3F05 /* AcrylicsColorPicker v3.1.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.2.xcdatamodel"; sourceTree = "<group>"; };
+		21397E131C84813E001C3F05 /* AcrylicsColorPicker v3.1.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.3.xcdatamodel"; sourceTree = "<group>"; };
+		21397E141C84813E001C3F05 /* AcrylicsColorPicker v3.1.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.4.xcdatamodel"; sourceTree = "<group>"; };
+		21397E151C84813E001C3F05 /* AcrylicsColorPicker v3.1.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.5.xcdatamodel"; sourceTree = "<group>"; };
+		21397E161C84813E001C3F05 /* AcrylicsColorPicker v3.1.6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.6.xcdatamodel"; sourceTree = "<group>"; };
+		21397E171C84813E001C3F05 /* AcrylicsColorPicker v3.1.7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.7.xcdatamodel"; sourceTree = "<group>"; };
+		21397E181C84813E001C3F05 /* AcrylicsColorPicker v3.1.8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.8.xcdatamodel"; sourceTree = "<group>"; };
+		21397E191C84813E001C3F05 /* AcrylicsColorPicker v3.1.9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.1.9.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1A1C84813E001C3F05 /* AcrylicsColorPicker v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v3.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.0.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.1.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.10.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.11.xcdatamodel"; sourceTree = "<group>"; };
+		21397E1F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.12.xcdatamodel"; sourceTree = "<group>"; };
+		21397E201C84813E001C3F05 /* AcrylicsColorPicker v4.0.13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.13.xcdatamodel"; sourceTree = "<group>"; };
+		21397E211C84813E001C3F05 /* AcrylicsColorPicker v4.0.14.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.14.xcdatamodel"; sourceTree = "<group>"; };
+		21397E221C84813E001C3F05 /* AcrylicsColorPicker v4.0.15.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.15.xcdatamodel"; sourceTree = "<group>"; };
+		21397E231C84813E001C3F05 /* AcrylicsColorPicker v4.0.16.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.16.xcdatamodel"; sourceTree = "<group>"; };
+		21397E241C84813E001C3F05 /* AcrylicsColorPicker v4.0.17.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.17.xcdatamodel"; sourceTree = "<group>"; };
+		21397E251C84813E001C3F05 /* AcrylicsColorPicker v4.0.18.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.18.xcdatamodel"; sourceTree = "<group>"; };
+		21397E261C84813E001C3F05 /* AcrylicsColorPicker v4.0.19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.19.xcdatamodel"; sourceTree = "<group>"; };
+		21397E271C84813E001C3F05 /* AcrylicsColorPicker v4.0.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.2.xcdatamodel"; sourceTree = "<group>"; };
+		21397E281C84813E001C3F05 /* AcrylicsColorPicker v4.0.20.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.20.xcdatamodel"; sourceTree = "<group>"; };
+		21397E291C84813E001C3F05 /* AcrylicsColorPicker v4.0.21.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.21.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.22.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.22.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.23.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.23.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.24.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.24.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.25.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.25.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.26.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.26.xcdatamodel"; sourceTree = "<group>"; };
+		21397E2F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.27.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.27.xcdatamodel"; sourceTree = "<group>"; };
+		21397E301C84813E001C3F05 /* AcrylicsColorPicker v4.0.28.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.28.xcdatamodel"; sourceTree = "<group>"; };
+		21397E311C84813E001C3F05 /* AcrylicsColorPicker v4.0.29.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.29.xcdatamodel"; sourceTree = "<group>"; };
+		21397E321C84813E001C3F05 /* AcrylicsColorPicker v4.0.3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.3.xcdatamodel"; sourceTree = "<group>"; };
+		21397E331C84813E001C3F05 /* AcrylicsColorPicker v4.0.30.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.30.xcdatamodel"; sourceTree = "<group>"; };
+		21397E341C84813E001C3F05 /* AcrylicsColorPicker v4.0.31.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.31.xcdatamodel"; sourceTree = "<group>"; };
+		21397E351C84813E001C3F05 /* AcrylicsColorPicker v4.0.32.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.32.xcdatamodel"; sourceTree = "<group>"; };
+		21397E361C84813E001C3F05 /* AcrylicsColorPicker v4.0.33.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.33.xcdatamodel"; sourceTree = "<group>"; };
+		21397E371C84813E001C3F05 /* AcrylicsColorPicker v4.0.34.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.34.xcdatamodel"; sourceTree = "<group>"; };
+		21397E381C84813E001C3F05 /* AcrylicsColorPicker v4.0.35.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.35.xcdatamodel"; sourceTree = "<group>"; };
+		21397E391C84813E001C3F05 /* AcrylicsColorPicker v4.0.36.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.36.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.37.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.37.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.38.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.38.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.39.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.39.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.4.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.40.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.40.xcdatamodel"; sourceTree = "<group>"; };
+		21397E3F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.41.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.41.xcdatamodel"; sourceTree = "<group>"; };
+		21397E401C84813E001C3F05 /* AcrylicsColorPicker v4.0.42.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.42.xcdatamodel"; sourceTree = "<group>"; };
+		21397E411C84813E001C3F05 /* AcrylicsColorPicker v4.0.43.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.43.xcdatamodel"; sourceTree = "<group>"; };
+		21397E421C84813E001C3F05 /* AcrylicsColorPicker v4.0.44.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.44.xcdatamodel"; sourceTree = "<group>"; };
+		21397E431C84813E001C3F05 /* AcrylicsColorPicker v4.0.45.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.45.xcdatamodel"; sourceTree = "<group>"; };
+		21397E441C84813E001C3F05 /* AcrylicsColorPicker v4.0.46.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.46.xcdatamodel"; sourceTree = "<group>"; };
+		21397E451C84813E001C3F05 /* AcrylicsColorPicker v4.0.47.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.47.xcdatamodel"; sourceTree = "<group>"; };
+		21397E461C84813E001C3F05 /* AcrylicsColorPicker v4.0.48.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.48.xcdatamodel"; sourceTree = "<group>"; };
+		21397E471C84813E001C3F05 /* AcrylicsColorPicker v4.0.49.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.49.xcdatamodel"; sourceTree = "<group>"; };
+		21397E481C84813E001C3F05 /* AcrylicsColorPicker v4.0.5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.5.xcdatamodel"; sourceTree = "<group>"; };
+		21397E491C84813E001C3F05 /* AcrylicsColorPicker v4.0.50.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.50.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.51.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.51.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.52.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.52.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.53.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.53.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.6.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.7.xcdatamodel"; sourceTree = "<group>"; };
+		21397E4F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.8.xcdatamodel"; sourceTree = "<group>"; };
+		21397E501C84813E001C3F05 /* AcrylicsColorPicker v4.0.9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.9.xcdatamodel"; sourceTree = "<group>"; };
+		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
+		21397E521C84813E001C3F05 /* AcrylicsColorPicker2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker2.xcdatamodel; sourceTree = "<group>"; };
+		21397E561C8481C5001C3F05 /* MatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewController.m; sourceTree = "<group>"; };
+		21397E581C8481F6001C3F05 /* MatchTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewController.h; sourceTree = "<group>"; };
+		21397E591C848259001C3F05 /* AddMixTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMixTableViewController.h; sourceTree = "<group>"; };
+		21397E5A1C848259001C3F05 /* AddMixTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMixTableViewController.m; sourceTree = "<group>"; };
+		21397E5B1C848259001C3F05 /* AddMixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMixViewController.h; sourceTree = "<group>"; };
+		21397E5C1C848259001C3F05 /* AddMixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMixViewController.m; sourceTree = "<group>"; };
+		21397E5F1C848272001C3F05 /* AssocTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocTableViewController.h; sourceTree = "<group>"; };
+		21397E601C848272001C3F05 /* AssocTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocTableViewController.m; sourceTree = "<group>"; };
+		21397E621C8482E1001C3F05 /* colorwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorwheel.png; sourceTree = "<group>"; };
+		21397E641C848308001C3F05 /* MatchAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAlgorithms.h; sourceTree = "<group>"; };
+		21397E651C848308001C3F05 /* MatchAlgorithms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAlgorithms.m; sourceTree = "<group>"; };
+		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		21397E6A1C84833D001C3F05 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		21397E6C1C848370001C3F05 /* AssocCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocCollectionTableViewCell.h; sourceTree = "<group>"; };
+		21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocCollectionTableViewCell.m; sourceTree = "<group>"; };
+		21397E6E1C848370001C3F05 /* AssocDescTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocDescTableViewCell.h; sourceTree = "<group>"; };
+		21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocDescTableViewCell.m; sourceTree = "<group>"; };
+		21397E701C848370001C3F05 /* AssocTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocTableViewCell.h; sourceTree = "<group>"; };
+		21397E711C848370001C3F05 /* AssocTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocTableViewCell.m; sourceTree = "<group>"; };
+		21397E751C84839E001C3F05 /* ACPMixAssociationsDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPMixAssociationsDesc.h; sourceTree = "<group>"; };
+		21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPMixAssociationsDesc.m; sourceTree = "<group>"; };
+		21397E771C84839E001C3F05 /* ACPPaintSwatches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPPaintSwatches.h; sourceTree = "<group>"; };
+		21397E781C84839E001C3F05 /* ACPPaintSwatches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPPaintSwatches.m; sourceTree = "<group>"; };
+		21397E7B1C8483C6001C3F05 /* MixAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssociations.h; sourceTree = "<group>"; };
+		21397E7C1C8483C6001C3F05 /* MixAssociations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssociations.m; sourceTree = "<group>"; };
+		21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchesDiff.h; sourceTree = "<group>"; };
+		21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchesDiff.m; sourceTree = "<group>"; };
+		21397E811C848407001C3F05 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		21397E821C848407001C3F05 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		21397E841C848457001C3F05 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PaintSwatchType.txt; sourceTree = "<group>"; };
+		21397E851C848457001C3F05 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SubjectiveColor.txt; sourceTree = "<group>"; };
+		21397E881C8484D7001C3F05 /* ACPString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPString.h; sourceTree = "<group>"; };
+		21397E891C8484D7001C3F05 /* ACPString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPString.m; sourceTree = "<group>"; };
+		21397E8A1C8484D7001C3F05 /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
+		21397E8B1C8484D7001C3F05 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
+		21397E8C1C8484D7001C3F05 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarButtonUtils.h; sourceTree = "<group>"; };
+		21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarButtonUtils.m; sourceTree = "<group>"; };
+		21397E8E1C8484D7001C3F05 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
+		21397E8F1C8484D7001C3F05 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtils.m; sourceTree = "<group>"; };
+		21397E901C8484D7001C3F05 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataUtils.h; sourceTree = "<group>"; };
+		21397E911C8484D7001C3F05 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataUtils.m; sourceTree = "<group>"; };
+		21397E921C8484D7001C3F05 /* FieldUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldUtils.h; sourceTree = "<group>"; };
+		21397E931C8484D7001C3F05 /* FieldUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldUtils.m; sourceTree = "<group>"; };
+		21397E941C8484D7001C3F05 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericUtils.h; sourceTree = "<group>"; };
+		21397E951C8484D7001C3F05 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericUtils.m; sourceTree = "<group>"; };
+		21397E961C8484D7001C3F05 /* ManagedObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedObjectUtils.h; sourceTree = "<group>"; };
+		21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedObjectUtils.m; sourceTree = "<group>"; };
+		21397E981C8484D7001C3F05 /* StringObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringObjectUtils.h; sourceTree = "<group>"; };
+		21397E991C8484D7001C3F05 /* StringObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringObjectUtils.m; sourceTree = "<group>"; };
+		21397EA31C848551001C3F05 /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
+		21397EA41C848551001C3F05 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
+		21397EA51C848551001C3F05 /* MatchAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssociation.h; sourceTree = "<group>"; };
+		21397EA61C848551001C3F05 /* MatchAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAssociation.m; sourceTree = "<group>"; };
+		21397EA71C848551001C3F05 /* MixAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssociation.h; sourceTree = "<group>"; };
+		21397EA81C848551001C3F05 /* MixAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssociation.m; sourceTree = "<group>"; };
+		21397EA91C848551001C3F05 /* MixAssocSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssocSwatch.h; sourceTree = "<group>"; };
+		21397EAA1C848551001C3F05 /* MixAssocSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssocSwatch.m; sourceTree = "<group>"; };
+		21397EAB1C848551001C3F05 /* PaintSwatches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatches.h; sourceTree = "<group>"; };
+		21397EAC1C848551001C3F05 /* PaintSwatches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatches.m; sourceTree = "<group>"; };
+		21397EAD1C848551001C3F05 /* PaintSwatches+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PaintSwatches+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PaintSwatches+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21397EAF1C848551001C3F05 /* PaintSwatchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchType.h; sourceTree = "<group>"; };
+		21397EB01C848551001C3F05 /* PaintSwatchType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchType.m; sourceTree = "<group>"; };
+		21397EB11C848551001C3F05 /* PaintSwatchType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PaintSwatchType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PaintSwatchType+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21397EBB1C8485B6001C3F05 /* SubjectiveColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectiveColor.h; sourceTree = "<group>"; };
+		21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectiveColor.m; sourceTree = "<group>"; };
+		21397EBD1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SubjectiveColor+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SubjectiveColor+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchKeyword.h; sourceTree = "<group>"; };
+		21397EC01C8485B6001C3F05 /* SwatchKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchKeyword.m; sourceTree = "<group>"; };
+		21397EC11C8485B6001C3F05 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
+		21397EC21C8485B6001C3F05 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
+		21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaKeyword.h; sourceTree = "<group>"; };
+		21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAreaKeyword.m; sourceTree = "<group>"; };
+		21397EC51C8485B6001C3F05 /* TapAreaSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaSwatch.h; sourceTree = "<group>"; };
+		21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAreaSwatch.m; sourceTree = "<group>"; };
+		21397ECD1C848674001C3F05 /* ImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewController.h; sourceTree = "<group>"; };
+		21397ECE1C848674001C3F05 /* ImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewController.m; sourceTree = "<group>"; };
+		21397ECF1C848674001C3F05 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		21397ED01C848674001C3F05 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		21397ED11C848674001C3F05 /* SwatchDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchDetailTableViewController.h; sourceTree = "<group>"; };
+		21397ED21C848674001C3F05 /* SwatchDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchDetailTableViewController.m; sourceTree = "<group>"; };
+		21397ED31C848674001C3F05 /* UIImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageViewController.h; sourceTree = "<group>"; };
+		21397ED41C848674001C3F05 /* UIImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewController.m; sourceTree = "<group>"; };
+		21397ED51C848674001C3F05 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		21397ED61C848674001C3F05 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		21397EDC1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AcrylicsColorPicker.entitlements; sourceTree = "<group>"; };
+		21397EDE1C8486ED001C3F05 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		21397EE01C84876D001C3F05 /* GlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalSettings.h; sourceTree = "<group>"; };
+		21397EE11C84876D001C3F05 /* GlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSettings.m; sourceTree = "<group>"; };
+		21397EE21C84876D001C3F05 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		210C89641A9F6C440003CC85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210C897D1A9F6C440003CC85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				2108C5EE1C82145200DD7B9E /* Image Files */,
+				2108C5ED1C82108200DD7B9E /* Algorithms */,
+				2108C5EC1C820DF000DD7B9E /* Delegates & Main */,
+				2108C5EB1C820DA400DD7B9E /* Custom */,
+				2108C5EA1C820D1B00DD7B9E /* Other */,
+				2108C5E91C820D0000DD7B9E /* Data */,
+				2108C5E81C820CCA00DD7B9E /* Utilities */,
+				2108C5E71C820C9C00DD7B9E /* ManagedObject */,
+				2108C5E61C820C5800DD7B9E /* Controllers */,
+				21397EDC1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements */,
+				21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */,
+				21397EDE1C8486ED001C3F05 /* Main.storyboard */,
+				21397EE01C84876D001C3F05 /* GlobalSettings.h */,
+				21397EE11C84876D001C3F05 /* GlobalSettings.m */,
+				21397EE51C8487A1001C3F05 /* Images.xcassets */,
+				21397EE71C8487C7001C3F05 /* Media.xcassets */,
+				21397EE21C84876D001C3F05 /* Info.plist */,
+			);
+			name = AcrylicsColorPicker;
+			sourceTree = "<group>";
+		};
+		2108C5E61C820C5800DD7B9E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				21397E591C848259001C3F05 /* AddMixTableViewController.h */,
+				21397E5A1C848259001C3F05 /* AddMixTableViewController.m */,
+				21397E5B1C848259001C3F05 /* AddMixViewController.h */,
+				21397E5C1C848259001C3F05 /* AddMixViewController.m */,
+				21397E5F1C848272001C3F05 /* AssocTableViewController.h */,
+				21397E601C848272001C3F05 /* AssocTableViewController.m */,
+				21397E581C8481F6001C3F05 /* MatchTableViewController.h */,
+				21397E561C8481C5001C3F05 /* MatchTableViewController.m */,
+				21397ECD1C848674001C3F05 /* ImageTableViewController.h */,
+				21397ECE1C848674001C3F05 /* ImageTableViewController.m */,
+				21397ECF1C848674001C3F05 /* PickerViewController.h */,
+				21397ED01C848674001C3F05 /* PickerViewController.m */,
+				21397ED11C848674001C3F05 /* SwatchDetailTableViewController.h */,
+				21397ED21C848674001C3F05 /* SwatchDetailTableViewController.m */,
+				21397ED31C848674001C3F05 /* UIImageViewController.h */,
+				21397ED41C848674001C3F05 /* UIImageViewController.m */,
+				21397ED51C848674001C3F05 /* ViewController.h */,
+				21397ED61C848674001C3F05 /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
+			isa = PBXGroup;
+			children = (
+				21397EA31C848551001C3F05 /* Keyword.h */,
+				21397EA41C848551001C3F05 /* Keyword.m */,
+				21397EA51C848551001C3F05 /* MatchAssociation.h */,
+				21397EA61C848551001C3F05 /* MatchAssociation.m */,
+				21397EA71C848551001C3F05 /* MixAssociation.h */,
+				21397EA81C848551001C3F05 /* MixAssociation.m */,
+				21397EA91C848551001C3F05 /* MixAssocSwatch.h */,
+				21397EAA1C848551001C3F05 /* MixAssocSwatch.m */,
+				21397EAB1C848551001C3F05 /* PaintSwatches.h */,
+				21397EAC1C848551001C3F05 /* PaintSwatches.m */,
+				21397EAD1C848551001C3F05 /* PaintSwatches+CoreDataProperties.h */,
+				21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */,
+				21397EAF1C848551001C3F05 /* PaintSwatchType.h */,
+				21397EB01C848551001C3F05 /* PaintSwatchType.m */,
+				21397EB11C848551001C3F05 /* PaintSwatchType+CoreDataProperties.h */,
+				21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */,
+				21397EBB1C8485B6001C3F05 /* SubjectiveColor.h */,
+				21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */,
+				21397EBD1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.h */,
+				21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */,
+				21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */,
+				21397EC01C8485B6001C3F05 /* SwatchKeyword.m */,
+				21397EC11C8485B6001C3F05 /* TapArea.h */,
+				21397EC21C8485B6001C3F05 /* TapArea.m */,
+				21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */,
+				21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */,
+				21397EC51C8485B6001C3F05 /* TapAreaSwatch.h */,
+				21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */,
+			);
+			name = ManagedObject;
+			sourceTree = "<group>";
+		};
+		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				21397E881C8484D7001C3F05 /* ACPString.h */,
+				21397E891C8484D7001C3F05 /* ACPString.m */,
+				21397E8A1C8484D7001C3F05 /* AlertUtils.h */,
+				21397E8B1C8484D7001C3F05 /* AlertUtils.m */,
+				21397E8C1C8484D7001C3F05 /* BarButtonUtils.h */,
+				21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */,
+				21397E8E1C8484D7001C3F05 /* ColorUtils.h */,
+				21397E8F1C8484D7001C3F05 /* ColorUtils.m */,
+				21397E901C8484D7001C3F05 /* CoreDataUtils.h */,
+				21397E911C8484D7001C3F05 /* CoreDataUtils.m */,
+				21397E921C8484D7001C3F05 /* FieldUtils.h */,
+				21397E931C8484D7001C3F05 /* FieldUtils.m */,
+				21397E941C8484D7001C3F05 /* GenericUtils.h */,
+				21397E951C8484D7001C3F05 /* GenericUtils.m */,
+				21397E961C8484D7001C3F05 /* ManagedObjectUtils.h */,
+				21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */,
+				21397E981C8484D7001C3F05 /* StringObjectUtils.h */,
+				21397E991C8484D7001C3F05 /* StringObjectUtils.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		2108C5E91C820D0000DD7B9E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				21397E841C848457001C3F05 /* PaintSwatchType.txt */,
+				21397E851C848457001C3F05 /* SubjectiveColor.txt */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		2108C5EA1C820D1B00DD7B9E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				21397E751C84839E001C3F05 /* ACPMixAssociationsDesc.h */,
+				21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */,
+				21397E771C84839E001C3F05 /* ACPPaintSwatches.h */,
+				21397E781C84839E001C3F05 /* ACPPaintSwatches.m */,
+				21397E7B1C8483C6001C3F05 /* MixAssociations.h */,
+				21397E7C1C8483C6001C3F05 /* MixAssociations.m */,
+				21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */,
+				21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */,
+				21397E811C848407001C3F05 /* CollectionViewController.h */,
+				21397E821C848407001C3F05 /* CollectionViewController.m */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		2108C5EB1C820DA400DD7B9E /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				21397E6C1C848370001C3F05 /* AssocCollectionTableViewCell.h */,
+				21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */,
+				21397E6E1C848370001C3F05 /* AssocDescTableViewCell.h */,
+				21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */,
+				21397E701C848370001C3F05 /* AssocTableViewCell.h */,
+				21397E711C848370001C3F05 /* AssocTableViewCell.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		2108C5EC1C820DF000DD7B9E /* Delegates & Main */ = {
+			isa = PBXGroup;
+			children = (
+				21397E671C84832C001C3F05 /* AppDelegate.h */,
+				21397E681C84832C001C3F05 /* AppDelegate.m */,
+				21397E6A1C84833D001C3F05 /* main.m */,
+			);
+			name = "Delegates & Main";
+			sourceTree = "<group>";
+		};
+		2108C5ED1C82108200DD7B9E /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				21397E641C848308001C3F05 /* MatchAlgorithms.h */,
+				21397E651C848308001C3F05 /* MatchAlgorithms.m */,
+			);
+			name = Algorithms;
+			sourceTree = "<group>";
+		};
+		2108C5EE1C82145200DD7B9E /* Image Files */ = {
+			isa = PBXGroup;
+			children = (
+				21397E621C8482E1001C3F05 /* colorwheel.png */,
+			);
+			name = "Image Files";
+			sourceTree = "<group>";
+		};
+		210C895E1A9F6C440003CC85 = {
+			isa = PBXGroup;
+			children = (
+				2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */,
+				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
+				210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */,
+				210C89681A9F6C440003CC85 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		210C89681A9F6C440003CC85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */,
+				210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */ = {
+			isa = PBXGroup;
+			children = (
+				210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */,
+				210C89841A9F6C440003CC85 /* Supporting Files */,
+			);
+			path = AcrylicsColorPickerTests;
+			sourceTree = "<group>";
+		};
+		210C89841A9F6C440003CC85 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				210C89851A9F6C440003CC85 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		210C89661A9F6C440003CC85 /* AcrylicsColorPicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPicker" */;
+			buildPhases = (
+				210C89631A9F6C440003CC85 /* Sources */,
+				210C89641A9F6C440003CC85 /* Frameworks */,
+				210C89651A9F6C440003CC85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AcrylicsColorPicker;
+			productName = AcrylicsColorPicker;
+			productReference = 210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		210C897F1A9F6C440003CC85 /* AcrylicsColorPickerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerTests" */;
+			buildPhases = (
+				210C897C1A9F6C440003CC85 /* Sources */,
+				210C897D1A9F6C440003CC85 /* Frameworks */,
+				210C897E1A9F6C440003CC85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				210C89821A9F6C440003CC85 /* PBXTargetDependency */,
+			);
+			name = AcrylicsColorPickerTests;
+			productName = AcrylicsColorPickerTests;
+			productReference = 210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		210C895F1A9F6C440003CC85 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Stuart Pineo";
+				TargetAttributes = {
+					210C89661A9F6C440003CC85 = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = PEWN4D59QB;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
+					};
+					210C897F1A9F6C440003CC85 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 210C89661A9F6C440003CC85;
+					};
+				};
+			};
+			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "AcrylicsColorPicker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 210C895E1A9F6C440003CC85;
+			productRefGroup = 210C89681A9F6C440003CC85 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				210C89661A9F6C440003CC85 /* AcrylicsColorPicker */,
+				210C897F1A9F6C440003CC85 /* AcrylicsColorPickerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		210C89651A9F6C440003CC85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
+				21397E631C8482E1001C3F05 /* colorwheel.png in Resources */,
+				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
+				21397EE41C84876D001C3F05 /* Info.plist in Resources */,
+				21397E861C848457001C3F05 /* PaintSwatchType.txt in Resources */,
+				21397EDD1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements in Resources */,
+				21397E871C848457001C3F05 /* SubjectiveColor.txt in Resources */,
+				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
+				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210C897E1A9F6C440003CC85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		210C89631A9F6C440003CC85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */,
+				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,
+				21397E611C848272001C3F05 /* AssocTableViewController.m in Sources */,
+				21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */,
+				21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */,
+				21397E9C1C8484D7001C3F05 /* BarButtonUtils.m in Sources */,
+				21397E9D1C8484D7001C3F05 /* ColorUtils.m in Sources */,
+				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
+				21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */,
+				21397EDB1C848674001C3F05 /* ViewController.m in Sources */,
+				21397E831C848407001C3F05 /* CollectionViewController.m in Sources */,
+				21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */,
+				21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */,
+				21397EB31C848551001C3F05 /* Keyword.m in Sources */,
+				21397EA11C8484D7001C3F05 /* ManagedObjectUtils.m in Sources */,
+				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
+				21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */,
+				21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */,
+				21397EDA1C848674001C3F05 /* UIImageViewController.m in Sources */,
+				21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */,
+				21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */,
+				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
+				21397ECA1C8485B6001C3F05 /* TapArea.m in Sources */,
+				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
+				21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */,
+				21397E6B1C84833D001C3F05 /* main.m in Sources */,
+				21397E9E1C8484D7001C3F05 /* CoreDataUtils.m in Sources */,
+				21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */,
+				21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */,
+				21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */,
+				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
+				21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */,
+				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
+				21397EB41C848551001C3F05 /* MatchAssociation.m in Sources */,
+				21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */,
+				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
+				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
+				21397EA21C8484D7001C3F05 /* StringObjectUtils.m in Sources */,
+				21397EBA1C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m in Sources */,
+				21397ED91C848674001C3F05 /* SwatchDetailTableViewController.m in Sources */,
+				21397E9A1C8484D7001C3F05 /* ACPString.m in Sources */,
+				21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */,
+				21397ED81C848674001C3F05 /* PickerViewController.m in Sources */,
+				21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */,
+				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		210C897C1A9F6C440003CC85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		210C89821A9F6C440003CC85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210C89661A9F6C440003CC85 /* AcrylicsColorPicker */;
+			targetProxy = 210C89811A9F6C440003CC85 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		210C89881A9F6C440003CC85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		210C89891A9F6C440003CC85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		210C898B1A9F6C440003CC85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		210C898C1A9F6C440003CC85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		210C898E1A9F6C440003CC85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AcrylicsColorPickerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
+			};
+			name = Debug;
+		};
+		210C898F1A9F6C440003CC85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AcrylicsColorPickerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "AcrylicsColorPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210C89881A9F6C440003CC85 /* Debug */,
+				210C89891A9F6C440003CC85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210C898B1A9F6C440003CC85 /* Debug */,
+				210C898C1A9F6C440003CC85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				210C898E1A9F6C440003CC85 /* Debug */,
+				210C898F1A9F6C440003CC85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				21397E0E1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.51.xcdatamodel */,
+				21397E0F1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.52.xcdatamodel */,
+				21397E101C84813E001C3F05 /* AcrylicsColorPicker v3.1.10.xcdatamodel */,
+				21397E111C84813E001C3F05 /* AcrylicsColorPicker v3.1.11.xcdatamodel */,
+				21397E121C84813E001C3F05 /* AcrylicsColorPicker v3.1.2.xcdatamodel */,
+				21397E131C84813E001C3F05 /* AcrylicsColorPicker v3.1.3.xcdatamodel */,
+				21397E141C84813E001C3F05 /* AcrylicsColorPicker v3.1.4.xcdatamodel */,
+				21397E151C84813E001C3F05 /* AcrylicsColorPicker v3.1.5.xcdatamodel */,
+				21397E161C84813E001C3F05 /* AcrylicsColorPicker v3.1.6.xcdatamodel */,
+				21397E171C84813E001C3F05 /* AcrylicsColorPicker v3.1.7.xcdatamodel */,
+				21397E181C84813E001C3F05 /* AcrylicsColorPicker v3.1.8.xcdatamodel */,
+				21397E191C84813E001C3F05 /* AcrylicsColorPicker v3.1.9.xcdatamodel */,
+				21397E1A1C84813E001C3F05 /* AcrylicsColorPicker v3.xcdatamodel */,
+				21397E1B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.0.xcdatamodel */,
+				21397E1C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.1.xcdatamodel */,
+				21397E1D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.10.xcdatamodel */,
+				21397E1E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.11.xcdatamodel */,
+				21397E1F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.12.xcdatamodel */,
+				21397E201C84813E001C3F05 /* AcrylicsColorPicker v4.0.13.xcdatamodel */,
+				21397E211C84813E001C3F05 /* AcrylicsColorPicker v4.0.14.xcdatamodel */,
+				21397E221C84813E001C3F05 /* AcrylicsColorPicker v4.0.15.xcdatamodel */,
+				21397E231C84813E001C3F05 /* AcrylicsColorPicker v4.0.16.xcdatamodel */,
+				21397E241C84813E001C3F05 /* AcrylicsColorPicker v4.0.17.xcdatamodel */,
+				21397E251C84813E001C3F05 /* AcrylicsColorPicker v4.0.18.xcdatamodel */,
+				21397E261C84813E001C3F05 /* AcrylicsColorPicker v4.0.19.xcdatamodel */,
+				21397E271C84813E001C3F05 /* AcrylicsColorPicker v4.0.2.xcdatamodel */,
+				21397E281C84813E001C3F05 /* AcrylicsColorPicker v4.0.20.xcdatamodel */,
+				21397E291C84813E001C3F05 /* AcrylicsColorPicker v4.0.21.xcdatamodel */,
+				21397E2A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.22.xcdatamodel */,
+				21397E2B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.23.xcdatamodel */,
+				21397E2C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.24.xcdatamodel */,
+				21397E2D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.25.xcdatamodel */,
+				21397E2E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.26.xcdatamodel */,
+				21397E2F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.27.xcdatamodel */,
+				21397E301C84813E001C3F05 /* AcrylicsColorPicker v4.0.28.xcdatamodel */,
+				21397E311C84813E001C3F05 /* AcrylicsColorPicker v4.0.29.xcdatamodel */,
+				21397E321C84813E001C3F05 /* AcrylicsColorPicker v4.0.3.xcdatamodel */,
+				21397E331C84813E001C3F05 /* AcrylicsColorPicker v4.0.30.xcdatamodel */,
+				21397E341C84813E001C3F05 /* AcrylicsColorPicker v4.0.31.xcdatamodel */,
+				21397E351C84813E001C3F05 /* AcrylicsColorPicker v4.0.32.xcdatamodel */,
+				21397E361C84813E001C3F05 /* AcrylicsColorPicker v4.0.33.xcdatamodel */,
+				21397E371C84813E001C3F05 /* AcrylicsColorPicker v4.0.34.xcdatamodel */,
+				21397E381C84813E001C3F05 /* AcrylicsColorPicker v4.0.35.xcdatamodel */,
+				21397E391C84813E001C3F05 /* AcrylicsColorPicker v4.0.36.xcdatamodel */,
+				21397E3A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.37.xcdatamodel */,
+				21397E3B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.38.xcdatamodel */,
+				21397E3C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.39.xcdatamodel */,
+				21397E3D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.4.xcdatamodel */,
+				21397E3E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.40.xcdatamodel */,
+				21397E3F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.41.xcdatamodel */,
+				21397E401C84813E001C3F05 /* AcrylicsColorPicker v4.0.42.xcdatamodel */,
+				21397E411C84813E001C3F05 /* AcrylicsColorPicker v4.0.43.xcdatamodel */,
+				21397E421C84813E001C3F05 /* AcrylicsColorPicker v4.0.44.xcdatamodel */,
+				21397E431C84813E001C3F05 /* AcrylicsColorPicker v4.0.45.xcdatamodel */,
+				21397E441C84813E001C3F05 /* AcrylicsColorPicker v4.0.46.xcdatamodel */,
+				21397E451C84813E001C3F05 /* AcrylicsColorPicker v4.0.47.xcdatamodel */,
+				21397E461C84813E001C3F05 /* AcrylicsColorPicker v4.0.48.xcdatamodel */,
+				21397E471C84813E001C3F05 /* AcrylicsColorPicker v4.0.49.xcdatamodel */,
+				21397E481C84813E001C3F05 /* AcrylicsColorPicker v4.0.5.xcdatamodel */,
+				21397E491C84813E001C3F05 /* AcrylicsColorPicker v4.0.50.xcdatamodel */,
+				21397E4A1C84813E001C3F05 /* AcrylicsColorPicker v4.0.51.xcdatamodel */,
+				21397E4B1C84813E001C3F05 /* AcrylicsColorPicker v4.0.52.xcdatamodel */,
+				21397E4C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.53.xcdatamodel */,
+				21397E4D1C84813E001C3F05 /* AcrylicsColorPicker v4.0.6.xcdatamodel */,
+				21397E4E1C84813E001C3F05 /* AcrylicsColorPicker v4.0.7.xcdatamodel */,
+				21397E4F1C84813E001C3F05 /* AcrylicsColorPicker v4.0.8.xcdatamodel */,
+				21397E501C84813E001C3F05 /* AcrylicsColorPicker v4.0.9.xcdatamodel */,
+				21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */,
+				21397E521C84813E001C3F05 /* AcrylicsColorPicker2.xcdatamodel */,
+			);
+			currentVersion = 21397E4C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.53.xcdatamodel */;
+			path = AcrylicsColorPicker.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 210C895F1A9F6C440003CC85 /* Project object */;
+}

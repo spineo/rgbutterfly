@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="GlobalSettings" syncable="YES">
+        <attribute name="backup_schedule" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="7" syncable="YES"/>
+        <attribute name="backup_time" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="23" defaultValueString="23" syncable="YES"/>
+        <attribute name="can_add_swatch_types" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="icloud_sync" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="is_ref_data_editable" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="num_matches_to_show" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="tap_area_shape" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tap_area_size" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="MixAssociations" syncable="YES">
+        <attribute name="dom_parts_ratio" optional="YES" attributeType="Integer 16" minValueString="3" maxValueString="5" defaultValueString="0" regularExpressionString="[1-9]+[0-9]*:[1-9]+[0-9]*" syncable="YES"/>
+        <attribute name="mix_order" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
+        <attribute name="mix_parts_ratio" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="swatch_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="MixAssociationsDesc" syncable="YES">
+        <attribute name="mix_assoc_desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mix_assoc_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="mix_assoc_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="PaintSwatches" syncable="YES">
+        <attribute name="abbr_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="brightness" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="create_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="deg_hue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="360" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="green" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="image_thumb" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_mix" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="last_update" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="red" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ref_source_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="saturation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="mix_associations_to_paint_swatches" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PaintSwatches" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GlobalSettings" positionX="27" positionY="225" width="128" height="165"/>
+        <element name="MixAssociations" positionX="-504" positionY="63" width="128" height="120"/>
+        <element name="MixAssociationsDesc" positionX="-45" positionY="216" width="128" height="105"/>
+        <element name="PaintSwatches" positionX="-227" positionY="14" width="128" height="343"/>
+    </elements>
+</model>

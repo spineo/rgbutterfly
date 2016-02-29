@@ -1,0 +1,21 @@
+Other,         #FFFFFF
+Pink,          #FFC0CB
+Red,           #FF0000
+Red Orange,    #FF3300
+Orange,        #FF6600
+Copper,        #C87533
+Brown,         #663300
+Yellow Orange, #FFCC00
+Gold,          #FFD700
+Yellow,        #FFFF00
+Yellow Green,  #CCFF00
+Green,         #339900
+Blue Green,    #00FFCC
+Blue,          #0000FF
+Blue Violet,   #6600FF
+Violet,        #9900FF
+Red Violet,    #FF00FF
+White,         #FFFFFF
+Silver,        #C0C0C0
+Grey,          #D3D3D3
+Black,         #000000
