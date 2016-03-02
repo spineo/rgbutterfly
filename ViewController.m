@@ -304,8 +304,8 @@
         [headerLabel setText: [_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:@"Mix"]) {
+        [headerLabel setText: @"Mix Associations Listing"];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
-        [headerLabel setText: @"Mix Associations"];
         
     } else {
         [headerLabel setText: @"Colors Listing"];
@@ -495,18 +495,7 @@
 
 - (IBAction)changeButtonRendering:(id)sender {
     
-    // Access the just the first UIToolbar
-    //
-    UIToolbar *toolbar;
-    for (UIView *subview in self.view.subviews) {
-        if (([subview isKindOfClass:[UIToolbar class]]) && (subview.tag == DEF_TAG_NUM)) {
-            toolbar = (UIToolbar *)subview;
-            break;
-        }
-    }
-    
-    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:toolbar.items];
-
+    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
     [_colorTableView reloadData];
 }
 

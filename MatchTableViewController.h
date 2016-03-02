@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PaintSwatches.h"
 
-@interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
+//@interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
+@interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
 @property (nonatomic) int currTapSection, matchAlgIndex, maxMatchNum;

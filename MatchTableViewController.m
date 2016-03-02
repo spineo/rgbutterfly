@@ -34,12 +34,12 @@
 // Picker views
 //
 @property (nonatomic, strong) UITextField *swatchTypeName, *subjColorName;
-@property (nonatomic, strong) UIPickerView *subjColorPicker, *swatchTypesPicker;
-@property (nonatomic, strong) NSArray *subjColorNames, *swatchTypeNames;
+//@property (nonatomic, strong) UIPickerView *subjColorPicker, *swatchTypesPicker;
+//@property (nonatomic, strong) NSArray *subjColorNames, *swatchTypeNames;
 @property (nonatomic, strong) NSDictionary *subjColorData, *swatchTypeData;
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
-@property (nonatomic, strong) UIView *subjColorPickerView, *swatchTypesPickerView;
-@property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
+//@property (nonatomic, strong) UIView *subjColorPickerView, *swatchTypesPickerView;
+//@property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
 
 // NSManagedObject subclassing
 //
@@ -65,10 +65,10 @@ const int DIV2_SECTION  = 3;
 const int NAME_SECTION  = 4;
 const int KEYW_SECTION  = 5;
 const int DESC_SECTION  = 6;
-const int COLOR_SECTION = 7;
-const int TYPES_SECTION = 8;
+//const int COLOR_SECTION = 7;
+//const int TYPES_SECTION = 8;
 
-const int MAX_SECTION   = 9;
+const int MAX_SECTION   = 7;
 
 
 // Table views tags
@@ -76,15 +76,15 @@ const int MAX_SECTION   = 9;
 const int ALG_TAG    = 2;
 const int TYPE_TAG   = 4;
 const int IMAGE_TAG  = 6;
-const int COLLBL_TAG = 7;
-const int COLTXT_TAG = 8;
-const int COLSEL_TAG = 9;
-const int TYPLBL_TAG = 11;
-const int TYPTXT_TAG = 12;
-const int TYPSEL_TAG = 13;
-const int TYPBTN_TAG = 14;
+//const int COLLBL_TAG = 7;
+//const int COLTXT_TAG = 8;
+//const int COLSEL_TAG = 9;
+//const int TYPLBL_TAG = 11;
+//const int TYPTXT_TAG = 12;
+//const int TYPSEL_TAG = 13;
+//const int TYPBTN_TAG = 14;
 
-const int MAX_TAG     = 14;
+const int MAX_TAG     = 6;
 
 
 - (void)viewDidLoad {
@@ -152,22 +152,22 @@ const int MAX_TAG     = 14;
 
     // Color wheel data
     //
-    _subjColorData   = [GlobalSettings getSubjColorData];
-    _subjColorNames  = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
-
-    // Swatch types
-    //
-    _swatchTypeNames = [GlobalSettings getSwatchTypes];
-
-    // Subjective color picker
-    //
-    _colorPickerSelRow = _selPaintSwatch.subj_color_id ? _selPaintSwatch.subj_color_id : 0;
-    _typesPickerSelRow = _selPaintSwatch.type_id       ? _selPaintSwatch.type_id       : 0;
-    
-    _colorSelected     = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
-    _colorName         = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
-    _subjColorValue    = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
-    _typeSelected      = [_swatchTypeNames objectAtIndex:_typesPickerSelRow];
+//    _subjColorData   = [GlobalSettings getSubjColorData];
+//    _subjColorNames  = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
+//
+//    // Swatch types
+//    //
+//    _swatchTypeNames = [GlobalSettings getSwatchTypes];
+//
+//    // Subjective color picker
+//    //
+//    _colorPickerSelRow = _selPaintSwatch.subj_color_id ? _selPaintSwatch.subj_color_id : 0;
+//    _typesPickerSelRow = _selPaintSwatch.type_id       ? _selPaintSwatch.type_id       : 0;
+//    
+//    _colorSelected     = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
+//    _colorName         = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
+//    _subjColorValue    = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
+//    _typeSelected      = [_swatchTypeNames objectAtIndex:_typesPickerSelRow];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
@@ -194,9 +194,9 @@ const int MAX_TAG     = 14;
     if ((
          ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
          ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
-         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""]) ||
-         ((section == COLOR_SECTION) && _colorPickerSelRow == 0) ||
-         ((section == TYPES_SECTION) && _typesPickerSelRow == 0)
+         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
+//         ((section == COLOR_SECTION) && _colorPickerSelRow == 0) ||
+//         ((section == TYPES_SECTION) && _typesPickerSelRow == 0)
          ) && (_editFlag == FALSE)) {
         return 0;
     } else if (section != MATCH_SECTION) {
@@ -418,123 +418,123 @@ const int MAX_TAG     = 14;
             [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
         }
         
-    } else if (indexPath.section == COLOR_SECTION) {
-        cell.imageView.image = [ColorUtils renderRGB:_selPaintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
-        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        
-        if (_editFlag == FALSE) {
-            [cell.textLabel setText: @""];
-
-            UILabel *textLabel = [[UILabel alloc] init];
-            [textLabel setText:_colorSelected];
-            [textLabel setTextColor:[self setTextColor:_colorName]];
-            [textLabel setBackgroundColor:_subjColorValue];
-            [textLabel setTextAlignment:NSTextAlignmentCenter];
-            [textLabel setTag:COLLBL_TAG];
-            [textLabel setFont: TEXT_FIELD_FONT];
-            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-            
-            [textLabel setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, (self.tableView.bounds.size.width - _imageViewWidth) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            
-            [cell.contentView addSubview:textLabel];
-
-        } else {
-            
-            // Create the subjective color picker text field
-            //
-            _colorSelected = [_subjColorNames objectAtIndex:_colorPickerSelRow];
-            _subjColorName  = [FieldUtils createTextField:_colorSelected tag:COLTXT_TAG];
-            
-            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
-            
-            // Create the textfield
-            //
-            [_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-            
-            // Create the button
-            //
-            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
-            _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag: COLOR_BTN_TAG frame: buttonFrame];
-
-            [_doneColorButton addTarget:self action:@selector(colorSelection) forControlEvents:UIControlEventTouchUpInside];
-            [_doneColorButton setHidden:TRUE];
-            
-            if (_colorName && _subjColorValue) {
-                [_subjColorName setTextColor:[self setTextColor:_colorName]];
-                [_subjColorName setBackgroundColor:_subjColorValue];
-            }
-            [_subjColorName setDelegate:self];
-            [cell.contentView addSubview:_subjColorName];
-            [cell.contentView addSubview:_doneColorButton];
-            [cell.textLabel setText:@""];
-
-            [_subjColorName setTextAlignment:NSTextAlignmentCenter];
-            [_subjColorName setInputView: _subjColorPicker];
-            
-            // Create the subjective color picker
-            //
-            [self createColorPicker];
-        }
-        
-        [cell setAccessoryType: UITableViewCellAccessoryNone];
-
-    } else if (indexPath.section == TYPES_SECTION) {
-        
-        if (_editFlag == FALSE) {
-            [cell.textLabel setText: @""];
-            
-            UILabel *textLabel = [[UILabel alloc] init];
-            [textLabel setText:_typeSelected];
-            [textLabel setTextColor: LIGHT_TEXT_COLOR];
-
-            [textLabel setTextAlignment:NSTextAlignmentCenter];
-            [textLabel setTag:TYPLBL_TAG];
-            [textLabel setFont: TEXT_FIELD_FONT];
-            
-            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-            
-            [textLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            
-            [cell.contentView addSubview:textLabel];
-            
-            
-        } else {
-            
-            // Create the subjective color picker text field
-            //
-            _typeSelected = [GlobalSettings getSwatchType:_typesPickerSelRow];
-            _swatchTypeName  = [FieldUtils createTextField:_typeSelected tag:TYPTXT_TAG];
-
-            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
-
-            // Create the button
-            //
-            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
-            _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag: TYPBTN_TAG frame: buttonFrame];
-            [_doneTypeButton addTarget:self action:@selector(swatchTypeSelection) forControlEvents:UIControlEventTouchUpInside];
-            [_doneTypeButton setHidden:TRUE];
-            
-            [_swatchTypeName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-        
-            [_swatchTypeName setDelegate:self];
-            [cell.contentView addSubview:_swatchTypeName];
-            [cell.contentView addSubview:_doneTypeButton];
-
-            [cell.textLabel setText:@""];
-            
-            [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
-            [_swatchTypeName setInputView: _swatchTypesPicker];
-            
-            // Create the swatch Type picker
-            //
-            [self createSwatchTypePicker];
-        }
+//    } else if (indexPath.section == COLOR_SECTION) {
+//        cell.imageView.image = [ColorUtils renderRGB:_selPaintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
+//        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+//        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+//        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+//        
+//        if (_editFlag == FALSE) {
+//            [cell.textLabel setText: @""];
+//
+//            UILabel *textLabel = [[UILabel alloc] init];
+//            [textLabel setText:_colorSelected];
+//            [textLabel setTextColor:[self setTextColor:_colorName]];
+//            [textLabel setBackgroundColor:_subjColorValue];
+//            [textLabel setTextAlignment:NSTextAlignmentCenter];
+//            [textLabel setTag:COLLBL_TAG];
+//            [textLabel setFont: TEXT_FIELD_FONT];
+//            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
+//            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
+//            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+//            
+//            [textLabel setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, (self.tableView.bounds.size.width - _imageViewWidth) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+//            
+//            [cell.contentView addSubview:textLabel];
+//
+//        } else {
+//            
+//            // Create the subjective color picker text field
+//            //
+//            _colorSelected = [_subjColorNames objectAtIndex:_colorPickerSelRow];
+//            _subjColorName  = [FieldUtils createTextField:_colorSelected tag:COLTXT_TAG];
+//            
+//            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
+//            
+//            // Create the textfield
+//            //
+//            [_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+//            
+//            // Create the button
+//            //
+//            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
+//            _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag: COLOR_BTN_TAG frame: buttonFrame];
+//
+//            [_doneColorButton addTarget:self action:@selector(colorSelection) forControlEvents:UIControlEventTouchUpInside];
+//            [_doneColorButton setHidden:TRUE];
+//            
+//            if (_colorName && _subjColorValue) {
+//                [_subjColorName setTextColor:[self setTextColor:_colorName]];
+//                [_subjColorName setBackgroundColor:_subjColorValue];
+//            }
+//            [_subjColorName setDelegate:self];
+//            [cell.contentView addSubview:_subjColorName];
+//            [cell.contentView addSubview:_doneColorButton];
+//            [cell.textLabel setText:@""];
+//
+//            [_subjColorName setTextAlignment:NSTextAlignmentCenter];
+//            [_subjColorName setInputView: _subjColorPicker];
+//            
+//            // Create the subjective color picker
+//            //
+//            [self createColorPicker];
+//        }
+//        
+//        [cell setAccessoryType: UITableViewCellAccessoryNone];
+//
+//    } else if (indexPath.section == TYPES_SECTION) {
+//        
+//        if (_editFlag == FALSE) {
+//            [cell.textLabel setText: @""];
+//            
+//            UILabel *textLabel = [[UILabel alloc] init];
+//            [textLabel setText:_typeSelected];
+//            [textLabel setTextColor: LIGHT_TEXT_COLOR];
+//
+//            [textLabel setTextAlignment:NSTextAlignmentCenter];
+//            [textLabel setTag:TYPLBL_TAG];
+//            [textLabel setFont: TEXT_FIELD_FONT];
+//            
+//            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
+//            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
+//            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+//            
+//            [textLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+//            
+//            [cell.contentView addSubview:textLabel];
+//            
+//            
+//        } else {
+//            
+//            // Create the subjective color picker text field
+//            //
+//            _typeSelected = [GlobalSettings getSwatchType:_typesPickerSelRow];
+//            _swatchTypeName  = [FieldUtils createTextField:_typeSelected tag:TYPTXT_TAG];
+//
+//            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
+//
+//            // Create the button
+//            //
+//            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
+//            _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag: TYPBTN_TAG frame: buttonFrame];
+//            [_doneTypeButton addTarget:self action:@selector(swatchTypeSelection) forControlEvents:UIControlEventTouchUpInside];
+//            [_doneTypeButton setHidden:TRUE];
+//            
+//            [_swatchTypeName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+//        
+//            [_swatchTypeName setDelegate:self];
+//            [cell.contentView addSubview:_swatchTypeName];
+//            [cell.contentView addSubview:_doneTypeButton];
+//
+//            [cell.textLabel setText:@""];
+//            
+//            [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
+//            [_swatchTypeName setInputView: _swatchTypesPicker];
+//            
+//            // Create the swatch Type picker
+//            //
+//            [self createSwatchTypePicker];
+//        }
     }
         
     [cell setAccessoryType: UITableViewCellAccessoryNone];
@@ -610,19 +610,19 @@ const int MAX_TAG     = 14;
             return DEF_TABLE_HDR_HEIGHT;
         }
 
-    } else if (section == COLOR_SECTION) {
-        if ((_editFlag == FALSE) && (_colorPickerSelRow == 0)) {
-            return 0.0;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-
-    } else if (section == TYPES_SECTION) {
-        if ((_editFlag == FALSE) && (_typesPickerSelRow == 0)) {
-            return 0.0;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
+//    } else if (section == COLOR_SECTION) {
+//        if ((_editFlag == FALSE) && (_colorPickerSelRow == 0)) {
+//            return 0.0;
+//        } else {
+//            return DEF_TABLE_HDR_HEIGHT;
+//        }
+//
+//    } else if (section == TYPES_SECTION) {
+//        if ((_editFlag == FALSE) && (_typesPickerSelRow == 0)) {
+//            return 0.0;
+//        } else {
+//            return DEF_TABLE_HDR_HEIGHT;
+//        }
         
     } else if (section == DIV1_SECTION || section == DIV2_SECTION) {
         return 0.0;
@@ -658,12 +658,12 @@ const int MAX_TAG     = 14;
         
     } else if (section == IMAGE_SECTION) {
         headerStr = @"Reference Images";
-    
-    } else if (section == COLOR_SECTION) {
-        headerStr = @"Subjective Color Selection";
-        
-    } else if (section == TYPES_SECTION) {
-        headerStr = @"Swatch Type Selection";
+//    
+//    } else if (section == COLOR_SECTION) {
+//        headerStr = @"Subjective Color Selection";
+//        
+//    } else if (section == TYPES_SECTION) {
+//        headerStr = @"Swatch Type Selection";
         
     } else if (section == MATCH_SECTION) {
         headerStr = [[NSString alloc] initWithFormat:@"Matches (Type Method: %@)", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
@@ -707,12 +707,12 @@ const int MAX_TAG     = 14;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.tag == COLTXT_TAG) {
-        [_doneColorButton setHidden:FALSE];
-
-    } else if (textField.tag == TYPTXT_TAG) {
-        [_doneTypeButton setHidden:FALSE];
-    };
+//    if (textField.tag == COLTXT_TAG) {
+//        [_doneColorButton setHidden:FALSE];
+//
+//    } else if (textField.tag == TYPTXT_TAG) {
+//        [_doneTypeButton setHidden:FALSE];
+//    };
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -729,10 +729,10 @@ const int MAX_TAG     = 14;
         _keywEntered = textField.text;
     } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
         _descEntered = textField.text;
-    } else if (textField.tag == COLTXT_TAG) {
-        _colorSelected = textField.text;
-    } else if (textField.tag == TYPTXT_TAG) {
-        _typeSelected = textField.text;
+//    } else if (textField.tag == COLTXT_TAG) {
+//        _colorSelected = textField.text;
+//    } else if (textField.tag == TYPTXT_TAG) {
+//        _typeSelected = textField.text;
     }
 }
 
@@ -770,116 +770,116 @@ const int MAX_TAG     = 14;
 
 // The number of rows of data
 //
-- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (pickerView.tag == TYPSEL_TAG) {
-        return (long)[_swatchTypeNames count];
-    } else {
-        return (long)[_subjColorNames  count];
-    }
-}
-
-// Row height
+//- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+//    if (pickerView.tag == TYPSEL_TAG) {
+//        return (long)[_swatchTypeNames count];
+//    } else {
+//        return (long)[_subjColorNames  count];
+//    }
+//}
 //
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return DEF_PICKER_ROW_HEIGHT;
-}
-
-// The data to return for the row and component (column) that's being passed in
+//// Row height
+////
+//- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+//    return DEF_PICKER_ROW_HEIGHT;
+//}
 //
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (pickerView.tag == TYPSEL_TAG) {
-        return [_swatchTypeNames objectAtIndex:row];
-    } else {
-        return [_subjColorNames  objectAtIndex:row];
-    }
-}
+//// The data to return for the row and component (column) that's being passed in
+////
+//- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+//    if (pickerView.tag == TYPSEL_TAG) {
+//        return [_swatchTypeNames objectAtIndex:row];
+//    } else {
+//        return [_subjColorNames  objectAtIndex:row];
+//    }
+//}
+//
+//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+//    
+//    UILabel *label = (UILabel*)view;
+//    if (label == nil) {
+//        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
+//    }
+//    
+//    if (pickerView.tag == TYPSEL_TAG) {
+//        [label setText:[_swatchTypeNames objectAtIndex:row]];
+//        [label setTextColor: LIGHT_TEXT_COLOR];
+//        [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+//        [label.layer setBorderWidth: DEF_BORDER_WIDTH];
+//
+//    } else {
+//        NSString *colorName = [_subjColorNames objectAtIndex:row];
+//        UIColor *subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+//        
+//        [label setTextColor:[self setTextColor:colorName]];
+//        [label setBackgroundColor:subjColorValue];
+//        [label setText:[_subjColorNames objectAtIndex:row]];
+//    }
+//    [label setTextAlignment:NSTextAlignmentCenter];
+//    
+//    return label;
+//}
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    
-    UILabel *label = (UILabel*)view;
-    if (label == nil) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
-    }
-    
-    if (pickerView.tag == TYPSEL_TAG) {
-        [label setText:[_swatchTypeNames objectAtIndex:row]];
-        [label setTextColor: LIGHT_TEXT_COLOR];
-        [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-
-    } else {
-        NSString *colorName = [_subjColorNames objectAtIndex:row];
-        UIColor *subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
-        
-        [label setTextColor:[self setTextColor:colorName]];
-        [label setBackgroundColor:subjColorValue];
-        [label setText:[_subjColorNames objectAtIndex:row]];
-    }
-    [label setTextAlignment:NSTextAlignmentCenter];
-    
-    return label;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (pickerView.tag == TYPSEL_TAG) {
-        NSString *swatchType = [_swatchTypeNames objectAtIndex:row];
-        [_swatchTypeName setText:swatchType];
-        [_selPaintSwatch setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:swatchType]]];
-        [self setTypesPickerSelRow: (int)row];
-        
-    } else {
-        _colorName = [_subjColorNames objectAtIndex:row];
-        _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
-        
-        [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
-        [_subjColorName setTextColor:[self setTextColor:_colorName]];
-        [_subjColorName setBackgroundColor:_subjColorValue];
-        [_selPaintSwatch setSubj_color_id:[NSNumber numberWithInt:[GlobalSettings getSubjColorId:_colorName]]];
-        [self setColorPickerSelRow: (int)row];
-    }
-}
-
-- (void)createColorPicker {
-    _subjColorPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:COLSEL_TAG];
-    
-    [_subjColorPicker setDataSource:self];
-    [_subjColorPicker setDelegate:self];
-    [_subjColorPicker selectRow:_colorPickerSelRow inComponent:0 animated:YES];
-    [_subjColorName setInputView: _subjColorPicker];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(colorSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_subjColorPicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-- (void)createSwatchTypePicker {
-    _swatchTypesPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:TYPSEL_TAG];
-
-    [_swatchTypesPicker setDataSource:self];
-    [_swatchTypesPicker setDelegate:self];
-    [_swatchTypesPicker selectRow:_typesPickerSelRow inComponent:0 animated:YES];
-    [_swatchTypeName setInputView: _swatchTypesPicker];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(swatchTypeSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_swatchTypesPicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-- (void)colorSelection {
-    [_subjColorName resignFirstResponder];
-    [_subjColorPicker removeFromSuperview];
-    [_doneColorButton setHidden:TRUE];
-}
-
-- (void)swatchTypeSelection {
-    [_swatchTypeName resignFirstResponder];
-    [_swatchTypesPicker removeFromSuperview];
-    [_doneTypeButton setHidden:TRUE];
-}
+//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+//    if (pickerView.tag == TYPSEL_TAG) {
+//        NSString *swatchType = [_swatchTypeNames objectAtIndex:row];
+//        [_swatchTypeName setText:swatchType];
+//        [_selPaintSwatch setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:swatchType]]];
+//        [self setTypesPickerSelRow: (int)row];
+//        
+//    } else {
+//        _colorName = [_subjColorNames objectAtIndex:row];
+//        _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
+//        
+//        [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
+//        [_subjColorName setTextColor:[self setTextColor:_colorName]];
+//        [_subjColorName setBackgroundColor:_subjColorValue];
+//        [_selPaintSwatch setSubj_color_id:[NSNumber numberWithInt:[GlobalSettings getSubjColorId:_colorName]]];
+//        [self setColorPickerSelRow: (int)row];
+//    }
+//}
+//
+//- (void)createColorPicker {
+//    _subjColorPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:COLSEL_TAG];
+//    
+//    [_subjColorPicker setDataSource:self];
+//    [_subjColorPicker setDelegate:self];
+//    [_subjColorPicker selectRow:_colorPickerSelRow inComponent:0 animated:YES];
+//    [_subjColorName setInputView: _subjColorPicker];
+//    
+//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                                             initWithTarget:self action:@selector(colorSelection)];
+//    tapRecognizer.numberOfTapsRequired = 1;
+//    [_subjColorPicker addGestureRecognizer:tapRecognizer];
+//    tapRecognizer.delegate = self;
+//}
+//
+//- (void)createSwatchTypePicker {
+//    _swatchTypesPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:TYPSEL_TAG];
+//
+//    [_swatchTypesPicker setDataSource:self];
+//    [_swatchTypesPicker setDelegate:self];
+//    [_swatchTypesPicker selectRow:_typesPickerSelRow inComponent:0 animated:YES];
+//    [_swatchTypeName setInputView: _swatchTypesPicker];
+//    
+//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                                             initWithTarget:self action:@selector(swatchTypeSelection)];
+//    tapRecognizer.numberOfTapsRequired = 1;
+//    [_swatchTypesPicker addGestureRecognizer:tapRecognizer];
+//    tapRecognizer.delegate = self;
+//}
+//
+//- (void)colorSelection {
+//    [_subjColorName resignFirstResponder];
+//    [_subjColorPicker removeFromSuperview];
+//    [_doneColorButton setHidden:TRUE];
+//}
+//
+//- (void)swatchTypeSelection {
+//    [_swatchTypeName resignFirstResponder];
+//    [_swatchTypesPicker removeFromSuperview];
+//    [_doneTypeButton setHidden:TRUE];
+//}
 
 - (UIColor *)setTextColor:(NSString *)colorName {
     
