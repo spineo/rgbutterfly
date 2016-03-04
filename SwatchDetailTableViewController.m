@@ -229,8 +229,8 @@ const int DETAIL_MIX_SECTION    = 5;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
     
     
     // Adjust the layout with rotational changes
@@ -475,13 +475,11 @@ const int DETAIL_MIX_SECTION    = 5;
     return headerStr;
 }
 
-/*
-// Override to support conditional editing of the table view.
+// Only the field contents can be edited
+//
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
-*/
 
 /*
 // Override to support editing the table view.

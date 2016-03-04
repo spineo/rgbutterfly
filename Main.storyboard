@@ -46,13 +46,20 @@
                         </constraints>
                     </view>
                     <toolbarItems>
+                        <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="th5-64-N0B"/>
                         <barButtonItem tag="55" image="rgb" id="oSg-g8-C8g">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="changeButtonRendering:" destination="BYZ-38-t0r" id="7cI-Wx-Phc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="th5-64-N0B"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="e6z-xX-uqB"/>
                         <barButtonItem tag="51" image="photo 2" id="WsA-i4-ACA">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -67,13 +74,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="Ade-hS-Xh0">
-                        <barButtonItem key="leftBarButtonItem" tag="54" image="text list-1" id="cdZ-BK-uTE">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="showListingOptions:" destination="BYZ-38-t0r" id="PbP-g7-Yb2"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Acrylics Color Picker" id="Ade-hS-Xh0">
                         <barButtonItem key="rightBarButtonItem" tag="53" systemItem="search" id="wvt-NW-SHl">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>

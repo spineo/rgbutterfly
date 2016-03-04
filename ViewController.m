@@ -298,16 +298,37 @@
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
 
-    [headerView addSubview:headerLabel];
     
     if ([_listingType isEqualToString:@"Keywords"]) {
-        [headerLabel setText: [_sortedLetters objectAtIndex:section]];
+        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+        
+        if (section == 0) {
+            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT*2)];
+            [headerView addSubview:headerLabel];
+            [headerLabel setText: @"Keywords Listing"];
+            [headerLabel setTextAlignment: NSTextAlignmentCenter];
+            
+            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+DEF_TABLE_HDR_HEIGHT+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+        }
+        
+
+        [letterLabel setBackgroundColor: DARK_BG_COLOR];
+        [letterLabel setTextColor: LIGHT_TEXT_COLOR];
+        [letterLabel setFont: TABLE_HEADER_FONT];
+        
+        [letterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
+         UIViewAutoresizingFlexibleLeftMargin |
+         UIViewAutoresizingFlexibleRightMargin];
+        [headerView addSubview:letterLabel];
+        [letterLabel setText: [_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:@"Mix"]) {
+        [headerView addSubview:headerLabel];
         [headerLabel setText: @"Mix Associations Listing"];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
         
     } else {
+        [headerView addSubview:headerLabel];
         [headerLabel setText: @"Colors Listing"];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
     }
@@ -316,8 +337,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return DEF_TABLE_HDR_HEIGHT;
-    //return 0.0;
+    if ([_listingType isEqualToString:@"Keywords"] && (section == 0)) {
+        return DEF_TABLE_HDR_HEIGHT * 2;
+    } else {
+        return DEF_TABLE_HDR_HEIGHT;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
