@@ -47,7 +47,7 @@
 }
 
 - (void)setNoLabelLayout {
-    [self.layout setSectionInset: UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    [self.layout setSectionInset: UIEdgeInsetsMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

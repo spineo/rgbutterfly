@@ -217,16 +217,17 @@
     [headerLabel setBackgroundColor: DARK_BG_COLOR];
     [headerLabel setTextColor: LIGHT_TEXT_COLOR];
     [headerLabel setFont: TABLE_HEADER_FONT];
-  
-    [headerView addSubview:headerLabel];
     
     if (section == 0) {
+        [headerView addSubview:headerLabel];
         [headerLabel setText:_colorHeader];
         
     } else if (section == 2) {
+        [headerView addSubview:headerLabel];
         [headerLabel setText:_nameHeader];
         
     } else if (section == 3) {
+        [headerView addSubview:headerLabel];
         [headerLabel setText:_descHeader];
     }
     
@@ -234,7 +235,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return DEF_TABLE_HDR_HEIGHT;
+    if (section == 1) {
+        return DEF_NIL_HEADER;
+    } else {
+        return DEF_TABLE_HDR_HEIGHT;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -281,7 +286,8 @@
             [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
             cell.imageView.image = nil;
             
-            [(UITextField *) subView setFont: TEXT_FIELD_FONT];
+            [(UITextField *)subView setFont: TEXT_FIELD_FONT];
+            [subView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
             
             if (self.editingFlag == FALSE) {
                 [(UITextField *) subView setBackgroundColor: DARK_BG_COLOR];
@@ -397,7 +403,8 @@
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         cell.imageView.image = nil;
 
-        [(UITextView *) subView setFont: TEXT_FIELD_FONT];
+        [(UITextView *)subView setFont: TEXT_FIELD_FONT];
+        [subView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         
         if (self.editingFlag == FALSE) {
             [(UITextView *) subView setBackgroundColor: DARK_BG_COLOR];

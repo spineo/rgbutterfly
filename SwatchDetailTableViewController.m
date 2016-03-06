@@ -254,7 +254,7 @@ const int DETAIL_MIX_SECTION    = 5;
     
     // Global
     //
-    CGFloat viewWidth         = self.tableView.bounds.size.width;
+    CGFloat viewWidth  = self.tableView.bounds.size.width;
     
     // Text view widths
     //
@@ -918,26 +918,26 @@ const int DETAIL_MIX_SECTION    = 5;
     [_swatchName setTextColor:textColor];
     [_swatchName setBackgroundColor:bgColor];
     [_swatchName setEnabled:isEnabled];
-    [_swatchName.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [_swatchName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
     [_subjColorName setEnabled:isEnabled];
-    [_subjColorName.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [_subjColorName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
     [_swatchTypeName setTextColor:textColor];
     [_swatchTypeName setBackgroundColor:bgColor];
     [_swatchTypeName setEnabled:isEnabled];
     [_swatchTypeName setTextAlignment:NSTextAlignmentLeft];
-    [_swatchTypeName.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [_swatchTypeName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
 
     [_swatchKeywords setTextColor:textColor];
     [_swatchKeywords setBackgroundColor:bgColor];
     [_swatchKeywords setEnabled:isEnabled];
-    [_swatchKeywords.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [_swatchKeywords.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
     [_swatchDesc setTextColor:textColor];
     [_swatchDesc setBackgroundColor:bgColor];
     [_swatchDesc setEnabled:isEnabled];
-    [_swatchDesc.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [_swatchDesc.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
 }
 
 @end

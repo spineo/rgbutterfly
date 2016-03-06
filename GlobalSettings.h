@@ -20,6 +20,9 @@
 extern CGFloat const DEF_X_OFFSET;
 extern CGFloat const DEF_Y_OFFSET;
 extern CGFloat const DEF_NIL_CELL;
+extern CGFloat const DEF_NIL_HEADER;
+extern CGFloat const DEF_NIL_WIDTH;
+extern CGFloat const DEF_NIL_HEIGHT;
 extern CGFloat const DEF_LABEL_WIDTH;
 extern CGFloat const DEF_LABEL_HEIGHT;
 

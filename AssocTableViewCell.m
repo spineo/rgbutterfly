@@ -30,15 +30,16 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 
     if (self) {
-        _textReturn       = FALSE;
-        _textEntered      = @"";
+        _textReturn    = FALSE;
+        _textEntered   = @"";
     
         [self setBackgroundColor: CLEAR_COLOR];
         
-        CGSize size   = self.contentView.frame.size;
-        CGFloat xpos  = DEF_TABLE_CELL_HEIGHT+ 22.0;
+        CGSize size    = self.contentView.frame.size;
+        CGFloat height = DEF_TEXTFIELD_HEIGHT;
+        CGFloat xpos   = DEF_TABLE_CELL_HEIGHT+ 22.0;
     
-        _mixName = [[UITextField alloc] initWithFrame:CGRectMake(xpos, 5.0, size.width - (size.width / 4.0), size.height - 10.0)];
+        _mixName = [[UITextField alloc] initWithFrame:CGRectMake(xpos, 5.0, size.width - (size.width / 4.0), height - 10.0)];
         
         [_mixName setBackgroundColor: LIGHT_BG_COLOR];
         [_mixName setTextColor: DARK_TEXT_COLOR];
