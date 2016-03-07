@@ -28,7 +28,7 @@
         <attribute name="create_date" optional="YES" attributeType="Date" defaultDateTimeInterval="476293080" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last_update" optional="YES" attributeType="Date" defaultDateTimeInterval="476293080" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="No Mix Name" syncable="YES"/>
         <relationship name="mix_assoc_swatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MixAssocSwatch" inverseName="mix_association" inverseEntity="MixAssocSwatch" syncable="YES"/>
     </entity>
     <entity name="MixAssocSwatch" representedClassName="MixAssocSwatch" syncable="YES">
@@ -101,14 +101,14 @@
         <element name="GlobalSetting" positionX="-180" positionY="468" width="128" height="180"/>
         <element name="Keyword" positionX="-506" positionY="491" width="128" height="88"/>
         <element name="MatchAssociation" positionX="-792" positionY="-72" width="128" height="133"/>
-        <element name="MixAssociation" positionX="-801" positionY="143" width="128" height="120"/>
+        <element name="MixAssociation" positionX="-801" positionY="143" width="128" height="118"/>
         <element name="MixAssocSwatch" positionX="-452" positionY="143" width="128" height="73"/>
         <element name="PaintSwatch" positionX="-171" positionY="-99" width="128" height="478"/>
+        <element name="PaintSwatchType" positionX="-0" positionY="152" width="128" height="73"/>
         <element name="SubjectiveColor" positionX="-0" positionY="270" width="128" height="88"/>
         <element name="SwatchKeyword" positionX="-353" positionY="360" width="128" height="73"/>
         <element name="TapArea" positionX="-585" positionY="-72" width="128" height="163"/>
         <element name="TapAreaKeyword" positionX="-576" positionY="362" width="128" height="73"/>
         <element name="TapAreaSwatch" positionX="-380" positionY="-64" width="128" height="73"/>
-        <element name="PaintSwatchType" positionX="-0" positionY="152" width="128" height="73"/>
     </elements>
 </model>

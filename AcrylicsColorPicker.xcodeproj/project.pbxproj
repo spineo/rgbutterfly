@@ -37,7 +37,6 @@
 		21397EA11C8484D7001C3F05 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */; };
 		21397EA21C8484D7001C3F05 /* StringObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E991C8484D7001C3F05 /* StringObjectUtils.m */; };
 		21397EB31C848551001C3F05 /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA41C848551001C3F05 /* Keyword.m */; };
-		21397EB41C848551001C3F05 /* MatchAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA61C848551001C3F05 /* MatchAssociation.m */; };
 		21397EB51C848551001C3F05 /* MixAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA81C848551001C3F05 /* MixAssociation.m */; };
 		21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAA1C848551001C3F05 /* MixAssocSwatch.m */; };
 		21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAC1C848551001C3F05 /* PaintSwatches.m */; };
@@ -47,7 +46,6 @@
 		21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */; };
 		21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */; };
 		21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC01C8485B6001C3F05 /* SwatchKeyword.m */; };
-		21397ECA1C8485B6001C3F05 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC21C8485B6001C3F05 /* TapArea.m */; };
 		21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */; };
 		21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */; };
 		21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ECE1C848674001C3F05 /* ImageTableViewController.m */; };
@@ -61,6 +59,10 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */; };
+		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
+		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
+		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -200,8 +202,6 @@
 		21397E991C8484D7001C3F05 /* StringObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringObjectUtils.m; sourceTree = "<group>"; };
 		21397EA31C848551001C3F05 /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
 		21397EA41C848551001C3F05 /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
-		21397EA51C848551001C3F05 /* MatchAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssociation.h; sourceTree = "<group>"; };
-		21397EA61C848551001C3F05 /* MatchAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAssociation.m; sourceTree = "<group>"; };
 		21397EA71C848551001C3F05 /* MixAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssociation.h; sourceTree = "<group>"; };
 		21397EA81C848551001C3F05 /* MixAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssociation.m; sourceTree = "<group>"; };
 		21397EA91C848551001C3F05 /* MixAssocSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssocSwatch.h; sourceTree = "<group>"; };
@@ -220,8 +220,6 @@
 		21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SubjectiveColor+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchKeyword.h; sourceTree = "<group>"; };
 		21397EC01C8485B6001C3F05 /* SwatchKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchKeyword.m; sourceTree = "<group>"; };
-		21397EC11C8485B6001C3F05 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
-		21397EC21C8485B6001C3F05 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
 		21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaKeyword.h; sourceTree = "<group>"; };
 		21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAreaKeyword.m; sourceTree = "<group>"; };
 		21397EC51C8485B6001C3F05 /* TapAreaSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaSwatch.h; sourceTree = "<group>"; };
@@ -243,6 +241,15 @@
 		21397EE21C84876D001C3F05 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		21A69CBA1C8CA5F500B70810 /* AcrylicsColorPicker v4.0.54.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.54.xcdatamodel"; sourceTree = "<group>"; };
+		21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAssociations+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21A69CC91C8DAD3C00B70810 /* MatchAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssociations.h; sourceTree = "<group>"; };
+		21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAssociations.m; sourceTree = "<group>"; };
+		21A69CCD1C8DAFB600B70810 /* TapArea+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TapArea+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
+		21A69CCF1C8DAFB600B70810 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
+		21A69CD01C8DAFB600B70810 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -316,10 +323,16 @@
 		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				21A69CCD1C8DAFB600B70810 /* TapArea+CoreDataProperties.h */,
+				21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */,
+				21A69CCF1C8DAFB600B70810 /* TapArea.h */,
+				21A69CD01C8DAFB600B70810 /* TapArea.m */,
+				21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */,
+				21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */,
+				21A69CC91C8DAD3C00B70810 /* MatchAssociations.h */,
+				21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */,
 				21397EA31C848551001C3F05 /* Keyword.h */,
 				21397EA41C848551001C3F05 /* Keyword.m */,
-				21397EA51C848551001C3F05 /* MatchAssociation.h */,
-				21397EA61C848551001C3F05 /* MatchAssociation.m */,
 				21397EA71C848551001C3F05 /* MixAssociation.h */,
 				21397EA81C848551001C3F05 /* MixAssociation.m */,
 				21397EA91C848551001C3F05 /* MixAssocSwatch.h */,
@@ -338,8 +351,6 @@
 				21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */,
 				21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */,
 				21397EC01C8485B6001C3F05 /* SwatchKeyword.m */,
-				21397EC11C8485B6001C3F05 /* TapArea.h */,
-				21397EC21C8485B6001C3F05 /* TapArea.m */,
 				21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */,
 				21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */,
 				21397EC51C8485B6001C3F05 /* TapAreaSwatch.h */,
@@ -600,16 +611,17 @@
 				21397E831C848407001C3F05 /* CollectionViewController.m in Sources */,
 				21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */,
 				21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */,
+				21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */,
 				21397EB31C848551001C3F05 /* Keyword.m in Sources */,
 				21397EA11C8484D7001C3F05 /* ManagedObjectUtils.m in Sources */,
 				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
 				21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */,
 				21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */,
+				21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21397EDA1C848674001C3F05 /* UIImageViewController.m in Sources */,
 				21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */,
 				21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
-				21397ECA1C8485B6001C3F05 /* TapArea.m in Sources */,
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
 				21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
@@ -620,9 +632,9 @@
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */,
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
-				21397EB41C848551001C3F05 /* MatchAssociation.m in Sources */,
 				21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
+				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
 				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
 				21397EA21C8484D7001C3F05 /* StringObjectUtils.m in Sources */,
 				21397EBA1C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m in Sources */,
@@ -631,6 +643,7 @@
 				21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */,
 				21397ED81C848674001C3F05 /* PickerViewController.m in Sources */,
 				21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */,
+				21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */,
 				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -834,6 +847,7 @@
 		21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				21A69CBA1C8CA5F500B70810 /* AcrylicsColorPicker v4.0.54.xcdatamodel */,
 				21397E0E1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.51.xcdatamodel */,
 				21397E0F1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.52.xcdatamodel */,
 				21397E101C84813E001C3F05 /* AcrylicsColorPicker v3.1.10.xcdatamodel */,
@@ -904,7 +918,7 @@
 				21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */,
 				21397E521C84813E001C3F05 /* AcrylicsColorPicker2.xcdatamodel */,
 			);
-			currentVersion = 21397E4C1C84813E001C3F05 /* AcrylicsColorPicker v4.0.53.xcdatamodel */;
+			currentVersion = 21A69CBA1C8CA5F500B70810 /* AcrylicsColorPicker v4.0.54.xcdatamodel */;
 			path = AcrylicsColorPicker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

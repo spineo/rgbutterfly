@@ -1,5 +1,5 @@
 //
-//  TapArea.h
+//  MatchAssociations.h
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 3/7/16.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MatchAssociations, TapAreaKeyword, TapAreaSwatch;
+@class TapArea;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TapArea : NSManagedObject
+@interface MatchAssociations : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "TapArea+CoreDataProperties.h"
+#import "MatchAssociations+CoreDataProperties.h"

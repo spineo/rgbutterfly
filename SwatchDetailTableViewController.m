@@ -400,6 +400,9 @@ const int DETAIL_MIX_SECTION    = 5;
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:indexPath.row];
         MixAssociation *mixAssocObj = mixAssocSwatchObj.mix_association;
         NSString *mix_name = mixAssocObj.name;
+        if (mix_name == nil) {
+            mix_name = NO_MIX_NAME;
+        }
         
         NSError *error = nil;
         

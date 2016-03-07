@@ -84,7 +84,7 @@ const int IMAGE_TAG  = 6;
 //const int TYPSEL_TAG = 13;
 //const int TYPBTN_TAG = 14;
 
-const int MAX_TAG     = 6;
+//const int MAX_TAG     = 6;
 
 
 - (void)viewDidLoad {

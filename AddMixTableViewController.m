@@ -383,8 +383,7 @@
     [_cancelButton setFrame: CGRectMake(_navBarWidth - 70, 5, 60, _navBarHeight - 10)];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {    
     for (int i=0; i<[_paintSwatches count]; i++) {
         PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:i];
         BOOL is_selected = [[swatchObj is_selected] boolValue];
@@ -394,8 +393,8 @@
     }
 }
 
-//- (void)goBack {
-//    [self performSegueWithIdentifier:@"unwindToAssoc" sender:self];
-//}
+- (void)goBack {
+    [self performSegueWithIdentifier:@"unwindToAssoc" sender:self];
+}
 
 @end

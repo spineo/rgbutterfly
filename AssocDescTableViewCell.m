@@ -36,10 +36,9 @@
         [self setBackgroundColor: CLEAR_COLOR];
         
         CGSize size   = self.contentView.frame.size;
-        CGFloat height = DEF_TEXTFIELD_HEIGHT;
         CGFloat xpos   = 5.0;
     
-        _descField = [[UITextField alloc] initWithFrame:CGRectMake(xpos, 5.0, size.width - 5.0, height - 10.0)];
+        _descField = [[UITextField alloc] initWithFrame:CGRectMake(xpos, 5.0, size.width - 5.0, size.height - 10.0)];
         
         [_descField setBackgroundColor: LIGHT_BG_COLOR];
      

@@ -103,6 +103,8 @@ const int COLOR_PICKER_TAG  = 87;
 const int COLOR_BTN_TAG     = 88;
 const int TYPE_BTN_TAG      = 89;
 
+const int MAX_TAG           = 100;
+
 
 // Maximum Text field lengths (characters)
 //
@@ -127,14 +129,19 @@ NSString * const VALUE_EXISTS_MSG = @"Value already exists.";
 
 // Core data/Store
 //
-NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.53.sqlite";
-NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.53.sqlite";
+NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.54.sqlite";
+NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.54.sqlite";
 int const MIGRATE_STORE = 0;
 
 
 // NSManagedObject entities
 //
 NSString * const MATCH_ASSOCIATIONS = @"MatchAssociation";
+
+
+// Missing MixName
+//
+NSString * const NO_MIX_NAME    = @"No Mix Name";
 
 
 // Image Related

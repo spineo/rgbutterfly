@@ -1,17 +1,15 @@
 //
-//  TapArea.m
+//  MatchAssociations.m
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 3/7/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
 
-#import "TapArea.h"
 #import "MatchAssociations.h"
-#import "TapAreaKeyword.h"
-#import "TapAreaSwatch.h"
+#import "TapArea.h"
 
-@implementation TapArea
+@implementation MatchAssociations
 
 // Insert code here to add functionality to your managed object subclass
 

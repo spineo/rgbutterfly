@@ -107,6 +107,12 @@ extern const int COLOR_BTN_TAG;
 extern const int TYPE_BTN_TAG;
 
 
+// Max Tag used as reference to ensure all table view elements
+// removed from superview (see MatchTableViewController for example)
+//
+extern const int MAX_TAG;
+
+
 // Maximum Text field lengths (characters)
 //
 extern const int MAX_NAME_LEN;
@@ -133,6 +139,10 @@ extern int const MIGRATE_STORE;
 // NSManagedObject
 //
 extern NSString * const MATCH_ASSOCIATIONS;
+
+// Missing mix name
+//
+extern NSString * const NO_MIX_NAME;
 
 // Image Related
 //
