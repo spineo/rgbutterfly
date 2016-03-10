@@ -624,6 +624,10 @@
     
     NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     
+    // Skip match assoc types
+    //
+    [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != 3"]];
+    
     [request setSortDescriptors:@[nameSort]];
     
     [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:nil]];

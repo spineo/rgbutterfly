@@ -298,8 +298,13 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
     [fetchRequest setEntity:entity];
     
+    // Skip match assoc types
+    //
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != 3"]];
+
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     

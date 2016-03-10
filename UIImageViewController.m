@@ -38,7 +38,7 @@
 @property (nonatomic, strong) UIButton *shape, *scrollViewUp, *scrollViewDown;
 @property (nonatomic) int goBackStatus, viewInit, shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *rgbImage, *tapMeImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
-@property (nonatomic, strong) NSMutableArray *paintSwatches, *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects;
+@property (nonatomic, strong) NSMutableArray *paintSwatches, *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) GlobalSettings *globalSettings;
 @property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchDesc;
@@ -70,7 +70,6 @@
 @property (nonatomic) CGPoint touchPoint;
 
 @property (nonatomic, strong) PaintSwatches *swatchObj;
-@property (nonatomic, strong) MatchAssociations *matchAssociation;
 @property (nonatomic, strong) MixAssociation *mixAssociation;
 @property (nonatomic, strong) TapArea *tapArea;
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
@@ -154,6 +153,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     }
     [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
     [_userDefaults synchronize];
+    
+    // To contain the tap areas associated with the match functionality
+    //
+    _matchTapAreas = [[NSMutableArray alloc] init];
     
     // Load the paint swatches
     //
@@ -496,7 +499,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
                                                 _viewType = @"match";
                                                 [self resetViews];
-                                                _matchAssociation = [[MatchAssociations alloc] initWithEntity:_matchAssocEntity insertIntoManagedObjectContext:self.context];
+                                                
                                                 
                                                 UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:@"Match"
                                                                 style: UIBarButtonItemStylePlain
@@ -628,7 +631,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [_titleLabel setText: DEF_IMAGE_NAME];
     
     [_titleAndRGBView addSubview:_titleLabel];
-
 
 
     self.navigationItem.titleView = _titleAndRGBView;
@@ -798,9 +800,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (void)resetViews {
-//    for (PaintSwatches *psObj in _paintSwatches) {
-//        [self.context deleteObject:psObj];
-//    }
     [self.context rollback];
     
     [self setPaintSwatches: nil];
@@ -1060,8 +1059,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Instantiate the new PaintSwatch Object
         //
         _swatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
-        _paintSwatchCount++;
+
+
         [_swatchObj setCoord_pt:NSStringFromCGPoint(_touchPoint)];
+        _paintSwatchCount++;
         
         // Set the RGB and HSB value
         //
@@ -1096,7 +1097,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         }
         
     } else if (newCount == 0) {
-        
         _currTapSection = 0;
         
         // Disable view and algorithm buttons
@@ -1121,7 +1121,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
         
         for (int i=0; i<_currTapSection; i++) {
-            [self sortTapSection:swatches[i] tapSection:i+1];
+            [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
         }
     }
 
@@ -1375,8 +1375,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     _swatchObj.hue        = [NSString stringWithFormat:@"%f", _hue];
     _swatchObj.saturation = [NSString stringWithFormat:@"%f", _sat];
     _swatchObj.brightness = [NSString stringWithFormat:@"%f", _bri];
-    _swatchObj.alpha   = [NSString stringWithFormat:@"%f", _alpha];
-    _swatchObj.deg_hue = [NSNumber numberWithFloat:_hue * 360];
+    _swatchObj.alpha      = [NSString stringWithFormat:@"%f", _alpha];
+    _swatchObj.deg_hue    = [NSNumber numberWithFloat:_hue * 360];
 }
 
 
@@ -1672,7 +1672,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
     
     for (int i=0; i<_currTapSection; i++) {
-        [self sortTapSection:swatches[i] tapSection:i+1];
+        [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
     [self.imageTableView reloadData];
 }
@@ -1690,7 +1690,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
     
     for (int i=0; i<_currTapSection; i++) {
-        [self sortTapSection:swatches[i] tapSection:i+1];
+        [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
     [self.imageTableView reloadData];
 }
@@ -1769,7 +1769,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     } else if ([self existsMatchAssocName] == TRUE) {
         return FALSE;
     }
-    
+
     MatchAssociations *matchAssoc = [[MatchAssociations alloc] initWithEntity:_matchAssocEntity insertIntoManagedObjectContext:self.context];
 
     NSDate *currDate = [NSDate date];
@@ -1792,7 +1792,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
         
         PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
-        [tapAreaRef setName:@"Tap Area"];
+        
+        NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", i];
+        [tapAreaRef setName:tapAreaName];
+        
+        // Based on order
+        //
+        [tapAreaRef setType_id:[NSNumber numberWithInt:3]];
         
         TapArea *tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
         [tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
@@ -1800,6 +1806,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [tapArea setMatch_association:matchAssoc];
         
         [matchAssoc addTap_areaObject:tapArea];
+
         
         //NSLog(@"Tap Area Index=%i, Swatch Num=%i", i, (int)[swatches count]);
         for (int j=1; j<(int)[swatches count]; j++) {
@@ -1814,7 +1821,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         }
     }
     
-
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
