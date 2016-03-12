@@ -386,11 +386,11 @@
     if ([_listingType isEqualToString:@"Mix"]) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
-        [custCell setBackgroundColor: DARK_BG_COLOR];
-        
         if (! custCell) {
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
+        
+        [custCell setBackgroundColor: DARK_BG_COLOR];
         
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:indexPath.row];
         
@@ -416,7 +416,7 @@
             }
         }
         
-        [custCell setAssocName:[[NSString alloc] initWithFormat:@"%@", mix_assoc_name]];
+        [custCell setAssocName:mix_assoc_name];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         
@@ -560,7 +560,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    NSArray *collectionViewArray = self.colorArray[index];
+    NSArray *collectionViewArray = [self.colorArray objectAtIndex:index];
     
     return [collectionViewArray count];
 }
