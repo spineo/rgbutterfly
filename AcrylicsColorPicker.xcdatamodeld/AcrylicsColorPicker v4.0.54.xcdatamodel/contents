@@ -94,6 +94,7 @@
         <relationship name="tap_area" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="TapArea" inverseName="tap_area_keyword" inverseEntity="TapArea" syncable="YES"/>
     </entity>
     <entity name="TapAreaSwatch" representedClassName="TapAreaSwatch" syncable="YES">
+        <attribute name="match_order" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
         <relationship name="paint_swatch" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PaintSwatch" inverseName="tap_area_swatch" inverseEntity="PaintSwatch" syncable="YES"/>
         <relationship name="tap_area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TapArea" inverseName="tap_area_swatch" inverseEntity="TapArea" syncable="YES"/>
     </entity>
@@ -109,6 +110,6 @@
         <element name="SwatchKeyword" positionX="-353" positionY="360" width="128" height="73"/>
         <element name="TapArea" positionX="-585" positionY="-72" width="128" height="163"/>
         <element name="TapAreaKeyword" positionX="-576" positionY="362" width="128" height="73"/>
-        <element name="TapAreaSwatch" positionX="-380" positionY="-64" width="128" height="73"/>
+        <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="88"/>
     </elements>
 </model>

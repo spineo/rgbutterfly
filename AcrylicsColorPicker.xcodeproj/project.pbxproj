@@ -250,6 +250,8 @@
 		21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21A69CCF1C8DAFB600B70810 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
 		21A69CD01C8DAFB600B70810 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
+		21A69CD31C94682200B70810 /* AcrylicsColorPicker v4.0.55.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.55.xcdatamodel"; sourceTree = "<group>"; };
+		21A69CD41C94694800B70810 /* AcrylicsColorPicker v4.0.56.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.56.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -847,6 +849,8 @@
 		21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				21A69CD41C94694800B70810 /* AcrylicsColorPicker v4.0.56.xcdatamodel */,
+				21A69CD31C94682200B70810 /* AcrylicsColorPicker v4.0.55.xcdatamodel */,
 				21A69CBA1C8CA5F500B70810 /* AcrylicsColorPicker v4.0.54.xcdatamodel */,
 				21397E0E1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.51.xcdatamodel */,
 				21397E0F1C84813E001C3F05 /* AcrylicsColorPicker 2 v4.0.52.xcdatamodel */,
@@ -918,7 +922,7 @@
 				21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */,
 				21397E521C84813E001C3F05 /* AcrylicsColorPicker2.xcdatamodel */,
 			);
-			currentVersion = 21A69CBA1C8CA5F500B70810 /* AcrylicsColorPicker v4.0.54.xcdatamodel */;
+			currentVersion = 21A69CD41C94694800B70810 /* AcrylicsColorPicker v4.0.56.xcdatamodel */;
 			path = AcrylicsColorPicker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

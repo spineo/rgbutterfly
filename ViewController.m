@@ -395,6 +395,10 @@
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:indexPath.row];
         
         NSString *mix_assoc_name = mixAssocObj.name;
+        if (mix_assoc_name == nil) {
+            mix_assoc_name = @"Undefined Mix Association Name";
+            [mixAssocObj setName:mix_assoc_name];
+        }
         
         NSError *error = nil;
         
@@ -416,7 +420,7 @@
             }
         }
         
-        [custCell setAssocName:[[NSString alloc] initWithFormat:@"%@", mix_assoc_name]];
+        [custCell setAssocName:mix_assoc_name];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         
@@ -560,7 +564,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    NSArray *collectionViewArray = self.colorArray[index];
+    NSArray *collectionViewArray = [self.colorArray objectAtIndex:index];
     
     return [collectionViewArray count];
 }
