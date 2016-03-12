@@ -386,19 +386,15 @@
     if ([_listingType isEqualToString:@"Mix"]) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
-        [custCell setBackgroundColor: DARK_BG_COLOR];
-        
         if (! custCell) {
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         
+        [custCell setBackgroundColor: DARK_BG_COLOR];
+        
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:indexPath.row];
         
         NSString *mix_assoc_name = mixAssocObj.name;
-        if (mix_assoc_name == nil) {
-            mix_assoc_name = @"Undefined Mix Association Name";
-            [mixAssocObj setName:mix_assoc_name];
-        }
         
         NSError *error = nil;
         

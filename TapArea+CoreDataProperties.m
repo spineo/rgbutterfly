@@ -14,6 +14,8 @@
 @implementation TapArea (CoreDataProperties)
 
 @dynamic desc;
+@dynamic tap_order;
+@dynamic coord_pt;
 @dynamic image_section;
 @dynamic ma_manual_override;
 @dynamic match_algorithm_id;

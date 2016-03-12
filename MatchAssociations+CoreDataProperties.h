@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSDate *create_date;
 @property (nullable, nonatomic, retain) NSString *desc;
-@property (nullable, nonatomic, retain) id image_url;
+@property (nonatomic, retain) id image_url;
 @property (nullable, nonatomic, retain) NSDate *last_update;
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSSet<TapArea *> *tap_area;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSSet<TapArea *> *tap_area;
 
 @end
 

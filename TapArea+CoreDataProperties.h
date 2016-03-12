@@ -16,13 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TapArea (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *desc;
-@property (nullable, nonatomic, retain) id image_section;
+@property (nonatomic, retain) NSNumber *tap_order;
+@property (nonatomic, retain) NSString *coord_pt;
+@property (nonatomic, retain) id image_section;
 @property (nullable, nonatomic, retain) NSNumber *ma_manual_override;
-@property (nullable, nonatomic, retain) NSNumber *match_algorithm_id;
-@property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) MatchAssociations *match_association;
+@property (nonatomic, retain) NSNumber *match_algorithm_id;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) MatchAssociations *match_association;
 @property (nullable, nonatomic, retain) NSSet<TapAreaKeyword *> *tap_area_keyword;
-@property (nullable, nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;
+@property (nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;
 
 @end
 

@@ -1792,8 +1792,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
         
         PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
-        
-        NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", i];
+        int tap_order = i + 1;
+        NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
         [tapAreaRef setName:tapAreaName];
         
         // Based on order
@@ -1803,18 +1803,19 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         TapArea *tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
         [tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
         [tapArea setImage_section:tapAreaRef.image_thumb];
+        [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
+        [tapArea setCoord_pt:tapAreaRef.coord_pt];
         [tapArea setMatch_association:matchAssoc];
-        
+
         [matchAssoc addTap_areaObject:tapArea];
 
-        
-        //NSLog(@"Tap Area Index=%i, Swatch Num=%i", i, (int)[swatches count]);
         for (int j=1; j<(int)[swatches count]; j++) {
             PaintSwatches *paintSwatch = [swatches objectAtIndex:j];
             
             TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
             [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
             [tapAreaSwatch setTap_area:tapArea];
+            [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:j]];
             
             [tapArea addTap_area_swatchObject:tapAreaSwatch];
             [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
