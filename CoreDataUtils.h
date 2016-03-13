@@ -40,20 +40,20 @@
 //
 + (void)initGlobalSettings;
 //+ (ACPMixAssociationDesc *)insertMixDesc:(ACPMixAssociationDesc *)obj;
-+ (PaintSwatches *)insertPaintSwatch:(PaintSwatches *)obj;
-+ (void)addMixAssociation:(PaintSwatches *)obj;
+//+ (PaintSwatches *)insertPaintSwatch:(PaintSwatches *)obj;
+//+ (void)addMixAssociation:(PaintSwatches *)obj;
 
 
 // UPDATE methods
 //
 + (void)updateGlobalSettings:(GlobalSettings *)obj;
 //+ (void)updateMixDesc:(ACPMixAssociationDesc *)obj;
-+ (void)updatePaintSwatch:(PaintSwatches *)obj;
+//+ (void)updatePaintSwatch:(PaintSwatches *)obj;
 
 
 // DELETE methods
 //
-+ (int)deletePaintSwatch:(PaintSwatches *)obj;
+//+ (int)deletePaintSwatch:(PaintSwatches *)obj;
 
 // New method
 //
