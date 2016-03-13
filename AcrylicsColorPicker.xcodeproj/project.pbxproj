@@ -24,7 +24,6 @@
 		21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E781C84839E001C3F05 /* ACPPaintSwatches.m */; };
 		21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7C1C8483C6001C3F05 /* MixAssociations.m */; };
 		21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */; };
-		21397E831C848407001C3F05 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E821C848407001C3F05 /* CollectionViewController.m */; };
 		21397E861C848457001C3F05 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21397E841C848457001C3F05 /* PaintSwatchType.txt */; };
 		21397E871C848457001C3F05 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21397E851C848457001C3F05 /* SubjectiveColor.txt */; };
 		21397E9A1C8484D7001C3F05 /* ACPString.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E891C8484D7001C3F05 /* ACPString.m */; };
@@ -110,8 +109,6 @@
 		21397E7C1C8483C6001C3F05 /* MixAssociations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssociations.m; sourceTree = "<group>"; };
 		21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchesDiff.h; sourceTree = "<group>"; };
 		21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchesDiff.m; sourceTree = "<group>"; };
-		21397E811C848407001C3F05 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
-		21397E821C848407001C3F05 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		21397E841C848457001C3F05 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PaintSwatchType.txt; sourceTree = "<group>"; };
 		21397E851C848457001C3F05 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SubjectiveColor.txt; sourceTree = "<group>"; };
 		21397E881C8484D7001C3F05 /* ACPString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPString.h; sourceTree = "<group>"; };
@@ -339,8 +336,6 @@
 				21397E7C1C8483C6001C3F05 /* MixAssociations.m */,
 				21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */,
 				21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */,
-				21397E811C848407001C3F05 /* CollectionViewController.h */,
-				21397E821C848407001C3F05 /* CollectionViewController.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -465,7 +460,7 @@
 		210C895F1A9F6C440003CC85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Stuart Pineo";
 				TargetAttributes = {
 					210C89661A9F6C440003CC85 = {
@@ -543,7 +538,6 @@
 				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
 				21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */,
 				21397EDB1C848674001C3F05 /* ViewController.m in Sources */,
-				21397E831C848407001C3F05 /* CollectionViewController.m in Sources */,
 				21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */,
 				21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */,
 				21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */,
@@ -622,6 +616,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -690,6 +685,7 @@
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -706,6 +702,7 @@
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -726,6 +723,7 @@
 				);
 				INFOPLIST_FILE = AcrylicsColorPickerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
 			};
@@ -741,6 +739,7 @@
 				);
 				INFOPLIST_FILE = AcrylicsColorPickerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
 			};
