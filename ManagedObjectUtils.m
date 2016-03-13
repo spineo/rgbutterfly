@@ -442,6 +442,9 @@
     
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"match_association == %@", match_assoc_id]];
     
+    NSSortDescriptor *orderSort = [[NSSortDescriptor alloc] initWithKey:@"tap_order" ascending:YES];
+    [fetchRequest setSortDescriptors:@[ orderSort ]];
+    
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     

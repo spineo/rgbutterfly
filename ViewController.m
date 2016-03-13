@@ -22,7 +22,7 @@
 #import "MixAssociation.h"
 #import "MixAssocSwatch.h"
 #import "MatchAssociations.h"
-#import "TapArea.h";
+#import "TapArea.h"
 
 
 @interface ViewController()

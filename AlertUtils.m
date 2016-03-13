@@ -11,6 +11,9 @@
 
 @implementation AlertUtils
 
+
+// Replace with UIAlertController (see 'takePhoto' example in 'ViewController')
+//
 + (UIAlertView *)createOkAlert:(NSString *)title message:(NSString *)message {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
@@ -18,6 +21,7 @@
                                     delegate:self
                                     cancelButtonTitle:@"Ok"
                                     otherButtonTitles: nil];
+
     [alert setTintColor: DARK_TEXT_COLOR];
     
     return alert;
