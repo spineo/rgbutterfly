@@ -31,12 +31,14 @@
 + (NSArray *)fetchKeywords:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchPaintSwatches:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchMixAssociations:(NSManagedObjectContext *)context;
++ (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context;
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchDictNames:(NSString *)entityName context:(NSManagedObjectContext *)context;
 
 // Query methods
 //
 + (NSMutableArray *)queryMixAssocSwatches:(NSManagedObjectID *)mix_assoc_id context:(NSManagedObjectContext *)context;
++ (NSMutableArray *)queryTapAreas:(NSManagedObjectID *)match_assoc_id context:(NSManagedObjectContext *)context;
 + (SubjectiveColor *)querySubjectiveColor:(NSString *)colorName context:(NSManagedObjectContext *)context;
 + (SubjectiveColor *)querySubjectiveColorByOrder:(NSNumber *)order context:(NSManagedObjectContext *)context;
 + (PaintSwatches *)queryPaintSwatches:(NSString *)swatchName context:(NSManagedObjectContext *)context;

@@ -18,7 +18,7 @@
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
-+ (UIImage *)renderPaint:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
++ (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
 

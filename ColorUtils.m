@@ -171,11 +171,11 @@
     return rgbImage;
 }
 
-+ (UIImage *)renderPaint:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
-
++ (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
+    
     CGSize size = CGSizeMake(width, height);
     
-    UIImage *resizedImage   = [self resizeImage:[UIImage imageWithData:swatchObj.image_thumb] imageSize:size];
+    UIImage *resizedImage   = [self resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
     
     return resizedImage;
 }

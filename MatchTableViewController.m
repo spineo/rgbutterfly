@@ -339,7 +339,7 @@ const int IMAGE_TAG  = 6;
     } else if (indexPath.section == IMAGE_SECTION) {
         
         if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            cell.imageView.image = [ColorUtils renderPaint:_selPaintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         } else {
             cell.imageView.image = [ColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         }
@@ -393,7 +393,7 @@ const int IMAGE_TAG  = 6;
         PaintSwatches *paintSwatch = [_matchedSwatches objectAtIndex:indexPath.row + 1];
         
         if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
+            cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
         } else {
             cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
         }

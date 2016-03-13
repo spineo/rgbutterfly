@@ -331,7 +331,7 @@
                 [cell.imageView setClipsToBounds: YES];
                 
                 if (_isRGB == FALSE) {
-                    cell.imageView.image = [ColorUtils renderPaint:[_paintSwatches objectAtIndex:indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
+                    cell.imageView.image = [ColorUtils renderPaint:[[_paintSwatches objectAtIndex:indexPath.row] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
                 } else {
                     cell.imageView.image = [ColorUtils renderRGB:[_paintSwatches objectAtIndex:indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
                 }
@@ -353,7 +353,7 @@
                 [cell.imageView setClipsToBounds: YES];
                 
                 if (_isRGB == FALSE) {
-                    cell.imageView.image = [ColorUtils renderPaint:_paintSwatches[indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
+                    cell.imageView.image = [ColorUtils renderPaint:[[_paintSwatches objectAtIndex:indexPath.row] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
                 } else {
                     cell.imageView.image = [ColorUtils renderRGB:_paintSwatches[indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
                 }

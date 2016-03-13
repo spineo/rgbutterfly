@@ -1544,7 +1544,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     UIImage *swatchImage;
     
     if (_isRGB == FALSE) {
-        swatchImage = [ColorUtils renderPaint:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
     } else {
         swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
     }

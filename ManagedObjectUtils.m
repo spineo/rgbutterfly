@@ -331,6 +331,22 @@
     }
 }
 
++ (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return (NSMutableArray *)results;
+    } else {
+        return nil;
+    }
+}
+
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -407,6 +423,24 @@
     [fetchRequest setEntity:entity];
     
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", mix_assoc_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return (NSMutableArray *)results;
+    } else {
+        return nil;
+    }
+}
+
++ (NSMutableArray *)queryTapAreas:(NSManagedObjectID *)match_assoc_id context:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TapArea" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"match_association == %@", match_assoc_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];

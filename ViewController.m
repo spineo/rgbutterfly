@@ -21,6 +21,8 @@
 #import "Keyword.h"
 #import "MixAssociation.h"
 #import "MixAssocSwatch.h"
+#import "MatchAssociations.h"
+#import "TapArea.h";
 
 
 @interface ViewController()
@@ -32,7 +34,7 @@
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *defaultListingType, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
-@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *colorArray, *sortedLetters;
+@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow;
@@ -102,6 +104,10 @@
         [self updateTable:@"Keywords"];
     }];
     
+    UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"MatchAssociations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self updateTable:@"Match"];
+    }];
+    
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [_listingAlertController dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -109,6 +115,7 @@
     [_listingAlertController addAction:defaultAction];
     [_listingAlertController addAction:mixAssociations];
     [_listingAlertController addAction:sortByKeywords];
+    [_listingAlertController addAction:matchAssociations];
     [_listingAlertController addAction:alertCancel];
     
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
@@ -120,7 +127,10 @@
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
  
     if ([_listingType isEqualToString:@"Mix"]) {
-        [self loadCollectionViewData];
+        [self loadMixCollectionViewData];
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         [self loadKeywordData];
@@ -128,7 +138,7 @@
     [_colorTableView reloadData];
 }
 
-- (void)loadCollectionViewData {
+- (void)loadMixCollectionViewData {
     
     _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
     int num_tableview_rows = (int)[_mixAssocObjs count];
@@ -153,11 +163,39 @@
         [mixAssociationIds addObject:paintSwatches];
     }
     
-    self.colorArray = [NSMutableArray arrayWithArray:mixAssociationIds];
+    self.mixColorArray = [NSMutableArray arrayWithArray:mixAssociationIds];
     
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
     
     [_colorTableView reloadData];
+}
+
+- (void)loadMatchCollectionViewData {
+    
+    _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context];
+    int num_tableview_rows = (int)[_matchAssocObjs count];
+    
+    NSMutableArray *matchAssociationIds = [[NSMutableArray alloc] init];
+    for (int i=0; i<num_tableview_rows; i++) {
+        
+        MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:i];
+        
+        NSMutableArray *tap_area_ids = [ManagedObjectUtils queryTapAreas:matchAssocObj.objectID context:self.context];
+        int num_collectionview_cells = (int)[tap_area_ids count];
+        
+        NSMutableArray *tapAreas = [NSMutableArray arrayWithCapacity:num_collectionview_cells];
+        
+       for (int j=0; j<num_collectionview_cells; j++) {
+           TapArea *tapAreaObj = [tap_area_ids objectAtIndex:j];
+
+            [tapAreas addObject:tapAreaObj];
+        }
+        [matchAssociationIds addObject:tapAreas];
+    }
+    
+    self.matchColorArray = [NSMutableArray arrayWithArray:matchAssociationIds];
+    
+    [_colorTableView reloadData];    
 }
 
 - (void)loadKeywordData {
@@ -251,14 +289,19 @@
 
 - (IBAction)takePhoto:(id)sender {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+
+
+        UIAlertController *myAlertView = [UIAlertController alertControllerWithTitle:@"Error"
+                                            message:@"Device has no camera"
+                                     preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
+        UIAlertAction* OKButton = [UIAlertAction
+                                    actionWithTitle:@"OK"
+                                    style:UIAlertActionStyleDefault
+                                    handler:nil];
         
-        [myAlertView show];
+        [myAlertView addAction:OKButton];
+        [self presentViewController:myAlertView animated:YES completion:nil];
         
     } else {
         [self setImageAction:1];
@@ -327,6 +370,11 @@
         [headerLabel setText: @"Mix Associations Listing"];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
         
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [headerView addSubview:headerLabel];
+        [headerLabel setText: @"Match Associations Listing"];
+        [headerLabel setTextAlignment: NSTextAlignmentCenter];
+        
     } else {
         [headerView addSubview:headerLabel];
         [headerLabel setText: @"Colors Listing"];
@@ -362,6 +410,9 @@
     if ([_listingType isEqualToString:@"Mix"]) {
         objCount = [_mixAssocObjs count];
 
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        objCount = [_matchAssocObjs count];
+        
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         NSString *sectionTitle = [_sortedLetters objectAtIndex:section];
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
@@ -376,6 +427,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if ([_listingType isEqualToString:@"Mix"]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+    
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+    
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -409,8 +464,8 @@
         } else {
             NSArray *matches = [regex matchesInString:mix_assoc_name options:NSMatchingAnchored range:searchedRange];
             if ([matches count] > 0) {
-                PaintSwatches *ref = [[self.colorArray objectAtIndex:indexPath.row] objectAtIndex:0];
-                PaintSwatches *mix = [[self.colorArray objectAtIndex:indexPath.row] objectAtIndex:1];
+                PaintSwatches *ref = [[self.mixColorArray objectAtIndex:indexPath.row] objectAtIndex:0];
+                PaintSwatches *mix = [[self.mixColorArray objectAtIndex:indexPath.row] objectAtIndex:1];
                 
                 mix_assoc_name = [[NSString alloc] initWithFormat:@"%@ and %@ Mix", ref.name, mix.name];
             }
@@ -426,6 +481,31 @@
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
         return custCell;
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+            AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+            
+            if (! custCell) {
+                custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            }
+            
+            [custCell setBackgroundColor: DARK_BG_COLOR];
+            
+            MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:indexPath.row];
+            
+            NSString *match_assoc_name = matchAssocObj.name;
+    
+            
+            [custCell setAssocName:match_assoc_name];
+            [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
+            
+            
+            NSInteger index = custCell.collectionView.tag;
+            
+            CGFloat horizontalOffset = [self.contentOffsetDictionary[[@(index) stringValue]] floatValue];
+            [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
+            
+            return custCell;
         
     } else {
         
@@ -453,7 +533,7 @@
             PaintSwatches *ps = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
 
             if (_isRGB == FALSE) {
-               [cell.imageView setImage: [ColorUtils renderPaint:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+               [cell.imageView setImage: [ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             } else {
                [cell.imageView setImage: [ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             }
@@ -465,7 +545,7 @@
             PaintSwatches *ps = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
 
             if (_isRGB == FALSE) {
-                [cell.imageView setImage:[ColorUtils renderPaint:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             } else {
                 [cell.imageView setImage:[ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             }
@@ -480,17 +560,22 @@
     
     if ([_listingType isEqualToString:@"Mix"]) {
         _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
+        
+    } else    if ([_listingType isEqualToString:@"Match"]) {
+        //_selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
 
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         
         NSString *sectionTitle   = [_sortedLetters objectAtIndex:indexPath.section];
         _selPaintSwatch = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
 
     } else {
         _selPaintSwatch = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+        [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
     }
     
-    [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
 }
 
 // Keywords index
@@ -535,7 +620,10 @@
     _listingType = listingType;
     
     if ([_listingType isEqualToString:@"Mix"]) {
-        [self loadCollectionViewData];
+        [self loadMixCollectionViewData];
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         [self loadKeywordData];
@@ -560,9 +648,14 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    NSArray *collectionViewArray = [self.colorArray objectAtIndex:index];
-    
-    return [collectionViewArray count];
+    if ([_listingType isEqualToString:@"Mix"]) {
+        return [[self.mixColorArray objectAtIndex:index] count];
+
+    // Match
+    //
+    } else {
+        return [[self.matchColorArray objectAtIndex:index] count];
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -570,15 +663,26 @@
     
     int index = (int)collectionView.tag;
     
-    PaintSwatches *paintSwatch = [[self.colorArray objectAtIndex:index] objectAtIndex:indexPath.row];
-    
     UIImage *swatchImage;
     
-    if (_isRGB == FALSE) {
-        swatchImage = [ColorUtils renderPaint:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+    if ([_listingType isEqualToString:@"Mix"]) {
+    
+        PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
+        
+        if (_isRGB == FALSE) {
+            swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        } else {
+            swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        }
+
+
+    // Match
+    //
     } else {
-        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        swatchImage = [ColorUtils renderPaint:tapArea.image_section cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
     }
+    
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
     
     [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
@@ -598,7 +702,9 @@
 
     [self setCollectViewSelRow:index];
     
-    [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+    if ([_listingType isEqualToString:@"Mix"]) {
+        [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+    }
 }
 
 
@@ -683,7 +789,7 @@
         UINavigationController *navigationViewController = [segue destinationViewController];
         AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
         
-        [assocTableViewController setPaintSwatches:[self.colorArray objectAtIndex:_collectViewSelRow]];
+        [assocTableViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
         [assocTableViewController setMixAssociation:[_mixAssocObjs objectAtIndex:_collectViewSelRow]];
         [assocTableViewController setSaveFlag:TRUE];
         [assocTableViewController setSourceViewName:@"ViewController"];

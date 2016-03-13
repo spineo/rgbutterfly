@@ -746,7 +746,7 @@ const int DETAIL_MIX_SECTION    = 5;
     
     PaintSwatches *paintSwatch = [[self.colorArray objectAtIndex:index] objectAtIndex:indexPath.row];
     
-    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[ColorUtils renderPaint:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
+    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
     
     [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
