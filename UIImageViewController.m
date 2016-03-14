@@ -854,7 +854,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [_scrollViewUp setHidden:TRUE];
             [_scrollViewDown setHidden:FALSE];
             
-            CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+            //CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+            CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
             self.tableHeightConstraint.constant = frameHeight;
             
             [_imageTableView setHidden:FALSE];
@@ -870,7 +871,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_scrollViewUp setHidden:TRUE];
         [_scrollViewDown setHidden:FALSE];
         
-        CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+        //CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+        CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
         self.tableHeightConstraint.constant = frameHeight;
         
         [_imageTableView setHidden:FALSE];
@@ -1529,7 +1531,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    NSArray *collectionViewArray = self.collectionMatchArray[index];
+    NSArray *collectionViewArray = [self.collectionMatchArray objectAtIndex:index];
     
     return (int)[collectionViewArray count];
 }
@@ -1793,11 +1795,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Add the TapAreas, TapAreaSwatches, and PaintSwatches
     //
-    for (int i=0; i<[self.collectionMatchArray count]; i++) {
+    for (int i=0; i<[self.collectionMatchArray count];i++) {
         NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
         
         PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
-        int tap_order = i + 1;
+        int tap_order = (int)[self.collectionMatchArray count] - i;
         NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
         [tapAreaRef setName:tapAreaName];
         
@@ -1811,6 +1813,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
         [tapArea setCoord_pt:tapAreaRef.coord_pt];
         [tapArea setMatch_association:matchAssoc];
+        [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
 
         [matchAssoc addTap_areaObject:tapArea];
 

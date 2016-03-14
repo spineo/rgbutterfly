@@ -88,7 +88,7 @@
     
     // Data model
     //
-    _dataModelObjects = @[ @"PaintSwatches", @"MixAssociations", @"SwatchKeywords", @"KeywordNames", @"MixAssociationsDesc" ];
+    _dataModelObjects = @[ @"PaintSwatches", @"MixAssociations", @"SwatchKeywords", @"MixAssociationsDesc" ];
 }
 
 - (void)tearDown {

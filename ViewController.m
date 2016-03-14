@@ -670,6 +670,7 @@
     } else {
         TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         swatchImage = [ColorUtils renderPaint:tapArea.image_section cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        NSLog(@"NAME=%@, INDEX=%i, IP ROW=%i", tapArea.name, index, (int)indexPath.row);
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
