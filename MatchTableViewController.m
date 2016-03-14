@@ -717,7 +717,8 @@ const int IMAGE_TAG  = 6;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {
-        [AlertUtils noValueAlert];
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
         _textReturn  = TRUE;
@@ -743,13 +744,16 @@ const int IMAGE_TAG  = 6;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField.tag == NAME_FIELD_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
-        [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
-        [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
-        [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else {
         return YES;
@@ -973,7 +977,8 @@ const int IMAGE_TAG  = 6;
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         
     } else {
-        [AlertUtils rowLimitAlert: _maxRowLimit];
+        UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
+        [self presentViewController:myAlert animated:YES completion:nil];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }

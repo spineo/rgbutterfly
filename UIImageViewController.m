@@ -1725,7 +1725,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         
     } else {
-        [AlertUtils rowLimitAlert: _maxRowLimit];
+        UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
+        [self presentViewController:myAlert animated:YES completion:nil];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
@@ -1743,7 +1744,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     NSArray *objects = [frc fetchedObjects];
     
     if ([objects count] > 0) {
-        [AlertUtils valueExistsAlert];
+        UIAlertController *myAlert = [AlertUtils valueExistsAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return TRUE;
     }
     
@@ -1755,15 +1757,18 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Run a series of checks first
     //
     if ([_matchName isEqualToString:@""]) {
-        [AlertUtils noValueAlert];
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
         
     } else if ([_matchName length] > MAX_NAME_LEN) {
-        [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
         
     } else if ([_matchDesc length] > MAX_DESC_LEN) {
-        [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
         
     } else if ([self existsMatchAssocName] == TRUE) {
@@ -1825,7 +1830,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        [[AlertUtils createOkAlert:@"Match Association Save" message:@"Error saving"] show];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association Save" message:@"Error saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
 
     } else {
         NSLog(@"Match assoc save successful");

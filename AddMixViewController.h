@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PaintSwatches.h"
 
-@interface AddMixViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface AddMixViewController : UIViewController <UISearchBarDelegate>
 
 @property NSMutableArray *paintSwatches, *addPaintSwatches;
 
@@ -32,7 +32,5 @@
 @property (strong, nonatomic) UISearchBar *mixSearchBar;
 
 @property (weak, nonatomic) IBOutlet UITableView *addMixTableView;
-
-- (IBAction)searchMix:(id)sender;
 
 @end

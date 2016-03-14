@@ -14,6 +14,7 @@
 #import "SwatchDetailTableViewController.h"
 #import "AssocCollectionTableViewCell.h"
 #import "AssocTableViewController.h"
+#import "AlertUtils.h"
 
 #import "ManagedObjectUtils.h"
 #import "PaintSwatches.h"
@@ -289,19 +290,7 @@
 
 - (IBAction)takePhoto:(id)sender {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-
-
-        UIAlertController *myAlertView = [UIAlertController alertControllerWithTitle:@"Error"
-                                            message:@"Device has no camera"
-                                     preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* OKButton = [UIAlertAction
-                                    actionWithTitle:@"OK"
-                                    style:UIAlertActionStyleDefault
-                                    handler:nil];
-        
-        [myAlertView addAction:OKButton];
-        [self presentViewController:myAlertView animated:YES completion:nil];
+        [self presentViewController:[AlertUtils createOkAlert:@"Error" message:@"Device has no camera"] animated:YES completion:nil];
         
     } else {
         [self setImageAction:1];

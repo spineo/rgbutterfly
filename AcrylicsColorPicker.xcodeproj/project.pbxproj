@@ -47,7 +47,6 @@
 		21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC01C8485B6001C3F05 /* SwatchKeyword.m */; };
 		21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */; };
 		21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */; };
-		21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ECE1C848674001C3F05 /* ImageTableViewController.m */; };
 		21397ED81C848674001C3F05 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED01C848674001C3F05 /* PickerViewController.m */; };
 		21397ED91C848674001C3F05 /* SwatchDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED21C848674001C3F05 /* SwatchDetailTableViewController.m */; };
 		21397EDA1C848674001C3F05 /* UIImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397ED41C848674001C3F05 /* UIImageViewController.m */; };
@@ -153,8 +152,6 @@
 		21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAreaKeyword.m; sourceTree = "<group>"; };
 		21397EC51C8485B6001C3F05 /* TapAreaSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaSwatch.h; sourceTree = "<group>"; };
 		21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapAreaSwatch.m; sourceTree = "<group>"; };
-		21397ECD1C848674001C3F05 /* ImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableViewController.h; sourceTree = "<group>"; };
-		21397ECE1C848674001C3F05 /* ImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableViewController.m; sourceTree = "<group>"; };
 		21397ECF1C848674001C3F05 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
 		21397ED01C848674001C3F05 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
 		21397ED11C848674001C3F05 /* SwatchDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchDetailTableViewController.h; sourceTree = "<group>"; };
@@ -238,8 +235,6 @@
 				21397E601C848272001C3F05 /* AssocTableViewController.m */,
 				21397E581C8481F6001C3F05 /* MatchTableViewController.h */,
 				21397E561C8481C5001C3F05 /* MatchTableViewController.m */,
-				21397ECD1C848674001C3F05 /* ImageTableViewController.h */,
-				21397ECE1C848674001C3F05 /* ImageTableViewController.m */,
 				21397ECF1C848674001C3F05 /* PickerViewController.h */,
 				21397ED01C848674001C3F05 /* PickerViewController.m */,
 				21397ED11C848674001C3F05 /* SwatchDetailTableViewController.h */,
@@ -559,7 +554,6 @@
 				21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */,
 				21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
-				21397ED71C848674001C3F05 /* ImageTableViewController.m in Sources */,
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
 				21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,

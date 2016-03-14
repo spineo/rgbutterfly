@@ -11,14 +11,14 @@
 
 @interface AlertUtils : NSObject
 
-+ (UIAlertView *)createOkAlert:(NSString *)title message:(NSString *)message;
++ (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message;
 
-+ (void)noValueAlert;
++ (UIAlertController *)noValueAlert;
 
-+ (void)sizeLimitAlert:(int)size;
++ (UIAlertController *)sizeLimitAlert:(int)size;
 
-+ (void)rowLimitAlert:(int)size;
++ (UIAlertController *)rowLimitAlert:(int)size;
 
-+ (void)valueExistsAlert;
++ (UIAlertController *)valueExistsAlert;
 
 @end

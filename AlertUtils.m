@@ -9,40 +9,44 @@
 #import "AlertUtils.h"
 #import "GlobalSettings.h"
 
+
 @implementation AlertUtils
 
 
 // Replace with UIAlertController (see 'takePhoto' example in 'ViewController')
 //
-+ (UIAlertView *)createOkAlert:(NSString *)title message:(NSString *)message {
++ (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
-                                    message: message
-                                    delegate:self
-                                    cancelButtonTitle:@"Ok"
-                                    otherButtonTitles: nil];
-
-    [alert setTintColor: DARK_TEXT_COLOR];
+    UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:title
+                                                                         message:message
+                                                                  preferredStyle:UIAlertControllerStyleAlert];
     
-    return alert;
+    UIAlertAction* OKButton = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:nil];
+    
+    [myAlertController addAction:OKButton];
+    
+    return myAlertController;
 }
 
 // The alert text set in GlobalSettings
 //
-+ (void)noValueAlert {
-    [[AlertUtils createOkAlert: NO_VALUE message: NO_VALUE_MSG] show];
++ (UIAlertController *)noValueAlert {
+    return [self createOkAlert: NO_VALUE message: NO_VALUE_MSG];
 }
 
-+ (void)sizeLimitAlert:(int)size {
-    [[AlertUtils createOkAlert: SIZE_LIMIT message: [[NSString alloc] initWithFormat: SIZE_LIMIT_MSG, size]] show];
++ (UIAlertController *)sizeLimitAlert:(int)size {
+    return [self createOkAlert: SIZE_LIMIT message: [[NSString alloc] initWithFormat: SIZE_LIMIT_MSG, size]];
 }
 
-+ (void)rowLimitAlert:(int)size {
-    [[AlertUtils createOkAlert: ROW_LIMIT message: [[NSString alloc] initWithFormat: ROW_LIMIT_MSG, size]] show];
++ (UIAlertController *)rowLimitAlert:(int)size {
+    return [self createOkAlert: ROW_LIMIT message: [[NSString alloc] initWithFormat: ROW_LIMIT_MSG, size]];
 }
 
-+ (void)valueExistsAlert {
-    [[AlertUtils createOkAlert: VALUE_EXISTS message: VALUE_EXISTS_MSG] show];
++ (UIAlertController *)valueExistsAlert {
+    return [self createOkAlert: VALUE_EXISTS message: VALUE_EXISTS_MSG];
 }
 
 @end

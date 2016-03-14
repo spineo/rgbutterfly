@@ -8,6 +8,7 @@
 
 #import "AssocTableViewCell.h"
 #import "GlobalSettings.h"
+#import "AlertUtils.h"
 
 @interface AssocTableViewCell()
 
@@ -72,6 +73,9 @@
                                             cancelButtonTitle:@"Ok"
                                             otherButtonTitles: nil];
         [_noTextAlert setTintColor: DARK_TEXT_COLOR];
+        
+//        _noTextAlert = [AlertUtils createOkAlert:@"Error" message:@"Device has no camera"];
+//        [_presentingViewController presentViewController:_noTextAlert animated:YES completion:nil];
     }
 
     return self;

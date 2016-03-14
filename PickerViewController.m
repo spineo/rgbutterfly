@@ -8,7 +8,6 @@
 
 #import "PickerViewController.h"
 #import "UIImageViewController.h"
-//#import "ImageTableViewController.h"
 
 
 @interface PickerViewController ()
