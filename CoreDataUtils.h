@@ -23,7 +23,6 @@
 // FETCH methods
 //
 + (GlobalSettings *)fetchGlobalSettings;
-+ (int)fetchCount:(NSString *)entityName;
 + (int)fetchIdCount:(NSString *)entityName idName:(NSString *)idName idValue:(int)idValue;
 + (NSMutableArray *)fetchMixAssociationsIds:(NSString *)idName idValue:(int)idValue returnName:(NSString *)returnName;
 + (NSMutableArray *)fetchMixAssocIds:(int)swatchId descId:(int)descId;

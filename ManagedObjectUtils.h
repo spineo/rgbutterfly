@@ -15,6 +15,7 @@
 #import "Keyword.h"
 #import "SwatchKeyword.h"
 #import "MixAssociation.h"
+#import "MatchAlgorithm.h"
 
 @interface ManagedObjectUtils : NSObject
 
@@ -23,10 +24,12 @@
 //
 + (void)insertSubjectiveColors;
 + (void)insertPaintSwatchTypes;
-+ (void)insertPaintSwatches:(NSManagedObjectContext *)context;
++ (void)insertMatchAlgorithms;
++ (void)insertTestPaintSwatches:(NSManagedObjectContext *)context;
 
 // Fetch methods
 //
++ (int)fetchCount:(NSString *)entityName;
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context;
 + (NSArray *)fetchKeywords:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchPaintSwatches:(NSManagedObjectContext *)context;

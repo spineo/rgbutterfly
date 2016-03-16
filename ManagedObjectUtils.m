@@ -128,7 +128,60 @@
     }
 }
 
-+ (void)insertPaintSwatches:(NSManagedObjectContext *)context {
+// Call this method from GlobalSettings
+//
++ (void)insertMatchAlgorithms {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSEntityDescription *matchAlgEntity = [NSEntityDescription entityForName:@"MatchAlgorithm" inManagedObjectContext:context];
+    
+    // Read the data text files
+    //
+    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:@"MatchAlgorithm"
+                                                         ofType:@"txt"];
+    // Get rid of new line
+    //
+    NSString* fileContents =
+    [NSString stringWithContentsOfFile:fileRoot
+                              encoding:NSUTF8StringEncoding error:nil];
+    
+    // First, separate by new line
+    //
+    NSArray* allLines =
+    [fileContents componentsSeparatedByCharactersInSet:
+     [NSCharacterSet newlineCharacterSet]];
+    
+    // Order is used for the color wheel (starting at zero)
+    //
+    int order = 0;
+    for (NSString *line in allLines) {
+        // Strip newlines and split by delimiters
+        //
+        NSString *compsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@","]];
+        
+        if ([comps count] == 1) {
+            NSString *name = [comps objectAtIndex:0];
+            
+            MatchAlgorithm *matchAlgorithm = [[MatchAlgorithm alloc] initWithEntity:matchAlgEntity insertIntoManagedObjectContext:context];
+            [matchAlgorithm setName:name];
+            [matchAlgorithm setOrder:[NSNumber numberWithInt:order]];
+            
+            order++;
+        }
+    }
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Save successful");
+    }
+}
+
++ (void)insertTestPaintSwatches:(NSManagedObjectContext *)context {
 
     NSEntityDescription *paintSwatchEntity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
 
@@ -256,6 +309,23 @@
 
 // Generic fetch
 //
++ (int)fetchCount:(NSString *)entityName {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    NSError *error      = nil;
+    int count = (int)[context countForFetchRequest:fetch error:&error];
+    
+    return count;
+}
+
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -376,7 +446,7 @@
     return subj_colors;
 }
 
-// Generic method to fetch ordered names (SubjectiveColor and PaintSwatchTypes)
+// Generic method to fetch ordered names (SubjectiveColor, PaintSwatchTypes, and MatchAlgorithm)
 //
 + (NSMutableArray *)fetchDictNames:(NSString *)entityName context:(NSManagedObjectContext *)context {
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];

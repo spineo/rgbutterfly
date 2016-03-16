@@ -77,7 +77,7 @@
 
 @property (nonatomic) BOOL saveFlag, isRGB;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
-@property (nonatomic, strong) NSArray *matchAlgorithms;
+@property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 @property (nonatomic, strong) UITextField *matchNumTextField;
 
 @property (nonatomic) BOOL expandTableView;
@@ -189,7 +189,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Match algorithms
     //
-    _matchAlgorithms = [GlobalSettings getMatchAlgorithms];
+    _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchAlgIndex = 0;
 
     // RGB Rendering FALSE by default

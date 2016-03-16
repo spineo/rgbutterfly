@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "BarButtonUtils.h"
 #import "AssocCollectionTableViewCell.h"
+#import "ManagedObjectUtils.h"
 
 
 // Data model and related API
@@ -106,7 +107,7 @@
 - (void)testDataModelAndAPI {
     NSLog(@"********************************************");
     for (_entity in _dataModelObjects) {
-        int count = [CoreDataUtils fetchCount:_entity];
+        int count = [ManagedObjectUtils fetchCount:_entity];
         XCTAssertGreaterThan(count, 0);
         NSLog(@"Entity %@ count is %i", _entity, count);
     }
@@ -155,7 +156,7 @@
     // Table view initialization
     //
     XCTAssertTrue(_vcTableView.numberOfSections == 1);
-    XCTAssertTrue([_vcTableView numberOfRowsInSection:0] == [CoreDataUtils fetchCount:@"PaintSwatches"]);
+    XCTAssertTrue([_vcTableView numberOfRowsInSection:0] == [ManagedObjectUtils fetchCount:@"PaintSwatch"]);
 }
 
 // UIImageViewController

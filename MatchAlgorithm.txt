@@ -1,0 +1,8 @@
+RGB Only
+HSB Only
+RGB+Hue
+RGB+HSB
+WGT RGB
+WGT RGB+HSB
+Hue Only
+Messy One

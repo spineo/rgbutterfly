@@ -13,7 +13,6 @@
 #import "BarButtonUtils.h"
 #import "ColorUtils.h"
 #import "MatchAlgorithms.h"
-//#import "PaintSwatchesDiff.h"
 #import "AlertUtils.h"
 #import "StringObjectUtils.h"
 #import "AppDelegate.h"
@@ -29,17 +28,14 @@
 @property (nonatomic) BOOL editFlag;
 @property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches;
-@property (nonatomic, strong) NSArray *matchAlgorithms;
+@property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
 // Picker views
 //
 @property (nonatomic, strong) UITextField *swatchTypeName, *subjColorName;
-//@property (nonatomic, strong) UIPickerView *subjColorPicker, *swatchTypesPicker;
-//@property (nonatomic, strong) NSArray *subjColorNames, *swatchTypeNames;
 @property (nonatomic, strong) NSDictionary *subjColorData, *swatchTypeData;
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
-//@property (nonatomic, strong) UIView *subjColorPickerView, *swatchTypesPickerView;
-//@property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
+
 
 // NSManagedObject subclassing
 //
@@ -65,8 +61,6 @@ const int DIV2_SECTION  = 3;
 const int NAME_SECTION  = 4;
 const int KEYW_SECTION  = 5;
 const int DESC_SECTION  = 6;
-//const int COLOR_SECTION = 7;
-//const int TYPES_SECTION = 8;
 
 const int MAX_SECTION   = 7;
 
@@ -76,15 +70,6 @@ const int MAX_SECTION   = 7;
 const int ALG_TAG    = 2;
 const int TYPE_TAG   = 4;
 const int IMAGE_TAG  = 6;
-//const int COLLBL_TAG = 7;
-//const int COLTXT_TAG = 8;
-//const int COLSEL_TAG = 9;
-//const int TYPLBL_TAG = 11;
-//const int TYPTXT_TAG = 12;
-//const int TYPSEL_TAG = 13;
-//const int TYPBTN_TAG = 14;
-
-//const int MAX_TAG     = 6;
 
 
 - (void)viewDidLoad {
@@ -147,27 +132,8 @@ const int IMAGE_TAG  = 6;
 
     // Match algorithms
     //
-    _matchAlgorithms = [GlobalSettings getMatchAlgorithms];
+    _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
-
-    // Color wheel data
-    //
-//    _subjColorData   = [GlobalSettings getSubjColorData];
-//    _subjColorNames  = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
-//
-//    // Swatch types
-//    //
-//    _swatchTypeNames = [GlobalSettings getSwatchTypes];
-//
-//    // Subjective color picker
-//    //
-//    _colorPickerSelRow = _selPaintSwatch.subj_color_id ? _selPaintSwatch.subj_color_id : 0;
-//    _typesPickerSelRow = _selPaintSwatch.type_id       ? _selPaintSwatch.type_id       : 0;
-//    
-//    _colorSelected     = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
-//    _colorName         = [_subjColorNames  objectAtIndex:_colorPickerSelRow];
-//    _subjColorValue    = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
-//    _typeSelected      = [_swatchTypeNames objectAtIndex:_typesPickerSelRow];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
@@ -195,8 +161,6 @@ const int IMAGE_TAG  = 6;
          ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
          ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
          ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
-//         ((section == COLOR_SECTION) && _colorPickerSelRow == 0) ||
-//         ((section == TYPES_SECTION) && _typesPickerSelRow == 0)
          ) && (_editFlag == FALSE)) {
         return 0;
     } else if (section != MATCH_SECTION) {

@@ -244,6 +244,4 @@ extern float const DEF_BORDER_THRESHOLD;
 
 + (NSString *)getColorName:(int)subjColorId;
 
-+ (NSArray *)getMatchAlgorithms;
-
 @end

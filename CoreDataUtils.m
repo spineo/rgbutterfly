@@ -103,23 +103,6 @@
     return globalSettings;
 }
 
-+ (int)fetchCount:(NSString *)entityName {
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    
-    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-    
-    [fetch setEntity:entity];
-    
-    NSError *error      = nil;
-    int count = (int)[context countForFetchRequest:fetch error:&error];
-    
-    return count;
-}
-
 + (NSMutableArray *)fetchSwatchKeywords:(int)swatchId {
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

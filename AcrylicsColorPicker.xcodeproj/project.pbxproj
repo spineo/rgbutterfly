@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
+		2134C8A81C99812300E3E959 /* MatchAlgorithm.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2134C8A71C99812300E3E959 /* MatchAlgorithm.txt */; };
+		2134C8AD1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */; };
+		2134C8AE1C99834500E3E959 /* MatchAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E561C8481C5001C3F05 /* MatchTableViewController.m */; };
 		21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E5A1C848259001C3F05 /* AddMixTableViewController.m */; };
@@ -79,6 +82,11 @@
 		210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
+		2134C8A71C99812300E3E959 /* MatchAlgorithm.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MatchAlgorithm.txt; sourceTree = "<group>"; };
+		2134C8A91C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAlgorithm+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAlgorithm+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2134C8AB1C99834500E3E959 /* MatchAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAlgorithm.h; sourceTree = "<group>"; };
+		2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAlgorithm.m; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E561C8481C5001C3F05 /* MatchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewController.m; sourceTree = "<group>"; };
 		21397E581C8481F6001C3F05 /* MatchTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewController.h; sourceTree = "<group>"; };
@@ -250,6 +258,10 @@
 		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				2134C8A91C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.h */,
+				2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */,
+				2134C8AB1C99834500E3E959 /* MatchAlgorithm.h */,
+				2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */,
 				21A69CCD1C8DAFB600B70810 /* TapArea+CoreDataProperties.h */,
 				21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */,
 				21A69CCF1C8DAFB600B70810 /* TapArea.h */,
@@ -316,6 +328,7 @@
 			children = (
 				21397E841C848457001C3F05 /* PaintSwatchType.txt */,
 				21397E851C848457001C3F05 /* SubjectiveColor.txt */,
+				2134C8A71C99812300E3E959 /* MatchAlgorithm.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -499,6 +512,7 @@
 			files = (
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
 				21397E631C8482E1001C3F05 /* colorwheel.png in Resources */,
+				2134C8A81C99812300E3E959 /* MatchAlgorithm.txt in Resources */,
 				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
 				21397EE41C84876D001C3F05 /* Info.plist in Resources */,
 				21397E861C848457001C3F05 /* PaintSwatchType.txt in Resources */,
@@ -524,6 +538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */,
+				2134C8AD1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,
 				21397E611C848272001C3F05 /* AssocTableViewController.m in Sources */,
 				21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */,
@@ -544,6 +559,7 @@
 				21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21397EDA1C848674001C3F05 /* UIImageViewController.m in Sources */,
 				21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */,
+				2134C8AE1C99834500E3E959 /* MatchAlgorithm.m in Sources */,
 				21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,

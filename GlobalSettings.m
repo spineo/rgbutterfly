@@ -163,22 +163,26 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
-    int count = [CoreDataUtils fetchCount:@"GlobalSetting"];
+    int count = [ManagedObjectUtils fetchCount:@"GlobalSetting"];
     
     if (count == 0) {
         [CoreDataUtils initGlobalSettings];
     }
     
-    count = [CoreDataUtils fetchCount:@"SubjectiveColor"];
+    count = [ManagedObjectUtils fetchCount:@"SubjectiveColor"];
     if (count == 0) {
         [ManagedObjectUtils insertSubjectiveColors];
     }
     
-    count = [CoreDataUtils fetchCount:@"PaintSwatchType"];
+    count = [ManagedObjectUtils fetchCount:@"PaintSwatchType"];
     if (count == 0) {
         [ManagedObjectUtils insertPaintSwatchTypes];
     }
-    
+
+    count = [ManagedObjectUtils fetchCount:@"MatchAlgorithm"];
+    if (count == 0) {
+        [ManagedObjectUtils insertMatchAlgorithms];
+    }
 }
 
 #pragma mark - Swatch Dictionaries and Arrays
@@ -357,19 +361,6 @@ static NSDictionary *swatchTypes;
 
 + (NSString *)getColorName:(int)subjColorId {
     return [[self getColorWheel] objectAtIndex:subjColorId];
-}
-
-+ (NSArray *)getMatchAlgorithms {
-      return @[
-               @"RGB Only",
-               @"HSB Only",
-               @"RGB+Hue",
-               @"RGB+HSB",
-               @"WGT RGB",
-               @"WGT RGB+HSB",
-               @"Hue Only",
-               @"Messy One"
-               ];
 }
 
 @end
