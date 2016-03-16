@@ -21,10 +21,6 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
 
-- (IBAction)selectPhoto:(id)sender;
-
-- (IBAction)takePhoto:(id)sender;
-
 - (IBAction)changeButtonRendering:(id)sender;
 
 - (IBAction)showListingOptions:(id)sender;

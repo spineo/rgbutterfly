@@ -28,13 +28,13 @@
 
 @interface ViewController()
 
-@property (nonatomic, strong) UIAlertController *listingAlertController;
+@property (nonatomic, strong) UIAlertController *listingController, *photoSelectionController;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *defaultListingType, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
-@property (nonatomic, strong) UIImage *colorRenderingImage;
+@property (nonatomic, strong) UIImage *colorRenderingImage, *matchAssociationImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
@@ -86,9 +86,9 @@
     _imageViewHeight    = DEF_TABLE_CELL_HEIGHT;
 
     
-    // Listing Alert Controller
+    // Listing Controller
     //
-    _listingAlertController = [UIAlertController alertControllerWithTitle:@"Colors Listings"
+    _listingController = [UIAlertController alertControllerWithTitle:@"Colors Listings"
                                                                    message:@"Please select a listing type"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
@@ -110,14 +110,38 @@
     }];
     
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        [_listingAlertController dismissViewControllerAnimated:YES completion:nil];
+        [_listingController dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [_listingAlertController addAction:defaultAction];
-    [_listingAlertController addAction:mixAssociations];
-    [_listingAlertController addAction:sortByKeywords];
-    [_listingAlertController addAction:matchAssociations];
-    [_listingAlertController addAction:alertCancel];
+    [_listingController addAction:defaultAction];
+    [_listingController addAction:mixAssociations];
+    [_listingController addAction:sortByKeywords];
+    [_listingController addAction:matchAssociations];
+    [_listingController addAction:alertCancel];
+    
+    
+    // Listing Alert Controller
+    //
+    _photoSelectionController = [UIAlertController alertControllerWithTitle:@"Photo Selection"
+                                                             message:@"Please select from options below"
+                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* selLibraryAction   = [UIAlertAction actionWithTitle:@"My Photo Library" style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action) {
+                                                                [self selectPhoto];
+                                                            }];
+    
+    UIAlertAction *selTakePhotoAction = [UIAlertAction actionWithTitle:@"Take New Photo" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+        [self takePhoto];
+    }];
+    
+    UIAlertAction *selCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_photoSelectionController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_photoSelectionController addAction:selLibraryAction];
+    [_photoSelectionController addAction:selTakePhotoAction];
+    [_photoSelectionController addAction:selCancel];
     
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
 
@@ -288,7 +312,7 @@
 }
 
 
-- (IBAction)takePhoto:(id)sender {
+- (void)takePhoto {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self presentViewController:[AlertUtils createOkAlert:@"Error" message:@"Device has no camera"] animated:YES completion:nil];
         
@@ -300,11 +324,10 @@
     }
 }
 
-- (IBAction)selectPhoto:(id)sender {
+- (void)selectPhoto {
     [self setImageAction: 2];
     [self performSegueWithIdentifier:@"ImagePickerSegue" sender:self];
 }
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Tableview methods
@@ -598,11 +621,11 @@
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UIAlertController
+// UIAlertControllers
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - (IBAction)showListingOptions:(id)sender {
-    [self presentViewController:_listingAlertController animated:YES completion:nil];
+    [self presentViewController:_listingController animated:YES completion:nil];
 }
 
 - (void)updateTable:(NSString *)listingType {
@@ -621,6 +644,10 @@
         [self initPaintSwatchFetchedResultsController];
     }
     [_colorTableView reloadData];
+}
+
+- (IBAction)showPhotoOptions:(id)sender {
+    [self presentViewController:_photoSelectionController animated:YES completion:nil];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -694,6 +721,13 @@
     
     if ([_listingType isEqualToString:@"Mix"]) {
         [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        MatchAssociations *matchAssociation = tapArea.match_association;
+        _matchAssociationImage = [UIImage imageWithData:matchAssociation.image_url];
+        
+        [self performSegueWithIdentifier:@"MatchSelectionSegue" sender:self];
     }
 }
 
@@ -783,6 +817,15 @@
         [assocTableViewController setMixAssociation:[_mixAssocObjs objectAtIndex:_collectViewSelRow]];
         [assocTableViewController setSaveFlag:TRUE];
         [assocTableViewController setSourceViewName:@"ViewController"];
+        
+    // MatchSelectionSegue
+    //
+    } else if ([[segue identifier] isEqualToString:@"MatchSelectionSegue"]) {
+
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
+        
+        [imageViewController setSelectedImage:_matchAssociationImage];
         
     // MainSwatchDetailSegue
     //
