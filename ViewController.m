@@ -826,6 +826,7 @@
         UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
         
         [imageViewController setSelectedImage:_matchAssociationImage];
+        [imageViewController setSourceViewController:@"ViewController"];
         
     // MainSwatchDetailSegue
     //

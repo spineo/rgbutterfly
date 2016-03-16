@@ -555,6 +555,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [_typeAlertController addAction:_associateMixes];
     [_typeAlertController addAction:_alertCancel];
     
+    // Hide this controller if the source is the main ViewController (as 'match' is the only valid context)
+    //
+    if ([_sourceViewController isEqualToString:@"ViewController"]) {
+        [self matchButtonHide];
+    }
+    
     // TableView
     //
     _reuseCellIdentifier = @"ImageTableViewCell";
@@ -695,6 +701,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)viewButtonHide {
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: VIEW_BTN_TAG width: HIDE_BUTTON_WIDTH];
+}
+
+// When source view controller is 'ViewController' context
+//
+- (void)matchButtonHide {
+    [BarButtonUtils buttonHide:self.toolbarItems refTag: MATCH_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: MATCH_BTN_TAG width: HIDE_BUTTON_WIDTH];
 }
 
 // ******************************************************************************

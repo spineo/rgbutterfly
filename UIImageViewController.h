@@ -15,6 +15,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *imageScrollView;
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic, strong) NSString *sourceViewController;
 @property (nonatomic, strong) IBOutlet UITableView *imageTableView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *scrollHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableHeightConstraint;
