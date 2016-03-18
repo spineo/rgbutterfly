@@ -23,5 +23,6 @@
 @dynamic match_association;
 @dynamic tap_area_keyword;
 @dynamic tap_area_swatch;
+@dynamic tap_area_match;
 
 @end

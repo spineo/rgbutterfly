@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) MatchAssociations *match_association;
 @property (nullable, nonatomic, retain) NSSet<TapAreaKeyword *> *tap_area_keyword;
 @property (nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;
+@property (nonatomic, retain) PaintSwatches *tap_area_match;
 
 @end
 

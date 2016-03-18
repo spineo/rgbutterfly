@@ -212,8 +212,10 @@
         
        for (int j=0; j<num_collectionview_cells; j++) {
            TapArea *tapAreaObj = [tap_area_ids objectAtIndex:j];
+           PaintSwatches *swatchObj = tapAreaObj.tap_area_match;
 
-            [tapAreas addObject:tapAreaObj];
+           //[tapAreas addObject:tapAreaObj];
+           [tapAreas addObject:swatchObj];
         }
         [matchAssociationIds addObject:tapAreas];
     }
@@ -695,8 +697,11 @@
     // Match
     //
     } else {
-        TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
-        swatchImage = [ColorUtils renderPaint:tapArea.image_section cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        //TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        TapArea *tapArea = paintSwatch.tap_area;
+        //swatchImage = [ColorUtils renderPaint:tapArea.image_section cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue]];
     }
     
@@ -826,7 +831,8 @@
         UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
         
         [imageViewController setSelectedImage:_matchAssociationImage];
-        [imageViewController setSourceViewController:@"ViewController"];
+        [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
+        [imageViewController setSourceViewController:@"MatchViewController"];
         
     // MainSwatchDetailSegue
     //

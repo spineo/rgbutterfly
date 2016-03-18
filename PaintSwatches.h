@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MixAssocSwatch, SubjectiveColor, SwatchKeyword, TapAreaSwatch;
+@class MixAssocSwatch, SubjectiveColor, SwatchKeyword, TapAreaSwatch, TapArea;
 
 NS_ASSUME_NONNULL_BEGIN
 

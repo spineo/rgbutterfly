@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MatchAssociations, TapAreaKeyword, TapAreaSwatch;
+@class MatchAssociations, TapAreaKeyword, TapAreaSwatch, PaintSwatches;
 
 NS_ASSUME_NONNULL_BEGIN
 

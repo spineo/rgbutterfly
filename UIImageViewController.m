@@ -38,7 +38,7 @@
 @property (nonatomic, strong) UIButton *shape, *scrollViewUp, *scrollViewDown;
 @property (nonatomic) int goBackStatus, viewInit, shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *rgbImage, *tapMeImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
-@property (nonatomic, strong) NSMutableArray *paintSwatches, *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
+@property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) GlobalSettings *globalSettings;
 @property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchDesc;
@@ -286,7 +286,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     // List of coordinates associated with tapped regions (i.e., GCPoint)
     //
-    _paintSwatches = [[NSMutableArray alloc] init];
+    if (![_sourceViewController isEqualToString:@"MatchViewController"]) {
+        _paintSwatches = [[NSMutableArray alloc] init];
+    } else {
+        _currTapSection = (int)[_paintSwatches count];
+    }
     
     
     // Set the info image
@@ -557,7 +561,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Hide this controller if the source is the main ViewController (as 'match' is the only valid context)
     //
-    if ([_sourceViewController isEqualToString:@"ViewController"]) {
+    if ([_sourceViewController isEqualToString:@"MatchViewController"]) {
         [self matchButtonHide];
     }
     
@@ -718,7 +722,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)resizeViews {
     
-    CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+    CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
 
     if ([_viewType containsString:@"match"]) {
         
@@ -1653,6 +1657,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 #pragma mark - Match Methods
 
 - (void)sortTapSection:(PaintSwatches *)refObj tapSection:(int)tapSection {
+    
     _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
     while (tapSection < [_tapNumberArray count]) {
@@ -1799,7 +1804,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Save the image as Transformable
     //
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_referenceTappedImage)];
+    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_referenceTappedImage)];
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
     [matchAssoc setImage_url:imageData];
     
     [matchAssoc setLast_update:currDate];
@@ -1827,6 +1833,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [tapArea setCoord_pt:tapAreaRef.coord_pt];
         [tapArea setMatch_association:matchAssoc];
         [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
+        [tapArea setTap_area_match:tapAreaRef];
+        [tapAreaRef setTap_area:tapArea];
 
         [matchAssoc addTap_areaObject:tapArea];
 

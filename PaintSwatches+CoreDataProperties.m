@@ -43,5 +43,6 @@
 @dynamic subjective_color;
 @dynamic swatch_keyword;
 @dynamic tap_area_swatch;
+@dynamic tap_area;
 
 @end

@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) SubjectiveColor *subjective_color;
 @property (nullable, nonatomic, retain) NSSet<SwatchKeyword *> *swatch_keyword;
 @property (nullable, nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;
+@property (nullable, nonatomic, retain) TapArea *tap_area;
 
 @end
 
