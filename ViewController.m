@@ -728,7 +728,8 @@
         [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
-        TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        TapArea *tapArea = paintSwatch.tap_area;
         MatchAssociations *matchAssociation = tapArea.match_association;
         _matchAssociationImage = [UIImage imageWithData:matchAssociation.image_url];
         
@@ -832,7 +833,7 @@
         
         [imageViewController setSelectedImage:_matchAssociationImage];
         [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
-        [imageViewController setSourceViewController:@"MatchViewController"];
+        [imageViewController setSourceViewContext:@"MatchViewController"];
         
     // MainSwatchDetailSegue
     //

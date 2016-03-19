@@ -283,15 +283,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     [self setBorderThreshold: DEF_BORDER_THRESHOLD];
     
-
-    // List of coordinates associated with tapped regions (i.e., GCPoint)
-    //
-    if (![_sourceViewController isEqualToString:@"MatchViewController"]) {
-        _paintSwatches = [[NSMutableArray alloc] init];
-    } else {
-        _currTapSection = (int)[_paintSwatches count];
-    }
-    
     
     // Set the info image
     //
@@ -559,17 +550,22 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [_typeAlertController addAction:_associateMixes];
     [_typeAlertController addAction:_alertCancel];
     
+
+    // List of coordinates associated with tapped regions (i.e., GCPoint)
     // Hide this controller if the source is the main ViewController (as 'match' is the only valid context)
     //
-    if ([_sourceViewController isEqualToString:@"MatchViewController"]) {
+    if ([_sourceViewContext isEqualToString:@"MatchViewController"]) {
+        _currTapSection = (int)[_paintSwatches count];
         [self matchButtonHide];
+    } else {
+        _paintSwatches = [[NSMutableArray alloc] init];
     }
     
     // TableView
     //
     _reuseCellIdentifier = @"ImageTableViewCell";
 
-    
+
     [_imageTableView setDelegate: self];
     [_imageTableView setDataSource: self];
 
@@ -644,6 +640,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 
     self.navigationItem.titleView = _titleAndRGBView;
+    
+    if ([_sourceViewContext isEqualToString:@"MatchViewController"]) {
+        [self setTapAreas];
+    }
 }
 
 
@@ -673,7 +673,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (void)selectAssocAction {
-    
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
@@ -1134,14 +1133,16 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _swatchObj = [_paintSwatches objectAtIndex:index];
     }
     
-    // TEMP
-    //
     if ([_viewType isEqualToString:@"match"]) {
-        NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
-        
-        for (int i=0; i<_currTapSection; i++) {
-            [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
-        }
+        [self setTapAreas];
+    }
+}
+
+- (void)setTapAreas {
+    NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
+    
+    for (int i=0; i<_currTapSection; i++) {
+        [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
 
     [self.imageTableView reloadData];
