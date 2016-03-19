@@ -48,7 +48,7 @@
 
 @property (nonatomic, strong) UIAlertView *tapAreaAlertView, *clearTapsAlertView;
 @property (nonatomic) int tapAreaSeen, tapAreaSize;
-@property (nonatomic, strong) NSString *tapAreaShape, *shapeGeom, *rectLabel, *circleLabel, *shapeTitle, *viewType;
+@property (nonatomic, strong) NSString *tapAreaShape, *shapeGeom, *rectLabel, *circleLabel, *shapeTitle;
 
 @property (nonatomic) int stepMinVal, stepMaxVal, stepIncVal, matchAlgIndex, matchStepMinVal, matchStepMaxVal, matchStepIncVal, maxRowLimit;
 
@@ -129,7 +129,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"      inManagedObjectContext:self.context];
     _matchAssocEntity     = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:self.context];
-    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
     _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
     _tapAreaEntity        = [NSEntityDescription entityForName:@"TapArea"          inManagedObjectContext:self.context];
     _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"    inManagedObjectContext:self.context];
@@ -184,7 +183,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     _cellHeight         = DEF_TABLE_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
 
-    _viewType           = @"match";
+    if (_viewType == nil) {
+        _viewType           = @"match";
+    }
+    
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
     
     // Match algorithms
@@ -520,7 +522,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                 
                                                 _viewType = @"assoc";
                                                 [self resetViews];
-                                                _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+                                                [self addMixAssociation];
 
                                                 UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:@"Assoc"
                                                                 style: UIBarButtonItemStylePlain
@@ -554,7 +556,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // List of coordinates associated with tapped regions (i.e., GCPoint)
     // Hide this controller if the source is the main ViewController (as 'match' is the only valid context)
     //
-    if ([_sourceViewContext isEqualToString:@"MatchViewController"]) {
+    if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
         [self matchButtonHide];
     } else {
@@ -641,7 +643,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     self.navigationItem.titleView = _titleAndRGBView;
     
-    if ([_sourceViewContext isEqualToString:@"MatchViewController"]) {
+    if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         [self setTapAreas];
     }
 }
@@ -869,8 +871,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             _imageViewSize = 0;
             [_scrollViewUp setHidden:TRUE];
             [_scrollViewDown setHidden:FALSE];
-            
-            //CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+
             CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
             self.tableHeightConstraint.constant = frameHeight;
             
@@ -975,7 +976,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)respondToTap:(id)sender {
 
-    _touchPoint = [sender locationInView: _imageView];
+    _touchPoint = [sender locationInView:_imageView];
 
     [self drawTouchShape];
     
@@ -1104,7 +1105,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             
         } else {
             if (_mixAssociation == nil) {
-                _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+                [self addMixAssociation];
             }
             
             MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
@@ -1133,16 +1134,16 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _swatchObj = [_paintSwatches objectAtIndex:index];
     }
     
-    if ([_viewType isEqualToString:@"match"]) {
-        [self setTapAreas];
-    }
+    [self setTapAreas];
 }
 
 - (void)setTapAreas {
-    NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
-    
-    for (int i=0; i<_currTapSection; i++) {
-        [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
+    if ([_viewType isEqualToString:@"match"]) {
+        NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
+        
+        for (int i=0; i<_currTapSection; i++) {
+            [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
+        }
     }
 
     [self.imageTableView reloadData];
@@ -1672,6 +1673,19 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         NSArray *tapNumberArrayReverse = [[_tapNumberArray reverseObjectEnumerator] allObjects];
         self.collectionMatchArray = [NSMutableArray arrayWithArray:tapNumberArrayReverse];
     }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Mix Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Match Methods
+
+- (void)addMixAssociation {
+    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
+    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
+    [_mixAssociation setImage_url:imageData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

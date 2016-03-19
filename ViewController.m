@@ -34,7 +34,7 @@
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *defaultListingType, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
-@property (nonatomic, strong) UIImage *colorRenderingImage, *matchAssociationImage;
+@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
@@ -725,16 +725,23 @@
     [self setCollectViewSelRow:index];
     
     if ([_listingType isEqualToString:@"Mix"]) {
-        [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+        //[self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+        PaintSwatches *paintSwatch = [[self.mixColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
+        
+        // Doesn't matter which one
+        //
+        MixAssocSwatch *mixAssocSwatch = [[paintSwatch.mix_assoc_swatch allObjects] objectAtIndex:0];
+
+        MixAssociation *mixAssociation = mixAssocSwatch.mix_association;
+        _associationImage = [UIImage imageWithData:mixAssociation.image_url];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
         MatchAssociations *matchAssociation = tapArea.match_association;
-        _matchAssociationImage = [UIImage imageWithData:matchAssociation.image_url];
-        
-        [self performSegueWithIdentifier:@"MatchSelectionSegue" sender:self];
+        _associationImage = [UIImage imageWithData:matchAssociation.image_url];
     }
+    [self performSegueWithIdentifier:@"ImageSelectionSegue" sender:self];
 }
 
 
@@ -815,7 +822,6 @@
         [pickerViewController setImageAction:_imageAction];
     
     } else if ([[segue identifier] isEqualToString:@"VCToAssocSegue"]) {
-
         UINavigationController *navigationViewController = [segue destinationViewController];
         AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
         
@@ -824,16 +830,23 @@
         [assocTableViewController setSaveFlag:TRUE];
         [assocTableViewController setSourceViewName:@"ViewController"];
         
-    // MatchSelectionSegue
+    // ImageSelectionSegue (applies to Match and Mix Collections)
     //
-    } else if ([[segue identifier] isEqualToString:@"MatchSelectionSegue"]) {
+    } else if ([[segue identifier] isEqualToString:@"ImageSelectionSegue"]) {
 
         UINavigationController *navigationViewController = [segue destinationViewController];
         UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
         
-        [imageViewController setSelectedImage:_matchAssociationImage];
-        [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
-        [imageViewController setSourceViewContext:@"MatchViewController"];
+        [imageViewController setSelectedImage:_associationImage];
+        [imageViewController setSourceViewContext:@"CollectionViewController"];
+
+        if ([_listingType isEqualToString:@"Match"]) {
+            [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
+            [imageViewController setViewType:@"match"];
+        } else {
+            [imageViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
+            [imageViewController setViewType:@"mix"];
+        }
         
     // MainSwatchDetailSegue
     //

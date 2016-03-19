@@ -76,7 +76,7 @@
                         <segue destination="LVy-Pe-LHL" kind="presentation" identifier="MainSwatchDetailSegue" id="aqc-zq-dwj"/>
                         <segue destination="tpP-IS-lqc" kind="presentation" identifier="VCToAssocSegue" id="9H9-9R-KDD"/>
                         <segue destination="Ph7-MU-Z6c" kind="presentation" identifier="ImagePickerSegue" id="7bF-uJ-b3u"/>
-                        <segue destination="kb5-wH-h3N" kind="presentation" identifier="MatchSelectionSegue" id="ZPZ-Du-pkL"/>
+                        <segue destination="kb5-wH-h3N" kind="presentation" identifier="ImageSelectionSegue" id="ZPZ-Du-pkL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

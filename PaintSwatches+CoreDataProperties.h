@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *hue;
 @property (nullable, nonatomic, retain) NSNumber *is_selected;
 @property (nullable, nonatomic, retain) id image_thumb;
-@property (nullable, nonatomic, retain) NSString *image_url;
 @property (nullable, nonatomic, retain) NSNumber *is_mix;
 @property (nullable, nonatomic, retain) NSDate *last_update;
 @property (nullable, nonatomic, retain) NSNumber *mix_order;

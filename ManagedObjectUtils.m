@@ -200,7 +200,6 @@
     [paintSwatch setDesc:@"This is a color mix with purple and white"];
     [paintSwatch setGreen:@"102.00"];
     [paintSwatch setHue:@"0.7241"];
-    [paintSwatch setImage_url:@""];
     [paintSwatch setName:@"Purple + White 3:4"];
     [paintSwatch setRed:@"122.00"];
     [paintSwatch setSaturation:@"0.3625"];
@@ -223,7 +222,6 @@
     [paintSwatch2 setDesc:@"This is a color mix with light brown and white"];
     [paintSwatch2 setGreen:@"123.00"];
     [paintSwatch2 setHue:@"0.0789"];
-    [paintSwatch2 setImage_url:@""];
     [paintSwatch2 setName:@"Light brown + White 0:1"];
     [paintSwatch2 setRed:@"163.00"];
     [paintSwatch2 setSaturation:@"0.4663"];

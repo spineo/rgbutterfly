@@ -24,7 +24,6 @@
 @dynamic green;
 @dynamic hue;
 @dynamic image_thumb;
-@dynamic image_url;
 @dynamic is_selected;
 @dynamic is_mix;
 @dynamic last_update;

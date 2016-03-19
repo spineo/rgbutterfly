@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSDate * create_date;
 @property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) id image_url;
 @property (nonatomic, retain) NSDate * last_update;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *mix_assoc_swatch;

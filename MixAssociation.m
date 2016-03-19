@@ -14,6 +14,7 @@
 
 @dynamic create_date;
 @dynamic desc;
+@dynamic image_url;
 @dynamic last_update;
 @dynamic name;
 @dynamic mix_assoc_swatch;
