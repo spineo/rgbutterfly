@@ -28,7 +28,7 @@
 #import "TapArea.h"
 #import "TapAreaSwatch.h"
 #import "MixAssocSwatch.h"
-#import "MixAssociation.h"
+
 
 @interface UIImageViewController ()
 
@@ -70,7 +70,6 @@
 @property (nonatomic) CGPoint touchPoint;
 
 @property (nonatomic, strong) PaintSwatches *swatchObj;
-@property (nonatomic, strong) MixAssociation *mixAssociation;
 @property (nonatomic, strong) TapArea *tapArea;
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 

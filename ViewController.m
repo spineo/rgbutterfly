@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
+@property (nonatomic, strong) MixAssociation *mixAssociation;
 
 // NSManagedObject subclassing
 //
@@ -508,12 +509,10 @@
             MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:indexPath.row];
             
             NSString *match_assoc_name = matchAssocObj.name;
-    
             
             [custCell setAssocName:match_assoc_name];
             [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
-            
-            
+        
             NSInteger index = custCell.collectionView.tag;
             
             CGFloat horizontalOffset = [self.contentOffsetDictionary[[@(index) stringValue]] floatValue];
@@ -725,15 +724,14 @@
     [self setCollectViewSelRow:index];
     
     if ([_listingType isEqualToString:@"Mix"]) {
-        //[self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
         PaintSwatches *paintSwatch = [[self.mixColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         
         // Doesn't matter which one
         //
         MixAssocSwatch *mixAssocSwatch = [[paintSwatch.mix_assoc_swatch allObjects] objectAtIndex:0];
 
-        MixAssociation *mixAssociation = mixAssocSwatch.mix_association;
-        _associationImage = [UIImage imageWithData:mixAssociation.image_url];
+        _mixAssociation  = mixAssocSwatch.mix_association;
+        _associationImage = [UIImage imageWithData:_mixAssociation.image_url];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
@@ -846,6 +844,7 @@
         } else {
             [imageViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
             [imageViewController setViewType:@"assoc"];
+            [imageViewController setMixAssociation:_mixAssociation];
         }
         
     // MainSwatchDetailSegue
