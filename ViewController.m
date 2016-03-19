@@ -845,7 +845,7 @@
             [imageViewController setViewType:@"match"];
         } else {
             [imageViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
-            [imageViewController setViewType:@"mix"];
+            [imageViewController setViewType:@"assoc"];
         }
         
     // MainSwatchDetailSegue

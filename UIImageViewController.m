@@ -493,7 +493,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     _matchView   = [UIAlertAction actionWithTitle:@"Match View (default)" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-
                                                 _viewType = @"match";
                                                 [self resetViews];
                                                 
@@ -519,7 +518,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     _associateMixes = [UIAlertAction actionWithTitle:@"Associate Mixes" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                
                                                 _viewType = @"assoc";
                                                 [self resetViews];
                                                 [self addMixAssociation];
@@ -725,8 +723,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
 
-    if ([_viewType containsString:@"match"]) {
-        
+    //if ([_viewType containsString:@"match"]) {
+    if ([_viewType isEqualToString:@"match"]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
         
@@ -1896,7 +1894,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
     if ([[segue identifier] isEqualToString:@"AssocTableViewSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
         AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
