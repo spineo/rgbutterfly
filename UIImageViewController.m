@@ -457,10 +457,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     _matchAssocFieldsSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self insertMatchAssoc];
-//        if (stat == TRUE) {
-//            [self presentViewController:_editButtonAlertController animated:YES completion:nil];
-            //[editButtonAlertController_ dismissViewControllerAnimated:YES completion:nil];
-//        }
     }];
     
     _matchAssocFieldsCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -556,6 +552,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
         [self matchButtonHide];
+        if ([_viewType isEqualToString:@"match"]) {
+            [self matchButtonsShow];
+        }
+
     } else {
         _paintSwatches = [[NSMutableArray alloc] init];
     }
@@ -722,7 +722,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
 
-    //if ([_viewType containsString:@"match"]) {
     if ([_viewType isEqualToString:@"match"]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
