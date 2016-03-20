@@ -40,13 +40,15 @@
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
-@property (nonatomic, strong) MixAssociation *mixAssociation;
+
 
 // NSManagedObject subclassing
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) MixAssociation *mixAssociation;
+@property (nonatomic, strong) MatchAssociations *matchAssociation;
 
 @end
 
@@ -736,8 +738,8 @@
     } else if ([_listingType isEqualToString:@"Match"]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
-        MatchAssociations *matchAssociation = tapArea.match_association;
-        _associationImage = [UIImage imageWithData:matchAssociation.image_url];
+        _matchAssociation = tapArea.match_association;
+        _associationImage = [UIImage imageWithData:_matchAssociation.image_url];
     }
     [self performSegueWithIdentifier:@"ImageSelectionSegue" sender:self];
 }
@@ -841,6 +843,7 @@
         if ([_listingType isEqualToString:@"Match"]) {
             [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
             [imageViewController setViewType:@"match"];
+            [imageViewController setMatchAssociation:_matchAssociation];
         } else {
             [imageViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
             [imageViewController setViewType:@"assoc"];

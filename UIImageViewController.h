@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "MixAssociation.h"
+#import "MatchAssociations.h"
 
 @interface UIImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
@@ -22,6 +23,7 @@
 // Entities
 //
 @property (nonatomic, strong) MixAssociation *mixAssociation;
+@property (nonatomic, strong) MatchAssociations *matchAssociation;
 
 @property (nonatomic, strong) IBOutlet UITableView *imageTableView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *scrollHeightConstraint;

@@ -441,14 +441,22 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     __weak UIAlertController *editButtonAlertController_ = _editButtonAlertController;
     
                                 [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
-                                    [matchNameTextField setPlaceholder: NSLocalizedString(@"Please enter a match name.", nil)];
+                                    if (_matchAssociation != nil) {
+                                        [matchNameTextField setText:_matchAssociation.name];
+                                    } else {
+                                        [matchNameTextField setPlaceholder: NSLocalizedString(@"Please enter a match name.", nil)];
+                                    }
                                     [matchNameTextField setTag: MATCH_NAME_TAG];
                                     [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
                                     [matchNameTextField setDelegate: self];
                                 }];
     
                                 [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
-                                    [matchDescTextField setPlaceholder: NSLocalizedString(@"Please enter a match description.", nil)];
+                                    if (_matchAssociation != nil) {
+                                        [matchDescTextField setText:_matchAssociation.desc];
+                                    } else {
+                                        [matchDescTextField setPlaceholder: NSLocalizedString(@"Please enter a match description.", nil)];
+                                    }
                                     [matchDescTextField setTag: MATCH_DESC_TAG];
                                     [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
                                     [matchDescTextField setDelegate: self];
@@ -456,7 +464,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     
     _matchAssocFieldsSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self insertMatchAssoc];
+        [self updateMatchAssoc];
     }];
     
     _matchAssocFieldsCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -1783,7 +1791,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     return FALSE;
 }
 
-- (BOOL)insertMatchAssoc {
+- (BOOL)updateMatchAssoc {
     
     // Run a series of checks first
     //
@@ -1806,22 +1814,32 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         return FALSE;
     }
 
-    MatchAssociations *matchAssoc = [[MatchAssociations alloc] initWithEntity:_matchAssocEntity insertIntoManagedObjectContext:self.context];
-
     NSDate *currDate = [NSDate date];
     
-    [matchAssoc setCreate_date:currDate];
-    [matchAssoc setDesc:_matchDesc];
-    
-    // Save the image as Transformable
+    // Add a new Match
     //
-    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_referenceTappedImage)];
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
-    [matchAssoc setImage_url:imageData];
-    
-    [matchAssoc setLast_update:currDate];
-    
-    [matchAssoc setName:_matchName];
+    if (_matchAssociation == nil) {
+        _matchAssociation = [[MatchAssociations alloc] initWithEntity:_matchAssocEntity insertIntoManagedObjectContext:self.context];
+        
+        [_matchAssociation setCreate_date:currDate];
+        
+        // Save the image as Transformable
+        //
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
+        [_matchAssociation setImage_url:imageData];
+        
+    // Update existing match
+    //
+    } else {
+
+    }
+
+    // Applies to both updates and new
+    //
+    [_matchAssociation setName:_matchName];
+    [_matchAssociation setDesc:_matchDesc];
+    [_matchAssociation setLast_update:currDate];
+
     
     // Add the TapAreas, TapAreaSwatches, and PaintSwatches
     //
@@ -1830,6 +1848,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
         int tap_order = (int)[self.collectionMatchArray count] - i;
+        
+        
         NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
         [tapAreaRef setName:tapAreaName];
         
@@ -1842,12 +1862,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [tapArea setImage_section:tapAreaRef.image_thumb];
         [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
         [tapArea setCoord_pt:tapAreaRef.coord_pt];
-        [tapArea setMatch_association:matchAssoc];
+        [tapArea setMatch_association:_matchAssociation];
         [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
         [tapArea setTap_area_match:tapAreaRef];
         [tapAreaRef setTap_area:tapArea];
 
-        [matchAssoc addTap_areaObject:tapArea];
+        [_matchAssociation addTap_areaObject:tapArea];
 
         for (int j=1; j<(int)[swatches count]; j++) {
             PaintSwatches *paintSwatch = [swatches objectAtIndex:j];
