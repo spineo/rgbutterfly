@@ -651,6 +651,15 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         [self setTapAreas];
     }
+    
+    if ([_viewType isEqualToString:@"match"] && _matchAssociation != nil) {
+        // Update the title
+        //
+        NSString *matchAssocName = _matchAssociation.name;
+        if (matchAssocName != nil && ! [matchAssocName isEqualToString:@""]) {
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:matchAssocName];
+        }
+    }
 }
 
 
@@ -1344,6 +1353,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     for (int i=0; i<_paintSwatches.count; i++) {
         
         PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:i];
+        
+        // Adjust the border color for visibility
+        //
+        if ([swatchObj.brightness floatValue] < _borderThreshold) {
+            [LIGHT_TEXT_COLOR setStroke];
+        } else {
+            [DARK_TEXT_COLOR setStroke];
+        }
 
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
@@ -1922,8 +1939,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
-    TapArea *tapArea = paintSwatch.tap_area;
-    [self.context deleteObject:tapArea];
+    
+    if (paintSwatch.tap_area != nil) {
+        TapArea *tapArea = paintSwatch.tap_area;
+        [self.context deleteObject:tapArea];
+    }
     [self.context deleteObject:paintSwatch];
 }
 
