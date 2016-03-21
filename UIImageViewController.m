@@ -1081,7 +1081,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         // Instantiate the new PaintSwatch Object
         //
-        NSLog(@"***** NEW SWATCH ******");
         _swatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
 
 
@@ -1278,6 +1277,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     _maxMatchNum = (int)_matchNumStepper.value;
     
     [_matchNumTextField setText: [[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+    
+    [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
+    [_userDefaults synchronize];
 }
 
 - (void)changeShape {
