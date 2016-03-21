@@ -1081,6 +1081,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         // Instantiate the new PaintSwatch Object
         //
+        NSLog(@"***** NEW SWATCH ******");
         _swatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
 
 
@@ -1809,9 +1810,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
-        
-    } else if ([self existsMatchAssocName] == TRUE) {
-        return FALSE;
     }
 
     NSDate *currDate = [NSDate date];
@@ -1827,11 +1825,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         //
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
         [_matchAssociation setImage_url:imageData];
-        
-    // Update existing match
-    //
-    } else {
-
     }
 
     // Applies to both updates and new
@@ -1849,29 +1842,54 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
         int tap_order = (int)[self.collectionMatchArray count] - i;
         
-        
-        NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
-        [tapAreaRef setName:tapAreaName];
-        
         // Based on order
         //
         [tapAreaRef setType_id:[NSNumber numberWithInt:3]];
         
-        TapArea *tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
-        [tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
-        [tapArea setImage_section:tapAreaRef.image_thumb];
-        [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
-        [tapArea setCoord_pt:tapAreaRef.coord_pt];
-        [tapArea setMatch_association:_matchAssociation];
-        [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
-        [tapArea setTap_area_match:tapAreaRef];
-        [tapAreaRef setTap_area:tapArea];
+        
+        // Check if TapArea already exists
+        //
+        TapArea *tapArea;
+        if (tapAreaRef.tap_area == nil) {
+            NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
+            [tapAreaRef setName:tapAreaName];
+            
+            tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
+            [tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
+            [tapArea setImage_section:tapAreaRef.image_thumb];
+            [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
+            [tapArea setCoord_pt:tapAreaRef.coord_pt];
+            [tapArea setMatch_association:_matchAssociation];
+            [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
+            [tapArea setTap_area_match:tapAreaRef];
+            [tapAreaRef setTap_area:tapArea];
 
-        [_matchAssociation addTap_areaObject:tapArea];
+            [_matchAssociation addTap_areaObject:tapArea];
 
+        } else {
+            tapArea = tapAreaRef.tap_area;
+        }
+        
+        // Remove existing TapAreaSwatch elements (will add them back in)
+        //
+        NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+        for (int i=0; i<[tapAreaSwatches count]; i++) {
+            TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+            PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+            
+            [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+            [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+            [self.context deleteObject:tapAreaSwatch];
+        }
+        
+
+        // Add back the TapAreaSwatch elements
+        //
         for (int j=1; j<(int)[swatches count]; j++) {
             PaintSwatches *paintSwatch = [swatches objectAtIndex:j];
             
+            // Check if the TapAreaSwatch already exists
+            //
             TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
             [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
             [tapAreaSwatch setTap_area:tapArea];
@@ -1885,11 +1903,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association Save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations save" message:@"Error saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
     } else {
-        NSLog(@"Match assoc save successful");
+        NSLog(@"MatchAssociation and relations save successful");
         
         // Update the title
         //
