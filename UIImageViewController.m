@@ -1058,8 +1058,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             [self setTapAreaSeen: 1];
             seen_index   = i;
-            
-            [self.context deleteObject:swatchObj];
+
+            // Remove the PaintSwatch and any existing relations
+            //
+            [_paintSwatches removeObject:swatchObj];
+            [self deleteTapArea:swatchObj];
             _paintSwatchCount--;
             
         } else {
@@ -1916,6 +1919,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_matchName];
     }
     return TRUE;
+}
+
+- (void)deleteTapArea:(PaintSwatches *)paintSwatch {
+    TapArea *tapArea = paintSwatch.tap_area;
+    [self.context deleteObject:tapArea];
+    [self.context deleteObject:paintSwatch];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
