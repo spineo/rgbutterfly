@@ -735,13 +735,16 @@
         _mixAssociation  = mixAssocSwatch.mix_association;
         _associationImage = [UIImage imageWithData:_mixAssociation.image_url];
         
+        [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
+        
     } else if ([_listingType isEqualToString:@"Match"]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
         _matchAssociation = tapArea.match_association;
         _associationImage = [UIImage imageWithData:_matchAssociation.image_url];
+        
+        [self performSegueWithIdentifier:@"ImageSelectionSegue" sender:self];
     }
-    [self performSegueWithIdentifier:@"ImageSelectionSegue" sender:self];
 }
 
 
@@ -830,7 +833,7 @@
         [assocTableViewController setSaveFlag:TRUE];
         [assocTableViewController setSourceViewName:@"ViewController"];
         
-    // ImageSelectionSegue (applies to Match and Mix Collections)
+    // ImageSelectionSegue (applies to Match Collections only)
     //
     } else if ([[segue identifier] isEqualToString:@"ImageSelectionSegue"]) {
 
@@ -839,16 +842,9 @@
         
         [imageViewController setSelectedImage:_associationImage];
         [imageViewController setSourceViewContext:@"CollectionViewController"];
-
-        if ([_listingType isEqualToString:@"Match"]) {
-            [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
-            [imageViewController setViewType:@"match"];
-            [imageViewController setMatchAssociation:_matchAssociation];
-        } else {
-            [imageViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
-            [imageViewController setViewType:@"assoc"];
-            [imageViewController setMixAssociation:_mixAssociation];
-        }
+        [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
+        [imageViewController setViewType:@"match"];
+        [imageViewController setMatchAssociation:_matchAssociation];
         
     // MainSwatchDetailSegue
     //

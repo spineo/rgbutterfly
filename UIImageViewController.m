@@ -1715,13 +1715,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Mix Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Mix Methods
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // BarButton Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1814,6 +1807,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)deleteMixAssociation {
     
+    
+    
+    _paintSwatches  = [[NSMutableArray alloc] init];
+    _currTapSection = 0;
+    
+    [self drawTapAreas];
+    [self.imageTableView reloadData];
 }
 
 - (BOOL)existsMatchAssocName {
