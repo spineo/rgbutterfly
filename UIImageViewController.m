@@ -43,10 +43,10 @@
 @property (nonatomic, strong) GlobalSettings *globalSettings;
 @property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchDesc;
 
-@property (nonatomic, strong) UIAlertController *typeAlertController, *editButtonAlertController;
-@property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave;
+@property (nonatomic, strong) UIAlertController *typeAlertController, *editButtonAlertController, *deleteTapsAlertController;
+@property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
 
-@property (nonatomic, strong) UIAlertView *tapAreaAlertView, *clearTapsAlertView;
+@property (nonatomic, strong) UIAlertView *tapAreaAlertView;
 @property (nonatomic) int tapAreaSeen, tapAreaSize;
 @property (nonatomic, strong) NSString *tapAreaShape, *shapeGeom, *rectLabel, *circleLabel, *shapeTitle;
 
@@ -103,7 +103,6 @@
 // Defined programmatically
 //
 const int TAPS_ALERT_TAG   = 11;
-const int CLEAR_TAPS_TAG   = 12;
 const int SHAPE_BUTTON_TAG = 13;
 const int MATCH_NUM_TAG    = 14;
 const int MATCH_NAME_TAG   = 15;
@@ -422,45 +421,59 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [self matchButtonsHide];
     
 
-    // Clear taps Alert View
+    // Clear taps Alert Controller
     //
-    _clearTapsAlertView = [[UIAlertView alloc] initWithTitle:@"Clear Taps"
-                                                     message:@"Do you want to clear all tapped areas?"
-                                                    delegate:self
-                                           cancelButtonTitle:@"No"
-                                           otherButtonTitles:@"Yes", nil];
-    [_clearTapsAlertView setTintColor: DARK_TEXT_COLOR];
-    [_clearTapsAlertView setTag: CLEAR_TAPS_TAG];
+    _deleteTapsAlertController = [UIAlertController alertControllerWithTitle:@"Delete Tapped Areas"
+                                                                     message:@"Are you sure you want to delete all tapped areas?"
+                                                              preferredStyle:UIAlertControllerStyleAlert];
+    __weak UIAlertController *deleteTapsAlertController_ = _deleteTapsAlertController;
+    
+    _deleteTapsYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        if ([_viewType isEqualToString:@"match"]) {
+            [self deleteMatchAssociation];
+        } else {
+            [self deleteMixAssociation];
+        }
+    }];
+    
+    _deleteTapsCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [deleteTapsAlertController_ dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [deleteTapsAlertController_ addAction:_deleteTapsYes];
+    [deleteTapsAlertController_ addAction:_deleteTapsCancel];
     
     
-    // Edit button Alert View
+    
+    
+    // Edit button Alert Controller
     //
     _editButtonAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
                                                       message:@"Please enter the information below:"
                                                preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *editButtonAlertController_ = _editButtonAlertController;
     
-                                [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
-                                    if (_matchAssociation != nil) {
-                                        [matchNameTextField setText:_matchAssociation.name];
-                                    } else {
-                                        [matchNameTextField setPlaceholder: NSLocalizedString(@"Please enter a match name.", nil)];
-                                    }
-                                    [matchNameTextField setTag: MATCH_NAME_TAG];
-                                    [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
-                                    [matchNameTextField setDelegate: self];
-                                }];
-    
-                                [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
-                                    if (_matchAssociation != nil) {
-                                        [matchDescTextField setText:_matchAssociation.desc];
-                                    } else {
-                                        [matchDescTextField setPlaceholder: NSLocalizedString(@"Please enter a match description.", nil)];
-                                    }
-                                    [matchDescTextField setTag: MATCH_DESC_TAG];
-                                    [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
-                                    [matchDescTextField setDelegate: self];
-                                }];
+    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
+        if (_matchAssociation != nil) {
+            [matchNameTextField setText:_matchAssociation.name];
+        } else {
+            [matchNameTextField setPlaceholder: NSLocalizedString(@"Please enter a match name.", nil)];
+        }
+        [matchNameTextField setTag: MATCH_NAME_TAG];
+        [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
+        [matchNameTextField setDelegate: self];
+    }];
+
+    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
+        if (_matchAssociation != nil) {
+            [matchDescTextField setText:_matchAssociation.desc];
+        } else {
+            [matchDescTextField setPlaceholder: NSLocalizedString(@"Please enter a match description.", nil)];
+        }
+        [matchDescTextField setTag: MATCH_DESC_TAG];
+        [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
+        [matchDescTextField setDelegate: self];
+    }];
 
     
     _matchAssocFieldsSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -1036,9 +1049,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
-    
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        [_clearTapsAlertView show];
+        [self presentViewController:_deleteTapsAlertController animated:YES completion:nil];
     }
 }
 
@@ -1706,14 +1718,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 // Mix Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Match Methods
+#pragma mark - Mix Methods
 
-- (void)addMixAssociation {
-    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
-    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
-    [_mixAssociation setImage_url:imageData];
-}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // BarButton Methods
@@ -1798,6 +1804,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Data Model Query/Update Methods
+
+- (void)addMixAssociation {
+    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
+    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
+    [_mixAssociation setImage_url:imageData];
+}
+
+- (void)deleteMixAssociation {
+    
+}
 
 - (BOOL)existsMatchAssocName {
     
@@ -1903,7 +1920,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
             [self.context deleteObject:tapAreaSwatch];
         }
-        
 
         // Add back the TapAreaSwatch elements
         //
@@ -1939,12 +1955,71 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
-    
     if (paintSwatch.tap_area != nil) {
         TapArea *tapArea = paintSwatch.tap_area;
         [self.context deleteObject:tapArea];
     }
     [self.context deleteObject:paintSwatch];
+}
+
+- (void)deleteMatchAssociation {
+
+    for (int i=0; i<[self.collectionMatchArray count];i++) {
+        NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
+        
+        PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
+        
+        // Check if TapArea already exists and, if so delete along with any association
+        //
+        TapArea *tapArea;
+        if (tapAreaRef.tap_area != nil) {
+            tapArea = tapAreaRef.tap_area;
+        
+            // Remove existing TapAreaSwatch elements
+            //
+            NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+            for (int i=0; i<[tapAreaSwatches count]; i++) {
+                TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+                PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+                
+                [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+                [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+                [self.context deleteObject:tapAreaSwatch];
+            }
+            [self.context deleteObject:tapArea];
+        }
+        
+        // Delete the associated PaintSwatch
+        //
+        [self.context deleteObject:tapAreaRef];
+    }
+    
+    // Delete the MatchAssociation
+    //
+    if (_matchAssociation != nil) {
+        [self.context deleteObject:_matchAssociation];
+    }
+    
+    // Commit the delete
+    //
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations delete" message:@"Error saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        
+    } else {
+        NSLog(@"MatchAssociation and relations delete successful");
+        
+        // Update the title
+        //
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+    }
+    _paintSwatches  = [[NSMutableArray alloc] init];
+    _currTapSection = 0;
+
+    [self drawTapAreas];
+    [self.imageTableView reloadData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
