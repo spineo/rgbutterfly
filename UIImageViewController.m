@@ -1840,21 +1840,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                         }
                     }
                 }
-//                if (count > 1) {
-//                    NSLog(@"Cannot delete paint swatch %@ as it has %i associations", paintSwatch.name, count);
-//                    
-//                    
-//                } else {
-//                    // Delete the PaintSwatch (cascade delete should remove the MixAssocSwatch)
-//                    //
-//                    MixAssocSwatch *mixAssocSwatch = [[mixAssocSwatches allObjects] objectAtIndex:0];
-//                    if (mixAssocSwatch != nil) {
-//                        [self.context deleteObject:paintSwatch];
-//                        //[self.context deleteObject:mixAssocSwatch];
-//                    }
-//                }
             }
-            
         }
         
         // Delete the mix association
