@@ -1799,15 +1799,84 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 #pragma mark - Data Model Query/Update Methods
 
 - (void)addMixAssociation {
+    NSLog(@"Adding Mix");
     _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
     _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
-    [_mixAssociation setImage_url:imageData];
+    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
+    //[_mixAssociation setImage_url:imageData];
 }
 
 - (void)deleteMixAssociation {
     
-    
+    if (_mixAssociation != nil) {
+        NSManagedObjectID *mix_assoc_id = [_mixAssociation objectID];
+
+        for (int i=0; i<[_paintSwatches count];i++) {
+
+            PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:i];
+            
+            NSSet *mixAssocSwatches = paintSwatch.mix_assoc_swatch;
+            
+            if (mixAssocSwatches != nil) {
+                int count = (int)[mixAssocSwatches count];
+                for (MixAssocSwatch *mixAssocSwatch in mixAssocSwatches) {
+                    MixAssociation *mixAssocRef = mixAssocSwatch.mix_association;
+                    
+                    // Delete only relations associated with the current mix
+                    //
+                    if ([mixAssocRef objectID] == mix_assoc_id) {
+                        
+                        // Ensure that there is only one association if deleting the PaintSwatch
+                        // (delete should cascased to the MixAssocSwatch)
+                        //
+                        [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
+                        if (count == 1) {
+                            [self.context deleteObject:paintSwatch];
+                        } else {
+                            [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
+                            [self.context deleteObject:mixAssocSwatch];
+                            
+                            NSLog(@"Cannot delete paint swatch %@ has it belongs to more than one association", paintSwatch.name);
+                        }
+                    }
+                }
+//                if (count > 1) {
+//                    NSLog(@"Cannot delete paint swatch %@ as it has %i associations", paintSwatch.name, count);
+//                    
+//                    
+//                } else {
+//                    // Delete the PaintSwatch (cascade delete should remove the MixAssocSwatch)
+//                    //
+//                    MixAssocSwatch *mixAssocSwatch = [[mixAssocSwatches allObjects] objectAtIndex:0];
+//                    if (mixAssocSwatch != nil) {
+//                        [self.context deleteObject:paintSwatch];
+//                        //[self.context deleteObject:mixAssocSwatch];
+//                    }
+//                }
+            }
+            
+        }
+        
+        // Delete the mix association
+        //
+        [self.context deleteObject:_mixAssociation];
+        
+        // Commit the delete
+        //
+        NSError *error = nil;
+        if (![self.context save:&error]) {
+            NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MixAssociation and relations delete" message:@"Error saving"];
+            [self presentViewController:myAlert animated:YES completion:nil];
+            
+        } else {
+            NSLog(@"MixAssociation and relations delete successful");
+            
+            // Update the title
+            //
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+        }
+    }
     
     _paintSwatches  = [[NSMutableArray alloc] init];
     _currTapSection = 0;
@@ -1964,39 +2033,39 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)deleteMatchAssociation {
 
-    for (int i=0; i<[self.collectionMatchArray count];i++) {
-        NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
-        
-        PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
-        
-        // Check if TapArea already exists and, if so delete along with any association
-        //
-        TapArea *tapArea;
-        if (tapAreaRef.tap_area != nil) {
-            tapArea = tapAreaRef.tap_area;
-        
-            // Remove existing TapAreaSwatch elements
+    if (_matchAssociation != nil) {
+        for (int i=0; i<[self.collectionMatchArray count];i++) {
+            NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
+            
+            PaintSwatches *tapAreaRef = [swatches objectAtIndex:0];
+            
+            // Check if TapArea already exists and, if so delete along with any association
             //
-            NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-            for (int i=0; i<[tapAreaSwatches count]; i++) {
-                TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-                PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
-                
-                [tapArea removeTap_area_swatchObject:tapAreaSwatch];
-                [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
-                [self.context deleteObject:tapAreaSwatch];
+            TapArea *tapArea;
+            if (tapAreaRef.tap_area != nil) {
+                tapArea = tapAreaRef.tap_area;
+            
+                // Remove existing TapAreaSwatch elements
+                //
+                NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+                for (int i=0; i<[tapAreaSwatches count]; i++) {
+                    TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+                    PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+                    
+                    [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+                    [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+                    [self.context deleteObject:tapAreaSwatch];
+                }
+                [self.context deleteObject:tapArea];
             }
-            [self.context deleteObject:tapArea];
+            
+            // Delete the associated PaintSwatch
+            //
+            [self.context deleteObject:tapAreaRef];
         }
         
-        // Delete the associated PaintSwatch
+        // Delete the MatchAssociation
         //
-        [self.context deleteObject:tapAreaRef];
-    }
-    
-    // Delete the MatchAssociation
-    //
-    if (_matchAssociation != nil) {
         [self.context deleteObject:_matchAssociation];
     }
     
@@ -2015,6 +2084,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
     }
+    
+    // Re-initialize the view
+    //
     _paintSwatches  = [[NSMutableArray alloc] init];
     _currTapSection = 0;
 
