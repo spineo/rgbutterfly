@@ -92,7 +92,8 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *mixAssocEntity, *mixAssocSwatchEntity, *tapAreaEntity, *tapAreaSwatchEntity;
+//@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *mixAssocEntity, *mixAssocSwatchEntity, *tapAreaEntity, *tapAreaSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity;
 
 @end
 
@@ -127,7 +128,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"      inManagedObjectContext:self.context];
     _matchAssocEntity     = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:self.context];
-    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
+//    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
     _tapAreaEntity        = [NSEntityDescription entityForName:@"TapArea"          inManagedObjectContext:self.context];
     _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"    inManagedObjectContext:self.context];
     
@@ -536,7 +537,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = @"assoc";
                                                 [self resetViews];
-                                                [self addMixAssociation];
+//                                                [self addMixAssociation];
 
                                                 UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:@"Assoc"
                                                                 style: UIBarButtonItemStylePlain
@@ -1132,13 +1133,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             }
             
         } else {
-            if (_mixAssociation == nil) {
-                [self addMixAssociation];
-            }
-            
-            MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
-            [_swatchObj addMix_assoc_swatchObject:mixAssocSwatch];
-            [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
+//            if (_mixAssociation == nil) {
+//                [self addMixAssociation];
+//            }
+//            
+//            MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
+//            [_swatchObj addMix_assoc_swatchObject:mixAssocSwatch];
+//            [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
             
             [self viewButtonShow];
         }
@@ -1798,13 +1799,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 #pragma mark - Data Model Query/Update Methods
 
-- (void)addMixAssociation {
-    NSLog(@"Adding Mix");
-    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
-    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
-    //[_mixAssociation setImage_url:imageData];
-}
+//- (void)addMixAssociation {
+//    NSLog(@"Adding Mix");
+//    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
+//    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+//    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
+//    //[_mixAssociation setImage_url:imageData];
+//    
+//    // Update the title
+//    //
+//
+//}
 
 - (void)deleteMixAssociation {
     
