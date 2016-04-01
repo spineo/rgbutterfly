@@ -174,9 +174,6 @@ const int IMAGE_TAG  = 6;
     if (indexPath.section == IMAGE_SECTION) {
         return DEF_VLG_TBL_CELL_HGT + DEF_FIELD_PADDING;
         
-    } else if (indexPath.section == NAME_SECTION) {
-        return DEF_SM_TABLE_CELL_HGT;
-        
     } else if (indexPath.section == DIV1_SECTION || indexPath.section == DIV2_SECTION) {
         return DEF_TBL_DIVIDER_HGT;
     }

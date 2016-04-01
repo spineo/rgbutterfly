@@ -51,6 +51,7 @@ extern CGFloat const DEF_XLG_TBL_CELL_HGT;
 extern CGFloat const DEF_VLG_TBL_CELL_HGT;
 extern CGFloat const DEF_XXLG_TBL_CELL_HGT;
 extern CGFloat const DEF_TABLE_X_OFFSET;
+extern CGFloat const DEF_CELL_EDIT_DISPL;
 
 extern CGFloat const DEF_PICKER_ROW_HEIGHT;
 

@@ -36,7 +36,7 @@ CGFloat const DEF_BORDER_WIDTH      = 1.0;
 CGFloat const BORDER_WIDTH_NONE     = 0.0;
 CGFloat const CORNER_RADIUS_NONE    = 0.0;
 
-// UI Tables
+// UI Tables and Cells
 //
 CGFloat const DEF_TABLE_CELL_HEIGHT = 44.0;
 CGFloat const DEF_SM_TABLE_CELL_HGT = 33.0;
@@ -49,6 +49,7 @@ CGFloat const DEF_VLG_TBL_CELL_HGT  = 88.0;
 CGFloat const DEF_XLG_TBL_CELL_HGT  = 198.0;
 CGFloat const DEF_XXLG_TBL_CELL_HGT = 396.0;
 CGFloat const DEF_TABLE_X_OFFSET    = 15.0;
+CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
 
 CGFloat const DEF_PICKER_ROW_HEIGHT = 50.0;
 CGFloat const DEF_PICKER_HEIGHT     = 300.0;

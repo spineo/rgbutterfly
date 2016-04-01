@@ -60,10 +60,9 @@ const int ASSOC_DESC_SECTION   = 3;
 
 const int ASSOC_MAX_SECTION    = 4;
 
-const int ASSOC_NAME_TAG       = 301;
-const int ASSOC_DESC_TAG       = 302;
-
-const int ASSOC_MAX_TAG        = 400;
+const int ASSOC_NAME_TAG       = 1;
+const int ASSOC_DESC_TAG       = 2;
+const int ASSOC_COLORS_TAG     = 3;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -333,14 +332,7 @@ const int ASSOC_MAX_TAG        = 400;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
 
-    if (indexPath.section == ASSOC_COLORS_SECTION) {
-        return DEF_TABLE_CELL_HEIGHT;
-    
-    // Add Color, Name, Desc, and Keyw fields
-    //
-    } else {
-        return DEF_SM_TABLE_CELL_HGT;
-    }
+    return DEF_TABLE_CELL_HEIGHT;
 }
 
 
@@ -363,7 +355,8 @@ const int ASSOC_MAX_TAG        = 400;
     
     // Remove the tags
     //
-    for (int tag=1; tag<=ASSOC_MAX_TAG; tag++) {
+    int max_tag = (int)[_paintSwatches count] + ASSOC_COLORS_TAG;
+    for (int tag=1; tag<=max_tag; tag++) {
         [[cell.contentView viewWithTag:tag] removeFromSuperview];
     }
     
@@ -396,12 +389,13 @@ const int ASSOC_MAX_TAG        = 400;
         if (_editFlag == TRUE) {
             [cell setAccessoryType: UITableViewCellAccessoryNone];
             
-            int tag_num = (int)indexPath.row + 1;
+            int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
             UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
-            CGSize size    = cell.bounds.size;
-            CGFloat xpos   = DEF_TABLE_CELL_HEIGHT+ 22.0;
             
-            [refName setFrame:CGRectMake(xpos, 5.0, size.width - (size.width / 4.0), size.height - 10.0)];
+            CGFloat xpos  = _assocImageViewWidth + DEF_CELL_EDIT_DISPL;
+            CGFloat width = cell.contentView.bounds.size.width - xpos;
+            
+            [refName setFrame:CGRectMake(xpos, _textFieldYOffset, width, DEF_TEXTFIELD_HEIGHT)];
             [refName setDelegate:self];
             [cell.contentView addSubview:refName];
             [cell.textLabel setText:@""];
@@ -429,9 +423,9 @@ const int ASSOC_MAX_TAG        = 400;
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
 
-        
+    
     } else if (indexPath.section == ASSOC_NAME_SECTION) {
-        
+            
         if (_editFlag == TRUE) {
             
             // Create the image name text field
@@ -445,9 +439,9 @@ const int ASSOC_MAX_TAG        = 400;
             if ([_mixAssocName isEqualToString:@""]) {
                 [refName setPlaceholder:_namePlaceholder];
             }
-            
+
         } else {
-        
+
             [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocName]];
             [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
             [cell.textLabel setFont: TABLE_CELL_FONT];
@@ -460,7 +454,6 @@ const int ASSOC_MAX_TAG        = 400;
         }
         
         [cell setAccessoryType: UITableViewCellAccessoryNone];
-        
 
     // Desc section
     //
@@ -501,10 +494,10 @@ const int ASSOC_MAX_TAG        = 400;
 // (5) editingStyleForRowAtIndexPath: Invoked for each table cell (add logic here to pick whether to delete or insert)
 //
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
         return UITableViewCellEditingStyleDelete;
         
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == ASSOC_ADD_SECTION) {
         return UITableViewCellEditingStyleInsert;
 
     } else {
@@ -581,12 +574,10 @@ const int ASSOC_MAX_TAG        = 400;
 #pragma mark - TableView Move
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
         return YES;
-        
     } else {
         return NO;
-        
     }
 }
 
@@ -627,43 +618,6 @@ const int ASSOC_MAX_TAG        = 400;
     [self recalculateOrder];
 }
 
-#pragma mark - UITextField Delegate Methods
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UITextField Delegates
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    //    if (textField.tag == COLTXT_TAG) {
-//    //        [_doneColorButton setHidden:FALSE];
-//    //
-//    //    } else if (textField.tag == TYPTXT_TAG) {
-//    //        [_doneTypeButton setHidden:FALSE];
-//    //    };
-//}
-//
-//- (void)textFieldDidEndEditing:(UITextField *)textField {
-//    if ([textField.text isEqualToString:@""]) {
-//        UIAlertController *myAlert = [AlertUtils noValueAlert];
-//        [self presentViewController:myAlert animated:YES completion:nil];
-//        
-//    } else {
-//        _textReturn  = TRUE;
-//    }
-//    
-//    if ((textField.tag == NAME_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-//        _mixAssocName = textField.text;
-//    } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-//        _mixAssocDesc = textField.text;
-//        //    } else if (textField.tag == COLTXT_TAG) {
-//        //        _colorSelected = textField.text;
-//        //    } else if (textField.tag == TYPTXT_TAG) {
-//        //        _typeSelected = textField.text;
-//    }
-//}
-
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Edit Action
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -673,14 +627,14 @@ const int ASSOC_MAX_TAG        = 400;
 - (void)setEditing:(BOOL)flag animated:(BOOL)animated {
     [super setEditing:flag animated:animated];
     
-    _editFlag = flag;
-
-    if (_editFlag == FALSE) {
-
-        // Enable the 'Save' button
-        //
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:TRUE];
-    
+//    _editFlag = flag;
+//
+//    if (_editFlag == FALSE) {
+//
+//        // Enable the 'Save' button
+//        //
+//        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:TRUE];
+//    
 //        int objCount = (int)[_paintSwatches count];
 //
 //        for (int i=0; i < objCount; i++) {
@@ -752,13 +706,13 @@ const int ASSOC_MAX_TAG        = 400;
 //            }
 //            
 //        }
-        
-        UITableViewCell* nameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-        _mixAssocName = (NSString *)[(UITextField *)[nameCell.contentView viewWithTag:ASSOC_NAME_TAG] text];
-        
-        UITableViewCell* descCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-        _mixAssocDesc = (NSString *)[(UITextField *)[descCell.contentView viewWithTag:ASSOC_DESC_TAG] text];
-        
+//        
+//        UITableViewCell* nameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+//        _mixAssocName = (NSString *)[(UITextField *)[nameCell.contentView viewWithTag:ASSOC_NAME_TAG] text];
+//        
+//        UITableViewCell* descCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+//        _mixAssocDesc = (NSString *)[(UITextField *)[descCell.contentView viewWithTag:ASSOC_DESC_TAG] text];
+//        
 //        if (nameCell.textReturn == TRUE) {
 //            _mixAssocName = nameCell.textEntered;
 //        }
@@ -771,20 +725,84 @@ const int ASSOC_MAX_TAG        = 400;
 //        for (int tag=1; tag<=ASSOC_MAX_TAG; tag++) {
 //            [[cell.contentView viewWithTag:tag] removeFromSuperview];
 //        }
-
-        _mainColorFlag = FALSE;
-
-
-    } else {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:FALSE];
-    }
-
+//
+//        _mainColorFlag = FALSE;
+//
+//
+//    } else {
+//        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:FALSE];
+//    }
+//
+//    [self.tableView reloadData];
+//    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
+//    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+//    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
+    
+    _editFlag = flag;
+    
     [self.tableView reloadData];
-    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
-    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+
+#pragma mark - UITextField Delegate Methods
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// UITextField Delegates
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    //    if (textField.tag == COLTXT_TAG) {
+    //        [_doneColorButton setHidden:FALSE];
+    //
+    //    } else if (textField.tag == TYPTXT_TAG) {
+    //        [_doneTypeButton setHidden:FALSE];
+    //    };
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField.text isEqualToString:@""]) {
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        
+    } else {
+        _textReturn  = TRUE;
+    }
+    
+    if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
+        _mixAssocName = textField.text;
+        
+    } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
+        _mixAssocDesc = textField.text;
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.tag == ASSOC_NAME_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        return NO;
+        
+    } else if (textField.tag == ASSOC_DESC_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Save Action
@@ -806,7 +824,7 @@ const int ASSOC_MAX_TAG        = 400;
         _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
     }
     [_mixAssociation setName:_mixAssocName];
-    [_mixAssociation setDesc: _mixAssocDesc];
+    [_mixAssociation setDesc:_mixAssocDesc];
     
     NSError *error = nil;
     if (![self.context save:&error]) {
