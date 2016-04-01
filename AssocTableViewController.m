@@ -5,7 +5,6 @@
 //  Created by Stuart Pineo on 4/7/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-
 #import "AssocTableViewController.h"
 #import "AppDelegate.h"
 #import "AssocTableViewCell.h"
@@ -32,13 +31,14 @@
 
 @property (nonatomic, strong) NSString *nameHeader, *colorHeader, *descHeader;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc;
-@property (nonatomic) BOOL editingFlag, mainColorFlag, isRGB, textReturn;
+@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocDesc;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 @property (nonatomic) int goBackStatus;
+@property (nonatomic) CGFloat imageViewXOffset, imageViewYOffset, imageViewWidth, imageViewHeight, assocImageViewWidth, assocImageViewHeight, textFieldYOffset;
 
 @property (nonatomic, strong) AddMixViewController *sourceViewController;
 
@@ -53,8 +53,18 @@
 
 @implementation AssocTableViewController
 
-const int ASSOC_NAME_SECTION  = 2;
-const int ASSOC_DESC_SECTION  = 3;
+const int ASSOC_COLORS_SECTION = 0;
+const int ASSOC_ADD_SECTION    = 1;
+const int ASSOC_NAME_SECTION   = 2;
+const int ASSOC_DESC_SECTION   = 3;
+
+const int ASSOC_MAX_SECTION    = 4;
+
+const int ASSOC_NAME_TAG       = 301;
+const int ASSOC_DESC_TAG       = 302;
+
+const int ASSOC_MAX_TAG        = 400;
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Init methods
@@ -113,9 +123,9 @@ const int ASSOC_DESC_SECTION  = 3;
     _namePlaceholder   = @"- Include Mix Association Name Here -";
     _descPlaceholder   = @"- Include Mix Association Description Here -";
     
-    _editingFlag       = FALSE;
-    _mainColorFlag     = FALSE;
-    _bgColorView = [[UIView alloc] init];
+    _editFlag       = FALSE;
+    _mainColorFlag  = FALSE;
+    _bgColorView    = [[UIView alloc] init];
     [_bgColorView setBackgroundColor: DARK_BG_COLOR];
 
     
@@ -129,9 +139,18 @@ const int ASSOC_DESC_SECTION  = 3;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
     
-    
-    // Initialize the MixAssociationDesc object (containing the name and description for that mix association)
+    // Offsets and Widths
     //
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Tableview defaults
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    _imageViewXOffset     = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
+    _imageViewYOffset     = DEF_Y_OFFSET;
+    _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
+    _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
+    _assocImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
+    _assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
+    _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
     
     
     // Initialize the PaintSwatches array with default names (if values don't already exist)
@@ -214,10 +233,12 @@ const int ASSOC_DESC_SECTION  = 3;
 
 
 - (void)viewDidRotate {
-    AssocDescTableViewCell* cell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-    
-    UIView *subView = (UITextView *)[cell.contentView viewWithTag: DEF_TAG_NUM];
-    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
+//    AssocDescTableViewCell* cell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+//    
+//    int tag_num = DEF_TAG_NUM - ASSOC_DESC_SECTION;
+//    UIView *subView = (UITextView *)[cell.contentView viewWithTag:tag_num];
+//    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
+//    [cell.descField setTag:tag_num];
 }
 
 
@@ -227,54 +248,82 @@ const int ASSOC_DESC_SECTION  = 3;
 
 #pragma mark - UITableView Methods
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerView setBackgroundColor: DARK_BG_COLOR];
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
-    [headerLabel setBackgroundColor: DARK_BG_COLOR];
-    [headerLabel setTextColor: LIGHT_TEXT_COLOR];
-    [headerLabel setFont: TABLE_HEADER_FONT];
-    
-    if (section == 0) {
-        [headerView addSubview:headerLabel];
-        [headerLabel setText:_colorHeader];
-        
-    } else if (section == 2) {
-        [headerView addSubview:headerLabel];
-        [headerLabel setText:_nameHeader];
-        
-    } else if (section == 3) {
-        [headerView addSubview:headerLabel];
-        [headerLabel setText:_descHeader];
-    }
-    
-    return headerView;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+//    [headerView setBackgroundColor: DARK_BG_COLOR];
+//    
+//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+//    [headerLabel setBackgroundColor: DARK_BG_COLOR];
+//    [headerLabel setTextColor: LIGHT_TEXT_COLOR];
+//    [headerLabel setFont: TABLE_HEADER_FONT];
+//    
+//    if (section == 0) {
+//        [headerView addSubview:headerLabel];
+//        [headerLabel setText:_colorHeader];
+//        
+//    } else if (section == 2) {
+//        [headerView addSubview:headerLabel];
+//        [headerLabel setText:_nameHeader];
+//        
+//    } else if (section == 3) {
+//        [headerView addSubview:headerLabel];
+//        [headerLabel setText:_descHeader];
+//    }
+//    
+//    return headerView;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == ASSOC_ADD_SECTION) {
         return DEF_NIL_HEADER;
     } else {
         return DEF_TABLE_HDR_HEIGHT;
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    // Background color
+    //
+    [view setTintColor: DARK_TEXT_COLOR];
+    
+    // Text Color
+    //
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
+    [header.contentView setBackgroundColor:DARK_BG_COLOR];
+    [header.textLabel setFont:TABLE_HEADER_FONT];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *headerStr;
+    if (section == ASSOC_NAME_SECTION) {
+        headerStr = @"Mix Name";
+        
+    } else if (section == ASSOC_DESC_SECTION) {
+        headerStr = @"Mix Description";
+        
+    } else if (section == ASSOC_COLORS_SECTION) {
+        headerStr = @"Mix Color Names";
+    }
+    
+    return headerStr;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     //
-    return 4;
+    return ASSOC_MAX_SECTION;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     //
     if (section == 0) {
-        int objCount = (int)_paintSwatches.count;
+        int objCount = (int)[_paintSwatches count];
         return objCount;
         
-    } else if ((section == 1) && (_editingFlag == FALSE)) {
+    } else if ((section == 1) && (_editFlag == FALSE)) {
         return 0;
         
     } else {
@@ -283,268 +332,169 @@ const int ASSOC_DESC_SECTION  = 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return DEF_TABLE_CELL_HEIGHT;
+
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
+        return DEF_TABLE_CELL_HEIGHT;
+    
+    // Add Color, Name, Desc, and Keyw fields
+    //
+    } else {
+        return DEF_SM_TABLE_CELL_HGT;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-////    //    CGFloat tableViewWidth = self.tableView.bounds.size.width;
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
-////    
-//    // Remove the tags
-//    //
-//    for (int tag=1; tag<=MAX_TAG; tag++) {
-//        [[cell.contentView viewWithTag:tag] removeFromSuperview];
-//    }
-
-    if (indexPath.section <= 2) {
-        if (indexPath.section == ASSOC_NAME_SECTION) {
-            
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
-//            
-//            // Global defaults
-//            //
-//            [cell setBackgroundColor: DARK_BG_COLOR];
-//            [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-//            [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
-//            [tableView setSeparatorColor: GRAY_BG_COLOR];
-//            [cell.textLabel.layer setBorderWidth: BORDER_WIDTH_NONE];
-//            [cell.textLabel setBackgroundColor: DARK_BG_COLOR];
-//            [cell.textLabel setText:@""];
-//            cell.imageView.image = nil;
-//            
-//            if (self.editingFlag == FALSE) {
-//                [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocName]];
-//                [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-//                [cell.textLabel setFont: TABLE_CELL_FONT];
-//                cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-//                cell.textLabel.numberOfLines = 0;
-//                
-//                [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-//                [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-//                [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-//                
-//            } else {
-//                
-//                // Create the image name text field
-//                //
-//                UITextField *refName  = [FieldUtils createTextField:_mixAssocName tag:NAME_FIELD_TAG];
-//                [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, 5.0, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-//                [refName setDelegate:self];
-//                [cell.contentView addSubview:refName];
-//                [cell.textLabel setText:@""];
-//                
-//                if ([_mixAssocName isEqualToString:@""]) {
-//                    [refName setPlaceholder: _namePlaceholder];
-//                }
-//            }
-//            
-//            [cell setAccessoryType: UITableViewCellAccessoryNone];
-//            
-//            return cell;
-            
-            AssocTableViewCell *cell = [[AssocTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:assocCellIdentifier];
-            UIView *subView = (UITextField *)[cell.contentView viewWithTag:DEF_TAG_NUM];
-            [(UITextField *) subView setFrame:CGRectMake(5.0, 5.0, cell.bounds.size.width - 20.0, cell.bounds.size.height - 10.0)];
-            
-            if ([_mixAssocName isEqualToString:@""]) {
-                [(UITextField *) subView setPlaceholder:_namePlaceholder];
-            } else {
-                [(UITextField *) subView setText:_mixAssocName];
-            }
-            
-            
-            if (cell.textReturn == TRUE) {
-                _mixAssocName = (NSString *)[(UITextField *)[cell.contentView viewWithTag:DEF_TAG_NUM] text];
-                
-            } else {
-                [(UITextField *) subView setText:_mixAssocName];
-            }
-            
-            [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-            cell.imageView.image = nil;
-            
-            [(UITextField *)subView setFont: TEXT_FIELD_FONT];
-            [subView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-            
-            if (self.editingFlag == FALSE) {
-                [(UITextField *) subView setBackgroundColor: DARK_BG_COLOR];
-                [(UITextField *) subView setTextColor: LIGHT_TEXT_COLOR];
-                [(UITextField *) subView setUserInteractionEnabled:NO];
-                
-                //[(UITextField *) subView setTextColor: GRAY_TEXT_COLOR];
-                
-            } else {
-                [(UITextField *) subView setBackgroundColor: LIGHT_BG_COLOR];
-                [(UITextField *) subView setTextColor: DARK_TEXT_COLOR];
-                [(UITextField *) subView setUserInteractionEnabled:YES];
-            }
-            
-            return cell;
-            
-        } else if (indexPath.section == 0) {
-            
-            if (self.editingFlag == TRUE) {
-                AssocTableViewCell *cell = [[AssocTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:assocCellIdentifier];
-                
-                [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-                
-                cell.imageView.frame = CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height);
-                [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-                [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-                [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-                
-                [cell.imageView setContentMode: UIViewContentModeScaleAspectFill];
-                [cell.imageView setClipsToBounds: YES];
-                
-                if (_isRGB == FALSE) {
-                    cell.imageView.image = [ColorUtils renderPaint:[[_paintSwatches objectAtIndex:indexPath.row] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-                } else {
-                    cell.imageView.image = [ColorUtils renderRGB:[_paintSwatches objectAtIndex:indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-                }
-                
-                UIView *subView = (UITextField *)[cell.contentView viewWithTag: DEF_TAG_NUM];
-                [(UITextField *) subView setText: [[_paintSwatches objectAtIndex:indexPath.row] name]];
-                
-                return cell;
-                
-            } else {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
-                
-                cell.imageView.frame = CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height);
-                cell.imageView.layer.borderColor = [LIGHT_BORDER_COLOR CGColor];
-                [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-                [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-                
-                [cell.imageView setContentMode: UIViewContentModeScaleAspectFill];
-                [cell.imageView setClipsToBounds: YES];
-                
-                if (_isRGB == FALSE) {
-                    cell.imageView.image = [ColorUtils renderPaint:[[_paintSwatches objectAtIndex:indexPath.row] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-                } else {
-                    cell.imageView.image = [ColorUtils renderRGB:_paintSwatches[indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-                }
-            
-                cell.accessoryType       = UITableViewCellAccessoryDisclosureIndicator;
-                
-                [cell.textLabel setText: [[_paintSwatches objectAtIndex:indexPath.row] name]];
-                [cell.textLabel setFont: TABLE_CELL_FONT];
-                
-                [cell setBackgroundColor: DARK_BG_COLOR];
-                [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-                [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-                
-                return cell;
-            }
-
-        } else  {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
     
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
+    // Global defaults
+    //
+    [cell setBackgroundColor: DARK_BG_COLOR];
+    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+    [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorColor: GRAY_BG_COLOR];
+    [cell.textLabel.layer setBorderWidth: BORDER_WIDTH_NONE];
+    [cell.textLabel setBackgroundColor: DARK_BG_COLOR];
+    [cell.textLabel setText:@""];
+    cell.imageView.image = nil;
+    
+    //    CGFloat tableViewWidth = self.tableView.bounds.size.width;
+    
+    // Remove the tags
+    //
+    for (int tag=1; tag<=ASSOC_MAX_TAG; tag++) {
+        [[cell.contentView viewWithTag:tag] removeFromSuperview];
+    }
+    
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
+        
+        PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
+        NSString *name = [paintSwatch name];
+        
+        if (_isRGB == FALSE) {
+            cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
+        } else {
+            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
+        }
+        
+        // Tag the first reference image
+        //
+        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        
+        [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
+        [cell.imageView setClipsToBounds: YES];
+
+        [cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _imageViewWidth, _imageViewHeight)];
+        
+        [cell.textLabel setFont: TABLE_CELL_FONT];
+        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+        [cell.textLabel setText:paintSwatch.name];
+        
+        if (_editFlag == TRUE) {
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
             
-            [cell.textLabel setText: _addColorLabel];
-            cell.accessoryType       = UITableViewCellAccessoryNone;
-            cell.imageView.image = nil;
+            int tag_num = (int)indexPath.row + 1;
+            UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
+            CGSize size    = cell.bounds.size;
+            CGFloat xpos   = DEF_TABLE_CELL_HEIGHT+ 22.0;
             
+            [refName setFrame:CGRectMake(xpos, 5.0, size.width - (size.width / 4.0), size.height - 10.0)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            [cell.textLabel setText:@""];
+            
+            
+        } else {
+            [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+            
+            [cell.textLabel setText:name];
+            [cell.textLabel setFont: TABLE_CELL_FONT];
             [cell setBackgroundColor: DARK_BG_COLOR];
             [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-    
-            [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-            
-            return cell;
         }
-
-    } else {
+ 
+    } else if (indexPath.section == ASSOC_ADD_SECTION) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
-//        
-//        // Global defaults
-//        //
-//        [cell setBackgroundColor: DARK_BG_COLOR];
-//        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-//        [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
-//        [tableView setSeparatorColor: GRAY_BG_COLOR];
-//        [cell.textLabel.layer setBorderWidth: BORDER_WIDTH_NONE];
-//        [cell.textLabel setBackgroundColor: DARK_BG_COLOR];
-//        [cell.textLabel setText:@""];
-//        cell.imageView.image = nil;
-//        
-//        if (self.editingFlag == FALSE) {
-//            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocDesc]];
-//            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-//            [cell.textLabel setFont: TABLE_CELL_FONT];
-//            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-//            cell.textLabel.numberOfLines = 0;
-//            
-//            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-//            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-//            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-//            
-//        } else {
-//            
-//            // Create the image name text field
-//            //
-//            UITextField *refName  = [FieldUtils createTextField:_mixAssocDesc tag:NAME_FIELD_TAG];
-//            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, 5.0, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-//            [refName setDelegate:self];
-//            [cell.contentView addSubview:refName];
-//            [cell.textLabel setText:@""];
-//            
-//            if ([_mixAssocDesc isEqualToString:@""]) {
-//                [refName setPlaceholder: _descPlaceholder];
-//            }
-//        }
-//        
-//        [cell setAccessoryType: UITableViewCellAccessoryNone];
-//        
-//        return cell;
-
-        AssocDescTableViewCell *cell = [[AssocDescTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:assocDescCellIdentifier];
-        UIView *subView = (UITextView *)[cell.contentView viewWithTag: DEF_TAG_NUM];
-        [(UITextView *) subView setFrame:CGRectMake(5.0, 5.0, cell.bounds.size.width - 20.0, cell.bounds.size.height - 10.0)];
+        [cell.textLabel setText: _addColorLabel];
+        cell.accessoryType       = UITableViewCellAccessoryNone;
+        cell.imageView.image = nil;
         
-        if (cell.textReturn == TRUE) {
-            _mixAssocDesc = (NSString *)[(UITextField *)[cell.contentView viewWithTag:DEF_TAG_NUM] text];
-            
-        } else {
-            [(UITextView *) subView setText:_mixAssocDesc];
-        }
+        [cell setBackgroundColor: DARK_BG_COLOR];
+        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+        [cell.textLabel setFont: TABLE_CELL_FONT];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-        cell.imageView.image = nil;
 
-        [(UITextView *)subView setFont: TEXT_FIELD_FONT];
-        [subView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         
-        if (self.editingFlag == FALSE) {
-            [(UITextView *) subView setBackgroundColor: DARK_BG_COLOR];
-            [(UITextView *) subView setTextColor: LIGHT_TEXT_COLOR];
-            [(UITextView *) subView setUserInteractionEnabled:NO];
+    } else if (indexPath.section == ASSOC_NAME_SECTION) {
+        
+        if (_editFlag == TRUE) {
             
-            if ([_mixAssociation.desc isEqualToString:@""]) {
-                [(UITextView *) subView setTextColor: GRAY_TEXT_COLOR];
-                [(UITextView *) subView setText:_descPlaceholder];
-             
-            // Initialized with the placeholder
+            // Create the image name text field
             //
-            } else if ([_mixAssociation.desc isEqualToString:_descPlaceholder]) {
-                [(UITextView *) subView setTextColor: GRAY_TEXT_COLOR];
+            UITextField *refName  = [FieldUtils createTextField:_mixAssocName tag:ASSOC_NAME_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            [cell.textLabel setText:@""];
+            
+            if ([_mixAssocName isEqualToString:@""]) {
+                [refName setPlaceholder:_namePlaceholder];
             }
             
         } else {
-            [(UITextView *) subView setBackgroundColor: LIGHT_BG_COLOR];
-            [(UITextView *) subView setTextColor: DARK_TEXT_COLOR];
-            [(UITextView *) subView setUserInteractionEnabled:YES];
+        
+            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocName]];
+            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont: TABLE_CELL_FONT];
+            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
+            cell.textLabel.numberOfLines = 0;
             
-            if ([_mixAssociation.desc isEqualToString:_descPlaceholder]) {
-                [(UITextView *) subView setText:@""];
-            }
+            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
         }
-        [(UITextView *) subView setFont: TEXT_FIELD_FONT];
+        
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
+        
 
-        return cell;
+    // Desc section
+    //
+    } else {
+        
+        if (_editFlag == TRUE) {
+            
+            // Create the image name text field
+            //
+            UITextField *refName  = [FieldUtils createTextField:_mixAssocDesc tag:ASSOC_DESC_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            [cell.textLabel setText:@""];
+            
+            if ([_mixAssocDesc isEqualToString:@""]) {
+                [refName setPlaceholder: _descPlaceholder];
+            }
+
+        } else {
+            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocDesc]];
+            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont: TABLE_CELL_FONT];
+            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
+            cell.textLabel.numberOfLines = 0;
+            
+            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+        }
+        
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
     }
+    return cell;
 }
 
 
@@ -568,6 +518,7 @@ const int ASSOC_DESC_SECTION  = 3;
         [self performSegueWithIdentifier:@"AssocSwatchDetailSegue" sender:self];
     }
 }
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TableView Delete and Insert
@@ -722,100 +673,110 @@ const int ASSOC_DESC_SECTION  = 3;
 - (void)setEditing:(BOOL)flag animated:(BOOL)animated {
     [super setEditing:flag animated:animated];
     
-    //NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    
-    _editingFlag = flag;
+    _editFlag = flag;
 
-    if (_editingFlag == FALSE) {
+    if (_editFlag == FALSE) {
 
         // Enable the 'Save' button
         //
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: SAVE_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:TRUE];
     
-        int objCount = (int)_paintSwatches.count;
-
-        for (int i=0; i < objCount; i++) {
-            AssocTableViewCell* cell = (AssocTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            UIView *subView = (UITextField *)[cell.contentView viewWithTag:DEF_TAG_NUM];
-            
-            if (i < 2) {
-                if (cell.textReturn == TRUE) {
-                    [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
-                    _mainColorFlag = TRUE;
-                    
-                    [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-                    [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"Reference"]]];
-                }
-
-            } else {
-
-                if ([cell.textEntered length] == 0) {
-                    if (_mainColorFlag == TRUE) {
-                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
-                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
-                        
-                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
-                        [[_paintSwatches objectAtIndex:i] setName:mixName];
-                        
-                    } else {
-                        [(UITextField *) subView setText:[[_paintSwatches objectAtIndex:i] name]];
-                    }
-                } else {
-                    
-                    NSString *textEntered = cell.textEntered;
-                    NSString *textReplaced;
-                    NSError *error = nil;
-
-                    NSRegularExpression *regex = [NSRegularExpression
-                                regularExpressionWithPattern:@".*([0-9]+:[0-9]+).*"
-                                options:NSRegularExpressionCaseInsensitive error:&error];
-                    
-                    if(error != nil) {
-                        NSLog(@"Error: %@", error);
-                        
-                    } else {
-                        textReplaced = [regex stringByReplacingMatchesInString:textEntered
-                                    options:0
-                                    range:NSMakeRange(0, [textEntered length])
-                                    withTemplate:[NSString stringWithFormat:@"%@", @"$1"]];
-                    }
-                    
-                    NSArray *comps = [textReplaced componentsSeparatedByString:@":"];
-                    if ([comps count] == 2) {
-                        [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:[comps[0] intValue]]];
-                        [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:[comps[1] intValue]]];
-                    }
-                    
-                    if (_mainColorFlag == TRUE) {
-                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
-                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
-                        
-                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
-                        [[_paintSwatches objectAtIndex:i] setName:mixName];
-                        
-                    } else {
-                        [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
-                    }
-                }
-                [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"MixAssoc"]]];
-            }
-            
-        }
+//        int objCount = (int)[_paintSwatches count];
+//
+//        for (int i=0; i < objCount; i++) {
+//            UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+//            //int tag_num = DEF_TAG_NUM + i;
+//            UIView *subView = (UITextField *)[cell.contentView viewWithTag:tag_num];
+//            //[cell.mixName setTag:tag_num];
+//            
+//            if (i < 2) {
+//                if (cell.textReturn == TRUE) {
+//                    [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
+//                    _mainColorFlag = TRUE;
+//                    
+//                    [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
+//                    [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"Reference"]]];
+//                }
+//
+//            } else {
+//
+//                if ([cell.textEntered length] == 0) {
+//                    if (_mainColorFlag == TRUE) {
+//                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
+//                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
+//                        
+//                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
+//                        [[_paintSwatches objectAtIndex:i] setName:mixName];
+//                        
+//                    } else {
+//                        [(UITextField *) subView setText:[[_paintSwatches objectAtIndex:i] name]];
+//                    }
+//                } else {
+//                    
+//                    NSString *textEntered = cell.textEntered;
+//                    NSString *textReplaced;
+//                    NSError *error = nil;
+//
+//                    NSRegularExpression *regex = [NSRegularExpression
+//                                regularExpressionWithPattern:@".*([0-9]+:[0-9]+).*"
+//                                options:NSRegularExpressionCaseInsensitive error:&error];
+//                    
+//                    if(error != nil) {
+//                        NSLog(@"Error: %@", error);
+//                        
+//                    } else {
+//                        textReplaced = [regex stringByReplacingMatchesInString:textEntered
+//                                    options:0
+//                                    range:NSMakeRange(0, [textEntered length])
+//                                    withTemplate:[NSString stringWithFormat:@"%@", @"$1"]];
+//                    }
+//                    
+//                    NSArray *comps = [textReplaced componentsSeparatedByString:@":"];
+//                    if ([comps count] == 2) {
+//                        [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:[comps[0] intValue]]];
+//                        [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:[comps[1] intValue]]];
+//                    }
+//                    
+//                    if (_mainColorFlag == TRUE) {
+//                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
+//                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
+//                        
+//                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
+//                        [[_paintSwatches objectAtIndex:i] setName:mixName];
+//                        
+//                    } else {
+//                        [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
+//                    }
+//                }
+//                [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"MixAssoc"]]];
+//            }
+//            
+//        }
         
-        AssocTableViewCell* nameCell = (AssocTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-        if (nameCell.textReturn == TRUE) {
-            _mixAssocName = nameCell.textEntered;
-        }
-    
-        AssocDescTableViewCell* descCell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-        if (descCell.textReturn == TRUE) {
-            _mixAssocDesc = descCell.textEntered;
-        }
+        UITableViewCell* nameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+        _mixAssocName = (NSString *)[(UITextField *)[nameCell.contentView viewWithTag:ASSOC_NAME_TAG] text];
+        
+        UITableViewCell* descCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+        _mixAssocDesc = (NSString *)[(UITextField *)[descCell.contentView viewWithTag:ASSOC_DESC_TAG] text];
+        
+//        if (nameCell.textReturn == TRUE) {
+//            _mixAssocName = nameCell.textEntered;
+//        }
+//    
+//        AssocDescTableViewCell* descCell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
+//        if (descCell.textReturn == TRUE) {
+//            _mixAssocDesc = descCell.textEntered;
+//        }
+        
+//        for (int tag=1; tag<=ASSOC_MAX_TAG; tag++) {
+//            [[cell.contentView viewWithTag:tag] removeFromSuperview];
+//        }
 
         _mainColorFlag = FALSE;
 
+
     } else {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: SAVE_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:FALSE];
     }
 
     [self.tableView reloadData];

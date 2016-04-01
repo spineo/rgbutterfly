@@ -13,9 +13,7 @@
 @interface AssocTableViewCell()
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UITextField *mixName;
 @property (nonatomic, strong) UILabel *mainLabel;
-@property (nonatomic, strong) UIAlertView *noTextAlert;
 
 @end
 
@@ -46,7 +44,7 @@
      
         [_mixName.layer setCornerRadius: DEF_CORNER_RADIUS];
         [_mixName.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [_mixName setTag: DEF_TAG_NUM];
+//        [_mixName setTag:_tagNum];
         [_mixName setTextAlignment:NSTextAlignmentLeft];
         [_mixName setFont: TEXT_FIELD_FONT];
         
@@ -62,20 +60,7 @@
         // Textfields
         //
         [_mixName setUserInteractionEnabled: YES];
-//        [_mixName addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
         [_mixName setDelegate:self];
-        
-        // Tap size Alert View
-        //
-        _noTextAlert = [[UIAlertView alloc] initWithTitle:@"No Color Name Entered"
-                                            message:@"Please enter a primary, mix, or primary + color name."
-                                            delegate:self
-                                            cancelButtonTitle:@"Ok"
-                                            otherButtonTitles: nil];
-        [_noTextAlert setTintColor: DARK_TEXT_COLOR];
-        
-//        _noTextAlert = [AlertUtils createOkAlert:@"Error" message:@"Device has no camera"];
-//        [_presentingViewController presentViewController:_noTextAlert animated:YES completion:nil];
     }
 
     return self;
@@ -97,13 +82,8 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text isEqualToString:@""]) {
-        [_noTextAlert show];
-        
-    } else {
-        _textEntered = textField.text;
-        _textReturn  = TRUE;
-    }
+    _textEntered = textField.text;
+    _textReturn  = TRUE;
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{

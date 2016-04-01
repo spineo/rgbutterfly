@@ -573,20 +573,6 @@ const int IMAGE_TAG  = 6;
         } else {
             return DEF_TABLE_HDR_HEIGHT;
         }
-
-//    } else if (section == COLOR_SECTION) {
-//        if ((_editFlag == FALSE) && (_colorPickerSelRow == 0)) {
-//            return 0.0;
-//        } else {
-//            return DEF_TABLE_HDR_HEIGHT;
-//        }
-//
-//    } else if (section == TYPES_SECTION) {
-//        if ((_editFlag == FALSE) && (_typesPickerSelRow == 0)) {
-//            return 0.0;
-//        } else {
-//            return DEF_TABLE_HDR_HEIGHT;
-//        }
         
     } else if (section == DIV1_SECTION || section == DIV2_SECTION) {
         return 0.0;
@@ -622,12 +608,6 @@ const int IMAGE_TAG  = 6;
         
     } else if (section == IMAGE_SECTION) {
         headerStr = @"Reference Images";
-//    
-//    } else if (section == COLOR_SECTION) {
-//        headerStr = @"Subjective Color Selection";
-//        
-//    } else if (section == TYPES_SECTION) {
-//        headerStr = @"Swatch Type Selection";
         
     } else if (section == MATCH_SECTION) {
         headerStr = [[NSString alloc] initWithFormat:@"Matches (Type Method: %@)", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];

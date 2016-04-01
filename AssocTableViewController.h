@@ -12,7 +12,7 @@
 #import "GlobalSettings.h"
 #import "BarButtonUtils.h"
 
-@interface AssocTableViewController : UITableViewController
+@interface AssocTableViewController : UITableViewController <UITextFieldDelegate>
 
 
 // Set this value to determine the 'go back' action based on the source view controller

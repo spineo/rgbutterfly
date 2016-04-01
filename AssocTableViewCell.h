@@ -14,5 +14,6 @@ static NSString *assocCellIdentifier = @"AssocCellIdentifier";
 
 @property (nonatomic) BOOL textReturn;
 @property (nonatomic, strong) NSString *textEntered;
+@property (nonatomic, strong) UITextField *mixName;
 
 @end

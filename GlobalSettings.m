@@ -69,7 +69,7 @@ int const DEF_STEP_MATCH = 5;
 
 // Tags
 //
-int const DEF_TAG_NUM    = 1;
+int const DEF_TAG_NUM    = 200;
 
 // UI Button Tags
 //

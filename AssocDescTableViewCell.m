@@ -12,7 +12,6 @@
 @interface AssocDescTableViewCell()
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UITextField *descField;
 @property (nonatomic, strong) UILabel *mainLabel;
 //@property (nonatomic, strong) UIAlertView *noTextAlert;
 
@@ -45,7 +44,7 @@
         [_descField.layer setCornerRadius: DEF_CORNER_RADIUS];
         [_descField.layer setBorderWidth: DEF_BORDER_WIDTH];
         
-        [_descField setTag: DEF_TAG_NUM];
+//        [_descField setTag: DEF_TAG_NUM];
         
         [_descField setTextAlignment:NSTextAlignmentLeft];
         [_descField setFont: TEXT_FIELD_FONT];

@@ -14,5 +14,6 @@ static NSString *assocDescCellIdentifier = @"AssocDescCellIdentifier";
 
 @property (nonatomic) BOOL textReturn;
 @property (nonatomic, strong) NSString *textEntered;
+@property (nonatomic, strong) UITextField *descField;
 
 @end
