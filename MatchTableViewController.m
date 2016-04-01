@@ -552,27 +552,27 @@ const int IMAGE_TAG  = 6;
 
     if (section == NAME_SECTION) {
         if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
-            return 0.0;
+            return DEF_NIL_HEADER;
         } else {
             return DEF_TABLE_HDR_HEIGHT;
         }
         
     } else if (section == KEYW_SECTION) {
         if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
-            return 0.0;
+            return DEF_NIL_HEADER;
         } else {
             return DEF_TABLE_HDR_HEIGHT;
         }
         
     } else if (section == DESC_SECTION) {
         if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
-            return 0.0;
+            return DEF_NIL_HEADER;
         } else {
             return DEF_TABLE_HDR_HEIGHT;
         }
         
     } else if (section == DIV1_SECTION || section == DIV2_SECTION) {
-        return 0.0;
+        return DEF_NIL_HEADER;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;

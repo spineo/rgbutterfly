@@ -274,12 +274,29 @@ const int ASSOC_COLORS_TAG     = 3;
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == ASSOC_ADD_SECTION) {
+    
+    if (section == ASSOC_NAME_SECTION) {
+        if ((_editFlag == FALSE) && [_mixAssocName isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+        
+    } else if (section == ASSOC_DESC_SECTION) {
+        if ((_editFlag == FALSE) && [_mixAssocDesc isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+
+    } else if (section == ASSOC_ADD_SECTION) {
         return DEF_NIL_HEADER;
+        
     } else {
         return DEF_TABLE_HDR_HEIGHT;
     }
 }
+
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     // Background color
@@ -316,14 +333,20 @@ const int ASSOC_COLORS_TAG     = 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     // Return the number of rows in the section.
     //
-    if (section == 0) {
-        int objCount = (int)[_paintSwatches count];
-        return objCount;
-        
-    } else if ((section == 1) && (_editFlag == FALSE)) {
+    if ((
+         ((section == ASSOC_NAME_SECTION)  && [_mixAssocName  isEqualToString:@""]) ||
+         ((section == ASSOC_DESC_SECTION)  && [_mixAssocDesc  isEqualToString:@""]))
+         && (_editFlag == FALSE)) {
         return 0;
+
+    } else if ((section == ASSOC_ADD_SECTION) && (_editFlag == FALSE)) {
+        return 0;
+
+    } else if (section == ASSOC_COLORS_SECTION) {
+        return [_paintSwatches count];
         
     } else {
         return 1;
@@ -331,8 +354,11 @@ const int ASSOC_COLORS_TAG     = 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-
-    return DEF_TABLE_CELL_HEIGHT;
+    if ((indexPath.section == ASSOC_ADD_SECTION) && (_editFlag == FALSE)) {
+        return DEF_NIL_HEIGHT;
+    } else {
+        return DEF_TABLE_CELL_HEIGHT;
+    }
 }
 
 
@@ -411,8 +437,6 @@ const int ASSOC_COLORS_TAG     = 3;
         }
  
     } else if (indexPath.section == ASSOC_ADD_SECTION) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
-        
         [cell.textLabel setText: _addColorLabel];
         cell.accessoryType       = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
@@ -744,7 +768,7 @@ const int ASSOC_COLORS_TAG     = 3;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == ASSOC_COLORS_SECTION) {
+    if ((indexPath.section == ASSOC_COLORS_SECTION) || (indexPath.section == ASSOC_ADD_SECTION)) {
         return YES;
     } else {
         return NO;
