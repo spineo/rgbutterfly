@@ -372,9 +372,7 @@ const int ASSOC_COLORS_TAG     = 3;
     [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
     [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor: GRAY_BG_COLOR];
-//    [cell.textLabel.layer setBorderWidth: BORDER_WIDTH_NONE];
-//    [cell.textLabel setBackgroundColor: DARK_BG_COLOR];
-//    [cell.textLabel setText:@""];
+
     cell.imageView.image = nil;
     
     //    CGFloat tableViewWidth = self.tableView.bounds.size.width;

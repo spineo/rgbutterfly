@@ -99,7 +99,11 @@
 }
 
 + (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border {
-    [refName setText:content];
+    
+    if (![content isEqualToString:@""]) {
+        [refName setText:content];
+    }
+
     [refName setFont:TEXT_FIELD_FONT];
     [refName setTextColor:LIGHT_TEXT_COLOR];
     [refName setBackgroundColor:DARK_BG_COLOR];
@@ -110,6 +114,19 @@
         [refName.layer setBorderColor:[GRAY_BORDER_COLOR CGColor]];
     }
     [refName setEnabled:FALSE];
+}
+
++ (void)makeTextFieldEditable:(UITextField *)refName content:(NSString *)content {
+    
+    if (![content isEqualToString:@""]) {
+        [refName setText:content];
+    }
+    
+    [refName setFont:TEXT_FIELD_FONT];
+    [refName setTextColor:DARK_TEXT_COLOR];
+    [refName setBackgroundColor:LIGHT_BG_COLOR];
+    
+    [refName setEnabled:TRUE];
 }
 
 @end

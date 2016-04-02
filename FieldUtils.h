@@ -25,4 +25,6 @@
 
 + (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border;
 
++ (void)makeTextFieldEditable:(UITextField *)refName content:(NSString *)content;
+
 @end

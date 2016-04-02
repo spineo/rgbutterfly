@@ -67,7 +67,7 @@
 // Picker views
 //
 @property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
-@property (nonatomic) BOOL colorPickerFlag, typesPickerFlag;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag;
 
 
 // NSManagedObject subclassing
@@ -159,6 +159,10 @@ const int DETAIL_MIX_SECTION    = 5;
     //
     int type_id       = [[_paintSwatch type_id] intValue];
     int subj_color_id = [[_paintSwatch subj_color_id] intValue];
+    
+    // Default edit behaviour
+    //
+    _editFlag = FALSE;
 
     
     // A few defaults
@@ -234,7 +238,7 @@ const int DETAIL_MIX_SECTION    = 5;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
     [self.editButtonItem setAction:@selector(editAction:)];
-    [self setTextFieldsAttributes:LIGHT_TEXT_COLOR bgColor:DARK_BG_COLOR isEnabled:FALSE];
+    [self makeTextFieldsNonEditable];
     
     
     // Adjust the layout with rotational changes
@@ -912,38 +916,30 @@ const int DETAIL_MIX_SECTION    = 5;
 - (IBAction)editAction:(id)sender {
     if ([self.editButtonItem.title isEqualToString:@"Edit"]){
         [self.editButtonItem setTitle:@"Done"];
-        [self setTextFieldsAttributes:DARK_TEXT_COLOR bgColor:LIGHT_BG_COLOR isEnabled:TRUE];
+        [self makeTextFieldsEditable];
+        _editFlag = TRUE;
 
     } else {
         [self.editButtonItem setTitle:@"Edit"];
-        [self setTextFieldsAttributes:LIGHT_TEXT_COLOR bgColor:DARK_BG_COLOR isEnabled:FALSE];
+        [self makeTextFieldsNonEditable];
+        _editFlag = FALSE;
     }
 }
 
-- (void)setTextFieldsAttributes:(UIColor *)textColor bgColor:(UIColor *)bgColor isEnabled:(BOOL)isEnabled {
-    [_swatchName setTextColor:textColor];
-    [_swatchName setBackgroundColor:bgColor];
-    [_swatchName setEnabled:isEnabled];
-    [_swatchName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-    
-    [_subjColorName setEnabled:isEnabled];
-    [_subjColorName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-    
-    [_swatchTypeName setTextColor:textColor];
-    [_swatchTypeName setBackgroundColor:bgColor];
-    [_swatchTypeName setEnabled:isEnabled];
-    [_swatchTypeName setTextAlignment:NSTextAlignmentLeft];
-    [_swatchTypeName.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+- (void)makeTextFieldsEditable {
+    [FieldUtils makeTextFieldEditable:_swatchName content:@""];
+    [FieldUtils makeTextFieldEditable:_subjColorName content:@""];
+    [FieldUtils makeTextFieldEditable:_swatchTypeName content:@""];
+    [FieldUtils makeTextFieldEditable:_swatchKeywords content:@""];
+    [FieldUtils makeTextFieldEditable:_swatchDesc content:@""];
+}
 
-    [_swatchKeywords setTextColor:textColor];
-    [_swatchKeywords setBackgroundColor:bgColor];
-    [_swatchKeywords setEnabled:isEnabled];
-    [_swatchKeywords.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-    
-    [_swatchDesc setTextColor:textColor];
-    [_swatchDesc setBackgroundColor:bgColor];
-    [_swatchDesc setEnabled:isEnabled];
-    [_swatchDesc.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+- (void)makeTextFieldsNonEditable {
+    [FieldUtils makeTextFieldNonEditable:_swatchName content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_subjColorName content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_swatchKeywords content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_swatchDesc content:@"" border:TRUE];
 }
 
 @end
