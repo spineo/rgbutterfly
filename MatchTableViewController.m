@@ -189,9 +189,7 @@ const int IMAGE_TAG  = 6;
     [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
     [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor: GRAY_BG_COLOR];
-    [cell.textLabel.layer setBorderWidth: BORDER_WIDTH_NONE];
-    [cell.textLabel setBackgroundColor: DARK_BG_COLOR];
-    [cell.textLabel setText:@""];
+
     cell.imageView.image = nil;
     
 //    CGFloat tableViewWidth = self.tableView.bounds.size.width;
@@ -205,96 +203,65 @@ const int IMAGE_TAG  = 6;
     // Set up the image name and match method fields
     //
     if (indexPath.section == NAME_SECTION) {
-        if (_editFlag == FALSE) {
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _nameEntered]];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-            cell.textLabel.numberOfLines = 0;
-            
-            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-
-        } else {
-            
-            // Create the image name text field
-            //
-            UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [refName setDelegate:self];
-            [cell.contentView addSubview:refName];
-            [cell.textLabel setText:@""];
-            
+        
+        // Create the name text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
+        
+        if (_editFlag == TRUE) {
             if ([_nameEntered isEqualToString:@""]) {
-                [refName setPlaceholder: _namePlaceholder];
+                [refName setPlaceholder:_namePlaceholder];
             }
+            
+        } else {
+            [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
         }
-
         [cell setAccessoryType: UITableViewCellAccessoryNone];
     
     // Set up the keywords and match type fields
     //
     } else if (indexPath.section == KEYW_SECTION) {
-        if (_editFlag == FALSE) {
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _keywEntered]];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-            cell.textLabel.numberOfLines = 0;
-            
-            //[cell.textLabel setBackgroundColor:_grayBgColor];
-            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
 
-        } else {
-            
-            // Create the keywords text field
-            //
-            UITextField *keywords  = [FieldUtils createTextField:_keywEntered tag:KEYW_FIELD_TAG];
-            [keywords setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [keywords setDelegate:self];
-            [cell.contentView addSubview:keywords];
-            [cell.textLabel setText:@""];
-            
-            if ([_keywEntered isEqualToString:@""]) {
-                [keywords setPlaceholder: _keywPlaceholder];
-            }
-        }
+        // Create the keyword text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_keywEntered tag:KEYW_FIELD_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
         
+        if (_editFlag == TRUE) {
+            if ([_keywEntered isEqualToString:@""]) {
+                [refName setPlaceholder:_keywPlaceholder];
+            }
+            
+        } else {
+            [FieldUtils makeTextFieldNonEditable:refName content:_keywEntered border:TRUE];
+        }
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         
     
     // Set up the description field
     //
     } else if (indexPath.section == DESC_SECTION) {
-        if (_editFlag == FALSE) {
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _descEntered]];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-            cell.textLabel.numberOfLines = 0;
-    
-            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+        
+        // Create the description text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
+        
+        if (_editFlag == TRUE) {
+            if ([_descEntered isEqualToString:@""]) {
+                [refName setPlaceholder:_descPlaceholder];
+            }
 
         } else {
-            
-            // Create the description text field
-            //
-            UITextField *description  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
-            [description setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [description setDelegate:self];
-            [cell.contentView addSubview:description];
-            [cell.textLabel setText:@""];
-            
-            if ([_descEntered isEqualToString:@""]) {
-                [description setPlaceholder: _descPlaceholder];
-            }
+            [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:TRUE];
         }
-        
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         
     } else if (indexPath.section == IMAGE_SECTION) {
@@ -378,124 +345,6 @@ const int IMAGE_TAG  = 6;
         } else {
             [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
         }
-        
-//    } else if (indexPath.section == COLOR_SECTION) {
-//        cell.imageView.image = [ColorUtils renderRGB:_selPaintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
-//        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-//        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-//        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-//        
-//        if (_editFlag == FALSE) {
-//            [cell.textLabel setText: @""];
-//
-//            UILabel *textLabel = [[UILabel alloc] init];
-//            [textLabel setText:_colorSelected];
-//            [textLabel setTextColor:[self setTextColor:_colorName]];
-//            [textLabel setBackgroundColor:_subjColorValue];
-//            [textLabel setTextAlignment:NSTextAlignmentCenter];
-//            [textLabel setTag:COLLBL_TAG];
-//            [textLabel setFont: TEXT_FIELD_FONT];
-//            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-//            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-//            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-//            
-//            [textLabel setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, (self.tableView.bounds.size.width - _imageViewWidth) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-//            
-//            [cell.contentView addSubview:textLabel];
-//
-//        } else {
-//            
-//            // Create the subjective color picker text field
-//            //
-//            _colorSelected = [_subjColorNames objectAtIndex:_colorPickerSelRow];
-//            _subjColorName  = [FieldUtils createTextField:_colorSelected tag:COLTXT_TAG];
-//            
-//            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
-//            
-//            // Create the textfield
-//            //
-//            [_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-//            
-//            // Create the button
-//            //
-//            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
-//            _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag: COLOR_BTN_TAG frame: buttonFrame];
-//
-//            [_doneColorButton addTarget:self action:@selector(colorSelection) forControlEvents:UIControlEventTouchUpInside];
-//            [_doneColorButton setHidden:TRUE];
-//            
-//            if (_colorName && _subjColorValue) {
-//                [_subjColorName setTextColor:[self setTextColor:_colorName]];
-//                [_subjColorName setBackgroundColor:_subjColorValue];
-//            }
-//            [_subjColorName setDelegate:self];
-//            [cell.contentView addSubview:_subjColorName];
-//            [cell.contentView addSubview:_doneColorButton];
-//            [cell.textLabel setText:@""];
-//
-//            [_subjColorName setTextAlignment:NSTextAlignmentCenter];
-//            [_subjColorName setInputView: _subjColorPicker];
-//            
-//            // Create the subjective color picker
-//            //
-//            [self createColorPicker];
-//        }
-//        
-//        [cell setAccessoryType: UITableViewCellAccessoryNone];
-//
-//    } else if (indexPath.section == TYPES_SECTION) {
-//        
-//        if (_editFlag == FALSE) {
-//            [cell.textLabel setText: @""];
-//            
-//            UILabel *textLabel = [[UILabel alloc] init];
-//            [textLabel setText:_typeSelected];
-//            [textLabel setTextColor: LIGHT_TEXT_COLOR];
-//
-//            [textLabel setTextAlignment:NSTextAlignmentCenter];
-//            [textLabel setTag:TYPLBL_TAG];
-//            [textLabel setFont: TEXT_FIELD_FONT];
-//            
-//            [textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-//            [textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-//            [textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
-//            
-//            [textLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-//            
-//            [cell.contentView addSubview:textLabel];
-//            
-//            
-//        } else {
-//            
-//            // Create the subjective color picker text field
-//            //
-//            _typeSelected = [GlobalSettings getSwatchType:_typesPickerSelRow];
-//            _swatchTypeName  = [FieldUtils createTextField:_typeSelected tag:TYPTXT_TAG];
-//
-//            [self resizeSelFieldAndDone:DEF_BUTTON_WIDTH];
-//
-//            // Create the button
-//            //
-//            CGRect buttonFrame = CGRectMake(_doneButtonXOffset, _textFieldYOffset, _doneButtonWidth, DEF_TEXTFIELD_HEIGHT);
-//            _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag: TYPBTN_TAG frame: buttonFrame];
-//            [_doneTypeButton addTarget:self action:@selector(swatchTypeSelection) forControlEvents:UIControlEventTouchUpInside];
-//            [_doneTypeButton setHidden:TRUE];
-//            
-//            [_swatchTypeName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _selTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-//        
-//            [_swatchTypeName setDelegate:self];
-//            [cell.contentView addSubview:_swatchTypeName];
-//            [cell.contentView addSubview:_doneTypeButton];
-//
-//            [cell.textLabel setText:@""];
-//            
-//            [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
-//            [_swatchTypeName setInputView: _swatchTypesPicker];
-//            
-//            // Create the swatch Type picker
-//            //
-//            [self createSwatchTypePicker];
-//        }
     }
         
     [cell setAccessoryType: UITableViewCellAccessoryNone];
