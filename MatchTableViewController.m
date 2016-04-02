@@ -185,14 +185,13 @@ const int IMAGE_TAG  = 6;
     
     // Global defaults
     //
-    [cell setBackgroundColor: DARK_BG_COLOR];
-    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-    [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
-    [tableView setSeparatorColor: GRAY_BG_COLOR];
+    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorColor:GRAY_BG_COLOR];
 
     cell.imageView.image = nil;
-    
-//    CGFloat tableViewWidth = self.tableView.bounds.size.width;
+
     
     // Remove the tags
     //
@@ -328,28 +327,25 @@ const int IMAGE_TAG  = 6;
         
         // Tag the first reference image
         //
-        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+        [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         
         [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
-        [cell.imageView setClipsToBounds: YES];
+        [cell.imageView setClipsToBounds:YES];
         [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _matchImageViewWidth, _matchImageViewHeight)];
         
-        [cell.textLabel setFont: TABLE_CELL_FONT];
-        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+        [cell.textLabel setFont:TABLE_CELL_FONT];
+        [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
         [cell.textLabel setText: paintSwatch.name];
         
         if (_editFlag == TRUE) {
-            [cell setAccessoryType: UITableViewCellAccessoryNone];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
         } else {
-            [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
-        
-    [cell setAccessoryType: UITableViewCellAccessoryNone];
 
-    
     return cell;
 }
 
