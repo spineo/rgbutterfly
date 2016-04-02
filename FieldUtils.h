@@ -23,4 +23,6 @@
 
 + (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag;
 
++ (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border;
+
 @end

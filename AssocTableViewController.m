@@ -402,38 +402,27 @@ const int ASSOC_COLORS_TAG     = 3;
         [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
         [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
         [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        
         [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [cell.imageView setClipsToBounds: YES];
-
         [cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _imageViewWidth, _imageViewHeight)];
+
         
-        [cell.textLabel setFont: TABLE_CELL_FONT];
-        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-        [cell.textLabel setText:paintSwatch.name];
+        int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
+        UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
+        
+        CGFloat xpos  = _assocImageViewWidth + DEF_CELL_EDIT_DISPL;
+        CGFloat width = cell.contentView.bounds.size.width - xpos;
+        
+        [refName setFrame:CGRectMake(xpos, _textFieldYOffset, width, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
         
         if (_editFlag == TRUE) {
             [cell setAccessoryType: UITableViewCellAccessoryNone];
-            
-            int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
-            UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
-            
-            CGFloat xpos  = _assocImageViewWidth + DEF_CELL_EDIT_DISPL;
-            CGFloat width = cell.contentView.bounds.size.width - xpos;
-            
-            [refName setFrame:CGRectMake(xpos, _textFieldYOffset, width, DEF_TEXTFIELD_HEIGHT)];
-            [refName setDelegate:self];
-            [cell.contentView addSubview:refName];
-            [cell.textLabel setText:@""];
-            
-            
+
         } else {
             [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
-            
-            [cell.textLabel setText:name];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            [cell setBackgroundColor: DARK_BG_COLOR];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+            [FieldUtils makeTextFieldNonEditable:refName content:name border:FALSE];
         }
  
     } else if (indexPath.section == ASSOC_ADD_SECTION) {
@@ -449,66 +438,43 @@ const int ASSOC_COLORS_TAG     = 3;
 
     
     } else if (indexPath.section == ASSOC_NAME_SECTION) {
-            
+        
+        // Create the name text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_mixAssocName tag:ASSOC_NAME_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
+
         if (_editFlag == TRUE) {
-            
-            // Create the image name text field
-            //
-            UITextField *refName  = [FieldUtils createTextField:_mixAssocName tag:ASSOC_NAME_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [refName setDelegate:self];
-            [cell.contentView addSubview:refName];
-            [cell.textLabel setText:@""];
-            
             if ([_mixAssocName isEqualToString:@""]) {
                 [refName setPlaceholder:_namePlaceholder];
             }
 
         } else {
-
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocName]];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-            cell.textLabel.numberOfLines = 0;
-            
-            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+            [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocName border:TRUE];
         }
-        
         [cell setAccessoryType: UITableViewCellAccessoryNone];
 
     // Desc section
     //
     } else {
         
+        // Create the description text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_mixAssocDesc tag:ASSOC_DESC_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
+        
         if (_editFlag == TRUE) {
-            
-            // Create the image name text field
-            //
-            UITextField *refName  = [FieldUtils createTextField:_mixAssocDesc tag:ASSOC_DESC_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [refName setDelegate:self];
-            [cell.contentView addSubview:refName];
-            [cell.textLabel setText:@""];
-            
             if ([_mixAssocDesc isEqualToString:@""]) {
                 [refName setPlaceholder: _descPlaceholder];
             }
 
         } else {
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@" %@", _mixAssocDesc]];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-            cell.textLabel.numberOfLines = 0;
-            
-            [cell.textLabel.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.textLabel.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [cell.textLabel.layer setBorderColor: [GRAY_BORDER_COLOR CGColor]];
+            [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocDesc border:TRUE];
         }
-        
         [cell setAccessoryType: UITableViewCellAccessoryNone];
     }
     return cell;

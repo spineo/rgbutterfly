@@ -98,4 +98,18 @@
     return colorPicker;
 }
 
++ (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border {
+    [refName setText:content];
+    [refName setFont:TEXT_FIELD_FONT];
+    [refName setTextColor:LIGHT_TEXT_COLOR];
+    [refName setBackgroundColor:DARK_BG_COLOR];
+    
+    if (border == TRUE) {
+        [refName.layer setBorderWidth: DEF_BORDER_WIDTH];
+        [refName.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [refName.layer setBorderColor:[GRAY_BORDER_COLOR CGColor]];
+    }
+    [refName setEnabled:FALSE];
+}
+
 @end
