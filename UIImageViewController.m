@@ -41,7 +41,7 @@
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) GlobalSettings *globalSettings;
-@property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchDesc;
+@property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchKeyw, *matchDesc;
 
 @property (nonatomic, strong) UIAlertController *typeAlertController, *editButtonAlertController, *deleteTapsAlertController;
 @property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
@@ -107,7 +107,8 @@ const int TAPS_ALERT_TAG   = 11;
 const int SHAPE_BUTTON_TAG = 13;
 const int MATCH_NUM_TAG    = 14;
 const int MATCH_NAME_TAG   = 15;
-const int MATCH_DESC_TAG   = 16;
+const int MATCH_KEYW_TAG   = 16;
+const int MATCH_DESC_TAG   = 17;
 
 // Button widths
 //
@@ -458,18 +459,29 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         if (_matchAssociation != nil) {
             [matchNameTextField setText:_matchAssociation.name];
         } else {
-            [matchNameTextField setPlaceholder: NSLocalizedString(@"Please enter a match name.", nil)];
+            [matchNameTextField setPlaceholder: NSLocalizedString(@"Match name.", nil)];
         }
         [matchNameTextField setTag: MATCH_NAME_TAG];
         [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
         [matchNameTextField setDelegate: self];
+    }];
+    
+    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchKeywTextField) {
+        if (_matchAssociation != nil) {
+            [matchKeywTextField setText:_matchAssociation.name];
+        } else {
+            [matchKeywTextField setPlaceholder: NSLocalizedString(@"Comma-separated keywords.", nil)];
+        }
+        [matchKeywTextField setTag: MATCH_KEYW_TAG];
+        [matchKeywTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
+        [matchKeywTextField setDelegate: self];
     }];
 
     [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
         if (_matchAssociation != nil) {
             [matchDescTextField setText:_matchAssociation.desc];
         } else {
-            [matchDescTextField setPlaceholder: NSLocalizedString(@"Please enter a match description.", nil)];
+            [matchDescTextField setPlaceholder: NSLocalizedString(@"Match description.", nil)];
         }
         [matchDescTextField setTag: MATCH_DESC_TAG];
         [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
@@ -1680,6 +1692,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     } else if (textField.tag == MATCH_NAME_TAG) {
         _matchName = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:0]).text;
+        
+    } else if (textField.tag == MATCH_KEYW_TAG) {
+        _matchKeyw = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:0]).text;
 
     } else if (textField.tag == MATCH_DESC_TAG) {
         _matchDesc = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:1]).text;
