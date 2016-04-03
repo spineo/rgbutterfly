@@ -13,6 +13,8 @@
     </entity>
     <entity name="Keyword" representedClassName="KeywordNames" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString="Other" syncable="YES"/>
+        <relationship name="match_assoc_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MatchAssocKeyword" inverseName="keyword" inverseEntity="MatchAssocKeyword" syncable="YES"/>
+        <relationship name="mix_assoc_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MixAssocKeyword" inverseName="keyword" inverseEntity="MixAssocKeyword" syncable="YES"/>
         <relationship name="swatch_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SwatchKeyword" inverseName="keyword" inverseEntity="SwatchKeyword" syncable="YES"/>
         <relationship name="tap_area_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaKeyword" inverseName="keyword" inverseEntity="TapAreaKeyword" syncable="YES"/>
     </entity>
@@ -26,7 +28,12 @@
         <attribute name="image_url" attributeType="Transformable" syncable="YES"/>
         <attribute name="last_update" optional="YES" attributeType="Date" defaultDateTimeInterval="476293080" syncable="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="Undefined Name" syncable="YES"/>
+        <relationship name="match_assoc_keyword" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchAssocKeyword" inverseName="match_association" inverseEntity="MatchAssocKeyword" syncable="YES"/>
         <relationship name="tap_area" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapArea" inverseName="match_association" inverseEntity="TapArea" syncable="YES"/>
+    </entity>
+    <entity name="MatchAssocKeyword" syncable="YES">
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="match_assoc_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="match_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchAssociation" inverseName="match_assoc_keyword" inverseEntity="MatchAssociation" syncable="YES"/>
     </entity>
     <entity name="MixAssociation" representedClassName="MixAssociation" syncable="YES">
         <attribute name="create_date" attributeType="Date" defaultDateTimeInterval="476293080" syncable="YES"/>
@@ -34,7 +41,12 @@
         <attribute name="image_url" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="last_update" attributeType="Date" defaultDateTimeInterval="476293080" syncable="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="Undefined Name" syncable="YES"/>
+        <relationship name="mix_assoc_keyword" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MixAssocKeyword" inverseName="mix_association" inverseEntity="MixAssocKeyword" syncable="YES"/>
         <relationship name="mix_assoc_swatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MixAssocSwatch" inverseName="mix_association" inverseEntity="MixAssocSwatch" syncable="YES"/>
+    </entity>
+    <entity name="MixAssocKeyword" syncable="YES">
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="mix_assoc_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="mix_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MixAssociation" inverseName="mix_assoc_keyword" inverseEntity="MixAssociation" syncable="YES"/>
     </entity>
     <entity name="MixAssocSwatch" representedClassName="MixAssocSwatch" syncable="YES">
         <attribute name="mix_order" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
@@ -109,17 +121,19 @@
     </entity>
     <elements>
         <element name="GlobalSetting" positionX="-180" positionY="468" width="128" height="180"/>
-        <element name="Keyword" positionX="-506" positionY="491" width="128" height="88"/>
+        <element name="Keyword" positionX="-506" positionY="491" width="128" height="118"/>
         <element name="MatchAlgorithm" positionX="-801" positionY="-153" width="128" height="73"/>
-        <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="133"/>
-        <element name="MixAssociation" positionX="-801" positionY="143" width="128" height="133"/>
+        <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="148"/>
+        <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="148"/>
         <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="88"/>
         <element name="PaintSwatch" positionX="-128" positionY="-198" width="128" height="478"/>
-        <element name="PaintSwatchType" positionX="-0" positionY="152" width="128" height="73"/>
-        <element name="SubjectiveColor" positionX="-0" positionY="270" width="128" height="88"/>
+        <element name="PaintSwatchType" positionX="16" positionY="152" width="128" height="73"/>
+        <element name="SubjectiveColor" positionX="16" positionY="270" width="128" height="88"/>
         <element name="SwatchKeyword" positionX="-353" positionY="360" width="128" height="73"/>
-        <element name="TapArea" positionX="-585" positionY="-361" width="128" height="208"/>
-        <element name="TapAreaKeyword" positionX="-576" positionY="362" width="128" height="73"/>
+        <element name="TapArea" positionX="-578" positionY="-180" width="128" height="208"/>
+        <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="73"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="88"/>
+        <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="73"/>
+        <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="73"/>
     </elements>
 </model>
