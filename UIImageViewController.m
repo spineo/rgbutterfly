@@ -20,15 +20,16 @@
 #import "MatchAlgorithms.h"
 #import "PaintSwatchesDiff.h"
 #import "AlertUtils.h"
-#import "MatchAssociations.h"
 #import "ManagedObjectUtils.h"
+#import "GenericUtils.h"
 
+// NSManagedObject
+//
 #import "PaintSwatches.h"
-#import "MatchAssociations.h"
 #import "TapArea.h"
 #import "TapAreaSwatch.h"
 #import "MixAssocSwatch.h"
-
+#import "Keyword.h"
 
 @interface UIImageViewController ()
 
@@ -93,7 +94,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 //@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *mixAssocEntity, *mixAssocSwatchEntity, *tapAreaEntity, *tapAreaSwatchEntity;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity, *keywordEntity;
 
 @end
 
@@ -132,6 +133,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 //    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
     _tapAreaEntity        = [NSEntityDescription entityForName:@"TapArea"          inManagedObjectContext:self.context];
     _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"    inManagedObjectContext:self.context];
+    _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"          inManagedObjectContext:self.context];
     
 
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
@@ -1952,30 +1954,24 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Delete all  associations first and then add them back in (the cascade delete rules should
     // automatically delete the MatchAssocKeyword)
     //
-//    [ManagedObjectUtils deleteSwatchKeywords:_paintSwatch context:self.context];
+    [ManagedObjectUtils deleteMatchAssocKeywords:_matchAssociation context:self.context];
     
     // Add keywords
     //
-//    NSMutableArray *keywords = [GenericUtils trimStrings:[_swatchKeywords.text componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_matchKeyw componentsSeparatedByString:@","]];
     
-    // Add subjective color if not 'Other'
-    //
-//    NSString *subj_color = _subjColorName.text;
-//    if (![subj_color isEqualToString:@"Other"]) {
-//        [keywords addObject:subj_color];
-//    }
-//    
-//    for (NSString *keyword in keywords) {
-//        if ([keyword isEqualToString:@""]) {
-//            continue;
-//        }
-//        
-//        Keyword *kwObj = [ManagedObjectUtils queryKeyword:keyword context:self.context];
-//        if (kwObj == nil) {
-//            kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
-//            [kwObj setName:keyword];
-//        }
-//        
+   
+    for (NSString *keyword in keywords) {
+        if ([keyword isEqualToString:@""]) {
+            continue;
+        }
+        
+        Keyword *kwObj = [ManagedObjectUtils queryKeyword:keyword context:self.context];
+        if (kwObj == nil) {
+            kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
+            [kwObj setName:keyword];
+        }
+        
 //        SwatchKeyword *swKwObj = [ManagedObjectUtils querySwatchKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
 //        if (swKwObj == nil) {
 //            swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
@@ -1985,7 +1981,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 //            [_paintSwatch addSwatch_keywordObject:swKwObj];
 //            [kwObj addSwatch_keywordObject:swKwObj];
 //        }
-//    }
+    }
 
     
     // Add the TapAreas, TapAreaSwatches, and PaintSwatches

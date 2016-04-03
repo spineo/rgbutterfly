@@ -1114,11 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MixAssociation.h"
-            timestampString = "480097783.919898"
+            timestampString = "481406295.098472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "@interface MixAssociation(CoreDataGeneratedAccessors)"
             landmarkType = "2">
          </BreakpointContent>

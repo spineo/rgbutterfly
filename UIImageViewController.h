@@ -9,8 +9,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+
+// NSManagedObject
+//
 #import "MixAssociation.h"
 #import "MatchAssociations.h"
+
 
 @interface UIImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
