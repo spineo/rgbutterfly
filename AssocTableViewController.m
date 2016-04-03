@@ -29,12 +29,12 @@
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorHeader, *descHeader;
-@property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc;
+@property (nonatomic, strong) NSString *nameHeader, *colorHeader, *keywHeader, *descHeader;
+@property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
-@property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocDesc;
+@property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocKeyw, *mixAssocDesc;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 @property (nonatomic) int goBackStatus;
@@ -56,13 +56,15 @@
 const int ASSOC_COLORS_SECTION = 0;
 const int ASSOC_ADD_SECTION    = 1;
 const int ASSOC_NAME_SECTION   = 2;
-const int ASSOC_DESC_SECTION   = 3;
+const int ASSOC_KEYW_SECTION   = 3;
+const int ASSOC_DESC_SECTION   = 4;
 
-const int ASSOC_MAX_SECTION    = 4;
+const int ASSOC_MAX_SECTION    = 5;
 
 const int ASSOC_NAME_TAG       = 1;
-const int ASSOC_DESC_TAG       = 2;
-const int ASSOC_COLORS_TAG     = 3;
+const int ASSOC_KEYW_TAG       = 2;
+const int ASSOC_DESC_TAG       = 3;
+const int ASSOC_COLORS_TAG     = 4;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,10 +94,14 @@ const int ASSOC_COLORS_TAG     = 3;
         _mixAssocName = @"";
         _mixAssocDesc = @"";
     }
+    _mixAssocKeyw = @"";
+    
     _textReturn = FALSE;
     
-    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Selection Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Selection Description (max. %i chars) - ", MAX_DESC_LEN];
+    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Name (max. of %i chars) - ", MAX_NAME_LEN];
+    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Description (max. %i chars) - ", MAX_DESC_LEN];
+
     
     // Set RGB Rendering to FALSE by default
     //
@@ -111,16 +117,13 @@ const int ASSOC_COLORS_TAG     = 3;
     //
     _nameHeader        = @"Mix Name";
     _colorHeader       = @"Mix Color Names";
+    _keywHeader        = @"Mix Keywords";
     _descHeader        = @"Mix Description";
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
     _addColorLabel     = @"Add Mix Color";
-    
-    // Placeholder
-    //
-    _namePlaceholder   = @"- Include Mix Association Name Here -";
-    _descPlaceholder   = @"- Include Mix Association Description Here -";
+
     
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
@@ -281,6 +284,13 @@ const int ASSOC_COLORS_TAG     = 3;
         } else {
             return DEF_TABLE_HDR_HEIGHT;
         }
+    
+    } else if (section == ASSOC_KEYW_SECTION) {
+        if ((_editFlag == FALSE) && [_mixAssocKeyw isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
         
     } else if (section == ASSOC_DESC_SECTION) {
         if ((_editFlag == FALSE) && [_mixAssocDesc isEqualToString:@""]) {
@@ -316,6 +326,9 @@ const int ASSOC_COLORS_TAG     = 3;
     if (section == ASSOC_NAME_SECTION) {
         headerStr = @"Mix Name";
         
+    } else if (section == ASSOC_KEYW_SECTION) {
+        headerStr = @"Mix Keywords";
+        
     } else if (section == ASSOC_DESC_SECTION) {
         headerStr = @"Mix Description";
         
@@ -338,6 +351,7 @@ const int ASSOC_COLORS_TAG     = 3;
     //
     if ((
          ((section == ASSOC_NAME_SECTION)  && [_mixAssocName  isEqualToString:@""]) ||
+         ((section == ASSOC_KEYW_SECTION)  && [_mixAssocKeyw  isEqualToString:@""]) ||
          ((section == ASSOC_DESC_SECTION)  && [_mixAssocDesc  isEqualToString:@""]))
          && (_editFlag == FALSE)) {
         return 0;
@@ -434,7 +448,6 @@ const int ASSOC_COLORS_TAG     = 3;
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
 
-    
     } else if (indexPath.section == ASSOC_NAME_SECTION) {
         
         // Create the name text field
@@ -451,6 +464,25 @@ const int ASSOC_COLORS_TAG     = 3;
 
         } else {
             [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocName border:TRUE];
+        }
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
+
+    } else if (indexPath.section == ASSOC_KEYW_SECTION) {
+        
+        // Create the name text field
+        //
+        UITextField *refName  = [FieldUtils createTextField:_mixAssocKeyw tag:ASSOC_KEYW_TAG];
+        [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+        [refName setDelegate:self];
+        [cell.contentView addSubview:refName];
+        
+        if (_editFlag == TRUE) {
+            if ([_mixAssocKeyw isEqualToString:@""]) {
+                [refName setPlaceholder:_keywPlaceholder];
+            }
+            
+        } else {
+            [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocKeyw border:TRUE];
         }
         [cell setAccessoryType: UITableViewCellAccessoryNone];
 
@@ -767,6 +799,9 @@ const int ASSOC_COLORS_TAG     = 3;
     if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
         _mixAssocName = textField.text;
         
+    } else if ((textField.tag == ASSOC_KEYW_TAG) && (! [textField.text isEqualToString:@""])) {
+        _mixAssocKeyw = textField.text;
+        
     } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
         _mixAssocDesc = textField.text;
     }
@@ -780,6 +815,11 @@ const int ASSOC_COLORS_TAG     = 3;
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField.tag == ASSOC_NAME_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        return NO;
+
+    } else if (textField.tag == ASSOC_KEYW_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
         
