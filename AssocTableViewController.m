@@ -29,7 +29,7 @@
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorHeader, *keywHeader, *descHeader;
+@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn;
 
@@ -115,14 +115,14 @@ const int ASSOC_COLORS_TAG     = 4;
     
     // Header labels
     //
-    _nameHeader        = @"Mix Name";
-    _colorHeader       = @"Mix Color Names";
-    _keywHeader        = @"Mix Keywords";
-    _descHeader        = @"Mix Description";
+    _colorsHeader      = @"Mix Association Colors";
+    _nameHeader        = @"Mix Association Name";
+    _keywHeader        = @"Mix Association Keywords";
+    _descHeader        = @"Mix Association Description";
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
-    _addColorLabel     = @"Add Mix Color";
+    _addColorLabel     = @"Add Mix Association Color";
 
     
     _editFlag       = FALSE;
@@ -146,6 +146,7 @@ const int ASSOC_COLORS_TAG     = 4;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Tableview defaults
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     _imageViewXOffset     = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
     _imageViewYOffset     = DEF_Y_OFFSET;
     _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
@@ -324,16 +325,16 @@ const int ASSOC_COLORS_TAG     = 4;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     if (section == ASSOC_NAME_SECTION) {
-        headerStr = @"Mix Name";
+        headerStr = _nameHeader;
         
     } else if (section == ASSOC_KEYW_SECTION) {
-        headerStr = @"Mix Keywords";
+        headerStr = _keywHeader;
         
     } else if (section == ASSOC_DESC_SECTION) {
-        headerStr = @"Mix Description";
+        headerStr = _descHeader;
         
     } else if (section == ASSOC_COLORS_SECTION) {
-        headerStr = @"Mix Color Names";
+        headerStr = _colorsHeader;
     }
     
     return headerStr;

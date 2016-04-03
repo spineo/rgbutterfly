@@ -22,7 +22,7 @@
 @interface MatchTableViewController ()
 
 @property (nonatomic) BOOL isRGB, textReturn;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag;
@@ -88,7 +88,16 @@ const int IMAGE_TAG  = 6;
     _isRGB    = FALSE;
     _editFlag = FALSE;
     _reuseCellIdentifier = @"MatchTableCell";
-    
+
+
+    // Header names
+    //
+    _imagesHeader  = @"Tap Area Reference Images";
+    _matchesHeader = @"Matches";
+    _nameHeader    = @"Tap Area Name";
+    _keywHeader    = @"Tap Area Keywords";
+    _descHeader    = @"Tap Area Description";
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Tableview defaults
@@ -119,11 +128,9 @@ const int IMAGE_TAG  = 6;
     
     // Set the placeholders
     //
-    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Selection Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Selection Description (max. %i chars) - ", MAX_DESC_LEN];
-    _colorPlaceholder = @" - Subjective Color - ";
-    _typePlaceholder  = @" - Swatch Type - ";
+    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Name (max. of %i chars) - ", MAX_NAME_LEN];
+    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Description (max. %i chars) - ", MAX_DESC_LEN];
     
     _dbSwatchesCount  = (int)[_dbPaintSwatches count];
 
@@ -440,19 +447,19 @@ const int IMAGE_TAG  = 6;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     if (section == NAME_SECTION) {
-        headerStr = @"Image Name";
+        headerStr = _nameHeader;
         
     } else if (section == KEYW_SECTION) {
-        headerStr = @"Keywords";
+        headerStr = _keywHeader;
 
     } else if (section == DESC_SECTION) {
-        headerStr = @"Description";
+        headerStr = _descHeader;
         
     } else if (section == IMAGE_SECTION) {
-        headerStr = @"Reference Images";
+        headerStr = _imagesHeader;
         
     } else if (section == MATCH_SECTION) {
-        headerStr = [[NSString alloc] initWithFormat:@"Matches (Type Method: %@)", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
+        headerStr = [[NSString alloc] initWithFormat:@"%@ (Type Method: %@)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
     }
     
     return headerStr;
@@ -558,118 +565,7 @@ const int IMAGE_TAG  = 6;
     return 1;
 }
 
-// The number of rows of data
-//
-//- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-//    if (pickerView.tag == TYPSEL_TAG) {
-//        return (long)[_swatchTypeNames count];
-//    } else {
-//        return (long)[_subjColorNames  count];
-//    }
-//}
-//
-//// Row height
-////
-//- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-//    return DEF_PICKER_ROW_HEIGHT;
-//}
-//
-//// The data to return for the row and component (column) that's being passed in
-////
-//- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-//    if (pickerView.tag == TYPSEL_TAG) {
-//        return [_swatchTypeNames objectAtIndex:row];
-//    } else {
-//        return [_subjColorNames  objectAtIndex:row];
-//    }
-//}
-//
-//- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-//    
-//    UILabel *label = (UILabel*)view;
-//    if (label == nil) {
-//        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
-//    }
-//    
-//    if (pickerView.tag == TYPSEL_TAG) {
-//        [label setText:[_swatchTypeNames objectAtIndex:row]];
-//        [label setTextColor: LIGHT_TEXT_COLOR];
-//        [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-//        [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-//
-//    } else {
-//        NSString *colorName = [_subjColorNames objectAtIndex:row];
-//        UIColor *subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
-//        
-//        [label setTextColor:[self setTextColor:colorName]];
-//        [label setBackgroundColor:subjColorValue];
-//        [label setText:[_subjColorNames objectAtIndex:row]];
-//    }
-//    [label setTextAlignment:NSTextAlignmentCenter];
-//    
-//    return label;
-//}
 
-//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-//    if (pickerView.tag == TYPSEL_TAG) {
-//        NSString *swatchType = [_swatchTypeNames objectAtIndex:row];
-//        [_swatchTypeName setText:swatchType];
-//        [_selPaintSwatch setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:swatchType]]];
-//        [self setTypesPickerSelRow: (int)row];
-//        
-//    } else {
-//        _colorName = [_subjColorNames objectAtIndex:row];
-//        _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorName] valueForKey:@"hex"]];
-//        
-//        [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
-//        [_subjColorName setTextColor:[self setTextColor:_colorName]];
-//        [_subjColorName setBackgroundColor:_subjColorValue];
-//        [_selPaintSwatch setSubj_color_id:[NSNumber numberWithInt:[GlobalSettings getSubjColorId:_colorName]]];
-//        [self setColorPickerSelRow: (int)row];
-//    }
-//}
-//
-//- (void)createColorPicker {
-//    _subjColorPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:COLSEL_TAG];
-//    
-//    [_subjColorPicker setDataSource:self];
-//    [_subjColorPicker setDelegate:self];
-//    [_subjColorPicker selectRow:_colorPickerSelRow inComponent:0 animated:YES];
-//    [_subjColorName setInputView: _subjColorPicker];
-//    
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-//                                             initWithTarget:self action:@selector(colorSelection)];
-//    tapRecognizer.numberOfTapsRequired = 1;
-//    [_subjColorPicker addGestureRecognizer:tapRecognizer];
-//    tapRecognizer.delegate = self;
-//}
-//
-//- (void)createSwatchTypePicker {
-//    _swatchTypesPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:TYPSEL_TAG];
-//
-//    [_swatchTypesPicker setDataSource:self];
-//    [_swatchTypesPicker setDelegate:self];
-//    [_swatchTypesPicker selectRow:_typesPickerSelRow inComponent:0 animated:YES];
-//    [_swatchTypeName setInputView: _swatchTypesPicker];
-//    
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-//                                             initWithTarget:self action:@selector(swatchTypeSelection)];
-//    tapRecognizer.numberOfTapsRequired = 1;
-//    [_swatchTypesPicker addGestureRecognizer:tapRecognizer];
-//    tapRecognizer.delegate = self;
-//}
-//
-//- (void)colorSelection {
-//    [_subjColorName resignFirstResponder];
-//    [_subjColorPicker removeFromSuperview];
-//    [_doneColorButton setHidden:TRUE];
-//}
-//
-//- (void)swatchTypeSelection {
-//    [_swatchTypeName resignFirstResponder];
-//    [_swatchTypesPicker removeFromSuperview];
-//    [_doneTypeButton setHidden:TRUE];
-//}
 
 - (UIColor *)setTextColor:(NSString *)colorName {
     
@@ -681,7 +577,6 @@ const int IMAGE_TAG  = 6;
     
     return textColor;
 }
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TapRecognizer Methods
