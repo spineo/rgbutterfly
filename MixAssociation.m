@@ -18,5 +18,6 @@
 @dynamic last_update;
 @dynamic name;
 @dynamic mix_assoc_swatch;
+@dynamic mix_assoc_keyword;
 
 @end

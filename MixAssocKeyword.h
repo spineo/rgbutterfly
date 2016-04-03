@@ -1,5 +1,5 @@
 //
-//  Keyword.h
+//  MixAssocKeyword.h
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 4/3/16.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MatchAssocKeyword, MixAssocKeyword, SwatchKeyword, TapAreaKeyword;
+@class Keyword, MixAssociation;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Keyword : NSManagedObject
+@interface MixAssocKeyword : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Keyword+CoreDataProperties.h"
+#import "MixAssocKeyword+CoreDataProperties.h"

@@ -619,13 +619,13 @@
     }
 }
 
-+ (NSArray *)querySwatchKeywords:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context {
++ (NSArray *)querySwatchKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"SwatchKeyword" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"paint_swatch == %@", swatch_id]];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"paint_swatch == %@", obj_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -636,6 +636,43 @@
         return nil;
     }
 }
+
++ (NSArray *)queryMatchAssocKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssocKeyword" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"match_association == %@", obj_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
+}
+
++ (NSArray *)queryMixAssocKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssocKeyword" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", obj_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
+}
+
 
 + (MixAssociation *)queryMixAssociation:(int)mix_assoc_id context:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -693,6 +730,40 @@
             [swatchObj removeSwatch_keywordObject:swatchKeywordObj];
             
             [context deleteObject:swatchKeywordObj];
+        }
+    }
+}
+
++ (void)deleteMatchAssocKeywords:(MatchAssociations *)matchAssocObj context:(NSManagedObjectContext *)context {
+    
+    NSArray *matchAssocKeywords = [self queryMatchAssocKeywords:matchAssocObj.objectID context:context];
+    
+    for (MatchAssocKeyword *matchAssocKeywordObj in matchAssocKeywords) {
+        if (matchAssocKeywordObj != nil) {
+            
+            Keyword *keywordObj = matchAssocKeywordObj.keyword;
+            
+            [keywordObj removeMatch_assoc_keywordObject:matchAssocKeywordObj];
+            [matchAssocObj removeMatch_assoc_keywordObject:matchAssocKeywordObj];
+            
+            [context deleteObject:matchAssocKeywordObj];
+        }
+    }
+}
+
++ (void)deleteMixAssocKeywords:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context {
+    
+    NSArray *mixAssocKeywords = [self queryMixAssocKeywords:mixAssocObj.objectID context:context];
+    
+    for (MixAssocKeyword *mixAssocKeywordObj in mixAssocKeywords) {
+        if (mixAssocKeywordObj != nil) {
+            
+            Keyword *keywordObj = mixAssocKeywordObj.keyword;
+            
+            [keywordObj removeMix_assoc_keywordObject:mixAssocKeywordObj];
+            [mixAssocObj removeMix_assoc_keywordObject:mixAssocKeywordObj];
+            
+            [context deleteObject:mixAssocKeywordObj];
         }
     }
 }

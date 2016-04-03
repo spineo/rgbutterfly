@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *last_update;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSSet<TapArea *> *tap_area;
+@property (nonatomic, retain) NSSet<MatchAssocKeyword *> *match_assoc_keyword;
 
 @end
 
@@ -30,6 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeTap_areaObject:(TapArea *)value;
 - (void)addTap_area:(NSSet<TapArea *> *)values;
 - (void)removeTap_area:(NSSet<TapArea *> *)values;
+
+- (void)addMatch_assoc_keywordObject:(MatchAssocKeyword *)value;
+- (void)removeMatch_assoc_keywordObject:(MatchAssocKeyword *)value;
+- (void)addMatch_assoc_keyword:(NSSet<MatchAssocKeyword *> *)values;
+- (void)removeMatch_assoc_keyword:(NSSet<MatchAssocKeyword *> *)values;
 
 @end
 

@@ -523,10 +523,6 @@ const int IMAGE_TAG  = 6;
         _keywEntered = textField.text;
     } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
         _descEntered = textField.text;
-//    } else if (textField.tag == COLTXT_TAG) {
-//        _colorSelected = textField.text;
-//    } else if (textField.tag == TYPTXT_TAG) {
-//        _typeSelected = textField.text;
     }
 }
 

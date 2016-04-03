@@ -15,6 +15,9 @@
 #import "Keyword.h"
 #import "SwatchKeyword.h"
 #import "MixAssociation.h"
+#import "MixAssocKeyword.h"
+#import "MatchAssociations.h"
+#import "MatchAssocKeyword.h"
 #import "MatchAlgorithm.h"
 
 @interface ManagedObjectUtils : NSObject
@@ -54,5 +57,7 @@
 // Delete methods
 //
 + (void)deleteSwatchKeywords:(PaintSwatches *)swatchObj context:(NSManagedObjectContext *)context;
++ (void)deleteMatchAssocKeywords:(MatchAssociations *)matchAssocObj context:(NSManagedObjectContext *)context;
++ (void)deleteMixAssocKeywords:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context;
 
 @end

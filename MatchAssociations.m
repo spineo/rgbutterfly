@@ -8,6 +8,7 @@
 
 #import "MatchAssociations.h"
 #import "TapArea.h"
+#import "MatchAssocKeyword.h"
 
 @implementation MatchAssociations
 

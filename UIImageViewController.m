@@ -1946,6 +1946,46 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [_matchAssociation setName:_matchName];
     [_matchAssociation setDesc:_matchDesc];
     [_matchAssociation setLast_update:currDate];
+    
+    // Save keywords
+    //
+    // Delete all  associations first and then add them back in (the cascade delete rules should
+    // automatically delete the MatchAssocKeyword)
+    //
+//    [ManagedObjectUtils deleteSwatchKeywords:_paintSwatch context:self.context];
+    
+    // Add keywords
+    //
+//    NSMutableArray *keywords = [GenericUtils trimStrings:[_swatchKeywords.text componentsSeparatedByString:@","]];
+    
+    // Add subjective color if not 'Other'
+    //
+//    NSString *subj_color = _subjColorName.text;
+//    if (![subj_color isEqualToString:@"Other"]) {
+//        [keywords addObject:subj_color];
+//    }
+//    
+//    for (NSString *keyword in keywords) {
+//        if ([keyword isEqualToString:@""]) {
+//            continue;
+//        }
+//        
+//        Keyword *kwObj = [ManagedObjectUtils queryKeyword:keyword context:self.context];
+//        if (kwObj == nil) {
+//            kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
+//            [kwObj setName:keyword];
+//        }
+//        
+//        SwatchKeyword *swKwObj = [ManagedObjectUtils querySwatchKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
+//        if (swKwObj == nil) {
+//            swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
+//            [swKwObj setKeyword:kwObj];
+//            [swKwObj setPaint_swatch:(PaintSwatch *)_paintSwatch];
+//            
+//            [_paintSwatch addSwatch_keywordObject:swKwObj];
+//            [kwObj addSwatch_keywordObject:swKwObj];
+//        }
+//    }
 
     
     // Add the TapAreas, TapAreaSwatches, and PaintSwatches
