@@ -35,7 +35,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *swatchKeywords, *swatchDesc;
 
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *keywHeader, *descHeader, *mixAssocHeader;
 
 // Subjective color related
 //
@@ -162,6 +162,16 @@ const int DETAIL_MIX_SECTION    = 5;
     // Default edit behaviour
     //
     _editFlag = FALSE;
+
+    
+    // Table View Headers
+    //
+    _nameHeader       = @"Name";
+    _subjColorHeader  = @"Subjective Color Selection";
+    _swatchTypeHeader = @"Swatch Type Selection";
+    _keywHeader       = @"Keywords";
+    _descHeader       = @"Description";
+    _mixAssocHeader   = @"Mix Associations";
 
     
     // A few defaults
@@ -464,22 +474,22 @@ const int DETAIL_MIX_SECTION    = 5;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     if (section == DETAIL_NAME_SECTION) {
-        headerStr = @"Name";
+        headerStr = _nameHeader;
         
     } else if (section == DETAIL_COLOR_SECTION) {
-        headerStr = @"Subjective Color Selection";
+        headerStr = _subjColorHeader;
         
     } else if (section == DETAIL_TYPES_SECTION) {
-        headerStr = @"Swatch Type Selection";
+        headerStr = _swatchTypeHeader;
         
     } else if (section == DETAIL_KEYW_SECTION) {
-        headerStr = @"Comma-separated Keywords";
+        headerStr = _keywHeader;
         
     } else if (section == DETAIL_DESC_SECTION) {
-        headerStr = @"Description";
+        headerStr = _descHeader;
         
     } else {
-        headerStr = @"Mix Associations";
+        headerStr = _mixAssocHeader;
     }
 
     return headerStr;
