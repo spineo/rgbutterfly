@@ -601,78 +601,6 @@
     }
 }
 
-+ (SwatchKeyword *)querySwatchKeyword:(NSManagedObjectID *)keyword_id swatchId:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SwatchKeyword" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"keyword == %@ and paint_swatch == %@", keyword_id, swatch_id]];
-    
-    NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if ([results count] > 0) {
-        return [results objectAtIndex:0];
-    } else {
-        return nil;
-    }
-}
-
-+ (NSArray *)querySwatchKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"SwatchKeyword" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"paint_swatch == %@", obj_id]];
-    
-    NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if ([results count] > 0) {
-        return results;
-    } else {
-        return nil;
-    }
-}
-
-+ (NSArray *)queryMatchAssocKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssocKeyword" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"match_association == %@", obj_id]];
-    
-    NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if ([results count] > 0) {
-        return results;
-    } else {
-        return nil;
-    }
-}
-
-+ (NSArray *)queryMixAssocKeywords:(NSManagedObjectID *)obj_id context:(NSManagedObjectContext *)context {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssocKeyword" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", obj_id]];
-    
-    NSError *error = nil;
-    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
-    
-    if ([results count] > 0) {
-        return results;
-    } else {
-        return nil;
-    }
-}
-
 
 + (MixAssociation *)queryMixAssociation:(int)mix_assoc_id context:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -712,6 +640,47 @@
 }
 
 
+// Generic query methods
+//
++ (id)queryObjectKeyword:(NSManagedObjectID *)keyword_id objId:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"keyword == %@ and %K == %@", keyword_id, relationName, obj_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return [results objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
++ (NSArray *)queryObjectKeywords:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"%K == %@", relationName, obj_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
+}
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Delete methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -720,7 +689,7 @@
 
 + (void)deleteSwatchKeywords:(PaintSwatches *)swatchObj context:(NSManagedObjectContext *)context {
 
-    NSArray *swatchKeywords = [self querySwatchKeywords:swatchObj.objectID context:context];
+    NSArray *swatchKeywords = [self queryObjectKeywords:swatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
 
     for (SwatchKeyword *swatchKeywordObj in swatchKeywords) {
         if (swatchKeywordObj != nil) {
@@ -736,7 +705,7 @@
 
 + (void)deleteMatchAssocKeywords:(MatchAssociations *)matchAssocObj context:(NSManagedObjectContext *)context {
     
-    NSArray *matchAssocKeywords = [self queryMatchAssocKeywords:matchAssocObj.objectID context:context];
+    NSArray *matchAssocKeywords = [self queryObjectKeywords:matchAssocObj.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:context];
     
     for (MatchAssocKeyword *matchAssocKeywordObj in matchAssocKeywords) {
         if (matchAssocKeywordObj != nil) {
@@ -752,8 +721,8 @@
 }
 
 + (void)deleteMixAssocKeywords:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context {
-    
-    NSArray *mixAssocKeywords = [self queryMixAssocKeywords:mixAssocObj.objectID context:context];
+
+    NSArray *mixAssocKeywords = [self queryObjectKeywords:mixAssocObj.objectID relationName:@"mix_association" entityName:@"MixAssocKeyword" context:context];
     
     for (MixAssocKeyword *mixAssocKeywordObj in mixAssocKeywords) {
         if (mixAssocKeywordObj != nil) {

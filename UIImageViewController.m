@@ -1972,7 +1972,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [kwObj setName:keyword];
         }
         
-//        SwatchKeyword *swKwObj = [ManagedObjectUtils querySwatchKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
+        //MatchAssocKeyword *matchAssocKwObj = [ManagedObjectUtils queryMatchAssocKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
+        MatchAssocKeyword *matchAssocKwObj = (MatchAssocKeyword *)[ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_matchAssociation.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:self.context];
+        
 //        if (swKwObj == nil) {
 //            swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
 //            [swKwObj setKeyword:kwObj];

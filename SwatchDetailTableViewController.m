@@ -883,7 +883,8 @@ const int DETAIL_MIX_SECTION    = 5;
             [kwObj setName:keyword];
         }
         
-        SwatchKeyword *swKwObj = [ManagedObjectUtils querySwatchKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
+        SwatchKeyword *swKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_paintSwatch.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:self.context];
+        
         if (swKwObj == nil) {
             swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
             [swKwObj setKeyword:kwObj];

@@ -41,7 +41,12 @@
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchDictNames:(NSString *)entityName context:(NSManagedObjectContext *)context;
 
-// Query methods
+// Generic query methods
+//
++ (id)queryObjectKeyword:(NSManagedObjectID *)keyword_id objId:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context;
++ (NSArray *)queryObjectKeywords:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context;
+
+// Specific query methods
 //
 + (NSMutableArray *)queryMixAssocSwatches:(NSManagedObjectID *)mix_assoc_id context:(NSManagedObjectContext *)context;
 + (NSMutableArray *)queryTapAreas:(NSManagedObjectID *)match_assoc_id context:(NSManagedObjectContext *)context;
@@ -49,8 +54,6 @@
 + (SubjectiveColor *)querySubjectiveColorByOrder:(NSNumber *)order context:(NSManagedObjectContext *)context;
 + (PaintSwatches *)queryPaintSwatches:(NSString *)swatchName context:(NSManagedObjectContext *)context;
 + (Keyword *)queryKeyword:(NSString *)keyword context:(NSManagedObjectContext *)context;
-+ (SwatchKeyword *)querySwatchKeyword:(NSManagedObjectID *)keyword_id swatchId:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
-+ (NSMutableArray *)querySwatchKeywords:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
 + (MixAssociation *)queryMixAssociation:(int)mix_assoc_id context:(NSManagedObjectContext *)context;
 + (NSMutableArray *)queryMixAssocBySwatch:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
 

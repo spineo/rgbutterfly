@@ -1814,13 +1814,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.h"
-            timestampString = "481403906.31775"
+            timestampString = "481462963.510065"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "+fetchDictNames:context:"
-            landmarkType = "4">
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "@interface ManagedObjectUtils"
+            landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
