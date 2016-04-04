@@ -93,8 +93,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-//@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *mixAssocEntity, *mixAssocSwatchEntity, *tapAreaEntity, *tapAreaSwatchEntity;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity, *keywordEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity, *keywordEntity, *matchAssocKwEntity;
 
 @end
 
@@ -128,12 +127,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Initialize the PaintSwatch entity
     //
-    _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"      inManagedObjectContext:self.context];
-    _matchAssocEntity     = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:self.context];
-//    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
-    _tapAreaEntity        = [NSEntityDescription entityForName:@"TapArea"          inManagedObjectContext:self.context];
-    _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"    inManagedObjectContext:self.context];
-    _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"          inManagedObjectContext:self.context];
+    _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"       inManagedObjectContext:self.context];
+    _matchAssocEntity     = [NSEntityDescription entityForName:@"MatchAssociation"  inManagedObjectContext:self.context];
+    _tapAreaEntity        = [NSEntityDescription entityForName:@"TapArea"           inManagedObjectContext:self.context];
+    _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"     inManagedObjectContext:self.context];
+    _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"           inManagedObjectContext:self.context];
+    _matchAssocKwEntity   = [NSEntityDescription entityForName:@"MatchAssocKeyword" inManagedObjectContext:self.context];
     
 
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
@@ -459,7 +458,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
         if (_matchAssociation != nil) {
-            [matchNameTextField setText:_matchAssociation.name];
+            [matchNameTextField setText:[_matchAssociation name]];
         } else {
             [matchNameTextField setPlaceholder: NSLocalizedString(@"Match name.", nil)];
         }
@@ -470,7 +469,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchKeywTextField) {
         if (_matchAssociation != nil) {
-            [matchKeywTextField setText:_matchAssociation.name];
+            NSSet *matchAssocKeywords = _matchAssociation.match_assoc_keyword;
+            NSMutableArray *keywords = [[NSMutableArray alloc] init];
+            for (MatchAssocKeyword *match_assoc_keyword in matchAssocKeywords) {
+                Keyword *keyword = match_assoc_keyword.keyword;
+                [keywords addObject:keyword.name];
+            }
+            if ([keywords count] > 0) {
+                [matchKeywTextField setText:[keywords componentsJoinedByString:@", "]];
+            } else {
+                [matchKeywTextField setPlaceholder: NSLocalizedString(@"Comma-separated keywords.", nil)];
+            }
         } else {
             [matchKeywTextField setPlaceholder: NSLocalizedString(@"Comma-separated keywords.", nil)];
         }
@@ -481,7 +490,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
         if (_matchAssociation != nil) {
-            [matchDescTextField setText:_matchAssociation.desc];
+            [matchDescTextField setText:[_matchAssociation desc]];
         } else {
             [matchDescTextField setPlaceholder: NSLocalizedString(@"Match description.", nil)];
         }
@@ -1696,10 +1705,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _matchName = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:0]).text;
         
     } else if (textField.tag == MATCH_KEYW_TAG) {
-        _matchKeyw = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:0]).text;
+        _matchKeyw = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:1]).text;
 
     } else if (textField.tag == MATCH_DESC_TAG) {
-        _matchDesc = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:1]).text;
+        _matchDesc = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:2]).text;
     }
 }
 
@@ -1922,6 +1931,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
         
+    } else if ([_matchKeyw length] > MAX_KEYW_LEN) {
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        return FALSE;
+        
     } else if ([_matchDesc length] > MAX_DESC_LEN) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
@@ -1959,8 +1973,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Add keywords
     //
     NSMutableArray *keywords = [GenericUtils trimStrings:[_matchKeyw componentsSeparatedByString:@","]];
-    
-   
+
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {
             continue;
@@ -1971,18 +1984,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
             [kwObj setName:keyword];
         }
+
+        MatchAssocKeyword *matchAssocKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_matchAssociation.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:self.context];
         
-        //MatchAssocKeyword *matchAssocKwObj = [ManagedObjectUtils queryMatchAssocKeyword:kwObj.objectID swatchId:_paintSwatch.objectID context:self.context];
-        MatchAssocKeyword *matchAssocKwObj = (MatchAssocKeyword *)[ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_matchAssociation.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:self.context];
-        
-//        if (swKwObj == nil) {
-//            swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
-//            [swKwObj setKeyword:kwObj];
-//            [swKwObj setPaint_swatch:(PaintSwatch *)_paintSwatch];
-//            
-//            [_paintSwatch addSwatch_keywordObject:swKwObj];
-//            [kwObj addSwatch_keywordObject:swKwObj];
-//        }
+        if (matchAssocKwObj == nil) {
+            matchAssocKwObj = [[MatchAssocKeyword alloc] initWithEntity:_matchAssocKwEntity insertIntoManagedObjectContext:self.context];
+            [matchAssocKwObj setKeyword:kwObj];
+            [matchAssocKwObj setMatch_association:_matchAssociation];
+            
+            [_matchAssociation addMatch_assoc_keywordObject:matchAssocKwObj];
+            [kwObj addMatch_assoc_keywordObject:matchAssocKwObj];
+        }
     }
 
     
