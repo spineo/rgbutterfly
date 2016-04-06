@@ -200,7 +200,7 @@
                                 <action selector="goBack:" destination="6Nq-8K-N9m" id="Scg-Ua-ntJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="57" enabled="NO" title="Edit" id="pzx-mR-o6R">
+                        <barButtonItem key="rightBarButtonItem" tag="57" enabled="NO" title="Save" id="pzx-mR-o6R">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="editMatchAlertShow:" destination="6Nq-8K-N9m" id="yDP-YI-ABK"/>
@@ -683,9 +683,9 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x4f-Hg-Dtd"/>
-        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="x4f-Hg-Dtd"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -37,6 +37,10 @@
     return [self createOkAlert: NO_VALUE message: NO_VALUE_MSG];
 }
 
++ (UIAlertController *)noSaveAlert {
+    return [self createOkAlert: NO_SAVE message: NO_SAVE_MSG];
+}
+
 + (UIAlertController *)sizeLimitAlert:(int)size {
     return [self createOkAlert: SIZE_LIMIT message: [[NSString alloc] initWithFormat: SIZE_LIMIT_MSG, size]];
 }

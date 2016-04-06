@@ -119,6 +119,9 @@ const int MAX_DESC_LEN = 128;
 NSString * const NO_VALUE         = @"No Value";
 NSString * const NO_VALUE_MSG     = @"Please enter a value for this field.";
 
+NSString * const NO_SAVE          = @"Not Saved";
+NSString * const NO_SAVE_MSG      = @"Please save first.";
+
 NSString * const SIZE_LIMIT       = @"Size Limit";
 NSString * const SIZE_LIMIT_MSG   = @"Value entered has reached the size limit of %i for this field.";
 

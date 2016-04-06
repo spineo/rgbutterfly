@@ -15,6 +15,8 @@
 
 + (UIAlertController *)noValueAlert;
 
++ (UIAlertController *)noSaveAlert;
+
 + (UIAlertController *)sizeLimitAlert:(int)size;
 
 + (UIAlertController *)rowLimitAlert:(int)size;

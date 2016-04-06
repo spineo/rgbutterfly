@@ -124,16 +124,16 @@
         <element name="Keyword" positionX="-506" positionY="491" width="128" height="118"/>
         <element name="MatchAlgorithm" positionX="-801" positionY="-153" width="128" height="73"/>
         <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="148"/>
+        <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="73"/>
         <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="148"/>
+        <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="73"/>
         <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="88"/>
         <element name="PaintSwatch" positionX="-128" positionY="-198" width="128" height="478"/>
         <element name="PaintSwatchType" positionX="16" positionY="152" width="128" height="73"/>
         <element name="SubjectiveColor" positionX="16" positionY="270" width="128" height="88"/>
         <element name="SwatchKeyword" positionX="-353" positionY="360" width="128" height="73"/>
-        <element name="TapArea" positionX="-578" positionY="-180" width="128" height="208"/>
+        <element name="TapArea" positionX="-578" positionY="-180" width="128" height="210"/>
         <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="73"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="88"/>
-        <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="73"/>
-        <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="73"/>
     </elements>
 </model>

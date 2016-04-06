@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PaintSwatches.h"
+#import "TapArea.h"
 
 //@interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
 @interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
@@ -16,5 +17,6 @@
 @property (nonatomic) int currTapSection, matchAlgIndex, maxMatchNum;
 @property (nonatomic, strong) UIImage *referenceImage;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches;
+@property (nonatomic, strong) TapArea *tapArea;
 
 @end

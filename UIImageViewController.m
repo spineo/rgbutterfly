@@ -75,7 +75,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, isRGB;
+@property (nonatomic) BOOL saveFlag, isRGB, tapAreasChanged;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 @property (nonatomic, strong) UITextField *matchNumTextField;
@@ -141,8 +141,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Keep track of the PaintSwatches count
     //
     _paintSwatchCount = 0;
-
     
+    // Keep track of any changes to the TapAreas'
+    //
+    _tapAreasChanged  = FALSE;
+
+
     // Existing MatchAssociation
     //
     if (_matchAssociation != nil) {
@@ -1037,6 +1041,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)respondToTap:(id)sender {
 
     _touchPoint = [sender locationInView:_imageView];
+    
+    _tapAreasChanged = TRUE;
 
     [self drawTouchShape];
     
@@ -1575,7 +1581,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         //[headerLabel setTextAlignment: NSTextAlignmentCenter];
         if (_currTapSection > 0) {
-            [headerLabel setText:[[NSString alloc] initWithFormat:@"Match Type Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]]];
+            [headerLabel setText:[[NSString alloc] initWithFormat:@"Def. Match Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]]];
         }
         
         [headerLabel setTextAlignment:NSTextAlignmentLeft];
@@ -1736,7 +1742,16 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)sortTapSection:(PaintSwatches *)refObj tapSection:(int)tapSection {
     
-    _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    // If MatchAssociation exists (or has already been saved) then get the actual Match Algorithm or manual override
+    //
+    int matchAlgValue = _matchAlgIndex;
+    if (_matchAssociation != nil) {
+        int tapAreaIndex = tapSection - 1;
+        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapAreaIndex];
+        matchAlgValue = [tapArea.match_algorithm_id intValue];
+    }
+    
+    _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];
@@ -2082,6 +2097,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     } else {
         NSLog(@"MatchAssociation and relations save successful");
         
+        _tapAreasChanged = FALSE;
+        
         // Update the title
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_matchName];
@@ -2146,6 +2163,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     } else {
         NSLog(@"MatchAssociation and relations delete successful");
         
+        _tapAreasChanged = FALSE;
+        
         // Update the title
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
@@ -2184,19 +2203,28 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
         
     } else if ([[segue identifier] isEqualToString:@"MatchTableViewSegue"]) {
-        PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:_currSelectedSection] objectAtIndex:0];
         
-        UINavigationController *navigationViewController = [segue destinationViewController];
-        MatchTableViewController *matchTableViewController = (MatchTableViewController *)([navigationViewController viewControllers][0]);
-        
-        [matchTableViewController setSelPaintSwatch:paintSwatch];
-        
-        int currTapSection = _currTapSection - _currSelectedSection;
-        [matchTableViewController setCurrTapSection:currTapSection];
-        [matchTableViewController setReferenceImage:_referenceTappedImage];
-        [matchTableViewController setMatchAlgIndex:_matchAlgIndex];
-        [matchTableViewController setMaxMatchNum:_maxMatchNum];
-        [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+        // Save the MatchAssociation first
+        //
+        if (_matchAssociation == nil || _tapAreasChanged == TRUE) {
+            UIAlertController *myAlert = [AlertUtils noSaveAlert];
+            [self presentViewController:myAlert animated:YES completion:nil];
+
+        } else {
+            PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:_currSelectedSection] objectAtIndex:0];
+            
+            UINavigationController *navigationViewController = [segue destinationViewController];
+            MatchTableViewController *matchTableViewController = (MatchTableViewController *)([navigationViewController viewControllers][0]);
+            
+            [matchTableViewController setSelPaintSwatch:paintSwatch];
+            
+            int currTapSection = _currTapSection - _currSelectedSection;
+            [matchTableViewController setCurrTapSection:currTapSection];
+            [matchTableViewController setReferenceImage:_referenceTappedImage];
+            [matchTableViewController setMatchAlgIndex:_matchAlgIndex];
+            [matchTableViewController setMaxMatchNum:_maxMatchNum];
+            [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+        }
 
     } else {
         NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);

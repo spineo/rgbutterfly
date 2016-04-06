@@ -124,6 +124,8 @@ extern const int MAX_DESC_LEN;
 //
 extern NSString * const NO_VALUE;
 extern NSString * const NO_VALUE_MSG;
+extern NSString * const NO_SAVE;
+extern NSString * const NO_SAVE_MSG;
 extern NSString * const SIZE_LIMIT;
 extern NSString * const SIZE_LIMIT_MSG;
 extern NSString * const ROW_LIMIT;
