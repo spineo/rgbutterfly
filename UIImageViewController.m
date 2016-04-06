@@ -143,16 +143,26 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     _paintSwatchCount = 0;
 
     
-    // Get/save NSUserDefaults handle
+    // Existing MatchAssociation
     //
-    _userDefaults = [NSUserDefaults standardUserDefaults];
-    _maxMatchNumKey = @"MaxMatchNum";
-    _maxMatchNum = (int)[_userDefaults integerForKey:_maxMatchNumKey];
-    if (! _maxMatchNum) {
-        _maxMatchNum = DEF_MATCH_NUM;
+    if (_matchAssociation != nil) {
+        // Just get the count for the first tap area as all counts should be the same
+        //
+        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:0];
+        _maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
+    
+    // New MatchAssociation: Get/save NSUserDefaults handle
+    //
+    } else {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+        _maxMatchNumKey = @"MaxMatchNum";
+        _maxMatchNum = (int)[_userDefaults integerForKey:_maxMatchNumKey];
+        if (! _maxMatchNum) {
+            _maxMatchNum = DEF_MATCH_NUM;
+        }
+        [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
+        [_userDefaults synchronize];
     }
-    [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
-    [_userDefaults synchronize];
     
     // To contain the tap areas associated with the match functionality
     //
@@ -163,7 +173,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     _dbPaintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
     _dbSwatchesCount = (int)[_dbPaintSwatches count];
     
-    _maxRowLimit = (_dbSwatchesCount > DEF_MAX_MATCH) ? DEF_MAX_MATCH : _dbSwatchesCount;
+    _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
 
     _defScrollViewOrigin = _imageScrollView.bounds.origin;
     _defScrollViewSize   = _imageScrollView.bounds.size;
@@ -452,7 +462,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Edit button Alert Controller
     //
     _editButtonAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
-                                                      message:@"Please enter the information below:"
+                                                      message:@"Enter/Update Match Name, Keyword(s), and/or Description:"
                                                preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *editButtonAlertController_ = _editButtonAlertController;
     
