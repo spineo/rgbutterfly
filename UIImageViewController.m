@@ -1745,10 +1745,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // If MatchAssociation exists (or has already been saved) then get the actual Match Algorithm or manual override
     //
     int matchAlgValue = _matchAlgIndex;
+    int tapIndex = tapSection - 1;
     if (_matchAssociation != nil) {
-        int tapAreaIndex = tapSection - 1;
-        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapAreaIndex];
-        matchAlgValue = [tapArea.match_algorithm_id intValue];
+        NSArray *tapAreaObjects = [_matchAssociation.tap_area allObjects];
+        if ([tapAreaObjects count] >= tapSection) {
+            TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+            matchAlgValue = [tapArea.match_algorithm_id intValue];
+        }
     }
     
     _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
@@ -1757,7 +1760,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_tapNumberArray removeLastObject];
     }
     
-    int tapIndex = tapSection - 1;
     if (tapIndex >= 0) {
         [_tapNumberArray setObject:_compPaintSwatches atIndexedSubscript:tapIndex];
 
