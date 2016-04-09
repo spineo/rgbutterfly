@@ -2042,7 +2042,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         //
         TapArea *tapArea;
         if (tapAreaRef.tap_area == nil) {
-            NSString *tapAreaName = [[NSString alloc] initWithFormat:@"Tap Area %i", tap_order];
+            NSString *tapAreaName = [[NSString alloc] initWithFormat:@"%@ Tap Area Swatch", _matchName];
             [tapAreaRef setName:tapAreaName];
             
             tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
@@ -2051,7 +2051,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
             [tapArea setCoord_pt:tapAreaRef.coord_pt];
             [tapArea setMatch_association:_matchAssociation];
-            [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area %i", _matchName, tap_order]];
+            [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area", _matchName]];
             [tapArea setTap_area_match:tapAreaRef];
             [tapAreaRef setTap_area:tapArea];
 
@@ -2059,6 +2059,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
         } else {
             tapArea = tapAreaRef.tap_area;
+            [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
         }
         
         // Remove existing TapAreaSwatch elements (will add them back in)
@@ -2111,6 +2112,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
     if (paintSwatch.tap_area != nil) {
         TapArea *tapArea = paintSwatch.tap_area;
+        [_matchAssociation removeTap_areaObject:tapArea];
         [self.context deleteObject:tapArea];
     }
     [self.context deleteObject:paintSwatch];
@@ -2119,6 +2121,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)deleteMatchAssociation {
 
     if (_matchAssociation != nil) {
+        
+        // Delete TapAreas, TapAreaSwatches, and any references to them
+        //
         for (int i=0; i<[self.collectionMatchArray count];i++) {
             NSMutableArray *swatches = [self.collectionMatchArray objectAtIndex:i];
             
@@ -2147,6 +2152,18 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             // Delete the associated PaintSwatch
             //
             [self.context deleteObject:tapAreaRef];
+        }
+        
+        // Delete any MatchAssociation keywords
+        //
+        if (_matchAssociation.match_assoc_keyword != nil) {
+            NSArray *matchAssocKeywords = [_matchAssociation.match_assoc_keyword allObjects];
+            for (MatchAssocKeyword *matchAssocKwObj in matchAssocKeywords) {
+                Keyword *kwObj = matchAssocKwObj.keyword;
+                [kwObj removeMatch_assoc_keywordObject:matchAssocKwObj];
+                [_matchAssociation removeMatch_assoc_keywordObject:matchAssocKwObj];
+                [self.context deleteObject:matchAssocKwObj];
+            }
         }
         
         // Delete the MatchAssociation
