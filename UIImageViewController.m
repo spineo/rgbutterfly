@@ -44,7 +44,7 @@
 @property (nonatomic, strong) GlobalSettings *globalSettings;
 @property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchKeyw, *matchDesc;
 
-@property (nonatomic, strong) UIAlertController *typeAlertController, *editButtonAlertController, *deleteTapsAlertController;
+@property (nonatomic, strong) UIAlertController *typeAlertController, *editButtonAlertController, *deleteTapsAlertController, *updateAlertController;
 @property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
 
 @property (nonatomic, strong) UIAlertView *tapAreaAlertView;
@@ -461,16 +461,54 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [deleteTapsAlertController_ addAction:_deleteTapsCancel];
     
     
+    // Edit Button Alert Controller
+    //
+    _editButtonAlertController = [UIAlertController alertControllerWithTitle:@"Match Association Edit"
+                                                             message:@"Please select operation"
+                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *alertUpdate = [UIAlertAction actionWithTitle:@"Update" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+        [self presentViewController:_updateAlertController animated:YES completion:nil];
+    }];
+    
+    UIAlertAction *alertSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        if (_matchAssociation != nil) {
+            _matchName = _matchAssociation.name;
+            if ([_matchName isEqualToString:@""] || _matchName == nil) {
+                [self updateMatchAssoc];
+                
+            } else {
+                [self saveMatchAssoc];
+            }
+            
+        } else {
+            [self updateMatchAssoc];
+        }
+    }];
+    
+    UIAlertAction *alertDelete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self presentViewController:_deleteTapsAlertController animated:YES completion:nil];
+    }];
+    
+    UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_editButtonAlertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+
+    [_editButtonAlertController addAction:alertUpdate];
+    [_editButtonAlertController addAction:alertSave];
+    [_editButtonAlertController addAction:alertDelete];
+    [_editButtonAlertController addAction:alertCancel];
+    
     
     
     // Edit button Alert Controller
     //
-    _editButtonAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
+    _updateAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
                                                       message:@"Enter/Update Match Name, Keyword(s), and/or Description:"
                                                preferredStyle:UIAlertControllerStyleAlert];
-    __weak UIAlertController *editButtonAlertController_ = _editButtonAlertController;
+    __weak UIAlertController *updateAlertController_ = _updateAlertController;
     
-    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
+    [updateAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchNameTextField) {
         if (_matchAssociation != nil) {
             [matchNameTextField setText:[_matchAssociation name]];
         } else {
@@ -481,7 +519,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [matchNameTextField setDelegate: self];
     }];
     
-    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchKeywTextField) {
+    [updateAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchKeywTextField) {
         if (_matchAssociation != nil) {
             NSSet *matchAssocKeywords = _matchAssociation.match_assoc_keyword;
             NSMutableArray *keywords = [[NSMutableArray alloc] init];
@@ -502,7 +540,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [matchKeywTextField setDelegate: self];
     }];
 
-    [editButtonAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
+    [updateAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
         if (_matchAssociation != nil) {
             [matchDescTextField setText:[_matchAssociation desc]];
         } else {
@@ -519,11 +557,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     }];
     
     _matchAssocFieldsCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        [editButtonAlertController_ dismissViewControllerAnimated:YES completion:nil];
+        [updateAlertController_ dismissViewControllerAnimated:YES completion:nil];
     }];
 
-    [editButtonAlertController_ addAction:_matchAssocFieldsSave];
-    [editButtonAlertController_ addAction:_matchAssocFieldsCancel];
+    [updateAlertController_ addAction:_matchAssocFieldsSave];
+    [updateAlertController_ addAction:_matchAssocFieldsCancel];
     
     
     // Adjust the NavBar layout when the orientation changes
@@ -1718,13 +1756,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_matchNumStepper setValue:(double)_maxMatchNum];
 
     } else if (textField.tag == MATCH_NAME_TAG) {
-        _matchName = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:0]).text;
+        _matchName = ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text;
         
     } else if (textField.tag == MATCH_KEYW_TAG) {
-        _matchKeyw = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:1]).text;
+        _matchKeyw = ((UITextField *)[_updateAlertController.textFields objectAtIndex:1]).text;
 
     } else if (textField.tag == MATCH_DESC_TAG) {
-        _matchDesc = ((UITextField *)[_editButtonAlertController.textFields objectAtIndex:2]).text;
+        _matchDesc = ((UITextField *)[_updateAlertController.textFields objectAtIndex:2]).text;
     }
 }
 
@@ -2023,8 +2061,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [kwObj addMatch_assoc_keywordObject:matchAssocKwObj];
         }
     }
+    [self saveMatchAssoc];
+    
+    return TRUE;
+}
 
     
+- (void)saveMatchAssoc {
+
     // Add the TapAreas, TapAreaSwatches, and PaintSwatches
     //
     for (int i=0; i<[self.collectionMatchArray count];i++) {
@@ -2106,7 +2150,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_matchName];
     }
-    return TRUE;
 }
 
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
