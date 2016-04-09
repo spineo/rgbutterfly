@@ -475,14 +475,15 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         if (_matchAssociation != nil) {
             _matchName = _matchAssociation.name;
             if ([_matchName isEqualToString:@""] || _matchName == nil) {
-                [self updateMatchAssoc];
+                [self presentViewController:_updateAlertController animated:YES completion:nil];
                 
             } else {
                 [self saveMatchAssoc];
             }
             
         } else {
-            [self updateMatchAssoc];
+            [self presentViewController:_updateAlertController animated:YES completion:nil];
+            
         }
     }];
     
