@@ -142,6 +142,16 @@ const int IMAGE_TAG  = 6;
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
+    
+    // Initialize
+    //
+    // Override the default Algorithm index?
+    //
+    _matchAlgIndex = [_tapArea.match_algorithm_id intValue];
+    _nameEntered   = _tapArea.name;
+    _descEntered   = _tapArea.desc;
+
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
 }
@@ -533,15 +543,15 @@ const int IMAGE_TAG  = 6;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField.tag == NAME_FIELD_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert:MAX_NAME_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert:MAX_KEYW_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert:MAX_DESC_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else {
@@ -686,6 +696,25 @@ const int IMAGE_TAG  = 6;
 
 
 - (IBAction)save:(id)sender {
+    [_tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
+    
+    // Ensure that this value is not empty or nil
+    //
+    if (![_nameEntered isEqualToString:@""] && _nameEntered != nil) {
+        [_tapArea setName:_nameEntered];
+    }
+    
+    [_tapArea setDesc:_descEntered];
+    
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"TapArea save" message:@"Error saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        
+    } else {
+        NSLog(@"TapArea save successful");
+    }
 }
 
 

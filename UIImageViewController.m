@@ -2287,6 +2287,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [matchTableViewController setMatchAlgIndex:_matchAlgIndex];
             [matchTableViewController setMaxMatchNum:_maxMatchNum];
             [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+            
+            int tapIndex = currTapSection - 1;
+            TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+            [matchTableViewController setTapArea:tapArea];
         }
 
     } else {
