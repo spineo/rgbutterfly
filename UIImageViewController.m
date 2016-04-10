@@ -138,6 +138,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width: HIDE_BUTTON_WIDTH];
     
+    
+    // We also want to change this initial behaviour (see #B59) with the default MatchCount and AlgorithmId
+    // not able to be changed in this controller. These defaults can be changed in the settings for unsaved
+    // MatchAssociations and in the Match TVC for individual tap areas
+    
+    
     // Keep track of the PaintSwatches count
     //
     _paintSwatchCount = 0;
@@ -595,7 +601,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                                 target: self
                                                                 action: @selector(selectMatchAction)];
                                                 
-                                                [matchButton setTintColor: LIGHT_TEXT_COLOR];
+                                                [matchButton setTintColor:LIGHT_TEXT_COLOR];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
                                                 [items replaceObjectAtIndex:3 withObject:matchButton];
@@ -784,12 +790,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)matchButtonsShow {
     [self.navigationItem.rightBarButtonItem setEnabled: TRUE];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width: DECR_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width: INCR_BUTTON_WIDTH];
+//    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
+//    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
+//    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
+//    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
+//    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width: DECR_BUTTON_WIDTH];
+//    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width: INCR_BUTTON_WIDTH];
 }
 
 - (void)matchButtonsHide {
@@ -962,11 +968,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [_imageTableView setHidden:FALSE];
             [_imageScrollView setHidden:FALSE];
             
-            if (_currTapSection > 0) {
-                [self matchButtonsShow];
-            } else {
-                [self matchButtonsHide];
-            }
+//            if (_currTapSection > 0) {
+//                [self matchButtonsShow];
+//            } else {
+//                [self matchButtonsHide];
+//            }
             
             [self removeUpArrow];
             
@@ -981,7 +987,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [_imageTableView setHidden:FALSE];
             [_imageScrollView setHidden:TRUE];
             
-            [self matchButtonsShow];
+            //[self matchButtonsShow];
         }
         
     // Landscape
@@ -998,7 +1004,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_imageTableView setHidden:FALSE];
         [_imageScrollView setHidden:TRUE];
         
-        [self matchButtonsShow];
+        //[self matchButtonsShow];
         
         [self removeUpArrow];
     }
@@ -1018,17 +1024,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             self.tableHeightConstraint.constant =  _defTableViewSize.height;
             [_imageTableView setHidden:FALSE];
             
-            if (_currTapSection > 0) {
-                [self matchButtonsShow];
-            } else {
-                [self matchButtonsHide];
-            }
+//            if (_currTapSection > 0) {
+//                [self matchButtonsShow];
+//            } else {
+//                [self matchButtonsHide];
+//            }
             
         } else if (_imageViewSize == 1) {
             _imageViewSize = 2;
             self.tableHeightConstraint.constant =  0.0;
             [_imageTableView setHidden:TRUE];
-            [self matchButtonsHide];
+            //[self matchButtonsHide];
             
             [self addUpArrow];
         }
@@ -1039,7 +1045,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _imageViewSize = 2;
         self.tableHeightConstraint.constant =  0.0;
         [_imageTableView setHidden:TRUE];
-        [self matchButtonsHide];
+        //[self matchButtonsHide];
         
         [self removeUpArrow];
         [self addUpArrow];
@@ -1228,7 +1234,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Disable view and algorithm buttons
         //
         [self viewButtonHide];
-        [self matchButtonsHide];
+        //[self matchButtonsHide];
         
         _imageTableView.hidden = true;
     
@@ -2150,6 +2156,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Update the title
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_matchName];
+        
+        // Disable the Match/Assoc toggle (no reason to switch back)
+        //
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -2310,7 +2320,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     if ([_paintSwatches count] == 0) {
         [self viewButtonHide];
-        [self matchButtonsHide];
+        //[self matchButtonsHide];
     }
     
     [self drawTapAreas];
