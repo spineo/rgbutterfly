@@ -155,24 +155,24 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     // Existing MatchAssociation
     //
-    if (_matchAssociation != nil) {
-        // Just get the count for the first tap area as all counts should be the same
-        //
-        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:0];
-        _maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
-    
-    // New MatchAssociation: Get/save NSUserDefaults handle
-    //
-    } else {
-        _userDefaults = [NSUserDefaults standardUserDefaults];
-        _maxMatchNumKey = @"MaxMatchNum";
-        _maxMatchNum = (int)[_userDefaults integerForKey:_maxMatchNumKey];
-        if (! _maxMatchNum) {
-            _maxMatchNum = DEF_MATCH_NUM;
-        }
-        [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
-        [_userDefaults synchronize];
+//    if (_matchAssociation != nil) {
+//        // Just get the count for the first tap area as all counts should be the same
+//        //
+//        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:0];
+//        _maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
+//    
+//    // New MatchAssociation: Get/save NSUserDefaults handle
+//    //
+//    } else {
+    _userDefaults = [NSUserDefaults standardUserDefaults];
+    _maxMatchNumKey = @"MaxMatchNum";
+    _maxMatchNum = (int)[_userDefaults integerForKey:_maxMatchNumKey];
+    if (! _maxMatchNum) {
+        _maxMatchNum = DEF_MATCH_NUM;
     }
+    [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
+    [_userDefaults synchronize];
+//    };
     
     // To contain the tap areas associated with the match functionality
     //
@@ -447,7 +447,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Clear taps Alert Controller
     //
     _deleteTapsAlertController = [UIAlertController alertControllerWithTitle:@"Delete Tapped Areas"
-                                                                     message:@"Are you sure you want to delete all tapped areas?"
+                                                                     message:@"Are you sure you want to delete this association?"
                                                               preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *deleteTapsAlertController_ = _deleteTapsAlertController;
     
@@ -1565,7 +1565,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         
-        [custCell setBackgroundColor: DARK_BG_COLOR];
+        [custCell setBackgroundColor:DARK_BG_COLOR];
         
         [custCell setNoLabelLayout];
         
@@ -1791,15 +1791,24 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     int matchAlgValue = _matchAlgIndex;
     int tapIndex = tapSection - 1;
+    
+    // Default
+    //
+    int maxMatchNum = _maxMatchNum;
+    
     if (_matchAssociation != nil) {
         NSArray *tapAreaObjects = [_matchAssociation.tap_area allObjects];
         if ([tapAreaObjects count] >= tapSection) {
             TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
             matchAlgValue = [tapArea.match_algorithm_id intValue];
+            
+            // Get the existing match count
+            //
+            maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
         }
     }
     
-    _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];

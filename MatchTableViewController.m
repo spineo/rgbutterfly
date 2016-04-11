@@ -18,6 +18,11 @@
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 
+// NSManagedObject
+//
+#import "TapAreaSwatch.h"
+#import "PaintSwatches.h"
+
 
 @interface MatchTableViewController ()
 
@@ -42,7 +47,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *tapAreaSwatchEntity;
 
 @end
 
@@ -82,7 +87,8 @@ const int IMAGE_TAG  = 6;
     
     // Initialize the PaintSwatch entity
     //
-    _paintSwatchEntity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:self.context];
+    _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"   inManagedObjectContext:self.context];
+    _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch" inManagedObjectContext:self.context];
     
     
     _isRGB    = FALSE;
@@ -705,6 +711,47 @@ const int IMAGE_TAG  = 6;
     }
     
     [_tapArea setDesc:_descEntered];
+    
+    NSArray *tapAreaSwatches = [_tapArea.tap_area_swatch allObjects];
+    int curr_swatch_ct  = (int)[tapAreaSwatches count];
+    int match_swatch_ct = (int)[_matchedSwatches count] - 1;
+    
+    NSLog(@"CURR=%i, MATCH (ADD/RM)=%i", curr_swatch_ct, match_swatch_ct);
+    
+    // Lop off swatches (if needed)
+    //
+    int swatch_ct = curr_swatch_ct;
+    
+    for (int i=swatch_ct-1; i>=match_swatch_ct; i--) {
+        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+        
+        [_tapArea removeTap_area_swatchObject:tapAreaSwatch];
+        [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+        [self.context deleteObject:tapAreaSwatch];
+        
+        //[tapAreaSwatches removeLastObject];
+        [_matchedSwatches removeLastObject];
+        
+        NSLog(@"REMOVING %i", i);
+    }
+    
+    // Add swatches (if needed)
+    //
+    for (int i=swatch_ct; i<match_swatch_ct; i++) {
+        PaintSwatches *paintSwatch   = [_matchedSwatches objectAtIndex:i];
+
+        TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
+        [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
+        [tapAreaSwatch setTap_area:_tapArea];
+        [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:i]];
+        
+        [_tapArea addTap_area_swatchObject:tapAreaSwatch];
+        [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
+        
+        NSLog(@"ADDING %i", swatch_ct);
+    }
+    
     
     NSError *error = nil;
     if (![self.context save:&error]) {
