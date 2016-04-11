@@ -145,6 +145,7 @@ const int IMAGE_TAG  = 6;
 
     // Match algorithms
     //
+    _maxMatchNum     = (int)[[_tapArea.tap_area_swatch allObjects] count];
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
@@ -715,8 +716,7 @@ const int IMAGE_TAG  = 6;
     NSArray *tapAreaSwatches = [_tapArea.tap_area_swatch allObjects];
     int curr_swatch_ct  = (int)[tapAreaSwatches count];
     int match_swatch_ct = (int)[_matchedSwatches count] - 1;
-    
-    NSLog(@"CURR=%i, MATCH (ADD/RM)=%i", curr_swatch_ct, match_swatch_ct);
+
     
     // Lop off swatches (if needed)
     //
@@ -729,11 +729,8 @@ const int IMAGE_TAG  = 6;
         [_tapArea removeTap_area_swatchObject:tapAreaSwatch];
         [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
         [self.context deleteObject:tapAreaSwatch];
-        
-        //[tapAreaSwatches removeLastObject];
+
         [_matchedSwatches removeLastObject];
-        
-        NSLog(@"REMOVING %i", i);
     }
     
     // Add swatches (if needed)
@@ -748,8 +745,6 @@ const int IMAGE_TAG  = 6;
         
         [_tapArea addTap_area_swatchObject:tapAreaSwatch];
         [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
-        
-        NSLog(@"ADDING %i", swatch_ct);
     }
     
     
