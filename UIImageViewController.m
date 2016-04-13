@@ -2232,24 +2232,25 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Delete the MatchAssociation
         //
         [self.context deleteObject:_matchAssociation];
-    }
+
     
-    // Commit the delete
-    //
-    NSError *error = nil;
-    if (![self.context save:&error]) {
-        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations delete" message:@"Error saving"];
-        [self presentViewController:myAlert animated:YES completion:nil];
-        
-    } else {
-        NSLog(@"MatchAssociation and relations delete successful");
-        
-        _tapAreasChanged = FALSE;
-        
-        // Update the title
+        // Commit the delete
         //
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+        NSError *error = nil;
+        if (![self.context save:&error]) {
+            NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations delete" message:@"Error saving"];
+            [self presentViewController:myAlert animated:YES completion:nil];
+            
+        } else {
+            NSLog(@"MatchAssociation and relations delete successful");
+            
+            _tapAreasChanged = FALSE;
+            
+            // Update the title
+            //
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+        }
     }
     
     // Re-initialize the view
@@ -2303,13 +2304,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             int currTapSection = _currTapSection - _currSelectedSection;
             [matchTableViewController setCurrTapSection:currTapSection];
             [matchTableViewController setReferenceImage:_referenceTappedImage];
-            [matchTableViewController setMatchAlgIndex:_matchAlgIndex];
+
             [matchTableViewController setMaxMatchNum:_maxMatchNum];
             [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
             
             int tapIndex = currTapSection - 1;
             TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
             [matchTableViewController setTapArea:tapArea];
+            [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
         }
 
     } else {

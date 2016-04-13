@@ -703,7 +703,6 @@ const int IMAGE_TAG  = 6;
 
 
 - (IBAction)save:(id)sender {
-    [_tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
     
     // Ensure that this value is not empty or nil
     //
@@ -714,39 +713,47 @@ const int IMAGE_TAG  = 6;
     [_tapArea setDesc:_descEntered];
     
     NSArray *tapAreaSwatches = [_tapArea.tap_area_swatch allObjects];
-    int curr_swatch_ct  = (int)[tapAreaSwatches count];
-    int match_swatch_ct = (int)[_matchedSwatches count] - 1;
-
     
-    // Lop off swatches (if needed)
+    // Get the currently saved values for swatch count and algorithm id
     //
-    int swatch_ct = curr_swatch_ct;
-    
-    for (int i=swatch_ct-1; i>=match_swatch_ct; i--) {
-        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-        PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
-        
-        [_tapArea removeTap_area_swatchObject:tapAreaSwatch];
-        [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
-        [self.context deleteObject:tapAreaSwatch];
+    int saved_algorithm_id = [[_tapArea match_algorithm_id] intValue];
+    int saved_swatch_count = (int)[tapAreaSwatches count];
 
-        [_matchedSwatches removeLastObject];
-    }
     
-    // Add swatches (if needed)
+    // If either of the currently saved values differ, recreate the tapAreaSwatches
     //
-    for (int i=swatch_ct; i<match_swatch_ct; i++) {
-        PaintSwatches *paintSwatch   = [_matchedSwatches objectAtIndex:i];
-
-        TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
-        [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
-        [tapAreaSwatch setTap_area:_tapArea];
-        [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:i]];
-        
-        [_tapArea addTap_area_swatchObject:tapAreaSwatch];
-        [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
-    }
+    int curr_swatch_ct = (int)[_matchedSwatches count] - 1;
+    if ((saved_algorithm_id != _matchAlgIndex) || (saved_swatch_count != curr_swatch_ct)) {
     
+        [_tapArea setMatch_algorithm_id:[NSNumber numberWithInt:_matchAlgIndex]];
+        
+        // Clear the existing tapAreaSwatches
+        //
+        for (int i=0; i<saved_swatch_count; i++) {
+            TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+            PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+
+            [_tapArea removeTap_area_swatchObject:tapAreaSwatch];
+            [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+            [self.context deleteObject:tapAreaSwatch];
+        }
+        
+        
+        // The _matchedSwatch array gets automatically recreated when the algorithm changes
+        //
+        for (int i=curr_swatch_ct; i>=1; i--) {
+            PaintSwatches *paintSwatch   = [_matchedSwatches objectAtIndex:i];
+    
+            TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
+            [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
+            [tapAreaSwatch setTap_area:_tapArea];
+            [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:i]];
+    
+            [_tapArea addTap_area_swatchObject:tapAreaSwatch];
+            [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
+        }
+    }
+
     
     NSError *error = nil;
     if (![self.context save:&error]) {
