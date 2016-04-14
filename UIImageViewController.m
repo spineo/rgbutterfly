@@ -57,7 +57,7 @@
 //
 @property (nonatomic) int imageViewSize;
 
-@property (nonatomic) CGFloat screenWidth, titleOrigin, titleWidth, rgbOrigin, rgbWidth, rectSize, rgbViewWidth, rgbViewHeight, sizePadding, imgViewOffsetX, offsetY, imageViewXOffset, imageViewWidth, imageViewHeight, headerViewYOffset, headerViewHeight, cellHeight;
+@property (nonatomic) CGFloat screenWidth, titleOrigin, titleWidth, rgbOrigin, rgbWidth, rectSize, rgbViewWidth, rgbViewHeight, sizePadding, imgViewOffsetX, offsetY, imageViewXOffset, imageViewWidth, imageViewHeight, headerViewYOffset, headerViewHeight;
 
 @property (nonatomic) CGSize defScrollViewSize, defTableViewSize;
 @property (nonatomic) CGPoint defScrollViewOrigin, defTableViewOrigin;
@@ -201,8 +201,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     _imageViewSize = 1;
 
-
-    _cellHeight         = DEF_TABLE_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
 
     if (_viewType == nil) {
         _viewType           = @"match";
@@ -1553,7 +1551,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     if (indexPath.section == 0) {
         return 0.0;
     } else {
-        //return _cellHeight;
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     }
 }
@@ -1568,11 +1565,15 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         [custCell setBackgroundColor:DARK_BG_COLOR];
         
-        [custCell setNoLabelLayout];
-        
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
-        [custCell setAssocName:@"TEST"];
+        int tapIndex = _currTapSection - (int)indexPath.row - 1;
+        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+        int match_algorithm_id = [[tapArea match_algorithm_id] intValue];
+        
+        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Match Type: %@", [_matchAlgorithms objectAtIndex:match_algorithm_id]];
+        
+        [custCell setAssocName:match_algorithm_text];
         
         NSInteger index = custCell.collectionView.tag;
         
@@ -1601,12 +1602,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 // Header sections
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (section == 0) {
-//        return DEF_TABLE_HDR_HEIGHT;
-//    } else {
-//        return 0.0;
-//    }
-    return DEF_TABLE_HDR_HEIGHT;
+    if (section == 0) {
+        return DEF_TABLE_HDR_HEIGHT;
+    } else {
+        return 0.0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
