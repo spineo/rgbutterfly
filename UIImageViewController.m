@@ -1553,7 +1553,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     if (indexPath.section == 0) {
         return 0.0;
     } else {
-        return _cellHeight;
+        //return _cellHeight;
+        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     }
 }
 
@@ -1570,6 +1571,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [custCell setNoLabelLayout];
         
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
+        
+        [custCell setAssocName:@"TEST"];
         
         NSInteger index = custCell.collectionView.tag;
         
@@ -1598,11 +1601,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 // Header sections
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return DEF_TABLE_HDR_HEIGHT;
-    } else {
-        return 0.0;
-    }
+//    if (section == 0) {
+//        return DEF_TABLE_HDR_HEIGHT;
+//    } else {
+//        return 0.0;
+//    }
+    return DEF_TABLE_HDR_HEIGHT;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

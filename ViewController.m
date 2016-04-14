@@ -442,10 +442,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ([_listingType isEqualToString:@"Mix"]) {
-        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
-    
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    if ([_listingType isEqualToString:@"Mix"] || [_listingType isEqualToString:@"Match"]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     
     } else {
@@ -698,10 +695,8 @@
     // Match
     //
     } else {
-        //TapArea *tapArea = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
-        //swatchImage = [ColorUtils renderPaint:tapArea.image_section cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue]];
     }
