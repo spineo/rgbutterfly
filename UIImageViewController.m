@@ -439,8 +439,9 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Hide the "arrow" buttons by default
     //
-    [self matchButtonsHide];
-    
+    if (_matchAssociation != nil) {
+        [self matchButtonsHide];
+    }
 
     // Clear taps Alert Controller
     //
@@ -535,10 +536,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             if ([keywords count] > 0) {
                 [matchKeywTextField setText:[keywords componentsJoinedByString:@", "]];
             } else {
-                [matchKeywTextField setPlaceholder: NSLocalizedString(@"Comma-separated keywords.", nil)];
+                [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
             }
         } else {
-            [matchKeywTextField setPlaceholder: NSLocalizedString(@"Comma-separated keywords.", nil)];
+            [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
         }
         [matchKeywTextField setTag: MATCH_KEYW_TAG];
         [matchKeywTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
@@ -788,12 +789,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)matchButtonsShow {
     [self.navigationItem.rightBarButtonItem setEnabled: TRUE];
-//    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
-//    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
-//    [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
-//    [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
-//    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width: DECR_BUTTON_WIDTH];
-//    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width: INCR_BUTTON_WIDTH];
+    if (_matchAssociation == nil) {
+        [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
+        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width:INCR_BUTTON_WIDTH];
+    }
 }
 
 - (void)matchButtonsHide {
@@ -802,8 +805,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [BarButtonUtils buttonHide:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width: HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width: HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)viewButtonShow {
@@ -843,6 +846,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                 [_imageScrollView setHidden:TRUE];
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant = frameHeight;
+                
                 [self matchButtonsShow];
                 
                 [_scrollViewUp setHidden:TRUE];
@@ -880,6 +884,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                 [_imageScrollView setHidden:TRUE];
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant = frameHeight;
+
                 [self matchButtonsShow];
                 
                 [_scrollViewUp setHidden:TRUE];
@@ -966,11 +971,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [_imageTableView setHidden:FALSE];
             [_imageScrollView setHidden:FALSE];
             
-//            if (_currTapSection > 0) {
-//                [self matchButtonsShow];
-//            } else {
-//                [self matchButtonsHide];
-//            }
+            if (_currTapSection > 0) {
+                [self matchButtonsShow];
+            } else {
+                [self matchButtonsHide];
+            }
             
             [self removeUpArrow];
             
@@ -985,7 +990,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [_imageTableView setHidden:FALSE];
             [_imageScrollView setHidden:TRUE];
             
-            //[self matchButtonsShow];
+            [self matchButtonsShow];
         }
         
     // Landscape
@@ -1002,7 +1007,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_imageTableView setHidden:FALSE];
         [_imageScrollView setHidden:TRUE];
         
-        //[self matchButtonsShow];
+        [self matchButtonsShow];
         
         [self removeUpArrow];
     }
@@ -1022,17 +1027,17 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             self.tableHeightConstraint.constant =  _defTableViewSize.height;
             [_imageTableView setHidden:FALSE];
             
-//            if (_currTapSection > 0) {
-//                [self matchButtonsShow];
-//            } else {
-//                [self matchButtonsHide];
-//            }
+            if (_currTapSection > 0) {
+                [self matchButtonsShow];
+            } else {
+                [self matchButtonsHide];
+            }
             
         } else if (_imageViewSize == 1) {
             _imageViewSize = 2;
             self.tableHeightConstraint.constant =  0.0;
             [_imageTableView setHidden:TRUE];
-            //[self matchButtonsHide];
+            [self matchButtonsHide];
             
             [self addUpArrow];
         }
@@ -1043,7 +1048,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _imageViewSize = 2;
         self.tableHeightConstraint.constant =  0.0;
         [_imageTableView setHidden:TRUE];
-        //[self matchButtonsHide];
+        [self matchButtonsHide];
         
         [self removeUpArrow];
         [self addUpArrow];
@@ -1232,7 +1237,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Disable view and algorithm buttons
         //
         [self viewButtonHide];
-        //[self matchButtonsHide];
+        [self matchButtonsHide];
         
         _imageTableView.hidden = true;
     
@@ -1268,8 +1273,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     tempImage = [self drawText:tempImage];
     
     [_imageView setImage: tempImage];
-    [_imageView.layer setMasksToBounds: YES];
-    [_imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+    [_imageView.layer setMasksToBounds:YES];
+    [_imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     
     // Set the reference image (used by the detail views)
     //
@@ -1280,7 +1285,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     UIImage *retImage = image;
     
-    for (int i=0; i<_paintSwatches.count; i++) {
+    for (int i=0; i<(int)[_paintSwatches count]; i++) {
         
         int count = i + 1;
         NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
@@ -1302,7 +1307,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
         CGRect rect = CGRectMake(x, y, image.size.width, image.size.height);
 
-        NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
+        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
 
         [countStr drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
     
@@ -1568,10 +1573,23 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         int tapIndex = _currTapSection - (int)indexPath.row - 1;
-        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
-        int match_algorithm_id = [[tapArea match_algorithm_id] intValue];
         
-        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Match Type: %@", [_matchAlgorithms objectAtIndex:match_algorithm_id]];
+        
+
+
+        int match_algorithm_id = 0;
+        int swatch_ct          = _maxMatchNum;
+        
+        int tap_obj_ct = (int)[[_matchAssociation.tap_area allObjects] count];
+        if (tapIndex < tap_obj_ct) {
+            TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+            if (tapArea != nil) {
+                match_algorithm_id = [[tapArea match_algorithm_id] intValue];
+                swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
+            }
+        }
+        
+        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Match Type: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
         
         [custCell setAssocName:match_algorithm_text];
         
@@ -2173,6 +2191,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
+        
+        [self matchButtonsHide];
     }
 }
 
@@ -2254,6 +2274,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             // Update the title
             //
             [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+            
+            [self matchButtonsHide];
         }
     }
     
@@ -2335,7 +2357,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     //
     if ([_paintSwatches count] == 0) {
         [self viewButtonHide];
-        //[self matchButtonsHide];
+        [self matchButtonsHide];
     }
     
     [self drawTapAreas];
