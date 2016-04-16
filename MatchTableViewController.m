@@ -394,14 +394,16 @@ const int IMAGE_TAG  = 6;
     }
 }
 
+// For now (perhaps even this version), disallow the manual override
+//
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == MATCH_SECTION) {
-        return YES;
-    } else {
-        return NO;
-    }
+//    if (indexPath.section == MATCH_SECTION) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+    return NO;
 }
-
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == MATCH_SECTION) {
@@ -490,7 +492,8 @@ const int IMAGE_TAG  = 6;
         headerStr = _imagesHeader;
         
     } else if (section == MATCH_SECTION) {
-        headerStr = [[NSString alloc] initWithFormat:@"%@ (Type Method: %@)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
+        int match_ct = (int)[_matchedSwatches count] - 1;
+        headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
     }
     
     return headerStr;
@@ -508,20 +511,22 @@ const int IMAGE_TAG  = 6;
 }
 */
 
+// For now (perhaps even this version), disallow the manual override
+//
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-    int fromIndex = (int)fromIndexPath.row + 1;
-    int toIndex   = (int)toIndexPath.row + 1;
-    
-    // 2 takes into account the first "swatch" item
-    //
-    if ((fromIndex != toIndex) && [_matchedSwatches count] > 2) {
-        PaintSwatches *fromSwatch = [_matchedSwatches objectAtIndex:fromIndex];
-        
-        [_matchedSwatches removeObjectAtIndex:fromIndex];
-        [_matchedSwatches insertObject:fromSwatch atIndex:toIndex];
-
-        [self.tableView reloadData];
-    }
+//    int fromIndex = (int)fromIndexPath.row + 1;
+//    int toIndex   = (int)toIndexPath.row + 1;
+//    
+//    // 2 takes into account the first "swatch" item
+//    //
+//    if ((fromIndex != toIndex) && [_matchedSwatches count] > 2) {
+//        PaintSwatches *fromSwatch = [_matchedSwatches objectAtIndex:fromIndex];
+//        
+//        [_matchedSwatches removeObjectAtIndex:fromIndex];
+//        [_matchedSwatches insertObject:fromSwatch atIndex:toIndex];
+//
+//        [self.tableView reloadData];
+//    }
 }
 
 #pragma mark - UITextField Delegate Methods
@@ -591,8 +596,6 @@ const int IMAGE_TAG  = 6;
 - (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
-
-
 
 - (UIColor *)setTextColor:(NSString *)colorName {
     

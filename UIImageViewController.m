@@ -1573,9 +1573,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         int tapIndex = _currTapSection - (int)indexPath.row - 1;
-        
-        
-
 
         int match_algorithm_id = 0;
         int swatch_ct          = _maxMatchNum;
@@ -1589,7 +1586,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             }
         }
         
-        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Match Type: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
+        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
         
         [custCell setAssocName:match_algorithm_text];
         
@@ -1648,7 +1645,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         //[headerLabel setTextAlignment: NSTextAlignmentCenter];
         if (_currTapSection > 0) {
-            [headerLabel setText:[[NSString alloc] initWithFormat:@"Def. Match Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]]];
+            //[headerLabel setText:[[NSString alloc] initWithFormat:@"Def. Match Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]]];
+            [headerLabel setText:@"Match Method and Count"];
         }
         
         [headerLabel setTextAlignment:NSTextAlignmentLeft];
