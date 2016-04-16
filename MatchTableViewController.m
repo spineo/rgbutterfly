@@ -17,11 +17,14 @@
 #import "StringObjectUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
+#import "GenericUtils.h"
 
 // NSManagedObject
 //
 #import "TapAreaSwatch.h"
 #import "PaintSwatches.h"
+#import "Keyword.h"
+#import "TapAreaKeyword.h"
 
 
 @interface MatchTableViewController ()
@@ -47,7 +50,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *tapAreaSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *tapAreaSwatchEntity, *keywordEntity, *tapAreaKeywordEntity;
 
 @end
 
@@ -87,8 +90,10 @@ const int IMAGE_TAG  = 6;
     
     // Initialize the PaintSwatch entity
     //
-    _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"   inManagedObjectContext:self.context];
-    _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch" inManagedObjectContext:self.context];
+    _paintSwatchEntity    = [NSEntityDescription entityForName:@"PaintSwatch"    inManagedObjectContext:self.context];
+    _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"  inManagedObjectContext:self.context];
+    _tapAreaKeywordEntity = [NSEntityDescription entityForName:@"TapAreaKeyword" inManagedObjectContext:self.context];
+    _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"        inManagedObjectContext:self.context];
     
     
     _isRGB    = FALSE;
@@ -157,7 +162,16 @@ const int IMAGE_TAG  = 6;
     _matchAlgIndex = [_tapArea.match_algorithm_id intValue];
     _nameEntered   = _tapArea.name;
     _descEntered   = _tapArea.desc;
-
+    
+    // Keywords
+    //
+    NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
+        Keyword *keyword = tap_area_keyword.keyword;
+        [keywords addObject:keyword.name];
+    }
+    _keywEntered = [keywords componentsJoinedByString:@", "];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
@@ -711,6 +725,38 @@ const int IMAGE_TAG  = 6;
     }
     
     [_tapArea setDesc:_descEntered];
+    
+    // Delete all tapAreaKeywords and associations first
+    //
+    [ManagedObjectUtils deleteTapAreaKeywords:_tapArea context:self.context];
+    
+    // Add keywords
+    //
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:@","]];
+    
+    for (NSString *keyword in keywords) {
+        if ([keyword isEqualToString:@""]) {
+            continue;
+        }
+        
+        Keyword *kwObj = [ManagedObjectUtils queryKeyword:keyword context:self.context];
+        if (kwObj == nil) {
+            kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
+            [kwObj setName:keyword];
+        }
+        
+        TapAreaKeyword *taKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_tapArea.objectID relationName:@"tap_area" entityName:@"TapAreaKeyword" context:self.context];
+        
+        if (taKwObj == nil) {
+            taKwObj = [[TapAreaKeyword alloc] initWithEntity:_tapAreaKeywordEntity insertIntoManagedObjectContext:self.context];
+            [taKwObj setKeyword:kwObj];
+            [taKwObj setTap_area:_tapArea];
+            
+            [_tapArea addTap_area_keywordObject:taKwObj];
+            [kwObj addTap_area_keywordObject:taKwObj];
+        }
+    }
+
     
     NSArray *tapAreaSwatches = [_tapArea.tap_area_swatch allObjects];
     

@@ -120,7 +120,7 @@ const int DETAIL_MIX_SECTION    = 5;
     _keywordEntity       = [NSEntityDescription entityForName:@"Keyword"       inManagedObjectContext:self.context];
     _swatchKeywordEntity = [NSEntityDescription entityForName:@"SwatchKeyword" inManagedObjectContext:self.context];
     
-    num_tableview_rows = (int)[_mixAssocSwatches count];
+    num_tableview_rows   = (int)[_mixAssocSwatches count];
     
     NSMutableArray *mixAssociationIds = [[NSMutableArray alloc] init];
     for (int i=0; i<num_tableview_rows; i++) {

@@ -703,6 +703,22 @@
     }
 }
 
++ (void)deleteTapAreaKeywords:(TapArea *)tapAreaObj context:(NSManagedObjectContext *)context {
+
+    NSArray *tapAreaKeywords = [self queryObjectKeywords:tapAreaObj.objectID relationName:@"tap_area" entityName:@"TapAreaKeyword" context:context];
+    
+    for (TapAreaKeyword *tapAreaKeywordObj in tapAreaKeywords) {
+        if (tapAreaKeywordObj != nil) {
+            
+            Keyword *keywordObj = tapAreaKeywordObj.keyword;
+            [keywordObj removeTap_area_keywordObject:tapAreaKeywordObj];
+            [tapAreaObj removeTap_area_keywordObject:tapAreaKeywordObj];
+            
+            [context deleteObject:tapAreaKeywordObj];
+        }
+    }
+}
+
 + (void)deleteMatchAssocKeywords:(MatchAssociations *)matchAssocObj context:(NSManagedObjectContext *)context {
     
     NSArray *matchAssocKeywords = [self queryObjectKeywords:matchAssocObj.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:context];
