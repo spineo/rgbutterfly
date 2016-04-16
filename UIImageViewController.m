@@ -2194,6 +2194,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     }
 }
 
+// Need to delete keywords
+//
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
     if (paintSwatch.tap_area != nil) {
         TapArea *tapArea = paintSwatch.tap_area;
@@ -2203,6 +2205,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     [self.context deleteObject:paintSwatch];
 }
 
+// Need to delete keywords
+//
 - (void)deleteMatchAssociation {
 
     if (_matchAssociation != nil) {
