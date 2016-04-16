@@ -1574,7 +1574,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         int tapIndex = _currTapSection - (int)indexPath.row - 1;
 
-        int match_algorithm_id = 0;
+        int match_algorithm_id = _matchAlgIndex;
         int swatch_ct          = _maxMatchNum;
         
         int tap_obj_ct = (int)[[_matchAssociation.tap_area allObjects] count];
