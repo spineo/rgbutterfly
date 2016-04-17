@@ -127,9 +127,6 @@ const int IMAGE_TAG  = 6;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     _textReturn       = FALSE;
-    _nameEntered      = @"";
-    _keywEntered      = @"";
-    _descEntered      = @"";
     
     // Offsets and Widths
     //

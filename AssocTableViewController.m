@@ -90,9 +90,20 @@ const int ASSOC_COLORS_TAG     = 4;
         _mixAssocName = _mixAssociation.name;
         _mixAssocDesc = _mixAssociation.desc;
         
+        // Keywords
+        //
+        NSSet *mixAssocKeywords = _mixAssociation.mix_assoc_keyword;
+        NSMutableArray *keywords = [[NSMutableArray alloc] init];
+        for (MixAssocKeyword *mix_assoc_keyword in mixAssocKeywords) {
+            Keyword *keyword = mix_assoc_keyword.keyword;
+            [keywords addObject:keyword.name];
+        }
+        _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
+        
     } else {
         _mixAssocName = @"";
         _mixAssocDesc = @"";
+        _mixAssocKeyw = @"";
     }
     _mixAssocKeyw = @"";
     
