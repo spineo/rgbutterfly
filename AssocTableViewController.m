@@ -855,6 +855,34 @@ const int ASSOC_COLORS_TAG     = 4;
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
     
+    // Delete/recreate the swatches
+    //
+    NSSet *mixAssocSwatchSet = [_mixAssociation mix_assoc_swatch];
+    if (mixAssocSwatchSet != nil) {
+        NSArray *mixAssocSwatchList = [mixAssocSwatchSet allObjects];
+        
+        for (int i=0; i<[mixAssocSwatchList count]; i++) {
+            MixAssocSwatch *mixAssocSwatch = [mixAssocSwatchList objectAtIndex:i];
+            PaintSwatches *paintSwatchObj = (PaintSwatches *)mixAssocSwatch.paint_swatch;
+            
+            [paintSwatchObj removeMix_assoc_swatchObject:mixAssocSwatch];
+            [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
+            
+            [self.context deleteObject:mixAssocSwatch];
+        }
+    }
+    
+    // Add swatches back in
+    //
+    for (int i=0; i<[_paintSwatches count]; i++) {
+        PaintSwatches *paintSwatchObj = [_paintSwatches objectAtIndex:i];
+        MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
+        [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatchObj];
+        [mixAssocSwatch setMix_association:_mixAssociation];
+        [paintSwatchObj addMix_assoc_swatchObject:mixAssocSwatch];
+        [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
+    }
+    
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -944,9 +972,10 @@ const int ASSOC_COLORS_TAG     = 4;
     _addPaintSwatches = _sourceViewController.addPaintSwatches;
     
     if ([_addPaintSwatches count] > 0) {
-        if (_mixAssociation == nil) {
-            _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-        }
+//        if (_mixAssociation == nil) {
+//            _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+//        }
+        [self saveData];
         
         for (int i=0; i<_addPaintSwatches.count; i++) {
             PaintSwatches *swatchObj = [_addPaintSwatches objectAtIndex:i];
@@ -955,6 +984,13 @@ const int ASSOC_COLORS_TAG     = 4;
             [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
             
             [_paintSwatches addObject:swatchObj];
+        }
+        
+        NSError *error = nil;
+        if (![self.context save:&error]) {
+            NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        } else {
+            NSLog(@"Mix assoc add successful");
         }
     }
     
