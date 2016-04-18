@@ -16,6 +16,7 @@
 #import "ManagedObjectUtils.h"
 #import "FieldUtils.h"
 #import "AlertUtils.h"
+#import "GenericUtils.h"
 
 #import "PaintSwatches.h"
 #import "MixAssocSwatch.h"
@@ -47,7 +48,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 
 @end
 
@@ -81,8 +82,10 @@ const int ASSOC_COLORS_TAG     = 4;
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
-    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
-    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"   inManagedObjectContext:self.context];
+    _mixAssocEntity        = [NSEntityDescription entityForName:@"MixAssociation"    inManagedObjectContext:self.context];
+    _mixAssocSwatchEntity  = [NSEntityDescription entityForName:@"MixAssocSwatch"    inManagedObjectContext:self.context];
+    _keywordEntity         = [NSEntityDescription entityForName:@"Keyword"           inManagedObjectContext:self.context];
+    _mixAssocKeywordEntity = [NSEntityDescription entityForName:@"MixAssocKeyword"   inManagedObjectContext:self.context];
 
     // Set the name and desc values
     //
@@ -105,7 +108,6 @@ const int ASSOC_COLORS_TAG     = 4;
         _mixAssocDesc = @"";
         _mixAssocKeyw = @"";
     }
-    _mixAssocKeyw = @"";
     
     _textReturn = FALSE;
     
@@ -863,6 +865,13 @@ const int ASSOC_COLORS_TAG     = 4;
     if (_mixAssociation == nil) {
         _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
     }
+    
+    // Add a placeholder value if missing
+    //
+    if ([_mixAssocName isEqualToString:@""]) {
+        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssociation_%i", (int)[_mixAssociation objectID]];
+    }
+
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
     
@@ -893,6 +902,38 @@ const int ASSOC_COLORS_TAG     = 4;
         [paintSwatchObj addMix_assoc_swatchObject:mixAssocSwatch];
         [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
     }
+    
+    // Delete all MixAssociation Keywords and first
+    //
+    [ManagedObjectUtils deleteMixAssocKeywords:_mixAssociation context:self.context];
+    
+    // Add keywords
+    //
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_mixAssocKeyw componentsSeparatedByString:@","]];
+    
+    for (NSString *keyword in keywords) {
+        if ([keyword isEqualToString:@""]) {
+            continue;
+        }
+        
+        Keyword *kwObj = [ManagedObjectUtils queryKeyword:keyword context:self.context];
+        if (kwObj == nil) {
+            kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
+            [kwObj setName:keyword];
+        }
+        
+        MixAssocKeyword *maKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_mixAssociation.objectID relationName:@"mix_association" entityName:@"MixAssocKeyword" context:self.context];
+        
+        if (maKwObj == nil) {
+            maKwObj = [[MixAssocKeyword alloc] initWithEntity:_mixAssocKeywordEntity insertIntoManagedObjectContext:self.context];
+            [maKwObj setKeyword:kwObj];
+            [maKwObj setMix_association:_mixAssociation];
+            
+            [_mixAssociation addMix_assoc_keywordObject:maKwObj];
+            [kwObj addMix_assoc_keywordObject:maKwObj];
+        }
+    }
+
     
     NSError *error = nil;
     if (![self.context save:&error]) {
