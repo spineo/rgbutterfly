@@ -611,7 +611,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                 //
                                                 [self viewButtonHide];
                                                 [self matchButtonsHide];
-                                                
+                                                [self editButtonDisable];
                                             }];
     
     _associateMixes = [UIAlertAction actionWithTitle:@"Associate Mixes" style:UIAlertActionStyleDefault
@@ -638,6 +638,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                 //
                                                 [self viewButtonHide];
                                                 [self matchButtonsHide];
+                                                [self editButtonDisable];
                                             }];
     
     _alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -790,40 +791,43 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)matchButtonsShow {
     [self.navigationItem.rightBarButtonItem setEnabled: TRUE];
     if (_matchAssociation == nil) {
-        [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
-        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width:INCR_BUTTON_WIDTH];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+        [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:INCR_BUTTON_WIDTH];
     }
 }
 
 - (void)matchButtonsHide {
-    [self.navigationItem.rightBarButtonItem setEnabled: FALSE];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: DECR_ALG_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: INCR_ALG_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: DECR_TAP_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+}
+
+- (void)editButtonDisable {
+    [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
 }
 
 - (void)viewButtonShow {
-   [BarButtonUtils buttonShow:self.toolbarItems refTag: VIEW_BTN_TAG];
-   [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: VIEW_BTN_TAG width: DEF_BUTTON_WIDTH];
+   [BarButtonUtils buttonShow:self.toolbarItems refTag:VIEW_BTN_TAG];
+   [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:DEF_BUTTON_WIDTH];
 }
 
 - (void)viewButtonHide {
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: VIEW_BTN_TAG width: HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 // When source view controller is 'ViewController' context
 //
 - (void)matchButtonHide {
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: MATCH_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag: MATCH_BTN_TAG width: HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:MATCH_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:MATCH_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 // ******************************************************************************
@@ -917,6 +921,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_imageTableView setHidden:TRUE];
         [_imageScrollView setHidden:FALSE];
         [self matchButtonsHide];
+        [self editButtonDisable];
         
         if (_currTapSection > 0) {
             [self viewButtonShow];
@@ -2023,16 +2028,16 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Run a series of checks first
     //
     if ([_matchName isEqualToString:@""]) {
-        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Name Missing" message:@"Setting a default value"];
         [self presentViewController:myAlert animated:YES completion:nil];
-        return FALSE;
-        
+
     } else if ([_matchName length] > MAX_NAME_LEN) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
-        
-    } else if ([_matchKeyw length] > MAX_KEYW_LEN) {
+    }
+    
+    if ([_matchKeyw length] > MAX_KEYW_LEN) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
@@ -2060,6 +2065,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     // Applies to both updates and new
     //
+    if ([_matchName isEqualToString:@""]) {
+        _matchName = [[NSString alloc] initWithFormat:@"MatchAssoc_%i", (int)[_matchAssociation objectID]];
+        ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _matchName;
+    }
+
     [_matchAssociation setName:_matchName];
     [_matchAssociation setDesc:_matchDesc];
     [_matchAssociation setLast_update:currDate];
@@ -2258,6 +2268,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Delete the MatchAssociation
         //
         [self.context deleteObject:_matchAssociation];
+        _matchAssociation = nil;
+        [self editButtonDisable];
 
     
         // Commit the delete
@@ -2360,6 +2372,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     if ([_paintSwatches count] == 0) {
         [self viewButtonHide];
         [self matchButtonsHide];
+        [self editButtonDisable];
     }
     
     [self drawTapAreas];

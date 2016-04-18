@@ -818,6 +818,14 @@ const int ASSOC_COLORS_TAG     = 4;
         
     } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
         _mixAssocDesc = textField.text;
+        
+    } else {
+        for (int i=0; i<[_paintSwatches count]; i++) {
+            int COLOR_TAG = i + ASSOC_COLORS_TAG;
+            if (textField.tag == COLOR_TAG) {
+                [[_paintSwatches objectAtIndex:i] setName:textField.text];
+            }
+        }
     }
 }
 
@@ -869,7 +877,7 @@ const int ASSOC_COLORS_TAG     = 4;
     // Add a placeholder value if missing
     //
     if ([_mixAssocName isEqualToString:@""]) {
-        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssociation_%i", (int)[_mixAssociation objectID]];
+        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssoc_%i", (int)[_mixAssociation objectID]];
     }
 
     [_mixAssociation setName:_mixAssocName];

@@ -34,23 +34,23 @@
 // The alert text set in GlobalSettings
 //
 + (UIAlertController *)noValueAlert {
-    return [self createOkAlert: NO_VALUE message: NO_VALUE_MSG];
+    return [self createOkAlert:NO_VALUE message:NO_VALUE_MSG];
 }
 
 + (UIAlertController *)noSaveAlert {
-    return [self createOkAlert: NO_SAVE message: NO_SAVE_MSG];
+    return [self createOkAlert:NO_SAVE message:NO_SAVE_MSG];
 }
 
 + (UIAlertController *)sizeLimitAlert:(int)size {
-    return [self createOkAlert: SIZE_LIMIT message: [[NSString alloc] initWithFormat: SIZE_LIMIT_MSG, size]];
+    return [self createOkAlert:SIZE_LIMIT message:[[NSString alloc] initWithFormat:SIZE_LIMIT_MSG, size]];
 }
 
 + (UIAlertController *)rowLimitAlert:(int)size {
-    return [self createOkAlert: ROW_LIMIT message: [[NSString alloc] initWithFormat: ROW_LIMIT_MSG, size]];
+    return [self createOkAlert:ROW_LIMIT message:[[NSString alloc] initWithFormat:ROW_LIMIT_MSG, size]];
 }
 
 + (UIAlertController *)valueExistsAlert {
-    return [self createOkAlert: VALUE_EXISTS message: VALUE_EXISTS_MSG];
+    return [self createOkAlert:VALUE_EXISTS message:VALUE_EXISTS_MSG];
 }
 
 @end
