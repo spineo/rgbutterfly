@@ -13,6 +13,7 @@
 
 @implementation MixAssocSwatch
 
+@dynamic mix_order;
 @dynamic mix_association;
 @dynamic paint_swatch;
 

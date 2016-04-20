@@ -42,7 +42,7 @@
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) GlobalSettings *globalSettings;
-@property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchKeyw, *matchDesc;
+@property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchKeyw, *matchDesc, *mixName;
 
 @property (nonatomic, strong) UIAlertController *typeAlertController, *matchEditAlertController, *assocEditAlertController, *deleteTapsAlertController, *updateAlertController;
 @property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
@@ -93,7 +93,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity, *keywordEntity, *matchAssocKwEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *matchAssocEntity, *tapAreaEntity, *tapAreaSwatchEntity, *keywordEntity, *matchAssocKwEntity, *mixAssocEntity, *mixAssocSwatchEntity;
 
 @end
 
@@ -133,6 +133,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     _tapAreaSwatchEntity  = [NSEntityDescription entityForName:@"TapAreaSwatch"     inManagedObjectContext:self.context];
     _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"           inManagedObjectContext:self.context];
     _matchAssocKwEntity   = [NSEntityDescription entityForName:@"MatchAssocKeyword" inManagedObjectContext:self.context];
+    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"    inManagedObjectContext:self.context];
+    _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"    inManagedObjectContext:self.context];
     
 
     [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
@@ -452,10 +454,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     _deleteTapsYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         if ([_viewType isEqualToString:@"match"]) {
-            [self deleteMatchAssociation];
+            [self deleteMatchAssoc];
             [self matchButtonsHide];
         } else {
-            [self deleteMixAssociation];
+            [self deleteMixAssoc];
             [self viewButtonHide];
         }
         [self editButtonDisable];
@@ -580,7 +582,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *assocSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            //[self saveMixAssoc];
+            [self saveMixAssoc];
     }];
     
     UIAlertAction *assocDelete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -1978,7 +1980,78 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 //
 //}
 
-- (void)deleteMixAssociation {
+- (void)saveMixAssoc {
+    NSDate *currDate = [NSDate date];
+    
+    // Add a new Mix
+    //
+    if (_mixAssociation == nil) {
+        _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
+        
+        [_mixAssociation setCreate_date:currDate];
+    }
+    
+    // Applies to both updates and new
+    //
+    if ([_mixName isEqualToString:@""] || _mixName == nil) {
+        _mixName = [[NSString alloc] initWithFormat:@"MixAssoc_%i", (int)[_mixAssociation objectID]];
+    }
+    
+    [_mixAssociation setName:_mixName];
+    [_mixAssociation setLast_update:currDate];
+    
+    
+    // First delete any outstanding MixAssocSwatch relations (we will re-create them)
+    //
+    NSSet *maSwatchSet = [_mixAssociation mix_assoc_swatch];
+    if (maSwatchSet != nil) {
+        NSArray *maSwatchList = [maSwatchSet allObjects];
+        for (MixAssocSwatch *mixAssocSwatch in maSwatchList) {
+            PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+            
+            [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
+            [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
+            [self.context deleteObject:mixAssocSwatch];
+        }
+    }
+    
+    
+    // Add the MixAssocSwatch relations
+    //
+    for (int i=0; i<[_paintSwatches count];i++) {
+
+        PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:i];
+        
+        MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
+        [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
+        [mixAssocSwatch setMix_association:_mixAssociation];
+        
+        int mix_order = i + 1;
+        [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_order]];
+        
+        [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
+        [paintSwatch addMix_assoc_swatchObject:mixAssocSwatch];
+    }
+
+    
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MixAssociation and relations save" message:@"Error saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        
+    } else {
+        NSLog(@"MixAssociation and relations save successful");
+        
+        _tapAreasChanged = FALSE;
+        
+        // Update the title
+        //
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_mixName];
+    }
+}
+
+- (void)deleteMixAssoc {
     
     if (_mixAssociation != nil) {
         NSManagedObjectID *mix_assoc_id = [_mixAssociation objectID];
@@ -2252,7 +2325,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 // Need to delete keywords
 //
-- (void)deleteMatchAssociation {
+- (void)deleteMatchAssoc {
 
     if (_matchAssociation != nil) {
         
@@ -2352,12 +2425,21 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"AssocTableViewSegue"]) {
-        UINavigationController *navigationViewController = [segue destinationViewController];
-        AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
         
-        [assocTableViewController setPaintSwatches:_paintSwatches];
-        [assocTableViewController setMixAssociation:_mixAssociation];
-        [assocTableViewController setSaveFlag:_saveFlag];
+        // Save the MixAssociation first
+        //
+        if (_mixAssociation == nil || _tapAreasChanged == TRUE) {
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
+            [self presentViewController:myAlert animated:YES completion:nil];
+            
+        } else {
+            UINavigationController *navigationViewController = [segue destinationViewController];
+            AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
+            
+            [assocTableViewController setPaintSwatches:_paintSwatches];
+            [assocTableViewController setMixAssociation:_mixAssociation];
+            [assocTableViewController setSaveFlag:_saveFlag];
+        }
 
         
     } else if ([[segue identifier] isEqualToString:@"MatchTableViewSegue"]) {
@@ -2365,7 +2447,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Save the MatchAssociation first
         //
         if (_matchAssociation == nil || _tapAreasChanged == TRUE) {
-            UIAlertController *myAlert = [AlertUtils noSaveAlert];
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
             [self presentViewController:myAlert animated:YES completion:nil];
 
         } else {
