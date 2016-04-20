@@ -203,7 +203,7 @@
                         <barButtonItem key="rightBarButtonItem" tag="57" enabled="NO" title="Edit" id="pzx-mR-o6R">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="editMatchAlertShow:" destination="6Nq-8K-N9m" id="yDP-YI-ABK"/>
+                                <action selector="editAlertShow:" destination="6Nq-8K-N9m" id="VL5-np-z3f"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
