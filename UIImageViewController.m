@@ -42,7 +42,7 @@
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) GlobalSettings *globalSettings;
-@property (nonatomic, strong) NSString *maxMatchNumKey, *matchName, *matchKeyw, *matchDesc, *mixName;
+@property (nonatomic, strong) NSString *defTitle, *maxMatchNumKey, *assocName, *matchKeyw, *matchDesc;
 
 @property (nonatomic, strong) UIAlertController *typeAlertController, *matchEditAlertController, *assocEditAlertController, *deleteTapsAlertController, *updateAlertController;
 @property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
@@ -157,15 +157,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     // Existing MatchAssociation
     //
-//    if (_matchAssociation != nil) {
-//        // Just get the count for the first tap area as all counts should be the same
-//        //
-//        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:0];
-//        _maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
-//    
-//    // New MatchAssociation: Get/save NSUserDefaults handle
-//    //
-//    } else {
     _userDefaults = [NSUserDefaults standardUserDefaults];
     _maxMatchNumKey = @"MaxMatchNum";
     _maxMatchNum = (int)[_userDefaults integerForKey:_maxMatchNumKey];
@@ -174,7 +165,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     }
     [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
     [_userDefaults synchronize];
-//    };
+
     
     // To contain the tap areas associated with the match functionality
     //
@@ -208,7 +199,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         _viewType           = @"match";
     }
     
-    [BarButtonUtils buttonHide:self.toolbarItems refTag: VIEW_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
     
     // Match algorithms
     //
@@ -483,8 +474,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     UIAlertAction *matchSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         if (_matchAssociation != nil) {
-            _matchName = [_matchAssociation name];
-            if ([_matchName isEqualToString:@""] || _matchName == nil) {
+            _assocName = [_matchAssociation name];
+            if ([_assocName isEqualToString:@""] || _assocName == nil) {
                 [self presentViewController:_updateAlertController animated:YES completion:nil];
                 
             } else {
@@ -525,7 +516,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         } else {
             [matchNameTextField setPlaceholder: NSLocalizedString(@"Match name.", nil)];
         }
-        [matchNameTextField setTag: MATCH_NAME_TAG];
+        [matchNameTextField setTag:MATCH_NAME_TAG];
         [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
         [matchNameTextField setDelegate: self];
     }];
@@ -546,7 +537,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         } else {
             [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
         }
-        [matchKeywTextField setTag: MATCH_KEYW_TAG];
+        [matchKeywTextField setTag:MATCH_KEYW_TAG];
         [matchKeywTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
         [matchKeywTextField setDelegate: self];
     }];
@@ -557,7 +548,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         } else {
             [matchDescTextField setPlaceholder: NSLocalizedString(@"Match description.", nil)];
         }
-        [matchDescTextField setTag: MATCH_DESC_TAG];
+        [matchDescTextField setTag:MATCH_DESC_TAG];
         [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
         [matchDescTextField setDelegate: self];
     }];
@@ -607,8 +598,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Navigation Item Title
     //
-    [[self.navigationItem.titleView.subviews objectAtIndex:0] setText: DEF_IMAGE_NAME];
-    [[self.navigationItem.titleView.subviews objectAtIndex:0] setColor: LIGHT_YELLOW_COLOR];
+    [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+    [[self.navigationItem.titleView.subviews objectAtIndex:0] setColor:LIGHT_YELLOW_COLOR];
     
     
     // Type Alert Controller
@@ -646,7 +637,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = @"assoc";
                                                 [self resetViews];
-//                                                [self addMixAssociation];
 
                                                 UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:@"Assoc"
                                                                 style: UIBarButtonItemStylePlain
@@ -762,10 +752,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Default label
     //
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleViewOrigin,navBarOriginY,titleLabelWidth,navBarHeight)];
-    [_titleLabel setTextColor: LIGHT_TEXT_COLOR];
+    [_titleLabel setTextColor:LIGHT_TEXT_COLOR];
     [_titleLabel setTextAlignment: NSTextAlignmentCenter];
-    [_titleLabel setBackgroundColor: CLEAR_COLOR];
-    [_titleLabel setText: DEF_IMAGE_NAME];
+    [_titleLabel setBackgroundColor:CLEAR_COLOR];
+    [_titleLabel setText:DEF_IMAGE_NAME];
     
     [_titleAndRGBView addSubview:_titleLabel];
 
@@ -776,13 +766,18 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [self setTapAreas];
     }
     
+    NSString *assocName;
     if ([_viewType isEqualToString:@"match"] && _matchAssociation != nil) {
-        // Update the title
-        //
-        NSString *matchAssocName = _matchAssociation.name;
-        if (matchAssocName != nil && ! [matchAssocName isEqualToString:@""]) {
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:matchAssocName];
-        }
+        assocName = [_matchAssociation name];
+        
+    } else if ([_viewType isEqualToString:@"assoc"] && _mixAssociation != nil) {
+        assocName = [_mixAssociation name];
+    }
+
+    // Update the title
+    //
+    if (assocName != nil && ! [assocName isEqualToString:@""]) {
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:assocName];
     }
 }
 
@@ -1825,7 +1820,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_matchNumStepper setValue:(double)_maxMatchNum];
 
     } else if (textField.tag == MATCH_NAME_TAG) {
-        _matchName = ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text;
+        _assocName = ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text;
         
     } else if (textField.tag == MATCH_KEYW_TAG) {
         _matchKeyw = ((UITextField *)[_updateAlertController.textFields objectAtIndex:1]).text;
@@ -1993,12 +1988,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Applies to both updates and new
     //
-    if ([_mixName isEqualToString:@""] || _mixName == nil) {
+    if ([_assocName isEqualToString:@""] || _assocName == nil) {
         int assoc_ct = [ManagedObjectUtils fetchCount:@"MixAssociation"];
-         _mixName = [[NSString alloc] initWithFormat:@"MixAssoc %i", assoc_ct];
+         _assocName = [[NSString alloc] initWithFormat:@"MixAssoc %i", assoc_ct];
     }
     
-    [_mixAssociation setName:_mixName];
+    [_mixAssociation setName:_assocName];
     [_mixAssociation setLast_update:currDate];
     
     
@@ -2049,7 +2044,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         // Update the title
         //
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_mixName];
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
     }
 }
 
@@ -2120,7 +2115,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 - (BOOL)existsMatchAssocName {
     
-    NSFetchedResultsController *frc = [CoreDataUtils fetchedResultsController: self.context entity: MATCH_ASSOCIATIONS sortDescriptor:@"name" predicate: [[NSString alloc] initWithFormat:@"name == '%@'", _matchName]];
+    NSFetchedResultsController *frc = [CoreDataUtils fetchedResultsController: self.context entity: MATCH_ASSOCIATIONS sortDescriptor:@"name" predicate: [[NSString alloc] initWithFormat:@"name == '%@'", _assocName]];
 
     NSArray *objects = [frc fetchedObjects];
     
@@ -2137,11 +2132,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     // Run a series of checks first
     //
-    if ([_matchName isEqualToString:@""]) {
+    if ([_assocName isEqualToString:@""]) {
         UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Name Missing" message:@"Setting a default value"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
-    } else if ([_matchName length] > MAX_NAME_LEN) {
+    } else if ([_assocName length] > MAX_NAME_LEN) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return FALSE;
@@ -2175,12 +2170,13 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
     // Applies to both updates and new
     //
-    if ([_matchName isEqualToString:@""]) {
-        _matchName = [[NSString alloc] initWithFormat:@"MatchAssoc_%i", (int)[_matchAssociation objectID]];
-        ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _matchName;
+    if ([_assocName isEqualToString:@""] || _assocName == nil) {
+        int match_ct = [ManagedObjectUtils fetchCount:@"MatchAssociation"];
+        _assocName = [[NSString alloc] initWithFormat:@"MatchAssoc %i", match_ct];
+        ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
     }
 
-    [_matchAssociation setName:_matchName];
+    [_matchAssociation setName:_assocName];
     [_matchAssociation setDesc:_matchDesc];
     [_matchAssociation setLast_update:currDate];
     
@@ -2242,7 +2238,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         //
         TapArea *tapArea;
         if (tapAreaRef.tap_area == nil) {
-            NSString *tapAreaName = [[NSString alloc] initWithFormat:@"%@ Tap Area Swatch", _matchName];
+            NSString *tapAreaName = [[NSString alloc] initWithFormat:@"%@ Tap Area Swatch", _assocName];
             [tapAreaRef setName:tapAreaName];
             
             tapArea = [[TapArea alloc] initWithEntity:_tapAreaEntity insertIntoManagedObjectContext:self.context];
@@ -2251,7 +2247,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
             [tapArea setCoord_pt:tapAreaRef.coord_pt];
             [tapArea setMatch_association:_matchAssociation];
-            [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area", _matchName]];
+            [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area", _assocName]];
             [tapArea setTap_area_match:tapAreaRef];
             [tapAreaRef setTap_area:tapArea];
 
@@ -2304,7 +2300,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         // Update the title
         //
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_matchName];
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
         
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
