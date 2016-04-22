@@ -1994,7 +1994,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Applies to both updates and new
     //
     if ([_mixName isEqualToString:@""] || _mixName == nil) {
-        _mixName = [[NSString alloc] initWithFormat:@"MixAssoc_%i", (int)[_mixAssociation objectID]];
+        int assoc_ct = [ManagedObjectUtils fetchCount:@"MixAssociation"];
+         _mixName = [[NSString alloc] initWithFormat:@"MixAssoc %i", assoc_ct];
     }
     
     [_mixAssociation setName:_mixName];
@@ -2019,13 +2020,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     // Add the MixAssocSwatch relations
     //
     for (int i=0; i<[_paintSwatches count];i++) {
-
         PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:i];
+        int mix_ct = i + 1;
+        [paintSwatch setName:[[NSString alloc] initWithFormat:@"Mix %i", mix_ct]];
         
         MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
         [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
         [mixAssocSwatch setMix_association:_mixAssociation];
-        
+
         int mix_order = i + 1;
         [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_order]];
         
