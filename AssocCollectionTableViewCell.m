@@ -40,7 +40,7 @@
 }
 
 - (void)setAssocName:(NSString *)desc {
-    UILabel *assocDesc = [FieldUtils createSmallLabel:desc xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET];
+    UILabel *assocDesc = [FieldUtils createLabel:desc xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.contentView.bounds.size.width height:DEF_LABEL_HEIGHT];
     [assocDesc setBackgroundColor: DARK_BG_COLOR];
 
     [self.contentView addSubview:assocDesc];

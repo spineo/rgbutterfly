@@ -145,7 +145,7 @@ const int ASSOC_COLORS_TAG     = 4;
 
     
     _mixTitleLabel = [[UILabel alloc] init];
-    _mixTitleLabel.text = @"Mix Association";
+    _mixTitleLabel.text = [_mixAssociation name];
     [_mixTitleLabel setBackgroundColor: CLEAR_COLOR];
     [_mixTitleLabel setTextColor: LIGHT_TEXT_COLOR];
     [_mixTitleLabel sizeToFit];

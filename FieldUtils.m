@@ -27,6 +27,19 @@
     return label;
 }
 
++ (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height {
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
+    
+    [label setText:name];
+    [label setBackgroundColor: DARK_TEXT_COLOR];
+    [label setTextColor: LIGHT_TEXT_COLOR];
+    [label setTextAlignment:NSTextAlignmentLeft];
+    [label setFont: ITALIC_FONT];
+    
+    return label;
+}
+
 + (UILabel *)createSmallLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
 
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];

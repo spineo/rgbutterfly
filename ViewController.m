@@ -463,7 +463,7 @@
         
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:indexPath.row];
         
-        NSString *mix_assoc_name = mixAssocObj.name;
+        NSString *mix_assoc_name = [mixAssocObj name];
         
         NSError *error = nil;
         
@@ -507,7 +507,7 @@
             
             MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:indexPath.row];
             
-            NSString *match_assoc_name = matchAssocObj.name;
+            NSString *match_assoc_name = [matchAssocObj name];
             
             [custCell setAssocName:match_assoc_name];
             [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
