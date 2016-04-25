@@ -26,7 +26,7 @@
 @interface AssocTableViewController ()
 
 @property (nonatomic, strong) PaintSwatches *addPaintSwatch, *selPaintSwatch;
-@property (nonatomic, strong) NSMutableArray *addPaintSwatches;
+@property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
@@ -49,6 +49,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
+@property (nonatomic, strong) NSSortDescriptor *orderSort;
 
 @end
 
@@ -103,10 +104,8 @@ const int ASSOC_COLORS_TAG     = 4;
         }
         _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
         
-    } else {
-        _mixAssocName = @"";
-        _mixAssocDesc = @"";
-        _mixAssocKeyw = @"";
+        _orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
+        _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
     }
     
     _textReturn = FALSE;
@@ -247,7 +246,6 @@ const int ASSOC_COLORS_TAG     = 4;
                                                object:nil];
 }
 
-
 - (void)viewDidRotate {
 //    AssocDescTableViewCell* cell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
 //    
@@ -255,6 +253,29 @@ const int ASSOC_COLORS_TAG     = 4;
 //    UIView *subView = (UITextView *)[cell.contentView viewWithTag:tag_num];
 //    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
 //    [cell.descField setTag:tag_num];
+}
+
+- (void)initializeFetchedResultsController {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MixAssocSwatch"];
+    
+    NSSortDescriptor *orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
+    [request setSortDescriptors:@[orderSort]];
+
+    
+    [request setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", [_mixAssociation objectID]]];
+    
+    [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:@"mix_order" cacheName:nil]];
+    
+    
+    [[self fetchedResultsController] setDelegate:self];
+    
+    NSError *error = nil;
+    
+    @try {
+        [[self fetchedResultsController] performFetch:&error];
+    } @catch (NSException *exception) {
+        NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
+    }
 }
 
 
@@ -374,7 +395,7 @@ const int ASSOC_COLORS_TAG     = 4;
         return 0;
 
     } else if (section == ASSOC_COLORS_SECTION) {
-        return [_paintSwatches count];
+        return [_mixAssocSwatches count];
         
     } else {
         return 1;
@@ -403,18 +424,24 @@ const int ASSOC_COLORS_TAG     = 4;
 
     cell.imageView.image = nil;
     
+    //[self initializeFetchedResultsController];
+    
     //    CGFloat tableViewWidth = self.tableView.bounds.size.width;
     
     // Remove the tags
     //
-    int max_tag = (int)[_paintSwatches count] + ASSOC_COLORS_TAG;
+    int max_tag = (int)[_mixAssocSwatches count] + ASSOC_COLORS_TAG;
     for (int tag=1; tag<=max_tag; tag++) {
         [[cell.contentView viewWithTag:tag] removeFromSuperview];
     }
     
     if (indexPath.section == ASSOC_COLORS_SECTION) {
+        //MixAssocSwatch *mixAssocSwatch = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:ASSOC_COLORS_SECTION]];
         
-        PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:indexPath.row];
+        
+        PaintSwatches *paintSwatch     = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
         NSString *name = [paintSwatch name];
         
         if (_isRGB == FALSE) {
@@ -483,7 +510,7 @@ const int ASSOC_COLORS_TAG     = 4;
 
     } else if (indexPath.section == ASSOC_KEYW_SECTION) {
         
-        // Create the name text field
+        // Create the keywords text field
         //
         UITextField *refName  = [FieldUtils createTextField:_mixAssocKeyw tag:ASSOC_KEYW_TAG];
         [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
@@ -621,35 +648,56 @@ const int ASSOC_COLORS_TAG     = 4;
     
     // Create the source objects
     //
-    int fromRow                    = (int)fromIndexPath.row;
-    PaintSwatches *fromPaintSwatch = _paintSwatches[fromRow];
-    
-    // Create the destination objects
-    //
-    int toRow                     = (int)toIndexPath.row;
-    
-    PaintSwatches *tmpSwatch;
-    
-    if (toRow <= 1) {
-        _mainColorFlag = TRUE;
-    }
+    int fromRow   = (int)fromIndexPath.row;
+    int toRow     = (int)toIndexPath.row;
+    int mix_order = toRow + 1;
     
     if (toRow > fromRow) {
-        for (int i=toRow; i>=fromRow; i--) {
-            tmpSwatch         = _paintSwatches[i];
-            _paintSwatches[i] = fromPaintSwatch;
-            fromPaintSwatch   = tmpSwatch;
+
+        for (int i=fromRow; i<=toRow; i++) {
+            [[_mixAssocSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:mix_order]];
+            mix_order = i + 1;
         }
         
     } else {
-        for (int i=toRow; i<=fromRow; i++) {
-            tmpSwatch         = _paintSwatches[i];
-            _paintSwatches[i] = fromPaintSwatch;
-            fromPaintSwatch   = tmpSwatch;
+        
+        for (int i=fromRow; i>=toRow; i--) {
+            [[_mixAssocSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:mix_order]];
+            mix_order = i + 1;
         }
     }
     
-    [self recalculateOrder];
+    _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
+
+    
+//    PaintSwatches *fromPaintSwatch = _paintSwatches[fromRow];
+//    
+//    // Create the destination objects
+//    //
+//    int toRow                     = (int)toIndexPath.row;
+//    
+//    PaintSwatches *tmpSwatch;
+//    
+//    if (toRow <= 1) {
+//        _mainColorFlag = TRUE;
+//    }
+//    
+//    if (toRow > fromRow) {
+//        for (int i=toRow; i>=fromRow; i--) {
+//            tmpSwatch         = _paintSwatches[i];
+//            _paintSwatches[i] = fromPaintSwatch;
+//            fromPaintSwatch   = tmpSwatch;
+//        }
+//        
+//    } else {
+//        for (int i=toRow; i<=fromRow; i++) {
+//            tmpSwatch         = _paintSwatches[i];
+//            _paintSwatches[i] = fromPaintSwatch;
+//            fromPaintSwatch   = tmpSwatch;
+//        }
+//    }
+//
+//    [self recalculateOrder];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -877,39 +925,44 @@ const int ASSOC_COLORS_TAG     = 4;
     // Add a placeholder value if missing
     //
     if ([_mixAssocName isEqualToString:@""]) {
-        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssoc_%i", (int)[_mixAssociation objectID]];
+        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssoc %i", (int)[_mixAssociation objectID]];
     }
 
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
     
+    
     // Delete/recreate the swatches
     //
-    NSSet *mixAssocSwatchSet = [_mixAssociation mix_assoc_swatch];
-    if (mixAssocSwatchSet != nil) {
-        NSArray *mixAssocSwatchList = [mixAssocSwatchSet allObjects];
-        
-        for (int i=0; i<[mixAssocSwatchList count]; i++) {
-            MixAssocSwatch *mixAssocSwatch = [mixAssocSwatchList objectAtIndex:i];
-            PaintSwatches *paintSwatchObj = (PaintSwatches *)mixAssocSwatch.paint_swatch;
-            
-            [paintSwatchObj removeMix_assoc_swatchObject:mixAssocSwatch];
-            [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
-            
-            [self.context deleteObject:mixAssocSwatch];
-        }
-    }
+//    NSSet *mixAssocSwatchSet = [_mixAssociation mix_assoc_swatch];
+//    if (mixAssocSwatchSet != nil) {
+//        NSArray *mixAssocSwatchList = [mixAssocSwatchSet allObjects];
+//        
+//        for (int i=0; i<[mixAssocSwatchList count]; i++) {
+//            MixAssocSwatch *mixAssocSwatch = [mixAssocSwatchList objectAtIndex:i];
+//            PaintSwatches *paintSwatchObj = (PaintSwatches *)mixAssocSwatch.paint_swatch;
+//            
+//            [paintSwatchObj removeMix_assoc_swatchObject:mixAssocSwatch];
+//            [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
+//            
+//            [self.context deleteObject:mixAssocSwatch];
+//        }
+//    }
+//    
+//    // Add swatches back in
+//    //
+//    //for (int i=0; i<[_paintSwatches count]; i++) {
+//    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+//        PaintSwatches *paintSwatchObj = [_paintSwatches objectAtIndex:i];
+//        MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
+//        [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatchObj];
+//        [mixAssocSwatch setMix_association:_mixAssociation];
+//        [paintSwatchObj addMix_assoc_swatchObject:mixAssocSwatch];
+//        [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
+//    }
     
-    // Add swatches back in
-    //
-    for (int i=0; i<[_paintSwatches count]; i++) {
-        PaintSwatches *paintSwatchObj = [_paintSwatches objectAtIndex:i];
-        MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
-        [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatchObj];
-        [mixAssocSwatch setMix_association:_mixAssociation];
-        [paintSwatchObj addMix_assoc_swatchObject:mixAssocSwatch];
-        [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
-    }
+    
+
     
     // Delete all MixAssociation Keywords and first
     //
@@ -963,18 +1016,22 @@ const int ASSOC_COLORS_TAG     = 4;
 
     // Reset the order and is_mix flag
     //
-    int ct = (int)[_paintSwatches count];
+//    int ct = (int)[_paintSwatches count];
+//    
+//    for (int i=0; i<ct; i++) {
+//        if (i < 2) {
+//            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
+//            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"Reference"]]];
+//        } else {
+//            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
+//            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"MixAssoc"]]];
+//        }
+//        
+//        [[_paintSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:i+1]];
+//    }
     
-    for (int i=0; i<ct; i++) {
-        if (i < 2) {
-            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"Reference"]]];
-        } else {
-            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
-            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"MixAssoc"]]];
-        }
-        
-        [[_paintSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:i+1]];
+    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:ASSOC_COLORS_SECTION]];
     }
 }
 

@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocCollectionTableViewCell.m"
-            timestampString = "483023753.385484"
+            timestampString = "483024196.984538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "-setAssocName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocCollectionTableViewCell.m"
-            timestampString = "483023753.385484"
+            timestampString = "483024196.984538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-setAssocName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocCollectionTableViewCell.m"
-            timestampString = "483023753.385484"
+            timestampString = "483024196.984538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "-setAssocName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1029"
-            endingLineNumber = "1029"
+            startingLineNumber = "1091"
+            endingLineNumber = "1091"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1031"
-            endingLineNumber = "1031"
+            startingLineNumber = "1093"
+            endingLineNumber = "1093"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1033"
-            endingLineNumber = "1033"
+            startingLineNumber = "1095"
+            endingLineNumber = "1095"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1039"
-            endingLineNumber = "1039"
+            startingLineNumber = "1101"
+            endingLineNumber = "1101"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -522,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1040"
-            endingLineNumber = "1040"
+            startingLineNumber = "1102"
+            endingLineNumber = "1102"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1054"
-            endingLineNumber = "1054"
+            startingLineNumber = "1116"
+            endingLineNumber = "1116"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1056"
-            endingLineNumber = "1056"
+            startingLineNumber = "1118"
+            endingLineNumber = "1118"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1057"
-            endingLineNumber = "1057"
+            startingLineNumber = "1119"
+            endingLineNumber = "1119"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -586,11 +586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1058"
-            endingLineNumber = "1058"
+            startingLineNumber = "1120"
+            endingLineNumber = "1120"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482682699.355287"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1060"
-            endingLineNumber = "1060"
+            startingLineNumber = "1122"
+            endingLineNumber = "1122"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1736,11 +1736,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "482681879.264546"
+            timestampString = "483284005.544296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "727"
-            endingLineNumber = "727"
+            startingLineNumber = "780"
+            endingLineNumber = "780"
             landmarkName = "-setEditing:animated:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2349,6 +2349,22 @@
                   offsetFromSymbolStart = "1820">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "483284005.544296"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "677"
+            endingLineNumber = "677"
+            landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
