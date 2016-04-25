@@ -582,45 +582,70 @@ const int ASSOC_COLORS_TAG     = 4;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-
-        PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:indexPath.row];
-        BOOL is_selected = [[swatchObj is_selected] boolValue];
         
-        // Remove the swatch and cascade delete the mixassocswatch
-        //
-        if (is_selected == FALSE) {
-            [self.context deleteObject:swatchObj];
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:indexPath.row];
         
-        // Remove the mixassocswatch only (as swatch is associated with another mix)
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
+        // Delete only if it references just this mix association
         //
+        if ([[[paintSwatch mix_assoc_swatch] allObjects] count] == 1) {
+            [self.context deleteObject:paintSwatch];
+            
         } else {
-            NSSet *assocSwatchSet = swatchObj.mix_assoc_swatch;
-            for (MixAssocSwatch *obj in assocSwatchSet) {
-                PaintSwatches *ps = (PaintSwatches *)obj.paint_swatch;
-                MixAssociation *ma = obj.mix_association;
-                if (([ps.name isEqualToString:swatchObj.name]) && (_mixAssociation.objectID == ma.objectID)) {
-                    
-                    // Need to delete set element for ps.paint_swatch
-                    // Need to delete reference for ma.mix_association
-                    
-                    [self.context deleteObject:obj];
-                }
-            }
+            [paintSwatch delete:mixAssocSwatch];
         }
-        [_paintSwatches removeObjectAtIndex:indexPath.row];
-            
-        if ([_paintSwatches count] > 0) {
-            [self recalculateOrder];
-            
-        } else {
+        
+        [self.context deleteObject:mixAssocSwatch];
+        
+        if ([_mixAssocSwatches count] == 1) {;
             [self.context deleteObject:_mixAssociation];
-            _mixAssociation = nil;
         }
+        
+        //[_mixAssocSwatches removeObjectAtIndex:indexPath.row];
+        
+        for (int i=0; i<[_mixAssocSwatches count]; i++) {
+            int mix_order = i + 1;
+            [[_mixAssocSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:mix_order]];
+        }
+
+//        PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:indexPath.row];
+//        BOOL is_selected = [[swatchObj is_selected] boolValue];
+//        
+//        // Remove the swatch and cascade delete the mixassocswatch
+//        //
+//        if (is_selected == FALSE) {
+//            [self.context deleteObject:swatchObj];
+//        
+//        // Remove the mixassocswatch only (as swatch is associated with another mix)
+//        //
+//        } else {
+//            NSSet *assocSwatchSet = swatchObj.mix_assoc_swatch;
+//            for (MixAssocSwatch *obj in assocSwatchSet) {
+//                PaintSwatches *ps = (PaintSwatches *)obj.paint_swatch;
+//                MixAssociation *ma = obj.mix_association;
+//                if (([ps.name isEqualToString:swatchObj.name]) && (_mixAssociation.objectID == ma.objectID)) {
+//                    
+//                    // Need to delete set element for ps.paint_swatch
+//                    // Need to delete reference for ma.mix_association
+//                    
+//                    [self.context deleteObject:obj];
+//                }
+//            }
+//        }
+//        [_paintSwatches removeObjectAtIndex:indexPath.row];
+//            
+//        if ([_paintSwatches count] > 0) {
+//            [self recalculateOrder];
+//            
+//        } else {
+//            [self.context deleteObject:_mixAssociation];
+//            _mixAssociation = nil;
+//        }
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
         
-
       
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -1002,6 +1027,8 @@ const int ASSOC_COLORS_TAG     = 4;
     } else {
         NSLog(@"Mix assoc save successful");
     }
+    
+    _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
     
     _saveFlag = TRUE;
 }
