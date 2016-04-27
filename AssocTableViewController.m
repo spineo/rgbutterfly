@@ -601,6 +601,7 @@ const int ASSOC_COLORS_TAG     = 4;
         if ([_mixAssocSwatches count] == 1) {;
             [self.context deleteObject:_mixAssociation];
         }
+        _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
         
         //[_mixAssocSwatches removeObjectAtIndex:indexPath.row];
         
