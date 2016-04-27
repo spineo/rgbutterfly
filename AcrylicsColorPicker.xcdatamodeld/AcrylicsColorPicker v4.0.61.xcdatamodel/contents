@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Automatic">
-    <entity name="Entity" syncable="YES"/>
     <entity name="GlobalSetting" syncable="YES">
         <attribute name="backup_schedule" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="7" syncable="YES"/>
         <attribute name="backup_time" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="23" defaultValueString="23" syncable="YES"/>
@@ -136,6 +135,5 @@
         <element name="TapArea" positionX="-578" positionY="-180" width="128" height="210"/>
         <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="73"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="88"/>
-        <element name="Entity" positionX="-621" positionY="-54" width="128" height="45"/>
     </elements>
 </model>

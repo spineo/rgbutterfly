@@ -1080,13 +1080,6 @@ const int ASSOC_COLORS_TAG     = 4;
             
             [_paintSwatches addObject:paintSwatch];
         }
-        
-//        NSError *error = nil;
-//        if (![self.context save:&error]) {
-//            NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-//        } else {
-//            NSLog(@"Mix assoc add successful");
-//        }
     }
     
     NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);

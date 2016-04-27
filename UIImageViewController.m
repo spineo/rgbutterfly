@@ -30,6 +30,7 @@
 #import "TapAreaSwatch.h"
 #import "MixAssocSwatch.h"
 #import "Keyword.h"
+#import "TapAreaKeyword.h"
 
 @interface UIImageViewController ()
 
@@ -2313,12 +2314,56 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 // Need to delete keywords
 //
 - (void)deleteTapArea:(PaintSwatches *)paintSwatch {
-    if (paintSwatch.tap_area != nil) {
-        TapArea *tapArea = paintSwatch.tap_area;
+    if ([paintSwatch tap_area] != nil) {
+        TapArea *tapArea = [paintSwatch tap_area];
         [_matchAssociation removeTap_areaObject:tapArea];
+        
+        // Delete tap area swatches
+        //
+        if ([tapArea tap_area_swatch] != nil) {
+            [self deleteTapAreaSwatches:tapArea];
+        }
+        
+        // Delete tap area keywords
+        //
+        if ([tapArea tap_area_keyword] != nil) {
+            [self deleteTapAreaKeywords:tapArea];
+        }
+        
         [self.context deleteObject:tapArea];
     }
     [self.context deleteObject:paintSwatch];
+    
+    [self drawTapAreas];
+    [self.imageTableView reloadData];
+}
+
+- (void)deleteTapAreaSwatches:(TapArea *)tapArea {
+
+    NSArray *tapAreaSwatches = [[tapArea tap_area_swatch] allObjects];
+    for (int i=0; i<[tapAreaSwatches count]; i++) {
+        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+        
+        [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+        [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+    
+        [self.context deleteObject:tapAreaSwatch];
+    }
+}
+
+- (void)deleteTapAreaKeywords:(TapArea *)tapArea {
+    
+    NSArray *tapAreaKeywords = [[tapArea tap_area_keyword] allObjects];
+    for (int i=0; i<[tapAreaKeywords count]; i++) {
+        TapAreaKeyword *tapAreaKeyword = [tapAreaKeywords objectAtIndex:i];
+        Keyword *keyword   = tapAreaKeyword.keyword;
+        
+        [tapArea removeTap_area_keywordObject:tapAreaKeyword];
+        [keyword removeTap_area_keywordObject:tapAreaKeyword];
+    
+        [self.context deleteObject:tapAreaKeyword];
+    }
 }
 
 // Need to delete keywords
@@ -2337,20 +2382,21 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
             // Check if TapArea already exists and, if so delete along with any association
             //
             TapArea *tapArea;
-            if (tapAreaRef.tap_area != nil) {
-                tapArea = tapAreaRef.tap_area;
+            if ([tapAreaRef tap_area] != nil) {
+                tapArea = [tapAreaRef tap_area];
             
                 // Remove existing TapAreaSwatch elements
                 //
-                NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-                for (int i=0; i<[tapAreaSwatches count]; i++) {
-                    TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-                    PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
-                    
-                    [tapArea removeTap_area_swatchObject:tapAreaSwatch];
-                    [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
-                    [self.context deleteObject:tapAreaSwatch];
+                if ([tapArea tap_area_swatch] != nil) {
+                    [self deleteTapAreaSwatches:tapArea];
                 }
+                
+                // Delete tap area keywords
+                //
+                if ([tapArea tap_area_keyword] != nil) {
+                    [self deleteTapAreaKeywords:tapArea];
+                }
+
                 [self.context deleteObject:tapArea];
             }
             
