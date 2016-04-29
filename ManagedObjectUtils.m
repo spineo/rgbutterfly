@@ -10,6 +10,7 @@
 
 #import "GlobalSettings.h"
 #import "GenericUtils.h"
+#import "AlertUtils.h"
 
 
 @implementation ManagedObjectUtils
@@ -773,6 +774,40 @@
 
 + (void)deleteMixAssociation:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context {
     
+    // Delete all MixAssociation Keywords and first
+    //
+    [ManagedObjectUtils deleteMixAssocKeywords:mixAssocObj context:context];
+    
+    NSArray *mixAssocSwatches = [[mixAssocObj mix_assoc_swatch] allObjects];
+    for (MixAssocSwatch *mixAssocSwatch in mixAssocSwatches) {
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
+        [mixAssocObj removeMix_assoc_swatchObject:mixAssocSwatch];
+        
+        int mix_assoc_swatch_ct = (int)[[paintSwatch mix_assoc_swatch] count];
+        int tap_area_swatch_ct  = (int)[[paintSwatch tap_area_swatch] count];
+        
+        // Ensure first that this PaintSwatch does not reference another Mix or Match Association
+        //
+        if ((mix_assoc_swatch_ct == 1) && (tap_area_swatch_ct == 0)) {
+            
+            // Delete SwatchKeyword elements (though a cascade rule is in place)
+            //
+            [ManagedObjectUtils deletePaintSwatchKeywords:paintSwatch context:context];
+            
+            [context deleteObject:paintSwatch];
+            
+        } else {
+            [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
+            
+            NSLog(@"Cannot delete paint swatch '%@' has it belongs to more than one Mix/Match association", [paintSwatch name]);
+        }
+        [context deleteObject:mixAssocSwatch];
+    }
+    
+    // Delete the mix association
+    //
+    [context deleteObject:mixAssocObj];
 }
 
 

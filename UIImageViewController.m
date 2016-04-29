@@ -2052,43 +2052,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 - (void)deleteMixAssoc {
     
     if (_mixAssociation != nil) {
-        NSManagedObjectID *mix_assoc_id = [_mixAssociation objectID];
 
-        for (int i=0; i<[_paintSwatches count];i++) {
-
-            PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:i];
-            
-            NSSet *mixAssocSwatches = paintSwatch.mix_assoc_swatch;
-            
-            if (mixAssocSwatches != nil) {
-                int count = (int)[mixAssocSwatches count];
-                for (MixAssocSwatch *mixAssocSwatch in mixAssocSwatches) {
-                    MixAssociation *mixAssocRef = mixAssocSwatch.mix_association;
-                    
-                    // Delete only relations associated with the current mix
-                    //
-                    if ([mixAssocRef objectID] == mix_assoc_id) {
-                        
-                        // Ensure that there is only one association if deleting the PaintSwatch
-                        // (delete should cascased to the MixAssocSwatch)
-                        //
-                        [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
-                        if (count == 1) {
-                            [self.context deleteObject:paintSwatch];
-                        } else {
-                            [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
-                            [self.context deleteObject:mixAssocSwatch];
-                            
-                            NSLog(@"Cannot delete paint swatch %@ has it belongs to more than one association", paintSwatch.name);
-                        }
-                    }
-                }
-            }
-        }
-        
-        // Delete the mix association
-        //
-        [self.context deleteObject:_mixAssociation];
+        [ManagedObjectUtils deleteMixAssociation:_mixAssociation context:self.context];
         
         // Commit the delete
         //
