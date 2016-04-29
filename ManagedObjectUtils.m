@@ -753,4 +753,27 @@
     }
 }
 
++ (void)deletePaintSwatchKeywords:(PaintSwatches *)paintSwatchObj context:(NSManagedObjectContext *)context {
+    
+    NSArray *paintSwatchKeywords = [self queryObjectKeywords:paintSwatchObj.objectID relationName:@"swatch_keyword" entityName:@"SwatchKeyword" context:context];
+    
+    for (SwatchKeyword *swatchKeywordObj in paintSwatchKeywords) {
+        if (swatchKeywordObj != nil) {
+            
+            Keyword *keywordObj = swatchKeywordObj.keyword;
+            
+            [keywordObj removeSwatch_keywordObject:swatchKeywordObj];
+            [paintSwatchObj removeSwatch_keywordObject:swatchKeywordObj];
+            
+            [context deleteObject:swatchKeywordObj];
+        }
+    }
+}
+
+
++ (void)deleteMixAssociation:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context {
+    
+}
+
+
 @end

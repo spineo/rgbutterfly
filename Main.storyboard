@@ -265,13 +265,6 @@
                                 <action selector="changeButtonRendering:" destination="6pV-zD-nhf" id="bhq-AW-d8E"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="2" style="plain" systemItem="flexibleSpace" id="oK3-s4-aJC"/>
-                        <barButtonItem tag="59" title="Save" width="66" id="nDK-Wo-clk">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="save:" destination="6pV-zD-nhf" id="Rt7-em-RoA"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Maj-ib-srW">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="k9c-gm-4aI">

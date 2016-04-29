@@ -260,6 +260,7 @@ const int ASSOC_COLORS_TAG     = 4;
     
     UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
+                                                       [self deleteData];
 
     }];
     
@@ -896,24 +897,14 @@ const int ASSOC_COLORS_TAG     = 4;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Save Action
+// Save and Delete Data
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Save Action
-
-- (IBAction)save:(id)sender {
-    [self saveData];
-}
+#pragma mark - Save and Delete Data
 
 // Invoked directly and by unwind to segue
 //
 - (void)saveData {
-    
-    // Create if needed
-    //
-    if (_mixAssociation == nil) {
-        _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-    }
     
     // Add a placeholder value if missing
     //
@@ -956,7 +947,6 @@ const int ASSOC_COLORS_TAG     = 4;
         }
     }
 
-    
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
@@ -967,6 +957,52 @@ const int ASSOC_COLORS_TAG     = 4;
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
     
     _saveFlag = TRUE;
+}
+
+- (void)deleteData {
+    
+    // Delete all MixAssociation Keywords and first
+    //
+    [ManagedObjectUtils deleteMixAssocKeywords:_mixAssociation context:self.context];
+    
+    NSArray *mixAssocSwatches = [[_mixAssociation mix_assoc_swatch] allObjects];
+    for (MixAssocSwatch *mixAssocSwatch in mixAssocSwatches) {
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+
+        [_mixAssociation removeMix_assoc_swatchObject:mixAssocSwatch];
+        
+        int mix_assoc_swatch_ct = (int)[[paintSwatch mix_assoc_swatch] count];
+        int tap_area_swatch_ct  = (int)[[paintSwatch tap_area_swatch] count];
+        
+        // Ensure first that this PaintSwatch does not reference another Mix or Match Association
+        //
+        if ((mix_assoc_swatch_ct == 1) && (tap_area_swatch_ct == 0)) {
+
+            // Delete SwatchKeyword elements (though a cascade rule is in place)
+            //
+            [ManagedObjectUtils deletePaintSwatchKeywords:paintSwatch context:self.context];
+            
+            [self.context deleteObject:paintSwatch];
+            
+        } else {
+            [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
+            [self.context deleteObject:mixAssocSwatch];
+            
+            NSLog(@"Cannot delete paint swatch %@ has it belongs to more than one association", paintSwatch.name);
+        }
+    }
+    
+    // Delete the mix association
+    //
+    [self.context deleteObject:_mixAssociation];
+
+
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error delete context: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Mix delete successful");
+    }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
