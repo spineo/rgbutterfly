@@ -755,7 +755,7 @@
 
 + (void)deletePaintSwatchKeywords:(PaintSwatches *)paintSwatchObj context:(NSManagedObjectContext *)context {
     
-    NSArray *paintSwatchKeywords = [self queryObjectKeywords:paintSwatchObj.objectID relationName:@"swatch_keyword" entityName:@"SwatchKeyword" context:context];
+    NSArray *paintSwatchKeywords = [self queryObjectKeywords:paintSwatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
     
     for (SwatchKeyword *swatchKeywordObj in paintSwatchKeywords) {
         if (swatchKeywordObj != nil) {

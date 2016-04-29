@@ -986,10 +986,10 @@ const int ASSOC_COLORS_TAG     = 4;
             
         } else {
             [paintSwatch removeMix_assoc_swatchObject:mixAssocSwatch];
-            [self.context deleteObject:mixAssocSwatch];
-            
-            NSLog(@"Cannot delete paint swatch %@ has it belongs to more than one association", paintSwatch.name);
+
+            NSLog(@"Cannot delete paint swatch %@ has it belongs to more than one Mix/Match association", [paintSwatch name]);
         }
+        [self.context deleteObject:mixAssocSwatch];
     }
     
     // Delete the mix association
