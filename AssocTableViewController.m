@@ -28,6 +28,8 @@
 @property (nonatomic, strong) PaintSwatches *addPaintSwatch, *selPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches;
 
+@property (nonatomic, strong) UIAlertController *saveAlertController;
+
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader;
@@ -244,6 +246,30 @@ const int ASSOC_COLORS_TAG     = 4;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidRotate)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    
+    // Match Edit Button Alert Controller
+    //
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Mix Association Edit"
+                                                                    message:@"Please select operation"
+                                                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *save = [UIAlertAction actionWithTitle:@"Save Changes" style:UIAlertActionStyleDefault
+                                                 handler:^(UIAlertAction * action) {
+                                                     [self saveData];
+    }];
+    
+    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+
+    }];
+    
+    UIAlertAction *discard = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_saveAlertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_saveAlertController addAction:save];
+    [_saveAlertController addAction:delete];
+    [_saveAlertController addAction:discard];
 }
 
 - (void)viewDidRotate {
@@ -661,35 +687,6 @@ const int ASSOC_COLORS_TAG     = 4;
     
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
 
-    
-//    PaintSwatches *fromPaintSwatch = _paintSwatches[fromRow];
-//    
-//    // Create the destination objects
-//    //
-//    int toRow                     = (int)toIndexPath.row;
-//    
-//    PaintSwatches *tmpSwatch;
-//    
-//    if (toRow <= 1) {
-//        _mainColorFlag = TRUE;
-//    }
-//    
-//    if (toRow > fromRow) {
-//        for (int i=toRow; i>=fromRow; i--) {
-//            tmpSwatch         = _paintSwatches[i];
-//            _paintSwatches[i] = fromPaintSwatch;
-//            fromPaintSwatch   = tmpSwatch;
-//        }
-//        
-//    } else {
-//        for (int i=toRow; i<=fromRow; i++) {
-//            tmpSwatch         = _paintSwatches[i];
-//            _paintSwatches[i] = fromPaintSwatch;
-//            fromPaintSwatch   = tmpSwatch;
-//        }
-//    }
-//
-//    [self recalculateOrder];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -701,9 +698,11 @@ const int ASSOC_COLORS_TAG     = 4;
 - (void)setEditing:(BOOL)flag animated:(BOOL)animated {
     [super setEditing:flag animated:animated];
     
-//    _editFlag = flag;
-//
-//    if (_editFlag == FALSE) {
+    _editFlag = flag;
+
+    if (_editFlag == FALSE) {
+        [self presentViewController:_saveAlertController animated:YES completion:nil];
+    }
 //
 //        // Enable the 'Save' button
 //        //
