@@ -274,13 +274,10 @@ const int ASSOC_COLORS_TAG     = 5;
     [_saveAlertController addAction:save];
     [_saveAlertController addAction:delete];
     [_saveAlertController addAction:discard];
-
-
+    
     _applyRenameText = @"Apply Auto Renaming to Rows 3..N";
-    CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
-    [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_applyButton addTarget:self action:@selector(recalculateOrder) forControlEvents:UIControlEventTouchUpInside];
+
+    [self recreateApplyButton];
 }
 
 - (void)viewDidRotate {
@@ -291,6 +288,14 @@ const int ASSOC_COLORS_TAG     = 5;
 //    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
 //    [cell.descField setTag:tag_num];
     [self.tableView reloadData];
+    [self recreateApplyButton];
+}
+
+- (void)recreateApplyButton {
+    CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
+    _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
+    [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
+    [_applyButton addTarget:self action:@selector(recalculateOrder) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initializeFetchedResultsController {
