@@ -29,8 +29,6 @@
 //
 @property (nonatomic, strong) UITextField *mixName;
 
-- (IBAction)save:(id)sender;
-
 - (IBAction)changeButtonRendering:(id)sender;
 
 - (void)saveData;

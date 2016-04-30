@@ -237,6 +237,8 @@ extern float const DEF_BORDER_THRESHOLD;
 
 + (NSString *)arrowDownImageName;
 
++ (NSString *)abcImageName;
+
 + (NSString *)getDefaultListingType;
 
 + (NSDictionary *)getImageNames;

@@ -32,7 +32,7 @@
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader;
+@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn;
 
@@ -42,6 +42,8 @@
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 @property (nonatomic) int goBackStatus;
 @property (nonatomic) CGFloat imageViewXOffset, imageViewYOffset, imageViewWidth, imageViewHeight, assocImageViewWidth, assocImageViewHeight, textFieldYOffset;
+
+@property (nonatomic, strong) UIButton *applyButton;
 
 @property (nonatomic, strong) AddMixViewController *sourceViewController;
 
@@ -59,16 +61,18 @@
 
 const int ASSOC_COLORS_SECTION = 0;
 const int ASSOC_ADD_SECTION    = 1;
-const int ASSOC_NAME_SECTION   = 2;
-const int ASSOC_KEYW_SECTION   = 3;
-const int ASSOC_DESC_SECTION   = 4;
+const int ASSOC_APPLY_SECTION  = 2;
+const int ASSOC_NAME_SECTION   = 3;
+const int ASSOC_KEYW_SECTION   = 4;
+const int ASSOC_DESC_SECTION   = 5;
 
-const int ASSOC_MAX_SECTION    = 5;
+const int ASSOC_MAX_SECTION    = 6;
 
-const int ASSOC_NAME_TAG       = 1;
-const int ASSOC_KEYW_TAG       = 2;
-const int ASSOC_DESC_TAG       = 3;
-const int ASSOC_COLORS_TAG     = 4;
+const int ASSOC_APPLY_TAG      = 1;
+const int ASSOC_NAME_TAG       = 2;
+const int ASSOC_KEYW_TAG       = 3;
+const int ASSOC_DESC_TAG       = 4;
+const int ASSOC_COLORS_TAG     = 5;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,16 +97,16 @@ const int ASSOC_COLORS_TAG     = 4;
     // Set the name and desc values
     //
     if (_mixAssociation != nil) {
-        _mixAssocName = _mixAssociation.name;
-        _mixAssocDesc = _mixAssociation.desc;
+        _mixAssocName = [_mixAssociation name];
+        _mixAssocDesc = [_mixAssociation desc];
         
         // Keywords
         //
-        NSSet *mixAssocKeywords = _mixAssociation.mix_assoc_keyword;
+        NSSet *mixAssocKeywords = [_mixAssociation mix_assoc_keyword];
         NSMutableArray *keywords = [[NSMutableArray alloc] init];
         for (MixAssocKeyword *mix_assoc_keyword in mixAssocKeywords) {
-            Keyword *keyword = mix_assoc_keyword.keyword;
-            [keywords addObject:keyword.name];
+            Keyword *keyword = [mix_assoc_keyword keyword];
+            [keywords addObject:[keyword name]];
         }
         _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
         
@@ -137,7 +141,6 @@ const int ASSOC_COLORS_TAG     = 4;
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
     _addColorLabel     = @"Add Mix Association Color";
-
     
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
@@ -271,6 +274,13 @@ const int ASSOC_COLORS_TAG     = 4;
     [_saveAlertController addAction:save];
     [_saveAlertController addAction:delete];
     [_saveAlertController addAction:discard];
+
+
+    _applyRenameText = @"Apply Auto Renaming to Rows 3..N";
+    CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
+    _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
+    [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
+    [_applyButton addTarget:self action:@selector(recalculateOrder) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidRotate {
@@ -280,6 +290,7 @@ const int ASSOC_COLORS_TAG     = 4;
 //    UIView *subView = (UITextView *)[cell.contentView viewWithTag:tag_num];
 //    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
 //    [cell.descField setTag:tag_num];
+    [self.tableView reloadData];
 }
 
 - (void)initializeFetchedResultsController {
@@ -361,7 +372,7 @@ const int ASSOC_COLORS_TAG     = 4;
             return DEF_TABLE_HDR_HEIGHT;
         }
 
-    } else if (section == ASSOC_ADD_SECTION) {
+    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_APPLY_SECTION)) {
         return DEF_NIL_HEADER;
         
     } else {
@@ -417,6 +428,9 @@ const int ASSOC_COLORS_TAG     = 4;
          ((section == ASSOC_DESC_SECTION)  && [_mixAssocDesc  isEqualToString:@""]))
          && (_editFlag == FALSE)) {
         return 0;
+        
+    } else if ((section == ASSOC_APPLY_SECTION) && (_editFlag == FALSE)) {
+        return 0;
 
     } else if ((section == ASSOC_ADD_SECTION) && (_editFlag == FALSE)) {
         return 0;
@@ -430,7 +444,7 @@ const int ASSOC_COLORS_TAG     = 4;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ((indexPath.section == ASSOC_ADD_SECTION) && (_editFlag == FALSE)) {
+    if (((indexPath.section == ASSOC_ADD_SECTION) || (indexPath.section == ASSOC_APPLY_SECTION)) && (_editFlag == FALSE)) {
         return DEF_NIL_HEIGHT;
     } else {
         return DEF_TABLE_CELL_HEIGHT;
@@ -472,7 +486,7 @@ const int ASSOC_COLORS_TAG     = 4;
         NSString *name = [paintSwatch name];
         
         if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
+            cell.imageView.image = [ColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
         } else {
             cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
         }
@@ -509,6 +523,17 @@ const int ASSOC_COLORS_TAG     = 4;
         [cell.textLabel setText: _addColorLabel];
         cell.accessoryType       = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
+        
+        [cell setBackgroundColor: DARK_BG_COLOR];
+        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+        [cell.textLabel setFont: TABLE_CELL_FONT];
+        
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+        
+    } else if (indexPath.section == ASSOC_APPLY_SECTION) {
+        cell.accessoryType       = UITableViewCellAccessoryNone;
+        cell.imageView.image = nil;
+        [cell.contentView addSubview:_applyButton];
         
         [cell setBackgroundColor: DARK_BG_COLOR];
         [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
@@ -640,8 +665,11 @@ const int ASSOC_COLORS_TAG     = 4;
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        [_applyButton setEnabled:TRUE];
+        
       
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [_applyButton setEnabled:TRUE];
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         [self performSegueWithIdentifier:@"AddMixSegue" sender:self];
     }   
@@ -686,6 +714,8 @@ const int ASSOC_COLORS_TAG     = 4;
         }
     }
     
+    [_applyButton setEnabled:TRUE];
+    
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
 
 }
@@ -700,6 +730,8 @@ const int ASSOC_COLORS_TAG     = 4;
     [super setEditing:flag animated:animated];
     
     _editFlag = flag;
+    
+    [_applyButton setEnabled:TRUE];
 
     if (_editFlag == FALSE) {
         [self presentViewController:_saveAlertController animated:YES completion:nil];
@@ -850,6 +882,8 @@ const int ASSOC_COLORS_TAG     = 4;
         _textReturn  = TRUE;
     }
     
+    [_applyButton setEnabled:TRUE];
+    
     if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
         _mixAssocName = textField.text;
         
@@ -979,6 +1013,9 @@ const int ASSOC_COLORS_TAG     = 4;
 
 - (void)recalculateOrder {
 
+    [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
+    [_applyButton setEnabled:FALSE];
+    
     // Reset the order and is_mix flag
     //
 //    int ct = (int)[_paintSwatches count];

@@ -247,6 +247,10 @@ static NSDictionary *swatchTypes;
     return @"arrow down.png";
 }
 
++ (NSString *)abcImageName {
+    return @"abc-1.png";
+}
+
 + (NSString *)getDefaultListingType {
     return @"Default";
 }
