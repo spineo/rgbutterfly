@@ -619,7 +619,9 @@ const int ASSOC_COLORS_TAG     = 5;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:indexPath.row];
+        _selPaintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
         [self performSegueWithIdentifier:@"AssocSwatchDetailSegue" sender:self];
     }
 }
