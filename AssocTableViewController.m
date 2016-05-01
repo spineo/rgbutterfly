@@ -281,12 +281,6 @@ const int ASSOC_COLORS_TAG     = 5;
 }
 
 - (void)viewDidRotate {
-//    AssocDescTableViewCell* cell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-//    
-//    int tag_num = DEF_TAG_NUM - ASSOC_DESC_SECTION;
-//    UIView *subView = (UITextView *)[cell.contentView viewWithTag:tag_num];
-//    [(UITextView *) subView setFrame:CGRectMake(18.0, 5.0, cell.bounds.size.width - (cell.bounds.size.width / 5.0), cell.bounds.size.height - 10.0)];
-//    [cell.descField setTag:tag_num];
     [self.tableView reloadData];
     [self recreateApplyButton];
 }
@@ -1021,38 +1015,46 @@ const int ASSOC_COLORS_TAG     = 5;
     [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
     [_applyButton setEnabled:FALSE];
     
-    NSString *refName_1, *refName_2, *mixName;
+    NSString *refName_1, *refName_2;
     int ratio_1, ratio_2;
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
         int COLOR_TAG = i + ASSOC_COLORS_TAG;
         UITextField *textField = (UITextField *)[self.view viewWithTag:COLOR_TAG];
         
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
+        BOOL isMix;
+        NSString *swatchName;
+        int swatchId;
+        
         if (i == 0) {
             refName_1 = textField.text;
+            isMix = NO;
+            swatchName = refName_1;
+            swatchId = [GlobalSettings getSwatchId:@"Reference"];
             
         } else if (i == 1) {
             refName_2 = textField.text;
+            isMix = NO;
+            swatchName = refName_2;
+            swatchId = [GlobalSettings getSwatchId:@"Reference"];
             
         } else {
             ratio_2 = i - 1;
             ratio_1 = swatch_ct - ratio_2 - 1;
-            
-            mixName = [[NSString alloc] initWithFormat:@"%@-%@ Mix %i:%i", refName_1, refName_2, ratio_1, ratio_2];
-            
-            [textField setText:mixName];
-            
-            MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
-            PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
-            [paintSwatch setName:textField.text];
+            isMix = YES;
+            swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", refName_1, refName_2, ratio_1, ratio_2];
+            swatchId = [GlobalSettings getSwatchId:@"MixAssoc"];
         }
 
-    }
+        [textField setText:swatchName];
+        [paintSwatch setIs_mix:[NSNumber numberWithBool:isMix]];
+        [paintSwatch setType_id:[NSNumber numberWithInteger:swatchId]];
+        [paintSwatch setName:swatchName];
 
-    
-//    for (int i=0; i<[_mixAssocSwatches count]; i++) {
-//        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:ASSOC_COLORS_SECTION]];
-//    }
+    }
 }
 
 
