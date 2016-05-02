@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches;
 
 @property (nonatomic, strong) UIAlertController *saveAlertController;
+@property (nonatomic, strong) UIAlertAction *save;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
@@ -256,7 +257,9 @@ const int ASSOC_COLORS_TAG     = 5;
                                                                     message:@"Please select operation"
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *save = [UIAlertAction actionWithTitle:@"Save Changes" style:UIAlertActionStyleDefault
+    // Modified globally (i.e., enable/disable)
+    //
+    _save = [UIAlertAction actionWithTitle:@"Save Changes" style:UIAlertActionStyleDefault
                                                  handler:^(UIAlertAction * action) {
                                                      [self saveData];
     }];
@@ -271,13 +274,19 @@ const int ASSOC_COLORS_TAG     = 5;
         [_saveAlertController dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [_saveAlertController addAction:save];
+    [_saveAlertController addAction:_save];
     [_saveAlertController addAction:delete];
     [_saveAlertController addAction:discard];
     
+
+    // Apply renaming button
+    //
     _applyRenameText = @"Apply Auto Renaming to Rows 3..N";
 
     [self recreateApplyButton];
+    
+    [_applyButton setEnabled:TRUE];
+    [_save setEnabled:FALSE];
 }
 
 - (void)viewDidRotate {
@@ -666,11 +675,11 @@ const int ASSOC_COLORS_TAG     = 5;
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
+        [_save setEnabled:TRUE];
         [_applyButton setEnabled:TRUE];
         
       
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        [_applyButton setEnabled:TRUE];
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         [self performSegueWithIdentifier:@"AddMixSegue" sender:self];
     }   
@@ -716,6 +725,7 @@ const int ASSOC_COLORS_TAG     = 5;
     }
     
     [_applyButton setEnabled:TRUE];
+    [_save setEnabled:TRUE];
     
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
 
@@ -737,115 +747,6 @@ const int ASSOC_COLORS_TAG     = 5;
     if (_editFlag == FALSE) {
         [self presentViewController:_saveAlertController animated:YES completion:nil];
     }
-//
-//        // Enable the 'Save' button
-//        //
-//        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:TRUE];
-//    
-//        int objCount = (int)[_paintSwatches count];
-//
-//        for (int i=0; i < objCount; i++) {
-//            UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-//            //int tag_num = DEF_TAG_NUM + i;
-//            UIView *subView = (UITextField *)[cell.contentView viewWithTag:tag_num];
-//            //[cell.mixName setTag:tag_num];
-//            
-//            if (i < 2) {
-//                if (cell.textReturn == TRUE) {
-//                    [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
-//                    _mainColorFlag = TRUE;
-//                    
-//                    [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-//                    [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"Reference"]]];
-//                }
-//
-//            } else {
-//
-//                if ([cell.textEntered length] == 0) {
-//                    if (_mainColorFlag == TRUE) {
-//                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
-//                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
-//                        
-//                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
-//                        [[_paintSwatches objectAtIndex:i] setName:mixName];
-//                        
-//                    } else {
-//                        [(UITextField *) subView setText:[[_paintSwatches objectAtIndex:i] name]];
-//                    }
-//                } else {
-//                    
-//                    NSString *textEntered = cell.textEntered;
-//                    NSString *textReplaced;
-//                    NSError *error = nil;
-//
-//                    NSRegularExpression *regex = [NSRegularExpression
-//                                regularExpressionWithPattern:@".*([0-9]+:[0-9]+).*"
-//                                options:NSRegularExpressionCaseInsensitive error:&error];
-//                    
-//                    if(error != nil) {
-//                        NSLog(@"Error: %@", error);
-//                        
-//                    } else {
-//                        textReplaced = [regex stringByReplacingMatchesInString:textEntered
-//                                    options:0
-//                                    range:NSMakeRange(0, [textEntered length])
-//                                    withTemplate:[NSString stringWithFormat:@"%@", @"$1"]];
-//                    }
-//                    
-//                    NSArray *comps = [textReplaced componentsSeparatedByString:@":"];
-//                    if ([comps count] == 2) {
-//                        [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:[comps[0] intValue]]];
-//                        [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:[comps[1] intValue]]];
-//                    }
-//                    
-//                    if (_mainColorFlag == TRUE) {
-//                        NSString *ref_name = [[_paintSwatches objectAtIndex:0] name];
-//                        NSString *mix_name = [[_paintSwatches objectAtIndex:1] name];
-//                        
-//                        NSString *mixName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", ref_name, mix_name, [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue], [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue]];
-//                        [[_paintSwatches objectAtIndex:i] setName:mixName];
-//                        
-//                    } else {
-//                        [[_paintSwatches objectAtIndex:i] setName:cell.textEntered];
-//                    }
-//                }
-//                [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInt:[GlobalSettings getSwatchId:@"MixAssoc"]]];
-//            }
-//            
-//        }
-//        
-//        UITableViewCell* nameCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
-//        _mixAssocName = (NSString *)[(UITextField *)[nameCell.contentView viewWithTag:ASSOC_NAME_TAG] text];
-//        
-//        UITableViewCell* descCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-//        _mixAssocDesc = (NSString *)[(UITextField *)[descCell.contentView viewWithTag:ASSOC_DESC_TAG] text];
-//        
-//        if (nameCell.textReturn == TRUE) {
-//            _mixAssocName = nameCell.textEntered;
-//        }
-//    
-//        AssocDescTableViewCell* descCell = (AssocDescTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:3]];
-//        if (descCell.textReturn == TRUE) {
-//            _mixAssocDesc = descCell.textEntered;
-//        }
-        
-//        for (int tag=1; tag<=ASSOC_MAX_TAG; tag++) {
-//            [[cell.contentView viewWithTag:tag] removeFromSuperview];
-//        }
-//
-//        _mainColorFlag = FALSE;
-//
-//
-//    } else {
-//        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:FALSE];
-//    }
-//
-//    [self.tableView reloadData];
-//    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
-//    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-//    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
-    
-    _editFlag = flag;
     
     [self.tableView reloadData];
 }
@@ -883,8 +784,6 @@ const int ASSOC_COLORS_TAG     = 5;
         _textReturn  = TRUE;
     }
     
-    [_applyButton setEnabled:TRUE];
-    
     if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
         _mixAssocName = textField.text;
         
@@ -903,7 +802,10 @@ const int ASSOC_COLORS_TAG     = 5;
                 [paintSwatch setName:textField.text];
             }
         }
+        [_applyButton setEnabled:TRUE];
     }
+    
+    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -987,6 +889,9 @@ const int ASSOC_COLORS_TAG     = 5;
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Mix assoc save successful");
+        
+        [_applyButton setEnabled:FALSE];
+        [_save setEnabled:FALSE];
     }
     
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
@@ -1057,8 +962,9 @@ const int ASSOC_COLORS_TAG     = 5;
         [paintSwatch setName:swatchName];
 
     }
+    [_applyButton setEnabled:FALSE];
+    [_save setEnabled:TRUE];
 }
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UIBarButton actions
@@ -1140,6 +1046,8 @@ const int ASSOC_COLORS_TAG     = 5;
             
             [_paintSwatches addObject:paintSwatch];
         }
+        [_applyButton setEnabled:TRUE];
+        [_save setEnabled:TRUE];
     }
     
     NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
