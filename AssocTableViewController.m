@@ -666,8 +666,6 @@ const int ASSOC_COLORS_TAG     = 5;
     
         _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
         
-        //[_mixAssocSwatches removeObjectAtIndex:indexPath.row];
-        
         for (int i=0; i<[_mixAssocSwatches count]; i++) {
             int mix_order = i + 1;
             [[_mixAssocSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:mix_order]];

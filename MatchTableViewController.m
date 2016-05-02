@@ -29,6 +29,10 @@
 
 @interface MatchTableViewController ()
 
+@property (nonatomic, strong) UIAlertController *saveAlertController;
+@property (nonatomic, strong) UIAlertAction *save;
+
+
 @property (nonatomic) BOOL isRGB, textReturn;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
@@ -172,6 +176,29 @@ const int IMAGE_TAG  = 6;
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
+    
+    // Match Edit Button Alert Controller
+    //
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Match Association Edit"
+                                                               message:@"Please select operation"
+                                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Modified globally (i.e., enable/disable)
+    //
+    _save = [UIAlertAction actionWithTitle:@"Save Changes" style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       [self saveData];
+                                   }];
+    
+    
+    UIAlertAction *discard = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_saveAlertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_saveAlertController addAction:_save];
+    [_saveAlertController addAction:discard];
+    
+    [_save setEnabled:FALSE];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -422,8 +449,12 @@ const int IMAGE_TAG  = 6;
 //
 - (void)setEditing:(BOOL)flag animated:(BOOL)animated {
     [super setEditing:flag animated:animated];
-
+    
     _editFlag = flag;
+    
+    if (_editFlag == FALSE) {
+        [self presentViewController:_saveAlertController animated:YES completion:nil];
+    }
     
     [self.tableView reloadData];
 }
@@ -526,6 +557,7 @@ const int IMAGE_TAG  = 6;
 //    }
 }
 
+
 #pragma mark - UITextField Delegate Methods
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -557,6 +589,8 @@ const int IMAGE_TAG  = 6;
     } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
         _descEntered = textField.text;
     }
+    
+    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -639,6 +673,8 @@ const int IMAGE_TAG  = 6;
     //
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
+    [_save setEnabled:TRUE];
+    
     [self.tableView reloadData];
 }
 
@@ -654,6 +690,8 @@ const int IMAGE_TAG  = 6;
     // Re-run the comparison algorithm
     //
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    
+    [_save setEnabled:TRUE];
 
     [self.tableView reloadData];
 }
@@ -666,6 +704,7 @@ const int IMAGE_TAG  = 6;
         [self.tableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:TRUE];
         
+        [_save setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
@@ -683,6 +722,8 @@ const int IMAGE_TAG  = 6;
     
         [self.tableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
+        
+        [_save setEnabled:TRUE];
         
     } else {
         UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
@@ -716,7 +757,7 @@ const int IMAGE_TAG  = 6;
 }
 
 
-- (IBAction)save:(id)sender {
+- (void)saveData {
     
     // Ensure that this value is not empty or nil
     //
@@ -809,6 +850,8 @@ const int IMAGE_TAG  = 6;
         
     } else {
         NSLog(@"TapArea save successful");
+        
+        [_save setEnabled:FALSE];
     }
 }
 
