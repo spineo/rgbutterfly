@@ -965,6 +965,8 @@ const int ASSOC_COLORS_TAG     = 5;
     }
     [_applyButton setEnabled:FALSE];
     [_save setEnabled:TRUE];
+    
+    [self.tableView reloadData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1043,10 +1045,10 @@ const int ASSOC_COLORS_TAG     = 5;
             mix_assoc_ct += 1;
             [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_assoc_ct]];
             
-            _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
-            
             [_paintSwatches addObject:paintSwatch];
         }
+        _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
+
         [_applyButton setEnabled:TRUE];
         [_save setEnabled:TRUE];
     }
