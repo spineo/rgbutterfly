@@ -31,6 +31,9 @@
 @property (nonatomic, strong) NSDictionary *pickerViewDefaults;
 @property (nonatomic, strong) UIImageView *swatchImageView;
 
+@property (nonatomic, strong) UIAlertController *saveAlertController;
+@property (nonatomic, strong) UIAlertAction *save, *delete;
+
 // SwatchName and Reference Label and Name fields
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *swatchKeywords, *swatchDesc;
@@ -248,6 +251,43 @@ const int DETAIL_MIX_SECTION    = 5;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
     [self.editButtonItem setAction:@selector(editAction:)];
     [self makeTextFieldsNonEditable];
+    
+    // Swatch Detail Edit Button Alert Controller
+    //
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Swatch Detail Edit"
+                                                               message:@"Please select operation"
+                                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Modified globally (i.e., enable/disable)
+    //
+    _save = [UIAlertAction actionWithTitle:@"Save Changes" style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       [self saveData];
+                                   }];
+    
+    _delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       [self deleteData];
+                                                       
+                                                   }];
+    
+    UIAlertAction *discard = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_saveAlertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_saveAlertController addAction:_save];
+    [_saveAlertController addAction:_delete];
+    [_saveAlertController addAction:discard];
+    
+    
+    // Check if delete should be disabled (i.e., if PaintSwatch is referenced by any association)
+    //
+    int assoc_ct   = (int)[[ManagedObjectUtils queryEntityRelation:_paintSwatch.objectID relationName:@"paint_swatch" entityName:@"MixAssocSwatch" context:self.context] count];
+    int match_ct = (int)[[ManagedObjectUtils queryEntityRelation:_paintSwatch.objectID relationName:@"paint_swatch" entityName:@"TapAreaSwatch" context:self.context] count];
+    
+    if ((assoc_ct > 0) || (match_ct > 0)) {
+        [_delete setEnabled:FALSE];
+    }
     
     
     // Adjust the layout with rotational changes
@@ -815,7 +855,7 @@ const int DETAIL_MIX_SECTION    = 5;
 // TapRecognizer Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark UIGestureRecognizer methods
+#pragma mark - UIGestureRecognizer methods
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
 
@@ -826,7 +866,7 @@ const int DETAIL_MIX_SECTION    = 5;
 // Storyboard, Tap, and Navigation Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark Navigation and Multi-purpose methods
+#pragma mark - Navigation and Multi-purpose methods
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -860,7 +900,7 @@ const int DETAIL_MIX_SECTION    = 5;
     [super dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)saveSwatch:(id)sender {
+- (void)saveData {
     [_swatchName resignFirstResponder];
     [_swatchKeywords resignFirstResponder];
     [_swatchDesc resignFirstResponder];
@@ -908,7 +948,27 @@ const int DETAIL_MIX_SECTION    = 5;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Mix assoc save successful");
+        NSLog(@"Swatch Detail save successful");
+    }
+}
+
+- (void)deleteData {
+    
+    // Only left relation since this is an orphan PaintSwatch
+    //
+    [ManagedObjectUtils deleteSwatchKeywords:_paintSwatch context:self.context];
+
+    
+    [self.context deleteObject:_paintSwatch];
+    
+
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error deleting context: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Swatch Detail delete successful");
+        
+        [super dismissViewControllerAnimated:YES completion:NULL];
     }
 }
 
@@ -930,6 +990,7 @@ const int DETAIL_MIX_SECTION    = 5;
         _editFlag = TRUE;
 
     } else {
+        [self presentViewController:_saveAlertController animated:YES completion:nil];
         [self.editButtonItem setTitle:@"Edit"];
         [self makeTextFieldsNonEditable];
         _editFlag = FALSE;

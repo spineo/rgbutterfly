@@ -17,6 +17,4 @@
 
 - (IBAction)goBack:(id)sender;
 
-- (IBAction)saveSwatch:(id)sender;
-
 @end

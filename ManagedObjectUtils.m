@@ -662,7 +662,7 @@
     }
 }
 
-+ (NSArray *)queryObjectKeywords:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context {
++ (NSArray *)queryEntityRelation:(NSManagedObjectID *)obj_id relationName:(NSString *)relationName entityName:(NSString *)entityName context:(NSManagedObjectContext *)context {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -690,7 +690,7 @@
 
 + (void)deleteSwatchKeywords:(PaintSwatches *)swatchObj context:(NSManagedObjectContext *)context {
 
-    NSArray *swatchKeywords = [self queryObjectKeywords:swatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
+    NSArray *swatchKeywords = [self queryEntityRelation:swatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
 
     for (SwatchKeyword *swatchKeywordObj in swatchKeywords) {
         if (swatchKeywordObj != nil) {
@@ -706,7 +706,7 @@
 
 + (void)deleteTapAreaKeywords:(TapArea *)tapAreaObj context:(NSManagedObjectContext *)context {
 
-    NSArray *tapAreaKeywords = [self queryObjectKeywords:tapAreaObj.objectID relationName:@"tap_area" entityName:@"TapAreaKeyword" context:context];
+    NSArray *tapAreaKeywords = [self queryEntityRelation:tapAreaObj.objectID relationName:@"tap_area" entityName:@"TapAreaKeyword" context:context];
     
     for (TapAreaKeyword *tapAreaKeywordObj in tapAreaKeywords) {
         if (tapAreaKeywordObj != nil) {
@@ -722,7 +722,7 @@
 
 + (void)deleteMatchAssocKeywords:(MatchAssociations *)matchAssocObj context:(NSManagedObjectContext *)context {
     
-    NSArray *matchAssocKeywords = [self queryObjectKeywords:matchAssocObj.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:context];
+    NSArray *matchAssocKeywords = [self queryEntityRelation:matchAssocObj.objectID relationName:@"match_association" entityName:@"MatchAssocKeyword" context:context];
     
     for (MatchAssocKeyword *matchAssocKeywordObj in matchAssocKeywords) {
         if (matchAssocKeywordObj != nil) {
@@ -739,7 +739,7 @@
 
 + (void)deleteMixAssocKeywords:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context {
 
-    NSArray *mixAssocKeywords = [self queryObjectKeywords:mixAssocObj.objectID relationName:@"mix_association" entityName:@"MixAssocKeyword" context:context];
+    NSArray *mixAssocKeywords = [self queryEntityRelation:mixAssocObj.objectID relationName:@"mix_association" entityName:@"MixAssocKeyword" context:context];
     
     for (MixAssocKeyword *mixAssocKeywordObj in mixAssocKeywords) {
         if (mixAssocKeywordObj != nil) {
@@ -756,7 +756,7 @@
 
 + (void)deletePaintSwatchKeywords:(PaintSwatches *)paintSwatchObj context:(NSManagedObjectContext *)context {
     
-    NSArray *paintSwatchKeywords = [self queryObjectKeywords:paintSwatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
+    NSArray *paintSwatchKeywords = [self queryEntityRelation:paintSwatchObj.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:context];
     
     for (SwatchKeyword *swatchKeywordObj in paintSwatchKeywords) {
         if (swatchKeywordObj != nil) {
