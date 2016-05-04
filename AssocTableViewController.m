@@ -793,11 +793,14 @@ const int ASSOC_COLORS_TAG     = 5;
         
     } else {
         for (int i=0; i<[_mixAssocSwatches count]; i++) {
-            int COLOR_TAG = i + ASSOC_COLORS_TAG;
-            if (textField.tag == COLOR_TAG) {
+            int color_tag = i + ASSOC_COLORS_TAG;
+            if (textField.tag == color_tag) {
                 MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
                 PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
                 [paintSwatch setName:textField.text];
+                
+                
+                NSLog(@"COUNT=%i, Name=%@", i, textField.text);
             }
         }
         [_applyButton setEnabled:TRUE];
@@ -924,8 +927,8 @@ const int ASSOC_COLORS_TAG     = 5;
     int ratio_1, ratio_2;
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
-        int COLOR_TAG = i + ASSOC_COLORS_TAG;
-        UITextField *textField = (UITextField *)[self.view viewWithTag:COLOR_TAG];
+        int color_tag = i + ASSOC_COLORS_TAG;
+        UITextField *textField = (UITextField *)[self.view viewWithTag:color_tag];
         
         MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
         PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
@@ -935,13 +938,13 @@ const int ASSOC_COLORS_TAG     = 5;
         int swatchId;
         
         if (i == 0) {
-            refName_1 = textField.text;
+            refName_1 = paintSwatch.name;
             isMix = NO;
             swatchName = refName_1;
             swatchId = [GlobalSettings getSwatchId:@"Reference"];
             
         } else if (i == 1) {
-            refName_2 = textField.text;
+            refName_2 = paintSwatch.name;
             isMix = NO;
             swatchName = refName_2;
             swatchId = [GlobalSettings getSwatchId:@"Reference"];
@@ -1020,7 +1023,7 @@ const int ASSOC_COLORS_TAG     = 5;
         
         int mix_assoc_ct = (int)[_mixAssocSwatches count];
         
-        for (int i=0; i<_addPaintSwatches.count; i++) {
+        for (int i=0; i<[_addPaintSwatches count]; i++) {
             PaintSwatch *paintSwatch = [_addPaintSwatches objectAtIndex:i];
             MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
             

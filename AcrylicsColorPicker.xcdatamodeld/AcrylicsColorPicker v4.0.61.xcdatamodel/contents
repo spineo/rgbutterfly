@@ -50,6 +50,7 @@
     </entity>
     <entity name="MixAssocSwatch" representedClassName="MixAssocSwatch" syncable="YES">
         <attribute name="mix_order" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
+        <attribute name="pswatch_is_add" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="mix_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MixAssociation" inverseName="mix_assoc_swatch" inverseEntity="MixAssociation" syncable="YES"/>
         <relationship name="paint_swatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaintSwatch" inverseName="mix_assoc_swatch" inverseEntity="PaintSwatch" syncable="YES"/>
     </entity>
@@ -127,7 +128,7 @@
         <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="73"/>
         <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="148"/>
         <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="73"/>
-        <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="88"/>
+        <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="103"/>
         <element name="PaintSwatch" positionX="-128" positionY="-198" width="128" height="478"/>
         <element name="PaintSwatchType" positionX="16" positionY="152" width="128" height="73"/>
         <element name="SubjectiveColor" positionX="16" positionY="270" width="128" height="88"/>

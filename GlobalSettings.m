@@ -133,8 +133,8 @@ NSString * const VALUE_EXISTS_MSG = @"Value already exists.";
 
 // Core data/Store
 //
-NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.61.sqlite";
-NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.61.sqlite";
+NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
+NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
 int const MIGRATE_STORE = 0;
 
 

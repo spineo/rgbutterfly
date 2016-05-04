@@ -194,6 +194,8 @@
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
+		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
+		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
 		21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
 		21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAssociations+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21A69CC91C8DAD3C00B70810 /* MatchAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssociations.h; sourceTree = "<group>"; };
@@ -822,6 +824,8 @@
 		21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */,
+				219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */,
 				215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */,
 				214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */,
 				2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */,
@@ -829,7 +833,7 @@
 				21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */,
 				21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */,
 			);
-			currentVersion = 215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */;
+			currentVersion = 219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */;
 			path = AcrylicsColorPicker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
