@@ -110,7 +110,7 @@ const int DETAIL_DESC_SECTION   = 4;
 const int DETAIL_MIX_SECTION    = 5;
 
 
-#pragma mark Initialization methods
+#pragma mark - Initialization methods
 
 -(void)loadView {
     [super loadView];
@@ -289,6 +289,7 @@ const int DETAIL_MIX_SECTION    = 5;
         [_delete setEnabled:FALSE];
     }
     
+    [_save setEnabled:FALSE];
     
     // Adjust the layout with rotational changes
     //
@@ -360,7 +361,7 @@ const int DETAIL_MIX_SECTION    = 5;
 // Tableview methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark UITableView methods
+#pragma mark - UITableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (num_tableview_rows > 0) {
@@ -572,7 +573,7 @@ const int DETAIL_MIX_SECTION    = 5;
 // Textfield Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark UITextField methods
+#pragma mark - UITextField methods
 
 //- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 //    return YES;
@@ -617,6 +618,8 @@ const int DETAIL_MIX_SECTION    = 5;
     _typesPickerFlag = FALSE;
     _colorPickerFlag = FALSE;
     [self setFrameSizes];
+
+    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -648,7 +651,7 @@ const int DETAIL_MIX_SECTION    = 5;
 // Picker Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark UIPickerView methods
+#pragma mark - UIPickerView methods
 
 
 // The number of columns of data
@@ -949,6 +952,8 @@ const int DETAIL_MIX_SECTION    = 5;
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Swatch Detail save successful");
+        
+        [_save setEnabled:FALSE];
     }
 }
 
