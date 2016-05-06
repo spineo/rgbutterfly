@@ -14,7 +14,6 @@
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E561C8481C5001C3F05 /* MatchTableViewController.m */; };
 		21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E5A1C848259001C3F05 /* AddMixTableViewController.m */; };
-		21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E5C1C848259001C3F05 /* AddMixViewController.m */; };
 		21397E611C848272001C3F05 /* AssocTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E601C848272001C3F05 /* AssocTableViewController.m */; };
 		21397E631C8482E1001C3F05 /* colorwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 21397E621C8482E1001C3F05 /* colorwheel.png */; };
 		21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E651C848308001C3F05 /* MatchAlgorithms.m */; };
@@ -97,8 +96,6 @@
 		21397E581C8481F6001C3F05 /* MatchTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewController.h; sourceTree = "<group>"; };
 		21397E591C848259001C3F05 /* AddMixTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMixTableViewController.h; sourceTree = "<group>"; };
 		21397E5A1C848259001C3F05 /* AddMixTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMixTableViewController.m; sourceTree = "<group>"; };
-		21397E5B1C848259001C3F05 /* AddMixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMixViewController.h; sourceTree = "<group>"; };
-		21397E5C1C848259001C3F05 /* AddMixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMixViewController.m; sourceTree = "<group>"; };
 		21397E5F1C848272001C3F05 /* AssocTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocTableViewController.h; sourceTree = "<group>"; };
 		21397E601C848272001C3F05 /* AssocTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocTableViewController.m; sourceTree = "<group>"; };
 		21397E621C8482E1001C3F05 /* colorwheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorwheel.png; sourceTree = "<group>"; };
@@ -255,8 +252,6 @@
 			children = (
 				21397E591C848259001C3F05 /* AddMixTableViewController.h */,
 				21397E5A1C848259001C3F05 /* AddMixTableViewController.m */,
-				21397E5B1C848259001C3F05 /* AddMixViewController.h */,
-				21397E5C1C848259001C3F05 /* AddMixViewController.m */,
 				21397E5F1C848272001C3F05 /* AssocTableViewController.h */,
 				21397E601C848272001C3F05 /* AssocTableViewController.m */,
 				21397E581C8481F6001C3F05 /* MatchTableViewController.h */,
@@ -601,7 +596,6 @@
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
 				214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */,
 				214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */,
-				21397E5E1C848259001C3F05 /* AddMixViewController.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
 				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
 				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
