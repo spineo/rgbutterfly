@@ -18,15 +18,8 @@
 
 @interface AddMixTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *paintSwatches, *addPaintSwatches;
-
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *searchString;
-
-@property (nonatomic) BOOL isRGB, searchMatch;
 
 @property (nonatomic) int addSwatchCount;
-
-@property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *backImageName, *searchImageName, *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic) CGFloat defCellHeight;
 @property (nonatomic, strong) UIView *bgColorView;
@@ -52,6 +45,11 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSEntityDescription *paintSwatchEntity;
+
+@property UIColor *defaultColor, *defaultBgColor,  *currColor;
+@property UIFont *defaultFont, *placeholderFont, *currFont;
+@property UILabel *mixTitleLabel;
+@property CGColorRef defColorBorder;
 
 @end
 

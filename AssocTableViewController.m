@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "AssocTableViewCell.h"
 #import "AssocDescTableViewCell.h"
-#import "AddMixViewController.h"
+#import "AddMixTableViewController.h"
 #import "ColorUtils.h"
 #import "CoreDataUtils.h"
 #import "SwatchDetailTableViewController.h"
@@ -46,7 +46,7 @@
 
 @property (nonatomic, strong) UIButton *applyButton;
 
-@property (nonatomic, strong) AddMixViewController *sourceViewController;
+@property (nonatomic, strong) AddMixTableViewController *sourceViewController;
 
 // NSManagedObject subclassing
 //
@@ -1008,9 +1008,9 @@ const int ASSOC_COLORS_TAG     = 5;
     
     if ([[segue identifier] isEqualToString:@"AddMixSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
-        AddMixViewController *addMixViewController = (AddMixViewController *)([navigationViewController viewControllers][0]);
+        AddMixTableViewController *addMixTableViewController = (AddMixTableViewController *)([navigationViewController viewControllers][0]);
         
-        [addMixViewController setIsRGB:_isRGB];
+        [addMixTableViewController setIsRGB:_isRGB];
         
     } else if ([[segue identifier] isEqualToString:@"AssocSwatchDetailSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];

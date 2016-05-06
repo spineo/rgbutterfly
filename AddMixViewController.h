@@ -11,26 +11,26 @@
 
 @interface AddMixViewController : UIViewController <UISearchBarDelegate>
 
-@property NSMutableArray *paintSwatches, *addPaintSwatches;
-
-@property NSString *reuseCellIdentifier, *searchString;
-
-@property BOOL isRGB, searchMatch;
-
-@property UIColor *defaultColor, *defaultBgColor,  *currColor;
-@property UIFont *defaultFont, *placeholderFont, *currFont;
-@property UILabel *mixTitleLabel;
-@property NSString *domColorLabel, *mixColorLabel, *addColorLabel;
-@property CGColorRef defColorBorder;
-@property CGFloat defCellHeight;
-@property UIView *bgColorView;
-@property UIImage *colorRenderingImage;
-
-// SearchBar related
+//@property NSMutableArray *paintSwatches, *addPaintSwatches;
 //
-@property UIView *titleView;
-@property (strong, nonatomic) UISearchBar *mixSearchBar;
-
-@property (weak, nonatomic) IBOutlet UITableView *addMixTableView;
+//@property NSString *reuseCellIdentifier, *searchString;
+//
+//@property BOOL isRGB, searchMatch;
+//
+//@property UIColor *defaultColor, *defaultBgColor,  *currColor;
+//@property UIFont *defaultFont, *placeholderFont, *currFont;
+//@property UILabel *mixTitleLabel;
+//@property NSString *domColorLabel, *mixColorLabel, *addColorLabel;
+//@property CGColorRef defColorBorder;
+//@property CGFloat defCellHeight;
+//@property UIView *bgColorView;
+//@property UIImage *colorRenderingImage;
+//
+//// SearchBar related
+////
+//@property UIView *titleView;
+//@property (strong, nonatomic) UISearchBar *mixSearchBar;
+//
+//@property (weak, nonatomic) IBOutlet UITableView *addMixTableView;
 
 @end

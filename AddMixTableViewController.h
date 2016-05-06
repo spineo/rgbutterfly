@@ -13,5 +13,11 @@
 
 - (IBAction)searchMix:(id)sender;
 
+@property NSMutableArray *paintSwatches, *addPaintSwatches;
+
+@property NSString *reuseCellIdentifier, *searchString;
+
+@property BOOL isRGB, searchMatch;
+
 
 @end
