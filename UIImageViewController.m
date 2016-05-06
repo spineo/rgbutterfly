@@ -2046,6 +2046,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Update the title
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
+
     }
 }
 
@@ -2066,9 +2067,10 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         } else {
             NSLog(@"MixAssociation and relations delete successful");
             
-            // Update the title
-            //
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+//            // Update the title
+//            //
+//            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
     
@@ -2400,13 +2402,14 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         } else {
             NSLog(@"MatchAssociation and relations delete successful");
             
-            _tapAreasChanged = FALSE;
-            
-            // Update the title
-            //
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
-            
-            [self matchButtonsHide];
+//            _tapAreasChanged = FALSE;
+//            
+//            // Update the title
+//            //
+//            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+//            
+//            [self matchButtonsHide];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
     
@@ -2514,7 +2517,6 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
 }
 
 - (IBAction)goBack:(id)sender {
-    [self.context rollback];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

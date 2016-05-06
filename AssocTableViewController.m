@@ -909,6 +909,8 @@ const int ASSOC_COLORS_TAG     = 5;
         NSLog(@"Error delete context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Mix delete successful");
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
