@@ -14,6 +14,7 @@
 @interface MixAssocSwatch : NSManagedObject
 
 @property (nonatomic, retain) NSNumber *mix_order;
+@property (nonatomic, retain) NSNumber *paint_swatch_is_add;
 @property (nonatomic, retain) MixAssociation *mix_association;
 @property (nonatomic, retain) PaintSwatch *paint_swatch;
 

@@ -512,6 +512,13 @@ const int ASSOC_COLORS_TAG     = 5;
         int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
         UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
         
+        // Disable editing if the paint swatch is an "add"
+        //
+        if ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) {
+            [refName setEnabled:FALSE];
+            [refName setBackgroundColor:GRAY_BG_COLOR];
+        }
+        
         CGFloat xpos  = _assocImageViewWidth + DEF_CELL_EDIT_DISPL;
         CGFloat width = cell.contentView.bounds.size.width - xpos;
         
@@ -1046,6 +1053,10 @@ const int ASSOC_COLORS_TAG     = 5;
             //
             mix_assoc_ct += 1;
             [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_assoc_ct]];
+            
+            // Flag it as an added paint swatch (so it will not be editable)
+            //
+            [mixAssocSwatch setPaint_swatch_is_add:[NSNumber numberWithBool:TRUE]];
             
             [_paintSwatches addObject:paintSwatch];
         }
