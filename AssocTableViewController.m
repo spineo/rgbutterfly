@@ -805,9 +805,6 @@ const int ASSOC_COLORS_TAG     = 5;
                 MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
                 PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
                 [paintSwatch setName:textField.text];
-                
-                
-                NSLog(@"COUNT=%i, Name=%@", i, textField.text);
             }
         }
         [_applyButton setEnabled:TRUE];
@@ -1011,6 +1008,7 @@ const int ASSOC_COLORS_TAG     = 5;
         AddMixTableViewController *addMixTableViewController = (AddMixTableViewController *)([navigationViewController viewControllers][0]);
         
         [addMixTableViewController setIsRGB:_isRGB];
+        [addMixTableViewController setMixAssocSwatches:_mixAssocSwatches];
         
     } else if ([[segue identifier] isEqualToString:@"AssocSwatchDetailSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];

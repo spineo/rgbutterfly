@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PaintSwatches.h"
 
 @interface AddMixTableViewController : UITableViewController <UISearchBarDelegate>
 
 - (IBAction)searchMix:(id)sender;
 
-@property NSMutableArray *paintSwatches, *addPaintSwatches;
+@property NSMutableArray *addPaintSwatches, *mixAssocSwatches;
 
 @property NSString *reuseCellIdentifier, *searchString;
 

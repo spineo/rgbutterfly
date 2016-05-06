@@ -16,8 +16,15 @@
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 
+// Entity related
+//
+#import "PaintSwatches.h"
+#import "MixAssocSwatch.h"
+
+
 @interface AddMixTableViewController ()
 
+@property NSMutableArray *allPaintSwatches, *paintSwatches;
 
 @property (nonatomic) int addSwatchCount;
 @property (nonatomic, strong) NSString *backImageName, *searchImageName, *domColorLabel, *mixColorLabel, *addColorLabel;
@@ -72,7 +79,26 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    _paintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    // Get the full list of Paint Swatches and filter out the ones from the source MixAssociation
+    //
+    // (1) Create the lookup by Name
+    //
+    NSMutableDictionary *currPaintSwatchNames = [[NSMutableDictionary alloc] init];
+    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+        NSString *paintSwatchName = [(PaintSwatches *)[[_mixAssocSwatches objectAtIndex:i] paint_swatch] name];
+        [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
+    }
+
+    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    _paintSwatches    = [[NSMutableArray alloc] init];
+    for (PaintSwatches *paintSwatch in _allPaintSwatches) {
+        NSString *name = [paintSwatch name];
+
+        if (![currPaintSwatchNames valueForKey:name]) {
+            [_paintSwatches addObject:paintSwatch];
+        }
+    }
+    
     _addPaintSwatches = [[NSMutableArray alloc] init];
     
     // TEMP
@@ -311,8 +337,7 @@
     [self.navigationItem setRightBarButtonItem: _searchButton];
     
     [self reloadTable];
-    
-    NSLog(@"Selection...");
+
     for (int i=0; i< [_paintSwatches count]; i++) {
         BOOL  test_val = [[[_paintSwatches objectAtIndex:i] is_selected] boolValue];
         if (test_val == TRUE) {

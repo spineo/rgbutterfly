@@ -458,7 +458,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1026"
+            endingLineNumber = "1026"
+            landmarkName = "-unwindToAssocFromAdd:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1028"
@@ -474,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1030"
@@ -490,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1032"
-            endingLineNumber = "1032"
+            startingLineNumber = "1034"
+            endingLineNumber = "1034"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1036"
-            endingLineNumber = "1036"
+            startingLineNumber = "1035"
+            endingLineNumber = "1035"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -522,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1037"
-            endingLineNumber = "1037"
+            startingLineNumber = "1066"
+            endingLineNumber = "1066"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -538,7 +554,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
+            landmarkName = "-unwindToAssocFromAdd:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1068"
@@ -553,44 +585,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1069"
-            endingLineNumber = "1069"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1070"
-            endingLineNumber = "1070"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -602,11 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "386"
-            endingLineNumber = "386"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -650,11 +650,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -682,11 +682,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AddMixTableViewController.m"
-            timestampString = "484232144.780219"
+            timestampString = "484235160.868866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2374,11 +2374,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1061"
-            endingLineNumber = "1061"
+            startingLineNumber = "1059"
+            endingLineNumber = "1059"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2390,11 +2390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1056"
-            endingLineNumber = "1056"
+            startingLineNumber = "1054"
+            endingLineNumber = "1054"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2406,11 +2406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1056"
-            endingLineNumber = "1056"
+            startingLineNumber = "1054"
+            endingLineNumber = "1054"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2422,11 +2422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "484229868.801562"
+            timestampString = "484234171.24255"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1048"
-            endingLineNumber = "1048"
+            startingLineNumber = "1046"
+            endingLineNumber = "1046"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2709,6 +2709,70 @@
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddMixTableViewController.m"
+            timestampString = "484235160.868866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddMixTableViewController.m"
+            timestampString = "484235160.868866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddMixTableViewController.m"
+            timestampString = "484235160.868866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AddMixTableViewController.m"
+            timestampString = "484235160.868866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
