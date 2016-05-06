@@ -252,7 +252,8 @@ const int IMAGE_TAG  = 6;
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:GRAY_BG_COLOR];
 
-    cell.imageView.image = nil;
+    [cell.imageView setImage:nil];
+    [cell.textLabel setText:nil];
 
     
     // Remove the tags
@@ -399,7 +400,7 @@ const int IMAGE_TAG  = 6;
         
         [cell.textLabel setFont:TABLE_CELL_FONT];
         [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
-        [cell.textLabel setText: paintSwatch.name];
+        [cell.textLabel setText:[paintSwatch name]];
         
         if (_editFlag == TRUE) {
             [cell setAccessoryType:UITableViewCellAccessoryNone];
