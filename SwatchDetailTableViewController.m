@@ -820,12 +820,15 @@ const int DETAIL_MIX_SECTION    = 5;
     return cell;
 }
 
+// Do not want to create a never ending circular navigation so making this collection non-selectable
+// In order to view relations, the View Controller selection/search in the home page will be used
+//
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    int index = (int)collectionView.tag;
-    
-    _collectViewSelRow = index;
-    
-    [self performSegueWithIdentifier:@"DetailToAssocSegue" sender:self];
+//    int index = (int)collectionView.tag;
+//    
+//    _collectViewSelRow = index;
+//    
+//    [self performSegueWithIdentifier:@"DetailToAssocSegue" sender:self];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
