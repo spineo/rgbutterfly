@@ -2030,7 +2030,11 @@ const int MATCH_DESC_TAG   = 17;
     for (int i=0; i<[_paintSwatches count];i++) {
         PaintSwatches *paintSwatch = [_paintSwatches objectAtIndex:i];
         int mix_ct = i + 1;
-        [paintSwatch setName:[[NSString alloc] initWithFormat:@"Mix %i", mix_ct]];
+        
+        NSString *name = [paintSwatch name];
+        if (name == nil) {
+            [paintSwatch setName:[[NSString alloc] initWithFormat:@"Mix %i", mix_ct]];
+        }
         
         MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
         [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];

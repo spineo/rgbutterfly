@@ -97,23 +97,21 @@ const int ASSOC_COLORS_TAG     = 5;
 
     // Set the name and desc values
     //
-    if (_mixAssociation != nil) {
-        _mixAssocName = [_mixAssociation name];
-        _mixAssocDesc = [_mixAssociation desc];
-        
-        // Keywords
-        //
-        NSSet *mixAssocKeywords = [_mixAssociation mix_assoc_keyword];
-        NSMutableArray *keywords = [[NSMutableArray alloc] init];
-        for (MixAssocKeyword *mix_assoc_keyword in mixAssocKeywords) {
-            Keyword *keyword = [mix_assoc_keyword keyword];
-            [keywords addObject:[keyword name]];
-        }
-        _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
-        
-        _orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
-        _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
+    _mixAssocName = [_mixAssociation name];
+    _mixAssocDesc = [_mixAssociation desc];
+    
+    // Keywords
+    //
+    NSSet *mixAssocKeywords = [_mixAssociation mix_assoc_keyword];
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    for (MixAssocKeyword *mix_assoc_keyword in mixAssocKeywords) {
+        Keyword *keyword = [mix_assoc_keyword keyword];
+        [keywords addObject:[keyword name]];
     }
+    _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
+    
+    _orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
+    _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
     
     _textReturn = FALSE;
     
