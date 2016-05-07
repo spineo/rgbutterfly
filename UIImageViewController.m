@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
 #import "UIImageViewController.h"
+#import "SwatchDetailTableViewController.h"
 #import "GlobalSettings.h"
 #import "ACPMixAssociationsDesc.h"
 #import "AppDelegate.h"
@@ -2502,7 +2503,10 @@ const int MATCH_DESC_TAG   = 17;
         }
 
     } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {
-        NSLog(@"Segue to Detail");
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
+    
+        [swatchDetailTableViewController setPaintSwatch:[_paintSwatches objectAtIndex:0]];
 
     } else {
         NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);
