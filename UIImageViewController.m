@@ -2444,7 +2444,11 @@ const int MATCH_DESC_TAG   = 17;
 
 - (IBAction)segueToMatchOrAssoc:(id)sender {
     if ([_viewType isEqualToString:@"assoc"]) {
-        [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
+        if ([_paintSwatches count] == 1) {
+            [self performSegueWithIdentifier:@"AssocToDetailSegue" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
+        }
     }
 }
 
@@ -2496,6 +2500,9 @@ const int MATCH_DESC_TAG   = 17;
             [matchTableViewController setTapArea:tapArea];
             [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
         }
+
+    } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {
+        NSLog(@"Segue to Detail");
 
     } else {
         NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);

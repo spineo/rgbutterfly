@@ -1734,23 +1734,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "484327119.165103"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2471"
-            endingLineNumber = "2471"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "484327119.165103"
+            timestampString = "484328524.282753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2475"
@@ -1766,11 +1750,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "484327119.165103"
+            timestampString = "484328524.282753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2477"
-            endingLineNumber = "2477"
+            startingLineNumber = "2479"
+            endingLineNumber = "2479"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1782,11 +1766,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "484327119.165103"
+            timestampString = "484328524.282753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2481"
             endingLineNumber = "2481"
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "484328524.282753"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2485"
+            endingLineNumber = "2485"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
