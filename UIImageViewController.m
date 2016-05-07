@@ -46,7 +46,7 @@
 @property (nonatomic, strong) NSString *defTitle, *maxMatchNumKey, *assocName, *matchKeyw, *matchDesc;
 
 @property (nonatomic, strong) UIAlertController *typeAlertController, *matchEditAlertController, *assocEditAlertController, *deleteTapsAlertController, *updateAlertController;
-@property (nonatomic, strong) UIAlertAction *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
+@property (nonatomic, strong) UIAlertAction *matchSave, *assocSave, *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
 
 @property (nonatomic, strong) UIAlertView *tapAreaAlertView;
 @property (nonatomic) int tapAreaSeen, tapAreaSize;
@@ -473,7 +473,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [self presentViewController:_updateAlertController animated:YES completion:nil];
     }];
     
-    UIAlertAction *matchSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    _matchSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         if (_matchAssociation != nil) {
             _assocName = [_matchAssociation name];
             if ([_assocName isEqualToString:@""] || _assocName == nil) {
@@ -498,10 +498,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     }];
 
     [_matchEditAlertController addAction:matchUpdate];
-    [_matchEditAlertController addAction:matchSave];
+    [_matchEditAlertController addAction:_matchSave];
     [_matchEditAlertController addAction:matchDelete];
     [_matchEditAlertController addAction:matchCancel];
     
+    [_matchSave setEnabled:FALSE];
     
     
     // Match Update Edit button Alert Controller
@@ -573,7 +574,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
                                                                     message:@"Please select operation"
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *assocSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    _assocSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             [self saveMixAssoc];
     }];
     
@@ -585,9 +586,11 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_assocEditAlertController dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [_assocEditAlertController addAction:assocSave];
+    [_assocEditAlertController addAction:_assocSave];
     [_assocEditAlertController addAction:assocDelete];
     [_assocEditAlertController addAction:assocCancel];
+    
+    [_assocSave setEnabled:FALSE];
 
     
     // Adjust the NavBar layout when the orientation changes
@@ -1136,6 +1139,12 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [_rgbView setImage: _tapMeImage];
         [_rgbView setBackgroundColor: LIGHT_BG_COLOR];
     }
+    
+    if ([_viewType isEqualToString:@"match"]) {
+        [_matchSave setEnabled:TRUE];
+    } else {
+        [_assocSave setEnabled:TRUE];
+    }
 }
 
 
@@ -1430,6 +1439,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
     
     [_userDefaults setInteger:_maxMatchNum forKey:_maxMatchNumKey];
     [_userDefaults synchronize];
+    
+    [_matchSave setEnabled:TRUE];
 }
 
 - (void)changeShape {
@@ -1902,6 +1913,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
     [self.imageTableView reloadData];
+    [_matchSave setEnabled:TRUE];
 }
 
 - (IBAction)decrMatchAlgorithm:(id)sender {
@@ -1920,6 +1932,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
     [self.imageTableView reloadData];
+    [_matchSave setEnabled:TRUE];
 }
 
 - (IBAction)removeTableRows:(id)sender {
@@ -1933,6 +1946,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         [self.imageTableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:TRUE];
+        [_matchSave setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
@@ -1950,6 +1964,7 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         
         [self.imageTableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
+        [_matchSave setEnabled:TRUE];
         
     } else {
         UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
@@ -2046,7 +2061,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         // Update the title
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
-
+        
+        [_assocSave setEnabled:FALSE];
     }
 }
 
@@ -2275,6 +2291,8 @@ const CGFloat INCR_BUTTON_WIDTH = 20.0;
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
         
         [self matchButtonsHide];
+        
+        [_matchSave setEnabled:FALSE];
     }
 }
 
