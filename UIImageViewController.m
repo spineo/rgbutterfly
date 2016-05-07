@@ -111,10 +111,6 @@ const int MATCH_NAME_TAG   = 15;
 const int MATCH_KEYW_TAG   = 16;
 const int MATCH_DESC_TAG   = 17;
 
-// Button widths
-//
-const CGFloat DECR_BUTTON_WIDTH = 20.0;
-const CGFloat INCR_BUTTON_WIDTH = 20.0;
 
 #pragma mark - Initialization Methods
 

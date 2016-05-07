@@ -61,6 +61,12 @@ CGFloat const DEF_BUTTON_WIDTH      = 60.0;
 CGFloat const DEF_BUTTON_HEIGHT     = 26.0;
 CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
 
+// Match Button widths
+//
+CGFloat const DECR_BUTTON_WIDTH     = 20.0;
+CGFloat const INCR_BUTTON_WIDTH     = 20.0;
+
+
 // Max Match Num (i.e., UIImageViewController)
 //
 int const DEF_MAX_MATCH  = 100;

@@ -71,6 +71,11 @@ extern CGFloat const DEF_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_HEIGHT;
 extern CGFloat const HIDE_BUTTON_WIDTH;
 
+// Match Button widths
+//
+extern CGFloat const DECR_BUTTON_WIDTH;
+extern CGFloat const INCR_BUTTON_WIDTH;
+
 // Tags
 //
 extern int const DEF_TAG_NUM;

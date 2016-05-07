@@ -199,6 +199,8 @@ const int IMAGE_TAG  = 6;
     [_saveAlertController addAction:discard];
     
     [_save setEnabled:FALSE];
+    
+    [self matchButtonsHide];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -454,7 +456,10 @@ const int IMAGE_TAG  = 6;
     _editFlag = flag;
     
     if (_editFlag == FALSE) {
+        [self matchButtonsHide];
         [self presentViewController:_saveAlertController animated:YES completion:nil];
+    } else {
+        [self matchButtonsShow];
     }
     
     [self.tableView reloadData];
@@ -496,14 +501,14 @@ const int IMAGE_TAG  = 6;
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     // Background color
     //
-    [view setTintColor: DARK_TEXT_COLOR];
+    [view setTintColor:DARK_TEXT_COLOR];
     
     // Text Color
     //
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor: LIGHT_TEXT_COLOR];
-    [header.contentView setBackgroundColor: DARK_BG_COLOR];
-    [header.textLabel setFont: TABLE_HEADER_FONT];
+    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
+    [header.contentView setBackgroundColor:DARK_BG_COLOR];
+    [header.textLabel setFont:TABLE_CELL_FONT];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -731,6 +736,24 @@ const int IMAGE_TAG  = 6;
         [self presentViewController:myAlert animated:YES completion:nil];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
+}
+
+- (void)matchButtonsShow {
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:INCR_BUTTON_WIDTH];
+}
+
+- (void)matchButtonsHide {
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 #pragma mark - General purpose methods
