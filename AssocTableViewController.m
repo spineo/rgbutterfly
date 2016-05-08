@@ -935,6 +935,7 @@ const int ASSOC_COLORS_TAG     = 5;
         UITextField *textField = (UITextField *)[self.view viewWithTag:color_tag];
         
         MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+
         PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
         
         BOOL isMix;
@@ -942,13 +943,13 @@ const int ASSOC_COLORS_TAG     = 5;
         int swatchId;
         
         if (i == 0) {
-            refName_1 = paintSwatch.name;
+            refName_1 = [paintSwatch name];
             isMix = NO;
             swatchName = refName_1;
             swatchId = [GlobalSettings getSwatchId:@"Reference"];
             
         } else if (i == 1) {
-            refName_2 = paintSwatch.name;
+            refName_2 = [paintSwatch name];
             isMix = NO;
             swatchName = refName_2;
             swatchId = [GlobalSettings getSwatchId:@"Reference"];
@@ -957,10 +958,18 @@ const int ASSOC_COLORS_TAG     = 5;
             ratio_2 = i - 1;
             ratio_1 = swatch_ct - ratio_2 - 1;
             isMix = YES;
+
             swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", refName_1, refName_2, ratio_1, ratio_2];
             swatchId = [GlobalSettings getSwatchId:@"MixAssoc"];
         }
 
+        // Skip any Paint Swatch that is an add
+        //
+        BOOL paintSwatchIsAdd = [[mixAssocSwatch paint_swatch_is_add] boolValue];
+        if (paintSwatchIsAdd == TRUE) {
+            continue;
+        }
+        
         [textField setText:swatchName];
         [paintSwatch setIs_mix:[NSNumber numberWithBool:isMix]];
         [paintSwatch setType_id:[NSNumber numberWithInteger:swatchId]];
