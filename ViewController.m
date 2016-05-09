@@ -14,6 +14,7 @@
 #import "SwatchDetailTableViewController.h"
 #import "AssocCollectionTableViewCell.h"
 #import "AssocTableViewController.h"
+#import "SettingsTableViewController.h"
 #import "AlertUtils.h"
 
 #import "ManagedObjectUtils.h"
@@ -844,7 +845,7 @@
         
     // MainSwatchDetailSegue
     //
-    } else {
+    } else  if ([[segue identifier] isEqualToString:@"MainSwatchDetailSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
         
@@ -854,6 +855,11 @@
         
         [swatchDetailTableViewController setPaintSwatch:_selPaintSwatch];
         [swatchDetailTableViewController setMixAssocSwatches:mixAssocSwatches];
+    
+    // SettingsSegue
+    //
+    } else {
+
     }
 }
 

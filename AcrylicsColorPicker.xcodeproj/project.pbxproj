@@ -69,6 +69,7 @@
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
 		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
+		21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,8 @@
 		21A69CD01C8DAFB600B70810 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +253,8 @@
 		2108C5E61C820C5800DD7B9E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */,
+				21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */,
 				21397E591C848259001C3F05 /* AddMixTableViewController.h */,
 				21397E5A1C848259001C3F05 /* AddMixTableViewController.m */,
 				21397E5F1C848272001C3F05 /* AssocTableViewController.h */,
@@ -568,6 +573,7 @@
 				21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */,
 				21397E9C1C8484D7001C3F05 /* BarButtonUtils.m in Sources */,
 				21397E9D1C8484D7001C3F05 /* ColorUtils.m in Sources */,
+				21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */,
 				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
 				214430E81CB1A19B0014AABD /* MixAssocKeyword.m in Sources */,
 				21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */,
