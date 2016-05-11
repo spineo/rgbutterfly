@@ -151,7 +151,7 @@ const int IMAGE_TAG  = 6;
 
     // Match algorithms
     //
-    _maxMatchNum     = (int)[[_tapArea.tap_area_swatch allObjects] count];
+    _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
     
@@ -160,17 +160,18 @@ const int IMAGE_TAG  = 6;
     //
     // Override the default Algorithm index?
     //
-    _matchAlgIndex = [_tapArea.match_algorithm_id intValue];
-    _nameEntered   = _tapArea.name;
-    _descEntered   = _tapArea.desc;
-    
+    _matchAlgIndex = [[_tapArea match_algorithm_id] intValue];
+    _nameEntered   = [_tapArea name] ? [_tapArea name] : @"";
+    _descEntered   = [_tapArea desc] ? [_tapArea desc] : @"";
+
+
     // Keywords
     //
     NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
     for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
         Keyword *keyword = tap_area_keyword.keyword;
-        [keywords addObject:keyword.name];
+        [keywords addObject:[keyword name]];
     }
     _keywEntered = [keywords componentsJoinedByString:@", "];
     

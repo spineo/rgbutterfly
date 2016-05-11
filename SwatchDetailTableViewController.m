@@ -36,7 +36,7 @@
 
 // SwatchName and Reference Label and Name fields
 //
-@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *swatchKeywords, *swatchDesc;
+@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *swatchKeyw;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *keywHeader, *descHeader, *mixAssocHeader;
 
@@ -100,14 +100,14 @@ static NSString * const reuseIdentifier = @"CollectionPrototypeCell";
 
 // Globals
 //
-const int NUM_SECTIONS          = 6;
-
 const int DETAIL_NAME_SECTION   = 0;
 const int DETAIL_COLOR_SECTION  = 1;
 const int DETAIL_TYPES_SECTION  = 2;
 const int DETAIL_KEYW_SECTION   = 3;
 const int DETAIL_DESC_SECTION   = 4;
 const int DETAIL_MIX_SECTION    = 5;
+
+const int DETAIL_MAX_SECTION    = 6;
 
 
 #pragma mark - Initialization methods
@@ -175,6 +175,12 @@ const int DETAIL_MIX_SECTION    = 5;
     _keywHeader       = @"Keywords";
     _descHeader       = @"Description";
     _mixAssocHeader   = @"Mix Associations";
+    
+    // Set the placeholders
+    //
+    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Name (max. of %i chars) - ", MAX_NAME_LEN];
+    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Description (max. %i chars) - ", MAX_DESC_LEN];
 
     
     // A few defaults
@@ -196,51 +202,47 @@ const int DETAIL_MIX_SECTION    = 5;
 
     // Instantiate the widgets
     //
-    _swatchName  = [FieldUtils createTextField:_paintSwatch.name tag: NAME_FIELD_TAG];
-    [_swatchName setDelegate:self];
+    _nameEntered = [_paintSwatch name];
 
     
     // Swatch Type
     //
     NSString *typeName = [GlobalSettings getSwatchType:_typesPickerSelRow];
-    _swatchTypeName  = [FieldUtils createTextField:typeName tag: TYPE_FIELD_TAG];
+    _swatchTypeName  = [FieldUtils createTextField:typeName tag:TYPE_FIELD_TAG];
     [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
     [_swatchTypeName setInputView: _swatchTypesPicker];
     [_swatchTypeName setDelegate:self];
     [self createSwatchTypePicker];
 
     NSString *colorName = [GlobalSettings getColorName:_colorPickerSelRow];
-    _subjColorName = [FieldUtils createTextField:colorName tag: COLOR_FIELD_TAG];
+    _subjColorName = [FieldUtils createTextField:colorName tag:COLOR_FIELD_TAG];
     [_subjColorName setTextAlignment:NSTextAlignmentCenter];
     [_subjColorName setInputView: _subjColorPicker];
     [_subjColorName setDelegate:self];
     [self createColorPicker];
     
-    NSSet *swatchKeywords = _paintSwatch.swatch_keyword;
+    NSSet *swatchKeywords = [_paintSwatch swatch_keyword];
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
     for (SwatchKeyword *swatch_keyword in swatchKeywords) {
-        Keyword *keyword = swatch_keyword.keyword;
-        [keywords addObject:keyword.name];
+        Keyword *keyword = [swatch_keyword keyword];
+        [keywords addObject:[keyword name]];
     }
+    _keywEntered = [keywords componentsJoinedByString:@", "];
     
     // Create the buttons
     //
     CGRect colorButtonFrame = CGRectMake(_doneColorButtonXOffset, _textFieldYOffset, _doneColorButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag: COLOR_BTN_TAG frame:colorButtonFrame];
+    _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag:COLOR_BTN_TAG frame:colorButtonFrame];
     
     [_doneColorButton addTarget:self action:@selector(colorSelection) forControlEvents:UIControlEventTouchUpInside];
     [_doneColorButton setHidden:TRUE];
     
     CGRect typeButtonFrame = CGRectMake(_doneTypeButtonXOffset, _textFieldYOffset, _doneTypeButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag: TYPE_BTN_TAG frame:typeButtonFrame];
+    _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag:TYPE_BTN_TAG frame:typeButtonFrame];
     [_doneTypeButton addTarget:self action:@selector(swatchTypeSelection) forControlEvents:UIControlEventTouchUpInside];
     [_doneTypeButton setHidden:TRUE];
     
-    _swatchKeywords = [FieldUtils createTextField:[keywords componentsJoinedByString:@", "] tag: KEYW_FIELD_TAG];
-    [_swatchKeywords setDelegate: self];
-
-    _swatchDesc = [FieldUtils createTextField:_paintSwatch.desc tag: DESC_FIELD_TAG];
-    [_swatchDesc setDelegate: self];
+    _descEntered = [_paintSwatch desc] ? [_paintSwatch desc] : @"";
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -249,7 +251,6 @@ const int DETAIL_MIX_SECTION    = 5;
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
-    [self.editButtonItem setAction:@selector(editAction:)];
     [self makeTextFieldsNonEditable];
     
     // Swatch Detail Edit Button Alert Controller
@@ -314,9 +315,6 @@ const int DETAIL_MIX_SECTION    = 5;
     //
     CGFloat fullTextFieldWidth = (viewWidth - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING;
 
-    [_swatchName      setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-
-
     // Subjective Color
     //
     if (_colorPickerFlag == TRUE) {
@@ -349,11 +347,6 @@ const int DETAIL_MIX_SECTION    = 5;
 
     _doneTypeButtonXOffset  = DEF_TABLE_X_OFFSET + _typeTextFieldWidth + DEF_FIELD_PADDING;
     [_doneTypeButton setFrame:CGRectMake(_doneTypeButtonXOffset, _textFieldYOffset, _doneTypeButtonWidth, DEF_TEXTFIELD_HEIGHT)];
-
-    // Keywords and Description text views
-    //
-    [_swatchKeywords  setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_swatchDesc      setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
 }
 
 
@@ -365,32 +358,51 @@ const int DETAIL_MIX_SECTION    = 5;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (num_tableview_rows > 0) {
-        return NUM_SECTIONS;
+        return DETAIL_MAX_SECTION;
     } else {
-        return NUM_SECTIONS - 1;
+        return DETAIL_MAX_SECTION - 1;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section <= DETAIL_DESC_SECTION) {
-        return 1;
-    } else {
+    if ((
+         ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
+         ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
+         ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
+         ) && (_editFlag == FALSE)) {
+        return 0;
+
+    } else if (section == DETAIL_MIX_SECTION) {
         return num_tableview_rows;
+
+    } else {
+        return 1;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == DETAIL_MIX_SECTION) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        
+    } else {
+        return DEF_TABLE_CELL_HEIGHT;
     }
-    
-    return DEF_TABLE_CELL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section <= DETAIL_DESC_SECTION) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:REUSE_IDENTIFIER forIndexPath:indexPath];
+        
+        // Global defaults
+        //
+        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        [tableView setSeparatorColor:GRAY_BG_COLOR];
+        
+        [cell.imageView setImage:nil];
+        [cell.textLabel setText:nil];
         
         // Global defaults
         //
@@ -402,10 +414,33 @@ const int DETAIL_MIX_SECTION    = 5;
         //
         [self setFrameSizes];
         
+        // Remove dynamic text fields
+        //
+        [[cell.contentView viewWithTag:NAME_FIELD_TAG] removeFromSuperview];
+        [[cell.contentView viewWithTag:KEYW_FIELD_TAG] removeFromSuperview];
+        [[cell.contentView viewWithTag:DESC_FIELD_TAG] removeFromSuperview];
+        
+        
         // Name, and reference type
         //
         if (indexPath.section == DETAIL_NAME_SECTION) {
-            [cell.contentView addSubview:_swatchName];
+
+            // Create the name text field
+            //
+            UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            
+            if (_editFlag == TRUE) {
+                if ([_nameEntered isEqualToString:@""]) {
+                    [refName setPlaceholder:_namePlaceholder];
+                }
+                
+            } else {
+                [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
+            }
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
         
         // Subjective color field
         //
@@ -430,12 +465,44 @@ const int DETAIL_MIX_SECTION    = 5;
         // Keywords field
         //
         } else if (indexPath.section == DETAIL_KEYW_SECTION) {
-            [cell.contentView addSubview:_swatchKeywords];
+
+            // Create the keyword text field
+            //
+            UITextField *refName  = [FieldUtils createTextField:_keywEntered tag:KEYW_FIELD_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            
+            if (_editFlag == TRUE) {
+                if ([_keywEntered isEqualToString:@""]) {
+                    [refName setPlaceholder:_keywPlaceholder];
+                }
+                
+            } else {
+                [FieldUtils makeTextFieldNonEditable:refName content:_keywEntered border:TRUE];
+            }
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
 
         // Description field
         //
         } else {
-            [cell.contentView addSubview:_swatchDesc];
+        
+            // Create the description text field
+            //
+            UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setDelegate:self];
+            [cell.contentView addSubview:refName];
+            
+            if (_editFlag == TRUE) {
+                if ([_descEntered isEqualToString:@""]) {
+                    [refName setPlaceholder:_descPlaceholder];
+                }
+                
+            } else {
+                [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:TRUE];
+            }
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
         }
         
         return cell;
@@ -496,6 +563,13 @@ const int DETAIL_MIX_SECTION    = 5;
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == DETAIL_DESC_SECTION) {
+        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+    }
     return DEF_TABLE_HDR_HEIGHT;
 }
 
@@ -542,32 +616,22 @@ const int DETAIL_MIX_SECTION    = 5;
     return NO;
 }
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+// flag is 1 after pressing the 'Edit' button
+//
+- (void)setEditing:(BOOL)flag animated:(BOOL)animated {
+    [super setEditing:flag animated:animated];
+    
+    _editFlag = flag;
+    
+    if (_editFlag == FALSE) {
+        [self makeTextFieldsNonEditable];
+        [self presentViewController:_saveAlertController animated:YES completion:nil];
+    } else {
+        [self makeTextFieldsEditable];
+    }
+    
+    [self.tableView reloadData];
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Textfield Methods
@@ -600,20 +664,20 @@ const int DETAIL_MIX_SECTION    = 5;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     // Just set the swatch name, type/color text fields are handled by the picker
-    //
-    if (textField.tag == NAME_FIELD_TAG) {
-        [_paintSwatch setName:textField.text];
     
-    // Keywords
-    //
-    } else if (textField.tag == KEYW_FIELD_TAG) {
-//        _paintSwatch.keywords = [self keywordsTrim:[[NSMutableArray alloc] initWithArray:[textField.text componentsSeparatedByString:@","]]];
-
-    // Description
-    //
-    } else if (textField.tag == DESC_FIELD_TAG) {
-        [_paintSwatch setDesc:textField.text];
+    if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
     }
+    
+    if ((textField.tag == NAME_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
+        _nameEntered = textField.text;
+    } else if (textField.tag == KEYW_FIELD_TAG) {
+        _keywEntered = textField.text;
+    } else if (textField.tag == DESC_FIELD_TAG) {
+        _descEntered = textField.text;
+    }
+    
     [textField resignFirstResponder];
     _typesPickerFlag = FALSE;
     _colorPickerFlag = FALSE;
@@ -907,9 +971,6 @@ const int DETAIL_MIX_SECTION    = 5;
 }
 
 - (void)saveData {
-    [_swatchName resignFirstResponder];
-    [_swatchKeywords resignFirstResponder];
-    [_swatchDesc resignFirstResponder];
 
     // Delete all  associations first and then add them back in (the cascade delete rules should
     // automatically delete the SwatchKeyword)
@@ -918,11 +979,11 @@ const int DETAIL_MIX_SECTION    = 5;
     
     // Add keywords
     //
-    NSMutableArray *keywords = [GenericUtils trimStrings:[_swatchKeywords.text componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:@","]];
     
     // Add subjective color if not 'Other'
     //
-    NSString *subj_color = _subjColorName.text;
+    NSString *subj_color = [_subjColorName text];
     if (![subj_color isEqualToString:@"Other"]) {
         [keywords addObject:subj_color];
     }
@@ -949,10 +1010,16 @@ const int DETAIL_MIX_SECTION    = 5;
             [kwObj addSwatch_keywordObject:swKwObj];
         }
     }
+    
+    [_paintSwatch setName:_nameEntered];
+    [_paintSwatch setDesc:_descEntered];
 
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Swatch Detail save" message:@"Error saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
     } else {
         NSLog(@"Swatch Detail save successful");
         
@@ -991,34 +1058,34 @@ const int DETAIL_MIX_SECTION    = 5;
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];
 }
 
-- (IBAction)editAction:(id)sender {
-    if ([self.editButtonItem.title isEqualToString:@"Edit"]){
-        [self.editButtonItem setTitle:@"Done"];
-        [self makeTextFieldsEditable];
-        _editFlag = TRUE;
-
-    } else {
-        [self presentViewController:_saveAlertController animated:YES completion:nil];
-        [self.editButtonItem setTitle:@"Edit"];
-        [self makeTextFieldsNonEditable];
-        _editFlag = FALSE;
-    }
-}
+//- (IBAction)editAction:(id)sender {
+//    if ([self.editButtonItem.title isEqualToString:@"Edit"]){
+//        [self.editButtonItem setTitle:@"Done"];
+//        [self makeTextFieldsEditable];
+//        _editFlag = TRUE;
+//
+//    } else {
+//        [self presentViewController:_saveAlertController animated:YES completion:nil];
+//        [self.editButtonItem setTitle:@"Edit"];
+//        [self makeTextFieldsNonEditable];
+//        _editFlag = FALSE;
+//    }
+//}
 
 - (void)makeTextFieldsEditable {
-    [FieldUtils makeTextFieldEditable:_swatchName content:@""];
+    //[FieldUtils makeTextFieldEditable:_swatchName content:@""];
     [FieldUtils makeTextFieldEditable:_subjColorName content:@""];
     [FieldUtils makeTextFieldEditable:_swatchTypeName content:@""];
-    [FieldUtils makeTextFieldEditable:_swatchKeywords content:@""];
-    [FieldUtils makeTextFieldEditable:_swatchDesc content:@""];
+    //[FieldUtils makeTextFieldEditable:_swatchKeyw content:@""];
+    //[FieldUtils makeTextFieldEditable:_swatchDesc content:@""];
 }
 
 - (void)makeTextFieldsNonEditable {
-    [FieldUtils makeTextFieldNonEditable:_swatchName content:@"" border:TRUE];
+    //[FieldUtils makeTextFieldNonEditable:_swatchName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_subjColorName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_swatchKeywords content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_swatchDesc content:@"" border:TRUE];
+    //[FieldUtils makeTextFieldNonEditable:_swatchKeyw content:@"" border:TRUE];
+    //[FieldUtils makeTextFieldNonEditable:_swatchDesc content:@"" border:TRUE];
 }
 
 @end

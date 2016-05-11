@@ -97,8 +97,8 @@ const int ASSOC_COLORS_TAG     = 5;
 
     // Set the name and desc values
     //
-    _mixAssocName = [_mixAssociation name];
-    _mixAssocDesc = [_mixAssociation desc];
+    _mixAssocName = [_mixAssociation name] ? [_mixAssociation name] : @"";
+    _mixAssocDesc = [_mixAssociation desc] ? [_mixAssociation desc] : @"";
     
     // Keywords
     //
