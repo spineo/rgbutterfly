@@ -24,7 +24,6 @@
 		21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */; };
 		21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E711C848370001C3F05 /* AssocTableViewCell.m */; };
 		21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */; };
-		21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E781C84839E001C3F05 /* ACPPaintSwatches.m */; };
 		21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7C1C8483C6001C3F05 /* MixAssociations.m */; };
 		21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */; };
 		21397E861C848457001C3F05 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21397E841C848457001C3F05 /* PaintSwatchType.txt */; };
@@ -116,8 +115,6 @@
 		21397E711C848370001C3F05 /* AssocTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocTableViewCell.m; sourceTree = "<group>"; };
 		21397E751C84839E001C3F05 /* ACPMixAssociationsDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPMixAssociationsDesc.h; sourceTree = "<group>"; };
 		21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPMixAssociationsDesc.m; sourceTree = "<group>"; };
-		21397E771C84839E001C3F05 /* ACPPaintSwatches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPPaintSwatches.h; sourceTree = "<group>"; };
-		21397E781C84839E001C3F05 /* ACPPaintSwatches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPPaintSwatches.m; sourceTree = "<group>"; };
 		21397E7B1C8483C6001C3F05 /* MixAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssociations.h; sourceTree = "<group>"; };
 		21397E7C1C8483C6001C3F05 /* MixAssociations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssociations.m; sourceTree = "<group>"; };
 		21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchesDiff.h; sourceTree = "<group>"; };
@@ -369,10 +366,8 @@
 			children = (
 				21397E751C84839E001C3F05 /* ACPMixAssociationsDesc.h */,
 				21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */,
-				21397E771C84839E001C3F05 /* ACPPaintSwatches.h */,
 				2133F20C1CE5FA8A00FB91AD /* PaintSwatchSelection.h */,
 				2133F20D1CE5FA8A00FB91AD /* PaintSwatchSelection.m */,
-				21397E781C84839E001C3F05 /* ACPPaintSwatches.m */,
 				21397E7B1C8483C6001C3F05 /* MixAssociations.h */,
 				21397E7C1C8483C6001C3F05 /* MixAssociations.m */,
 				21397E7E1C8483DF001C3F05 /* PaintSwatchesDiff.h */,
@@ -575,7 +570,6 @@
 				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,
 				21397E611C848272001C3F05 /* AssocTableViewController.m in Sources */,
 				21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */,
-				21397E7A1C84839E001C3F05 /* ACPPaintSwatches.m in Sources */,
 				21397E9C1C8484D7001C3F05 /* BarButtonUtils.m in Sources */,
 				21397E9D1C8484D7001C3F05 /* ColorUtils.m in Sources */,
 				21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */,

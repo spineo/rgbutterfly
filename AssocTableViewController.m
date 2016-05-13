@@ -231,9 +231,6 @@ const int ASSOC_COLORS_TAG     = 5;
             [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
             [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInteger:[GlobalSettings getSwatchId:@"MixAssoc"]]];
         }
-        int mix_order = i + 1;
-
-        [[_paintSwatches objectAtIndex:i] setMix_order:[NSNumber numberWithInt:mix_order]];
         [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:ref_parts_ratio]];
         [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:mix_parts_ratio]];
         [[_paintSwatches objectAtIndex:i] setName:colorFormatLabel];

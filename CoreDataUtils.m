@@ -606,55 +606,6 @@
     return obj;
 }
 
-//+ (void)addMixAssociation:(PaintSwatches *)obj {
-//    
-//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-//    
-//    NSManagedObject *insert = [NSEntityDescription insertNewObjectForEntityForName:@"MixAssociation" inManagedObjectContext:context];
-//    
-//    [insert setValue:[NSNumber numberWithInt:obj.uid]      forKey:@"uid"];
-//    
-//    [insert setValue:[NSNumber numberWithInt:obj.uid] forKey:@"swatch_id"];
-//    
-//    int dom_parts_ratio    = obj.dom_parts_ratio;
-//    int mix_parts_ratio    = obj.mix_parts_ratio;
-//    int mix_order          = obj.mix_order;
-//    int mix_assoc_desc_uid = obj.mix_assoc_desc_uid;
-//    
-//    [insert setValue:[NSNumber numberWithInt:dom_parts_ratio]    forKey:@"dom_parts_ratio"];
-//    [insert setValue:[NSNumber numberWithInt:mix_parts_ratio]    forKey:@"mix_parts_ratio"];
-//    [insert setValue:[NSNumber numberWithInt:mix_order]          forKey:@"mix_order"];
-//    [insert setValue:[NSNumber numberWithInt:mix_assoc_desc_uid] forKey:@"desc_id"];
-//}
-
-//+ (PaintSwatches *)insertMixAssociation:(PaintSwatches *)obj context:(NSManagedObjectContext *)context {
-//    
-//    NSManagedObject *insert = [NSEntityDescription insertNewObjectForEntityForName:@"MixAssociation" inManagedObjectContext:context];
-//    
-//    int uid = [CoreDataUtils getUID];
-//    
-//    [insert setValue:[NSNumber numberWithInt:uid]      forKey:@"uid"];
-//
-//    // Update the PaintSwatches object
-//    //
-//    [obj setMix_assoc_uid:uid];
-//    
-//    [insert setValue:[NSNumber numberWithInt:obj.uid] forKey:@"swatch_id"];
-//    
-//    int dom_parts_ratio    = obj.dom_parts_ratio;
-//    int mix_parts_ratio    = obj.mix_parts_ratio;
-//    int mix_order          = obj.mix_order;
-//    int mix_assoc_desc_uid = obj.mix_assoc_desc_uid;
-//    
-//    [insert setValue:[NSNumber numberWithInt:dom_parts_ratio]    forKey:@"dom_parts_ratio"];
-//    [insert setValue:[NSNumber numberWithInt:mix_parts_ratio]    forKey:@"mix_parts_ratio"];
-//    [insert setValue:[NSNumber numberWithInt:mix_order]          forKey:@"mix_order"];
-//    [insert setValue:[NSNumber numberWithInt:mix_assoc_desc_uid] forKey:@"desc_id"];
-//
-//    return obj;
-//}
-
 + (int)insertKeyword:(NSString *)keyword {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

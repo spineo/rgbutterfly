@@ -34,7 +34,6 @@
 @dynamic name;
 @dynamic pigment_type_id;
 @dynamic red;
-@dynamic mix_order;
 @dynamic ref_parts_ratio;
 @dynamic ref_swatch_id;
 @dynamic saturation;
