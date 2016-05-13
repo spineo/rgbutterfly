@@ -15,6 +15,7 @@
 #import "BarButtonUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
+#import "PaintSwatchSelection.h"
 
 // Entity related
 //
@@ -24,7 +25,7 @@
 
 @interface AddMixTableViewController ()
 
-@property NSMutableArray *allPaintSwatches, *paintSwatches;
+@property NSMutableArray *allPaintSwatches, *paintSwatchList;
 
 @property (nonatomic) int addSwatchCount;
 @property (nonatomic, strong) NSString *backImageName, *searchImageName, *domColorLabel, *mixColorLabel, *addColorLabel;
@@ -51,7 +52,6 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity;
 
 @property UIColor *defaultColor, *defaultBgColor,  *currColor;
 @property UIFont *defaultFont, *placeholderFont, *currFont;
@@ -70,11 +70,7 @@
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
-    
-    // Initialize the PaintSwatch entity
-    //
-    _paintSwatchEntity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:self.context];
-    
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -90,22 +86,22 @@
     }
 
     _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    _paintSwatches    = [[NSMutableArray alloc] init];
+    _paintSwatchList    = [[NSMutableArray alloc] init];
     for (PaintSwatches *paintSwatch in _allPaintSwatches) {
         NSString *name = [paintSwatch name];
 
         if (![currPaintSwatchNames valueForKey:name]) {
-            [_paintSwatches addObject:paintSwatch];
+            PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
+            [paintSwatchSelection setPaintSwatch:paintSwatch];
+            [paintSwatchSelection setIs_selected:FALSE];
+            [_paintSwatchList addObject:paintSwatchSelection];
         }
     }
     
     _addPaintSwatches = [[NSMutableArray alloc] init];
     
-    // TEMP
-    //
-    //_selPaintSwatches = [self setIsSelected];
+
     _addSwatchCount = 0;
-    [self setIsSelected];
 
     _reuseCellIdentifier = @"AddMixTableCell";
     
@@ -150,7 +146,7 @@
     
     // Return the number of rows in the section.
     //
-    int objCount = (int)[_paintSwatches count];
+    int objCount = (int)[_paintSwatchList count];
     return objCount;
 }
 
@@ -166,23 +162,20 @@
     [cell.imageView setClipsToBounds: YES];
     
     if (_isRGB == FALSE) {
-        cell.imageView.image = [ColorUtils renderPaint:[[_paintSwatches objectAtIndex:indexPath.row] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
+        cell.imageView.image = [ColorUtils renderPaint:[[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch ] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
     } else {
-        cell.imageView.image = [ColorUtils renderRGB:[_paintSwatches objectAtIndex:indexPath.row] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
+        cell.imageView.image = [ColorUtils renderRGB:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
     }
     
     cell.accessoryType       = UITableViewCellSeparatorStyleNone;
 
- 
-// TEMP
-//    BOOL test_val = [[[_selPaintSwatches objectAtIndex:indexPath.row] is_selected] boolValue];
     
-    BOOL test_val = [[[_paintSwatches objectAtIndex:indexPath.row] is_selected] boolValue];
+    BOOL test_val = [[_paintSwatchList objectAtIndex:indexPath.row] is_selected];
     if (test_val == TRUE) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
-    [cell.textLabel setText: [[_paintSwatches objectAtIndex:indexPath.row] name]];
+    [cell.textLabel setText: [[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] name]];
     [cell.textLabel setFont: TABLE_CELL_FONT];
     
     [cell setBackgroundColor: DARK_BG_COLOR];
@@ -197,10 +190,6 @@
     [self checkStatus:tableView path:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-   [self checkStatus:tableView path:indexPath];
-}
-
 
 - (void)checkStatus:(UITableView *)tableView path:(NSIndexPath *)indexPath {
     
@@ -209,20 +198,20 @@
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         [cell setSelected: FALSE];
-        [[_paintSwatches objectAtIndex:indexPath.row] setIs_selected:[NSNumber numberWithBool: FALSE]];
+        [[_paintSwatchList objectAtIndex:indexPath.row] setIs_selected:FALSE];
         _addSwatchCount--;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     } else {
         [cell setAccessoryType: UITableViewCellAccessoryCheckmark];
         [cell setSelected:TRUE];
-        [[_paintSwatches objectAtIndex:indexPath.row] setIs_selected:[NSNumber numberWithBool: TRUE]];
+        [[_paintSwatchList objectAtIndex:indexPath.row] setIs_selected:TRUE];
         _addSwatchCount++;
     }
 
     if (_addSwatchCount > 0) {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DONE_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:TRUE];
     } else {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DONE_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -338,8 +327,8 @@
     
     [self reloadTable];
 
-    for (int i=0; i< [_paintSwatches count]; i++) {
-        BOOL  test_val = [[[_paintSwatches objectAtIndex:i] is_selected] boolValue];
+    for (int i=0; i< [_paintSwatchList count]; i++) {
+        BOOL  test_val = [[_paintSwatchList objectAtIndex:i] is_selected];
         if (test_val == TRUE) {
             NSLog(@"Selected %i", i);
         }
@@ -347,42 +336,41 @@
 }
 
 - (void)reloadTable {
-    _paintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    NSMutableArray *paintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    _paintSwatchList = [[NSMutableArray alloc] init];
+    for (PaintSwatches *paintSwatch in paintSwatches) {
+        PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
+        [paintSwatchSelection setPaintSwatch:paintSwatch];
+    }
     
     [self.tableView reloadData];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 }
 
 - (void)updateTable {
-    int count = (int)[_paintSwatches count];
+    int count = (int)[_paintSwatchList count];
 
     NSMutableArray *tmpPaintSwatches = [[NSMutableArray alloc] init];
 
     _searchMatch  = FALSE;
 
     for (int i=0; i<count; i++) {
-        PaintSwatches *obj  = [_paintSwatches objectAtIndex:i];
-        NSString *matchName = obj.name;
+        PaintSwatchSelection *sel_obj  = [_paintSwatchList objectAtIndex:i];
+        NSString *matchName = [[sel_obj paintSwatch] name];
 
         NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
 
         if (rangeValue.length > 0) {
             _searchMatch = TRUE;
 
-            [tmpPaintSwatches addObject:obj];
+            [tmpPaintSwatches addObject:sel_obj];
         }
     }
 
-    _paintSwatches = tmpPaintSwatches;
+    _paintSwatchList = tmpPaintSwatches;
 
     [self.tableView reloadData];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-}
-
-- (void)setIsSelected {
-    for (int i=0; i< [_paintSwatches count]; i++) {
-        [[_paintSwatches objectAtIndex:i] setIs_selected:[NSNumber numberWithBool:FALSE]];
-    }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -407,11 +395,12 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {    
-    for (int i=0; i<[_paintSwatches count]; i++) {
-        PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:i];
-        BOOL is_selected = [[swatchObj is_selected] boolValue];
+    for (int i=0; i<[_paintSwatchList count]; i++) {
+        PaintSwatchSelection *selObj = [_paintSwatchList objectAtIndex:i];
+        BOOL is_selected = [selObj is_selected];
         if (is_selected == TRUE) {
-            [_addPaintSwatches addObject:swatchObj];
+            PaintSwatches *paintSwatch = [selObj paintSwatch];
+            [_addPaintSwatches addObject:paintSwatch];
         }
     }
 }

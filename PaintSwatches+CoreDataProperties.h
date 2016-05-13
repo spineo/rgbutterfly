@@ -25,7 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSString *green;
 @property (nullable, nonatomic, retain) NSString *hue;
-@property (nullable, nonatomic, retain) NSNumber *is_selected;
+@property (nullable, nonatomic, retain) NSNumber *is_shipped;
+@property (nullable, nonatomic, retain) NSNumber *is_visible;
+@property (nullable, nonatomic, retain) NSNumber *is_readonly;
 @property (nullable, nonatomic, retain) id image_thumb;
 @property (nullable, nonatomic, retain) NSNumber *is_mix;
 @property (nullable, nonatomic, retain) NSDate *last_update;
@@ -45,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSSet<SwatchKeyword *> *swatch_keyword;
 @property (nullable, nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;
 @property (nullable, nonatomic, retain) TapArea *tap_area;
+
+@property (nonatomic) BOOL is_selected;
 
 @end
 

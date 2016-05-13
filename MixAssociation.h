@@ -18,6 +18,9 @@
 @property (nonatomic, retain) id image_url;
 @property (nonatomic, retain) NSDate * last_update;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber *is_shipped;
+@property (nonatomic, retain) NSNumber *is_visible;
+@property (nonatomic, retain) NSNumber *is_readonly;
 @property (nonatomic, retain) NSSet *mix_assoc_swatch;
 @property (nonatomic, retain) NSSet *mix_assoc_keyword;
 

@@ -24,7 +24,9 @@
 @dynamic green;
 @dynamic hue;
 @dynamic image_thumb;
-@dynamic is_selected;
+@dynamic is_shipped;
+@dynamic is_visible;
+@dynamic is_readonly;
 @dynamic is_mix;
 @dynamic last_update;
 @dynamic mix_parts_ratio;
@@ -43,5 +45,7 @@
 @dynamic swatch_keyword;
 @dynamic tap_area_swatch;
 @dynamic tap_area;
+
+@dynamic is_selected;
 
 @end
