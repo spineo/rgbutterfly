@@ -70,7 +70,7 @@
 // Picker views
 //
 @property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
-@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, isShipped, isReadOnly;
 
 
 // NSManagedObject subclassing
@@ -200,9 +200,12 @@ const int DETAIL_MAX_SECTION    = 6;
     _doneTypeButtonWidth   = 1.0;
     _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
 
-    // Instantiate the widgets
+
+    // Attributes
     //
     _nameEntered = [_paintSwatch name];
+    _isShipped   = [[_paintSwatch is_shipped] boolValue];
+    _isReadOnly  = [[_paintSwatch is_readonly] boolValue];
 
     
     // Swatch Type
@@ -439,6 +442,10 @@ const int DETAIL_MAX_SECTION    = 6;
             if (_editFlag == TRUE) {
                 if ([_nameEntered isEqualToString:@""]) {
                     [refName setPlaceholder:_namePlaceholder];
+                }
+                
+                if ((_isShipped == TRUE) || (_isReadOnly == TRUE)) {
+                    [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
                 }
                 
             } else {
