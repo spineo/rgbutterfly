@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *green;
 @property (nullable, nonatomic, retain) NSString *hue;
 @property (nullable, nonatomic, retain) NSNumber *is_shipped;
-@property (nullable, nonatomic, retain) NSNumber *is_visible;
+@property (nullable, nonatomic, retain) NSNumber *is_hidden;
 @property (nullable, nonatomic, retain) NSNumber *is_readonly;
 @property (nullable, nonatomic, retain) id image_thumb;
 @property (nullable, nonatomic, retain) NSNumber *is_mix;

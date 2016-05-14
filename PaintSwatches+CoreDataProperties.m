@@ -25,7 +25,7 @@
 @dynamic hue;
 @dynamic image_thumb;
 @dynamic is_shipped;
-@dynamic is_visible;
+@dynamic is_hidden;
 @dynamic is_readonly;
 @dynamic is_mix;
 @dynamic last_update;

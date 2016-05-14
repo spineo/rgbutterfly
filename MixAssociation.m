@@ -18,7 +18,7 @@
 @dynamic last_update;
 @dynamic name;
 @dynamic is_shipped;
-@dynamic is_visible;
+@dynamic is_hidden;
 @dynamic is_readonly;
 @dynamic mix_assoc_swatch;
 @dynamic mix_assoc_keyword;

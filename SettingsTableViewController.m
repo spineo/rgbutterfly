@@ -5,20 +5,26 @@
 //  Created by Stuart Pineo on 5/9/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
-
 #import "SettingsTableViewController.h"
+#import "GlobalSettings.h"
+#import "FieldUtils.h"
 
 @interface SettingsTableViewController ()
 
+@property (nonatomic) BOOL editFlag;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @end
 
 @implementation SettingsTableViewController
 
+const int SETTINGS_READ_ONLY_SECTION = 0;
+const int SETTINGS_MAX_NUM_SECTIONS  = 1;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _editFlag = FALSE;
     _reuseCellIdentifier = @"SettingsTableCell";
     
     // Uncomment the following line to preserve selection between presentations.
@@ -36,17 +42,53 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return SETTINGS_MAX_NUM_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return DEF_TABLE_CELL_HEIGHT;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    //
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
+    
+    // Global defaults
+    //
+    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorColor:GRAY_BG_COLOR];
+    [cell.imageView setImage:nil];
+    [cell.textLabel setText:nil];
+    [cell.textLabel setText:@""];
+    
+    // Name, and reference type
+    //
+    if (indexPath.section == SETTINGS_READ_ONLY_SECTION) {
+        
+        // Create the name text field
+        //
+        UILabel *readOnlyLabel   = [FieldUtils createLabel:@"Make My Paint Swatches Read Only" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET];
+        //UISwitch *readOnlySwitch = [[UISwitch alloc] initWithFrame:CGRectMake()];
+        
+        [cell.contentView addSubview:readOnlyLabel];
+        
+        if (_editFlag == TRUE) {
+
+            
+        } else {
+            //[FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
+        }
+        [cell setAccessoryType: UITableViewCellAccessoryNone];
+        
+    }
     
     return cell;
 }

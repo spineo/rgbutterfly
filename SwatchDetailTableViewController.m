@@ -38,7 +38,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *keywHeader, *descHeader, *mixAssocHeader;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *keywHeader, *descHeader, *mixAssocHeader;
 
 // Subjective color related
 //
@@ -79,13 +79,14 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSEntityDescription *keywordEntity, *swatchKeywordEntity;
 
+@property (nonatomic, strong) NSString *reuseTableCellIdentifier, *reuseCollectionCellIdentifier;
+
 @end
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constants defaults
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-NSString * const REUSE_IDENTIFIER = @"SwatchDetailCell";
 const int num_core_sections  = 5;
 int num_tableview_rows = 0;
 
@@ -96,7 +97,6 @@ int num_tableview_rows = 0;
 
 @implementation SwatchDetailTableViewController
 
-static NSString * const reuseIdentifier = @"CollectionPrototypeCell";
 
 // Globals
 //
@@ -114,6 +114,8 @@ const int DETAIL_MAX_SECTION    = 6;
 
 -(void)loadView {
     [super loadView];
+    
+    _reuseTableCellIdentifier      = @"SwatchDetailCell";
     
     // NSManagedObject subclassing
     //
@@ -269,11 +271,16 @@ const int DETAIL_MAX_SECTION    = 6;
                                        [self saveData];
                                    }];
     
-    _delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
+    _delete = [UIAlertAction actionWithTitle:@"Delete Swatch" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [self deleteData];
                                                        
                                                    }];
+    
+    UIAlertAction *hide = [UIAlertAction actionWithTitle:@"Hide Swatch" style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         [self hideSwatch];
+                                     }];
     
     UIAlertAction *discard = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [_saveAlertController dismissViewControllerAnimated:YES completion:nil];
@@ -281,6 +288,12 @@ const int DETAIL_MAX_SECTION    = 6;
     
     [_saveAlertController addAction:_save];
     [_saveAlertController addAction:_delete];
+    
+    // ***** Will activate this for next release (if really needed) *****
+    //
+    [_saveAlertController addAction:hide];
+    [hide setEnabled:FALSE];
+    
     [_saveAlertController addAction:discard];
     
     
@@ -399,7 +412,7 @@ const int DETAIL_MAX_SECTION    = 6;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section <= DETAIL_DESC_SECTION) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:REUSE_IDENTIFIER forIndexPath:indexPath];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseTableCellIdentifier forIndexPath:indexPath];
         
         // Global defaults
         //
@@ -407,14 +420,8 @@ const int DETAIL_MAX_SECTION    = 6;
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         [tableView setSeparatorColor:GRAY_BG_COLOR];
-        
         [cell.imageView setImage:nil];
         [cell.textLabel setText:nil];
-        
-        // Global defaults
-        //
-        [cell setBackgroundColor: DARK_BG_COLOR];
-        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         [cell.textLabel setText:@""];
 
         // Set the widget frame sizes
@@ -1054,6 +1061,22 @@ const int DETAIL_MAX_SECTION    = 6;
         NSLog(@"Error deleting context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Swatch Detail delete successful");
+        
+        [super dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)hideSwatch {
+
+    // Set the is_visible flag
+    //
+    [_paintSwatch setIs_hidden:[NSNumber numberWithBool:TRUE]];
+    
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error deleting context: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Swatch hide successful");
         
         [super dismissViewControllerAnimated:YES completion:NULL];
     }
