@@ -365,12 +365,16 @@ const int DETAIL_MAX_SECTION    = 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ((
-         ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
-         ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
-         ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
-         ) && (_editFlag == FALSE)) {
-        return 0;
+    if (section <= DETAIL_DESC_SECTION) {
+        if ((
+             ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
+             ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
+             ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
+             ) && (_editFlag == FALSE)) {
+            return 0;
+        } else {
+            return 1;
+        }
 
     } else if (section == DETAIL_MIX_SECTION) {
         return num_tableview_rows;
