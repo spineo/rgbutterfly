@@ -574,14 +574,15 @@ const int DETAIL_MAX_SECTION    = 6;
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == DETAIL_DESC_SECTION) {
-        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
+    if ((
+         ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
+         ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
+         ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
+         ) && (_editFlag == FALSE)) {
+        return DEF_NIL_HEADER;
+    } else {
+        return DEF_TABLE_HDR_HEIGHT;
     }
-    return DEF_TABLE_HDR_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
