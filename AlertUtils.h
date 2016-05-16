@@ -23,4 +23,6 @@
 
 + (UIAlertController *)valueExistsAlert;
 
++ (UIAlertController *)createBlankAlert:(NSString *)title message:(NSString *)message;
+
 @end

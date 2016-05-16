@@ -693,6 +693,15 @@
                             <outlet property="delegate" destination="z8z-Q4-bZ9" id="Rqb-sB-QSg"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
+                        <barButtonItem tag="59" title="Save" id="o7Y-Oe-dyU">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="save:" destination="z8z-Q4-bZ9" id="SmM-Yw-uGh"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="UFN-Ih-VPD">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="NKU-jd-I4P">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>

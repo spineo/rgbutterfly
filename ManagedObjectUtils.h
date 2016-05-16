@@ -60,6 +60,10 @@
 + (MixAssociation *)queryMixAssociation:(int)mix_assoc_id context:(NSManagedObjectContext *)context;
 + (NSMutableArray *)queryMixAssocBySwatch:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
 
+// Update methods
+//
++ (void)setPaintSwatchReadOnly:(BOOL *)is_readonly context:(NSManagedObjectContext *)context;
+
 // Delete methods
 //
 + (void)deleteSwatchKeywords:(PaintSwatches *)swatchObj context:(NSManagedObjectContext *)context;

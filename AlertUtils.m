@@ -53,4 +53,13 @@
     return [self createOkAlert:VALUE_EXISTS message:VALUE_EXISTS_MSG];
 }
 
++ (UIAlertController *)createBlankAlert:(NSString *)title message:(NSString *)message {
+    
+    UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:title
+                                                                               message:message
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    return myAlertController;
+}
+
 @end
