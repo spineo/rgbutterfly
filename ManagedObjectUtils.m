@@ -688,9 +688,9 @@
 
 #pragma mark - Update methods
 
-+ (void)setPaintSwatchReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context {
++ (void)setEntityReadOnly:(NSString *)entityName isReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context {
 
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     
     NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
     

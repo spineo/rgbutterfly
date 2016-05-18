@@ -14,24 +14,25 @@
 
 @interface SettingsTableViewController ()
 
-@property (nonatomic, strong) UILabel *readOnlyLabel;
-@property (nonatomic, strong) UISwitch *readOnlySwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *readOnlyKey, *readOnlyText, *makeReadOnlyLabel, *makeReadWriteLabel;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel;
+@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
+@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyKey, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyKey, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 
 // NSManagedObject
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity;
+@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *mixAssocEntity;
 
 @end
 
 @implementation SettingsTableViewController
 
-const int SETTINGS_READ_ONLY_SECTION = 0;
-const int SETTINGS_MAX_NUM_SECTIONS  = 1;
+const int PSWATCH_READ_ONLY_SECTION  = 0;
+const int MIXASSOC_READ_ONLY_SECTION = 1;
+const int SETTINGS_MAX_NUM_SECTIONS  = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,9 +43,10 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
     // NSManagedObject
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
-    self.context = [self.appDelegate managedObjectContext];
+    self.context     = [self.appDelegate managedObjectContext];
     
-    _paintSwatchEntity        = [NSEntityDescription entityForName:@"PaintSwatch"    inManagedObjectContext:self.context];
+    _paintSwatchEntity = [NSEntityDescription entityForName:@"PaintSwatch"    inManagedObjectContext:self.context];
+    _mixAssocEntity    = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:self.context];
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,49 +54,89 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _readOnlyKey = @"swatches_read_only";
-    _readOnlyText = @"swatches_read_only_text";
+    _psReadOnlyKey = @"swatches_read_only";
+    _psReadOnlyText = @"swatches_read_only_text";
     
-    _makeReadOnlyLabel  = @"Make My Paint Swatches Read-Only";
-    _makeReadWriteLabel = @"Make My Paint Swatches Read/Write";
+    _psMakeReadOnlyLabel  = @"Make My Paint Swatches Read-Only";
+    _psMakeReadWriteLabel = @"Make My Paint Swatches Read/Write";
     
     NSString *labelText;
-    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:_readOnlyKey] &&
-          [[NSUserDefaults standardUserDefaults] stringForKey:_readOnlyText])
+    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:_psReadOnlyKey] &&
+          [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText])
        ) {
         _swatchesReadOnly = FALSE;
-        labelText = _makeReadOnlyLabel;
+        labelText = _psMakeReadOnlyLabel;
         
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_readOnlyKey];
-        [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_readOnlyText];
+        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_psReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_psReadOnlyText];
         
     } else {
-        _swatchesReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:_readOnlyKey];
-        labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_readOnlyText];
+        _swatchesReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:_psReadOnlyKey];
+        labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText];
     }
     
     // Create the label and switch, set the last state or default values
     //
-    _readOnlySwitch = [[UISwitch alloc] init];
-    CGFloat switchHeight = _readOnlySwitch.bounds.size.height;
+    _psReadOnlySwitch = [[UISwitch alloc] init];
+    CGFloat switchHeight = _psReadOnlySwitch.bounds.size.height;
     CGFloat switchYOffset = (DEF_TABLE_CELL_HEIGHT - switchHeight) / 2;
-    [_readOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, switchYOffset, DEF_BUTTON_WIDTH, switchHeight)];
-    [_readOnlySwitch setOn:_swatchesReadOnly];
+    [_psReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, switchYOffset, DEF_BUTTON_WIDTH, switchHeight)];
+    [_psReadOnlySwitch setOn:_swatchesReadOnly];
     
     // Add the switch target
     //
-    [_readOnlySwitch addTarget:self action:@selector(setROSwitchState:) forControlEvents:UIControlEventValueChanged];
+    [_psReadOnlySwitch addTarget:self action:@selector(setPSSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _readOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth = _readOnlyLabel.bounds.size.width;
-    CGFloat labelHeight = _readOnlyLabel.bounds.size.height;
+    _psReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    CGFloat labelWidth = _psReadOnlyLabel.bounds.size.width;
+    CGFloat labelHeight = _psReadOnlyLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
-    [_readOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    [_psReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Section
+    // MixAssociation Read-Only Section
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _maReadOnlyKey = @"assoc_read_only";
+    _maReadOnlyText = @"assoc_read_only_text";
+    
+    _maMakeReadOnlyLabel  = @"Make My Mix Associations Read-Only";
+    _maMakeReadWriteLabel = @"Make My Mix Associations Read/Write";
+    
+    labelText = @"";
+    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:_maReadOnlyKey] &&
+          [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText])
+       ) {
+        _assocsReadOnly = FALSE;
+        labelText = _maMakeReadOnlyLabel;
+        
+        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:_maReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_maReadOnlyText];
+        
+    } else {
+        _assocsReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:_maReadOnlyKey];
+        labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _maReadOnlySwitch = [[UISwitch alloc] init];
+    switchHeight = _maReadOnlySwitch.bounds.size.height;
+    switchYOffset = (DEF_TABLE_CELL_HEIGHT - switchHeight) / 2;
+    [_maReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, switchYOffset, DEF_BUTTON_WIDTH, switchHeight)];
+    [_maReadOnlySwitch setOn:_assocsReadOnly];
+    
+    // Add the switch target
+    //
+    [_maReadOnlySwitch addTarget:self action:@selector(setMASwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _maReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _maReadOnlyLabel.bounds.size.width;
+    labelHeight = _maReadOnlyLabel.bounds.size.height;
+    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
+    [_maReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
     // Create No Save alert
@@ -160,10 +202,13 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
     
     // Name, and reference type
     //
-    if (indexPath.section == SETTINGS_READ_ONLY_SECTION) {
-
-        [cell.contentView addSubview:_readOnlySwitch];
-        [cell.contentView addSubview:_readOnlyLabel];
+    if (indexPath.section == PSWATCH_READ_ONLY_SECTION) {
+        [cell.contentView addSubview:_psReadOnlySwitch];
+        [cell.contentView addSubview:_psReadOnlyLabel];
+        
+    } else if (indexPath.section == MIXASSOC_READ_ONLY_SECTION) {
+        [cell.contentView addSubview:_maReadOnlySwitch];
+        [cell.contentView addSubview:_maReadOnlyLabel];
     }
     
     return cell;
@@ -205,21 +250,34 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
 
 #pragma mark - Widget states and Save
 
-- (void)setROSwitchState:(id)sender {
+- (void)setPSSwitchState:(id)sender {
     _swatchesReadOnly = [sender isOn];
 
     if (_swatchesReadOnly == TRUE) {
-        [_readOnlyLabel setText:_makeReadWriteLabel];
+        [_psReadOnlyLabel setText:_psMakeReadWriteLabel];
         
     } else {
-        [_readOnlyLabel setText:_makeReadOnlyLabel];
+        [_psReadOnlyLabel setText:_psMakeReadOnlyLabel];
+    }
+    _editFlag = TRUE;
+}
+
+- (void)setMASwitchState:(id)sender {
+    _assocsReadOnly = [sender isOn];
+    
+    if (_assocsReadOnly == TRUE) {
+        [_maReadOnlyLabel setText:_maMakeReadWriteLabel];
+        
+    } else {
+        [_maReadOnlyLabel setText:_maMakeReadOnlyLabel];
     }
     _editFlag = TRUE;
 }
 
 - (IBAction)save:(id)sender {
     
-    [ManagedObjectUtils setPaintSwatchReadOnly:_swatchesReadOnly context:self.context];
+    [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
+    [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:_assocsReadOnly context:self.context];
     
     NSError *error = nil;
     if (![self.context save:&error]) {
@@ -227,8 +285,11 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
     } else {
         NSLog(@"Settings save successful");
 
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_readOnlyKey];
-        [[NSUserDefaults standardUserDefaults] setValue:[_readOnlyLabel text] forKey:_readOnlyText];
+        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_psReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:_maReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
         
         _editFlag = FALSE;
     }

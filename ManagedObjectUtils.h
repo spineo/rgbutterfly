@@ -62,7 +62,7 @@
 
 // Update methods
 //
-+ (void)setPaintSwatchReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context;
++ (void)setEntityReadOnly:(NSString *)entityName isReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context;
 
 // Delete methods
 //

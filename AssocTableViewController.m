@@ -29,13 +29,13 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches;
 
 @property (nonatomic, strong) UIAlertController *saveAlertController;
-@property (nonatomic, strong) UIAlertAction *save;
+@property (nonatomic, strong) UIAlertAction *save, *delete;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
-@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn;
+@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn, mixAssocReadOnly;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocKeyw, *mixAssocDesc;
@@ -259,7 +259,7 @@ const int ASSOC_COLORS_TAG     = 5;
                                                      [self saveData];
     }];
     
-    UIAlertAction *delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
+    _delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [self deleteData];
 
@@ -270,7 +270,7 @@ const int ASSOC_COLORS_TAG     = 5;
     }];
     
     [_saveAlertController addAction:_save];
-    [_saveAlertController addAction:delete];
+    [_saveAlertController addAction:_delete];
     [_saveAlertController addAction:discard];
     
 
@@ -282,6 +282,19 @@ const int ASSOC_COLORS_TAG     = 5;
     
     [_applyButton setEnabled:TRUE];
     [_save setEnabled:FALSE];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    _mixAssocReadOnly = FALSE;
+    
+    BOOL is_shipped  = [[_mixAssociation is_shipped] boolValue];
+    BOOL is_readonly = [[_mixAssociation is_readonly] boolValue];
+    
+    _mixAssocReadOnly = is_shipped ? is_shipped : is_readonly;
+    
+    if (_mixAssocReadOnly == TRUE) {
+        [_delete setEnabled:FALSE];
+    }
 }
 
 - (void)viewDidRotate {
@@ -432,11 +445,11 @@ const int ASSOC_COLORS_TAG     = 5;
          && (_editFlag == FALSE)) {
         return 0;
         
-    } else if ((section == ASSOC_APPLY_SECTION) && (_editFlag == FALSE)) {
+    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_ADD_SECTION)) &&
+        ((_editFlag == FALSE) || (_mixAssocReadOnly == TRUE))
+    ) {
         return 0;
 
-    } else if ((section == ASSOC_ADD_SECTION) && (_editFlag == FALSE)) {
-        return 0;
 
     } else if (section == ASSOC_COLORS_SECTION) {
         return [_mixAssocSwatches count];
@@ -507,9 +520,11 @@ const int ASSOC_COLORS_TAG     = 5;
         int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
         UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
         
-        // Disable editing if the paint swatch is an "add"
+        // Disable editing if the paint swatch is an "add" or any of the other flags set
         //
-        if ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) {
+        if (
+            ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) || (_mixAssocReadOnly == TRUE)
+        ) {
             [refName setEnabled:FALSE];
             [refName setBackgroundColor:GRAY_BG_COLOR];
         }
@@ -560,13 +575,15 @@ const int ASSOC_COLORS_TAG     = 5;
         [refName setDelegate:self];
         [cell.contentView addSubview:refName];
 
-        if (_editFlag == TRUE) {
+        if (
+            (_editFlag == FALSE) || (_mixAssocReadOnly == TRUE)
+        ) {
+            [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocName border:TRUE];
+            
+        } else {
             if ([_mixAssocName isEqualToString:@""]) {
                 [refName setPlaceholder:_namePlaceholder];
             }
-
-        } else {
-            [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocName border:TRUE];
         }
         [cell setAccessoryType: UITableViewCellAccessoryNone];
 
@@ -691,14 +708,6 @@ const int ASSOC_COLORS_TAG     = 5;
 
 #pragma mark - TableView Move
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == ASSOC_COLORS_SECTION) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
 // Override to support rearranging the table view.
 //
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
@@ -751,8 +760,18 @@ const int ASSOC_COLORS_TAG     = 5;
     [self.tableView reloadData];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == ASSOC_COLORS_SECTION) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ((indexPath.section == ASSOC_COLORS_SECTION) || (indexPath.section == ASSOC_ADD_SECTION)) {
+    if (((indexPath.section == ASSOC_COLORS_SECTION) || (indexPath.section == ASSOC_ADD_SECTION)) && ! (
+        (_mixAssocReadOnly == TRUE)
+    )) {
         return YES;
     } else {
         return NO;
