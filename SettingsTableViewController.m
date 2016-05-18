@@ -10,6 +10,7 @@
 #import "FieldUtils.h"
 #import "AlertUtils.h"
 #import "AppDelegate.h"
+#import "ManagedObjectUtils.h"
 
 @interface SettingsTableViewController ()
 
@@ -217,6 +218,8 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 1;
 }
 
 - (IBAction)save:(id)sender {
+    
+    [ManagedObjectUtils setPaintSwatchReadOnly:_swatchesReadOnly context:self.context];
     
     NSError *error = nil;
     if (![self.context save:&error]) {

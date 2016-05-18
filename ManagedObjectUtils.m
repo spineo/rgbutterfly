@@ -683,6 +683,29 @@
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Update methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Update methods
+
++ (void)setPaintSwatchReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context {
+
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"is_shipped != %@", [NSNumber numberWithBool:TRUE]]];
+    
+    NSArray *results = [context executeFetchRequest:fetch error:NULL];
+    
+    for (PaintSwatches *paintSwatch in results) {
+        [paintSwatch setIs_readonly:[NSNumber numberWithBool:is_readonly]];
+    }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Delete methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
