@@ -35,7 +35,7 @@
 
 @property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
-@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn, mixAssocReadOnly;
+@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn, isReadOnly;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocKeyw, *mixAssocDesc;
@@ -285,14 +285,14 @@ const int ASSOC_COLORS_TAG     = 5;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    _mixAssocReadOnly = FALSE;
+    _isReadOnly = FALSE;
     
     BOOL is_shipped  = [[_mixAssociation is_shipped] boolValue];
     BOOL is_readonly = [[_mixAssociation is_readonly] boolValue];
     
-    _mixAssocReadOnly = is_shipped ? is_shipped : is_readonly;
+    _isReadOnly = is_shipped ? is_shipped : is_readonly;
     
-    if (_mixAssocReadOnly == TRUE) {
+    if (_isReadOnly == TRUE) {
         [_delete setEnabled:FALSE];
     }
 }
@@ -446,7 +446,7 @@ const int ASSOC_COLORS_TAG     = 5;
         return 0;
         
     } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_ADD_SECTION)) &&
-        ((_editFlag == FALSE) || (_mixAssocReadOnly == TRUE))
+        ((_editFlag == FALSE) || (_isReadOnly == TRUE))
     ) {
         return 0;
 
@@ -523,7 +523,7 @@ const int ASSOC_COLORS_TAG     = 5;
         // Disable editing if the paint swatch is an "add" or any of the other flags set
         //
         if (
-            ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) || (_mixAssocReadOnly == TRUE)
+            ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) || (_isReadOnly == TRUE)
         ) {
             [refName setEnabled:FALSE];
             [refName setBackgroundColor:GRAY_BG_COLOR];
@@ -576,7 +576,7 @@ const int ASSOC_COLORS_TAG     = 5;
         [cell.contentView addSubview:refName];
 
         if (
-            (_editFlag == FALSE) || (_mixAssocReadOnly == TRUE)
+            (_editFlag == FALSE) || (_isReadOnly == TRUE)
         ) {
             [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocName border:TRUE];
             
@@ -770,7 +770,7 @@ const int ASSOC_COLORS_TAG     = 5;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if (((indexPath.section == ASSOC_COLORS_SECTION) || (indexPath.section == ASSOC_ADD_SECTION)) && ! (
-        (_mixAssocReadOnly == TRUE)
+        (_isReadOnly == TRUE)
     )) {
         return YES;
     } else {

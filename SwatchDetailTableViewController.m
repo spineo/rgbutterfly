@@ -70,7 +70,7 @@
 // Picker views
 //
 @property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton;
-@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, isShipped, isReadOnly;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, isReadOnly;
 
 
 // NSManagedObject subclassing
@@ -206,8 +206,6 @@ const int DETAIL_MAX_SECTION    = 6;
     // Attributes
     //
     _nameEntered = [_paintSwatch name];
-    _isShipped   = [[_paintSwatch is_shipped] boolValue];
-    _isReadOnly  = [[_paintSwatch is_readonly] boolValue];
 
     
     // Swatch Type
@@ -314,6 +312,19 @@ const int DETAIL_MAX_SECTION    = 6;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrameSizes)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    _isReadOnly = FALSE;
+    
+    BOOL is_shipped  = [[_paintSwatch is_shipped] boolValue];
+    BOOL is_readonly = [[_paintSwatch is_readonly] boolValue];
+    
+    _isReadOnly = is_shipped ? is_shipped : is_readonly;
+    
+    if (_isReadOnly == TRUE) {
+        [_delete setEnabled:FALSE];
+    }
 }
 
 
@@ -451,7 +462,7 @@ const int DETAIL_MAX_SECTION    = 6;
                     [refName setPlaceholder:_namePlaceholder];
                 }
                 
-                if ((_isShipped == TRUE) || (_isReadOnly == TRUE)) {
+                if (_isReadOnly == TRUE) {
                     [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
                 }
                 
