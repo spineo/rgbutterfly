@@ -26,6 +26,10 @@ extern CGFloat const DEF_NIL_HEIGHT;
 extern CGFloat const DEF_LABEL_WIDTH;
 extern CGFloat const DEF_LABEL_HEIGHT;
 
+// Tap Area
+//
+extern CGFloat const DEF_TAP_AREA_SIZE;
+
 // UI TextField/TextView
 //
 extern CGFloat const DEF_TEXTFIELD_HEIGHT;
@@ -113,6 +117,7 @@ extern const int COLOR_BTN_TAG;
 extern const int TYPE_BTN_TAG;
 
 
+
 // Max Tag used as reference to ensure all table view elements
 // removed from superview (see MatchTableViewController for example)
 //
@@ -124,6 +129,16 @@ extern const int MAX_TAG;
 extern const int MAX_NAME_LEN;
 extern const int MAX_KEYW_LEN;
 extern const int MAX_DESC_LEN;
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// NSUserDefaults Keys
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+extern NSString * const TAP_AREA_SIZE_KEY;
+extern NSString * const PAINT_SWATCH_RO_KEY;
+extern NSString * const MIX_ASSOC_RO_KEY;
+
+
 
 // Alert Types
 //

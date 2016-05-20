@@ -20,6 +20,11 @@ CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
 CGFloat const DEF_LABEL_WIDTH       = 80.0;
 
+// Tap Area
+//
+CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
+
+
 // UI TextField/TextView
 //
 CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
@@ -118,6 +123,15 @@ const int MAX_TAG           = 100;
 const int MAX_NAME_LEN = 64;
 const int MAX_KEYW_LEN = 128;
 const int MAX_DESC_LEN = 128;
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// NSUserDefaults Keys
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
+NSString * const PAINT_SWATCH_RO_KEY = @"swatches_read_only";
+NSString * const MIX_ASSOC_RO_KEY    = @"assoc_read_only";
 
 
 // Alert Types

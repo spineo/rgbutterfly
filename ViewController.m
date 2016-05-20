@@ -525,20 +525,19 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
-        [cell.imageView setFrame: CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height)];
-        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [cell.imageView setFrame:CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height)];
+        [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+        [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
         
-        [cell.imageView setContentMode: UIViewContentModeScaleAspectFill];
-        [cell.imageView setClipsToBounds: YES];
+        [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [cell.imageView setClipsToBounds:YES];
         
-        [cell setAccessoryType: UITableViewCellAccessoryDisclosureIndicator];
-        [cell.textLabel setFont: TABLE_CELL_FONT];
-        
-        [cell setBackgroundColor: DARK_BG_COLOR];
-        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        [cell.textLabel setFont:TABLE_CELL_FONT];
+        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         if ([_listingType isEqualToString:@"Keywords"]) {
     
@@ -547,9 +546,9 @@
             PaintSwatches *ps = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
 
             if (_isRGB == FALSE) {
-               [cell.imageView setImage: [ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+               [cell.imageView setImage:[ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             } else {
-               [cell.imageView setImage: [ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+               [cell.imageView setImage:[ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             }
             
             [cell.textLabel setText:kw_name];

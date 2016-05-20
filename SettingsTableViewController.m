@@ -17,7 +17,9 @@
 @property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyKey, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyKey, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel;
+@property (nonatomic) CGFloat tapAreaSize;
+@property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 
 // NSManagedObject
@@ -30,9 +32,19 @@
 
 @implementation SettingsTableViewController
 
-const int PSWATCH_READ_ONLY_SECTION  = 0;
-const int MIXASSOC_READ_ONLY_SECTION = 1;
-const int SETTINGS_MAX_NUM_SECTIONS  = 2;
+
+// Section 1: READ-ONLY Settings
+//
+const int READ_ONLY_SETTINGS      = 0;
+const int PSWATCH_READ_ONLY_ROW   = 0;
+const int MIXASSOC_READ_ONLY_ROW  = 1;
+const int READ_ONLY_SETTINGS_ROWS = 2;
+
+const int TAP_AREA_SETTINGS       = 1;
+const int TAP_AREA_ROW            = 0;
+const int TAP_AREA_ROWS           = 1;
+
+const int SETTINGS_MAX_SECTIONS   = 2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,28 +62,27 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Swatches Read-Only Section
+    // Swatches Read-Only Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _psReadOnlyKey = @"swatches_read_only";
     _psReadOnlyText = @"swatches_read_only_text";
     
     _psMakeReadOnlyLabel  = @"Make My Paint Swatches Read-Only";
     _psMakeReadWriteLabel = @"Make My Paint Swatches Read/Write";
     
     NSString *labelText;
-    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:_psReadOnlyKey] &&
+    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:PAINT_SWATCH_RO_KEY] &&
           [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText])
        ) {
         _swatchesReadOnly = FALSE;
         labelText = _psMakeReadOnlyLabel;
         
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_psReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_psReadOnlyText];
         
     } else {
-        _swatchesReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:_psReadOnlyKey];
+        _swatchesReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:PAINT_SWATCH_RO_KEY];
         labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText];
     }
     
@@ -95,28 +106,27 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // MixAssociation Read-Only Section
+    // MixAssociation Read-Only Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _maReadOnlyKey = @"assoc_read_only";
     _maReadOnlyText = @"assoc_read_only_text";
     
     _maMakeReadOnlyLabel  = @"Make My Mix Associations Read-Only";
     _maMakeReadWriteLabel = @"Make My Mix Associations Read/Write";
     
     labelText = @"";
-    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:_maReadOnlyKey] &&
+    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:MIX_ASSOC_RO_KEY] &&
           [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText])
        ) {
         _assocsReadOnly = FALSE;
         labelText = _maMakeReadOnlyLabel;
         
-        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:_maReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_maReadOnlyText];
         
     } else {
-        _assocsReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:_maReadOnlyKey];
+        _assocsReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:MIX_ASSOC_RO_KEY];
         labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText];
     }
     
@@ -139,8 +149,128 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
     [_maReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
-    // Create No Save alert
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Tap Area Widgets
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    // Sizing parameters
     //
+    _tapAreaSize = [[NSUserDefaults standardUserDefaults] floatForKey:TAP_AREA_SIZE_KEY];
+    if (! _tapAreaSize) {
+        _tapAreaSize = DEF_TAP_AREA_SIZE;
+        [[NSUserDefaults standardUserDefaults] setFloat:DEF_TAP_AREA_SIZE forKey:TAP_AREA_SIZE_KEY];
+    }
+    
+//    CGFloat viewHeight     = (_tapAreaSize * 2) + _sizePadding * 2;
+//    CGFloat stepperOffsetX = 80.0;
+//    CGFloat stepperOffsetY = _sizePadding + (_tapAreaSize / 2) - 13.0;
+//    CGFloat shapeOffsetX   = 190.0;
+//    CGFloat shapeOffsetY  = _sizePadding + (_tapAreaSize / 2) - 11.0;
+//    
+//    
+//    // Creat the alertView main frame (to contain the imageView, stepper, and stepper label)
+//    //
+//    _rgbMainView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, viewHeight)];
+//    [_rgbMainView setBackgroundColor: DARK_BG_COLOR];
+//    
+//    
+//    // UIImageView (represents the current tap area)
+//    //
+//    [self setOffsetY: _sizePadding];
+    
+    _tapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, _tapAreaSize, _tapAreaSize)];
+    [_tapImageView setBackgroundColor:LIGHT_BG_COLOR];
+//    
+//    if ([_shapeGeom isEqualToString:_circleLabel]) {
+//        [_alertImageView.layer setCornerRadius: _tapAreaSize / 2.0];
+//        [_alertImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+//    } else {
+//        [_alertImageView.layer setCornerRadius: CORNER_RADIUS_NONE];
+//        [_alertImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+//    }
+//    [_alertImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+//    
+//    
+//    // Label displaying the value in the stepper
+//    //
+    int size = (int)_tapAreaSize;
+    
+//    _stepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, _tapAreaSize, _tapAreaSize)];
+//    [_stepperLabel setTextColor: DARK_TEXT_COLOR];
+//    [_stepperLabel setBackgroundColor: CLEAR_COLOR];
+//    [_stepperLabel setText: [[NSString alloc] initWithFormat:@"%i", size]];
+//    [_stepperLabel setTextAlignment: NSTextAlignmentCenter];
+//    [_alertImageView addSubview:_stepperLabel];
+//    
+//    
+//    // UIStepper (change the size of the tapping area)
+//    //
+//    _tapAreaStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, stepperOffsetY, _tapAreaSize, _tapAreaSize)];
+//    [_tapAreaStepper setTintColor: LIGHT_TEXT_COLOR];
+//    [_tapAreaStepper addTarget:self action:@selector(tapAreaStepperPressed) forControlEvents:UIControlEventValueChanged];
+//    
+//    
+//    // Set min, max, step, and default values and wraps parameter
+//    //
+//    [_tapAreaStepper setMinimumValue:_stepMinVal];
+//    [_tapAreaStepper setMaximumValue:_stepMaxVal];
+//    [_tapAreaStepper setStepValue:_stepIncVal];
+//    [_tapAreaStepper setValue:_tapAreaSize];
+//    [_tapAreaStepper setWraps:NO];
+//    
+//    
+//    // Create the Match Num Stepper
+//    //
+//    CGFloat matchNumYOffset = stepperOffsetY + _tapAreaSize + DEF_FIELD_PADDING;
+//    _matchNumLabel = [FieldUtils createLabel:@"Match #" xOffset:_imageViewXOffset yOffset:matchNumYOffset];
+//    [_matchNumLabel setFont: TEXT_LABEL_FONT];
+//    
+//    _matchNumStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, matchNumYOffset, _tapAreaSize, _tapAreaSize)];
+//    [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
+//    [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
+//    
+//    // Set min, max, step, and default values and wraps parameter
+//    //
+//    [_matchNumStepper setMinimumValue:_matchStepMinVal];
+//    [_matchNumStepper setMaximumValue:_matchStepMaxVal];
+//    [_matchNumStepper setStepValue:_matchStepIncVal];
+//    [_matchNumStepper setValue:_maxMatchNum];
+//    [_matchNumStepper setWraps:NO];
+//    
+//    
+//    _matchNumTextField = [FieldUtils createTextField:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum] tag: INCR_ALG_BTN_TAG];
+//    [_matchNumTextField setFrame:CGRectMake(shapeOffsetX, matchNumYOffset, DEF_SM_TXTFIELD_WIDTH, DEF_TEXTFIELD_HEIGHT)];
+//    [_matchNumTextField setAutoresizingMask: NO];
+//    [_matchNumTextField setKeyboardType: UIKeyboardTypeNumberPad];
+//    [_matchNumTextField setTag: MATCH_NUM_TAG];
+//    [_matchNumTextField setDelegate:self];
+//    
+//    
+//    // Initialize the shape
+//    //
+//    if ([_shapeGeom isEqualToString:_circleLabel]) {
+//        [self setShapeTitle: _rectLabel];
+//    } else {
+//        [self setShapeTitle: _circleLabel];
+//    }
+//    
+//    CGRect buttonFrame = CGRectMake(shapeOffsetX, shapeOffsetY, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
+//    _shape = [BarButtonUtils create3DButton:_shapeTitle tag: SHAPE_BUTTON_TAG frame: buttonFrame];
+//    [_shape addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [_rgbMainView addSubview:_alertImageView];
+//    [_rgbMainView addSubview:_tapAreaStepper];
+//    [_rgbMainView addSubview:_shape];
+//    
+//    [_rgbMainView addSubview:_matchNumLabel];
+//    [_rgbMainView addSubview:_matchNumStepper];
+//    [_rgbMainView addSubview:_matchNumTextField];
+    
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Create No Save alert
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     _noSaveAlert = [AlertUtils createBlankAlert:@"Settings Not Saved" message:@"Continue without saving?"];
     
     UIAlertAction* YesButton = [UIAlertAction
@@ -174,15 +304,32 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return SETTINGS_MAX_NUM_SECTIONS;
+    return SETTINGS_MAX_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == READ_ONLY_SETTINGS) {
+        return READ_ONLY_SETTINGS_ROWS;
+        
+    } else if (section == TAP_AREA_SETTINGS) {
+        return TAP_AREA_ROWS;
+    }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     return DEF_TABLE_CELL_HEIGHT;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *headerStr;
+    if (section == READ_ONLY_SETTINGS) {
+        headerStr = @"Read-Only Settings";
+        
+    } else if (section == TAP_AREA_SETTINGS) {
+        headerStr = @"Tap Area Settings";
+    }
+    return headerStr;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -197,18 +344,26 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:GRAY_BG_COLOR];
+    [cell.textLabel setFont:TABLE_CELL_FONT];
+    [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
     [cell.imageView setImage:nil];
     [cell.textLabel setText:@""];
     
-    // Name, and reference type
-    //
-    if (indexPath.section == PSWATCH_READ_ONLY_SECTION) {
-        [cell.contentView addSubview:_psReadOnlySwitch];
-        [cell.contentView addSubview:_psReadOnlyLabel];
+    if (indexPath.section == READ_ONLY_SETTINGS) {
+    
+        // Name, and reference type
+        //
+        if (indexPath.row == PSWATCH_READ_ONLY_ROW) {
+            [cell.contentView addSubview:_psReadOnlySwitch];
+            [cell.contentView addSubview:_psReadOnlyLabel];
+            
+        } else if (indexPath.row == MIXASSOC_READ_ONLY_ROW) {
+            [cell.contentView addSubview:_maReadOnlySwitch];
+            [cell.contentView addSubview:_maReadOnlyLabel];
+        }
         
-    } else if (indexPath.section == MIXASSOC_READ_ONLY_SECTION) {
-        [cell.contentView addSubview:_maReadOnlySwitch];
-        [cell.contentView addSubview:_maReadOnlyLabel];
+    } else if (indexPath.section == TAP_AREA_SETTINGS) {
+        cell.textLabel.text = @"Change the size and/or shape of the tap area.";
     }
     
     return cell;
@@ -285,10 +440,10 @@ const int SETTINGS_MAX_NUM_SECTIONS  = 2;
     } else {
         NSLog(@"Settings save successful");
 
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:_psReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
         
-        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:_maReadOnlyKey];
+        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
         
         _editFlag = FALSE;
