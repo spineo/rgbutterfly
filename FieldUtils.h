@@ -11,6 +11,8 @@
 
 @interface FieldUtils : NSObject
 
++ (UILabel *)createLabel:(NSString *)name;
+
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y;
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height;

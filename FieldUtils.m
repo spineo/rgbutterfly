@@ -11,31 +11,53 @@
 
 @implementation FieldUtils
 
-+ (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
++ (UILabel *)createLabel:(NSString *)name {
     
     CGFloat width = [name length] * 8;
     width = (width > DEF_LABEL_WIDTH) ? width : DEF_LABEL_WIDTH;
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
-
+    
+    UILabel *label = [[UILabel alloc] init];
+    
     [label setText:name];
-    [label setBackgroundColor: DARK_TEXT_COLOR];
-    [label setTextColor: LIGHT_TEXT_COLOR];
+    [label setBackgroundColor:DARK_TEXT_COLOR];
+    [label setTextColor:LIGHT_TEXT_COLOR];
     [label setTextAlignment:NSTextAlignmentLeft];
-    [label setFont: ITALIC_FONT];
+    [label setFont:ITALIC_FONT];
+    
+    return label;
+}
+
++ (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
+    
+    // Derived
+    //
+    CGFloat width = [name length] * 8;
+    width = (width > DEF_LABEL_WIDTH) ? width : DEF_LABEL_WIDTH;
+
+    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
+    UILabel *label = [self createLabel:name];
+    [label setFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
+
+//    [label setText:name];
+//    [label setBackgroundColor: DARK_TEXT_COLOR];
+//    [label setTextColor: LIGHT_TEXT_COLOR];
+//    [label setTextAlignment:NSTextAlignmentLeft];
+//    [label setFont: ITALIC_FONT];
 
     return label;
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height {
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
+    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
+    UILabel *label = [self createLabel:name];
+    [label setFrame:CGRectMake(x, y, width, height)];
     
-    [label setText:name];
-    [label setBackgroundColor: DARK_TEXT_COLOR];
-    [label setTextColor: LIGHT_TEXT_COLOR];
-    [label setTextAlignment:NSTextAlignmentLeft];
-    [label setFont: ITALIC_FONT];
+//    [label setText:name];
+//    [label setBackgroundColor: DARK_TEXT_COLOR];
+//    [label setTextColor: LIGHT_TEXT_COLOR];
+//    [label setTextAlignment:NSTextAlignmentLeft];
+//    [label setFont: ITALIC_FONT];
     
     return label;
 }

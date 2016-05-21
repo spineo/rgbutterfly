@@ -128,10 +128,18 @@ const int MAX_DESC_LEN = 128;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+//
 NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
 NSString * const PAINT_SWATCH_RO_KEY = @"swatches_read_only";
 NSString * const MIX_ASSOC_RO_KEY    = @"assoc_read_only";
+NSString * const SHAPE_GEOMETRY_KEY  = @"shape_geometry";
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// NSUserDefaults Values
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+NSString * const SHAPE_CIRCLE_VALUE  = @"Circle";
+NSString * const SHAPE_RECT_VALUE    = @"Rect";
 
 
 // Alert Types

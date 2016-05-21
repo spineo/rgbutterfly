@@ -137,7 +137,14 @@ extern const int MAX_DESC_LEN;
 extern NSString * const TAP_AREA_SIZE_KEY;
 extern NSString * const PAINT_SWATCH_RO_KEY;
 extern NSString * const MIX_ASSOC_RO_KEY;
+extern NSString * const SHAPE_GEOMETRY_KEY;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// NSUserDefaults Values
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+extern NSString * const SHAPE_CIRCLE_VALUE;
+extern NSString * const SHAPE_RECT_VALUE;
 
 
 // Alert Types
