@@ -39,6 +39,7 @@ extern CGFloat const DEF_TEXTVIEW_HEIGHT;
 // Generic Defaults
 //
 extern CGFloat const DEF_FIELD_PADDING;
+extern CGFloat const DEF_MD_FIELD_PADDING;
 extern CGFloat const DEF_LG_FIELD_PADDING;
 extern CGFloat const DEF_CORNER_RADIUS;
 extern CGFloat const DEF_BORDER_WIDTH;

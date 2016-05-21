@@ -36,6 +36,7 @@ CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 // Generic Defaults
 //
 CGFloat const DEF_FIELD_PADDING     = 5.0;
+CGFloat const DEF_MD_FIELD_PADDING  = 10.0;
 CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
 CGFloat const DEF_CORNER_RADIUS     = 5.0;
 CGFloat const DEF_BORDER_WIDTH      = 1.0;

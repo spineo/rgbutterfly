@@ -47,7 +47,11 @@ const int TAP_AREA_SETTINGS       = 1;
 const int TAP_AREA_ROW            = 0;
 const int TAP_AREA_ROWS           = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 2;
+const int MATCH_NUM_SETTINGS      = 2;
+const int MATCH_NUM_ROW           = 0;
+const int MATCH_NUM_ROWS          = 1;
+
+const int SETTINGS_MAX_SECTIONS   = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -351,33 +355,6 @@ const int SETTINGS_MAX_SECTIONS   = 2;
     return headerStr;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-//    [headerView setBackgroundColor: DARK_BG_COLOR];
-//    
-//    [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-//     UIViewAutoresizingFlexibleLeftMargin |
-//     UIViewAutoresizingFlexibleRightMargin];
-//    
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
-//    [headerLabel setBackgroundColor: DARK_BG_COLOR];
-//    [headerLabel setTextColor: LIGHT_TEXT_COLOR];
-//    [headerLabel setFont: TABLE_HEADER_FONT];
-//    
-//    [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-//     UIViewAutoresizingFlexibleLeftMargin |
-//     UIViewAutoresizingFlexibleRightMargin];
-//        
-//    if (section == TAP_AREA_SETTINGS) {
-//        [headerView addSubview:headerLabel];
-//        [headerLabel setText:@"Change the size and/or shape of the tap area."];
-//        [headerLabel setTextAlignment: NSTextAlignmentCenter];
-//    }
-//    
-//    return headerView;
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -413,18 +390,19 @@ const int SETTINGS_MAX_SECTIONS   = 2;
         [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_tapSettingsLabel];
         
-        [_tapImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
+        [_tapImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
         [cell.contentView addSubview:_tapImageView];
         
-        [_stepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
+        [_stepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
         [cell.contentView addSubview:_stepperLabel];
         
-        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + _stepperLabel.bounds.size.width + DEF_LG_FIELD_PADDING;
-        [_tapAreaStepper setFrame:CGRectMake(stepperXOffset, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + TAP_STEPPER_MAX + DEF_MD_FIELD_PADDING;
+        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_LG_FIELD_PADDING + (_tapAreaSize - _stepperLabel.bounds.size.height) / 2;
+        [_tapAreaStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_tapAreaStepper];
         
         CGFloat shapeXOffset = stepperXOffset + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
-        [_shapeButton setFrame:CGRectMake(shapeXOffset, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [_shapeButton setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_shapeButton];
     }
     
@@ -492,11 +470,33 @@ const int SETTINGS_MAX_SECTIONS   = 2;
 }
 
 - (void)tapAreaStepperPressed {
+    int size = (int)[_tapAreaStepper value];
     
+    [_stepperLabel setText:[[NSString alloc] initWithFormat:@"%i", size]];
+    
+    _tapAreaSize           = (CGFloat)size;
+    
+    if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+    } else {
+        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)changeShape {
-    
+    if ([_shapeButton.titleLabel.text isEqualToString:SHAPE_CIRCLE_VALUE]) {
+        _shapeTitle = SHAPE_RECT_VALUE;
+        _shapeGeom  = SHAPE_CIRCLE_VALUE;
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+        
+    } else {
+        _shapeTitle = SHAPE_CIRCLE_VALUE;
+        _shapeGeom  = SHAPE_RECT_VALUE;
+        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+        
+    }
+    [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
 }
 
 - (IBAction)save:(id)sender {
@@ -515,6 +515,11 @@ const int SETTINGS_MAX_SECTIONS   = 2;
         
         [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
+        
+        // Tap Area Stepper
+        //
+        [[NSUserDefaults standardUserDefaults] setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
+        [[NSUserDefaults standardUserDefaults] setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
         
         _editFlag = FALSE;
     }
