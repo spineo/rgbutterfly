@@ -126,12 +126,20 @@
 }
 
 + (UIButton *)create3DButton:(NSString *)title tag:(int)tag frame:(CGRect)frame {
+    
+    UIButton *button = [self create3DButton:title tag:tag];
+    [button setFrame:frame];
+    
+    return button;
+}
+
++ (UIButton *)create3DButton:(NSString *)title tag:(int)tag {
 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setFrame: frame];
+
     [button setTitle: title forState:UIControlStateNormal];
-    [button setTintColor: DARK_TEXT_COLOR];
-    [button setBackgroundColor: GRAY_BG_COLOR];
+    [button setTintColor:DARK_TEXT_COLOR];
+    [button setBackgroundColor:GRAY_BG_COLOR];
     [button setTag: tag];
     
     
@@ -150,13 +158,13 @@
     // Round button corners
     //
     CALayer *btnLayer = [button layer];
-    [btnLayer setMasksToBounds: YES];
-    [btnLayer setCornerRadius: DEF_CORNER_RADIUS];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:DEF_CORNER_RADIUS];
     
     // Apply a 1 pixel, black border
     //
-    [btnLayer setBorderWidth: DEF_BORDER_WIDTH];
-    [btnLayer setBorderColor: [DARK_BORDER_COLOR CGColor]];
+    [btnLayer setBorderWidth:DEF_BORDER_WIDTH];
+    [btnLayer setBorderColor:[DARK_BORDER_COLOR CGColor]];
     
     [button.layer insertSublayer: btnGradient atIndex:0];
     

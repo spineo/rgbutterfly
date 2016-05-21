@@ -39,6 +39,7 @@ extern CGFloat const DEF_TEXTVIEW_HEIGHT;
 // Generic Defaults
 //
 extern CGFloat const DEF_FIELD_PADDING;
+extern CGFloat const DEF_LG_FIELD_PADDING;
 extern CGFloat const DEF_CORNER_RADIUS;
 extern CGFloat const DEF_BORDER_WIDTH;
 extern CGFloat const BORDER_WIDTH_NONE;
@@ -116,6 +117,9 @@ extern const int COLOR_PICKER_TAG;
 extern const int COLOR_BTN_TAG;
 extern const int TYPE_BTN_TAG;
 
+// Settings
+//
+extern const int SHAPE_BUTTON_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements
@@ -145,6 +149,12 @@ extern NSString * const SHAPE_GEOMETRY_KEY;
 //
 extern NSString * const SHAPE_CIRCLE_VALUE;
 extern NSString * const SHAPE_RECT_VALUE;
+
+// Tap Area Stepper
+//
+extern const int TAP_STEPPER_MIN;
+extern const int TAP_STEPPER_MAX;
+extern const int TAP_STEPPER_INC;
 
 
 // Alert Types

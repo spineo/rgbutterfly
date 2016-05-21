@@ -27,4 +27,6 @@
 
 + (UIButton *)create3DButton:(NSString *)title tag:(int)tag frame:(CGRect)frame;
 
++ (UIButton *)create3DButton:(NSString *)title tag:(int)tag;
+
 @end

@@ -36,6 +36,7 @@ CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 // Generic Defaults
 //
 CGFloat const DEF_FIELD_PADDING     = 5.0;
+CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
 CGFloat const DEF_CORNER_RADIUS     = 5.0;
 CGFloat const DEF_BORDER_WIDTH      = 1.0;
 CGFloat const BORDER_WIDTH_NONE     = 0.0;
@@ -115,6 +116,10 @@ const int COLOR_PICKER_TAG  = 87;
 const int COLOR_BTN_TAG     = 88;
 const int TYPE_BTN_TAG      = 89;
 
+// Settings
+//
+const int SHAPE_BUTTON_TAG  = 93;
+
 const int MAX_TAG           = 100;
 
 
@@ -140,6 +145,12 @@ NSString * const SHAPE_GEOMETRY_KEY  = @"shape_geometry";
 //
 NSString * const SHAPE_CIRCLE_VALUE  = @"Circle";
 NSString * const SHAPE_RECT_VALUE    = @"Rect";
+
+// Tap Area Stepper
+//
+const int TAP_STEPPER_MIN = 20;
+const int TAP_STEPPER_MAX = 44;
+const int TAP_STEPPER_INC = 4;
 
 
 // Alert Types

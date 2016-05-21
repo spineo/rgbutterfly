@@ -106,7 +106,7 @@
 // Defined programmatically
 //
 const int TAPS_ALERT_TAG   = 11;
-const int SHAPE_BUTTON_TAG = 13;
+//const int SHAPE_BUTTON_TAG = 13;
 const int MATCH_NUM_TAG    = 14;
 const int MATCH_NAME_TAG   = 15;
 const int MATCH_KEYW_TAG   = 16;

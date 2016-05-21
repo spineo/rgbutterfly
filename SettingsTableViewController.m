@@ -9,6 +9,7 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "AlertUtils.h"
+#import "BarButtonUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 
@@ -17,9 +18,11 @@
 @property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *stepperLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
+@property (nonatomic, strong) UIStepper *tapAreaStepper;
+@property (nonatomic, strong) UIButton *shapeButton;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 
 // NSManagedObject
@@ -193,12 +196,14 @@ const int SETTINGS_MAX_SECTIONS   = 2;
     if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
         [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
         [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        _shapeTitle = SHAPE_CIRCLE_VALUE;
         
     // Rectangle
     //
     } else {
         [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
         [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        _shapeTitle = SHAPE_RECT_VALUE;
     }
     [_tapImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
@@ -211,25 +216,23 @@ const int SETTINGS_MAX_SECTIONS   = 2;
     [_stepperLabel setBackgroundColor:CLEAR_COLOR];
     [_stepperLabel setTextAlignment:NSTextAlignmentCenter];
     
-    //[_tapImageView addSubview:_stepperLabel];
+    // UIStepper (change the size of the tapping area)
+    //
+    _tapAreaStepper = [[UIStepper alloc] init];
+
+    [_tapAreaStepper setTintColor:LIGHT_TEXT_COLOR];
+    [_tapAreaStepper addTarget:self action:@selector(tapAreaStepperPressed) forControlEvents:UIControlEventValueChanged];
     
     
-//    // UIStepper (change the size of the tapping area)
-//    //
-//    _tapAreaStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, stepperOffsetY, _tapAreaSize, _tapAreaSize)];
-//    [_tapAreaStepper setTintColor: LIGHT_TEXT_COLOR];
-//    [_tapAreaStepper addTarget:self action:@selector(tapAreaStepperPressed) forControlEvents:UIControlEventValueChanged];
-//    
-//    
-//    // Set min, max, step, and default values and wraps parameter
-//    //
-//    [_tapAreaStepper setMinimumValue:_stepMinVal];
-//    [_tapAreaStepper setMaximumValue:_stepMaxVal];
-//    [_tapAreaStepper setStepValue:_stepIncVal];
-//    [_tapAreaStepper setValue:_tapAreaSize];
-//    [_tapAreaStepper setWraps:NO];
-//    
-//    
+    // Set min, max, step, and default values and wraps parameter
+    //
+    [_tapAreaStepper setMinimumValue:TAP_STEPPER_MIN];
+    [_tapAreaStepper setMaximumValue:TAP_STEPPER_MAX];
+    [_tapAreaStepper setStepValue:TAP_STEPPER_INC];
+    [_tapAreaStepper setValue:_tapAreaSize];
+    [_tapAreaStepper setWraps:NO];
+    
+    
 //    // Create the Match Num Stepper
 //    //
 //    CGFloat matchNumYOffset = stepperOffsetY + _tapAreaSize + DEF_FIELD_PADDING;
@@ -266,8 +269,8 @@ const int SETTINGS_MAX_SECTIONS   = 2;
 //    }
 //    
 //    CGRect buttonFrame = CGRectMake(shapeOffsetX, shapeOffsetY, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
-//    _shape = [BarButtonUtils create3DButton:_shapeTitle tag: SHAPE_BUTTON_TAG frame: buttonFrame];
-//    [_shape addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
+    _shapeButton = [BarButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
+    [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
 //    
 //    [_rgbMainView addSubview:_tapImageView];
 //    [_rgbMainView addSubview:_tapAreaStepper];
@@ -415,6 +418,14 @@ const int SETTINGS_MAX_SECTIONS   = 2;
         
         [_stepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
         [cell.contentView addSubview:_stepperLabel];
+        
+        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + _stepperLabel.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_tapAreaStepper setFrame:CGRectMake(stepperXOffset, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [cell.contentView addSubview:_tapAreaStepper];
+        
+        CGFloat shapeXOffset = stepperXOffset + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_shapeButton setFrame:CGRectMake(shapeXOffset, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [cell.contentView addSubview:_shapeButton];
     }
     
     return cell;
@@ -478,6 +489,14 @@ const int SETTINGS_MAX_SECTIONS   = 2;
         [_maReadOnlyLabel setText:_maMakeReadOnlyLabel];
     }
     _editFlag = TRUE;
+}
+
+- (void)tapAreaStepperPressed {
+    
+}
+
+- (void)changeShape {
+    
 }
 
 - (IBAction)save:(id)sender {
