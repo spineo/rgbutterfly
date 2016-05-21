@@ -111,7 +111,7 @@
     [textView.layer setBorderWidth: DEF_BORDER_WIDTH];
     [textView setTag: tag];
     [textView setTextAlignment:NSTextAlignmentLeft];
-    [textView setFont: TEXT_FIELD_FONT];
+    [textView setFont:TEXT_FIELD_FONT];
     [textView setText:name];
     [textView setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
     

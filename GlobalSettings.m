@@ -74,13 +74,6 @@ CGFloat const DECR_BUTTON_WIDTH     = 20.0;
 CGFloat const INCR_BUTTON_WIDTH     = 20.0;
 
 
-// Max Match Num (i.e., UIImageViewController)
-//
-int const DEF_MAX_MATCH  = 100;
-int const DEF_MATCH_NUM  = 20;
-int const DEF_MIN_MATCH  = 5;
-int const DEF_STEP_MATCH = 5;
-
 // Tags
 //
 int const DEF_TAG_NUM    = 200;
@@ -120,6 +113,7 @@ const int TYPE_BTN_TAG      = 89;
 // Settings
 //
 const int SHAPE_BUTTON_TAG  = 93;
+const int MATCH_NUM_TAG     = 94;
 
 const int MAX_TAG           = 100;
 
@@ -135,10 +129,11 @@ const int MAX_DESC_LEN = 128;
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
 NSString * const PAINT_SWATCH_RO_KEY = @"swatches_read_only";
 NSString * const MIX_ASSOC_RO_KEY    = @"assoc_read_only";
+NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
 NSString * const SHAPE_GEOMETRY_KEY  = @"shape_geometry";
+NSString * const MATCH_NUM_KEY       = @"match_num";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -152,6 +147,20 @@ NSString * const SHAPE_RECT_VALUE    = @"Rect";
 const int TAP_STEPPER_MIN = 20;
 const int TAP_STEPPER_MAX = 44;
 const int TAP_STEPPER_INC = 4;
+
+// Match Num Stepper
+//
+const int MATCH_STEPPER_MIN = 5;
+const int MATCH_STEPPER_MAX = 100;
+const int MATCH_STEPPER_INC = 5;
+const int MATCH_STEPPER_DEF = 20;
+
+// Max Match Num (i.e., UIImageViewController)
+//
+int const DEF_MAX_MATCH  = 100;
+int const DEF_MATCH_NUM  = 20;
+int const DEF_MIN_MATCH  = 5;
+int const DEF_STEP_MATCH = 5;
 
 
 // Alert Types

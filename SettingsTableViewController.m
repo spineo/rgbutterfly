@@ -15,15 +15,17 @@
 
 @interface SettingsTableViewController ()
 
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *stepperLabel;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
-@property (nonatomic, strong) UIStepper *tapAreaStepper;
+@property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
 @property (nonatomic, strong) UIButton *shapeButton;
+@property (nonatomic, strong) UITextField *matchNumTextField;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
+@property (nonatomic) int maxMatchNum;
 
 // NSManagedObject
 //
@@ -168,24 +170,7 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         [[NSUserDefaults standardUserDefaults] setFloat:DEF_TAP_AREA_SIZE forKey:TAP_AREA_SIZE_KEY];
     }
     
-//    CGFloat viewHeight     = (_tapAreaSize * 2) + _sizePadding * 2;
-//    CGFloat stepperOffsetX = 80.0;
-//    CGFloat stepperOffsetY = _sizePadding + (_tapAreaSize / 2) - 13.0;
-//    CGFloat shapeOffsetX   = 190.0;
-//    CGFloat shapeOffsetY  = _sizePadding + (_tapAreaSize / 2) - 11.0;
-//    
-//    
-//    // Creat the alertView main frame (to contain the imageView, stepper, and stepper label)
-//    //
-//    _rgbMainView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, viewHeight)];
-//    [_rgbMainView setBackgroundColor: DARK_BG_COLOR];
-//    
-//    
-//    // UIImageView (represents the current tap area)
-//    //
-//    [self setOffsetY: _sizePadding];
-    
-    _tapSettingsLabel = [FieldUtils createLabel:@"Change the size/shape of the tap area."];
+    _tapSettingsLabel = [FieldUtils createLabel:@"Change the size/shape of the tap area"];
     
     _tapImageView = [[UIImageView alloc] init];
     [_tapImageView setBackgroundColor:LIGHT_BG_COLOR];
@@ -211,14 +196,14 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     }
     [_tapImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
-//
-//    // Label displaying the value in the stepper
-//    //
+
+    // Label displaying the value in the stepper
+    //
     int size = (int)_tapAreaSize;
-    _stepperLabel = [FieldUtils createLabel:[[NSString alloc] initWithFormat:@"%i", size]];
-    [_stepperLabel setTextColor:DARK_TEXT_COLOR];
-    [_stepperLabel setBackgroundColor:CLEAR_COLOR];
-    [_stepperLabel setTextAlignment:NSTextAlignmentCenter];
+    _tapStepperLabel = [FieldUtils createLabel:[[NSString alloc] initWithFormat:@"%i", size]];
+    [_tapStepperLabel setTextColor:DARK_TEXT_COLOR];
+    [_tapStepperLabel setBackgroundColor:CLEAR_COLOR];
+    [_tapStepperLabel setTextAlignment:NSTextAlignmentCenter];
     
     // UIStepper (change the size of the tapping area)
     //
@@ -236,54 +221,42 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     [_tapAreaStepper setValue:_tapAreaSize];
     [_tapAreaStepper setWraps:NO];
     
-    
-//    // Create the Match Num Stepper
-//    //
-//    CGFloat matchNumYOffset = stepperOffsetY + _tapAreaSize + DEF_FIELD_PADDING;
-//    _matchNumLabel = [FieldUtils createLabel:@"Match #" xOffset:_imageViewXOffset yOffset:matchNumYOffset];
-//    [_matchNumLabel setFont: TEXT_LABEL_FONT];
-//    
-//    _matchNumStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, matchNumYOffset, _tapAreaSize, _tapAreaSize)];
-//    [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
-//    [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
-//    
-//    // Set min, max, step, and default values and wraps parameter
-//    //
-//    [_matchNumStepper setMinimumValue:_matchStepMinVal];
-//    [_matchNumStepper setMaximumValue:_matchStepMaxVal];
-//    [_matchNumStepper setStepValue:_matchStepIncVal];
-//    [_matchNumStepper setValue:_maxMatchNum];
-//    [_matchNumStepper setWraps:NO];
-//    
-//    
-//    _matchNumTextField = [FieldUtils createTextField:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum] tag: INCR_ALG_BTN_TAG];
-//    [_matchNumTextField setFrame:CGRectMake(shapeOffsetX, matchNumYOffset, DEF_SM_TXTFIELD_WIDTH, DEF_TEXTFIELD_HEIGHT)];
-//    [_matchNumTextField setAutoresizingMask: NO];
-//    [_matchNumTextField setKeyboardType: UIKeyboardTypeNumberPad];
-//    [_matchNumTextField setTag: MATCH_NUM_TAG];
-//    [_matchNumTextField setDelegate:self];
-//    
-//    
-//    // Initialize the shape
-//    //
-//    if ([_shapeGeom isEqualToString:_circleLabel]) {
-//        [self setShapeTitle: _rectLabel];
-//    } else {
-//        [self setShapeTitle: _circleLabel];
-//    }
-//    
-//    CGRect buttonFrame = CGRectMake(shapeOffsetX, shapeOffsetY, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
     _shapeButton = [BarButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
     [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [_rgbMainView addSubview:_tapImageView];
-//    [_rgbMainView addSubview:_tapAreaStepper];
-//    [_rgbMainView addSubview:_shape];
-//    
-//    [_rgbMainView addSubview:_matchNumLabel];
-//    [_rgbMainView addSubview:_matchNumStepper];
-//    [_rgbMainView addSubview:_matchNumTextField];
+
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Match Num Widgets
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    _matchSettingsLabel = [FieldUtils createLabel:@"Set the default number of Tap Area matches"];
+    
+    _matchStepperLabel = [FieldUtils createLabel:@"Match #"];
+    [_matchStepperLabel setFont:TEXT_LABEL_FONT];
+    
+    _matchNumStepper = [[UIStepper alloc] init];
+    [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
+    [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
+    
+    _maxMatchNum = (int)[[NSUserDefaults standardUserDefaults] integerForKey:MATCH_NUM_KEY];
+    if (! _maxMatchNum) {
+        _maxMatchNum = MATCH_STEPPER_DEF;
+    }
+    
+    // Set min, max, step, and default values and wraps parameter
+    //
+    [_matchNumStepper setMinimumValue:MATCH_STEPPER_MIN];
+    [_matchNumStepper setMaximumValue:MATCH_STEPPER_MAX];
+    [_matchNumStepper setStepValue:MATCH_STEPPER_INC];
+    [_matchNumStepper setValue:_maxMatchNum];
+    [_matchNumStepper setWraps:NO];
+   
+   
+    _matchNumTextField = [FieldUtils createTextField:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum] tag:MATCH_NUM_TAG];
+    [_matchNumTextField setAutoresizingMask: NO];
+    [_matchNumTextField setKeyboardType: UIKeyboardTypeNumberPad];
+    [_matchNumTextField setDelegate:self];
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
@@ -331,12 +304,15 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         
     } else if (section == TAP_AREA_SETTINGS) {
         return TAP_AREA_ROWS;
+        
+    } else if (section == MATCH_NUM_SETTINGS) {
+        return MATCH_NUM_ROWS;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == TAP_AREA_SETTINGS) {
+    if (indexPath.section == TAP_AREA_SETTINGS || indexPath.section == MATCH_NUM_SETTINGS) {
         return DEF_VLG_TBL_CELL_HGT;
         
     } else {
@@ -351,6 +327,9 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         
     } else if (section == TAP_AREA_SETTINGS) {
         headerStr = @"Tap Area Settings";
+        
+    } else if (section == MATCH_NUM_SETTINGS) {
+        headerStr = @"Match Number Settings";
     }
     return headerStr;
 }
@@ -390,20 +369,37 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_tapSettingsLabel];
         
-        [_tapImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
+        [_tapImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
         [cell.contentView addSubview:_tapImageView];
         
-        [_stepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
-        [cell.contentView addSubview:_stepperLabel];
+        [_tapStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
+        [cell.contentView addSubview:_tapStepperLabel];
         
-        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + TAP_STEPPER_MAX + DEF_MD_FIELD_PADDING;
-        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_LG_FIELD_PADDING + (_tapAreaSize - _stepperLabel.bounds.size.height) / 2;
+        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + TAP_STEPPER_MAX + DEF_FIELD_PADDING;
+        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING + (_tapAreaSize - _tapStepperLabel.bounds.size.height) / 2;
         [_tapAreaStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_tapAreaStepper];
         
         CGFloat shapeXOffset = stepperXOffset + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
         [_shapeButton setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_shapeButton];
+        
+    } else if (indexPath.section == MATCH_NUM_SETTINGS) {
+        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
+        [cell.contentView addSubview:_matchSettingsLabel];
+        
+        [_matchStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _matchStepperLabel.bounds.size.width, _matchStepperLabel.bounds.size.height)];
+        [_matchStepperLabel sizeToFit];
+        [cell.contentView addSubview:_matchStepperLabel];
+        
+        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + _matchStepperLabel.bounds.size.width + DEF_FIELD_PADDING;
+        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
+        [_matchNumStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [cell.contentView addSubview:_matchNumStepper];
+        
+        CGFloat shapeXOffset = stepperXOffset + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [cell.contentView addSubview:_matchNumTextField];
     }
     
     return cell;
@@ -443,6 +439,40 @@ const int SETTINGS_MAX_SECTIONS   = 3;
 }
 */
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TextField Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - TextField Methods
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    if (textField.tag == MATCH_NUM_TAG) {
+        NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
+        
+        if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
+            int newValue = [textField.text intValue];
+            if (newValue > DEF_MAX_MATCH) {
+                _maxMatchNum = DEF_MAX_MATCH;
+                
+            } else if (newValue <= 0) {
+                _maxMatchNum = 1;
+                
+            } else {
+                _maxMatchNum = newValue;
+            }
+        }
+        [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+        [_matchNumStepper setValue:(double)_maxMatchNum];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - Widget states and Save
 
 - (void)setPSSwitchState:(id)sender {
@@ -472,7 +502,7 @@ const int SETTINGS_MAX_SECTIONS   = 3;
 - (void)tapAreaStepperPressed {
     int size = (int)[_tapAreaStepper value];
     
-    [_stepperLabel setText:[[NSString alloc] initWithFormat:@"%i", size]];
+    [_tapStepperLabel setText:[[NSString alloc] initWithFormat:@"%i", size]];
     
     _tapAreaSize           = (CGFloat)size;
     
@@ -499,6 +529,12 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
 }
 
+- (void)matchNumStepperPressed {
+    _maxMatchNum = (int)[_matchNumStepper value];
+    
+    [_matchNumTextField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+}
+
 - (IBAction)save:(id)sender {
     
     [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
@@ -520,6 +556,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         //
         [[NSUserDefaults standardUserDefaults] setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
         [[NSUserDefaults standardUserDefaults] setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+        
+        // Match Num Stepper
+        //
+        [[NSUserDefaults standardUserDefaults] setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
         
         _editFlag = FALSE;
     }

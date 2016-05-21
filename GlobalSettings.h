@@ -121,6 +121,7 @@ extern const int TYPE_BTN_TAG;
 // Settings
 //
 extern const int SHAPE_BUTTON_TAG;
+extern const int MATCH_NUM_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements
@@ -139,10 +140,11 @@ extern const int MAX_DESC_LEN;
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-extern NSString * const TAP_AREA_SIZE_KEY;
 extern NSString * const PAINT_SWATCH_RO_KEY;
 extern NSString * const MIX_ASSOC_RO_KEY;
+extern NSString * const TAP_AREA_SIZE_KEY;
 extern NSString * const SHAPE_GEOMETRY_KEY;
+extern NSString * const MATCH_NUM_KEY;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -156,6 +158,13 @@ extern NSString * const SHAPE_RECT_VALUE;
 extern const int TAP_STEPPER_MIN;
 extern const int TAP_STEPPER_MAX;
 extern const int TAP_STEPPER_INC;
+
+// Match Num Stepper
+//
+extern const int MATCH_STEPPER_MIN;
+extern const int MATCH_STEPPER_MAX;
+extern const int MATCH_STEPPER_INC;
+extern const int MATCH_STEPPER_DEF;
 
 
 // Alert Types
