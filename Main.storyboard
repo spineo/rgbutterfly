@@ -158,7 +158,7 @@
                         <barButtonItem tag="58" image="settings" id="Ok2-x2-peI">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="respondToRgbTap:" destination="6Nq-8K-N9m" id="oyO-Le-NkU"/>
+                                <segue destination="Asd-Pb-qDH" kind="presentation" id="Szt-18-Btg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="F6j-7M-mxg"/>
@@ -665,7 +665,7 @@
             </objects>
             <point key="canvasLocation" x="-906" y="-976"/>
         </scene>
-        <!--Settings Table View Controller-->
+        <!--Color Picker Settings-->
         <scene sceneID="tiQ-WC-TVX">
             <objects>
                 <tableViewController id="z8z-Q4-bZ9" customClass="SettingsTableViewController" sceneMemberID="viewController">
@@ -702,7 +702,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="UFN-Ih-VPD">
+                    <navigationItem key="navigationItem" title="Color Picker Settings" id="UFN-Ih-VPD">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="NKU-jd-I4P">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -752,9 +752,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7OV-Go-gIV"/>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="9H9-9R-KDD"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

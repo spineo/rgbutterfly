@@ -27,6 +27,10 @@
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
 
+// NSUserDefaults
+//
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+
 // NSManagedObject
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -61,6 +65,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _editFlag = FALSE;
     _reuseCellIdentifier = @"SettingsTableCell";
     
+    // NSUserDefaults
+    //
+    _userDefaults = [NSUserDefaults standardUserDefaults];
+    
     // NSManagedObject
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
@@ -81,18 +89,18 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _psMakeReadWriteLabel = @"Make My Paint Swatches Read/Write";
     
     NSString *labelText;
-    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:PAINT_SWATCH_RO_KEY] &&
-          [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText])
+    if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
+          [_userDefaults stringForKey:_psReadOnlyText])
        ) {
         _swatchesReadOnly = FALSE;
         labelText = _psMakeReadOnlyLabel;
         
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
-        [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_psReadOnlyText];
+        [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
+        [_userDefaults setValue:labelText forKey:_psReadOnlyText];
         
     } else {
-        _swatchesReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:PAINT_SWATCH_RO_KEY];
-        labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_psReadOnlyText];
+        _swatchesReadOnly = [_userDefaults boolForKey:PAINT_SWATCH_RO_KEY];
+        labelText = [_userDefaults stringForKey:_psReadOnlyText];
     }
     
     // Create the label and switch, set the last state or default values
@@ -125,18 +133,18 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _maMakeReadWriteLabel = @"Make My Mix Associations Read/Write";
     
     labelText = @"";
-    if(! ([[NSUserDefaults standardUserDefaults] boolForKey:MIX_ASSOC_RO_KEY] &&
-          [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText])
+    if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
+          [_userDefaults stringForKey:_maReadOnlyText])
        ) {
         _assocsReadOnly = FALSE;
         labelText = _maMakeReadOnlyLabel;
         
-        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
-        [[NSUserDefaults standardUserDefaults] setValue:labelText forKey:_maReadOnlyText];
+        [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
+        [_userDefaults setValue:labelText forKey:_maReadOnlyText];
         
     } else {
-        _assocsReadOnly = [[NSUserDefaults standardUserDefaults] boolForKey:MIX_ASSOC_RO_KEY];
-        labelText = [[NSUserDefaults standardUserDefaults] stringForKey:_maReadOnlyText];
+        _assocsReadOnly = [_userDefaults boolForKey:MIX_ASSOC_RO_KEY];
+        labelText = [_userDefaults stringForKey:_maReadOnlyText];
     }
     
     // Create the label and switch, set the last state or default values
@@ -164,10 +172,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     
     // Sizing parameters
     //
-    _tapAreaSize = [[NSUserDefaults standardUserDefaults] floatForKey:TAP_AREA_SIZE_KEY];
+    _tapAreaSize = [_userDefaults floatForKey:TAP_AREA_SIZE_KEY];
     if (! _tapAreaSize) {
         _tapAreaSize = DEF_TAP_AREA_SIZE;
-        [[NSUserDefaults standardUserDefaults] setFloat:DEF_TAP_AREA_SIZE forKey:TAP_AREA_SIZE_KEY];
+        [_userDefaults setFloat:DEF_TAP_AREA_SIZE forKey:TAP_AREA_SIZE_KEY];
     }
     
     _tapSettingsLabel = [FieldUtils createLabel:@"Change the size/shape of the tap area"];
@@ -177,7 +185,7 @@ const int SETTINGS_MAX_SECTIONS   = 3;
 
     // Set the default
     //
-    _shapeGeom = [[NSUserDefaults standardUserDefaults] stringForKey:SHAPE_GEOMETRY_KEY];
+    _shapeGeom = [_userDefaults stringForKey:SHAPE_GEOMETRY_KEY];
     if (! _shapeGeom) {
         _shapeGeom = SHAPE_CIRCLE_VALUE;
     }
@@ -232,13 +240,14 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _matchSettingsLabel = [FieldUtils createLabel:@"Set the default number of Tap Area matches"];
     
     _matchStepperLabel = [FieldUtils createLabel:@"Match #"];
+    [_matchStepperLabel sizeToFit];
     [_matchStepperLabel setFont:TEXT_LABEL_FONT];
     
     _matchNumStepper = [[UIStepper alloc] init];
     [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
     [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
     
-    _maxMatchNum = (int)[[NSUserDefaults standardUserDefaults] integerForKey:MATCH_NUM_KEY];
+    _maxMatchNum = (int)[_userDefaults integerForKey:MATCH_NUM_KEY];
     if (! _maxMatchNum) {
         _maxMatchNum = MATCH_STEPPER_DEF;
     }
@@ -253,8 +262,8 @@ const int SETTINGS_MAX_SECTIONS   = 3;
    
    
     _matchNumTextField = [FieldUtils createTextField:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum] tag:MATCH_NUM_TAG];
-    [_matchNumTextField setAutoresizingMask: NO];
-    [_matchNumTextField setKeyboardType: UIKeyboardTypeNumberPad];
+    [_matchNumTextField setAutoresizingMask:NO];
+    [_matchNumTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [_matchNumTextField setDelegate:self];
 
 
@@ -388,12 +397,13 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_matchSettingsLabel];
         
-        [_matchStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _matchStepperLabel.bounds.size.width, _matchStepperLabel.bounds.size.height)];
+        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
+        CGFloat stepperLabelYOffset = yOffset + (_matchNumStepper.bounds.size.height - _matchStepperLabel.bounds.size.height) / 2;
+        [_matchStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, stepperLabelYOffset, _matchStepperLabel.bounds.size.width, _matchStepperLabel.bounds.size.height)];
         [_matchStepperLabel sizeToFit];
         [cell.contentView addSubview:_matchStepperLabel];
         
         CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + _matchStepperLabel.bounds.size.width + DEF_FIELD_PADDING;
-        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
         [_matchNumStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_matchNumStepper];
         
@@ -447,28 +457,28 @@ const int SETTINGS_MAX_SECTIONS   = 3;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    if (textField.tag == MATCH_NUM_TAG) {
-        NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
-        
-        if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
-            int newValue = [textField.text intValue];
-            if (newValue > DEF_MAX_MATCH) {
-                _maxMatchNum = DEF_MAX_MATCH;
-                
-            } else if (newValue <= 0) {
-                _maxMatchNum = 1;
-                
-            } else {
-                _maxMatchNum = newValue;
-            }
+    NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
+    
+    if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
+        int newValue = [textField.text intValue];
+        if (newValue > DEF_MAX_MATCH) {
+            _maxMatchNum = DEF_MAX_MATCH;
+            
+        } else if (newValue <= 0) {
+            _maxMatchNum = 1;
+            
+        } else {
+            _maxMatchNum = newValue;
         }
-        [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
-        [_matchNumStepper setValue:(double)_maxMatchNum];
     }
+    [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+    [_matchNumStepper setValue:(double)_maxMatchNum];
+    
+    _editFlag = TRUE;
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
 }
@@ -512,6 +522,8 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
     }
     [self.tableView reloadData];
+    
+    _editFlag = TRUE;
 }
 
 - (void)changeShape {
@@ -527,12 +539,16 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
+    
+    _editFlag = TRUE;
 }
 
 - (void)matchNumStepperPressed {
     _maxMatchNum = (int)[_matchNumStepper value];
     
     [_matchNumTextField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+    
+    _editFlag = TRUE;
 }
 
 - (IBAction)save:(id)sender {
@@ -546,20 +562,24 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     } else {
         NSLog(@"Settings save successful");
 
-        [[NSUserDefaults standardUserDefaults] setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
-        [[NSUserDefaults standardUserDefaults] setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
-        [[NSUserDefaults standardUserDefaults] setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
-        
-        // Tap Area Stepper
+        // Read-Only Settings
         //
-        [[NSUserDefaults standardUserDefaults] setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
-        [[NSUserDefaults standardUserDefaults] setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+        [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
+        [_userDefaults setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
         
-        // Match Num Stepper
+        [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
+        [_userDefaults setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
+        
+        // Tap Area Stepper Settings
         //
-        [[NSUserDefaults standardUserDefaults] setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+        [_userDefaults setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
+        [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+        
+        // Match Num Stepper Settings
+        //
+        [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+        
+        [_userDefaults synchronize];
         
         _editFlag = FALSE;
     }
