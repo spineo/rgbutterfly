@@ -35,26 +35,22 @@
 
 @interface UIImageViewController ()
 
-@property (nonatomic, strong) UILabel *titleLabel, *matchNumLabel;
-@property (nonatomic, strong) UIImageView *rgbView, *alertImageView;
-@property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
-@property (nonatomic, strong) UIButton *shape, *scrollViewUp, *scrollViewDown;
-@property (nonatomic) int goBackStatus, viewInit, shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
-@property (nonatomic, strong) UIImage *cgiImage, *rgbImage, *tapMeImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
-@property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray, *swatchObjects, *matchTapAreas;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *scrollViewUp, *scrollViewDown;
+@property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
+@property (nonatomic, strong) UIImage *cgiImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
+@property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
-@property (nonatomic, strong) GlobalSettings *globalSettings;
-@property (nonatomic, strong) NSString *defTitle, *assocName, *matchKeyw, *matchDesc;
+@property (nonatomic, strong) NSString *assocName, *matchKeyw, *matchDesc;
 
 @property (nonatomic, strong) UIAlertController *typeAlertController, *matchEditAlertController, *assocEditAlertController, *deleteTapsAlertController, *updateAlertController;
 @property (nonatomic, strong) UIAlertAction *matchSave, *assocSave, *matchView, *associateMixes, *alertCancel, *matchAssocFieldsView, *matchAssocFieldsCancel, *matchAssocFieldsSave, *deleteTapsYes, *deleteTapsCancel;
 
-//@property (nonatomic, strong) UIAlertView *tapAreaAlertView;
-@property (nonatomic) int tapAreaSeen, tapAreaSize;
-@property (nonatomic, strong) NSString *tapAreaShape, *shapeGeom, *rectLabel, *circleLabel, *shapeTitle;
+@property (nonatomic, strong) NSString *shapeGeom, *rectLabel, *circleLabel;
 
-@property (nonatomic) int stepMinVal, stepMaxVal, stepIncVal, matchAlgIndex, matchStepMinVal, matchStepMaxVal, matchStepIncVal, maxRowLimit;
+@property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Image view expansion
 //
 @property (nonatomic) int imageViewSize;
@@ -162,10 +158,6 @@ const int MATCH_DESC_TAG   = 17;
     [_userDefaults synchronize];
 
     
-    // To contain the tap areas associated with the match functionality
-    //
-    _matchTapAreas = [[NSMutableArray alloc] init];
-    
     // Load the paint swatches
     //
     _dbPaintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
@@ -217,47 +209,17 @@ const int MATCH_DESC_TAG   = 17;
     //
     [self setSaveFlag: FALSE];
 
-    // Go back storyboard (i.e., home) status
-    //
-    [self setGoBackStatus: 1];
-
     // View globals
     //
-    [self setViewInit: 1];
     [self setRgbViewWidth: 40];
     [self setSizePadding: 20.0];
     [self setImgViewOffsetX: 30.0];
-    
-    // Tap Area Stepper
-    //
-    [self setStepMinVal: 24];
-    [self setStepMaxVal: 48];
-    [self setStepIncVal: 4];
-    
-    // Max Num Stepper
-    //
-    int max_swatch_num = _dbSwatchesCount - (_dbSwatchesCount % 5);
-    int max_match = (max_swatch_num > DEF_MAX_MATCH) ? DEF_MAX_MATCH : max_swatch_num;
-    [self setMatchStepMinVal: DEF_MIN_MATCH];
-    [self setMatchStepMaxVal: max_match];
-    [self setMatchStepIncVal: DEF_STEP_MATCH];
     
     
     // Labels
     //
     [self setRectLabel: @"Rect"];
     [self setCircleLabel: @"Circle"];
-
-    
-    // Defaults
-    //
-    [self setTapAreaSize: 36];
-    [self setTapAreaShape: _circleLabel];
-    
-    
-    [self setGlobalSettings: [CoreDataUtils fetchGlobalSettings]];
-    [self setShapeLength: _globalSettings.tap_area_size];
-    [self setShapeGeom: _globalSettings.tap_area_shape];
 
 
     // Add the selected image
@@ -293,11 +255,6 @@ const int MATCH_DESC_TAG   = 17;
     [self setBorderThreshold: DEF_BORDER_THRESHOLD];
     
     
-    // Set the info image
-    //
-    [self setTapMeImage: [UIImage imageNamed:[GlobalSettings tapMeImageName]]];
-    
-    
     // Long press recognizer
     //
     _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -305,126 +262,6 @@ const int MATCH_DESC_TAG   = 17;
     [_longPressRecognizer setAllowableMovement: 100.0f];
     [_imageView addGestureRecognizer:_longPressRecognizer];
     
-    
-//    // Tap size Alert View
-//    //
-//    _tapAreaAlertView = [[UIAlertView alloc] initWithTitle:@"Tap Area RGB Display"
-//                                                   message:@"Change the size and/or shape of the tap area."
-//                                                  delegate:self
-//                                         cancelButtonTitle:@"Done"
-//                                         otherButtonTitles:@"Save Settings", nil];
-//    [_tapAreaAlertView setTintColor: DARK_TEXT_COLOR];
-//    [_tapAreaAlertView setTag: TAPS_ALERT_TAG];
-//    
-//    
-//    // Sizing parameters
-//    //
-//    CGFloat viewHeight     = (_shapeLength * 2) + _sizePadding * 2;
-//    CGFloat stepperOffsetX = 80.0;
-//    CGFloat stepperOffsetY = _sizePadding + (_shapeLength / 2) - 13.0;
-//    CGFloat shapeOffsetX   = 190.0;
-//    CGFloat shapeOffsetY  = _sizePadding + (_shapeLength / 2) - 11.0;
-//    
-//    
-//    // Creat the alertView main frame (to contain the imageView, stepper, and stepper label)
-//    //
-//    _rgbMainView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, viewHeight)];
-//    [_rgbMainView setBackgroundColor: DARK_BG_COLOR];
-//    
-//    
-//    // UIImageView (represents the current tap area)
-//    //
-//    [self setOffsetY: _sizePadding];
-//    _alertImageView = [[UIImageView alloc] initWithFrame: CGRectMake(_imgViewOffsetX, _offsetY, _shapeLength, _shapeLength)];
-//    [_alertImageView setBackgroundColor: LIGHT_BG_COLOR];
-//
-//    if ([_shapeGeom isEqualToString:_circleLabel]) {
-//        [_alertImageView.layer setCornerRadius: _shapeLength / 2.0];
-//        [_alertImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-//    } else {
-//        [_alertImageView.layer setCornerRadius: CORNER_RADIUS_NONE];
-//        [_alertImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-//    }
-//    [_alertImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-//    
-//    
-//    // Label displaying the value in the stepper
-//    //
-//    int size = (int)_shapeLength;
-//    
-//    _stepperLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, _shapeLength, _shapeLength)];
-//    [_stepperLabel setTextColor: DARK_TEXT_COLOR];
-//    [_stepperLabel setBackgroundColor: CLEAR_COLOR];
-//    [_stepperLabel setText: [[NSString alloc] initWithFormat:@"%i", size]];
-//    [_stepperLabel setTextAlignment: NSTextAlignmentCenter];
-//    [_alertImageView addSubview:_stepperLabel];
-//    
-//    
-//    // UIStepper (change the size of the tapping area)
-//    //
-//    _tapAreaStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, stepperOffsetY, _shapeLength, _shapeLength)];
-//    [_tapAreaStepper setTintColor: LIGHT_TEXT_COLOR];
-//    [_tapAreaStepper addTarget:self action:@selector(tapAreaStepperPressed) forControlEvents:UIControlEventValueChanged];
-//    
-//    
-//    // Set min, max, step, and default values and wraps parameter
-//    //
-//    [_tapAreaStepper setMinimumValue:_stepMinVal];
-//    [_tapAreaStepper setMaximumValue:_stepMaxVal];
-//    [_tapAreaStepper setStepValue:_stepIncVal];
-//    [_tapAreaStepper setValue:_shapeLength];
-//    [_tapAreaStepper setWraps:NO];
-//    
-//
-//    // Create the Match Num Stepper
-//    //
-//    CGFloat matchNumYOffset = stepperOffsetY + _shapeLength + DEF_FIELD_PADDING;
-//    _matchNumLabel = [FieldUtils createLabel:@"Match #" xOffset:_imageViewXOffset yOffset:matchNumYOffset];
-//    [_matchNumLabel setFont: TEXT_LABEL_FONT];
-//    
-//    _matchNumStepper = [[UIStepper alloc] initWithFrame:CGRectMake(stepperOffsetX, matchNumYOffset, _shapeLength, _shapeLength)];
-//    [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
-//    [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
-//    
-//    // Set min, max, step, and default values and wraps parameter
-//    //
-//    [_matchNumStepper setMinimumValue:_matchStepMinVal];
-//    [_matchNumStepper setMaximumValue:_matchStepMaxVal];
-//    [_matchNumStepper setStepValue:_matchStepIncVal];
-//    [_matchNumStepper setValue:_maxMatchNum];
-//    [_matchNumStepper setWraps:NO];
-//    
-//
-//
-//    _matchNumTextField = [FieldUtils createTextField:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum] tag: INCR_ALG_BTN_TAG];
-//    [_matchNumTextField setFrame:CGRectMake(shapeOffsetX, matchNumYOffset, DEF_SM_TXTFIELD_WIDTH, DEF_TEXTFIELD_HEIGHT)];
-//    [_matchNumTextField setAutoresizingMask: NO];
-//    [_matchNumTextField setKeyboardType: UIKeyboardTypeNumberPad];
-//    [_matchNumTextField setTag: MATCH_NUM_TAG];
-//    [_matchNumTextField setDelegate:self];
-//    
-//    
-//    // Initialize the shape
-//    //
-//    if ([_shapeGeom isEqualToString:_circleLabel]) {
-//        [self setShapeTitle: _rectLabel];
-//    } else {
-//        [self setShapeTitle: _circleLabel];
-//    }
-//
-//    CGRect buttonFrame = CGRectMake(shapeOffsetX, shapeOffsetY, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
-//    _shape = [BarButtonUtils create3DButton:_shapeTitle tag: SHAPE_BUTTON_TAG frame: buttonFrame];
-//    [_shape addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [_rgbMainView addSubview:_alertImageView];
-//    [_rgbMainView addSubview:_tapAreaStepper];
-//    [_rgbMainView addSubview:_shape];
-//    
-//    [_rgbMainView addSubview:_matchNumLabel];
-//    [_rgbMainView addSubview:_matchNumStepper];
-//    [_rgbMainView addSubview:_matchNumTextField];
-//    
-//    [_tapAreaAlertView setValue:_rgbMainView forKey:@"accessoryView"];
     
     // Hide the "arrow" buttons by default
     //
@@ -712,6 +549,28 @@ const int MATCH_DESC_TAG   = 17;
 
 - (void)viewDidAppear:(BOOL)didAppear {
     
+    // Initialize from NSUserDefaults (or GlobalSettings)
+    //
+    _maxMatchNum = (int)[_userDefaults integerForKey:MATCH_NUM_KEY];
+    if (! _maxMatchNum) {
+        _maxMatchNum = DEF_MATCH_NUM;
+    }
+    [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+    
+    [self setShapeLength:[_userDefaults floatForKey:TAP_AREA_SIZE_KEY]];
+    if (! _shapeLength) {
+        [self setShapeLength:TAP_AREA_LENGTH];
+    }
+    [_userDefaults setFloat:_shapeLength forKey:TAP_AREA_SIZE_KEY];
+    
+    [self setShapeGeom:[_userDefaults valueForKey:SHAPE_GEOMETRY_KEY]];
+    if (! _shapeGeom) {
+        [self setShapeGeom:SHAPE_CIRCLE_VALUE];
+    }
+    [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+    [_userDefaults synchronize];
+
+
     // Resize the scroll and table views
     //
     [self resizeViews];
@@ -966,8 +825,6 @@ const int MATCH_DESC_TAG   = 17;
     
     [self setPaintSwatches: nil];
     [_imageView setImage: _selectedImage];
-    [_rgbView setImage: _tapMeImage];
-    [_rgbView setBackgroundColor: LIGHT_BG_COLOR];
     
     _currTapSection = 0;
     
@@ -1126,15 +983,6 @@ const int MATCH_DESC_TAG   = 17;
 
     [self drawTouchShape];
     
-    if (_tapAreaSeen == 0) {
-        [self setRgbView];
-
-    } else {
-        [self setRgbImage: nil];
-        [_rgbView setImage: _tapMeImage];
-        [_rgbView setBackgroundColor: LIGHT_BG_COLOR];
-    }
-    
     if ([_viewType isEqualToString:@"match"]) {
         [_matchSave setEnabled:TRUE];
     } else {
@@ -1240,13 +1088,6 @@ const int MATCH_DESC_TAG   = 17;
             }
             
         } else {
-//            if (_mixAssociation == nil) {
-//                [self addMixAssociation];
-//            }
-//            
-//            MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
-//            [_swatchObj addMix_assoc_swatchObject:mixAssocSwatch];
-//            [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
             
             [self viewButtonShow];
         }
@@ -1356,88 +1197,6 @@ const int MATCH_DESC_TAG   = 17;
     }
 }
 
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    if (alertView.tag == 1) {
-//        if(buttonIndex == 1) {
-//            // Currently two different 'settings' areas
-//            //
-//            [CoreDataUtils updateGlobalSettings:_globalSettings];
-//
-//            [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
-//            [_userDefaults synchronize];
-//        }
-//        
-//        [self refreshViews];
-//        
-//    } else {
-//        if (buttonIndex == 1) {
-//            [self resetViews];
-//        }
-//    }
-//}
-
-- (void)setRgbView {
-    UIColor *swatchColor = [UIColor colorWithRed:([_swatchObj.red floatValue]/255.0) green:([_swatchObj.green floatValue]/255.0) blue:([_swatchObj.blue floatValue]/255.0) alpha:[_swatchObj.alpha floatValue]];
-    
-    _rgbImage = [ColorUtils imageWithColor:swatchColor objWidth:_rgbViewWidth objHeight:_rgbViewHeight];
-    
-    [_rgbView setImage:_rgbImage];
-}
-
-//- (void)tapAreaStepperPressed {
-//    int size = (int)_tapAreaStepper.value;
-//
-//    [_stepperLabel setText: [[NSString alloc] initWithFormat:@"%i", size]];
-//    
-//    CGFloat oldshapeLength = _shapeLength;
-//    [self setShapeLength: (CGFloat)_tapAreaStepper.value];
-//    [_globalSettings setTap_area_size: _shapeLength];
-//    
-//    CGFloat diff = _shapeLength - oldshapeLength;
-//    
-//    _imgViewOffsetX = _imgViewOffsetX - (diff / 2.0);
-//    _offsetY        = _offsetY - (diff / 2.0);
-//
-//    [_alertImageView setFrame: CGRectMake(_imgViewOffsetX, _offsetY, _shapeLength, _shapeLength)];
-//    if ([_shapeGeom isEqualToString:_circleLabel]) {
-//        [_alertImageView.layer setCornerRadius: _shapeLength / 2.0];
-//    } else {
-//        [_alertImageView.layer setCornerRadius: CORNER_RADIUS_NONE];
-//    }
-//    
-//    [_stepperLabel setFrame: CGRectMake(0.0, 0.0, _shapeLength, _shapeLength)];
-//}
-//
-
-//- (void)matchNumStepperPressed {
-//    _maxMatchNum = (int)_matchNumStepper.value;
-//    
-//    [_matchNumTextField setText: [[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
-//    
-//    [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
-//    [_userDefaults synchronize];
-//    
-//    [_matchSave setEnabled:TRUE];
-//}
-//
-//- (void)changeShape {
-//    if ([_shape.titleLabel.text isEqualToString:_circleLabel]) {
-//        _shapeTitle = _rectLabel;
-//        _shapeGeom  = _circleLabel;
-//        [_rgbView.layer setCornerRadius: _rgbViewWidth / 2.0];
-//        [_alertImageView.layer setCornerRadius: _shapeLength / 2.0];
-//        
-//    } else {
-//        _shapeTitle = _circleLabel;
-//        _shapeGeom  = _rectLabel;
-//        [_rgbView.layer setCornerRadius: CORNER_RADIUS_NONE];
-//        [_alertImageView.layer setCornerRadius: CORNER_RADIUS_NONE];
-//
-//    }
-//    [_globalSettings setTap_area_shape: _shapeGeom];
-//    [_shape setTitle:_shapeTitle forState:UIControlStateNormal];
-//}
-
 
 - (IBAction)showTypeOptions:(id)sender {
     [self presentViewController:_typeAlertController animated:YES completion:nil];
@@ -1516,16 +1275,6 @@ const int MATCH_DESC_TAG   = 17;
     
     
     return retImage;
-}
-
-
--(void)setRgbViewBorder {
-    
-    if ([_swatchObj.brightness floatValue] < _borderThreshold) {
-        _rgbView.layer.borderColor = [LIGHT_BORDER_COLOR CGColor];
-    } else {
-        _rgbView.layer.borderColor = [DARK_BORDER_COLOR CGColor];
-    }
 }
 
 -(void)setColorValues {
@@ -1789,26 +1538,7 @@ const int MATCH_DESC_TAG   = 17;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    if (textField.tag == MATCH_NUM_TAG) {
-        NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
-        
-        if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
-            int newValue = [textField.text intValue];
-            if (newValue > DEF_MAX_MATCH) {
-                _maxMatchNum = DEF_MAX_MATCH;
-                
-            } else if (newValue <= 0) {
-                _maxMatchNum = 1;
-                
-            } else {
-                _maxMatchNum = newValue;
-            }
-        }
-        [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
-        [_matchNumStepper setValue:(double)_maxMatchNum];
-
-    } else if (textField.tag == MATCH_NAME_TAG) {
+    if (textField.tag == MATCH_NAME_TAG) {
         _assocName = ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text;
         
     } else if (textField.tag == MATCH_KEYW_TAG) {
@@ -1955,18 +1685,6 @@ const int MATCH_DESC_TAG   = 17;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Data Model Query/Update Methods
-
-//- (void)addMixAssociation {
-//    NSLog(@"Adding Mix");
-//    _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"   inManagedObjectContext:self.context];
-//    _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
-//    //NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_selectedImage)];
-//    //[_mixAssociation setImage_url:imageData];
-//    
-//    // Update the title
-//    //
-//
-//}
 
 - (void)saveMixAssoc {
     NSDate *currDate = [NSDate date];
@@ -2400,14 +2118,7 @@ const int MATCH_DESC_TAG   = 17;
             
         } else {
             NSLog(@"MatchAssociation and relations delete successful");
-            
-//            _tapAreasChanged = FALSE;
-//            
-//            // Update the title
-//            //
-//            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
-//            
-//            [self matchButtonsHide];
+
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
@@ -2492,7 +2203,17 @@ const int MATCH_DESC_TAG   = 17;
     
         [swatchDetailTableViewController setPaintSwatch:[_paintSwatches objectAtIndex:0]];
 
+    // Settings or Other Segue
+    //
     } else {
+        if ([_viewType isEqualToString:@"assoc"] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
+            [self presentViewController:myAlert animated:YES completion:nil];
+        
+        } else if ([_viewType isEqualToString:@"match"] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
+            [self presentViewController:myAlert animated:YES completion:nil];
+        }
         NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);
     }
 }

@@ -153,6 +153,10 @@ extern NSString * const MATCH_NUM_KEY;
 extern NSString * const SHAPE_CIRCLE_VALUE;
 extern NSString * const SHAPE_RECT_VALUE;
 
+// Tap Area Length
+//
+extern const int TAP_AREA_LENGTH;
+
 // Tap Area Stepper
 //
 extern const int TAP_STEPPER_MIN;

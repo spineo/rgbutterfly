@@ -142,6 +142,10 @@ NSString * const MATCH_NUM_KEY       = @"match_num";
 NSString * const SHAPE_CIRCLE_VALUE  = @"Circle";
 NSString * const SHAPE_RECT_VALUE    = @"Rect";
 
+// Tap Area Length
+//
+const int TAP_AREA_LENGTH = 32;
+
 // Tap Area Stepper
 //
 const int TAP_STEPPER_MIN = 20;
