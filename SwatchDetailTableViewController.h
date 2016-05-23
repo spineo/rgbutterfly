@@ -15,6 +15,4 @@
 @property (nonatomic, strong) PaintSwatches *paintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches;
 
-- (IBAction)goBack:(id)sender;
-
 @end

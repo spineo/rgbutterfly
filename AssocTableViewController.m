@@ -1004,7 +1004,7 @@ const int ASSOC_COLORS_TAG     = 5;
 #pragma mark - UIBarButton Actions
 
 - (IBAction)changeButtonRendering:(id)sender {
-    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
+    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag:RGB_BTN_TAG toolBarItems:self.toolbarItems];
     [self.tableView reloadData];
 }
 

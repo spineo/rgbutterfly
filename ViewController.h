@@ -21,8 +21,5 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
 
-- (IBAction)changeButtonRendering:(id)sender;
-
-- (IBAction)showListingOptions:(id)sender;
 
 @end

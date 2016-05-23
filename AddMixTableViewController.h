@@ -10,8 +10,6 @@
 
 @interface AddMixTableViewController : UITableViewController <UISearchBarDelegate>
 
-- (IBAction)searchMix:(id)sender;
-
 @property NSMutableArray *addPaintSwatches, *mixAssocSwatches;
 
 @property NSString *reuseCellIdentifier, *searchString;
