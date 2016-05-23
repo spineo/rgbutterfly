@@ -55,7 +55,6 @@
 @property (nonatomic, strong) NSDictionary *subjColorData, *swatchTypeData;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
-@property (nonatomic, strong) UIActionSheet *pickerActionSheet;
 
 @property (nonatomic, strong) UIFont *placeholderFont, *currFont;
 @property (nonatomic, strong) UIColor *subjColorValue;

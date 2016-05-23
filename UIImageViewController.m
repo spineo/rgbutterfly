@@ -48,22 +48,14 @@
 
 @property (nonatomic, strong) NSString *shapeGeom, *rectLabel, *circleLabel;
 
-@property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit;
+@property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit, imageViewSize;
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Image view expansion
-//
-@property (nonatomic) int imageViewSize;
+@property (nonatomic) CGFloat screenWidth, rgbViewWidth, rgbViewHeight, headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold;
 
-@property (nonatomic) CGFloat screenWidth, titleOrigin, titleWidth, rgbOrigin, rgbWidth, rectSize, rgbViewWidth, rgbViewHeight, sizePadding, imgViewOffsetX, offsetY, imageViewXOffset, imageViewWidth, imageViewHeight, headerViewYOffset, headerViewHeight;
+@property (nonatomic) CGSize defTableViewSize;
 
-@property (nonatomic) CGSize defScrollViewSize, defTableViewSize;
-@property (nonatomic) CGPoint defScrollViewOrigin, defTableViewOrigin;
-
-@property (nonatomic) CGFloat hue, sat, bri, alpha, borderThreshold;
-
-@property (nonatomic, strong) UIView *titleAndRGBView, *rgbMainView;
-@property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer, *rgbTapRecognizer;
+@property (nonatomic, strong) UIView *titleAndRGBView;
+@property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
 @property (nonatomic) CGPoint touchPoint;
@@ -76,11 +68,8 @@
 @property (nonatomic) BOOL saveFlag, isRGB, tapAreasChanged;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
-@property (nonatomic, strong) UITextField *matchNumTextField;
 
-@property (nonatomic) BOOL expandTableView;
-
-@property (nonatomic, strong) UIBarButtonItem *flexibleItem, *upArrowItem;
+@property (nonatomic, strong) UIBarButtonItem *upArrowItem;
 
 // NSUserDefaults
 //
@@ -165,9 +154,6 @@ const int MATCH_DESC_TAG   = 17;
     
     _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
 
-    _defScrollViewOrigin = _imageScrollView.bounds.origin;
-    _defScrollViewSize   = _imageScrollView.bounds.size;
-    _defTableViewOrigin  = _imageTableView.bounds.origin;
     _defTableViewSize    = _imageTableView.bounds.size;
 
     // Used in sortByClosestMatch
@@ -199,21 +185,16 @@ const int MATCH_DESC_TAG   = 17;
     
     // Tableview defaults
     //
-    _imageViewXOffset  = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
-    _imageViewWidth    = DEF_TABLE_CELL_HEIGHT;
-    _imageViewHeight   = DEF_TABLE_CELL_HEIGHT;
     _headerViewYOffset = DEF_Y_OFFSET + 1.0;
     _headerViewHeight  = DEF_TABLE_HDR_HEIGHT - 2.0;
 
     // Initial CoreData state
     //
-    [self setSaveFlag: FALSE];
+    [self setSaveFlag:FALSE];
 
     // View globals
     //
     [self setRgbViewWidth: 40];
-    [self setSizePadding: 20.0];
-    [self setImgViewOffsetX: 30.0];
     
     
     // Labels
@@ -238,7 +219,7 @@ const int MATCH_DESC_TAG   = 17;
     //
     _tapRecognizer = [[UITapGestureRecognizer alloc]
                       initWithTarget:self action:@selector(respondToTap:)];
-    [_tapRecognizer setNumberOfTapsRequired: 1];
+    [_tapRecognizer setNumberOfTapsRequired:1];
     [_imageView addGestureRecognizer:_tapRecognizer];
 
     
@@ -252,7 +233,7 @@ const int MATCH_DESC_TAG   = 17;
     // Threshold brightness value under which a white border is drawn around the RGB image view
     // (default border is black)
     //
-    [self setBorderThreshold: DEF_BORDER_THRESHOLD];
+    [self setBorderThreshold:DEF_BORDER_THRESHOLD];
     
     
     // Long press recognizer
@@ -535,9 +516,6 @@ const int MATCH_DESC_TAG   = 17;
     // Initial state until tapped areas are added
     //
     [_imageTableView setHidden:TRUE];
-    _expandTableView = TRUE;
-    
-    _flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     _upArrowItem  = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
     
@@ -1484,9 +1462,9 @@ const int MATCH_DESC_TAG   = 17;
     UIImage *swatchImage;
     
     if (_isRGB == FALSE) {
-        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     } else {
-        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     }
     
     // Tag the first reference image
@@ -1504,7 +1482,7 @@ const int MATCH_DESC_TAG   = 17;
     
     [swatchImageView setContentMode: UIViewContentModeScaleAspectFit];
     [swatchImageView setClipsToBounds: YES];
-    [swatchImageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
+    [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_TABLE_CELL_HEIGHT, DEF_TABLE_CELL_HEIGHT)];
     
     cell.backgroundView = swatchImageView;
     
