@@ -15,14 +15,15 @@
 
 @interface SettingsTableViewController ()
 
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel;
+@property (nonatomic) CGFloat widgetHeight, widgetYOffset;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle;
+@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
-@property (nonatomic, strong) UIButton *shapeButton;
+@property (nonatomic, strong) UIButton *shapeButton, *rgbDisplayButton;
 @property (nonatomic, strong) UITextField *matchNumTextField;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
@@ -50,14 +51,15 @@ const int MIXASSOC_READ_ONLY_ROW  = 1;
 const int READ_ONLY_SETTINGS_ROWS = 2;
 
 const int TAP_AREA_SETTINGS       = 1;
-const int TAP_AREA_ROW            = 0;
 const int TAP_AREA_ROWS           = 1;
 
 const int MATCH_NUM_SETTINGS      = 2;
-const int MATCH_NUM_ROW           = 0;
 const int MATCH_NUM_ROWS          = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 3;
+const int RGB_DISPLAY_SETTINGS    = 3;
+const int RGB_DISPLAY_ROWS        = 1;
+
+const int SETTINGS_MAX_SECTIONS   = 4;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -85,15 +87,15 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     //
     _psReadOnlyText = @"swatches_read_only_text";
     
-    _psMakeReadOnlyLabel  = @"Make My Paint Swatches Read-Only";
-    _psMakeReadWriteLabel = @"Make My Paint Swatches Read/Write";
+    _psMakeReadOnlyLabel  = @"Paint Swatches set to Read-Only";
+    _psMakeReadWriteLabel = @"Paint Swatches set to Read/Write";
     
     NSString *labelText;
     if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
           [_userDefaults stringForKey:_psReadOnlyText])
        ) {
         _swatchesReadOnly = FALSE;
-        labelText = _psMakeReadOnlyLabel;
+        labelText = _psMakeReadWriteLabel;
         
         [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
         [_userDefaults setValue:labelText forKey:_psReadOnlyText];
@@ -106,9 +108,9 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     // Create the label and switch, set the last state or default values
     //
     _psReadOnlySwitch = [[UISwitch alloc] init];
-    CGFloat switchHeight = _psReadOnlySwitch.bounds.size.height;
-    CGFloat switchYOffset = (DEF_TABLE_CELL_HEIGHT - switchHeight) / 2;
-    [_psReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, switchYOffset, DEF_BUTTON_WIDTH, switchHeight)];
+    _widgetHeight = _psReadOnlySwitch.bounds.size.height;
+    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / 2;
+    [_psReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_psReadOnlySwitch setOn:_swatchesReadOnly];
     
     // Add the switch target
@@ -129,15 +131,15 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     //
     _maReadOnlyText = @"assoc_read_only_text";
     
-    _maMakeReadOnlyLabel  = @"Make My Mix Associations Read-Only";
-    _maMakeReadWriteLabel = @"Make My Mix Associations Read/Write";
+    _maMakeReadOnlyLabel  = @"Mix Associations set to Read-Only";
+    _maMakeReadWriteLabel = @"Mix Associations set to Read/Write";
     
     labelText = @"";
     if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
           [_userDefaults stringForKey:_maReadOnlyText])
        ) {
         _assocsReadOnly = FALSE;
-        labelText = _maMakeReadOnlyLabel;
+        labelText = _maMakeReadWriteLabel;
         
         [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
         [_userDefaults setValue:labelText forKey:_maReadOnlyText];
@@ -150,9 +152,9 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     // Create the label and switch, set the last state or default values
     //
     _maReadOnlySwitch = [[UISwitch alloc] init];
-    switchHeight = _maReadOnlySwitch.bounds.size.height;
-    switchYOffset = (DEF_TABLE_CELL_HEIGHT - switchHeight) / 2;
-    [_maReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, switchYOffset, DEF_BUTTON_WIDTH, switchHeight)];
+    _widgetHeight = _maReadOnlySwitch.bounds.size.height;
+    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / 2;
+    [_maReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_maReadOnlySwitch setOn:_assocsReadOnly];
     
     // Add the switch target
@@ -170,6 +172,8 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     // Tap Area Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
+    _tapSettingsLabel = [FieldUtils createLabel:@"Change the Size/Shape of the Tap Area"];
+    
     // Sizing parameters
     //
     _tapAreaSize = [_userDefaults floatForKey:TAP_AREA_SIZE_KEY];
@@ -177,41 +181,6 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         _tapAreaSize = DEF_TAP_AREA_SIZE;
         [_userDefaults setFloat:DEF_TAP_AREA_SIZE forKey:TAP_AREA_SIZE_KEY];
     }
-    
-    _tapSettingsLabel = [FieldUtils createLabel:@"Change the size/shape of the tap area"];
-    
-    _tapImageView = [[UIImageView alloc] init];
-    [_tapImageView setBackgroundColor:LIGHT_BG_COLOR];
-
-    // Set the default
-    //
-    _shapeGeom = [_userDefaults stringForKey:SHAPE_GEOMETRY_KEY];
-    if (! _shapeGeom) {
-        _shapeGeom = SHAPE_CIRCLE_VALUE;
-    }
-    
-    if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
-        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
-        [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
-        _shapeTitle = SHAPE_CIRCLE_VALUE;
-        
-    // Rectangle
-    //
-    } else {
-        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
-        [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
-        _shapeTitle = SHAPE_RECT_VALUE;
-    }
-    [_tapImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-    
-
-    // Label displaying the value in the stepper
-    //
-    int size = (int)_tapAreaSize;
-    _tapStepperLabel = [FieldUtils createLabel:[[NSString alloc] initWithFormat:@"%i", size]];
-    [_tapStepperLabel setTextColor:DARK_TEXT_COLOR];
-    [_tapStepperLabel setBackgroundColor:CLEAR_COLOR];
-    [_tapStepperLabel setTextAlignment:NSTextAlignmentCenter];
     
     // UIStepper (change the size of the tapping area)
     //
@@ -228,20 +197,50 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     [_tapAreaStepper setStepValue:TAP_STEPPER_INC];
     [_tapAreaStepper setValue:_tapAreaSize];
     [_tapAreaStepper setWraps:NO];
+
+    
+    _tapImageView = [[UIImageView alloc] init];
+    [_tapImageView setBackgroundColor:LIGHT_BG_COLOR];
+    
+    // Set the default
+    //
+    _shapeGeom = [_userDefaults stringForKey:SHAPE_GEOMETRY_KEY];
+    if (! _shapeGeom) {
+        _shapeGeom = SHAPE_CIRCLE_VALUE;
+    }
+    
+    if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+        [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        _shapeTitle = SHAPE_CIRCLE_VALUE;
+        
+        // Rectangle
+        //
+    } else {
+        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+        [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        _shapeTitle = SHAPE_RECT_VALUE;
+    }
+    [_tapImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
     _shapeButton = [BarButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
     [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    // Label displaying the value in the stepper
+    //
+    int size = (int)_tapAreaSize;
+    _tapStepperLabel = [FieldUtils createLabel:[[NSString alloc] initWithFormat:@"%i", size]];
+    [_tapStepperLabel setTextColor:DARK_TEXT_COLOR];
+    [_tapStepperLabel setBackgroundColor:CLEAR_COLOR];
+    [_tapStepperLabel setTextAlignment:NSTextAlignmentCenter];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Match Num Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _matchSettingsLabel = [FieldUtils createLabel:@"Set the default number of Tap Area matches"];
-    
-    _matchStepperLabel = [FieldUtils createLabel:@"Match #"];
-    [_matchStepperLabel sizeToFit];
-    [_matchStepperLabel setFont:TEXT_LABEL_FONT];
+    _matchSettingsLabel = [FieldUtils createLabel:@"Change the Default Number of Tap Area matches"];
     
     _matchNumStepper = [[UIStepper alloc] init];
     [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
@@ -265,6 +264,61 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     [_matchNumTextField setAutoresizingMask:NO];
     [_matchNumTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [_matchNumTextField setDelegate:self];
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // RGB Display Row
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _rgbDisplayTrueText  = @"Swatches Display RGB Values";
+    _rgbDisplayFalseText = @"Swatches Display Paint Image";
+    
+    _rgbDisplayTrueImage  = [GlobalSettings rgbImageName];
+    _rgbDisplayFalseImage = [GlobalSettings paletteImageName];
+    
+    if(! [_userDefaults boolForKey:RGB_DISPLAY_KEY]) {
+        _rgbDisplayFlag  = FALSE;
+        _rgbDisplayText  = _rgbDisplayFalseText;
+        _rgbDisplayImage = _rgbDisplayFalseImage;
+       
+        [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
+        
+    } else {
+        _rgbDisplayFlag = [_userDefaults boolForKey:RGB_DISPLAY_KEY];
+        if (_rgbDisplayFlag == TRUE) {
+            _rgbDisplayText  = _rgbDisplayTrueText;
+            _rgbDisplayImage = _rgbDisplayTrueImage;
+        } else {
+            _rgbDisplayText  = _rgbDisplayFalseText;
+            _rgbDisplayImage = _rgbDisplayFalseImage;
+        }
+    }
+    
+    // Create the button
+    //
+    _rgbDisplayButton = [[UIButton alloc] init];
+    
+    // Set the new image
+    //
+    UIImage *renderedImage = [UIImage imageNamed:_rgbDisplayImage];
+    [_rgbDisplayButton setImage:renderedImage forState:UIControlStateNormal];
+    [_rgbDisplayButton setBackgroundColor:LIGHT_BG_COLOR];
+    [_rgbDisplayButton.layer setCornerRadius:DEF_CORNER_RADIUS];
+    
+    CGFloat cellHeight   = DEF_TABLE_CELL_HEIGHT;
+    CGFloat buttonHeight = cellHeight * 0.8;
+    CGFloat yOffset      = (cellHeight - buttonHeight) / 2.0;
+    [_rgbDisplayButton setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, buttonHeight, buttonHeight)];
+
+    // Add the UIButton target
+    //
+    [_rgbDisplayButton addTarget:self action:@selector(setRGBDisplayState) forControlEvents:UIControlEventTouchUpInside];
+    
+    _rgbDisplayLabel   = [FieldUtils createLabel:_rgbDisplayText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _rgbDisplayLabel.bounds.size.width;
+    labelHeight = _rgbDisplayLabel.bounds.size.height;
+    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
+    [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -316,17 +370,27 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         
     } else if (section == MATCH_NUM_SETTINGS) {
         return MATCH_NUM_ROWS;
+        
+    } else if (section == RGB_DISPLAY_SETTINGS) {
+        return RGB_DISPLAY_ROWS;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == TAP_AREA_SETTINGS || indexPath.section == MATCH_NUM_SETTINGS) {
+    if (indexPath.section == TAP_AREA_SETTINGS) {
         return DEF_VLG_TBL_CELL_HGT;
+        
+    } else if (indexPath.section == MATCH_NUM_SETTINGS) {
+        return DEF_LG_TABLE_CELL_HGT;
         
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return DEF_SM_TBL_HDR_HEIGHT;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -339,6 +403,9 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         
     } else if (section == MATCH_NUM_SETTINGS) {
         headerStr = @"Match Number Settings";
+        
+    } else if (section == RGB_DISPLAY_SETTINGS) {
+        headerStr = @"RGB Display Settings";
     }
     return headerStr;
 }
@@ -377,39 +444,39 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     } else if (indexPath.section == TAP_AREA_SETTINGS) {
         [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_tapSettingsLabel];
-        
-        [_tapImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
-        [cell.contentView addSubview:_tapImageView];
-        
-        [_tapStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING, _tapAreaSize, _tapAreaSize)];
-        [cell.contentView addSubview:_tapStepperLabel];
-        
-        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + TAP_STEPPER_MAX + DEF_FIELD_PADDING;
-        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING + (_tapAreaSize - _tapStepperLabel.bounds.size.height) / 2;
-        [_tapAreaStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+
+        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
+        [_tapAreaStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_tapAreaStepper];
         
-        CGFloat shapeXOffset = stepperXOffset + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
-        [_shapeButton setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_shapeButton setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _tapAreaStepper.bounds.size.height)];
+        [_shapeButton setBackgroundColor:LIGHT_BG_COLOR];
         [cell.contentView addSubview:_shapeButton];
+        
+        CGFloat imageViewXOffset = shapeXOffset + _shapeButton.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_tapImageView setFrame:CGRectMake(imageViewXOffset, yOffset, _tapAreaSize, _tapAreaSize)];
+        [cell.contentView addSubview:_tapImageView];
+        
+        [_tapStepperLabel setFrame:CGRectMake(imageViewXOffset, yOffset, _tapAreaSize, _tapAreaSize)];
+        [cell.contentView addSubview:_tapStepperLabel];
+        
         
     } else if (indexPath.section == MATCH_NUM_SETTINGS) {
         [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_matchSettingsLabel];
         
         CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
-        CGFloat stepperLabelYOffset = yOffset + (_matchNumStepper.bounds.size.height - _matchStepperLabel.bounds.size.height) / 2;
-        [_matchStepperLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, stepperLabelYOffset, _matchStepperLabel.bounds.size.width, _matchStepperLabel.bounds.size.height)];
-        [_matchStepperLabel sizeToFit];
-        [cell.contentView addSubview:_matchStepperLabel];
-        
-        CGFloat stepperXOffset = DEF_TABLE_X_OFFSET + _matchStepperLabel.bounds.size.width + DEF_FIELD_PADDING;
-        [_matchNumStepper setFrame:CGRectMake(stepperXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        [_matchNumStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_matchNumStepper];
         
-        CGFloat shapeXOffset = stepperXOffset + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
-        [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+        CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
+        [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _matchNumStepper.bounds.size.height)];
         [cell.contentView addSubview:_matchNumTextField];
+        
+    } else if (indexPath.section == RGB_DISPLAY_SETTINGS) {
+        [cell.contentView addSubview:_rgbDisplayButton];
+        [cell.contentView addSubview:_rgbDisplayLabel];
     }
     
     return cell;
@@ -489,10 +556,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _swatchesReadOnly = [sender isOn];
 
     if (_swatchesReadOnly == TRUE) {
-        [_psReadOnlyLabel setText:_psMakeReadWriteLabel];
+        [_psReadOnlyLabel setText:_psMakeReadOnlyLabel];
         
     } else {
-        [_psReadOnlyLabel setText:_psMakeReadOnlyLabel];
+        [_psReadOnlyLabel setText:_psMakeReadWriteLabel];
     }
     _editFlag = TRUE;
 }
@@ -501,10 +568,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _assocsReadOnly = [sender isOn];
     
     if (_assocsReadOnly == TRUE) {
-        [_maReadOnlyLabel setText:_maMakeReadWriteLabel];
+        [_maReadOnlyLabel setText:_maMakeReadOnlyLabel];
         
     } else {
-        [_maReadOnlyLabel setText:_maMakeReadOnlyLabel];
+        [_maReadOnlyLabel setText:_maMakeReadWriteLabel];
     }
     _editFlag = TRUE;
 }
@@ -529,13 +596,13 @@ const int SETTINGS_MAX_SECTIONS   = 3;
 - (void)changeShape {
     if ([_shapeButton.titleLabel.text isEqualToString:SHAPE_CIRCLE_VALUE]) {
         _shapeTitle = SHAPE_RECT_VALUE;
-        _shapeGeom  = SHAPE_CIRCLE_VALUE;
-        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
-        
-    } else {
-        _shapeTitle = SHAPE_CIRCLE_VALUE;
         _shapeGeom  = SHAPE_RECT_VALUE;
         [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+
+    } else {
+        _shapeTitle = SHAPE_CIRCLE_VALUE;
+        _shapeGeom  = SHAPE_CIRCLE_VALUE;
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
         
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
@@ -547,6 +614,27 @@ const int SETTINGS_MAX_SECTIONS   = 3;
     _maxMatchNum = (int)[_matchNumStepper value];
     
     [_matchNumTextField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+    
+    _editFlag = TRUE;
+}
+
+- (void)setRGBDisplayState {
+    if (_rgbDisplayFlag == FALSE) {
+        _rgbDisplayFlag  = TRUE;
+        _rgbDisplayText  = _rgbDisplayTrueText;
+        _rgbDisplayImage = _rgbDisplayTrueImage;
+        
+    } else {
+        _rgbDisplayFlag  = FALSE;
+        _rgbDisplayText  = _rgbDisplayFalseText;
+        _rgbDisplayImage = _rgbDisplayFalseImage;
+    }
+    
+    // Re-set the image
+    //
+    UIImage *renderedImage = [UIImage imageNamed:_rgbDisplayImage];
+    [_rgbDisplayButton setImage:renderedImage forState:UIControlStateNormal];
+    [_rgbDisplayLabel setText:_rgbDisplayText];
     
     _editFlag = TRUE;
 }
@@ -578,6 +666,10 @@ const int SETTINGS_MAX_SECTIONS   = 3;
         // Match Num Stepper Settings
         //
         [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+        
+        // isRGB settings
+        //
+        [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
         
         [_userDefaults synchronize];
         

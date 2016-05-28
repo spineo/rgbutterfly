@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UIAlertAction *save;
 
 
-@property (nonatomic) BOOL isRGB, textReturn;
+@property (nonatomic) BOOL textReturn;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
@@ -99,8 +99,6 @@ const int IMAGE_TAG  = 6;
     _tapAreaKeywordEntity = [NSEntityDescription entityForName:@"TapAreaKeyword" inManagedObjectContext:self.context];
     _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"        inManagedObjectContext:self.context];
     
-    
-    _isRGB    = FALSE;
     _editFlag = FALSE;
     _reuseCellIdentifier = @"MatchTableCell";
 
@@ -205,7 +203,6 @@ const int IMAGE_TAG  = 6;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-
     // Reset some widths and offset per rotation
     //
     [self resizeSelFieldAndDone:_doneButtonWidth];
@@ -258,7 +255,6 @@ const int IMAGE_TAG  = 6;
     [cell.imageView setImage:nil];
     [cell.textLabel setText:nil];
 
-    
     // Remove the tags
     //
     for (int tag=1; tag<=MAX_TAG; tag++) {
@@ -330,12 +326,8 @@ const int IMAGE_TAG  = 6;
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         
     } else if (indexPath.section == IMAGE_SECTION) {
-        
-        if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:_selPaintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        } else {
-            cell.imageView.image = [ColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        }
+
+        cell.imageView.image = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
         
         // Tag the first reference image
         //
@@ -384,12 +376,8 @@ const int IMAGE_TAG  = 6;
     } else if (indexPath.section == MATCH_SECTION) {
 
         PaintSwatches *paintSwatch = [_matchedSwatches objectAtIndex:indexPath.row + 1];
-        
-        if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
-        } else {
-            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
-        }
+
+        cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
         
         // Tag the first reference image
         //
@@ -664,8 +652,8 @@ const int IMAGE_TAG  = 6;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - (IBAction)changeButtonRendering:(id)sender {
-    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
-    [self.tableView reloadData];
+    //_isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
+    //[self.tableView reloadData];
 }
 
 - (IBAction)decrMatchAlgorithm:(id)sender {

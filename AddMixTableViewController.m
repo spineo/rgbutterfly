@@ -160,12 +160,8 @@
     
     [cell.imageView setContentMode: UIViewContentModeScaleAspectFill];
     [cell.imageView setClipsToBounds: YES];
-    
-    if (_isRGB == FALSE) {
-        cell.imageView.image = [ColorUtils renderPaint:[[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch ] image_thumb] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-    } else {
-        cell.imageView.image = [ColorUtils renderRGB:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
-    }
+
+    cell.imageView.image = [ColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
     
     cell.accessoryType       = UITableViewCellSeparatorStyleNone;
 

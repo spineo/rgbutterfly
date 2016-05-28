@@ -14,7 +14,7 @@
 
 @property NSString *reuseCellIdentifier, *searchString;
 
-@property BOOL isRGB, searchMatch;
+@property BOOL searchMatch;
 
 
 @end

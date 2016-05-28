@@ -35,7 +35,7 @@
 
 @property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
-@property (nonatomic) BOOL editFlag, mainColorFlag, isRGB, textReturn, isReadOnly;
+@property (nonatomic) BOOL editFlag, mainColorFlag, textReturn, isReadOnly;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *refColorLabel, *mixColorLabel, *addColorLabel, *mixAssocName, *mixAssocKeyw, *mixAssocDesc;
@@ -117,11 +117,6 @@ const int ASSOC_COLORS_TAG     = 5;
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Description (max. %i chars) - ", MAX_DESC_LEN];
-
-    
-    // Set RGB Rendering to FALSE by default
-    //
-    _isRGB         = FALSE;
     
     _reuseCellIdentifier = @"AssocTableCell";
     
@@ -284,8 +279,6 @@ const int ASSOC_COLORS_TAG     = 5;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    _isReadOnly = FALSE;
-    
     BOOL is_shipped  = [[_mixAssociation is_shipped] boolValue];
     BOOL is_readonly = [[_mixAssociation is_readonly] boolValue];
     
@@ -499,12 +492,8 @@ const int ASSOC_COLORS_TAG     = 5;
         PaintSwatches *paintSwatch     = (PaintSwatches *)[mixAssocSwatch paint_swatch];
         
         NSString *name = [paintSwatch name];
-        
-        if (_isRGB == FALSE) {
-            cell.imageView.image = [ColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
-        } else {
-            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
-        }
+
+        cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
         
         // Tag the first reference image
         //
@@ -1004,8 +993,8 @@ const int ASSOC_COLORS_TAG     = 5;
 #pragma mark - UIBarButton Actions
 
 - (IBAction)changeButtonRendering:(id)sender {
-    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag:RGB_BTN_TAG toolBarItems:self.toolbarItems];
-    [self.tableView reloadData];
+//    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag:RGB_BTN_TAG toolBarItems:self.toolbarItems];
+//    [self.tableView reloadData];
 }
 
 
@@ -1028,8 +1017,7 @@ const int ASSOC_COLORS_TAG     = 5;
     if ([[segue identifier] isEqualToString:@"AddMixSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
         AddMixTableViewController *addMixTableViewController = (AddMixTableViewController *)([navigationViewController viewControllers][0]);
-        
-        [addMixTableViewController setIsRGB:_isRGB];
+
         [addMixTableViewController setMixAssocSwatches:_mixAssocSwatches];
         
     } else if ([[segue identifier] isEqualToString:@"AssocSwatchDetailSegue"]) {

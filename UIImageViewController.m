@@ -65,7 +65,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, isRGB, tapAreasChanged;
+@property (nonatomic) BOOL saveFlag, tapAreasChanged;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -178,10 +178,6 @@ const int MATCH_DESC_TAG   = 17;
     //
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchAlgIndex = 0;
-
-    // RGB Rendering FALSE by default
-    //
-    _isRGB = FALSE;
     
     // Tableview defaults
     //
@@ -546,6 +542,9 @@ const int MATCH_DESC_TAG   = 17;
         [self setShapeGeom:SHAPE_CIRCLE_VALUE];
     }
     [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+    
+    
+    
     [_userDefaults synchronize];
 
 
@@ -1459,13 +1458,7 @@ const int MATCH_DESC_TAG   = 17;
     
     PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:index] objectAtIndex:indexPath.row];
     
-    UIImage *swatchImage;
-    
-    if (_isRGB == FALSE) {
-        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
-    } else {
-        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
-    }
+    UIImage *swatchImage = [ColorUtils renderSwatch:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     
     // Tag the first reference image
     //

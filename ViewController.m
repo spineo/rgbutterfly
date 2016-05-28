@@ -42,7 +42,6 @@
 @property (nonatomic) int num_tableview_rows, collectViewSelRow;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
-
 // NSManagedObject subclassing
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -75,11 +74,7 @@
     
     _reuseCellIdentifier = @"InitTableCell";
     
-    // RGB Rendering FALSE by default
-    //
-    _isRGB = FALSE;
 
-    
     _defaultListingType = [GlobalSettings getDefaultListingType];
     _listingType        = _defaultListingType;
     
@@ -168,7 +163,6 @@
 }
 
 - (void)loadMixCollectionViewData {
-    
     _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
     int num_tableview_rows = (int)[_mixAssocObjs count];
     
@@ -545,11 +539,7 @@
             NSString *kw_name = [[_letterKeywords objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             PaintSwatches *ps = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
 
-            if (_isRGB == FALSE) {
-               [cell.imageView setImage:[ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-            } else {
-               [cell.imageView setImage:[ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-            }
+            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             
             [cell.textLabel setText:kw_name];
             
@@ -557,11 +547,7 @@
             
             PaintSwatches *ps = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
 
-            if (_isRGB == FALSE) {
-                [cell.imageView setImage:[ColorUtils renderPaint:ps.image_thumb cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-            } else {
-                [cell.imageView setImage:[ColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-            }
+            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
         }
 
@@ -615,11 +601,6 @@
 
 #pragma mark - UIBarButton and UIAlertController Methods
 
-- (IBAction)changeButtonRendering:(id)sender {
-    
-    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
-    [_colorTableView reloadData];
-}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UIAlertControllers
@@ -685,12 +666,8 @@
     if ([_listingType isEqualToString:@"Mix"]) {
     
         PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
-        
-        if (_isRGB == FALSE) {
-            swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        } else {
-            swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        }
+
+        swatchImage = [ColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
 
 
     // Match

@@ -59,13 +59,6 @@
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="hK8-5n-amq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="th5-64-N0B"/>
-                        <barButtonItem tag="55" image="rgb" id="oSg-g8-C8g">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="changeButtonRendering:" destination="BYZ-38-t0r" id="7cI-Wx-Phc"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Acrylics Color Picker" id="Ade-hS-Xh0">
                         <barButtonItem key="leftBarButtonItem" tag="51" image="photo 2" id="YaG-pI-rV6">

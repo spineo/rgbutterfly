@@ -134,6 +134,7 @@ NSString * const MIX_ASSOC_RO_KEY    = @"assoc_read_only";
 NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
 NSString * const SHAPE_GEOMETRY_KEY  = @"shape_geometry";
 NSString * const MATCH_NUM_KEY       = @"match_num";
+NSString * const RGB_DISPLAY_KEY     = @"rgb_display";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -240,6 +241,12 @@ static NSDictionary *swatchTypes;
     if (count == 0) {
         [ManagedObjectUtils insertMatchAlgorithms];
     }
+    
+    // NSUserDefaults intialization
+    //
+    // isRGB settings
+    //
+    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:RGB_DISPLAY_KEY];
 }
 
 #pragma mark - Swatch Dictionaries and Arrays

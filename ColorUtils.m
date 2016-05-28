@@ -162,6 +162,18 @@
     return newImage;
 }
 
++ (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
+    BOOL isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
+    
+    UIImage *swatchImage;
+    if (isRGB == FALSE) {
+        swatchImage = [ColorUtils renderPaint:swatchObj.image_thumb cellWidth:width cellHeight:height];
+    } else {
+        swatchImage = [ColorUtils renderRGB:swatchObj cellWidth:width cellHeight:height];
+    }
+    return swatchImage;
+}
+
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
   
     UIColor *swatchColor = [UIColor colorWithRed:([swatchObj.red floatValue]/255.0) green:([swatchObj.green floatValue]/255.0) blue:([swatchObj.blue floatValue]/255.0) alpha:[swatchObj.alpha floatValue]];
