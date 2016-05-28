@@ -209,14 +209,16 @@ const int DETAIL_MAX_SECTION    = 6;
     
     // Swatch Type
     //
-    NSString *typeName = [GlobalSettings getSwatchType:_typesPickerSelRow];
+    id typeObj = [ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:_typesPickerSelRow context:self.context];
+    NSString *typeName = [typeObj name];
     _swatchTypeName  = [FieldUtils createTextField:typeName tag:TYPE_FIELD_TAG];
     [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
     [_swatchTypeName setInputView: _swatchTypesPicker];
     [_swatchTypeName setDelegate:self];
     [self createSwatchTypePicker];
 
-    NSString *colorName = [GlobalSettings getColorName:_colorPickerSelRow];
+    id colorObj = [ManagedObjectUtils queryDictionaryName:@"SubjectiveColor" entityId:_colorPickerSelRow context:self.context];
+    NSString *colorName = [colorObj name];
     _subjColorName = [FieldUtils createTextField:colorName tag:COLOR_FIELD_TAG];
     [_subjColorName setTextAlignment:NSTextAlignmentCenter];
     [_subjColorName setInputView: _subjColorPicker];
@@ -1105,34 +1107,14 @@ const int DETAIL_MAX_SECTION    = 6;
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];
 }
 
-//- (IBAction)editAction:(id)sender {
-//    if ([self.editButtonItem.title isEqualToString:@"Edit"]){
-//        [self.editButtonItem setTitle:@"Done"];
-//        [self makeTextFieldsEditable];
-//        _editFlag = TRUE;
-//
-//    } else {
-//        [self presentViewController:_saveAlertController animated:YES completion:nil];
-//        [self.editButtonItem setTitle:@"Edit"];
-//        [self makeTextFieldsNonEditable];
-//        _editFlag = FALSE;
-//    }
-//}
-
 - (void)makeTextFieldsEditable {
-    //[FieldUtils makeTextFieldEditable:_swatchName content:@""];
     [FieldUtils makeTextFieldEditable:_subjColorName content:@""];
     [FieldUtils makeTextFieldEditable:_swatchTypeName content:@""];
-    //[FieldUtils makeTextFieldEditable:_swatchKeyw content:@""];
-    //[FieldUtils makeTextFieldEditable:_swatchDesc content:@""];
 }
 
 - (void)makeTextFieldsNonEditable {
-    //[FieldUtils makeTextFieldNonEditable:_swatchName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_subjColorName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:@"" border:TRUE];
-    //[FieldUtils makeTextFieldNonEditable:_swatchKeyw content:@"" border:TRUE];
-    //[FieldUtils makeTextFieldNonEditable:_swatchDesc content:@"" border:TRUE];
 }
 
 @end

@@ -70,9 +70,9 @@
     
     NSError *error = nil;
     if (![context save:&error]) {
-        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error inserting context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Save successful");
+        NSLog(@"Insert successful");
     }
 }
 
@@ -123,9 +123,9 @@
     
     NSError *error = nil;
     if (![context save:&error]) {
-        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error inserting context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Save successful");
+        NSLog(@"Insert successful");
     }
 }
 
@@ -176,9 +176,9 @@
     
     NSError *error = nil;
     if (![context save:&error]) {
-        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error inserting context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Save successful");
+        NSLog(@"Insert successful");
     }
 }
 
@@ -681,6 +681,25 @@
     }
 }
 
+// Query dictionary name
+//
++ (id)queryDictionaryName:(NSString *)entityName entityId:(int)entityId context:(NSManagedObjectContext *)context {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"order == %i", entityId]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return [results objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Update methods
@@ -710,6 +729,28 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Delete methods
+
+// Generic
+//
++ (void)deleteDictionaryEntity:(NSString *)entityName {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSFetchRequest * fetch = [[NSFetchRequest alloc] init];
+    [fetch setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:context]];
+    
+    NSArray * result = [context executeFetchRequest:fetch error:nil];
+    for (id attribute in result)
+        [context deleteObject:attribute];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Error deleting: %@\n%@", [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Delete of '%@' successful", entityName);
+    }
+}
 
 + (void)deleteSwatchKeywords:(PaintSwatches *)swatchObj context:(NSManagedObjectContext *)context {
 

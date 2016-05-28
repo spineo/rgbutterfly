@@ -227,21 +227,18 @@ static NSDictionary *swatchTypes;
         [CoreDataUtils initGlobalSettings];
     }
     
-    count = [ManagedObjectUtils fetchCount:@"SubjectiveColor"];
-    if (count == 0) {
-        [ManagedObjectUtils insertSubjectiveColors];
-    }
-    
-    count = [ManagedObjectUtils fetchCount:@"PaintSwatchType"];
-    if (count == 0) {
-        [ManagedObjectUtils insertPaintSwatchTypes];
-    }
+    // Refresh the dictionary tables
+    //
+    [ManagedObjectUtils deleteDictionaryEntity:@"SubjectiveColor"];
+    [ManagedObjectUtils insertSubjectiveColors];
 
-    count = [ManagedObjectUtils fetchCount:@"MatchAlgorithm"];
-    if (count == 0) {
-        [ManagedObjectUtils insertMatchAlgorithms];
-    }
-    
+    [ManagedObjectUtils deleteDictionaryEntity:@"PaintSwatchType"];
+    [ManagedObjectUtils insertPaintSwatchTypes];
+
+    [ManagedObjectUtils deleteDictionaryEntity:@"MatchAlgorithm"];
+    [ManagedObjectUtils insertMatchAlgorithms];
+
+
     // NSUserDefaults intialization
     //
     // isRGB settings
@@ -261,22 +258,8 @@ static NSDictionary *swatchTypes;
     };
 }
 
-+ (NSArray *)getSwatchTypes {
-    return @[
-        @"Unknown",
-        @"Reference",
-        @"MixAssoc",
-        @"MatchAssoc",
-        @"Derived",
-    ];
-}
-
 + (int)getSwatchId:(NSString *)key {
     return [[[self getSwatchIds] valueForKey:[key lowercaseString]] intValue];
-}
-
-+ (NSString *)getSwatchType:(int)typeId {
-    return [[self getSwatchTypes] objectAtIndex:typeId];
 }
 
 + (NSString *)paletteImageName {

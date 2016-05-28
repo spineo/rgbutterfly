@@ -261,17 +261,12 @@ extern float const DEF_BORDER_THRESHOLD;
 #define LARGE_BOLD_FONT    [UIFont boldSystemFontOfSize: 14]
 #define ITALIC_FONT        [UIFont italicSystemFontOfSize:12]
 
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Entity independent properties
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 + (void)init;
-
-// Swatch Types
-//
-+ (NSArray *)getSwatchTypes;
-
-+ (NSString *)getSwatchType:(int)typeId;
 
 + (int)getSwatchId:(NSString *)key;
 
