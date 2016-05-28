@@ -18,4 +18,11 @@
     }
     return trimmedStrings;
 }
+
++ (NSString *)trimString:(NSString *)string {
+    NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    return trimmedString;
+}
+
 @end

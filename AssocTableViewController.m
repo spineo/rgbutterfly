@@ -783,36 +783,39 @@ const int ASSOC_COLORS_TAG     = 5;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text isEqualToString:@""]) {
+    textField.text = [GenericUtils trimString:textField.text];
+    
+    if ([textField.text isEqualToString:@""] &&
+        ! (textField.tag == ASSOC_KEYW_TAG || textField.tag == ASSOC_DESC_TAG)
+    ) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
         _textReturn  = TRUE;
-    }
-    
-    if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
-        _mixAssocName = textField.text;
-        
-    } else if ((textField.tag == ASSOC_KEYW_TAG) && (! [textField.text isEqualToString:@""])) {
-        _mixAssocKeyw = textField.text;
-        
-    } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
-        _mixAssocDesc = textField.text;
-        
-    } else {
-        for (int i=0; i<[_mixAssocSwatches count]; i++) {
-            int color_tag = i + ASSOC_COLORS_TAG;
-            if (textField.tag == color_tag) {
-                MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
-                PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
-                [paintSwatch setName:textField.text];
+
+        if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
+            _mixAssocName = textField.text;
+            
+        } else if ((textField.tag == ASSOC_KEYW_TAG) && (! [textField.text isEqualToString:@""])) {
+            _mixAssocKeyw = textField.text;
+            
+        } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
+            _mixAssocDesc = textField.text;
+            
+        } else {
+            for (int i=0; i<[_mixAssocSwatches count]; i++) {
+                int color_tag = i + ASSOC_COLORS_TAG;
+                if (textField.tag == color_tag) {
+                    MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+                    PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+                    [paintSwatch setName:textField.text];
+                }
             }
+            [_applyButton setEnabled:TRUE];
         }
-        [_applyButton setEnabled:TRUE];
+        [_save setEnabled:TRUE];
     }
-    
-    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

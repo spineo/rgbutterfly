@@ -10,7 +10,6 @@
 #import "PaintSwatches.h"
 #import "TapArea.h"
 
-//@interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate>
 @interface MatchTableViewController : UITableViewController <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;

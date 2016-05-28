@@ -692,27 +692,29 @@ const int DETAIL_MAX_SECTION    = 6;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    // Just set the swatch name, type/color text fields are handled by the picker
+    textField.text = [GenericUtils trimString:textField.text];
     
     if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
-    }
+        
+    } else {
     
-    if ((textField.tag == NAME_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-        _nameEntered = textField.text;
-    } else if (textField.tag == KEYW_FIELD_TAG) {
-        _keywEntered = textField.text;
-    } else if (textField.tag == DESC_FIELD_TAG) {
-        _descEntered = textField.text;
+        if (textField.tag == NAME_FIELD_TAG) {
+            _nameEntered = textField.text;
+        } else if (textField.tag == KEYW_FIELD_TAG) {
+            _keywEntered = textField.text;
+        } else if (textField.tag == DESC_FIELD_TAG) {
+            _descEntered = textField.text;
+        }
+        
+        [_save setEnabled:TRUE];
     }
     
     [textField resignFirstResponder];
     _typesPickerFlag = FALSE;
     _colorPickerFlag = FALSE;
     [self setFrameSizes];
-
-    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

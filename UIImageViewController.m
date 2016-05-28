@@ -1508,6 +1508,7 @@ const int MATCH_DESC_TAG   = 17;
 #pragma mark - TextField Methods
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    textField.text = [GenericUtils trimString:textField.text];
     
     if (textField.tag == MATCH_NAME_TAG) {
         _assocName = ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text;

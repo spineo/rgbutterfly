@@ -10,6 +10,9 @@
 
 @interface GenericUtils : NSObject
 
+// Trim list or individual string of leading/trailing whitespace
+//
 + (NSMutableArray *)trimStrings:(NSArray *)stringList;
++ (NSString *)trimString:(NSString *)string;
 
 @end

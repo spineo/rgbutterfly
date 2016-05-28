@@ -569,23 +569,25 @@ const int IMAGE_TAG  = 6;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text isEqualToString:@""]) {
+    textField.text = [GenericUtils trimString:textField.text];
+    
+    if ([textField.text isEqualToString:@""] && (textField.tag == NAME_FIELD_TAG)) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
         _textReturn  = TRUE;
-    }
     
-    if ((textField.tag == NAME_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-        _nameEntered = textField.text;
-    } else if ((textField.tag == KEYW_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-        _keywEntered = textField.text;
-    } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
-        _descEntered = textField.text;
+        if (textField.tag == NAME_FIELD_TAG) {
+            _nameEntered = textField.text;
+        } else if ((textField.tag == KEYW_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
+            _keywEntered = textField.text;
+        } else if ((textField.tag == DESC_FIELD_TAG) && (! [textField.text isEqualToString:@""])) {
+            _descEntered = textField.text;
+        }
+        
+        [_save setEnabled:TRUE];
     }
-    
-    [_save setEnabled:TRUE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
