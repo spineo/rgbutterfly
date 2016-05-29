@@ -117,6 +117,10 @@ extern const int SWATCH_PICKER_TAG;
 extern const int COLOR_PICKER_TAG;
 extern const int COLOR_BTN_TAG;
 extern const int TYPE_BTN_TAG;
+extern const int BRAND_FIELD_TAG;
+extern const int BRAND_PICKER_TAG;
+extern const int BRAND_BTN_TAG;
+
 
 // Settings
 //

@@ -76,71 +76,18 @@
     }
 }
 
-// Call this method from GlobalSettings
+// Call this method from GlobalSettings: Generic insert method
 //
-+ (void)insertPaintSwatchTypes {
++ (void)insertFromDataFile:(NSString *)entityName {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
-    NSEntityDescription *swatchTypeEntity = [NSEntityDescription entityForName:@"PaintSwatchType" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     
     // Read the data text files
     //
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:@"PaintSwatchType"
-                                                         ofType:@"txt"];
-    // Get rid of new line
-    //
-    NSString* fileContents =
-    [NSString stringWithContentsOfFile:fileRoot
-                              encoding:NSUTF8StringEncoding error:nil];
-    
-    // First, separate by new line
-    //
-    NSArray* allLines =
-    [fileContents componentsSeparatedByCharactersInSet:
-     [NSCharacterSet newlineCharacterSet]];
-    
-    // Order is used for the color wheel (starting at zero)
-    //
-    int order = 0;
-    for (NSString *line in allLines) {
-        // Strip newlines and split by delimiters
-        //
-        NSString *typeCompsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        NSMutableArray *typeComps = [GenericUtils trimStrings:[typeCompsString componentsSeparatedByString:@","]];
-        
-        if ([typeComps count] == 1) {
-            NSString *typeName = [typeComps objectAtIndex:0];
-            
-            PaintSwatchType *swatchType = [[PaintSwatchType alloc] initWithEntity:swatchTypeEntity insertIntoManagedObjectContext:context];
-            [swatchType setName:typeName];
-            [swatchType setOrder:[NSNumber numberWithInt:order]];
-            
-            order++;
-        }
-    }
-    
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Error inserting context: %@\n%@", [error localizedDescription], [error userInfo]);
-    } else {
-        NSLog(@"Insert successful");
-    }
-}
-
-// Call this method from GlobalSettings
-//
-+ (void)insertMatchAlgorithms {
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSEntityDescription *matchAlgEntity = [NSEntityDescription entityForName:@"MatchAlgorithm" inManagedObjectContext:context];
-    
-    // Read the data text files
-    //
-    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:@"MatchAlgorithm"
+    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:entityName
                                                          ofType:@"txt"];
     // Get rid of new line
     //
@@ -166,9 +113,9 @@
         if ([comps count] == 1) {
             NSString *name = [comps objectAtIndex:0];
             
-            MatchAlgorithm *matchAlgorithm = [[MatchAlgorithm alloc] initWithEntity:matchAlgEntity insertIntoManagedObjectContext:context];
-            [matchAlgorithm setName:name];
-            [matchAlgorithm setOrder:[NSNumber numberWithInt:order]];
+            id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+            [managedObject setName:name];
+            [managedObject setOrder:[NSNumber numberWithInt:order]];
             
             order++;
         }
@@ -176,11 +123,12 @@
     
     NSError *error = nil;
     if (![context save:&error]) {
-        NSLog(@"Error inserting context: %@\n%@", [error localizedDescription], [error userInfo]);
+        NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Insert successful");
+        NSLog(@"Insert for '%@' successful", entityName);
     }
 }
+
 
 + (void)insertTestPaintSwatches:(NSManagedObjectContext *)context {
 

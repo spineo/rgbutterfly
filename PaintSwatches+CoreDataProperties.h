@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *abbr_name;
 @property (nullable, nonatomic, retain) NSString *alpha;
 @property (nullable, nonatomic, retain) NSString *blue;
+@property (nullable, nonatomic, retain) NSNumber *body_type_id;
 @property (nullable, nonatomic, retain) NSString *brightness;
 @property (nullable, nonatomic, retain) NSString *coord_pt;
 @property (nullable, nonatomic, retain) NSDate *create_date;
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *mix_swatch_id;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *pigment_type_id;
+@property (nullable, nonatomic, retain) NSNumber *paint_brand_id;
 @property (nullable, nonatomic, retain) NSString *red;
 @property (nullable, nonatomic, retain) NSNumber *ref_parts_ratio;
 @property (nullable, nonatomic, retain) NSNumber *ref_swatch_id;

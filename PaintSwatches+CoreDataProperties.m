@@ -16,6 +16,7 @@
 @dynamic abbr_name;
 @dynamic alpha;
 @dynamic blue;
+@dynamic body_type_id;
 @dynamic brightness;
 @dynamic coord_pt;
 @dynamic create_date;
@@ -33,6 +34,7 @@
 @dynamic mix_swatch_id;
 @dynamic name;
 @dynamic pigment_type_id;
+@dynamic paint_brand_id;
 @dynamic red;
 @dynamic ref_parts_ratio;
 @dynamic ref_swatch_id;

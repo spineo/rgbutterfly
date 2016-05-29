@@ -29,8 +29,7 @@
 // Init methods
 //
 + (void)insertSubjectiveColors;
-+ (void)insertPaintSwatchTypes;
-+ (void)insertMatchAlgorithms;
++ (void)insertFromDataFile:(NSString *)entityName;
 + (void)insertTestPaintSwatches:(NSManagedObjectContext *)context;
 
 // Fetch methods

@@ -109,13 +109,16 @@ const int SWATCH_PICKER_TAG = 86;
 const int COLOR_PICKER_TAG  = 87;
 const int COLOR_BTN_TAG     = 88;
 const int TYPE_BTN_TAG      = 89;
+const int BRAND_FIELD_TAG   = 90;
+const int BRAND_PICKER_TAG  = 91;
+const int BRAND_BTN_TAG     = 92;
 
 // Settings
 //
-const int SHAPE_BUTTON_TAG  = 93;
-const int MATCH_NUM_TAG     = 94;
+const int SHAPE_BUTTON_TAG  = 101;
+const int MATCH_NUM_TAG     = 102;
 
-const int MAX_TAG           = 100;
+const int MAX_TAG           = 120;
 
 
 // Maximum Text field lengths (characters)
@@ -233,10 +236,19 @@ static NSDictionary *swatchTypes;
     [ManagedObjectUtils insertSubjectiveColors];
 
     [ManagedObjectUtils deleteDictionaryEntity:@"PaintSwatchType"];
-    [ManagedObjectUtils insertPaintSwatchTypes];
+    [ManagedObjectUtils insertFromDataFile:@"PaintSwatchType"];
 
     [ManagedObjectUtils deleteDictionaryEntity:@"MatchAlgorithm"];
-    [ManagedObjectUtils insertMatchAlgorithms];
+    [ManagedObjectUtils insertFromDataFile:@"MatchAlgorithm"];
+    
+    [ManagedObjectUtils deleteDictionaryEntity:@"PaintBrand"];
+    [ManagedObjectUtils insertFromDataFile:@"PaintBrand"];
+    
+    [ManagedObjectUtils deleteDictionaryEntity:@"PigmentType"];
+    [ManagedObjectUtils insertFromDataFile:@"PigmentType"];
+    
+    [ManagedObjectUtils deleteDictionaryEntity:@"BodyType"];
+    [ManagedObjectUtils insertFromDataFile:@"BodyType"];
 
 
     // NSUserDefaults intialization
