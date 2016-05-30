@@ -36,9 +36,9 @@
 
 // SwatchName and Reference Label and Name fields
 //
-@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *swatchKeyw;
+@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorPlaceholder, *typePlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *keywHeader, *descHeader, *mixAssocHeader;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *keywHeader, *descHeader, *mixAssocHeader, *otherName;
 
 // Subjective color related
 //
@@ -80,6 +80,7 @@
 
 @property (nonatomic, strong) NSString *reuseTableCellIdentifier, *reuseCollectionCellIdentifier;
 
+
 @end
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,6 +107,7 @@ const int DETAIL_BRAND_SECTION  = 3;
 const int DETAIL_KEYW_SECTION   = 4;
 const int DETAIL_DESC_SECTION   = 5;
 const int DETAIL_MIX_SECTION    = 6;
+
 
 const int DETAIL_MAX_SECTION    = 7;
 
@@ -161,9 +163,10 @@ const int DETAIL_MAX_SECTION    = 7;
     
     // Initialize
     //
-    int type_id       = [[_paintSwatch type_id] intValue];
-    int subj_color_id = [[_paintSwatch subj_color_id] intValue];
-    int brand_id      = [[_paintSwatch paint_brand_id] intValue];
+    int type_id          = [[_paintSwatch type_id] intValue];
+    int subj_color_id    = [[_paintSwatch subj_color_id] intValue];
+    int brand_id         = [[_paintSwatch paint_brand_id] intValue];
+    NSString *brand_name = [_paintSwatch paint_brand_name];
     
     // Default edit behaviour
     //
@@ -185,6 +188,7 @@ const int DETAIL_MAX_SECTION    = 7;
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Description (max. %i chars) - ", MAX_DESC_LEN];
+    _otherPlaceholder = [[NSString alloc] initWithFormat:@" - Other Paint Brand (max. of %i chars) - ", MAX_BRAND_LEN];
 
     
     // A few defaults
@@ -194,6 +198,7 @@ const int DETAIL_MAX_SECTION    = 7;
     _typesPickerSelRow = type_id       ? type_id       : 0;
     _colorPickerSelRow = subj_color_id ? subj_color_id : 0;
     _brandPickerSelRow = brand_id      ? brand_id      : 0;
+    _otherName         = brand_name    ? brand_name    : @"";
     
     _colorPickerFlag   = FALSE;
     _typesPickerFlag   = FALSE;
@@ -238,6 +243,10 @@ const int DETAIL_MAX_SECTION    = 7;
     [_paintBrandName setInputView: _paintBrandPicker];
     [_paintBrandName setDelegate:self];
     [self createBrandPicker];
+    
+    _otherNameField = [FieldUtils createTextField:_otherName tag:OTHER_FIELD_TAG];
+    [_otherNameField setTextAlignment:NSTextAlignmentCenter];
+    [_otherNameField setDelegate:self];
     
     NSSet *swatchKeywords = [_paintSwatch swatch_keyword];
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
@@ -430,7 +439,11 @@ const int DETAIL_MAX_SECTION    = 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section <= DETAIL_DESC_SECTION) {
+    
+    if ((section == DETAIL_BRAND_SECTION) && (_brandPickerSelRow == 0)) {
+        return 2;
+
+    } else if (section <= DETAIL_DESC_SECTION) {
         if ((
              ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
              ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
@@ -531,8 +544,28 @@ const int DETAIL_MAX_SECTION    = 7;
         // Paint Brand field
         //
         } else if (indexPath.section == DETAIL_BRAND_SECTION) {
-            [cell.contentView addSubview:_doneBrandButton];
-            [cell.contentView addSubview:_paintBrandName];
+            if (indexPath.row == 0) {
+                [cell.contentView addSubview:_doneBrandButton];
+                [cell.contentView addSubview:_paintBrandName];
+                
+            } else {
+                // Create the keyword text field
+                //
+                UITextField *otherNameField  = [FieldUtils createTextField:_otherName tag:OTHER_FIELD_TAG];
+                [otherNameField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+                [otherNameField setDelegate:self];
+                [cell.contentView addSubview:otherNameField];
+                
+                if (_editFlag == TRUE) {
+                    if ([_otherName isEqualToString:@""]) {
+                        [otherNameField setPlaceholder:_otherPlaceholder];
+                    }
+                    
+                } else {
+                    [FieldUtils makeTextFieldNonEditable:otherNameField content:_otherName border:TRUE];
+                }
+                [cell setAccessoryType: UITableViewCellAccessoryNone];
+            }
 
         // Keywords field
         //
@@ -748,6 +781,10 @@ const int DETAIL_MAX_SECTION    = 7;
     if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
+    
+    } else if ((textField.tag == OTHER_FIELD_TAG) && [textField.text isEqualToString:@""] && (_brandPickerSelRow == 0)) {
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
     
@@ -757,6 +794,8 @@ const int DETAIL_MAX_SECTION    = 7;
             _keywEntered = textField.text;
         } else if (textField.tag == DESC_FIELD_TAG) {
             _descEntered = textField.text;
+        } else if (textField.tag == OTHER_FIELD_TAG) {
+            _otherName   = textField.text;
         }
         
         [_save setEnabled:TRUE];
@@ -766,6 +805,9 @@ const int DETAIL_MAX_SECTION    = 7;
     _typesPickerFlag = FALSE;
     _colorPickerFlag = FALSE;
     _brandPickerFlag = FALSE;
+
+    [self.tableView reloadData];
+    
     [self setFrameSizes];
 }
 
@@ -786,6 +828,10 @@ const int DETAIL_MAX_SECTION    = 7;
         return NO;
     } else if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        [self presentViewController:myAlert animated:YES completion:nil];
+        return NO;
+    } else if (textField.tag == OTHER_FIELD_TAG && textField.text.length >= MAX_BRAND_LEN && range.length == 0) {
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_BRAND_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else {
@@ -889,6 +935,7 @@ const int DETAIL_MAX_SECTION    = 7;
         NSString *paintBrand = [_paintBrandNames objectAtIndex:row];
         [_paintBrandName setText:paintBrand];
         [_paintSwatch setPaint_brand_id:[NSNumber numberWithInteger:row]];
+        _brandPickerSelRow = (int)row;
         
     } else {
         [self setColorPickerValues:(int)row];
@@ -1136,9 +1183,14 @@ const int DETAIL_MAX_SECTION    = 7;
             [kwObj addSwatch_keywordObject:swKwObj];
         }
     }
-    
     [_paintSwatch setName:_nameEntered];
     [_paintSwatch setDesc:_descEntered];
+    
+    if (_brandPickerSelRow == 0) {
+        [_paintSwatch setPaint_brand_name:_otherName];
+    } else {
+        [_paintSwatch setPaint_brand_name:nil];
+    }
 
     NSError *error = nil;
     if (![self.context save:&error]) {

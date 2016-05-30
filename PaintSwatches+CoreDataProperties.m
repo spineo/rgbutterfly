@@ -35,6 +35,7 @@
 @dynamic name;
 @dynamic pigment_type_id;
 @dynamic paint_brand_id;
+@dynamic paint_brand_name;
 @dynamic red;
 @dynamic ref_parts_ratio;
 @dynamic ref_swatch_id;

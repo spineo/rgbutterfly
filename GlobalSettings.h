@@ -120,12 +120,13 @@ extern const int TYPE_BTN_TAG;
 extern const int BRAND_FIELD_TAG;
 extern const int BRAND_PICKER_TAG;
 extern const int BRAND_BTN_TAG;
-
+extern const int OTHER_FIELD_TAG;
 
 // Settings
 //
 extern const int SHAPE_BUTTON_TAG;
 extern const int MATCH_NUM_TAG;
+extern const int ADD_BRANDS_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements
@@ -139,6 +140,7 @@ extern const int MAX_TAG;
 extern const int MAX_NAME_LEN;
 extern const int MAX_KEYW_LEN;
 extern const int MAX_DESC_LEN;
+extern const int MAX_BRAND_LEN;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
@@ -150,6 +152,7 @@ extern NSString * const TAP_AREA_SIZE_KEY;
 extern NSString * const SHAPE_GEOMETRY_KEY;
 extern NSString * const MATCH_NUM_KEY;
 extern NSString * const RGB_DISPLAY_KEY;
+extern NSString * const ADD_BRANDS_KEY;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

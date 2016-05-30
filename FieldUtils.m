@@ -38,12 +38,6 @@
     UILabel *label = [self createLabel:name];
     [label setFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
 
-//    [label setText:name];
-//    [label setBackgroundColor: DARK_TEXT_COLOR];
-//    [label setTextColor: LIGHT_TEXT_COLOR];
-//    [label setTextAlignment:NSTextAlignmentLeft];
-//    [label setFont: ITALIC_FONT];
-
     return label;
 }
 
@@ -52,12 +46,6 @@
     //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
     UILabel *label = [self createLabel:name];
     [label setFrame:CGRectMake(x, y, width, height)];
-    
-//    [label setText:name];
-//    [label setBackgroundColor: DARK_TEXT_COLOR];
-//    [label setTextColor: LIGHT_TEXT_COLOR];
-//    [label setTextAlignment:NSTextAlignmentLeft];
-//    [label setFont: ITALIC_FONT];
     
     return label;
 }

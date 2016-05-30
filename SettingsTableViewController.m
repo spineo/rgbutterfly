@@ -19,12 +19,12 @@
 @property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
 @property (nonatomic, strong) UIButton *shapeButton, *rgbDisplayButton;
-@property (nonatomic, strong) UITextField *matchNumTextField;
+@property (nonatomic, strong) UITextField *matchNumTextField, *addBrandsTextField;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
 
@@ -58,6 +58,9 @@ const int MATCH_NUM_ROWS          = 1;
 
 const int RGB_DISPLAY_SETTINGS    = 3;
 const int RGB_DISPLAY_ROWS        = 1;
+
+const int ADD_BRANDS_SETTINGS     = 4;
+const int ADD_BRANDS_ROWS         = 1;
 
 const int SETTINGS_MAX_SECTIONS   = 4;
 
@@ -319,8 +322,26 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     labelHeight = _rgbDisplayLabel.bounds.size.height;
     labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
     [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
-
-
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // New Brands Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
+    [_addBrandsTextField setAutoresizingMask:NO];
+    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
+    [_addBrandsTextField setDelegate:self];
+    
+    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
+    
+    // Add a place holder if no text
+    //
+    if (_addBrandsText) {
+        [_addBrandsTextField setText:_addBrandsText];
+    } else {
+        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
+    }
+    
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -373,6 +394,9 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
         return RGB_DISPLAY_ROWS;
+        
+    } else if (section == ADD_BRANDS_SETTINGS) {
+        return ADD_BRANDS_ROWS;
     }
     return 0;
 }
@@ -396,16 +420,19 @@ const int SETTINGS_MAX_SECTIONS   = 4;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     if (section == READ_ONLY_SETTINGS) {
-        headerStr = @"Read-Only Settings";
+        headerStr = @"Read-Only";
         
     } else if (section == TAP_AREA_SETTINGS) {
-        headerStr = @"Tap Area Settings";
+        headerStr = @"Tap Area";
         
     } else if (section == MATCH_NUM_SETTINGS) {
-        headerStr = @"Match Number Settings";
+        headerStr = @"Match Number";
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
-        headerStr = @"RGB Display Settings";
+        headerStr = @"RGB Display";
+        
+    } else if (section == ADD_BRANDS_SETTINGS) {
+        headerStr = @"Add Paint Brands";
     }
     return headerStr;
 }
@@ -477,6 +504,12 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     } else if (indexPath.section == RGB_DISPLAY_SETTINGS) {
         [cell.contentView addSubview:_rgbDisplayButton];
         [cell.contentView addSubview:_rgbDisplayLabel];
+        
+    } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
+        CGFloat addBrandsYOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / 2;
+        CGFloat addBrandsWidth   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, addBrandsYOffset, addBrandsWidth, DEF_TEXTFIELD_HEIGHT)];
+        [cell.contentView addSubview:_addBrandsTextField];
     }
     
     return cell;
@@ -524,23 +557,28 @@ const int SETTINGS_MAX_SECTIONS   = 4;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
-    NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-    NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
-    
-    if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
-        int newValue = [textField.text intValue];
-        if (newValue > DEF_MAX_MATCH) {
-            _maxMatchNum = DEF_MAX_MATCH;
-            
-        } else if (newValue <= 0) {
-            _maxMatchNum = 1;
-            
-        } else {
-            _maxMatchNum = newValue;
+    if (textField.tag == MATCH_NUM_TAG) {
+        NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
+
+        if ([numbersOnly isSupersetOfSet:characterSetFromTextField]) {
+            int newValue = [textField.text intValue];
+            if (newValue > DEF_MAX_MATCH) {
+                _maxMatchNum = DEF_MAX_MATCH;
+                
+            } else if (newValue <= 0) {
+                _maxMatchNum = 1;
+                
+            } else {
+                _maxMatchNum = newValue;
+            }
         }
+        [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
+        [_matchNumStepper setValue:(double)_maxMatchNum];
+        
+    } else {
+        _addBrandsText = textField.text;
     }
-    [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
-    [_matchNumStepper setValue:(double)_maxMatchNum];
     
     _editFlag = TRUE;
 }
@@ -670,6 +708,10 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         // isRGB settings
         //
         [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
+        
+        // Add Brands
+        //
+        [_userDefaults setValue:_addBrandsText forKey:ADD_BRANDS_KEY];
         
         [_userDefaults synchronize];
         

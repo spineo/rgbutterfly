@@ -112,32 +112,36 @@ const int TYPE_BTN_TAG      = 89;
 const int BRAND_FIELD_TAG   = 90;
 const int BRAND_PICKER_TAG  = 91;
 const int BRAND_BTN_TAG     = 92;
+const int OTHER_FIELD_TAG   = 93;
 
 // Settings
 //
 const int SHAPE_BUTTON_TAG  = 101;
 const int MATCH_NUM_TAG     = 102;
+const int ADD_BRANDS_TAG    = 103;
 
 const int MAX_TAG           = 120;
 
 
 // Maximum Text field lengths (characters)
 //
-const int MAX_NAME_LEN = 64;
-const int MAX_KEYW_LEN = 128;
-const int MAX_DESC_LEN = 128;
+const int MAX_NAME_LEN  = 64;
+const int MAX_KEYW_LEN  = 128;
+const int MAX_DESC_LEN  = 128;
+const int MAX_BRAND_LEN = 32;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-NSString * const PAINT_SWATCH_RO_KEY = @"swatches_read_only";
-NSString * const MIX_ASSOC_RO_KEY    = @"assoc_read_only";
-NSString * const TAP_AREA_SIZE_KEY   = @"tap_area_size";
-NSString * const SHAPE_GEOMETRY_KEY  = @"shape_geometry";
-NSString * const MATCH_NUM_KEY       = @"match_num";
-NSString * const RGB_DISPLAY_KEY     = @"rgb_display";
+NSString * const PAINT_SWATCH_RO_KEY = @"SwatchesReadOnly";
+NSString * const MIX_ASSOC_RO_KEY    = @"AssocReadOnly";
+NSString * const TAP_AREA_SIZE_KEY   = @"TapAreaSize";
+NSString * const SHAPE_GEOMETRY_KEY  = @"ShapeGeometry";
+NSString * const MATCH_NUM_KEY       = @"MatchNum";
+NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
+NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

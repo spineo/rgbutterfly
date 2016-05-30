@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *pigment_type_id;
 @property (nullable, nonatomic, retain) NSNumber *paint_brand_id;
+@property (nullable, nonatomic, retain) NSString *paint_brand_name;
 @property (nullable, nonatomic, retain) NSString *red;
 @property (nullable, nonatomic, retain) NSNumber *ref_parts_ratio;
 @property (nullable, nonatomic, retain) NSNumber *ref_swatch_id;
