@@ -100,27 +100,33 @@ int const INCR_ALG_BTN_TAG = 73;
 int const DECR_TAP_BTN_TAG = 74;
 int const INCR_TAP_BTN_TAG = 75;
 
-const int NAME_FIELD_TAG    = 81;
-const int TYPE_FIELD_TAG    = 82;
-const int COLOR_FIELD_TAG   = 83;
-const int KEYW_FIELD_TAG    = 84;
-const int DESC_FIELD_TAG    = 85;
-const int SWATCH_PICKER_TAG = 86;
-const int COLOR_PICKER_TAG  = 87;
-const int COLOR_BTN_TAG     = 88;
-const int TYPE_BTN_TAG      = 89;
-const int BRAND_FIELD_TAG   = 90;
-const int BRAND_PICKER_TAG  = 91;
-const int BRAND_BTN_TAG     = 92;
-const int OTHER_FIELD_TAG   = 93;
+const int NAME_FIELD_TAG     = 81;
+const int TYPE_FIELD_TAG     = 82;
+const int COLOR_FIELD_TAG    = 83;
+const int KEYW_FIELD_TAG     = 84;
+const int DESC_FIELD_TAG     = 85;
+const int SWATCH_PICKER_TAG  = 86;
+const int COLOR_PICKER_TAG   = 87;
+const int COLOR_BTN_TAG      = 88;
+const int TYPE_BTN_TAG       = 89;
+const int BRAND_FIELD_TAG    = 90;
+const int BRAND_PICKER_TAG   = 91;
+const int BRAND_BTN_TAG      = 92;
+const int OTHER_FIELD_TAG    = 93;
+const int BODY_FIELD_TAG     = 94;
+const int BODY_PICKER_TAG    = 95;
+const int BODY_BTN_TAG       = 96;
+const int PIGMENT_FIELD_TAG  = 97;
+const int PIGMENT_PICKER_TAG = 98;
+const int PIGMENT_BTN_TAG    = 99;
 
 // Settings
 //
-const int SHAPE_BUTTON_TAG  = 101;
-const int MATCH_NUM_TAG     = 102;
-const int ADD_BRANDS_TAG    = 103;
+const int SHAPE_BUTTON_TAG   = 101;
+const int MATCH_NUM_TAG      = 102;
+const int ADD_BRANDS_TAG     = 103;
 
-const int MAX_TAG           = 120;
+const int MAX_TAG            = 120;
 
 
 // Maximum Text field lengths (characters)

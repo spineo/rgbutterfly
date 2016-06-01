@@ -121,6 +121,12 @@ extern const int BRAND_FIELD_TAG;
 extern const int BRAND_PICKER_TAG;
 extern const int BRAND_BTN_TAG;
 extern const int OTHER_FIELD_TAG;
+extern const int BODY_FIELD_TAG;
+extern const int BODY_PICKER_TAG;
+extern const int BODY_BTN_TAG;
+extern const int PIGMENT_FIELD_TAG;
+extern const int PIGMENT_PICKER_TAG;
+extern const int PIGMENT_BTN_TAG;
 
 // Settings
 //

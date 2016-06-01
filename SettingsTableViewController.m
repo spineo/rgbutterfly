@@ -326,20 +326,21 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // New Brands Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
-    [_addBrandsTextField setAutoresizingMask:NO];
-    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
-    [_addBrandsTextField setDelegate:self];
-    
-    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
-    
-    // Add a place holder if no text
-    //
-    if (_addBrandsText) {
-        [_addBrandsTextField setText:_addBrandsText];
-    } else {
-        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
-    }
+
+//    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
+//    [_addBrandsTextField setAutoresizingMask:NO];
+//    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
+//    [_addBrandsTextField setDelegate:self];
+//    
+//    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
+//    
+//    // Add a place holder if no text
+//    //
+//    if (_addBrandsText) {
+//        [_addBrandsTextField setText:_addBrandsText];
+//    } else {
+//        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
+//    }
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
