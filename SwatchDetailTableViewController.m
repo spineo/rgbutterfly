@@ -134,7 +134,7 @@ const int DETAIL_MAX_SECTION     = 9;
     for (int i=0; i<num_tableview_rows; i++) {
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:i];
-        MixAssociation *mixAssocObj = mixAssocSwatchObj.mix_association;
+        MixAssociation *mixAssocObj = [mixAssocSwatchObj mix_association];
     
         NSMutableArray *swatch_ids = [ManagedObjectUtils queryMixAssocSwatches:mixAssocObj.objectID context:self.context];
 
@@ -1238,7 +1238,7 @@ const int DETAIL_MAX_SECTION     = 9;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    NSArray *collectionViewArray = self.colorArray[index];
+    NSArray *collectionViewArray = [self.colorArray objectAtIndex:index];
     
     return [collectionViewArray count];
 }
@@ -1269,11 +1269,10 @@ const int DETAIL_MAX_SECTION     = 9;
 // In order to view relations, the View Controller selection/search in the home page will be used
 //
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    int index = (int)collectionView.tag;
-//    
-//    _collectViewSelRow = index;
-//    
-//    [self performSegueWithIdentifier:@"DetailToAssocSegue" sender:self];
+    int index = (int)collectionView.tag;
+    _collectViewSelRow = index;
+    
+    [self performSegueWithIdentifier:@"DetailToAssocSegue" sender:self];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -1327,6 +1326,7 @@ const int DETAIL_MAX_SECTION     = 9;
     AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
     
     [assocTableViewController setPaintSwatches:self.colorArray[_collectViewSelRow]];
+    [assocTableViewController setMixAssociation:[[_mixAssocSwatches objectAtIndex:_collectViewSelRow] mix_association]];
     [assocTableViewController setSaveFlag:TRUE];
     [assocTableViewController setSourceViewName:@"SwatchDetail"];
 }

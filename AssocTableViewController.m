@@ -148,8 +148,15 @@ const int ASSOC_COLORS_TAG     = 5;
     [_mixTitleLabel sizeToFit];
     self.navigationItem.titleView = _mixTitleLabel;
     
+    // If coming from the Swatch Detail we don't want to edit (just need the information in this context)
+    //
+    if ([_sourceViewName isEqualToString:@"SwatchDetail"]) {
+        [self.editButtonItem setEnabled:FALSE];
+    }
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
+
     
     // Offsets and Widths
     //
@@ -230,7 +237,6 @@ const int ASSOC_COLORS_TAG     = 5;
         [[_paintSwatches objectAtIndex:i] setName:colorFormatLabel];
         
     }
-    
     
     
     // Adjust the layout when the orientation changes
