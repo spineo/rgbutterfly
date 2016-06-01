@@ -69,7 +69,7 @@
 // Picker views
 //
 @property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton, *doneBrandButton, *doneBodyButton, *donePigmentButton;
-@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, bodyPickerFlag, pigmentPickerFlag, isReadOnly;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, bodyPickerFlag, pigmentPickerFlag, isReadOnly, isShipped;
 
 
 // NSManagedObject subclassing
@@ -176,7 +176,11 @@ const int DETAIL_MAX_SECTION     = 9;
     
     // Default edit behaviour
     //
-    _editFlag = FALSE;
+    _editFlag  = FALSE;
+    
+    // Other flags
+    //
+    _isShipped = [[_paintSwatch is_shipped] boolValue];
 
     
     // Table View Headers
@@ -386,11 +390,10 @@ const int DETAIL_MAX_SECTION     = 9;
 
 - (void)viewDidAppear:(BOOL)animated {
     _isReadOnly = FALSE;
-    
-    BOOL is_shipped  = [[_paintSwatch is_shipped] boolValue];
+
     BOOL is_readonly = [[_paintSwatch is_readonly] boolValue];
     
-    _isReadOnly = is_shipped ? is_shipped : is_readonly;
+    _isReadOnly = _isShipped ? _isShipped : is_readonly;
     
     if (_isReadOnly == TRUE) {
         [_delete setEnabled:FALSE];
@@ -508,7 +511,10 @@ const int DETAIL_MAX_SECTION     = 9;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ((
+    if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
+        return 0;
+
+    } else if ((
          (section == DETAIL_BRAND_SECTION)   ||
          (section == DETAIL_BODY_SECTION)    ||
          (section == DETAIL_PIGMENT_SECTION)
@@ -757,7 +763,10 @@ const int DETAIL_MAX_SECTION     = 9;
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if ((
+    if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
+        return 0;
+
+    } else if ((
          (section == DETAIL_BRAND_SECTION)   ||
          (section == DETAIL_BODY_SECTION)    ||
          (section == DETAIL_PIGMENT_SECTION)
