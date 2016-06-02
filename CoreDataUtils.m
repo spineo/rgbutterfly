@@ -14,60 +14,6 @@
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UID methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Serial unique identifier (stored in the GlobalSettings entity)
-//
-
-#pragma mark - UID Methods
-
-+ (int)getUID {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSEntityDescription *entity_description = [NSEntityDescription entityForName:@"GlobalSetting" inManagedObjectContext:context];
-    
-    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-    
-    [fetch setEntity:entity_description];
-    
-    fetch.resultType = NSDictionaryResultType;
-
-    [fetch setPropertiesToFetch:[NSArray arrayWithObjects:@"max_uid", nil]];
-    
-    NSError *error      = nil;
-    NSArray *results    = [context executeFetchRequest:fetch error:&error];
-    
-    int uid = [[results[0] objectForKey:@"max_uid" ] intValue];
-    
-    int ret_uid = uid + 1;
-    
-    [self incrementUID:ret_uid];
-
-    return uid + 1;
-}
-
-// Increment the UID
-//
-+ (void)incrementUID:(int)uid {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GlobalSetting" inManagedObjectContext:context];
-    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-
-    [fetch setEntity:entity];
-
-    NSArray *results = [context executeFetchRequest:fetch error:NULL];
-
-    [results[0] setValue:[NSNumber numberWithInt:uid] forKey:@"max_uid"];
-        
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // FETCH methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -578,54 +524,6 @@
     }
 }
 
-+ (ACPMixAssociationsDesc *)insertMixDesc:(ACPMixAssociationsDesc *)obj {
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSManagedObject *insert = [NSEntityDescription insertNewObjectForEntityForName:@"ACPMixAssociationsDesc" inManagedObjectContext:context];
-    
-    int uid = [CoreDataUtils getUID];
-    
-    [insert setValue:[NSNumber numberWithInt:uid]      forKey:@"uid"];
-
-    [obj setUid:uid];
-    
-    [insert setValue:obj.mix_assoc_name forKey:@"mix_assoc_name"];
-    [insert setValue:obj.mix_assoc_desc forKey:@"mix_assoc_desc"];
-    
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-        
-        // Clear the uid
-        //
-        obj.uid = 0;
-    }
-    
-    return obj;
-}
-
-+ (int)insertKeyword:(NSString *)keyword {
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    NSManagedObject *insert = [NSEntityDescription insertNewObjectForEntityForName:@"KeywordName" inManagedObjectContext:context];
-    
-    int uid = [self getUID];
-    
-    [insert setValue:[NSNumber numberWithInt:uid] forKey:@"uid"];
-    [insert setValue:keyword                      forKey:@"name"];
-    
-    NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
-    
-    return uid;
-}
-
 + (void)insertSwatchKeywords:(int)swatchId keywordId:(int)keywordId {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -699,127 +597,11 @@
     }
 }
 
-//+ (void)updatePaintSwatch:(PaintSwatches *)obj {
-//
-//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-//    
-//    [self updatePaintSwatch:obj context:context];
-//    [self updateMixAssociation:obj context:context];
-//    
-//    NSError *error;
-//    if (![context save:&error]) {
-//        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-//    }
-//}
-
-//+ (void)updatePaintSwatch:(PaintSwatches *)obj context:(NSManagedObjectContext *)context {
-//
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
-//    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-//    
-//    [fetch setEntity:entity];
-//    
-//    //fetch.predicate = [NSPredicate predicateWithFormat:@"uid == %d", (int)uid];
-//    fetch.predicate = [NSPredicate predicateWithFormat:@"uid == %@", [[NSString alloc] initWithFormat:@"%i", obj.uid]];
-//    
-//    NSArray *results = [context executeFetchRequest:fetch error:NULL];
-//    
-//    if ([results count] == 1) {
-//        [results[0] setValue:obj.name                                   forKey:@"name"];
-//        [results[0] setValue:obj.desc                                   forKey:@"desc"];
-//        [results[0] setValue:[NSDate date]                              forKey:@"last_update"];
-//        [results[0] setValue:[NSNumber numberWithBool:obj.is_mix]       forKey:@"is_mix"];
-//        [results[0] setValue:[NSNumber numberWithInt:obj.type_id]       forKey:@"type_id"];
-//        [results[0] setValue:[NSNumber numberWithInt:obj.subj_color_id] forKey:@"subj_color_id"];
-//    }
-//    
-//    [self updateKeywords:obj context:context];
-//}
-
-//+ (void)updateMixAssociation:(PaintSwatches *)obj context:(NSManagedObjectContext *)context {
-//
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
-//    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
-//    
-//    [fetch setEntity:entity];
-//    
-//    fetch.predicate = [NSPredicate predicateWithFormat:@"uid == %@", [[NSString alloc] initWithFormat:@"%i", obj.mix_assoc_uid]];
-//    
-//    NSArray *results = [context executeFetchRequest:fetch error:NULL];
-//    
-//    if ([results count] == 1) {
-//        [results[0] setValue:[NSNumber numberWithInt:obj.mix_order]       forKey:@"mix_order"];
-//        [results[0] setValue:[NSNumber numberWithInt:obj.dom_parts_ratio] forKey:@"dom_parts_ratio"];
-//        [results[0] setValue:[NSNumber numberWithInt:obj.mix_parts_ratio] forKey:@"mix_parts_ratio"];
-//    }
-//}
-//
-//+ (void)updateKeywords:(PaintSwatches *)obj context:(NSManagedObjectContext *)context {
-//    
-//    // Check if the keyword exists in table KeywordNames (if not, add it)
-//    //
-//    for (int i=0; i<[obj.keywords count]; i++) {
-//        
-//        NSString *keyword = obj.keywords[i];
-//        
-//        int keyword_id = [self fetchUID:@"KeywordName" attrName:@"name" attrValue:keyword];
-//        if (! keyword_id) {
-//            
-//            // Add the keyword
-//            //
-//            keyword_id = [self insertKeyword:keyword];
-//        }
-//        
-//        // Check if relation already exists
-//        //
-//        int kw_count = [self fetchSwatchKeywordsCount:obj.uid keywordId:keyword_id];
-//            
-//        if (kw_count == 0) {
-//            // Add the relationship
-//            //
-//            [self insertSwatchKeywords:obj.uid keywordId:keyword_id];
-//        }
-//    }
-//}
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // DELETE methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Delete Methods
-
-//+ (int)deletePaintSwatch:(PaintSwatches *)obj {
-//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-//    
-//    // Check if the PaintSwatches uid is referenced in more than one mix association
-//    // (if so, prevent delete and alert user)
-//    //
-//    int count = [self fetchUIDCount:@"PaintSwatch" uidValue:obj.uid];
-//    if (count > 1) {
-//        return 1;
-//    }
-//
-//    [self deleteObj:@"PaintSwatch"   uidValue:obj.uid           context:context];
-//    [self deleteObj:@"MixAssociation" uidValue:obj.mix_assoc_uid context:context];
-//    
-//    count = [self fetchIdCount:@"MixAssociation" idName:@"desc_id" idValue:obj.mix_assoc_desc_uid];
-//    
-//    // Still having saved the previous delete operation
-//    //
-//    if (count == 1) {
-//        [self deleteObj:@"MixAssociationDesc" uidValue:obj.mix_assoc_desc_uid context:context];
-//    }
-//    
-//    NSError *error;
-//    if (![context save:&error]) {
-//        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-//    }
-//    
-//    return 0;
-//}
-
 
 + (void)deleteObj:(NSString *)entityName uidValue:(int)uid context:context {
 
@@ -866,18 +648,5 @@
     
     return fetchedResultsController;
 }
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Insert
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Update
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Delete
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 @end

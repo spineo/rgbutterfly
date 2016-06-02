@@ -436,6 +436,38 @@
     }
 }
 
+// Return dictionary keyed by names
+//
++ (NSMutableDictionary *)fetchDictByNames:(NSString *)entityName context:(NSManagedObjectContext *)context {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    [fetch setPropertiesToFetch:[NSArray arrayWithObjects:@"name", @"order", nil]];
+    
+    [fetch setResultType: NSDictionaryResultType];
+    
+    NSError *error = nil;
+    NSArray *arrayOfDict    = [context executeFetchRequest:fetch error:&error];
+    
+    NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
+    
+    for (NSMutableDictionary *dict in arrayOfDict) {
+        NSString *name = [dict valueForKey:@"name"];
+        NSNumber *order = [dict valueForKey:@"order"];
+        
+        [results setValue:order forKey:name];
+    }
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Query methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

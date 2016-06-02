@@ -15,10 +15,6 @@
 
 @interface CoreDataUtils : NSObject
 
-// UID methods
-//
-+ (int)getUID;
-
 
 // FETCH methods
 //
@@ -28,7 +24,6 @@
 + (NSMutableArray *)fetchMixAssocIds:(int)swatchId descId:(int)descId;
 + (NSMutableArray *)fetchAllMixAssocIds;
 + (NSMutableDictionary *)fetchMixAssoc:(int)swatchId descId:(int)descId;
-//+ (ACPMixAssociationsDesc *)fetchMixAssocDesc:(int)descId;
 + (NSString *)fetchMixAssocName:(int)descId;
 + (NSMutableDictionary *)fetchAllSwatchKeywords;
 + (NSMutableDictionary *)fetchAllSubjColors;

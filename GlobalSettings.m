@@ -270,20 +270,6 @@ static NSDictionary *swatchTypes;
 
 #pragma mark - Swatch Dictionaries and Arrays
 
-+ (NSDictionary *)getSwatchIds {
-    return @{
-        @"unknown"      : @"0",
-        @"reference"    : @"1",
-        @"mixassoc"     : @"2",
-        @"matchassoc"   : @"3",
-        @"derived"      : @"4",
-    };
-}
-
-+ (int)getSwatchId:(NSString *)key {
-    return [[[self getSwatchIds] valueForKey:[key lowercaseString]] intValue];
-}
-
 + (NSString *)paletteImageName {
     return @"Artist Palette.png";
 }

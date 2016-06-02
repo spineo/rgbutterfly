@@ -54,6 +54,8 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
+@property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
+@property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId;
 
 @end
 
@@ -93,6 +95,12 @@ const int ASSOC_COLORS_TAG     = 5;
     _mixAssocSwatchEntity  = [NSEntityDescription entityForName:@"MixAssocSwatch"    inManagedObjectContext:self.context];
     _keywordEntity         = [NSEntityDescription entityForName:@"Keyword"           inManagedObjectContext:self.context];
     _mixAssocKeywordEntity = [NSEntityDescription entityForName:@"MixAssocKeyword"   inManagedObjectContext:self.context];
+    
+    // Retrieve the PaintSwatchType dictionary
+    //
+    _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
+    _refTypeId = [_paintSwatchTypes valueForKey:@"Reference"];
+    _mixTypeId = [_paintSwatchTypes valueForKey:@"MixAssoc"];
 
     // Set the name and desc values
     //
@@ -195,7 +203,7 @@ const int ASSOC_COLORS_TAG     = 5;
             }
             
             [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInteger:[GlobalSettings getSwatchId:@"Reference"]]];
+            [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
             
             
         } else if (i == 1) {
@@ -210,7 +218,7 @@ const int ASSOC_COLORS_TAG     = 5;
             }
 
             [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInteger:[GlobalSettings getSwatchId:@"Reference"]]];
+            [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
             
         } else {
             ref_parts_ratio = [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue];
@@ -230,7 +238,7 @@ const int ASSOC_COLORS_TAG     = 5;
             }
 
             [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
-            [[_paintSwatches objectAtIndex:i] setType_id:[NSNumber numberWithInteger:[GlobalSettings getSwatchId:@"MixAssoc"]]];
+            [[_paintSwatches objectAtIndex:i] setType_id:_mixTypeId];
         }
         [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:ref_parts_ratio]];
         [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:mix_parts_ratio]];
@@ -953,19 +961,19 @@ const int ASSOC_COLORS_TAG     = 5;
         
         BOOL isMix;
         NSString *swatchName;
-        int swatchId;
+        NSNumber *swatchId;
         
         if (i == 0) {
             refName_1 = [paintSwatch name];
             isMix = NO;
             swatchName = refName_1;
-            swatchId = [GlobalSettings getSwatchId:@"Reference"];
+            swatchId = _refTypeId;
             
         } else if (i == 1) {
             refName_2 = [paintSwatch name];
             isMix = NO;
             swatchName = refName_2;
-            swatchId = [GlobalSettings getSwatchId:@"Reference"];
+            swatchId = _refTypeId;
             
         } else {
             ratio_2 = i - 1;
@@ -973,7 +981,7 @@ const int ASSOC_COLORS_TAG     = 5;
             isMix = YES;
 
             swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", refName_1, refName_2, ratio_1, ratio_2];
-            swatchId = [GlobalSettings getSwatchId:@"MixAssoc"];
+            swatchId = _mixTypeId;
         }
 
         // Skip any Paint Swatch that is an add
@@ -985,7 +993,7 @@ const int ASSOC_COLORS_TAG     = 5;
         
         [textField setText:swatchName];
         [paintSwatch setIs_mix:[NSNumber numberWithBool:isMix]];
-        [paintSwatch setType_id:[NSNumber numberWithInteger:swatchId]];
+        [paintSwatch setType_id:swatchId];
         [paintSwatch setName:swatchName];
 
     }

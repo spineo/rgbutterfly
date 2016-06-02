@@ -42,6 +42,7 @@
 + (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context;
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchDictNames:(NSString *)entityName context:(NSManagedObjectContext *)context;
++ (NSMutableDictionary *)fetchDictByNames:(NSString *)entityName context:(NSManagedObjectContext *)context;
 
 // Generic query methods
 //

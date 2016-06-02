@@ -281,8 +281,6 @@ extern float const DEF_BORDER_THRESHOLD;
 
 + (void)init;
 
-+ (int)getSwatchId:(NSString *)key;
-
 + (NSString *)paletteImageName;
 
 + (NSString *)rgbImageName;
