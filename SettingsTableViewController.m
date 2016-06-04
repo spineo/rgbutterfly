@@ -268,6 +268,17 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     [_matchNumTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [_matchNumTextField setDelegate:self];
     
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [numberToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    numberToolbar.items = @[
+                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            doneButton];
+    [numberToolbar sizeToFit];
+    [_matchNumTextField setInputAccessoryView:numberToolbar];
+
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // RGB Display Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -567,8 +578,8 @@ const int SETTINGS_MAX_SECTIONS   = 4;
             if (newValue > DEF_MAX_MATCH) {
                 _maxMatchNum = DEF_MAX_MATCH;
                 
-            } else if (newValue <= 0) {
-                _maxMatchNum = 1;
+            } else if (newValue < DEF_MIN_MATCH) {
+                _maxMatchNum = DEF_MIN_MATCH;
                 
             } else {
                 _maxMatchNum = newValue;
@@ -589,7 +600,15 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     return YES;
 }
 
-#pragma mark - Widget states and Save
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Widget States and Save
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Widget States and Save
+
+-(void)doneWithNumberPad{
+    [_matchNumTextField resignFirstResponder];
+}
 
 - (void)setPSSwitchState:(id)sender {
     _swatchesReadOnly = [sender isOn];
