@@ -11,7 +11,6 @@
 #import "AssocDescTableViewCell.h"
 #import "AddMixTableViewController.h"
 #import "ColorUtils.h"
-#import "CoreDataUtils.h"
 #import "SwatchDetailTableViewController.h"
 #import "ManagedObjectUtils.h"
 #import "FieldUtils.h"

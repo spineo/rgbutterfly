@@ -7,7 +7,6 @@
 //
 
 #import "GlobalSettings.h"
-#import "CoreDataUtils.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
 
@@ -219,6 +218,21 @@ NSString * const NO_MIX_NAME    = @"No Mix Name";
 //
 NSString * const DEF_IMAGE_NAME = @"Reference Image";
 
+
+// Image Names
+//
+NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
+NSString * const RGB_IMAGE_NAME         = @"rgb.png";
+NSString * const BACK_BUTTON_IMAGE_NAME = @"arrow.png";
+NSString * const SEARCH_IMAGE_NAME      = @"search.png";
+NSString * const ARROW_UP_IMAGE_NAME    = @"arrow up.png";
+NSString * const ARROW_DOWN_IMAGE_NAME  = @"arrow down.png";
+
+// Default listing type
+//
+NSString * const DEFAULT_LISTING_TYPE  = @"Default";
+
+
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)
 //
@@ -234,12 +248,6 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
-    int count = [ManagedObjectUtils fetchCount:@"GlobalSetting"];
-    
-    if (count == 0) {
-        [CoreDataUtils initGlobalSettings];
-    }
-    
     // Refresh the dictionary tables
     //
     [ManagedObjectUtils deleteDictionaryEntity:@"SubjectiveColor"];
@@ -266,160 +274,6 @@ static NSDictionary *swatchTypes;
     // isRGB settings
     //
     [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:RGB_DISPLAY_KEY];
-}
-
-#pragma mark - Swatch Dictionaries and Arrays
-
-+ (NSString *)paletteImageName {
-    return @"Artist Palette.png";
-}
-
-+ (NSString *)rgbImageName {
-    return @"rgb.png";
-}
-
-+ (NSString *)backButtonImageName {
-    return @"arrow.png";
-}
-
-+ (NSString *)tapMeImageName {
-    return @"question.png";
-}
-
-+ (NSString *)searchImageName {
-    return @"search.png";
-}
-
-+ (NSString *)arrowUpImageName {
-    return @"arrow up.png";
-}
-
-+ (NSString *)arrowDownImageName {
-    return @"arrow down.png";
-}
-
-+ (NSString *)abcImageName {
-    return @"abc-1.png";
-}
-
-+ (NSString *)getDefaultListingType {
-    return @"Default";
-}
-
-// Image Names
-//
-+ (NSDictionary *)getImageNames {
-    return @{
-        @"colorwheel" : @"colorwheel.png",
-    };
-}
-
-
-// Subjective Color Picker View Data
-// Keys are the color names and values
-// are hex values
-//
-+ (NSDictionary *)getSubjColorData {
-    return @{
-        @"Black"         : @{ @"hex" : @"#000000",
-                              @"id"  : @"20",
-                              },
-        @"Blue"          : @{ @"hex" : @"#0000FF",
-                              @"id"  : @"13",
-                              },
-        @"Blue Green"    : @{ @"hex" : @"#00FFCC",
-                              @"id"  : @"12",
-                              },
-        @"Blue Violet"   : @{ @"hex" : @"#6600FF",
-                              @"id"  : @"14",
-                              },
-        @"Brown"         : @{ @"hex" : @"#663300",
-                              @"id"  : @"6",
-                              },
-        @"Copper"        : @{ @"hex" : @"#C87533",
-                              @"id"  : @"5",
-                              },
-        @"Gold"          : @{ @"hex" : @"#FFD700",
-                              @"id"  : @"8",
-                              },
-        @"Green"         : @{ @"hex" : @"#339900",
-                              @"id"  : @"11",
-                              },
-        @"Grey"          : @{ @"hex" : @"#D3D3D3",
-                              @"id"  : @"19",
-                              },
-        @"Orange"        : @{ @"hex" : @"#FF6600",
-                              @"id"  : @"4",
-                              },
-        @"Pink"          : @{ @"hex" : @"#FFC0CB",
-                              @"id"  : @"1",
-                              },
-        @"Red"           : @{ @"hex" : @"#FF0000",
-                              @"id"  : @"2",
-                              },
-        @"Red Orange"    : @{ @"hex" : @"#FF3300",
-                              @"id"  : @"3",
-                              },
-        @"Red Violet"    : @{ @"hex" : @"#FF00FF",
-                              @"id"  : @"16",
-                              },
-        @"Silver"        : @{ @"hex" : @"#C0C0C0",
-                              @"id"  : @"18",
-                              },
-        @"Violet"        : @{ @"hex" : @"#9900FF",
-                              @"id"  : @"15",
-                              },
-        @"White"         : @{ @"hex" : @"#FFFFFF",
-                              @"id"  : @"17",
-                              },
-        @"Yellow"        : @{ @"hex" : @"#FFFF00",
-                              @"id"  : @"9",
-                              },
-        @"Yellow Green"  : @{ @"hex" : @"#CCFF00",
-                              @"id"  : @"10",
-                              },
-        @"Yellow Orange" : @{ @"hex" : @"#FFCC00",
-                              @"id"  : @"7",
-                              },
-        @"Other"         : @{ @"hex" : @"#FFFFFF",
-                              @"id"  : @"0",
-                              },
-        
-    };
-}
-
-+ (int)getSubjColorId:(NSString *)key {
-    return [[[[self getSubjColorData] objectForKey:key] valueForKey:@"id"] intValue];
-}
-
-+ (NSArray *)getColorWheel {
-    return @[
-      @"Other",
-      @"Pink",
-      @"Red",
-      @"Red Orange",
-      @"Orange",
-      @"Copper",
-      @"Brown",
-      @"Yellow Orange",
-      @"Gold",
-      @"Yellow",
-      @"Yellow Green",
-      @"Green",
-      @"Blue Green",
-      @"Blue",
-      @"Blue Violet",
-      @"Violet",
-      @"Red Violet",
-      @"White",
-      @"Silver",
-      @"Grey",
-      @"Black",
-    ];
-}
-
-+ (NSString *)getColorName:(int)subjColorId {
-    return [[self getColorWheel] objectAtIndex:subjColorId];
 }
 
 @end

@@ -276,8 +276,8 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     _rgbDisplayTrueText  = @"Swatches Display RGB Values";
     _rgbDisplayFalseText = @"Swatches Display Paint Image";
     
-    _rgbDisplayTrueImage  = [GlobalSettings rgbImageName];
-    _rgbDisplayFalseImage = [GlobalSettings paletteImageName];
+    _rgbDisplayTrueImage  = RGB_IMAGE_NAME;
+    _rgbDisplayFalseImage = PALETTE_IMAGE_NAME;
     
     if(! [_userDefaults boolForKey:RGB_DISPLAY_KEY]) {
         _rgbDisplayFlag  = FALSE;

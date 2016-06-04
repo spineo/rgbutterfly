@@ -10,7 +10,6 @@
 #import "AssocTableViewController.h"
 #import "GlobalSettings.h"
 #import "ColorUtils.h"
-#import "CoreDataUtils.h"
 #import "PaintSwatches.h"
 #import "BarButtonUtils.h"
 #import "AppDelegate.h"
@@ -28,7 +27,7 @@
 @property NSMutableArray *allPaintSwatches, *paintSwatchList;
 
 @property (nonatomic) int addSwatchCount;
-@property (nonatomic, strong) NSString *backImageName, *searchImageName, *domColorLabel, *mixColorLabel, *addColorLabel;
+@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic) CGFloat defCellHeight;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
@@ -104,18 +103,16 @@
     _addSwatchCount = 0;
 
     _reuseCellIdentifier = @"AddMixTableCell";
-    
-    _backImageName   = [GlobalSettings backButtonImageName];
-    _searchImageName = [GlobalSettings searchImageName];
+
     
     [self setNavBarSizes];
     
-    _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:_backImageName]
+    _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:BACK_BUTTON_IMAGE_NAME]
                                                    style:UIBarButtonItemStylePlain
                                                    target:self
                                                     action:@selector(goBack)];
 
-    _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:_searchImageName]
+    _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
                                                    style:UIBarButtonItemStylePlain
                                                    target:self
                                                    action:@selector(search)];

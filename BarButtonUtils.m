@@ -112,11 +112,11 @@
     
     NSString *imageName;
     if (isRGB == FALSE) {
-        imageName = [GlobalSettings paletteImageName];
+        imageName = PALETTE_IMAGE_NAME;
         isRGB = TRUE;
         
     } else {
-        imageName = [GlobalSettings rgbImageName];
+        imageName = RGB_IMAGE_NAME;
         isRGB = FALSE;
     }
     

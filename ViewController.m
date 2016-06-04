@@ -7,7 +7,6 @@
 //
 #import "ViewController.h"
 #import "GlobalSettings.h"
-#import "CoreDataUtils.h"
 #import "PickerViewController.h"
 #import "AppDelegate.h"
 #import "BarButtonUtils.h"
@@ -33,7 +32,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
-@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *defaultListingType, *listingType;
+@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
@@ -75,8 +74,7 @@
     _reuseCellIdentifier = @"InitTableCell";
     
 
-    _defaultListingType = [GlobalSettings getDefaultListingType];
-    _listingType        = _defaultListingType;
+    _listingType        = DEFAULT_LISTING_TYPE;
     
     // TableView defaults
     //
@@ -93,7 +91,7 @@
     
     UIAlertAction* defaultAction   = [UIAlertAction actionWithTitle:@"Default Colors Listing" style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
-                                                                [self updateTable:_defaultListingType];
+                                                                [self updateTable:DEFAULT_LISTING_TYPE];
                                                             }];
     
     UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Mix Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {

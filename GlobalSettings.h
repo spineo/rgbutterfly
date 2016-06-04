@@ -11,9 +11,6 @@
 
 @interface GlobalSettings : NSObject
 
-@property (nonatomic) int tap_area_size;
-@property (nonatomic, strong) NSString *tap_area_shape;
-
 
 // TableView Constants
 //
@@ -216,6 +213,18 @@ extern NSString * const NO_MIX_NAME;
 //
 extern NSString * const DEF_IMAGE_NAME;
 
+extern NSString * const PALETTE_IMAGE_NAME;
+extern NSString * const RGB_IMAGE_NAME;
+extern NSString * const BACK_BUTTON_IMAGE_NAME;
+extern NSString * const SEARCH_IMAGE_NAME;
+extern NSString * const ARROW_UP_IMAGE_NAME;
+extern NSString * const ARROW_DOWN_IMAGE_NAME;
+
+// Default listing type
+//
+extern NSString * const DEFAULT_LISTING_TYPE;
+
+
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)
 //
@@ -280,31 +289,5 @@ extern float const DEF_BORDER_THRESHOLD;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 + (void)init;
-
-+ (NSString *)paletteImageName;
-
-+ (NSString *)rgbImageName;
-
-+ (NSString *)backButtonImageName;
-
-+ (NSString *)tapMeImageName;
-
-+ (NSString *)searchImageName;
-
-+ (NSString *)arrowUpImageName;
-
-+ (NSString *)arrowDownImageName;
-
-+ (NSString *)abcImageName;
-
-+ (NSString *)getDefaultListingType;
-
-+ (NSDictionary *)getImageNames;
-
-+ (NSDictionary *)getSubjColorData;
-
-+ (int)getSubjColorId:(NSString *)key;
-
-+ (NSString *)getColorName:(int)subjColorId;
 
 @end

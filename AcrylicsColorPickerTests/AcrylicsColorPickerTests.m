@@ -21,7 +21,6 @@
 
 // Data model and related API
 //
-#import "CoreDataUtils.h"
 #import "PaintSwatches.h"
 #import "ACPMixAssociationsDesc.h"
 

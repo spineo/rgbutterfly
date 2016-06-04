@@ -41,7 +41,6 @@
 		21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8B1C8484D7001C3F05 /* AlertUtils.m */; };
 		21397E9C1C8484D7001C3F05 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */; };
 		21397E9D1C8484D7001C3F05 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E8F1C8484D7001C3F05 /* ColorUtils.m */; };
-		21397E9E1C8484D7001C3F05 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E911C8484D7001C3F05 /* CoreDataUtils.m */; };
 		21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E931C8484D7001C3F05 /* FieldUtils.m */; };
 		21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E951C8484D7001C3F05 /* GenericUtils.m */; };
 		21397EA11C8484D7001C3F05 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */; };
@@ -153,8 +152,6 @@
 		21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarButtonUtils.m; sourceTree = "<group>"; };
 		21397E8E1C8484D7001C3F05 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
 		21397E8F1C8484D7001C3F05 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtils.m; sourceTree = "<group>"; };
-		21397E901C8484D7001C3F05 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataUtils.h; sourceTree = "<group>"; };
-		21397E911C8484D7001C3F05 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataUtils.m; sourceTree = "<group>"; };
 		21397E921C8484D7001C3F05 /* FieldUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldUtils.h; sourceTree = "<group>"; };
 		21397E931C8484D7001C3F05 /* FieldUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldUtils.m; sourceTree = "<group>"; };
 		21397E941C8484D7001C3F05 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericUtils.h; sourceTree = "<group>"; };
@@ -373,8 +370,6 @@
 				21397E8D1C8484D7001C3F05 /* BarButtonUtils.m */,
 				21397E8E1C8484D7001C3F05 /* ColorUtils.h */,
 				21397E8F1C8484D7001C3F05 /* ColorUtils.m */,
-				21397E901C8484D7001C3F05 /* CoreDataUtils.h */,
-				21397E911C8484D7001C3F05 /* CoreDataUtils.m */,
 				21397E921C8484D7001C3F05 /* FieldUtils.h */,
 				21397E931C8484D7001C3F05 /* FieldUtils.m */,
 				21397E941C8484D7001C3F05 /* GenericUtils.h */,
@@ -638,7 +633,6 @@
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
 				21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
-				21397E9E1C8484D7001C3F05 /* CoreDataUtils.m in Sources */,
 				21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */,
 				21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */,
 				2133F2161CFB366100FB91AD /* PaintBrand.m in Sources */,
