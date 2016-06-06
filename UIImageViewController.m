@@ -35,7 +35,6 @@
 @interface UIImageViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
-//@property (nonatomic, strong) UIButton *scrollViewUp, *scrollViewDown;
 @property (nonatomic, strong) UIBarButtonItem *scrollViewUp, *scrollViewDown;
 
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
@@ -51,11 +50,11 @@
 
 @property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit, imageViewSize;
 
-@property (nonatomic) CGFloat screenWidth, rgbViewWidth, rgbViewHeight, headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold;
+@property (nonatomic) CGFloat headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold;
 
 @property (nonatomic) CGSize defTableViewSize;
 
-@property (nonatomic, strong) UIView *titleAndRGBView;
+@property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
@@ -106,10 +105,30 @@ int TABLE_VIEW = 0;
 int SPLIT_VIEW = 1;
 int IMAGE_VIEW = 2;
 
+// Tableview
+//
+int HEADER_TABLEVIEW_SECTION  = 0;
+int COLLECT_TABLEVIEW_SECTION = 1;
+int MAX_TABLEVIEW_SECTIONS    = 2;
+int MAX_COLLECTVIEW_SECTIONS  = 1;
+NSString *HDR_TABLEVIEW_TITLE = @"Match Method and Count";
+
 // View Types
 //
 NSString *MATCH_VIEW_TYPE = @"match";
 NSString *ASSOC_VIEW_TYPE = @"assoc";
+
+// Pinch Image
+//
+CGFloat MAX_PINCH_IMAGE_SCALE  = 2.0;
+CGFloat MIN_PINCH_IMAGE_SCALE  = 0.75;
+CGFloat PINCH_RECOGNIZER_SCALE = 1.0;
+
+// Tap Area
+//
+CGFloat TAP_AREA_LABEL_INSET    = 2.0;
+CGFloat TAP_AREA_BORDER_WIDTH   = 2.0;
+NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
 
 #pragma mark - Initialization Methods
@@ -200,15 +219,11 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     //
     [self setSaveFlag:FALSE];
 
-    // View globals
-    //
-    [self setRgbViewWidth: 40];
-    
-    
+
     // Labels
     //
-    [self setRectLabel: @"Rect"];
-    [self setCircleLabel: @"Circle"];
+    [self setRectLabel:SHAPE_RECT_VALUE];
+    [self setCircleLabel:SHAPE_CIRCLE_VALUE];
 
 
     // Add the selected image
@@ -227,7 +242,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     //
     _tapRecognizer = [[UITapGestureRecognizer alloc]
                       initWithTarget:self action:@selector(respondToTap:)];
-    [_tapRecognizer setNumberOfTapsRequired:1];
+    [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
     [_imageView addGestureRecognizer:_tapRecognizer];
 
     
@@ -247,8 +262,8 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     // Long press recognizer
     //
     _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [_longPressRecognizer setMinimumPressDuration: 1.0f];
-    [_longPressRecognizer setAllowableMovement: 100.0f];
+    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
+    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
     [_imageView addGestureRecognizer:_longPressRecognizer];
     
     
@@ -554,60 +569,24 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
         [self setShapeGeom:SHAPE_CIRCLE_VALUE];
     }
     [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
-    
-    
-    
     [_userDefaults synchronize];
 
 
     // Resize the scroll and table views
     //
     [self resizeViews];
-    
-    // Get this value for calculating the relative dimensions
-    //
-    _screenWidth = [[UIScreen mainScreen] bounds].size.width;
 
-    // Left back button
-    //
-    CGFloat leftItemWidth  = self.navigationItem.leftBarButtonItem.width;
-    
-    // Key origins and dimensions
-    //
-    CGRect navBarBounds        = self.navigationController.navigationBar.bounds;
-    CGFloat navBarOriginY      = navBarBounds.origin.y;
-    CGFloat navBarWidth        = navBarBounds.size.width;
-    CGFloat navBarHeight       = navBarBounds.size.height;
-    
-    CGFloat titleViewOrigin    = 0.0;
-    CGFloat titleViewWidth     = navBarWidth - leftItemWidth;
-
-    _rgbViewWidth              = MIN(_rgbViewWidth, navBarHeight - 2.0);
-    
-    CGFloat rgbViewWidthOffset = _rgbViewWidth + (_screenWidth / 10);
-
-    _rgbViewHeight             = _rgbViewWidth;
-
-    CGFloat titleLabelWidth    = titleViewWidth - rgbViewWidthOffset;
-
-
-    // Main view containing the label and RGB image view that is added to the NavBar titleView
-    //
-    _titleAndRGBView = [[UIView alloc] initWithFrame:CGRectMake(titleViewOrigin, navBarOriginY, titleViewWidth, _rgbViewHeight)];
-    
-
-    // Default label
-    //
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleViewOrigin,navBarOriginY,titleLabelWidth,navBarHeight)];
-    [_titleLabel setTextColor:LIGHT_TEXT_COLOR];
+    _titleLabel = [FieldUtils createLabel:DEF_IMAGE_NAME];
     [_titleLabel setTextAlignment: NSTextAlignmentCenter];
-    [_titleLabel setBackgroundColor:CLEAR_COLOR];
-    [_titleLabel setText:DEF_IMAGE_NAME];
+    [_titleLabel setFont:TITLE_VIEW_FONT];
+    [_titleLabel sizeToFit];
     
-    [_titleAndRGBView addSubview:_titleLabel];
+    // Title View containing the Label (i.e., association name)
+    //
+    _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _titleLabel.bounds.size.width, _titleLabel.bounds.size.height)];
+    [_titleView addSubview:_titleLabel];
+    self.navigationItem.titleView = _titleView;
 
-
-    self.navigationItem.titleView = _titleAndRGBView;
     
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         [self setTapAreas];
@@ -637,8 +616,8 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     CGRect frame = _imageView.frame;
-    frame.origin.x = 0.0;
-    frame.origin.y = 0.0;
+    frame.origin.x = DEF_X_OFFSET;
+    frame.origin.y = DEF_Y_OFFSET;
     self.imageView.frame = frame;
     
     [self viewWillLayoutSubviews];
@@ -729,9 +708,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
                 
                 [self matchButtonsShow];
                 
-                //[_scrollViewUp setHidden:TRUE];
                 [_scrollViewUp setEnabled:NO];
-                //[_scrollViewDown setHidden:FALSE];
                 [_scrollViewDown setEnabled:YES];
                 
                 [self removeUpArrow];
@@ -741,9 +718,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant =  _defTableViewSize.height;
                 
-                //[_scrollViewUp setHidden:FALSE];
                 [_scrollViewUp setEnabled:YES];
-                //[_scrollViewDown setHidden:FALSE];
                 [_scrollViewDown setEnabled:YES];
                 
                 
@@ -754,7 +729,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
             } else {
                 [_imageScrollView setHidden:FALSE];
                 [_imageTableView setHidden:TRUE];
-                self.tableHeightConstraint.constant =  0.0;
+                self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
                 [self matchButtonsHide];
                 
                 [self removeUpArrow];
@@ -772,9 +747,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 
                 [self matchButtonsShow];
                 
-                //[_scrollViewUp setHidden:TRUE];
                 [_scrollViewUp setEnabled:FALSE];
-                //[_scrollViewDown setHidden:FALSE];
                 [_scrollViewDown setEnabled:TRUE];
                 
 
@@ -785,7 +758,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
             } else {
                 [_imageScrollView setHidden:FALSE];
                 [_imageTableView setHidden:TRUE];
-                self.tableHeightConstraint.constant =  0.0;
+                self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
                 [self matchButtonsHide];
                 
                 [self removeUpArrow];
@@ -796,7 +769,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     // Assoc type
     //
     } else {
-        self.tableHeightConstraint.constant = 0.0;
+        self.tableHeightConstraint.constant = DEF_NIL_CONSTRAINT;
         
         [_matchView setEnabled:TRUE];
         [_associateMixes setEnabled:FALSE];
@@ -849,8 +822,6 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
         
         if (_imageViewSize == IMAGE_VIEW) {
             _imageViewSize = SPLIT_VIEW;
-            //[_scrollViewDown setHidden:FALSE];
-            //[_scrollViewUp setHidden:FALSE];
 
             [_scrollViewDown setEnabled:TRUE];
             [_scrollViewUp setEnabled:TRUE];
@@ -870,8 +841,6 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
             
         } else if ((_imageViewSize == SPLIT_VIEW) && (_currTapSection > 0)) {
             _imageViewSize = TABLE_VIEW;
-            //[_scrollViewUp setHidden:TRUE];
-            //[_scrollViewDown setHidden:FALSE];
 
             [_scrollViewUp setEnabled:FALSE];
             [_scrollViewDown setEnabled:TRUE];
@@ -889,13 +858,10 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     //
     } else if (_currTapSection > 0) {
         _imageViewSize = TABLE_VIEW;
-        //[_scrollViewUp setHidden:TRUE];
-        //[_scrollViewDown setHidden:FALSE];
         
         [_scrollViewUp setEnabled:FALSE];
         [_scrollViewDown setEnabled:TRUE];
         
-        //CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
         CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
         self.tableHeightConstraint.constant = frameHeight;
         
@@ -930,7 +896,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
             
         } else if (_imageViewSize == SPLIT_VIEW) {
             _imageViewSize = IMAGE_VIEW;
-            self.tableHeightConstraint.constant =  0.0;
+            self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
             [_imageTableView setHidden:TRUE];
             [self matchButtonsHide];
             
@@ -941,7 +907,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     //
     } else {
         _imageViewSize = IMAGE_VIEW;
-        self.tableHeightConstraint.constant =  0.0;
+        self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
         [_imageTableView setHidden:TRUE];
         [self matchButtonsHide];
         
@@ -1000,14 +966,14 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 - (void)respondToPinch:(UIPinchGestureRecognizer *)recognizer {
     float imageScale = sqrtf(recognizer.view.transform.a * recognizer.view.transform.a +
                              recognizer.view.transform.c * recognizer.view.transform.c);
-    if ((recognizer.scale > 1.0) && (imageScale >= 2.00)) {
+    if ((recognizer.scale > PINCH_RECOGNIZER_SCALE) && (imageScale >= MAX_PINCH_IMAGE_SCALE)) {
         return;
     }
-    if ((recognizer.scale < 1.0) && (imageScale <= 0.75)) {
+    if ((recognizer.scale < PINCH_RECOGNIZER_SCALE) && (imageScale <= MIN_PINCH_IMAGE_SCALE)) {
         return;
     }
     [recognizer.view setTransform: CGAffineTransformScale(recognizer.view.transform, recognizer.scale, recognizer.scale)];
-    [recognizer setScale: 1.0];
+    [recognizer setScale:PINCH_RECOGNIZER_SCALE];
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
@@ -1019,7 +985,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 - (void)drawTouchShape {
     int listCount = (int)[_paintSwatches count];
     
-    [self setTapAreaSeen: 0];
+    [self setTapAreaSeen:0];
     
     NSMutableArray *tempPaintSwatches = [[NSMutableArray alloc] initWithArray:_paintSwatches];
     _paintSwatches = [[NSMutableArray alloc] init];
@@ -1039,7 +1005,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
         
     
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
-            [self setTapAreaSeen: 1];
+            [self setTapAreaSeen:1];
             seen_index   = i;
 
             // Remove the PaintSwatch and any existing relations
@@ -1135,7 +1101,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 - (void)drawTapAreas {
 
-    UIImage *tempImage = [self imageWithBorderFromImage:_selectedImage rectSize:_selectedImage.size shapeType:_shapeGeom lineColor:@"white"];
+    UIImage *tempImage = [self imageWithBorderFromImage:_selectedImage rectSize:_selectedImage.size shapeType:_shapeGeom lineColor:TAP_AREA_LIGHT_STROKE];
     
     tempImage = [self drawText:tempImage];
     
@@ -1165,18 +1131,18 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
             x = pt.x - (_shapeLength / 3.3);
             y = pt.y - (_shapeLength / 3.3);
         } else {
-            x = pt.x - (_shapeLength / 2) + 2.0;
-            y = pt.y - (_shapeLength / 2) + 2.0;
+            x = pt.x - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
+            y = pt.y - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
         }
 
         UIGraphicsBeginImageContext(image.size);
         
-        [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+        [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
         CGRect rect = CGRectMake(x, y, image.size.width, image.size.height);
 
         NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
 
-        [countStr drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
+        [countStr drawInRect:CGRectInset(rect, TAP_AREA_LABEL_INSET, TAP_AREA_LABEL_INSET) withAttributes:attr];
     
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
@@ -1227,11 +1193,11 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     // get the context for CoreGraphics
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetLineWidth(ctx, TAP_AREA_BORDER_WIDTH);
     
     // set stroking color and draw shape
     //
-    if ([color isEqualToString:@"white"]) {
+    if ([color isEqualToString:TAP_AREA_LIGHT_STROKE]) {
         [LIGHT_TEXT_COLOR setStroke];
         
     } else {
@@ -1316,11 +1282,11 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return MAX_TABLEVIEW_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == HEADER_TABLEVIEW_SECTION) {
         return 1;
     } else {
         return _currTapSection;
@@ -1329,12 +1295,12 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (_currTapSection == 0) {
-        [tableView setSeparatorColor: DARK_BORDER_COLOR];
+        [tableView setSeparatorColor:DARK_BORDER_COLOR];
     } else {
-        [tableView setSeparatorColor: LIGHT_BORDER_COLOR];
+        [tableView setSeparatorColor:LIGHT_BORDER_COLOR];
     }
 
-    if (indexPath.section == 0) {
+    if (indexPath.section == HEADER_TABLEVIEW_SECTION) {
         return DEF_XSM_TBL_HDR_HGT;
     } else {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
@@ -1342,7 +1308,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == COLLECT_TABLEVIEW_SECTION) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
@@ -1380,7 +1346,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     } else {
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier];
         
-        [cell setBackgroundColor: DARK_BG_COLOR];
+        [cell setBackgroundColor:DARK_BG_COLOR];
         
         return cell;
     }
@@ -1401,7 +1367,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     if (section == 0) {
         return DEF_TABLE_HDR_HEIGHT;
     } else {
-        return 0.0;
+        return DEF_NIL_HEADER;
     }
 }
 
@@ -1409,65 +1375,34 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width,DEF_SM_TBL_HDR_HEIGHT)];
     
-    if (section == 0) {
+    if (section == HEADER_TABLEVIEW_SECTION) {
         [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
          UIViewAutoresizingFlexibleLeftMargin |
          UIViewAutoresizingFlexibleRightMargin];
-        
-        CGFloat headerViewWidth  = tableView.bounds.size.width;
-        UILabel *headerLabel     = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, _headerViewYOffset, headerViewWidth, _headerViewHeight)];
-        [headerLabel setBackgroundColor: DARK_BG_COLOR];
-        [headerLabel setTextColor: LIGHT_TEXT_COLOR];
-        [headerLabel setFont: TABLE_HEADER_FONT];
-        
-        [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-         UIViewAutoresizingFlexibleLeftMargin |
-         UIViewAutoresizingFlexibleRightMargin];
-        
-        //[headerLabel setTextAlignment: NSTextAlignmentCenter];
-        if (_currTapSection > 0) {
-            //[headerLabel setText:[[NSString alloc] initWithFormat:@"Def. Match Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]]];
-            [headerLabel setText:@"Match Method and Count"];
-        }
-        
-        [headerLabel setTextAlignment:NSTextAlignmentLeft];
-        //[headerView addSubview:headerLabel];
-        
+
         _scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
-        
         [_scrollViewUp setEnabled:FALSE];
         
+        NSString *headerTitle = @"";
         if (_currTapSection > 0) {
-            //_scrollViewUp = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 60, _headerViewYOffset, 30, _headerViewHeight)];
-
+            headerTitle = HDR_TABLEVIEW_TITLE;
             [_scrollViewUp setEnabled:TRUE];
-            
-            //[_scrollViewUp setImage:_upArrowImage forState:UIControlStateNormal];
         }
         
-        //_scrollViewDown = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 30, _headerViewYOffset, 30, _headerViewHeight)];
         _scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
-        //[_scrollViewDown setImage:_downArrowImage forState:UIControlStateNormal];
-        
-        //[_scrollViewUp addTarget:self action:@selector(scrollViewDecrease) forControlEvents:UIControlEventTouchUpInside];
-        
-        //[_scrollViewDown addTarget:self action:@selector(scrollViewIncrease) forControlEvents:UIControlEventTouchUpInside];
-
         [_scrollViewUp setTintColor: LIGHT_TEXT_COLOR];
         [_scrollViewDown setTintColor: LIGHT_TEXT_COLOR];
         
         if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
-            //[_scrollViewUp setHidden:TRUE];
             [_scrollViewUp setEnabled:FALSE];
         } else {
-            //[_scrollViewUp setHidden:FALSE];
             [_scrollViewUp setEnabled:TRUE];
         }
         
         UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
         [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
         
-        UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:@"Match Method and Count" style:UIBarButtonItemStylePlain target:nil action:nil];
+        UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:headerTitle style:UIBarButtonItemStylePlain target:nil action:nil];
 
         scrollViewToolbar.items = @[
                                     headerButtonLabel,
@@ -1479,9 +1414,6 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 
         [headerView addSubview:scrollViewToolbar];
         [scrollViewToolbar sizeToFit];
-        
-        //[headerView addSubview:_scrollViewUp];
-        //[headerView addSubview:_scrollViewDown];
     }
 
     return headerView;
@@ -1495,7 +1427,7 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
 #pragma mark - UICollectionView (and ScrollView) Methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return MAX_COLLECTVIEW_SECTIONS;
 }
 
 
@@ -1680,12 +1612,12 @@ NSString *ASSOC_VIEW_TYPE = @"assoc";
         [self refreshViews];
         
         [self.imageTableView reloadData];
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
         [_matchSave setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 

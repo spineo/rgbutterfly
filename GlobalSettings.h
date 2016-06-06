@@ -22,6 +22,7 @@ extern CGFloat const DEF_NIL_WIDTH;
 extern CGFloat const DEF_NIL_HEIGHT;
 extern CGFloat const DEF_LABEL_WIDTH;
 extern CGFloat const DEF_LABEL_HEIGHT;
+extern CGFloat const DEF_NIL_CONSTRAINT;
 
 // Tap Area
 //
@@ -69,6 +70,12 @@ extern int const DEF_MAX_MATCH;
 extern int const DEF_MATCH_NUM;
 extern int const DEF_MIN_MATCH;
 extern int const DEF_STEP_MATCH;
+
+// Tap Related
+//
+extern int const DEF_NUM_TAPS;
+extern CGFloat const MIN_PRESS_DUR;
+extern CGFloat const ALLOWABLE_MOVE;
 
 // UI Button
 //
@@ -264,25 +271,29 @@ extern float const DEF_BORDER_THRESHOLD;
 // UIFont related
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// UI Controller
+//
+#define TITLE_VIEW_FONT    [UIFont boldSystemFontOfSize:18]
+
 // UITable cell font
 //
-#define TABLE_CELL_FONT    [UIFont systemFontOfSize: 12]
-#define TABLE_HEADER_FONT  [UIFont boldSystemFontOfSize: 14]
+#define TABLE_CELL_FONT    [UIFont systemFontOfSize:12]
+#define TABLE_HEADER_FONT  [UIFont boldSystemFontOfSize:14]
 
 // UITextField and UITextView font
 //
-#define TEXT_LABEL_FONT    [UIFont systemFontOfSize: 12]
-#define TEXT_FIELD_FONT    [UIFont systemFontOfSize: 12]
-#define PLACEHOLDER_FONT   [UIFont italicSystemFontOfSize: 12]
+#define TEXT_LABEL_FONT    [UIFont systemFontOfSize:12]
+#define TEXT_FIELD_FONT    [UIFont systemFontOfSize:12]
+#define PLACEHOLDER_FONT   [UIFont italicSystemFontOfSize:12]
 
 // Image Tap Areas
 //
-#define TAP_AREA_FONT      [UIFont systemFontOfSize: 10]
+#define TAP_AREA_FONT      [UIFont systemFontOfSize:10]
 
 // Generic
 //
-#define SMALL_FONT         [UIFont systemFontOfSize: 10]
-#define LARGE_BOLD_FONT    [UIFont boldSystemFontOfSize: 14]
+#define SMALL_FONT         [UIFont systemFontOfSize:10]
+#define LARGE_BOLD_FONT    [UIFont boldSystemFontOfSize:14]
 #define ITALIC_FONT        [UIFont italicSystemFontOfSize:12]
 
 

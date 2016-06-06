@@ -17,6 +17,7 @@ CGFloat const DEF_NIL_CELL          = 0.0;
 CGFloat const DEF_NIL_HEADER        = 0.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
+CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
 CGFloat const DEF_LABEL_WIDTH       = 80.0;
 
 // Tap Area
@@ -181,6 +182,11 @@ int const DEF_MATCH_NUM  = 20;
 int const DEF_MIN_MATCH  = 5;
 int const DEF_STEP_MATCH = 5;
 
+// Tap Related
+//
+int const DEF_NUM_TAPS       = 1;
+CGFloat const MIN_PRESS_DUR  = 1.0f;
+CGFloat const ALLOWABLE_MOVE = 100.0f;
 
 // Alert Types
 //
