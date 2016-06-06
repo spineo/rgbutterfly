@@ -268,7 +268,7 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     [_matchNumTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [_matchNumTextField setDelegate:self];
     
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, 320, 50)];
     [numberToolbar setBarStyle:UIBarStyleBlackTranslucent];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)];
     [doneButton setTintColor:LIGHT_TEXT_COLOR];

@@ -35,7 +35,9 @@
 @interface UIImageViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIButton *scrollViewUp, *scrollViewDown;
+//@property (nonatomic, strong) UIButton *scrollViewUp, *scrollViewDown;
+@property (nonatomic, strong) UIBarButtonItem *scrollViewUp, *scrollViewDown;
+
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray;
@@ -89,10 +91,25 @@
 //
 // Defined programmatically
 //
-const int TAPS_ALERT_TAG   = 11;
-const int MATCH_NAME_TAG   = 15;
-const int MATCH_KEYW_TAG   = 16;
-const int MATCH_DESC_TAG   = 17;
+int TAPS_ALERT_TAG   = 11;
+int MATCH_NAME_TAG   = 15;
+int MATCH_KEYW_TAG   = 16;
+int MATCH_DESC_TAG   = 17;
+
+// Image/Table View Expansion
+//
+// 0 - Full table view
+// 1 - Split view (default)
+// 2 - Full image view
+//
+int TABLE_VIEW = 0;
+int SPLIT_VIEW = 1;
+int IMAGE_VIEW = 2;
+
+// View Types
+//
+NSString *MATCH_VIEW_TYPE = @"match";
+NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 
 #pragma mark - Initialization Methods
@@ -159,16 +176,12 @@ const int MATCH_DESC_TAG   = 17;
     //
     _tapNumberArray = [[NSMutableArray alloc] init];
     
-    // Image view expansion
-    // 0 - Full table view
-    // 1 - Split view (default)
-    // 2 - Full image view
-    //
-    _imageViewSize = 1;
+
+    _imageViewSize = SPLIT_VIEW;
 
 
     if (_viewType == nil) {
-        _viewType           = @"match";
+        _viewType           = MATCH_VIEW_TYPE;
     }
     
     [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
@@ -180,8 +193,8 @@ const int MATCH_DESC_TAG   = 17;
     
     // Tableview defaults
     //
-    _headerViewYOffset = DEF_Y_OFFSET + 1.0;
-    _headerViewHeight  = DEF_TABLE_HDR_HEIGHT - 2.0;
+    _headerViewYOffset = DEF_TBL_HDR_Y_OFFSET;
+    _headerViewHeight  = DEF_TABLE_HDR_HEIGHT;
 
     // Initial CoreData state
     //
@@ -253,7 +266,7 @@ const int MATCH_DESC_TAG   = 17;
     __weak UIAlertController *deleteTapsAlertController_ = _deleteTapsAlertController;
     
     _deleteTapsYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        if ([_viewType isEqualToString:@"match"]) {
+        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
             [self deleteMatchAssoc];
             [self matchButtonsHide];
         } else {
@@ -422,11 +435,11 @@ const int MATCH_DESC_TAG   = 17;
     
     _matchView   = [UIAlertAction actionWithTitle:@"Match View (default)" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                _viewType = @"match";
+                                                _viewType = MATCH_VIEW_TYPE;
                                                 [self resetViews];
                                                 
                                                 
-                                                UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:@"Match"
+                                                UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_VIEW_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectMatchAction)];
@@ -447,10 +460,10 @@ const int MATCH_DESC_TAG   = 17;
     
     _associateMixes = [UIAlertAction actionWithTitle:@"Associate Mixes" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                _viewType = @"assoc";
+                                                _viewType = ASSOC_VIEW_TYPE;
                                                 [self resetViews];
 
-                                                UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:@"Assoc"
+                                                UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_VIEW_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectAssocAction)];
@@ -486,7 +499,7 @@ const int MATCH_DESC_TAG   = 17;
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
         [self matchButtonHide];
-        if ([_viewType isEqualToString:@"match"]) {
+        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
             [self matchButtonsShow];
         }
 
@@ -601,10 +614,10 @@ const int MATCH_DESC_TAG   = 17;
     }
     
     NSString *assocName;
-    if ([_viewType isEqualToString:@"match"] && _matchAssociation != nil) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && _matchAssociation != nil) {
         assocName = [_matchAssociation name];
         
-    } else if ([_viewType isEqualToString:@"assoc"] && _mixAssociation != nil) {
+    } else if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && _mixAssociation != nil) {
         assocName = [_mixAssociation name];
     }
 
@@ -633,9 +646,9 @@ const int MATCH_DESC_TAG   = 17;
 
 - (void)selectMatchAction {
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
-        _imageViewSize = 1;
+        _imageViewSize = SPLIT_VIEW;
     } else {
-        _imageViewSize = 2;
+        _imageViewSize = IMAGE_VIEW;
     }
 
     [self presentViewController:_typeAlertController animated:YES completion:nil];
@@ -703,31 +716,36 @@ const int MATCH_DESC_TAG   = 17;
     
     CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
 
-    if ([_viewType isEqualToString:@"match"]) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
         
         if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
                 
-            if (_imageViewSize == 0) {
+            if (_imageViewSize == TABLE_VIEW) {
                 [_imageScrollView setHidden:TRUE];
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant = frameHeight;
                 
                 [self matchButtonsShow];
                 
-                [_scrollViewUp setHidden:TRUE];
-                [_scrollViewDown setHidden:FALSE];
+                //[_scrollViewUp setHidden:TRUE];
+                [_scrollViewUp setEnabled:NO];
+                //[_scrollViewDown setHidden:FALSE];
+                [_scrollViewDown setEnabled:YES];
                 
                 [self removeUpArrow];
                 
-            } else if (_imageViewSize == 1) {
+            } else if (_imageViewSize == SPLIT_VIEW) {
                 [_imageScrollView setHidden:FALSE];
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant =  _defTableViewSize.height;
                 
-                [_scrollViewUp setHidden:FALSE];
-                [_scrollViewDown setHidden:FALSE];
+                //[_scrollViewUp setHidden:FALSE];
+                [_scrollViewUp setEnabled:YES];
+                //[_scrollViewDown setHidden:FALSE];
+                [_scrollViewDown setEnabled:YES];
+                
                 
                 [self removeUpArrow];
             
@@ -747,19 +765,22 @@ const int MATCH_DESC_TAG   = 17;
         //
         } else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
 
-            if (_imageViewSize == 0) {
+            if (_imageViewSize == TABLE_VIEW) {
                 [_imageScrollView setHidden:TRUE];
                 [_imageTableView setHidden:FALSE];
                 self.tableHeightConstraint.constant = frameHeight;
 
                 [self matchButtonsShow];
                 
-                [_scrollViewUp setHidden:TRUE];
-                [_scrollViewDown setHidden:FALSE];
+                //[_scrollViewUp setHidden:TRUE];
+                [_scrollViewUp setEnabled:FALSE];
+                //[_scrollViewDown setHidden:FALSE];
+                [_scrollViewDown setEnabled:TRUE];
+                
 
                 [self removeUpArrow];
             
-            // _imageViewSize > 0 (full-screen image)
+            // _imageViewSize > TABLE_VIEW (full-screen image)
             //
             } else {
                 [_imageScrollView setHidden:FALSE];
@@ -826,10 +847,13 @@ const int MATCH_DESC_TAG   = 17;
     
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
-        if (_imageViewSize == 2) {
-            _imageViewSize = 1;
-            [_scrollViewDown setHidden:FALSE];
-            [_scrollViewUp setHidden:FALSE];
+        if (_imageViewSize == IMAGE_VIEW) {
+            _imageViewSize = SPLIT_VIEW;
+            //[_scrollViewDown setHidden:FALSE];
+            //[_scrollViewUp setHidden:FALSE];
+
+            [_scrollViewDown setEnabled:TRUE];
+            [_scrollViewUp setEnabled:TRUE];
             
             self.tableHeightConstraint.constant =  _defTableViewSize.height;
             
@@ -844,10 +868,13 @@ const int MATCH_DESC_TAG   = 17;
             
             [self removeUpArrow];
             
-        } else if ((_imageViewSize == 1) && (_currTapSection > 0)) {
-            _imageViewSize = 0;
-            [_scrollViewUp setHidden:TRUE];
-            [_scrollViewDown setHidden:FALSE];
+        } else if ((_imageViewSize == SPLIT_VIEW) && (_currTapSection > 0)) {
+            _imageViewSize = TABLE_VIEW;
+            //[_scrollViewUp setHidden:TRUE];
+            //[_scrollViewDown setHidden:FALSE];
+
+            [_scrollViewUp setEnabled:FALSE];
+            [_scrollViewDown setEnabled:TRUE];
 
             CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
             self.tableHeightConstraint.constant = frameHeight;
@@ -861,9 +888,12 @@ const int MATCH_DESC_TAG   = 17;
     // Landscape
     //
     } else if (_currTapSection > 0) {
-        _imageViewSize = 0;
-        [_scrollViewUp setHidden:TRUE];
-        [_scrollViewDown setHidden:FALSE];
+        _imageViewSize = TABLE_VIEW;
+        //[_scrollViewUp setHidden:TRUE];
+        //[_scrollViewDown setHidden:FALSE];
+        
+        [_scrollViewUp setEnabled:FALSE];
+        [_scrollViewDown setEnabled:TRUE];
         
         //CGFloat frameHeight = [[UIScreen mainScreen] applicationFrame].size.height;
         CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
@@ -887,8 +917,8 @@ const int MATCH_DESC_TAG   = 17;
     
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
-        if (_imageViewSize == 0) {
-            _imageViewSize = 1;
+        if (_imageViewSize == TABLE_VIEW) {
+            _imageViewSize = SPLIT_VIEW;
             self.tableHeightConstraint.constant =  _defTableViewSize.height;
             [_imageTableView setHidden:FALSE];
             
@@ -898,8 +928,8 @@ const int MATCH_DESC_TAG   = 17;
                 [self matchButtonsHide];
             }
             
-        } else if (_imageViewSize == 1) {
-            _imageViewSize = 2;
+        } else if (_imageViewSize == SPLIT_VIEW) {
+            _imageViewSize = IMAGE_VIEW;
             self.tableHeightConstraint.constant =  0.0;
             [_imageTableView setHidden:TRUE];
             [self matchButtonsHide];
@@ -910,7 +940,7 @@ const int MATCH_DESC_TAG   = 17;
     // Landscape
     //
     } else {
-        _imageViewSize = 2;
+        _imageViewSize = IMAGE_VIEW;
         self.tableHeightConstraint.constant =  0.0;
         [_imageTableView setHidden:TRUE];
         [self matchButtonsHide];
@@ -923,9 +953,9 @@ const int MATCH_DESC_TAG   = 17;
 }
 
 - (void)setAlertButtonStates {
-    if ([_viewType isEqualToString:@"match"]) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         
-    } else if ([_viewType isEqualToString:@"match"]) {
+    } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         
     } else {
         [_associateMixes setEnabled:FALSE];
@@ -959,7 +989,7 @@ const int MATCH_DESC_TAG   = 17;
 
     [self drawTouchShape];
     
-    if ([_viewType isEqualToString:@"match"]) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchSave setEnabled:TRUE];
     } else {
         [_assocSave setEnabled:TRUE];
@@ -1056,8 +1086,8 @@ const int MATCH_DESC_TAG   = 17;
         
         [_paintSwatches addObject:_swatchObj];
         
-        if ([_viewType isEqualToString:@"match"]) {
-            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < 2) {
+        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < IMAGE_VIEW) {
                 [self matchButtonsShow];
             } else {
                 [self matchButtonsHide];
@@ -1091,7 +1121,7 @@ const int MATCH_DESC_TAG   = 17;
 }
 
 - (void)setTapAreas {
-    if ([_viewType isEqualToString:@"match"]) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
         
         for (int i=0; i<_currTapSection; i++) {
@@ -1166,7 +1196,7 @@ const int MATCH_DESC_TAG   = 17;
 // Display alert view with textfields when clicking on the 'Edit' button (Match only)
 //
 - (IBAction)editAlertShow:(id)sender {
-    if ([_viewType isEqualToString:@"match"]) {
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [self presentViewController:_matchEditAlertController animated:YES completion:nil];
     } else {
         [self presentViewController:_assocEditAlertController animated:YES completion:nil];
@@ -1305,7 +1335,7 @@ const int MATCH_DESC_TAG   = 17;
     }
 
     if (indexPath.section == 0) {
-        return 0.0;
+        return DEF_XSM_TBL_HDR_HGT;
     } else {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     }
@@ -1377,7 +1407,7 @@ const int MATCH_DESC_TAG   = 17;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width,DEF_SM_TBL_HDR_HEIGHT)];
     
     if (section == 0) {
         [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
@@ -1401,30 +1431,57 @@ const int MATCH_DESC_TAG   = 17;
         }
         
         [headerLabel setTextAlignment:NSTextAlignmentLeft];
-        [headerView addSubview:headerLabel];
+        //[headerView addSubview:headerLabel];
+        
+        _scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
+        
+        [_scrollViewUp setEnabled:FALSE];
         
         if (_currTapSection > 0) {
-            _scrollViewUp = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 60, _headerViewYOffset, 30, _headerViewHeight)];
-            [_scrollViewUp setImage:_upArrowImage forState:UIControlStateNormal];
+            //_scrollViewUp = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 60, _headerViewYOffset, 30, _headerViewHeight)];
+
+            [_scrollViewUp setEnabled:TRUE];
+            
+            //[_scrollViewUp setImage:_upArrowImage forState:UIControlStateNormal];
         }
         
-        _scrollViewDown = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 30, _headerViewYOffset, 30, _headerViewHeight)];
-        [_scrollViewDown setImage:_downArrowImage forState:UIControlStateNormal];
+        //_scrollViewDown = [[UIButton alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + headerViewWidth - 30, _headerViewYOffset, 30, _headerViewHeight)];
+        _scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
+        //[_scrollViewDown setImage:_downArrowImage forState:UIControlStateNormal];
         
-        [_scrollViewUp addTarget:self action:@selector(scrollViewDecrease) forControlEvents:UIControlEventTouchUpInside];
-        [_scrollViewDown addTarget:self action:@selector(scrollViewIncrease) forControlEvents:UIControlEventTouchUpInside];
+        //[_scrollViewUp addTarget:self action:@selector(scrollViewDecrease) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[_scrollViewDown addTarget:self action:@selector(scrollViewIncrease) forControlEvents:UIControlEventTouchUpInside];
 
         [_scrollViewUp setTintColor: LIGHT_TEXT_COLOR];
         [_scrollViewDown setTintColor: LIGHT_TEXT_COLOR];
         
-        if ((_imageViewSize == 0) || (_currTapSection == 0)) {
-            [_scrollViewUp setHidden:TRUE];
+        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
+            //[_scrollViewUp setHidden:TRUE];
+            [_scrollViewUp setEnabled:FALSE];
         } else {
-            [_scrollViewUp setHidden:FALSE];
+            //[_scrollViewUp setHidden:FALSE];
+            [_scrollViewUp setEnabled:TRUE];
         }
         
-        [headerView addSubview:_scrollViewUp];
-        [headerView addSubview:_scrollViewDown];
+        UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
+        [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
+        
+        UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:@"Match Method and Count" style:UIBarButtonItemStylePlain target:nil action:nil];
+
+        scrollViewToolbar.items = @[
+                                    headerButtonLabel,
+                                    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                    _scrollViewUp,
+                                    _scrollViewDown,
+                                    ];
+
+
+        [headerView addSubview:scrollViewToolbar];
+        [scrollViewToolbar sizeToFit];
+        
+        //[headerView addSubview:_scrollViewUp];
+        //[headerView addSubview:_scrollViewDown];
     }
 
     return headerView;
@@ -2095,7 +2152,7 @@ const int MATCH_DESC_TAG   = 17;
 #pragma mark - Segue and Navigation Methods
 
 - (IBAction)segueToMatchOrAssoc:(id)sender {
-    if ([_viewType isEqualToString:@"assoc"]) {
+    if ([_viewType isEqualToString:ASSOC_VIEW_TYPE]) {
         if ([_paintSwatches count] == 1) {
             [self performSegueWithIdentifier:@"AssocToDetailSegue" sender:self];
         } else {
@@ -2162,11 +2219,11 @@ const int MATCH_DESC_TAG   = 17;
     // Settings or Other Segue
     //
     } else {
-        if ([_viewType isEqualToString:@"assoc"] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
+        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
             UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
             [self presentViewController:myAlert animated:YES completion:nil];
         
-        } else if ([_viewType isEqualToString:@"match"] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
+        } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
             UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
             [self presentViewController:myAlert animated:YES completion:nil];
         }

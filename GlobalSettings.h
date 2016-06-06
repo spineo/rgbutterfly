@@ -43,10 +43,12 @@ extern CGFloat const DEF_BORDER_WIDTH;
 extern CGFloat const BORDER_WIDTH_NONE;
 extern CGFloat const CORNER_RADIUS_NONE;
 
+extern CGFloat const DEF_TBL_HDR_Y_OFFSET;
 extern CGFloat const DEF_TABLE_CELL_HEIGHT;
 extern CGFloat const DEF_TBL_DIVIDER_HGT;
 extern CGFloat const DEF_SM_TABLE_CELL_HGT;
 extern CGFloat const DEF_MD_TABLE_CELL_HGT;
+extern CGFloat const DEF_XSM_TBL_HDR_HGT;
 extern CGFloat const DEF_SM_TBL_HDR_HEIGHT;
 extern CGFloat const DEF_TABLE_HDR_HEIGHT;
 extern CGFloat const DEF_LG_TABLE_CELL_HGT;

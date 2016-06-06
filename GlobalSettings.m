@@ -44,9 +44,11 @@ CGFloat const CORNER_RADIUS_NONE    = 0.0;
 
 // UI Tables and Cells
 //
+CGFloat const DEF_TBL_HDR_Y_OFFSET  = 1.0;
 CGFloat const DEF_TABLE_CELL_HEIGHT = 44.0;
 CGFloat const DEF_SM_TABLE_CELL_HGT = 33.0;
 CGFloat const DEF_MD_TABLE_CELL_HGT = 55.0;
+CGFloat const DEF_XSM_TBL_HDR_HGT   = 11.0;
 CGFloat const DEF_SM_TBL_HDR_HEIGHT = 22.0;
 CGFloat const DEF_TBL_DIVIDER_HGT   = 5.0;
 CGFloat const DEF_TABLE_HDR_HEIGHT  = 33.0;
