@@ -653,11 +653,6 @@ const int IMAGE_TAG  = 6;
 // UIBarButton actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- (IBAction)changeButtonRendering:(id)sender {
-    //_isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag: RGB_BTN_TAG toolBarItems:self.toolbarItems];
-    //[self.tableView reloadData];
-}
-
 - (IBAction)decrMatchAlgorithm:(id)sender {
     
     _matchAlgIndex--;
@@ -734,11 +729,11 @@ const int IMAGE_TAG  = 6;
     [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:RGB_BTN_TAG];
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:INCR_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:RGB_BTN_TAG      width:INCR_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
 }
 
@@ -747,12 +742,12 @@ const int IMAGE_TAG  = 6;
     [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:RGB_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:RGB_BTN_TAG      width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:INCR_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
 }
 
 #pragma mark - General purpose methods

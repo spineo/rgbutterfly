@@ -46,17 +46,17 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bT9-ul-ruX"/>
                         <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="hK8-5n-amq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bT9-ul-ruX"/>
+                        <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -259,13 +259,13 @@
                                 <segue destination="jHz-zW-4v8" kind="unwind" unwindAction="unwindToViewController:" id="aH0-rO-C2q"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Item" systemItem="flexibleSpace" id="MaY-oG-r6t"/>
-                        <barButtonItem tag="55" image="rgb" id="L1b-Mq-W0G">
+                        <barButtonItem tag="58" image="settings" id="L1b-Mq-W0G">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="changeButtonRendering:" destination="6pV-zD-nhf" id="bhq-AW-d8E"/>
+                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="L2p-PG-tYf"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem title="Item" systemItem="flexibleSpace" id="MaY-oG-r6t"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Maj-ib-srW">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="k9c-gm-4aI">
@@ -377,7 +377,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kps-q9-M1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="-599"/>
+            <point key="canvasLocation" x="1629" y="-21"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WSQ-Sw-Bge">
@@ -458,16 +458,16 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem tag="55" image="rgb" id="BH4-v8-rHx">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="changeButtonRendering:" destination="kOh-IX-qcO" id="0KW-jU-7aH"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem tag="62" image="home" id="9d3-xP-5s1">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="5mr-LJ-zgd" kind="unwind" unwindAction="unwindToViewController:" id="TAv-Lm-W9F"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem tag="58" image="settings" id="BH4-v8-rHx">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="cr4-CJ-FMT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="XTe-OD-4gI"/>
@@ -561,7 +561,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HR0-As-h4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4710" y="133"/>
+            <point key="canvasLocation" x="4468" y="-41"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jiu-af-eJz">
@@ -739,16 +739,15 @@
         <image name="minus" width="25" height="25"/>
         <image name="photo 2" width="22" height="18"/>
         <image name="plus-1" width="25" height="25"/>
-        <image name="rgb" width="30" height="30"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9H9-9R-KDD"/>
-        <segue reference="aqc-zq-dwj"/>
+        <segue reference="L2p-PG-tYf"/>
+        <segue reference="Omc-kQ-4iW"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
+        <segue reference="x4f-Hg-Dtd"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

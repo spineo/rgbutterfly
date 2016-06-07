@@ -164,7 +164,7 @@ const int ASSOC_COLORS_TAG     = 5;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
 
-    
+
     // Offsets and Widths
     //
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -289,6 +289,8 @@ const int ASSOC_COLORS_TAG     = 5;
     
     [_applyButton setEnabled:TRUE];
     [_save setEnabled:FALSE];
+
+    [self homeButtonShow];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -755,7 +757,11 @@ const int ASSOC_COLORS_TAG     = 5;
     [_applyButton setEnabled:TRUE];
 
     if (_editFlag == FALSE) {
+        [self homeButtonShow];
         [self presentViewController:_saveAlertController animated:YES completion:nil];
+        
+    } else {;
+        [self settingsButtonShow];
     }
     
     [self.tableView reloadData];
@@ -779,12 +785,31 @@ const int ASSOC_COLORS_TAG     = 5;
     }
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Buttons Show/Hide Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - UITextField Delegate Methods
+#pragma mark - Buttons Show/Hide Methods
+
+- (void)homeButtonShow {
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
+}
+
+- (void)settingsButtonShow {
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UITextField Delegates
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - UITextField Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     //    if (textField.tag == COLTXT_TAG) {
@@ -1007,11 +1032,6 @@ const int ASSOC_COLORS_TAG     = 5;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - UIBarButton Actions
-
-- (IBAction)changeButtonRendering:(id)sender {
-//    _isRGB = [BarButtonUtils changeButtonRendering:_isRGB refTag:RGB_BTN_TAG toolBarItems:self.toolbarItems];
-//    [self.tableView reloadData];
-}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -73,7 +73,7 @@ CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
 // Match Button widths
 //
 CGFloat const DECR_BUTTON_WIDTH     = 20.0;
-CGFloat const INCR_BUTTON_WIDTH     = 20.0;
+CGFloat const SHOW_BUTTON_WIDTH     = 20.0;
 
 
 // Tags
