@@ -24,10 +24,12 @@
 
 @interface AddMixTableViewController ()
 
-@property NSMutableArray *allPaintSwatches, *paintSwatchList;
+@property (nonatomic) BOOL searchMatch;
+
+@property (nonatomic, strong) NSMutableArray *allPaintSwatches, *paintSwatchList;
 
 @property (nonatomic) int addSwatchCount;
-@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel;
+@property (nonatomic, strong) NSString *searchString, *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic) CGFloat defCellHeight;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
@@ -52,14 +54,19 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
-@property UIColor *defaultColor, *defaultBgColor,  *currColor;
-@property UIFont *defaultFont, *placeholderFont, *currFont;
-@property UILabel *mixTitleLabel;
-@property CGColorRef defColorBorder;
+@property (nonatomic, strong) UIColor *defaultColor, *defaultBgColor,  *currColor;
+@property (nonatomic, strong) UIFont *defaultFont, *placeholderFont, *currFont;
+@property (nonatomic, strong) UILabel *mixTitleLabel;
+@property (nonatomic) CGColorRef defColorBorder;
 
 @end
 
 @implementation AddMixTableViewController
+
+int ADD_MIX_LIST_SECTION = 0;
+int MAX_ADD_MIX_SECTIONS = 1;
+
+NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
 
 - (void)viewDidLoad {
@@ -74,37 +81,12 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Get the full list of Paint Swatches and filter out the ones from the source MixAssociation
-    //
-    // (1) Create the lookup by Name
-    //
-    NSMutableDictionary *currPaintSwatchNames = [[NSMutableDictionary alloc] init];
-    for (int i=0; i<[_mixAssocSwatches count]; i++) {
-        NSString *paintSwatchName = [(PaintSwatches *)[[_mixAssocSwatches objectAtIndex:i] paint_swatch] name];
-        [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
-    }
+    [self loadTable];
 
-    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    _paintSwatchList    = [[NSMutableArray alloc] init];
-    for (PaintSwatches *paintSwatch in _allPaintSwatches) {
-        NSString *name = [paintSwatch name];
-
-        if (![currPaintSwatchNames valueForKey:name]) {
-            PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
-            [paintSwatchSelection setPaintSwatch:paintSwatch];
-            [paintSwatchSelection setIs_selected:FALSE];
-            [_paintSwatchList addObject:paintSwatchSelection];
-        }
-    }
     
     _addPaintSwatches = [[NSMutableArray alloc] init];
-    
-
     _addSwatchCount = 0;
 
-    _reuseCellIdentifier = @"AddMixTableCell";
-
-    
     [self setNavBarSizes];
     
     _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:BACK_BUTTON_IMAGE_NAME]
@@ -116,7 +98,7 @@
                                                    style:UIBarButtonItemStylePlain
                                                    target:self
                                                    action:@selector(search)];
-    
+
     // Adjust the layout when the orientation changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -131,12 +113,14 @@
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Tableview methods
+// TableView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return MAX_ADD_MIX_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -148,19 +132,19 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:REUSE_CELL_IDENTIFIER forIndexPath:indexPath];
     
-    cell.imageView.frame = CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height);
-    [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-    [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-    [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+    cell.imageView.frame = CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height);
+    [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+    [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+    [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     
-    [cell.imageView setContentMode: UIViewContentModeScaleAspectFill];
-    [cell.imageView setClipsToBounds: YES];
+    [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [cell.imageView setClipsToBounds:YES];
 
     cell.imageView.image = [ColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
     
-    cell.accessoryType       = UITableViewCellSeparatorStyleNone;
+    cell.accessoryType   = UITableViewCellSeparatorStyleNone;
 
     
     BOOL test_val = [[_paintSwatchList objectAtIndex:indexPath.row] is_selected];
@@ -168,13 +152,13 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
-    [cell.textLabel setText: [[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] name]];
-    [cell.textLabel setFont: TABLE_CELL_FONT];
+    [cell.textLabel setText:[[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] name]];
+    [cell.textLabel setFont:TABLE_CELL_FONT];
     
-    [cell setBackgroundColor: DARK_BG_COLOR];
-    [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
     
-    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
 }
@@ -253,8 +237,10 @@
 */
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// SEARCH BAR methods
+// SearchBar Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - SearchBar Methods
 
 - (IBAction)searchMix:(id)sender {
     [self search];
@@ -263,9 +249,10 @@
 - (void)search {
     _titleView = [[UIView alloc] init];
     _mixSearchBar = [[UISearchBar alloc] init];
-    [_mixSearchBar setBackgroundColor: CLEAR_COLOR];
-    [_mixSearchBar setBarTintColor: CLEAR_COLOR];
-    [_mixSearchBar setDelegate: self];
+    [_mixSearchBar setBackgroundColor:CLEAR_COLOR];
+    [_mixSearchBar setBarTintColor:CLEAR_COLOR];
+    [_mixSearchBar setReturnKeyType:UIReturnKeyDone];
+    [_mixSearchBar setDelegate:self];
     
     _cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -276,9 +263,9 @@
     [_titleView addSubview:_cancelButton];
     [_titleView addSubview:_mixSearchBar];
     
-    [self.navigationItem setTitleView: _titleView];
-    [self.navigationItem setLeftBarButtonItem: nil];
-    [self.navigationItem setRightBarButtonItem: nil];
+    [self.navigationItem setTitleView:_titleView];
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem setRightBarButtonItem:nil];
     
     [_mixSearchBar becomeFirstResponder];
 }
@@ -287,17 +274,11 @@
     _searchString = searchText;
 
     if ([searchText length] == 0) {
-        [self reloadTable];
+        [self loadTable];
     } else {
         [self updateTable];
     }
 }
-
-//- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    
-//    return YES;
-//}
 
 // Need index of items that have been checked
 //
@@ -307,37 +288,14 @@
     [_mixSearchBar resignFirstResponder];
 }
 
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//    //    [self.tableView reloadData];
-//    //    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-//}
-
 - (void)pressCancel {
-    [self.navigationItem setTitleView: nil];
-    [self.navigationItem setLeftBarButtonItem: _backButton];
-    [self.navigationItem setRightBarButtonItem: _searchButton];
+    [self.navigationItem setTitleView:nil];
+    [self.navigationItem setLeftBarButtonItem:_backButton];
+    [self.navigationItem setRightBarButtonItem:_searchButton];
     
-    [self reloadTable];
-
-    for (int i=0; i< [_paintSwatchList count]; i++) {
-        BOOL  test_val = [[_paintSwatchList objectAtIndex:i] is_selected];
-        if (test_val == TRUE) {
-            NSLog(@"Selected %i", i);
-        }
-    }
-}
-
-- (void)reloadTable {
-    NSMutableArray *paintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    _paintSwatchList = [[NSMutableArray alloc] init];
-    for (PaintSwatches *paintSwatch in paintSwatches) {
-        PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
-        [paintSwatchSelection setPaintSwatch:paintSwatch];
-    }
-    
-    [self.tableView reloadData];
-    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    // Refresh the list
+    //
+    [self loadTable];
 }
 
 - (void)updateTable {
@@ -348,7 +306,7 @@
     _searchMatch  = FALSE;
 
     for (int i=0; i<count; i++) {
-        PaintSwatchSelection *sel_obj  = [_paintSwatchList objectAtIndex:i];
+        PaintSwatchSelection *sel_obj = [_paintSwatchList objectAtIndex:i];
         NSString *matchName = [[sel_obj paintSwatch] name];
 
         NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
@@ -367,8 +325,43 @@
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ROTATION, RESIZING, and NAVIGATION
+// Table Reload Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Table Reload Methods
+
+- (void)loadTable {
+    
+    // Get the full list of Paint Swatches and filter out the ones from the source MixAssociation
+    //
+    NSMutableDictionary *currPaintSwatchNames = [[NSMutableDictionary alloc] init];
+    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+        NSString *paintSwatchName = [(PaintSwatches *)[[_mixAssocSwatches objectAtIndex:i] paint_swatch] name];
+        [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
+    }
+    
+    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    _paintSwatchList    = [[NSMutableArray alloc] init];
+    for (PaintSwatches *paintSwatch in _allPaintSwatches) {
+        NSString *name = [paintSwatch name];
+        
+        if (![currPaintSwatchNames valueForKey:name]) {
+            PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
+            [paintSwatchSelection setPaintSwatch:paintSwatch];
+            [paintSwatchSelection setIs_selected:FALSE];
+            [_paintSwatchList addObject:paintSwatchSelection];
+        }
+    }
+    
+    [self.tableView reloadData];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Rotation, Resizing, and Navigation Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Rotation, Resizing, and Navigation Methods
 
 - (void)viewDidRotate {
     [self setNavBarSizes];

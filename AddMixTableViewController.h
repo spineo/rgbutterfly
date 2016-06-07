@@ -12,9 +12,5 @@
 
 @property NSMutableArray *addPaintSwatches, *mixAssocSwatches;
 
-@property NSString *reuseCellIdentifier, *searchString;
-
-@property BOOL searchMatch;
-
 
 @end
