@@ -13,9 +13,6 @@
 
 + (UILabel *)createLabel:(NSString *)name {
     
-    CGFloat width = [name length] * 8;
-    width = (width > DEF_LABEL_WIDTH) ? width : DEF_LABEL_WIDTH;
-    
     UILabel *label = [[UILabel alloc] init];
     
     [label setText:name];
@@ -28,14 +25,10 @@
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-    
-    // Derived
-    //
-    CGFloat width = [name length] * 8;
-    width = (width > DEF_LABEL_WIDTH) ? width : DEF_LABEL_WIDTH;
 
-    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
     UILabel *label = [self createLabel:name];
+    [label sizeToFit];
+    CGFloat width = label.bounds.size.width;
     [label setFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
 
     return label;
@@ -43,7 +36,6 @@
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height {
 
-    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
     UILabel *label = [self createLabel:name];
     [label setFrame:CGRectMake(x, y, width, height)];
     
