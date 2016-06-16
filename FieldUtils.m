@@ -107,10 +107,13 @@
     return pickerView;
 }
 
-- (UIPickerView *)createColorPicker:(CGFloat)width tag:(int)tagnum selRow:(int)selectRow {
-    UIPickerView *colorPicker     = [FieldUtils createPickerView:width tag:tagnum];
-
-    return colorPicker;
++ (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag xOffset:(CGFloat)x yOffset:(CGFloat)y {
+    UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(x, y, width, DEF_PICKER_HEIGHT)];
+    [pickerView setBackgroundColor: DARK_BG_COLOR];
+    [pickerView setShowsSelectionIndicator:YES];
+    [pickerView setTag:tag];
+    
+    return pickerView;
 }
 
 + (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border {

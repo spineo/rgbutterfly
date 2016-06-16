@@ -27,6 +27,8 @@
 
 + (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag;
 
++ (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag xOffset:(CGFloat)x yOffset:(CGFloat)y;
+
 + (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border;
 
 + (void)makeTextFieldEditable:(UITextField *)refName content:(NSString *)content;

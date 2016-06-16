@@ -61,7 +61,7 @@ CGFloat const DEF_TABLE_X_OFFSET    = 15.0;
 CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
 
 CGFloat const DEF_PICKER_ROW_HEIGHT = 50.0;
-CGFloat const DEF_PICKER_HEIGHT     = 300.0;
+CGFloat const DEF_PICKER_HEIGHT     = 250.0;
 CGFloat const DEF_COLLECTVIEW_INSET = 20.0;
 
 // UI Buttons

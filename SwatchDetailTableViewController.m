@@ -41,7 +41,6 @@
 
 // Subjective color related
 //
-@property (nonatomic, strong) UILabel *pickerAlertLabel;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, strong) UIBarButtonItem *barButtonDone;
 
@@ -58,7 +57,7 @@
 @property (nonatomic, strong) UIFont *placeholderFont, *currFont;
 @property (nonatomic, strong) UIColor *subjColorValue;
 
-@property (nonatomic) CGFloat tableViewWidth, doneColorButtonWidth, doneTypeButtonWidth, doneBrandButtonWidth, doneBodyButtonWidth, donePigmentButtonWidth, viewWidth, defXStartOffset, defYOffset, imageViewXOffset, imageViewWidth, imageViewHeight, swatchNameWidth, swatchTypeNameWidth, colorViewWidth, swatchLabelWidth, textFieldYOffset, colorTextFieldWidth, typeTextFieldWidth, brandTextFieldWidth, bodyTextFieldWidth, pigmentTextFieldWidth, doneColorButtonXOffset, doneTypeButtonXOffset, doneBrandButtonXOffset, doneBodyButtonXOffset, donePigmentButtonXOffset;
+@property (nonatomic) CGFloat tableViewWidth, doneColorButtonWidth, doneTypeButtonWidth, doneBrandButtonWidth, donePigmentButtonWidth, viewWidth, defXStartOffset, defYOffset, imageViewXOffset, imageViewWidth, imageViewHeight, swatchNameWidth, swatchTypeNameWidth, colorViewWidth, swatchLabelWidth, textFieldYOffset, colorTextFieldWidth, typeTextFieldWidth, brandTextFieldWidth, bodyTextFieldWidth, pigmentTextFieldWidth, doneColorButtonXOffset, doneTypeButtonXOffset, doneBrandButtonXOffset, donePigmentButtonXOffset;
 
 @property (nonatomic) int typesPickerSelRow, colorPickerSelRow, brandPickerSelRow, bodyPickerSelRow, pigmentPickerSelRow, collectViewSelRow;
 
@@ -67,7 +66,8 @@
 
 // Picker views
 //
-@property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton, *doneBrandButton, *doneBodyButton, *donePigmentButton;
+@property (nonatomic, strong) UIButton *doneColorButton, * doneTypeButton, *doneBrandButton, *donePigmentButton;
+
 @property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, bodyPickerFlag, pigmentPickerFlag, isReadOnly, isShipped;
 
 
@@ -77,8 +77,6 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) NSEntityDescription *keywordEntity, *swatchKeywordEntity;
 
-@property (nonatomic, strong) NSString *reuseTableCellIdentifier, *reuseCollectionCellIdentifier;
-
 
 @end
 
@@ -86,7 +84,7 @@
 // Constants defaults
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int num_tableview_rows = 0;
+int NUM_TABLEVIEW_ROWS = 0;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,26 +96,25 @@ int num_tableview_rows = 0;
 
 // Globals
 //
-const int DETAIL_NAME_SECTION    = 0;
-const int DETAIL_COLOR_SECTION   = 1;
-const int DETAIL_TYPES_SECTION   = 2;
-const int DETAIL_BRAND_SECTION   = 3;
-const int DETAIL_PIGMENT_SECTION = 4;
-const int DETAIL_BODY_SECTION    = 5;
-const int DETAIL_KEYW_SECTION    = 6;
-const int DETAIL_DESC_SECTION    = 7;
-const int DETAIL_MIX_SECTION     = 8;
+int DETAIL_NAME_SECTION    = 0;
+int DETAIL_COLOR_SECTION   = 1;
+int DETAIL_TYPES_SECTION   = 2;
+int DETAIL_BRAND_SECTION   = 3;
+int DETAIL_PIGMENT_SECTION = 4;
+int DETAIL_BODY_SECTION    = 5;
+int DETAIL_KEYW_SECTION    = 6;
+int DETAIL_DESC_SECTION    = 7;
+int DETAIL_MIX_SECTION     = 8;
 
+int DETAIL_MAX_SECTION     = 9;
 
-const int DETAIL_MAX_SECTION     = 9;
+NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 
 #pragma mark - Initialization methods
 
 -(void)loadView {
     [super loadView];
-    
-    _reuseTableCellIdentifier      = @"SwatchDetailCell";
     
     // NSManagedObject subclassing
     //
@@ -127,10 +124,10 @@ const int DETAIL_MAX_SECTION     = 9;
     _keywordEntity       = [NSEntityDescription entityForName:@"Keyword"       inManagedObjectContext:self.context];
     _swatchKeywordEntity = [NSEntityDescription entityForName:@"SwatchKeyword" inManagedObjectContext:self.context];
     
-    num_tableview_rows   = (int)[_mixAssocSwatches count];
+    NUM_TABLEVIEW_ROWS   = (int)[_mixAssocSwatches count];
     
     NSMutableArray *mixAssociationIds = [[NSMutableArray alloc] init];
-    for (int i=0; i<num_tableview_rows; i++) {
+    for (int i=0; i<NUM_TABLEVIEW_ROWS; i++) {
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:i];
         MixAssociation *mixAssocObj = [mixAssocSwatchObj mix_association];
@@ -206,11 +203,11 @@ const int DETAIL_MAX_SECTION     = 9;
     //
     _imageViewWidth      = DEF_VLG_TBL_CELL_HGT;
     _imageViewHeight     = DEF_VLG_TBL_CELL_HGT;
-    _typesPickerSelRow   = type_id         ? type_id       : 0;
-    _colorPickerSelRow   = subj_color_id   ? subj_color_id : 0;
-    _brandPickerSelRow   = brand_id        ? brand_id      : 0;
-    _otherName           = brand_name      ? brand_name    : @"";
-    _bodyPickerSelRow    = body_type_id    ? body_type_id  : 0;
+    _typesPickerSelRow   = type_id         ? type_id         : 0;
+    _colorPickerSelRow   = subj_color_id   ? subj_color_id   : 0;
+    _brandPickerSelRow   = brand_id        ? brand_id        : 0;
+    _otherName           = brand_name      ? brand_name      : @"";
+    _bodyPickerSelRow    = body_type_id    ? body_type_id    : 0;
     _pigmentPickerSelRow = pigment_type_id ? pigment_type_id : 0;
     
     _colorPickerFlag   = FALSE;
@@ -222,44 +219,71 @@ const int DETAIL_MAX_SECTION     = 9;
 
     // Offsets and Widths
     //
-    _doneColorButtonWidth   = 1.0;
-    _doneTypeButtonWidth    = 1.0;
-    _doneBrandButtonWidth   = 1.0;
-    _doneBodyButtonWidth    = 1.0;
-    _donePigmentButtonWidth = 1.0;
+    _doneColorButtonWidth   = HIDE_BUTTON_WIDTH;
+    _doneTypeButtonWidth    = HIDE_BUTTON_WIDTH;
+    _doneBrandButtonWidth   = HIDE_BUTTON_WIDTH;
+    _donePigmentButtonWidth = HIDE_BUTTON_WIDTH;
     _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
 
 
     // Attributes
     //
     _nameEntered = [_paintSwatch name];
+    
+    // Create the buttons
+    //
+    CGRect typeButtonFrame = CGRectMake(_doneTypeButtonXOffset, _textFieldYOffset, _doneTypeButtonWidth, DEF_TEXTFIELD_HEIGHT);
+    _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag:TYPE_BTN_TAG frame:typeButtonFrame];
+    [_doneTypeButton addTarget:self action:@selector(pickerSelection:) forControlEvents:UIControlEventTouchUpInside];
+    [_doneTypeButton setHidden:TRUE];
+    
+    CGRect colorButtonFrame = CGRectMake(_doneColorButtonXOffset, _textFieldYOffset, _doneColorButtonWidth, DEF_TEXTFIELD_HEIGHT);
+    _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag:COLOR_BTN_TAG frame:colorButtonFrame];
+    [_doneColorButton addTarget:self action:@selector(pickerSelection:) forControlEvents:UIControlEventTouchUpInside];
+    [_doneColorButton setHidden:TRUE];
+    
+    CGRect brandButtonFrame = CGRectMake(_doneBrandButtonXOffset, _textFieldYOffset, _doneBrandButtonWidth, DEF_TEXTFIELD_HEIGHT);
+    _doneBrandButton = [BarButtonUtils create3DButton:@"Done" tag:BRAND_BTN_TAG frame:brandButtonFrame];
+    [_doneBrandButton addTarget:self action:@selector(pickerSelection:) forControlEvents:UIControlEventTouchUpInside];
+    [_doneBrandButton setHidden:TRUE];
 
     
+    CGRect pigmentButtonFrame = CGRectMake(_donePigmentButtonXOffset, _textFieldYOffset, _donePigmentButtonWidth, DEF_TEXTFIELD_HEIGHT);
+    _donePigmentButton = [BarButtonUtils create3DButton:@"Done" tag:PIGMENT_BTN_TAG frame:pigmentButtonFrame];
+    //[_donePigmentButton addTarget:self action:@selector(pigmentSelection) forControlEvents:UIControlEventTouchUpInside];
+    [_donePigmentButton addTarget:self action:@selector(pickerSelection:) forControlEvents:UIControlEventTouchUpInside];
+    [_donePigmentButton setHidden:TRUE];
+
+
     // Picker entities
     //
     id typeObj = [ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:_typesPickerSelRow context:self.context];
     NSString *typeName = [typeObj name];
     _swatchTypeName  = [FieldUtils createTextField:typeName tag:TYPE_FIELD_TAG];
     [_swatchTypeName setTextAlignment:NSTextAlignmentCenter];
-    [_swatchTypeName setInputView: _swatchTypesPicker];
     [_swatchTypeName setDelegate:self];
-    [self createSwatchTypePicker];
+    _swatchTypeNames = [ManagedObjectUtils fetchDictNames:@"PaintSwatchType" context:self.context];
+    _swatchTypesPicker = [self createPicker:SWATCH_PICKER_TAG selectRow:[[_paintSwatch type_id]intValue]];
+    [_swatchTypeName setInputView: _swatchTypesPicker];
 
     id colorObj = [ManagedObjectUtils queryDictionaryName:@"SubjectiveColor" entityId:_colorPickerSelRow context:self.context];
     NSString *colorName = [colorObj name];
     _subjColorName = [FieldUtils createTextField:colorName tag:COLOR_FIELD_TAG];
     [_subjColorName setTextAlignment:NSTextAlignmentCenter];
-    [_subjColorName setInputView: _subjColorPicker];
     [_subjColorName setDelegate:self];
-    [self createColorPicker];
+    _subjColorNames  = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
+    _subjColorData = [ManagedObjectUtils fetchSubjectiveColors:self.context];
+    _subjColorPicker = [self createPicker:COLOR_PICKER_TAG selectRow:[[_paintSwatch subj_color_id]intValue]];
+    [_subjColorName setInputView: _subjColorPicker];
     
     id brandObj = [ManagedObjectUtils queryDictionaryName:@"PaintBrand" entityId:_brandPickerSelRow context:self.context];
     NSString *brandName = [brandObj name];
     _paintBrandName = [FieldUtils createTextField:brandName tag:BRAND_FIELD_TAG];
     [_paintBrandName setTextAlignment:NSTextAlignmentCenter];
-    [_paintBrandName setInputView: _paintBrandPicker];
     [_paintBrandName setDelegate:self];
-    [self createBrandPicker];
+    _paintBrandNames  = [ManagedObjectUtils fetchDictNames:@"PaintBrand" context:self.context];
+    _paintBrandPicker = [self createPicker:BRAND_PICKER_TAG selectRow:[[_paintSwatch paint_brand_id]intValue]];
+    [_paintBrandName setInputView:_paintBrandPicker];
     
     _otherNameField = [FieldUtils createTextField:_otherName tag:OTHER_FIELD_TAG];
     [_otherNameField setTextAlignment:NSTextAlignmentCenter];
@@ -269,17 +293,18 @@ const int DETAIL_MAX_SECTION     = 9;
     NSString *bodyName = [bodyObj name];
     _bodyTypeName = [FieldUtils createTextField:bodyName tag:BODY_FIELD_TAG];
     [_bodyTypeName setTextAlignment:NSTextAlignmentCenter];
-    [_bodyTypeName setInputView:_bodyTypePicker];
     [_bodyTypeName setDelegate:self];
-    [self createBodyPicker];
+    _bodyTypeNames  = [ManagedObjectUtils fetchDictNames:@"BodyType" context:self.context];
+    _bodyTypePicker = [self createPicker:BODY_PICKER_TAG selectRow:[[_paintSwatch body_type_id] intValue] action:@selector(bodySelection) textField:_bodyTypeName];
     
     id pigmentObj = [ManagedObjectUtils queryDictionaryName:@"PigmentType" entityId:_pigmentPickerSelRow context:self.context];
     NSString *pigmentName = [pigmentObj name];
     _pigmentTypeName = [FieldUtils createTextField:pigmentName tag:PIGMENT_FIELD_TAG];
     [_pigmentTypeName setTextAlignment:NSTextAlignmentCenter];
-    [_pigmentTypeName setInputView:_pigmentTypePicker];
     [_pigmentTypeName setDelegate:self];
-    [self createPigmentPicker];
+    _pigmentTypeNames  = [ManagedObjectUtils fetchDictNames:@"PigmentType" context:self.context];
+    _pigmentTypePicker = [self createPicker:PIGMENT_PICKER_TAG selectRow:[[_paintSwatch pigment_type_id] intValue]];
+    [_pigmentTypeName setInputView:_pigmentTypePicker];
     
     
     NSSet *swatchKeywords = [_paintSwatch swatch_keyword];
@@ -290,33 +315,6 @@ const int DETAIL_MAX_SECTION     = 9;
     }
     _keywEntered = [keywords componentsJoinedByString:@", "];
     
-    // Create the buttons
-    //
-    
-    CGRect typeButtonFrame = CGRectMake(_doneTypeButtonXOffset, _textFieldYOffset, _doneTypeButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneTypeButton = [BarButtonUtils create3DButton:@"Done" tag:TYPE_BTN_TAG frame:typeButtonFrame];
-    [_doneTypeButton addTarget:self action:@selector(swatchTypeSelection) forControlEvents:UIControlEventTouchUpInside];
-    [_doneTypeButton setHidden:TRUE];
-
-    CGRect colorButtonFrame = CGRectMake(_doneColorButtonXOffset, _textFieldYOffset, _doneColorButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneColorButton = [BarButtonUtils create3DButton:@"Done" tag:COLOR_BTN_TAG frame:colorButtonFrame];
-    [_doneColorButton addTarget:self action:@selector(colorSelection) forControlEvents:UIControlEventTouchUpInside];
-    [_doneColorButton setHidden:TRUE];
-    
-    CGRect brandButtonFrame = CGRectMake(_doneBrandButtonXOffset, _textFieldYOffset, _doneBrandButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneBrandButton = [BarButtonUtils create3DButton:@"Done" tag:BRAND_BTN_TAG frame:brandButtonFrame];
-    [_doneBrandButton addTarget:self action:@selector(brandSelection) forControlEvents:UIControlEventTouchUpInside];
-    [_doneBrandButton setHidden:TRUE];
-    
-    CGRect bodyButtonFrame = CGRectMake(_doneBodyButtonXOffset, _textFieldYOffset, _doneBodyButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _doneBodyButton = [BarButtonUtils create3DButton:@"Done" tag:BODY_BTN_TAG frame:bodyButtonFrame];
-    [_doneBodyButton addTarget:self action:@selector(bodySelection) forControlEvents:UIControlEventTouchUpInside];
-    [_doneBodyButton setHidden:TRUE];
-    
-    CGRect pigmentButtonFrame = CGRectMake(_donePigmentButtonXOffset, _textFieldYOffset, _donePigmentButtonWidth, DEF_TEXTFIELD_HEIGHT);
-    _donePigmentButton = [BarButtonUtils create3DButton:@"Done" tag:PIGMENT_BTN_TAG frame:pigmentButtonFrame];
-    [_donePigmentButton addTarget:self action:@selector(pigmentSelection) forControlEvents:UIControlEventTouchUpInside];
-    [_donePigmentButton setHidden:TRUE];
     
     _descEntered = [_paintSwatch desc] ? [_paintSwatch desc] : @"";
 
@@ -422,7 +420,7 @@ const int DETAIL_MAX_SECTION     = 9;
         _typeTextFieldWidth = viewWidth - _doneTypeButtonWidth - (DEF_FIELD_PADDING * 2) - DEF_TABLE_X_OFFSET;
         
     } else {
-        _doneTypeButtonWidth   = 1.0;
+        _doneTypeButtonWidth   = HIDE_BUTTON_WIDTH;
         _typeTextFieldWidth = fullTextFieldWidth;
     }
     
@@ -433,7 +431,7 @@ const int DETAIL_MAX_SECTION     = 9;
         _colorTextFieldWidth = viewWidth - _imageViewWidth - _doneColorButtonWidth - (DEF_FIELD_PADDING * 2);
         
     } else {
-        _doneColorButtonWidth   = 1.0;
+        _doneColorButtonWidth   = HIDE_BUTTON_WIDTH;
         _colorTextFieldWidth = viewWidth - _imageViewWidth - (DEF_FIELD_PADDING * 2);
     }
 
@@ -444,20 +442,14 @@ const int DETAIL_MAX_SECTION     = 9;
         _brandTextFieldWidth = viewWidth - _doneBrandButtonWidth - (DEF_FIELD_PADDING * 2) - DEF_TABLE_X_OFFSET;
         
     } else {
-        _doneBrandButtonWidth   = 1.0;
+        _doneBrandButtonWidth   = HIDE_BUTTON_WIDTH;
         _brandTextFieldWidth = fullTextFieldWidth;
     }
     
     // Body
     //
-    if (_bodyPickerFlag == TRUE) {
-        _doneBodyButtonWidth   = DEF_BUTTON_WIDTH;
-        _bodyTextFieldWidth = viewWidth - _doneBodyButtonWidth - (DEF_FIELD_PADDING * 2) - DEF_TABLE_X_OFFSET;
-        
-    } else {
-        _doneBodyButtonWidth   = 1.0;
-        _bodyTextFieldWidth = fullTextFieldWidth;
-    }
+    _bodyTextFieldWidth = fullTextFieldWidth;
+
     
     // Pigment
     //
@@ -466,7 +458,7 @@ const int DETAIL_MAX_SECTION     = 9;
         _pigmentTextFieldWidth = viewWidth - _donePigmentButtonWidth - (DEF_FIELD_PADDING * 2) - DEF_TABLE_X_OFFSET;
         
     } else {
-        _donePigmentButtonWidth   = 1.0;
+        _donePigmentButtonWidth   = HIDE_BUTTON_WIDTH;
         _pigmentTextFieldWidth = fullTextFieldWidth;
     }
 
@@ -486,9 +478,6 @@ const int DETAIL_MAX_SECTION     = 9;
     _doneBrandButtonXOffset  = DEF_TABLE_X_OFFSET + _brandTextFieldWidth + DEF_FIELD_PADDING;
     [_doneBrandButton setFrame:CGRectMake(_doneBrandButtonXOffset, _textFieldYOffset, _doneBrandButtonWidth, DEF_TEXTFIELD_HEIGHT)];
     
-    _doneBodyButtonXOffset  = DEF_TABLE_X_OFFSET + _bodyTextFieldWidth + DEF_FIELD_PADDING;
-    [_doneBodyButton setFrame:CGRectMake(_doneBodyButtonXOffset, _textFieldYOffset, _doneBodyButtonWidth, DEF_TEXTFIELD_HEIGHT)];
-    
     _donePigmentButtonXOffset  = DEF_TABLE_X_OFFSET + _pigmentTextFieldWidth + DEF_FIELD_PADDING;
     [_donePigmentButton setFrame:CGRectMake(_donePigmentButtonXOffset, _textFieldYOffset, _donePigmentButtonWidth, DEF_TEXTFIELD_HEIGHT)];
 }
@@ -501,7 +490,7 @@ const int DETAIL_MAX_SECTION     = 9;
 #pragma mark - UITableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (num_tableview_rows > 0) {
+    if (NUM_TABLEVIEW_ROWS > 0) {
         return DETAIL_MAX_SECTION;
     } else {
         return DETAIL_MAX_SECTION - 1;
@@ -537,7 +526,7 @@ const int DETAIL_MAX_SECTION     = 9;
         }
 
     } else if (section == DETAIL_MIX_SECTION) {
-        return num_tableview_rows;
+        return NUM_TABLEVIEW_ROWS;
 
     } else {
         return 1;
@@ -556,7 +545,7 @@ const int DETAIL_MAX_SECTION     = 9;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section <= DETAIL_DESC_SECTION) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseTableCellIdentifier forIndexPath:indexPath];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DETAIL_REUSE_CELL_IDENTIFIER forIndexPath:indexPath];
         
         // Global defaults
         //
@@ -574,9 +563,11 @@ const int DETAIL_MAX_SECTION     = 9;
         
         // Remove dynamic text fields
         //
-        [[cell.contentView viewWithTag:NAME_FIELD_TAG] removeFromSuperview];
-        [[cell.contentView viewWithTag:KEYW_FIELD_TAG] removeFromSuperview];
-        [[cell.contentView viewWithTag:DESC_FIELD_TAG] removeFromSuperview];
+        for (UIView *subview in cell.contentView.subviews) {
+            if ([subview isKindOfClass:[UITextField class]]) {
+                [subview removeFromSuperview];
+            }
+        }
         
         
         // Name, and reference type
@@ -631,8 +622,7 @@ const int DETAIL_MAX_SECTION     = 9;
                 [cell.contentView addSubview:_paintBrandName];
                 
             } else {
-                // Create the keyword text field
-                //
+
                 UITextField *otherNameField  = [FieldUtils createTextField:_otherName tag:OTHER_FIELD_TAG];
                 [otherNameField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
                 [otherNameField setDelegate:self];
@@ -652,7 +642,6 @@ const int DETAIL_MAX_SECTION     = 9;
         // Body type field
         //
         } else if (indexPath.section == DETAIL_BODY_SECTION) {
-            [cell.contentView addSubview:_doneBodyButton];
             [cell.contentView addSubview:_bodyTypeName];
             
         // Pigment type field
@@ -877,15 +866,11 @@ const int DETAIL_MAX_SECTION     = 9;
         _brandPickerFlag = TRUE;
         
     } else if (textField.tag == BODY_FIELD_TAG) {
-        [_doneBodyButton setHidden:FALSE];
         _bodyPickerFlag = TRUE;
         
     } else if (textField.tag == PIGMENT_FIELD_TAG) {
         [_donePigmentButton setHidden:FALSE];
         _pigmentPickerFlag = TRUE;
-        
-    } else {
-        [_pickerAlertLabel setText:@""];
     }
     [self setFrameSizes];
 }
@@ -1026,38 +1011,30 @@ const int DETAIL_MAX_SECTION     = 9;
     if (label == nil) {
         label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
     }
-
+    
     if (pickerView.tag == SWATCH_PICKER_TAG) {
         [label setText:[_swatchTypeNames objectAtIndex:row]];
         [label setTextColor: LIGHT_TEXT_COLOR];
         [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-        
-        [_pickerAlertLabel setText:@"Single tap the type selection"];
-        
+
     } else if (pickerView.tag == BRAND_PICKER_TAG) {
         [label setText:[_paintBrandNames objectAtIndex:row]];
         [label setTextColor: LIGHT_TEXT_COLOR];
         [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [label.layer setBorderWidth: DEF_BORDER_WIDTH];
         
-        [_pickerAlertLabel setText:@"Single tap the type selection"];
-        
     } else if (pickerView.tag == BODY_PICKER_TAG) {
         [label setText:[_bodyTypeNames objectAtIndex:row]];
         [label setTextColor: LIGHT_TEXT_COLOR];
         [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-        
-        [_pickerAlertLabel setText:@"Single tap the type selection"];
     
     } else if (pickerView.tag == PIGMENT_PICKER_TAG) {
         [label setText:[_pigmentTypeNames objectAtIndex:row]];
         [label setTextColor: LIGHT_TEXT_COLOR];
         [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-        
-        [_pickerAlertLabel setText:@"Single tap the type selection"];
         
     } else {
         NSString *colorName = [_subjColorNames objectAtIndex:row];
@@ -1066,8 +1043,6 @@ const int DETAIL_MAX_SECTION     = 9;
         [label setTextColor:[self setTextColor:colorName]];
         [label setBackgroundColor:backgroundColor];
         [label setText:[_subjColorNames objectAtIndex:row]];
-    
-        [_pickerAlertLabel setText:@"Single tap the color selection"];
     }
     [label setTextAlignment:NSTextAlignmentCenter];
     
@@ -1103,124 +1078,76 @@ const int DETAIL_MAX_SECTION     = 9;
     }
 }
 
-- (void)createSwatchTypePicker {
-    _swatchTypesPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:SWATCH_PICKER_TAG];
-    [self setSwatchTypeNames:[ManagedObjectUtils fetchDictNames:@"PaintSwatchType" context:self.context]];
-    [_swatchTypesPicker setDataSource:self];
-    [_swatchTypesPicker setDelegate:self];
-    [_swatchTypesPicker selectRow:[[_paintSwatch type_id] intValue] inComponent:0 animated:YES];
-    [_swatchTypeName setInputView: _swatchTypesPicker];
+//- (void)createSwatchTypePicker {
+//    _swatchTypesPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:SWATCH_PICKER_TAG];
+//    [_swatchTypesPicker setDataSource:self];
+//    [_swatchTypesPicker setDelegate:self];
+//    [_swatchTypesPicker selectRow:[[_paintSwatch type_id] intValue] inComponent:0 animated:YES];
+//    [_swatchTypeName setInputView: _swatchTypesPicker];
+//    
+//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                                             initWithTarget:self action:@selector(swatchTypeSelection)];
+//    tapRecognizer.numberOfTapsRequired = 1;
+//    [_swatchTypesPicker addGestureRecognizer:tapRecognizer];
+//    tapRecognizer.delegate = self;
+//}
+
+// Generic Picker method
+//
+- (UIPickerView *)createPicker:(int)pickerTag selectRow:(int)selectRow {
+    UIPickerView *picker = [FieldUtils createPickerView:self.view.frame.size.width tag:pickerTag];
+    [picker setDataSource:self];
+    [picker setDelegate:self];
+    [picker selectRow:selectRow inComponent:0 animated:YES];
+    
+    return picker;
+}
+
+- (UIPickerView *)createPicker:(int)pickerTag selectRow:(int)selectRow action:(SEL)action textField:(UITextField *)textField {
+    UIPickerView *picker = [FieldUtils createPickerView:self.view.frame.size.width tag:pickerTag xOffset:DEF_X_OFFSET yOffset:DEF_TEXTFIELD_HEIGHT];
+    [picker setDataSource:self];
+    [picker setDelegate:self];
+    
+    UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, DEF_TEXTFIELD_HEIGHT)];
+    [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:action];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    
+    [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+    
+    UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TEXTFIELD_HEIGHT)];
+    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView addSubview:pickerToolbar];
+    [pickerParentView addSubview:picker];
+    
+    [textField setInputView:pickerParentView];
+    
+    // Need to prevent text from clearing
+    
+    [picker selectRow:selectRow inComponent:0 animated:YES];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(swatchTypeSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_swatchTypesPicker addGestureRecognizer:tapRecognizer];
+                                             initWithTarget:self action:action];
+    tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
+    [picker addGestureRecognizer:tapRecognizer];
     tapRecognizer.delegate = self;
     
-    //[_pickerAlertLabel setText:@"Single tap the type selection"];
+    return picker;
 }
 
-- (void)createColorPicker {
-    _subjColorPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:COLOR_PICKER_TAG];
-    _subjColorData = [ManagedObjectUtils fetchSubjectiveColors:self.context];
-    
-    _subjColorNames  = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
-
-    [_subjColorPicker setDataSource:self];
-    [_subjColorPicker setDelegate:self];
-    [_subjColorName setInputView: _subjColorPicker];
-    
-    [self setColorPickerValues:[[_paintSwatch subj_color_id] intValue]];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                      initWithTarget:self action:@selector(colorSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_subjColorPicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-- (void)createBrandPicker {
-    _paintBrandPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:BRAND_PICKER_TAG];
-    _paintBrandNames  = [ManagedObjectUtils fetchDictNames:@"PaintBrand" context:self.context];
-    
-    [_paintBrandPicker setDataSource:self];
-    [_paintBrandPicker setDelegate:self];
-    [_paintBrandName setInputView:_paintBrandPicker];
-    [_paintBrandPicker selectRow:[[_paintSwatch paint_brand_id] intValue] inComponent:0 animated:YES];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(brandSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_paintBrandPicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-- (void)createBodyPicker {
-    _bodyTypePicker = [FieldUtils createPickerView:self.view.frame.size.width tag:BODY_PICKER_TAG];
-    _bodyTypeNames  = [ManagedObjectUtils fetchDictNames:@"BodyType" context:self.context];
-    
-    [_bodyTypePicker setDataSource:self];
-    [_bodyTypePicker setDelegate:self];
-    [_bodyTypeName setInputView:_bodyTypePicker];
-    [_bodyTypePicker selectRow:[[_paintSwatch body_type_id] intValue] inComponent:0 animated:YES];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(bodySelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_bodyTypePicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-- (void)createPigmentPicker {
-    _pigmentTypePicker = [FieldUtils createPickerView:self.view.frame.size.width tag:PIGMENT_PICKER_TAG];
-    _pigmentTypeNames  = [ManagedObjectUtils fetchDictNames:@"PigmentType" context:self.context];
-    
-    [_pigmentTypePicker setDataSource:self];
-    [_pigmentTypePicker setDelegate:self];
-    [_pigmentTypeName setInputView:_pigmentTypePicker];
-    [_pigmentTypePicker selectRow:[[_paintSwatch pigment_type_id] intValue] inComponent:0 animated:YES];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:@selector(pigmentSelection)];
-    tapRecognizer.numberOfTapsRequired = 1;
-    [_pigmentTypePicker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-}
-
-
-- (void)swatchTypeSelection {
-    [_pickerAlertLabel setText:@""];
-    [_swatchTypeName resignFirstResponder];
-    [_swatchTypesPicker removeFromSuperview];
-    [_doneTypeButton setHidden:TRUE];
-}
-
-- (void)colorSelection {
-    [_pickerAlertLabel setText:@""];
-    [_subjColorName resignFirstResponder];
-    [_subjColorPicker removeFromSuperview];
-    [_doneColorButton setHidden:TRUE];
-}
-
-- (void)brandSelection {
-    [_pickerAlertLabel setText:@""];
-    [_paintBrandName resignFirstResponder];
-    [_paintBrandPicker removeFromSuperview];
-    [_doneBrandButton setHidden:TRUE];
+// Generic picker selection
+//
+- (void)pickerSelection:(id)sender {
+    [self.view endEditing:YES];
+    [sender setHidden:TRUE];
 }
 
 - (void)bodySelection {
-    [_pickerAlertLabel setText:@""];
+    int row = [[_paintSwatch body_type_id] intValue];
+    [_bodyTypeName setText:[_bodyTypeNames objectAtIndex:row]];
+    [_bodyTypePicker selectRow:row inComponent:0 animated:YES];
     [_bodyTypeName resignFirstResponder];
-    [_bodyTypePicker removeFromSuperview];
-    [_doneBodyButton setHidden:TRUE];
-}
-
-- (void)pigmentSelection {
-    [_pickerAlertLabel setText:@""];
-    [_pigmentTypeName resignFirstResponder];
-    [_pigmentTypePicker removeFromSuperview];
-    [_donePigmentButton setHidden:TRUE];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
