@@ -28,6 +28,7 @@ CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
 // UI TextField/TextView
 //
 CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
+CGFloat const DEF_TOOLBAR_HEIGHT    = 40.0;
 CGFloat const DEF_SM_TXTFIELD_WIDTH = 60.0;
 CGFloat const DEF_TEXTVIEW_HEIGHT   = 60.0;
 

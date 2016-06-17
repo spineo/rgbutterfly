@@ -31,6 +31,7 @@ extern CGFloat const DEF_TAP_AREA_SIZE;
 // UI TextField/TextView
 //
 extern CGFloat const DEF_TEXTFIELD_HEIGHT;
+extern CGFloat const DEF_TOOLBAR_HEIGHT;
 extern CGFloat const DEF_SM_TXTFIELD_WIDTH;
 extern CGFloat const DEF_TEXTVIEW_HEIGHT;
 
