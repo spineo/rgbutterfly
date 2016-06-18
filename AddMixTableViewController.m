@@ -83,11 +83,8 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     
     [self loadTable];
 
-    
     _addPaintSwatches = [[NSMutableArray alloc] init];
     _addSwatchCount = 0;
-
-    [self setNavBarSizes];
     
     _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:BACK_BUTTON_IMAGE_NAME]
                                                    style:UIBarButtonItemStylePlain
@@ -102,9 +99,25 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     // Adjust the layout when the orientation changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidRotate)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchBarSetFrames)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    
+    _titleView = [[UIView alloc] init];
+    
+    _cancelButton = [BarButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
+    [_cancelButton addTarget:self action:@selector(pressCancel) forControlEvents:UIControlEventTouchUpInside];
+    
+    _mixSearchBar = [[UISearchBar alloc] init];
+    [_mixSearchBar setBackgroundColor:CLEAR_COLOR];
+    [_mixSearchBar setBarTintColor:CLEAR_COLOR];
+    [_mixSearchBar setReturnKeyType:UIReturnKeyDone];
+    [_mixSearchBar setDelegate:self];
+    
+    [_titleView addSubview:_mixSearchBar];
+    [_titleView addSubview:_cancelButton];
+    
+    [self searchBarSetFrames];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -192,50 +205,6 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // SearchBar Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -247,26 +216,9 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 }
 
 - (void)search {
-    _titleView = [[UIView alloc] init];
-    _mixSearchBar = [[UISearchBar alloc] init];
-    [_mixSearchBar setBackgroundColor:CLEAR_COLOR];
-    [_mixSearchBar setBarTintColor:CLEAR_COLOR];
-    [_mixSearchBar setReturnKeyType:UIReturnKeyDone];
-    [_mixSearchBar setDelegate:self];
-    
-    _cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [_cancelButton addTarget:self action:@selector(pressCancel) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self searchBarSetFrames];
-    
-    [_titleView addSubview:_cancelButton];
-    [_titleView addSubview:_mixSearchBar];
-    
     [self.navigationItem setTitleView:_titleView];
     [self.navigationItem setLeftBarButtonItem:nil];
     [self.navigationItem setRightBarButtonItem:nil];
-    
     [_mixSearchBar becomeFirstResponder];
 }
 
@@ -286,6 +238,9 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     [self updateTable];
     
     [_mixSearchBar resignFirstResponder];
+    [self.navigationItem setTitleView:nil];
+    [self.navigationItem setLeftBarButtonItem:_backButton];
+    [self.navigationItem setRightBarButtonItem:_searchButton];
 }
 
 - (void)pressCancel {
@@ -363,21 +318,24 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
 #pragma mark - Rotation, Resizing, and Navigation Methods
 
-- (void)viewDidRotate {
-    [self setNavBarSizes];
-    [self searchBarSetFrames];
-}
-    
-- (void)setNavBarSizes {
-    _navBarBounds = self.navigationController.navigationBar.bounds;
-    _navBarWidth  = _navBarBounds.size.width - 10;
-    _navBarHeight = _navBarBounds.size.height;
-}
-    
+
 - (void)searchBarSetFrames {
-    [_titleView setFrame:CGRectMake(0, 0, _navBarWidth - 10, _navBarHeight)];
-    [_mixSearchBar setFrame:CGRectMake(5, 5, _navBarWidth - 80, _navBarHeight - 10)];
-    [_cancelButton setFrame: CGRectMake(_navBarWidth - 70, 5, 60, _navBarHeight - 10)];
+
+    CGSize navBarSize = self.tableView.bounds.size;
+    [_titleView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarSize.width, navBarSize.height)];
+
+    CGSize buttonSize  = _cancelButton.bounds.size;
+    CGFloat xPoint     = navBarSize.width - buttonSize.width - DEF_MD_FIELD_PADDING;
+    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / 2;
+    [_cancelButton setFrame:CGRectMake(xPoint, yPoint, buttonSize.width, buttonSize.height)];
+    
+    CGFloat xOffset;
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+        xOffset = DEF_NAVBAR_X_OFFSET;
+    } else {
+        xOffset = DEF_X_OFFSET;
+    }
+    [_mixSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {    

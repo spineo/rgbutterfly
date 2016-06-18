@@ -34,6 +34,7 @@ extern CGFloat const DEF_TEXTFIELD_HEIGHT;
 extern CGFloat const DEF_TOOLBAR_HEIGHT;
 extern CGFloat const DEF_SM_TXTFIELD_WIDTH;
 extern CGFloat const DEF_TEXTVIEW_HEIGHT;
+extern CGFloat const DEF_NAVBAR_X_OFFSET;
 
 // Generic Defaults
 //
@@ -115,45 +116,47 @@ extern int const INCR_ALG_BTN_TAG;
 extern int const DECR_TAP_BTN_TAG;
 extern int const INCR_TAP_BTN_TAG;
 
-extern const int NAME_FIELD_TAG;
-extern const int TYPE_FIELD_TAG;
-extern const int COLOR_FIELD_TAG;
-extern const int KEYW_FIELD_TAG;
-extern const int DESC_FIELD_TAG;
-extern const int SWATCH_PICKER_TAG;
-extern const int COLOR_PICKER_TAG;
-extern const int COLOR_BTN_TAG;
-extern const int TYPE_BTN_TAG;
-extern const int BRAND_FIELD_TAG;
-extern const int BRAND_PICKER_TAG;
-extern const int BRAND_BTN_TAG;
-extern const int OTHER_FIELD_TAG;
-extern const int BODY_FIELD_TAG;
-extern const int BODY_PICKER_TAG;
-extern const int BODY_BTN_TAG;
-extern const int PIGMENT_FIELD_TAG;
-extern const int PIGMENT_PICKER_TAG;
-extern const int PIGMENT_BTN_TAG;
+extern int const NAME_FIELD_TAG;
+extern int const TYPE_FIELD_TAG;
+extern int const COLOR_FIELD_TAG;
+extern int const KEYW_FIELD_TAG;
+extern int const DESC_FIELD_TAG;
+extern int const SWATCH_PICKER_TAG;
+extern int const COLOR_PICKER_TAG;
+extern int const COLOR_BTN_TAG;
+extern int const TYPE_BTN_TAG;
+extern int const BRAND_FIELD_TAG;
+extern int const BRAND_PICKER_TAG;
+extern int const BRAND_BTN_TAG;
+extern int const OTHER_FIELD_TAG;
+extern int const BODY_FIELD_TAG;
+extern int const BODY_PICKER_TAG;
+extern int const BODY_BTN_TAG;
+extern int const PIGMENT_FIELD_TAG;
+extern int const PIGMENT_PICKER_TAG;
+extern int const PIGMENT_BTN_TAG;
 
 // Settings
 //
-extern const int SHAPE_BUTTON_TAG;
-extern const int MATCH_NUM_TAG;
-extern const int ADD_BRANDS_TAG;
+extern int const SHAPE_BUTTON_TAG;
+extern int const MATCH_NUM_TAG;
+extern int const ADD_BRANDS_TAG;
 
+// Add Mix
+//
+extern int const CANCEL_BUTTON_TAG;
 
 // Max Tag used as reference to ensure all table view elements
 // removed from superview (see MatchTableViewController for example)
 //
-extern const int MAX_TAG;
-
+extern int const MAX_TAG;
 
 // Maximum Text field lengths (characters)
 //
-extern const int MAX_NAME_LEN;
-extern const int MAX_KEYW_LEN;
-extern const int MAX_DESC_LEN;
-extern const int MAX_BRAND_LEN;
+extern int const MAX_NAME_LEN;
+extern int const MAX_KEYW_LEN;
+extern int const MAX_DESC_LEN;
+extern int const MAX_BRAND_LEN;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys

@@ -31,8 +31,8 @@ CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
 CGFloat const DEF_TOOLBAR_HEIGHT    = 40.0;
 CGFloat const DEF_SM_TXTFIELD_WIDTH = 60.0;
 CGFloat const DEF_TEXTVIEW_HEIGHT   = 60.0;
-
 CGFloat const DEF_LABEL_HEIGHT      = 24.0;
+CGFloat const DEF_NAVBAR_X_OFFSET   = 10.0;
 
 // Generic Defaults
 //
@@ -103,41 +103,45 @@ int const INCR_ALG_BTN_TAG = 73;
 int const DECR_TAP_BTN_TAG = 74;
 int const INCR_TAP_BTN_TAG = 75;
 
-const int NAME_FIELD_TAG     = 81;
-const int TYPE_FIELD_TAG     = 82;
-const int COLOR_FIELD_TAG    = 83;
-const int KEYW_FIELD_TAG     = 84;
-const int DESC_FIELD_TAG     = 85;
-const int SWATCH_PICKER_TAG  = 86;
-const int COLOR_PICKER_TAG   = 87;
-const int COLOR_BTN_TAG      = 88;
-const int TYPE_BTN_TAG       = 89;
-const int BRAND_FIELD_TAG    = 90;
-const int BRAND_PICKER_TAG   = 91;
-const int BRAND_BTN_TAG      = 92;
-const int OTHER_FIELD_TAG    = 93;
-const int BODY_FIELD_TAG     = 94;
-const int BODY_PICKER_TAG    = 95;
-const int BODY_BTN_TAG       = 96;
-const int PIGMENT_FIELD_TAG  = 97;
-const int PIGMENT_PICKER_TAG = 98;
-const int PIGMENT_BTN_TAG    = 99;
+int const NAME_FIELD_TAG     = 81;
+int const TYPE_FIELD_TAG     = 82;
+int const COLOR_FIELD_TAG    = 83;
+int const KEYW_FIELD_TAG     = 84;
+int const DESC_FIELD_TAG     = 85;
+int const SWATCH_PICKER_TAG  = 86;
+int const COLOR_PICKER_TAG   = 87;
+int const COLOR_BTN_TAG      = 88;
+int const TYPE_BTN_TAG       = 89;
+int const BRAND_FIELD_TAG    = 90;
+int const BRAND_PICKER_TAG   = 91;
+int const BRAND_BTN_TAG      = 92;
+int const OTHER_FIELD_TAG    = 93;
+int const BODY_FIELD_TAG     = 94;
+int const BODY_PICKER_TAG    = 95;
+int const BODY_BTN_TAG       = 96;
+int const PIGMENT_FIELD_TAG  = 97;
+int const PIGMENT_PICKER_TAG = 98;
+int const PIGMENT_BTN_TAG    = 99;
 
 // Settings
 //
-const int SHAPE_BUTTON_TAG   = 101;
-const int MATCH_NUM_TAG      = 102;
-const int ADD_BRANDS_TAG     = 103;
+int const SHAPE_BUTTON_TAG   = 101;
+int const MATCH_NUM_TAG      = 102;
+int const ADD_BRANDS_TAG     = 103;
 
-const int MAX_TAG            = 120;
+// Add Mix
+//
+int const CANCEL_BUTTON_TAG  = 106;
+
+int const MAX_TAG            = 120;
 
 
 // Maximum Text field lengths (characters)
 //
-const int MAX_NAME_LEN  = 64;
-const int MAX_KEYW_LEN  = 128;
-const int MAX_DESC_LEN  = 128;
-const int MAX_BRAND_LEN = 32;
+int const MAX_NAME_LEN  = 64;
+int const MAX_KEYW_LEN  = 128;
+int const MAX_DESC_LEN  = 128;
+int const MAX_BRAND_LEN = 32;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

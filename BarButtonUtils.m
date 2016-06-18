@@ -125,6 +125,16 @@
     return isRGB;
 }
 
++ (UIButton *)createButton:(NSString *)title tag:(int)tag {
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTag:tag];
+    [button setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+    
+    return button;
+}
+
 + (UIButton *)create3DButton:(NSString *)title tag:(int)tag frame:(CGRect)frame {
     
     UIButton *button = [self create3DButton:title tag:tag];
