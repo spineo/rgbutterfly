@@ -283,7 +283,7 @@ const int ASSOC_COLORS_TAG     = 5;
 
     // Apply renaming button
     //
-    _applyRenameText = @"Apply Auto Renaming to Rows 3..N";
+    _applyRenameText = @"Apply Renaming with Ratios";
 
     [self recreateApplyButton];
     

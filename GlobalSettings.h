@@ -31,7 +31,6 @@ extern CGFloat const DEF_TAP_AREA_SIZE;
 // UI TextField/TextView
 //
 extern CGFloat const DEF_TEXTFIELD_HEIGHT;
-extern CGFloat const DEF_TOOLBAR_HEIGHT;
 extern CGFloat const DEF_SM_TXTFIELD_WIDTH;
 extern CGFloat const DEF_TEXTVIEW_HEIGHT;
 extern CGFloat const DEF_NAVBAR_X_OFFSET;
@@ -65,6 +64,11 @@ extern CGFloat const DEF_PICKER_ROW_HEIGHT;
 
 extern CGFloat const DEF_PICKER_HEIGHT;
 extern CGFloat const DEF_COLLECTVIEW_INSET;
+
+// UIToolbar
+//
+extern CGFloat const DEF_TOOLBAR_HEIGHT;
+extern CGFloat const DEF_TOOLBAR_WIDTH;
 
 // Match Num (i.e., UIImageViewController)
 //
@@ -141,6 +145,7 @@ extern int const PIGMENT_BTN_TAG;
 extern int const SHAPE_BUTTON_TAG;
 extern int const MATCH_NUM_TAG;
 extern int const ADD_BRANDS_TAG;
+extern int const MIX_RATIOS_TAG;
 
 // Add Mix
 //
@@ -169,6 +174,7 @@ extern NSString * const SHAPE_GEOMETRY_KEY;
 extern NSString * const MATCH_NUM_KEY;
 extern NSString * const RGB_DISPLAY_KEY;
 extern NSString * const ADD_BRANDS_KEY;
+extern NSString * const MIX_RATIOS_KEY;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

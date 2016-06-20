@@ -16,15 +16,16 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
 @property (nonatomic, strong) UIButton *shapeButton, *rgbDisplayButton;
-@property (nonatomic, strong) UITextField *matchNumTextField, *addBrandsTextField;
+@property (nonatomic, strong) UITextField *matchNumTextField, *addBrandsTextField, *mixRatiosTextField;
+@property (nonatomic, strong) UITextView *mixRatiosTextView;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
 
@@ -59,10 +60,13 @@ const int MATCH_NUM_ROWS          = 1;
 const int RGB_DISPLAY_SETTINGS    = 3;
 const int RGB_DISPLAY_ROWS        = 1;
 
-const int ADD_BRANDS_SETTINGS     = 4;
+const int MIX_RATIOS_SETTINGS     = 4;
+const int MIX_RATIOS_ROWS         = 1;
+
+const int ADD_BRANDS_SETTINGS     = 5;
 const int ADD_BRANDS_ROWS         = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 4;
+const int SETTINGS_MAX_SECTIONS   = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -268,7 +272,7 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     [_matchNumTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [_matchNumTextField setDelegate:self];
     
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, 320, 50)];
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_TOOLBAR_WIDTH, DEF_TOOLBAR_HEIGHT)];
     [numberToolbar setBarStyle:UIBarStyleBlackTranslucent];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)];
     [doneButton setTintColor:LIGHT_TEXT_COLOR];
@@ -320,7 +324,7 @@ const int SETTINGS_MAX_SECTIONS   = 4;
     [_rgbDisplayButton.layer setCornerRadius:DEF_CORNER_RADIUS];
     
     CGFloat cellHeight   = DEF_TABLE_CELL_HEIGHT;
-    CGFloat buttonHeight = cellHeight * 0.8;
+    CGFloat buttonHeight = cellHeight - DEF_FIELD_PADDING;
     CGFloat yOffset      = (cellHeight - buttonHeight) / 2.0;
     [_rgbDisplayButton setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, buttonHeight, buttonHeight)];
 
@@ -347,12 +351,39 @@ const int SETTINGS_MAX_SECTIONS   = 4;
 //    
 //    // Add a place holder if no text
 //    //
-//    if (_addBrandsText) {
+//    if (! [_addBrandsText isEqualToString:@""] && (_addBrandsText != nil)) {
 //        [_addBrandsTextField setText:_addBrandsText];
 //    } else {
 //        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
 //    }
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Mix Ratios Row
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    _mixRatiosLabel = [FieldUtils createLabel:@"Comma-separated ratios, separate line per group"];
+    
+    _mixRatiosTextView = [FieldUtils createTextView:@"" tag:MIX_RATIOS_TAG];
+    [_mixRatiosTextView setKeyboardType:UIKeyboardTypeDefault];
+    [_mixRatiosTextView setDelegate:self];
+    
+    UIToolbar* doneKeyToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_TOOLBAR_WIDTH, DEF_TOOLBAR_HEIGHT)];
+    [doneKeyToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    UIBarButtonItem *tvDoneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithTextView)];
+    [tvDoneButton setTintColor:LIGHT_TEXT_COLOR];
+    doneKeyToolbar.items = @[
+                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            tvDoneButton];
+    [doneKeyToolbar sizeToFit];
+    [_mixRatiosTextView setInputAccessoryView:doneKeyToolbar];
+    
+    _mixRatiosText = [_userDefaults stringForKey:MIX_RATIOS_KEY];
+    
+    // Add a place holder if no text
+    //
+    if (! [_mixRatiosText isEqualToString:@""] && (_mixRatiosText != nil)) {
+        [_mixRatiosTextView setText:_mixRatiosText];
+    }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
@@ -409,12 +440,18 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         
     } else if (section == ADD_BRANDS_SETTINGS) {
         return ADD_BRANDS_ROWS;
+        
+    } else if (section == MIX_RATIOS_SETTINGS) {
+        return MIX_RATIOS_ROWS;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == TAP_AREA_SETTINGS) {
+    if (indexPath.section == MIX_RATIOS_SETTINGS) {
+        return DEF_XLG_TBL_CELL_HGT;
+        
+    } else if (indexPath.section == TAP_AREA_SETTINGS) {
         return DEF_VLG_TBL_CELL_HGT;
         
     } else if (indexPath.section == MATCH_NUM_SETTINGS) {
@@ -445,6 +482,9 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         
     } else if (section == ADD_BRANDS_SETTINGS) {
         headerStr = @"Add Paint Brands";
+        
+    } else if (section == MIX_RATIOS_SETTINGS) {
+        headerStr = @"Default Paint Mix Ratios";
     }
     return headerStr;
 }
@@ -518,10 +558,19 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         [cell.contentView addSubview:_rgbDisplayLabel];
         
     } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
-        CGFloat addBrandsYOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / 2;
-        CGFloat addBrandsWidth   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
-        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, addBrandsYOffset, addBrandsWidth, DEF_TEXTFIELD_HEIGHT)];
+        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / 2;
+        CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTFIELD_HEIGHT)];
         [cell.contentView addSubview:_addBrandsTextField];
+        
+    } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
+        [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
+        [cell.contentView addSubview:_mixRatiosLabel];
+        
+        CGFloat yOffset = _mixRatiosLabel.bounds.size.height + DEF_FIELD_PADDING;
+        CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+        [_mixRatiosTextView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTVIEW_HEIGHT)];
+        [cell.contentView addSubview:_mixRatiosTextView];
     }
     
     return cell;
@@ -562,7 +611,7 @@ const int SETTINGS_MAX_SECTIONS   = 4;
 */
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// TextField Methods
+// TextField/TextView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - TextField Methods
@@ -588,15 +637,25 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
         [_matchNumStepper setValue:(double)_maxMatchNum];
         
-    } else {
+    } else if (textField.tag == ADD_BRANDS_TAG) {
         _addBrandsText = textField.text;
+        
     }
     
     _editFlag = TRUE;
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    _mixRatiosText = textView.text;
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textViewShouldReturn:(UITextView *)textView {
+    [textView resignFirstResponder];
     return YES;
 }
 
@@ -606,8 +665,12 @@ const int SETTINGS_MAX_SECTIONS   = 4;
 
 #pragma mark - Widget States and Save
 
--(void)doneWithNumberPad{
+-(void)doneWithNumberPad {
     [_matchNumTextField resignFirstResponder];
+}
+
+-(void)doneWithTextView {
+    [_mixRatiosTextView resignFirstResponder];
 }
 
 - (void)setPSSwitchState:(id)sender {
@@ -732,6 +795,10 @@ const int SETTINGS_MAX_SECTIONS   = 4;
         // Add Brands
         //
         [_userDefaults setValue:_addBrandsText forKey:ADD_BRANDS_KEY];
+        
+        // Paint Mix Ratios
+        //
+        [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
         
         [_userDefaults synchronize];
         

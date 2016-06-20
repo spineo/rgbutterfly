@@ -28,7 +28,6 @@ CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
 // UI TextField/TextView
 //
 CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
-CGFloat const DEF_TOOLBAR_HEIGHT    = 40.0;
 CGFloat const DEF_SM_TXTFIELD_WIDTH = 60.0;
 CGFloat const DEF_TEXTVIEW_HEIGHT   = 60.0;
 CGFloat const DEF_LABEL_HEIGHT      = 24.0;
@@ -56,7 +55,7 @@ CGFloat const DEF_TBL_DIVIDER_HGT   = 5.0;
 CGFloat const DEF_TABLE_HDR_HEIGHT  = 33.0;
 CGFloat const DEF_LG_TABLE_CELL_HGT = 66.0;
 CGFloat const DEF_VLG_TBL_CELL_HGT  = 88.0;
-CGFloat const DEF_XLG_TBL_CELL_HGT  = 198.0;
+CGFloat const DEF_XLG_TBL_CELL_HGT  = 110.0;
 CGFloat const DEF_XXLG_TBL_CELL_HGT = 396.0;
 CGFloat const DEF_TABLE_X_OFFSET    = 15.0;
 CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
@@ -64,6 +63,11 @@ CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
 CGFloat const DEF_PICKER_ROW_HEIGHT = 50.0;
 CGFloat const DEF_PICKER_HEIGHT     = 250.0;
 CGFloat const DEF_COLLECTVIEW_INSET = 20.0;
+
+// UIToolbar
+//
+CGFloat const DEF_TOOLBAR_HEIGHT    = 40.0;
+CGFloat const DEF_TOOLBAR_WIDTH     = 320.0;
 
 // UI Buttons
 //
@@ -128,6 +132,7 @@ int const PIGMENT_BTN_TAG    = 99;
 int const SHAPE_BUTTON_TAG   = 101;
 int const MATCH_NUM_TAG      = 102;
 int const ADD_BRANDS_TAG     = 103;
+int const MIX_RATIOS_TAG     = 104;
 
 // Add Mix
 //
@@ -155,6 +160,7 @@ NSString * const SHAPE_GEOMETRY_KEY  = @"ShapeGeometry";
 NSString * const MATCH_NUM_KEY       = @"MatchNum";
 NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
+NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
