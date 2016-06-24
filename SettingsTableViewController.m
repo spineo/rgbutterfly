@@ -116,7 +116,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     _psReadOnlySwitch = [[UISwitch alloc] init];
     _widgetHeight = _psReadOnlySwitch.bounds.size.height;
-    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / 2;
+    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
     [_psReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_psReadOnlySwitch setOn:_swatchesReadOnly];
     
@@ -127,7 +127,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _psReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     CGFloat labelWidth = _psReadOnlyLabel.bounds.size.width;
     CGFloat labelHeight = _psReadOnlyLabel.bounds.size.height;
-    CGFloat labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
+    CGFloat labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_psReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
@@ -160,7 +160,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     _maReadOnlySwitch = [[UISwitch alloc] init];
     _widgetHeight = _maReadOnlySwitch.bounds.size.height;
-    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / 2;
+    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
     [_maReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_maReadOnlySwitch setOn:_assocsReadOnly];
     
@@ -171,7 +171,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _maReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     labelWidth = _maReadOnlyLabel.bounds.size.width;
     labelHeight = _maReadOnlyLabel.bounds.size.height;
-    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
+    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_maReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
@@ -217,7 +217,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     }
     
     if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
-        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
         [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
         _shapeTitle = SHAPE_CIRCLE_VALUE;
         
@@ -325,7 +325,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     
     CGFloat cellHeight   = DEF_TABLE_CELL_HEIGHT;
     CGFloat buttonHeight = cellHeight - DEF_FIELD_PADDING;
-    CGFloat yOffset      = (cellHeight - buttonHeight) / 2.0;
+    CGFloat yOffset      = (cellHeight - buttonHeight) / DEF_HGT_ALIGN_FACTOR;
     [_rgbDisplayButton setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, buttonHeight, buttonHeight)];
 
     // Add the UIButton target
@@ -335,7 +335,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _rgbDisplayLabel   = [FieldUtils createLabel:_rgbDisplayText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     labelWidth = _rgbDisplayLabel.bounds.size.width;
     labelHeight = _rgbDisplayLabel.bounds.size.height;
-    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / 2;
+    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -507,6 +507,8 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     [cell.imageView setImage:nil];
     [cell.textLabel setText:@""];
     
+    CGFloat tableViewWidth = self.tableView.bounds.size.width;
+    
     if (indexPath.section == READ_ONLY_SETTINGS) {
     
         // Name, and reference type
@@ -521,7 +523,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         }
         
     } else if (indexPath.section == TAP_AREA_SETTINGS) {
-        [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
+        [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_tapSettingsLabel];
 
         CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
@@ -542,7 +544,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         
         
     } else if (indexPath.section == MATCH_NUM_SETTINGS) {
-        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
+        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_matchSettingsLabel];
         
         CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
@@ -558,13 +560,13 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         [cell.contentView addSubview:_rgbDisplayLabel];
         
     } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
-        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / 2;
+        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / DEF_HGT_ALIGN_FACTOR;
         CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
         [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTFIELD_HEIGHT)];
         [cell.contentView addSubview:_addBrandsTextField];
         
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
-        [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, self.tableView.bounds.size.width, DEF_LABEL_HEIGHT)];
+        [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosLabel];
         
         CGFloat yOffset = _mixRatiosLabel.bounds.size.height + DEF_FIELD_PADDING;
@@ -705,7 +707,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _tapAreaSize           = (CGFloat)size;
     
     if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
-        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
     } else {
         [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
     }
@@ -723,7 +725,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     } else {
         _shapeTitle = SHAPE_CIRCLE_VALUE;
         _shapeGeom  = SHAPE_CIRCLE_VALUE;
-        [_tapImageView.layer setCornerRadius:_tapAreaSize / 2.0];
+        [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
         
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];

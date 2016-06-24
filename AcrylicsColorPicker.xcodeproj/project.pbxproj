@@ -76,6 +76,7 @@
 		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
 		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
+		21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BE8EEB1D18261F0039A9FA /* PickerUtils.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -224,6 +225,8 @@
 		21A69CCF1C8DAFB600B70810 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
 		21A69CD01C8DAFB600B70810 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
+		21BE8EEA1D18261F0039A9FA /* PickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerUtils.h; sourceTree = "<group>"; };
+		21BE8EEB1D18261F0039A9FA /* PickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerUtils.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				21397E971C8484D7001C3F05 /* ManagedObjectUtils.m */,
 				21397E981C8484D7001C3F05 /* StringObjectUtils.h */,
 				21397E991C8484D7001C3F05 /* StringObjectUtils.m */,
+				21BE8EEA1D18261F0039A9FA /* PickerUtils.h */,
+				21BE8EEB1D18261F0039A9FA /* PickerUtils.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				2133F2261CFB532200FB91AD /* BodyType.m in Sources */,
 				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
 				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
+				21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */,
 				21397EA21C8484D7001C3F05 /* StringObjectUtils.m in Sources */,
 				214430E51CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				214430E61CB1A19B0014AABD /* MatchAssocKeyword.m in Sources */,

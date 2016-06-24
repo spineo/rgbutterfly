@@ -25,14 +25,14 @@
 @interface AssocTableViewController ()
 
 @property (nonatomic, strong) PaintSwatches *addPaintSwatch, *selPaintSwatch;
-@property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches;
+@property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches, *mixRatiosList, *mixRatiosComps, *mixRatiosSeen;
 
 @property (nonatomic, strong) UIAlertController *saveAlertController;
 @property (nonatomic, strong) UIAlertAction *save, *delete;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText;
+@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText, *mixRatiosText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, textReturn, isReadOnly;
 
@@ -43,8 +43,11 @@
 @property (nonatomic) CGFloat imageViewXOffset, imageViewYOffset, imageViewWidth, imageViewHeight, assocImageViewWidth, assocImageViewHeight, textFieldYOffset;
 
 @property (nonatomic, strong) UIButton *applyButton;
+@property (nonatomic, strong) UITextField *pickerTextField;
+@property (nonatomic) int mixCount, mixRatiosSelRow;
 
 @property (nonatomic, strong) AddMixTableViewController *sourceViewController;
+
 
 // NSManagedObject subclassing
 //
@@ -279,15 +282,15 @@ const int ASSOC_COLORS_TAG     = 5;
     [_saveAlertController addAction:_save];
     [_saveAlertController addAction:_delete];
     [_saveAlertController addAction:discard];
+   
     
-
     // Apply renaming button
     //
     _applyRenameText = @"Apply Renaming with Ratios";
-
     [self recreateApplyButton];
-    
     [_applyButton setEnabled:TRUE];
+    
+    
     [_save setEnabled:FALSE];
 
     [self homeButtonShow];
@@ -302,6 +305,10 @@ const int ASSOC_COLORS_TAG     = 5;
     if (_isReadOnly == TRUE) {
         [_delete setEnabled:FALSE];
     }
+    
+    // Used by the mixRatios Picker
+    //
+    _mixCount = (int)[_mixAssocSwatches count] - 2;
 }
 
 - (void)viewDidRotate {
@@ -313,7 +320,8 @@ const int ASSOC_COLORS_TAG     = 5;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+    //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+    [_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initializeFetchedResultsController {
@@ -1028,10 +1036,157 @@ const int ASSOC_COLORS_TAG     = 5;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UIBarButton actions
+// UIPickerView actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - UIBarButton Actions
+#pragma mark - UIPickerView Actions
+
+
+- (void)showMixRatiosPicker {
+    
+    // NSUserDefaults (Mix Ratios)
+    //
+    _mixRatiosText = [[NSUserDefaults standardUserDefaults] stringForKey:MIX_RATIOS_KEY];
+
+    if ([_mixRatiosText isEqualToString:@""] || (_mixRatiosText == nil)) {
+        [self presentViewController:[AlertUtils createOkAlert:@"No Mix Ratios to Apply" message:@"Add Mix Ratios in Settings"] animated:YES completion:nil];
+        
+    } else {
+        _mixRatiosList = [GenericUtils trimStrings:[_mixRatiosText componentsSeparatedByString:@"\n"]];
+        [_mixRatiosList insertObject:@"Do Not Apply Mix Ratios" atIndex:0];
+        
+        int mixRatiosCount;
+        BOOL mixRatioSeen;
+        _mixRatiosSeen = [[NSMutableArray alloc] init];
+        [_mixRatiosSeen addObject:[NSNumber numberWithBool:TRUE]];
+        for (int i=1; i<[_mixRatiosList count]; i++) {
+            mixRatiosCount = (int)[[GenericUtils trimStrings:[[_mixRatiosList objectAtIndex:i] componentsSeparatedByString:@","]] count];
+            
+            if (mixRatiosCount == _mixCount) {
+                mixRatioSeen = TRUE;
+            } else {
+                mixRatioSeen = FALSE;
+            }
+            [_mixRatiosSeen addObject:[NSNumber numberWithBool:mixRatioSeen]];
+        }
+        
+        // Tie the apply button to a UI Picker
+        //
+        UIPickerView *mixRatiosPicker = [FieldUtils createPickerView:self.view.frame.size.width tag:RATIOS_PICKER_TAG xOffset:DEF_X_OFFSET yOffset:DEF_TOOLBAR_HEIGHT];
+        [mixRatiosPicker setDataSource:self];
+        [mixRatiosPicker setDelegate:self];
+        
+        UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, mixRatiosPicker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
+        [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(ratiosSelection)];
+        [doneButton setTintColor:LIGHT_TEXT_COLOR];
+        
+        [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+        
+        UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, mixRatiosPicker.bounds.size.width, mixRatiosPicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
+        [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+        [pickerParentView addSubview:pickerToolbar];
+        [pickerParentView addSubview:mixRatiosPicker];
+        
+        _pickerTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+        [_pickerTextField setInputView:pickerParentView];
+        [self.view addSubview:_pickerTextField];
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self action:@selector(ratiosSelection)];
+        tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
+        [mixRatiosPicker addGestureRecognizer:tapRecognizer];
+        [tapRecognizer setDelegate:self];
+        
+        [_pickerTextField becomeFirstResponder];
+    }
+}
+
+- (void)ratiosSelection {
+    [_pickerTextField resignFirstResponder];
+    
+    if (_mixRatiosSelRow != 0) {
+    
+        NSString *mixRatios = [_mixRatiosList objectAtIndex:_mixRatiosSelRow];
+        _mixRatiosComps = [GenericUtils trimStrings:[mixRatios componentsSeparatedByString:@","]];
+        
+        if ([_mixRatiosComps count] != _mixCount) {
+            [self presentViewController:[AlertUtils createOkAlert:@"Mix Count and Ratios Number Mismatch" message:@"The mix number and ratios applied to it must match"] animated:YES completion:nil];
+            
+        } else {
+            [self applyRenaming];
+        }
+    }
+}
+
+
+// The number of columns of data
+//
+- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// The number of rows of data
+//
+- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return (long)[_mixRatiosList count];
+}
+
+// Row height
+//
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return DEF_PICKER_ROW_HEIGHT;
+}
+
+// The data to return for the row and component (column) that's being passed in
+//
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [_mixRatiosList objectAtIndex:row];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *label = (UILabel*)view;
+    if (label == nil) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
+    }
+    
+    [label setText:[_mixRatiosList objectAtIndex:row]];
+    [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [label.layer setBorderWidth: DEF_BORDER_WIDTH];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    
+    BOOL mixRatioSeen = [[_mixRatiosSeen objectAtIndex:row] boolValue];
+    CGColorRef backgroundCellColor;
+    UIColor *textColor;
+    if (mixRatioSeen == TRUE) {
+        backgroundCellColor = [[UIColor greenColor] CGColor];
+        textColor = DARK_TEXT_COLOR;
+    } else {
+        backgroundCellColor = [[UIColor redColor] CGColor];
+        textColor = LIGHT_TEXT_COLOR;
+    }
+    [label.layer setBackgroundColor:backgroundCellColor];
+    [label setTextColor:textColor];
+    
+    return label;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    _mixRatiosSelRow = (int)row;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TapRecognizer Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - UIGestureRecognizer methods
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    return true;
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

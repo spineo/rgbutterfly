@@ -18,19 +18,26 @@ CGFloat const DEF_NIL_HEADER        = 0.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
 CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
+
+// Widget alignment related
+//
+CGFloat const DEF_HGT_ALIGN_FACTOR  = 2.0;
+CGFloat const DEF_CORNER_RAD_FACTOR = 2.0;
+
+// UI Label
+//
 CGFloat const DEF_LABEL_WIDTH       = 80.0;
+CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 
 // Tap Area
 //
 CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
-
 
 // UI TextField/TextView
 //
 CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
 CGFloat const DEF_SM_TXTFIELD_WIDTH = 60.0;
 CGFloat const DEF_TEXTVIEW_HEIGHT   = 60.0;
-CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 CGFloat const DEF_NAVBAR_X_OFFSET   = 10.0;
 
 // Generic Defaults
@@ -60,8 +67,12 @@ CGFloat const DEF_XXLG_TBL_CELL_HGT = 396.0;
 CGFloat const DEF_TABLE_X_OFFSET    = 15.0;
 CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
 
+// UI PickerView
+//
 CGFloat const DEF_PICKER_ROW_HEIGHT = 50.0;
 CGFloat const DEF_PICKER_HEIGHT     = 250.0;
+CGFloat const DEF_PICKER_WIDTH      = 320.0;
+
 CGFloat const DEF_COLLECTVIEW_INSET = 20.0;
 
 // UIToolbar
@@ -126,17 +137,18 @@ int const BODY_BTN_TAG       = 96;
 int const PIGMENT_FIELD_TAG  = 97;
 int const PIGMENT_PICKER_TAG = 98;
 int const PIGMENT_BTN_TAG    = 99;
+int const RATIOS_PICKER_TAG  = 100;
 
 // Settings
 //
-int const SHAPE_BUTTON_TAG   = 101;
-int const MATCH_NUM_TAG      = 102;
-int const ADD_BRANDS_TAG     = 103;
-int const MIX_RATIOS_TAG     = 104;
+int const SHAPE_BUTTON_TAG   = 111;
+int const MATCH_NUM_TAG      = 112;
+int const ADD_BRANDS_TAG     = 113;
+int const MIX_RATIOS_TAG     = 114;
 
 // Add Mix
 //
-int const CANCEL_BUTTON_TAG  = 106;
+int const CANCEL_BUTTON_TAG  = 116;
 
 int const MAX_TAG            = 120;
 

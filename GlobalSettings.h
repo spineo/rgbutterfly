@@ -20,9 +20,17 @@ extern CGFloat const DEF_NIL_CELL;
 extern CGFloat const DEF_NIL_HEADER;
 extern CGFloat const DEF_NIL_WIDTH;
 extern CGFloat const DEF_NIL_HEIGHT;
+extern CGFloat const DEF_NIL_CONSTRAINT;
+
+// Widget alignment related
+//
+extern CGFloat const DEF_HGT_ALIGN_FACTOR;
+extern CGFloat const DEF_CORNER_RAD_FACTOR;
+
+// UI Label
+//
 extern CGFloat const DEF_LABEL_WIDTH;
 extern CGFloat const DEF_LABEL_HEIGHT;
-extern CGFloat const DEF_NIL_CONSTRAINT;
 
 // Tap Area
 //
@@ -60,9 +68,12 @@ extern CGFloat const DEF_XXLG_TBL_CELL_HGT;
 extern CGFloat const DEF_TABLE_X_OFFSET;
 extern CGFloat const DEF_CELL_EDIT_DISPL;
 
+// UI PickerView
+//
 extern CGFloat const DEF_PICKER_ROW_HEIGHT;
-
 extern CGFloat const DEF_PICKER_HEIGHT;
+extern CGFloat const DEF_PICKER_WIDTH;
+
 extern CGFloat const DEF_COLLECTVIEW_INSET;
 
 // UIToolbar
@@ -139,6 +150,7 @@ extern int const BODY_BTN_TAG;
 extern int const PIGMENT_FIELD_TAG;
 extern int const PIGMENT_PICKER_TAG;
 extern int const PIGMENT_BTN_TAG;
+extern int const RATIOS_PICKER_TAG;
 
 // Settings
 //

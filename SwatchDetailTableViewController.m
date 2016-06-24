@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "GenericUtils.h"
 #import "AlertUtils.h"
+#import "PickerUtils.h"
 
 #import "MixAssociation.h"
 #import "MixAssocSwatch.h"
@@ -994,7 +995,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                                              initWithTarget:self action:action];
     tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
     [picker addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
+    [tapRecognizer setDelegate:self];
     
     return picker;
 }
