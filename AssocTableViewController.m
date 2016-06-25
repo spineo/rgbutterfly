@@ -978,7 +978,7 @@ const int ASSOC_COLORS_TAG     = 5;
 - (void)applyRenaming {
 
     [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
-    [_applyButton setEnabled:FALSE];
+    //[_applyButton setEnabled:FALSE];
     
     NSString *refName_1, *refName_2;
     int ratio_1, ratio_2;
@@ -995,6 +995,8 @@ const int ASSOC_COLORS_TAG     = 5;
         NSString *swatchName;
         NSNumber *swatchId;
         
+        NSMutableArray *ratios;
+        int index;
         if (i == 0) {
             refName_1 = [paintSwatch name];
             isMix = NO;
@@ -1008,8 +1010,12 @@ const int ASSOC_COLORS_TAG     = 5;
             swatchId = _refTypeId;
             
         } else {
-            ratio_2 = i - 1;
-            ratio_1 = swatch_ct - ratio_2 - 1;
+            index = i - 2;
+            ratios = [GenericUtils trimStrings:[[_mixRatiosComps objectAtIndex:index] componentsSeparatedByString:@":"]];
+            
+            ratio_1 = [[ratios objectAtIndex:0] intValue];
+            ratio_2 = [[ratios objectAtIndex:1] intValue];
+            
             isMix = YES;
 
             swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", refName_1, refName_2, ratio_1, ratio_2];
@@ -1029,7 +1035,7 @@ const int ASSOC_COLORS_TAG     = 5;
         [paintSwatch setName:swatchName];
 
     }
-    [_applyButton setEnabled:FALSE];
+    //[_applyButton setEnabled:FALSE];
     [_save setEnabled:TRUE];
     
     [self.tableView reloadData];
@@ -1107,7 +1113,6 @@ const int ASSOC_COLORS_TAG     = 5;
     [_pickerTextField resignFirstResponder];
     
     if (_mixRatiosSelRow != 0) {
-    
         NSString *mixRatios = [_mixRatiosList objectAtIndex:_mixRatiosSelRow];
         _mixRatiosComps = [GenericUtils trimStrings:[mixRatios componentsSeparatedByString:@","]];
         
