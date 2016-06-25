@@ -12,6 +12,7 @@
 #import "BarButtonUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
+#import "GenericUtils.h"
 
 @interface SettingsTableViewController ()
 
@@ -616,7 +617,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
 // TextField/TextView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - TextField Methods
+#pragma mark - TextField/TextView Methods
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
@@ -647,13 +648,13 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _editFlag = TRUE;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    _mixRatiosText = textView.text;
-}
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    _mixRatiosText = [GenericUtils removeSpaces:textView.text];
 }
 
 -(BOOL)textViewShouldReturn:(UITextView *)textView {
@@ -764,52 +765,105 @@ const int SETTINGS_MAX_SECTIONS   = 5;
 
 - (IBAction)save:(id)sender {
     
-    [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
-    [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:_assocsReadOnly context:self.context];
-    
-    NSError *error = nil;
-    if (![self.context save:&error]) {
-        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-    } else {
-        NSLog(@"Settings save successful");
+    // Perform any validations first
+    //
+    if ([self areValidRatios:_mixRatiosText]) {
 
-        // Read-Only Settings
-        //
-        [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
-        [_userDefaults setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
+        [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
+        [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:_assocsReadOnly context:self.context];
         
-        [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
-        [_userDefaults setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
+        NSError *error = nil;
+        if (![self.context save:&error]) {
+            NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        } else {
+            NSLog(@"Settings save successful");
+
+            // Read-Only Settings
+            //
+            [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
+            [_userDefaults setValue:[_psReadOnlyLabel text] forKey:_psReadOnlyText];
+            
+            [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
+            [_userDefaults setValue:[_maReadOnlyLabel text] forKey:_maReadOnlyText];
+            
+            // Tap Area Stepper Settings
+            //
+            [_userDefaults setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
+            [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
+            
+            // Match Num Stepper Settings
+            //
+            [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+            
+            // isRGB settings
+            //
+            [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
+            
+            // Add Brands
+            //
+            [_userDefaults setValue:_addBrandsText forKey:ADD_BRANDS_KEY];
+            
+            // Paint Mix Ratios
+            //
+            [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
+            
+            [_userDefaults synchronize];
+            
+            _editFlag = FALSE;
+        }
         
-        // Tap Area Stepper Settings
-        //
-        [_userDefaults setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
-        [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
-        
-        // Match Num Stepper Settings
-        //
-        [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
-        
-        // isRGB settings
-        //
-        [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
-        
-        // Add Brands
-        //
-        [_userDefaults setValue:_addBrandsText forKey:ADD_BRANDS_KEY];
-        
-        // Paint Mix Ratios
-        //
-        [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
-        
-        [_userDefaults synchronize];
-        
-        _editFlag = FALSE;
+    } else {
+        [self presentViewController:[AlertUtils createOkAlert:@"Mix Ratios Incorrectly Formatted" message:@"Mix ratios must be colon-delimited, each pair comma-separated, and no blank lines"] animated:YES completion:nil];
     }
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Validation
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Validation
+
+- (BOOL)areValidRatios:(NSString *)ratiosText {
+    
+    NSArray *groupList  = [ratiosText componentsSeparatedByString:@"\n"];
+    NSCharacterSet *fullSetOfChars = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,:"];
+    for (NSString *group in groupList) {
+        
+        // Check that no empty string were added
+        //
+        if ([group isEqualToString:@""]) {
+            return FALSE;
+        }
+        
+        // Check that no invalid characters are being used
+        //
+        if (![[group stringByTrimmingCharactersInSet:fullSetOfChars] isEqualToString:@""]) {
+            return FALSE;
+        }
+        
+        NSArray *comps = [group componentsSeparatedByString:@","];
+        for (NSString *ratiosPair in comps) {
+            NSArray *ratios = [ratiosPair componentsSeparatedByString:@":"];
+            
+            int ratiosCount = (int)[ratios count];
+            
+            // Check that each component has only two numeric ratios
+            //
+            if (ratiosCount != 2) {
+                return FALSE;
+            }
+        }
+    }
+    
+    return TRUE;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Navigation
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Navigation
+
 
 /*
 // In a storyboard-based application, you will often want to do a little preparation before navigation

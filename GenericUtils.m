@@ -25,4 +25,10 @@
     return trimmedString;
 }
 
++ (NSString *)removeSpaces:(NSString *)string {
+    NSString *noSpacesString = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    return noSpacesString;
+}
+
 @end
