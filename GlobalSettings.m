@@ -98,25 +98,25 @@ int const DEF_TAG_NUM    = 200;
 
 // UI Button Tags
 //
-int const IMAGELIB_BTN_TAG = 51;
-int const PHOTO_BTN_TAG    = 52;
-int const SEARCH_BTN_TAG   = 53;
-int const LISTING_BTN_TAG  = 54;
-int const RGB_BTN_TAG      = 55;
+int const IMAGELIB_BTN_TAG   = 51;
+int const PHOTO_BTN_TAG      = 52;
+int const SEARCH_BTN_TAG     = 53;
+int const LISTING_BTN_TAG    = 54;
+int const RGB_BTN_TAG        = 55;
 
-int const BACK_BTN_TAG     = 56;
-int const EDIT_BTN_TAG     = 57;
-int const SETTINGS_BTN_TAG = 58;
-int const SAVE_BTN_TAG     = 59;
-int const VIEW_BTN_TAG     = 60;
-int const DONE_BTN_TAG     = 61;
-int const HOME_BTN_TAG     = 62;
+int const BACK_BTN_TAG       = 56;
+int const EDIT_BTN_TAG       = 57;
+int const SETTINGS_BTN_TAG   = 58;
+int const SAVE_BTN_TAG       = 59;
+int const VIEW_BTN_TAG       = 60;
+int const DONE_BTN_TAG       = 61;
+int const HOME_BTN_TAG       = 62;
 
-int const DECR_ALG_BTN_TAG = 71;
-int const MATCH_BTN_TAG    = 72;
-int const INCR_ALG_BTN_TAG = 73;
-int const DECR_TAP_BTN_TAG = 74;
-int const INCR_TAP_BTN_TAG = 75;
+int const DECR_ALG_BTN_TAG   = 71;
+int const MATCH_BTN_TAG      = 72;
+int const INCR_ALG_BTN_TAG   = 73;
+int const DECR_TAP_BTN_TAG   = 74;
+int const INCR_TAP_BTN_TAG   = 75;
 
 int const NAME_FIELD_TAG     = 81;
 int const TYPE_FIELD_TAG     = 82;

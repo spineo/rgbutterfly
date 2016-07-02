@@ -66,6 +66,7 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		213DACDB1D284FF000204D0C /* UIImageViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 213DACDA1D284FF000204D0C /* UIImageViewNavigationController.m */; };
 		214430E51CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430DE1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m */; };
 		214430E61CB1A19B0014AABD /* MatchAssocKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E01CB1A19B0014AABD /* MatchAssocKeyword.m */; };
 		214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E21CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m */; };
@@ -198,6 +199,8 @@
 		21397EE21C84876D001C3F05 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		213DACD91D284FF000204D0C /* UIImageViewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageViewNavigationController.h; sourceTree = "<group>"; };
+		213DACDA1D284FF000204D0C /* UIImageViewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewNavigationController.m; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		214430DD1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssocKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
 		214430DE1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAssocKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 				21397ED41C848674001C3F05 /* UIImageViewController.m */,
 				21397ED51C848674001C3F05 /* ViewController.h */,
 				21397ED61C848674001C3F05 /* ViewController.m */,
+				213DACD91D284FF000204D0C /* UIImageViewNavigationController.h */,
+				213DACDA1D284FF000204D0C /* UIImageViewNavigationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 				214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
 				2133F2261CFB532200FB91AD /* BodyType.m in Sources */,
+				213DACDB1D284FF000204D0C /* UIImageViewNavigationController.m in Sources */,
 				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
 				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
 				21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */,

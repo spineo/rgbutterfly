@@ -69,7 +69,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
-@property (nonatomic, strong) UIBarButtonItem *upArrowItem;
+@property (nonatomic, strong) UIBarButtonItem *upArrowItem, *downArrowItem;
 
 // NSUserDefaults
 //
@@ -431,10 +431,10 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     
     // Adjust the NavBar layout when the orientation changes
     //
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidAppear:)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidAppear:)
+//                                                 name:UIDeviceOrientationDidChangeNotification
+//                                               object:nil];
     
     // Navigation Item Title
     //
@@ -527,8 +527,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _reuseCellIdentifier = @"ImageTableViewCell";
 
 
-    [_imageTableView setDelegate: self];
-    [_imageTableView setDataSource: self];
+    [_imageTableView setDelegate:self];
+    [_imageTableView setDataSource:self];
 
     // Shrink and expand image shown in the tableView header (for UIImageScrollView hide/show)
     //
@@ -538,10 +538,17 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     
     // Initial state until tapped areas are added
     //
-    [_imageTableView setHidden:TRUE];
+    //[_imageTableView setHidden:YES];
     
     _upArrowItem  = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
+    _downArrowItem  = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
     
+    _scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
+    [_scrollViewUp setTintColor:LIGHT_TEXT_COLOR];
+    
+    _scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
+    [_scrollViewDown setTintColor:LIGHT_TEXT_COLOR];
+
     // Notification center
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
@@ -624,11 +631,12 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 }
 
 - (void)selectMatchAction {
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
-        _imageViewSize = SPLIT_VIEW;
-    } else {
-        _imageViewSize = IMAGE_VIEW;
-    }
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+//        _imageViewSize = SPLIT_VIEW;
+//    } else {
+//        _imageViewSize = IMAGE_VIEW;
+//    }
+    _imageViewSize = SPLIT_VIEW;
 
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
@@ -692,19 +700,19 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 #pragma mark - General Purpose Methods
 
 - (void)resizeViews {
-    
-    CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
+
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
 
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
         
-        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+//        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
                 
             if (_imageViewSize == TABLE_VIEW) {
-                [_imageScrollView setHidden:TRUE];
-                [_imageTableView setHidden:FALSE];
-                self.tableHeightConstraint.constant = frameHeight;
+                [_imageScrollView setHidden:YES];
+                [_imageTableView setHidden:NO];
+                self.tableHeightConstraint.constant = height;
                 
                 [self matchButtonsShow];
                 
@@ -714,57 +722,61 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                 [self removeUpArrow];
                 
             } else if (_imageViewSize == SPLIT_VIEW) {
-                [_imageScrollView setHidden:FALSE];
-                [_imageTableView setHidden:FALSE];
+                [_imageScrollView setHidden:NO];
+                [_imageTableView setHidden:NO];
                 self.tableHeightConstraint.constant =  _defTableViewSize.height;
                 
                 [_scrollViewUp setEnabled:YES];
                 [_scrollViewDown setEnabled:YES];
-                
                 
                 [self removeUpArrow];
             
             // Full-screen image
             //
             } else {
-                [_imageScrollView setHidden:FALSE];
-                [_imageTableView setHidden:TRUE];
+                [_imageScrollView setHidden:NO];
+                [_imageTableView setHidden:YES];
                 self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
+                
                 [self matchButtonsHide];
                 
                 [self removeUpArrow];
                 [self addUpArrow];
             }
     
-        // In landscape, expand either the scroll view or the table view (as it looks kludgy otherwise on most devices)
-        //
-        } else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
-
-            if (_imageViewSize == TABLE_VIEW) {
-                [_imageScrollView setHidden:TRUE];
-                [_imageTableView setHidden:FALSE];
-                self.tableHeightConstraint.constant = frameHeight;
-
-                [self matchButtonsShow];
-                
-                [_scrollViewUp setEnabled:FALSE];
-                [_scrollViewDown setEnabled:TRUE];
-                
-
-                [self removeUpArrow];
-            
-            // _imageViewSize > TABLE_VIEW (full-screen image)
-            //
-            } else {
-                [_imageScrollView setHidden:FALSE];
-                [_imageTableView setHidden:TRUE];
-                self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
-                [self matchButtonsHide];
-                
-                [self removeUpArrow];
-                [self addUpArrow];
-            }
-        }
+//        // In landscape, expand either the scroll view or the table view (as it looks kludgy otherwise on most devices)
+//        //
+//        } else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
+//
+//            if (_imageViewSize == TABLE_VIEW) {
+//                [_imageScrollView setHidden:YES];
+//                [_imageTableView setHidden:NO];
+//                self.tableHeightConstraint.constant = height;
+//
+//                [self matchButtonsShow];
+//                
+//                [_scrollViewUp setEnabled:FALSE];
+//                [_scrollViewDown setEnabled:TRUE];
+//                
+//                [self removeUpArrow];
+//                
+////                [self.view setNeedsDisplay]; // repaint
+////                [self.view setNeedsLayout]; // re-layout
+//            
+//            // _imageViewSize > TABLE_VIEW (full-screen image)
+//            //
+//            } else {
+//                [_imageScrollView setHidden:NO];
+//                [_imageScrollView setAutoresizesSubviews:YES];
+//                [_imageTableView setHidden:YES];
+//                self.tableHeightConstraint.constant = DEF_NIL_CONSTRAINT;
+//                
+//                [self matchButtonsHide];
+//                
+//                [self removeUpArrow];
+//                [self addUpArrow];
+//            }
+//        }
         
     // Assoc type
     //
@@ -775,8 +787,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [_associateMixes setEnabled:FALSE];
         [self viewButtonHide];
         
-        [_imageTableView setHidden:TRUE];
-        [_imageScrollView setHidden:FALSE];
+        [_imageTableView setHidden:YES];
+        [_imageScrollView setHidden:NO];
+        
         [self matchButtonsHide];
         
         if (_currTapSection > 0) {
@@ -787,14 +800,13 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     }
     
     [self.imageTableView needsUpdateConstraints];
-    [self.imageTableView reloadData];
 }
 
 - (void)resetViews {
     [self.context rollback];
     
     [self setPaintSwatches: nil];
-    [_imageView setImage: _selectedImage];
+    [_imageView setImage:_selectedImage];
     
     _currTapSection = 0;
     
@@ -817,105 +829,53 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 }
 
 - (void)scrollViewDecrease {
+
     
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
         if (_imageViewSize == IMAGE_VIEW) {
             _imageViewSize = SPLIT_VIEW;
 
-            [_scrollViewDown setEnabled:TRUE];
-            [_scrollViewUp setEnabled:TRUE];
-            
-            self.tableHeightConstraint.constant =  _defTableViewSize.height;
-            
-            [_imageTableView setHidden:FALSE];
-            [_imageScrollView setHidden:FALSE];
-            
-            if (_currTapSection > 0) {
-                [self matchButtonsShow];
-            } else {
-                [self matchButtonsHide];
-            }
-            
-            [self removeUpArrow];
-            
-        } else if ((_imageViewSize == SPLIT_VIEW) && (_currTapSection > 0)) {
+        // Split View
+        //
+        } else if (_currTapSection > 0) {
             _imageViewSize = TABLE_VIEW;
-
-            [_scrollViewUp setEnabled:FALSE];
-            [_scrollViewDown setEnabled:TRUE];
-
-            CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
-            self.tableHeightConstraint.constant = frameHeight;
-            
-            [_imageTableView setHidden:FALSE];
-            [_imageScrollView setHidden:TRUE];
-            
-            [self matchButtonsShow];
         }
+//    }
         
     // Landscape
     //
-    } else if (_currTapSection > 0) {
-        _imageViewSize = TABLE_VIEW;
-        
-        [_scrollViewUp setEnabled:FALSE];
-        [_scrollViewDown setEnabled:TRUE];
-        
-        CGFloat frameHeight = [[UIScreen mainScreen] bounds].size.height;
-        self.tableHeightConstraint.constant = frameHeight;
-        
-        [_imageTableView setHidden:FALSE];
-        [_imageScrollView setHidden:TRUE];
-        
-        [self matchButtonsShow];
-        
-        [self removeUpArrow];
-    }
+//    } else if (_currTapSection > 0) {
+//        _imageViewSize = TABLE_VIEW;
+//    }
     
-    [self.imageTableView needsUpdateConstraints];
-    [self.imageTableView reloadData];
+    [self resizeViews];
 }
 
 - (void)scrollViewIncrease {
     
-    [_imageScrollView setHidden:FALSE];
+    //[_imageScrollView setHidden:NO];
     
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
         if (_imageViewSize == TABLE_VIEW) {
             _imageViewSize = SPLIT_VIEW;
-            self.tableHeightConstraint.constant =  _defTableViewSize.height;
-            [_imageTableView setHidden:FALSE];
-            
-            if (_currTapSection > 0) {
-                [self matchButtonsShow];
-            } else {
-                [self matchButtonsHide];
-            }
             
         } else if (_imageViewSize == SPLIT_VIEW) {
             _imageViewSize = IMAGE_VIEW;
-            self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
-            [_imageTableView setHidden:TRUE];
-            [self matchButtonsHide];
-            
-            [self addUpArrow];
         }
         
     // Landscape
     //
-    } else {
-        _imageViewSize = IMAGE_VIEW;
-        self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
-        [_imageTableView setHidden:TRUE];
-        [self matchButtonsHide];
-        
-        [self removeUpArrow];
-        [self addUpArrow];
-    }
-    [self.imageTableView reloadData];
-    [self.imageTableView needsUpdateConstraints];
+    //} else  if (_currTapSection > 0) {
+//    }
+    
+//    } else {
+//        _imageViewSize = IMAGE_VIEW;
+//
+//    }
+    
+    [self resizeViews];
 }
 
 - (void)setAlertButtonStates {
@@ -1028,7 +988,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         //
         _currTapSection++;
         
-        [_imageTableView setHidden:false];
+        [_imageTableView setHidden:NO];
         
         
         // Instantiate the new PaintSwatch Object
@@ -1053,11 +1013,12 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [_paintSwatches addObject:_swatchObj];
         
         if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
-            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < IMAGE_VIEW) {
-                [self matchButtonsShow];
-            } else {
-                [self matchButtonsHide];
-            }
+//            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < IMAGE_VIEW) {
+//                [self matchButtonsShow];
+//            } else {
+//                [self matchButtonsHide];
+//            }
+            [self matchButtonsShow];
             
         } else {
             
@@ -1072,12 +1033,12 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [self viewButtonHide];
         [self matchButtonsHide];
         
-        _imageTableView.hidden = true;
+        //[_imageTableView setHidden:YES];
     
     } else {
         _currTapSection--;
         
-        _imageTableView.hidden = false;
+        [_imageTableView setHidden:NO];
         
         int index = _currTapSection - 1;
         _swatchObj = [_paintSwatches objectAtIndex:index];
@@ -1301,15 +1262,21 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     }
 
     if (indexPath.section == HEADER_TABLEVIEW_SECTION) {
-        return DEF_XSM_TBL_HDR_HGT;
+        //return DEF_XSM_TBL_HDR_HGT;
+        return DEF_TABLE_CELL_HEIGHT;
     } else {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"*********************** Section=%i, Row=%i, CurrTapSection=%i", (int)indexPath.section, (int)indexPath.row, _currTapSection);
+    
     if (indexPath.section == COLLECT_TABLEVIEW_SECTION) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+        
+        NSLog(@"****************************** COLLECT TV RELOAD ******************************");
         
         if (! custCell) {
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
@@ -1343,10 +1310,47 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
         return custCell;
+
     } else {
+        NSLog(@"****************************** TV RELOAD ******************************");
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier];
+        //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
         [cell setBackgroundColor:DARK_BG_COLOR];
+        
+        NSString *headerTitle = @"";
+        if (_currTapSection > 0) {
+            headerTitle = HDR_TABLEVIEW_TITLE;
+            //            [_scrollViewUp setEnabled:TRUE];
+        }
+        //
+        //        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
+        //            [_scrollViewUp setEnabled:FALSE];
+        //        } else {
+        //            [_scrollViewUp setEnabled:TRUE];
+        //        }
+        
+        UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
+        [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
+        
+        UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:headerTitle style:UIBarButtonItemStylePlain target:nil action:nil];
+        
+//        UIBarButtonItem *scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
+//        [scrollViewUp setTintColor:LIGHT_TEXT_COLOR];
+//        
+//        UIBarButtonItem *scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
+//        [scrollViewDown setTintColor:LIGHT_TEXT_COLOR];
+        
+        scrollViewToolbar.items = @[
+                                    headerButtonLabel,
+                                    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                    _scrollViewUp,
+                                    _scrollViewDown,
+                                    ];
+        
+        
+        [cell.contentView  addSubview:scrollViewToolbar];
+        [scrollViewToolbar sizeToFit];
         
         return cell;
     }
@@ -1365,7 +1369,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return DEF_TABLE_HDR_HEIGHT;
+        //return DEF_TABLE_HDR_HEIGHT;
+        return DEF_NIL_HEADER;
     } else {
         return DEF_NIL_HEADER;
     }
@@ -1376,28 +1381,26 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width,DEF_SM_TBL_HDR_HEIGHT)];
     
     if (section == HEADER_TABLEVIEW_SECTION) {
-        [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-         UIViewAutoresizingFlexibleLeftMargin |
-         UIViewAutoresizingFlexibleRightMargin];
 
-        _scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
-        [_scrollViewUp setEnabled:FALSE];
-        
+//        [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
+//         UIViewAutoresizingFlexibleLeftMargin |
+//         UIViewAutoresizingFlexibleRightMargin];
+
+
+//        [_scrollViewUp setEnabled:FALSE];
+//        [_scrollViewDown setEnabled:TRUE];
+//        
         NSString *headerTitle = @"";
         if (_currTapSection > 0) {
             headerTitle = HDR_TABLEVIEW_TITLE;
-            [_scrollViewUp setEnabled:TRUE];
+//            [_scrollViewUp setEnabled:TRUE];
         }
-        
-        _scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
-        [_scrollViewUp setTintColor: LIGHT_TEXT_COLOR];
-        [_scrollViewDown setTintColor: LIGHT_TEXT_COLOR];
-        
-        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
-            [_scrollViewUp setEnabled:FALSE];
-        } else {
-            [_scrollViewUp setEnabled:TRUE];
-        }
+//        
+//        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
+//            [_scrollViewUp setEnabled:FALSE];
+//        } else {
+//            [_scrollViewUp setEnabled:TRUE];
+//        }
         
         UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
         [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
