@@ -15,5 +15,6 @@
 + (NSMutableArray *)trimStrings:(NSArray *)stringList;
 + (NSString *)trimString:(NSString *)string;
 + (NSString *)removeSpaces:(NSString *)string;
++ (NSString *)getCurrDateString;
 
 @end

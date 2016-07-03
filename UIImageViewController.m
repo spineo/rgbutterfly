@@ -1664,8 +1664,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        int assoc_ct = [ManagedObjectUtils fetchCount:@"MixAssociation"];
-         _assocName = [[NSString alloc] initWithFormat:@"MixAssoc %i", assoc_ct];
+         _assocName = [[NSString alloc] initWithFormat:@"MixAssoc %@", [GenericUtils getCurrDateString]];
     }
     
     [_mixAssociation setName:_assocName];
@@ -1803,8 +1802,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        int match_ct = [ManagedObjectUtils fetchCount:@"MatchAssociation"];
-        _assocName = [[NSString alloc] initWithFormat:@"MatchAssoc %i", match_ct];
+        _assocName = [[NSString alloc] initWithFormat:@"MatchAssoc %@", [GenericUtils getCurrDateString]];
         ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
     }
 

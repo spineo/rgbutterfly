@@ -31,4 +31,11 @@
     return noSpacesString;
 }
 
++ (NSString *)getCurrDateString {
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    return [dateFormatter stringFromDate:currentDate];
+}
+
 @end
