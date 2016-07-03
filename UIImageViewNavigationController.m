@@ -24,6 +24,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Orientations
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
 }

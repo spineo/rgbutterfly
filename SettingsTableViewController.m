@@ -38,7 +38,6 @@
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSEntityDescription *paintSwatchEntity, *mixAssocEntity;
 
 @end
 
@@ -82,10 +81,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     // NSManagedObject
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
-    self.context     = [self.appDelegate managedObjectContext];
-    
-    _paintSwatchEntity = [NSEntityDescription entityForName:@"PaintSwatch"    inManagedObjectContext:self.context];
-    _mixAssocEntity    = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:self.context];
+    self.context  = [self.appDelegate managedObjectContext];
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -769,15 +765,20 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     if ([self areValidRatios:_mixRatiosText]) {
 
+        BOOL saveError = FALSE;
+        
         [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
         [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:_assocsReadOnly context:self.context];
         
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+            saveError = TRUE;
         } else {
             NSLog(@"Settings save successful");
+        }
 
+        if (! saveError) {
             // Read-Only Settings
             //
             [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];

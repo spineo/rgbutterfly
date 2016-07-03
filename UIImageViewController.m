@@ -22,6 +22,7 @@
 #import "AlertUtils.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
+#import "SettingsTableViewController.h"
 
 // NSManagedObject
 //
@@ -2151,18 +2152,26 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     
         [swatchDetailTableViewController setPaintSwatch:[_paintSwatches objectAtIndex:0]];
 
-    // Settings or Other Segue
+
+    // Settings or Other Segue (for now, no action)
     //
     } else {
-        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
-            [self presentViewController:myAlert animated:YES completion:nil];
-        
+        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged)) {
+            [self saveMixAssoc];
+            
         } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
-            [self presentViewController:myAlert animated:YES completion:nil];
+            [self updateMatchAssoc];
+            //[settingsTableViewController setParentContext:self.context];
         }
-        NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);
+//        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
+//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
+//            [self presentViewController:myAlert animated:YES completion:nil];
+//        
+//        } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
+//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
+//            [self presentViewController:myAlert animated:YES completion:nil];
+//        }
+//        NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);
     }
 }
 
