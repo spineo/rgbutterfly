@@ -225,14 +225,14 @@ const int ASSOC_COLORS_TAG     = 5;
         } else {
             ref_parts_ratio = [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue];
 
-            if (ref_parts_ratio == 0) {
-                ref_parts_ratio = objCount - i;
-            }
+//            if (ref_parts_ratio == 0) {
+//                ref_parts_ratio = objCount - i;
+//            }
     
             mix_parts_ratio = [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue];
-            if (mix_parts_ratio == 0) {
-                mix_parts_ratio = i - 1;
-            }
+//            if (mix_parts_ratio == 0) {
+//                mix_parts_ratio = i - 1;
+//            }
     
             colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
             if ([colorFormatLabel length] == 0) {
@@ -980,8 +980,9 @@ const int ASSOC_COLORS_TAG     = 5;
     [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
     //[_applyButton setEnabled:FALSE];
     
+    
     NSString *refName_1, *refName_2;
-    int ratio_1, ratio_2;
+
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
         int color_tag = i + ASSOC_COLORS_TAG;
@@ -997,6 +998,10 @@ const int ASSOC_COLORS_TAG     = 5;
         
         NSMutableArray *ratios;
         int index;
+
+        int ratio_1 = 0;
+        int ratio_2 = 0;
+
         if (i == 0) {
             refName_1 = [paintSwatch name];
             isMix = NO;
@@ -1033,6 +1038,8 @@ const int ASSOC_COLORS_TAG     = 5;
         [paintSwatch setIs_mix:[NSNumber numberWithBool:isMix]];
         [paintSwatch setType_id:swatchId];
         [paintSwatch setName:swatchName];
+        [paintSwatch setRef_parts_ratio:[NSNumber numberWithInt:ratio_1]];
+        [paintSwatch setMix_parts_ratio:[NSNumber numberWithInt:ratio_2]];
 
     }
     //[_applyButton setEnabled:FALSE];
