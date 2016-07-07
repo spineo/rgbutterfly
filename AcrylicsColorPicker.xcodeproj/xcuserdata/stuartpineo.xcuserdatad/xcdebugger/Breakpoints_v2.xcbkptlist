@@ -495,7 +495,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1247"
             endingLineNumber = "1247"
-            landmarkName = "-unwindToAssocFromAdd:"
+            landmarkName = "-unwindToAssocFromDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -511,7 +511,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1248"
             endingLineNumber = "1248"
-            landmarkName = "-unwindToAssocFromAdd:"
+            landmarkName = "-unwindToAssocFromDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -526,9 +526,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1279"
-            endingLineNumber = "1279"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1279">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -542,9 +540,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1280"
-            endingLineNumber = "1280"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1280">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -558,9 +554,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1281"
-            endingLineNumber = "1281"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1281">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -730,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-loadMixCollectionViewData"
             landmarkType = "5">
          </BreakpointContent>
@@ -746,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "-loadMixCollectionViewData"
             landmarkType = "5">
          </BreakpointContent>
@@ -762,11 +756,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -778,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -794,11 +788,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-loadMixCollectionViewData"
             landmarkType = "5">
          </BreakpointContent>
@@ -810,11 +804,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "635"
-            endingLineNumber = "635"
+            startingLineNumber = "638"
+            endingLineNumber = "638"
             landmarkName = "@implementation ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -826,11 +820,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "628"
-            endingLineNumber = "628"
+            startingLineNumber = "631"
+            endingLineNumber = "631"
             landmarkName = "-showPhotoOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -874,11 +868,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "-loadMixCollectionViewData"
             landmarkType = "5">
          </BreakpointContent>
@@ -890,11 +884,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,11 +900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -922,11 +916,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -938,39 +932,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "465"
-            endingLineNumber = "465"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViewController.m"
-            timestampString = "486745164.870518"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "468"
@@ -986,11 +948,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewController.m"
+            timestampString = "489589720.66178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewController.m"
+            timestampString = "489589720.66178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1002,11 +996,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "486745164.870518"
+            timestampString = "489589720.66178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2299,6 +2293,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "751"
             endingLineNumber = "751"
+            landmarkName = "-tableView:canEditRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "488463247.926055"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "705"
+            endingLineNumber = "705"
             landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2315,23 +2325,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "705"
             endingLineNumber = "705"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AssocTableViewController.m"
-            timestampString = "488463247.926055"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "705"
-            endingLineNumber = "705"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2347,7 +2341,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "697"
             endingLineNumber = "697"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2362,9 +2356,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1272"
-            endingLineNumber = "1272"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1272">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2378,9 +2370,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1267"
-            endingLineNumber = "1267"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1267">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2394,9 +2384,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1267"
-            endingLineNumber = "1267"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1267">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2410,9 +2398,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1259"
-            endingLineNumber = "1259"
-            landmarkName = "-unwindToAssocFromAdd:"
-            landmarkType = "5">
+            endingLineNumber = "1259">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2422,11 +2408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "812"
-            endingLineNumber = "812"
+            startingLineNumber = "831"
+            endingLineNumber = "831"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2438,11 +2424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "814"
-            endingLineNumber = "814"
+            startingLineNumber = "833"
+            endingLineNumber = "833"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2454,11 +2440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "815"
-            endingLineNumber = "815"
+            startingLineNumber = "834"
+            endingLineNumber = "834"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2470,11 +2456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "817"
-            endingLineNumber = "817"
+            startingLineNumber = "836"
+            endingLineNumber = "836"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2486,11 +2472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "819"
-            endingLineNumber = "819"
+            startingLineNumber = "838"
+            endingLineNumber = "838"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2502,11 +2488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "820"
-            endingLineNumber = "820"
+            startingLineNumber = "839"
+            endingLineNumber = "839"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2518,11 +2504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ManagedObjectUtils.m"
-            timestampString = "486565797.907674"
+            timestampString = "489589603.342755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "822"
-            endingLineNumber = "822"
+            startingLineNumber = "841"
+            endingLineNumber = "841"
             landmarkName = "+deletePaintSwatchKeywords:context:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2803,7 +2789,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "786"
             endingLineNumber = "786"
-            landmarkName = "-tableView:canEditRowAtIndexPath:"
+            landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

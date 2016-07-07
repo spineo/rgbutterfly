@@ -22,5 +22,6 @@
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
++ (UIColor *)setBestColorContrast:(NSString *)colorName;
 
 @end

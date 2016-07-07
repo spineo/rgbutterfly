@@ -231,4 +231,16 @@
     return croppedImage;
 }
 
++ (UIColor *)setBestColorContrast:(NSString *)colorName {
+    
+    UIColor *textColor = DARK_TEXT_COLOR;
+    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
+        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
+        textColor = LIGHT_TEXT_COLOR;
+    }
+    
+    return textColor;
+}
+
+
 @end

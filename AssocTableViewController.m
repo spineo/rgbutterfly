@@ -190,12 +190,11 @@ const int ASSOC_COLORS_TAG     = 5;
     for (int i=0; i < objCount; i++) {
         
         NSString *colorFormatLabel;
-        int ref_parts_ratio, mix_parts_ratio;
+        int ref_parts_ratio = 0;
+        int mix_parts_ratio = 0;
 
         if (i == 0) {
-            ref_parts_ratio = 1;
-            mix_parts_ratio = 0;
-            
+
             colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
             
             if ([colorFormatLabel length] == 0) {
@@ -209,8 +208,6 @@ const int ASSOC_COLORS_TAG     = 5;
             
             
         } else if (i == 1) {
-            ref_parts_ratio = 0;
-            mix_parts_ratio = 1;
 
             colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
             if ([colorFormatLabel length] == 0) {
@@ -224,15 +221,7 @@ const int ASSOC_COLORS_TAG     = 5;
             
         } else {
             ref_parts_ratio = [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue];
-
-//            if (ref_parts_ratio == 0) {
-//                ref_parts_ratio = objCount - i;
-//            }
-    
             mix_parts_ratio = [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue];
-//            if (mix_parts_ratio == 0) {
-//                mix_parts_ratio = i - 1;
-//            }
     
             colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
             if ([colorFormatLabel length] == 0) {
@@ -320,7 +309,7 @@ const int ASSOC_COLORS_TAG     = 5;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
-    //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+
     [_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -353,32 +342,6 @@ const int ASSOC_COLORS_TAG     = 5;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - UITableView Methods
-
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-//    [headerView setBackgroundColor: DARK_BG_COLOR];
-//    
-//    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
-//    [headerLabel setBackgroundColor: DARK_BG_COLOR];
-//    [headerLabel setTextColor: LIGHT_TEXT_COLOR];
-//    [headerLabel setFont: TABLE_HEADER_FONT];
-//    
-//    if (section == 0) {
-//        [headerView addSubview:headerLabel];
-//        [headerLabel setText:_colorHeader];
-//        
-//    } else if (section == 2) {
-//        [headerView addSubview:headerLabel];
-//        [headerLabel setText:_nameHeader];
-//        
-//    } else if (section == 3) {
-//        [headerView addSubview:headerLabel];
-//        [headerLabel setText:_descHeader];
-//    }
-//    
-//    return headerView;
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

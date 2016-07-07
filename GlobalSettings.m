@@ -91,6 +91,11 @@ CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
 CGFloat const DECR_BUTTON_WIDTH     = 20.0;
 CGFloat const SHOW_BUTTON_WIDTH     = 20.0;
 
+// Image Actions
+//
+int const TAKE_PHOTO_ACTION   = 1;
+int const SELECT_PHOTO_ACTION = 2;
+
 
 // Tags
 //

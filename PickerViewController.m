@@ -8,6 +8,7 @@
 
 #import "PickerViewController.h"
 #import "UIImageViewController.h"
+#import "GlobalSettings.h"
 
 
 @interface PickerViewController ()
@@ -42,7 +43,7 @@
     
     // For the PhotoLibrary rotation is allowed and each call recomputes the layout
     //
-    if (_imageAction == 2) {
+    if (_imageAction == SELECT_PHOTO_ACTION) {
         
         [self setAutoRotate: TRUE];
         
@@ -56,11 +57,11 @@
 }
 
 - (void)refreshPicker {
-    if ((_imageAction == 1) && ! _photoSetUp) {
+    if ((_imageAction == TAKE_PHOTO_ACTION) && ! _photoSetUp) {
         [self setPhotoSetUp: TRUE];
         [self takePhoto];
         
-    } else if (_imageAction == 2) {
+    } else if (_imageAction == SELECT_PHOTO_ACTION) {
         [self selectPhoto];
     }
 }
@@ -110,7 +111,7 @@
 }
 
 - (IBAction)unwindToPickerViewController:(UIStoryboardSegue *)segue {
-    if (_imageAction == 1) {
+    if (_imageAction == TAKE_PHOTO_ACTION) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

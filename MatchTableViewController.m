@@ -625,17 +625,6 @@ const int IMAGE_TAG  = 6;
     return 1;
 }
 
-- (UIColor *)setTextColor:(NSString *)colorName {
-    
-    UIColor *textColor = DARK_TEXT_COLOR;
-    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
-        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
-        textColor = LIGHT_TEXT_COLOR;
-    }
-    
-    return textColor;
-}
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TapRecognizer Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -694,13 +683,13 @@ const int IMAGE_TAG  = 6;
         _maxMatchNum--;
 
         [self.tableView reloadData];
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
         
         [_save setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 

@@ -598,8 +598,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         }
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:indexPath.row];
-        MixAssociation *mixAssocObj = mixAssocSwatchObj.mix_association;
-        NSString *mix_name = mixAssocObj.name;
+        MixAssociation *mixAssocObj = [mixAssocSwatchObj mix_association];
+        NSString *mix_name = [mixAssocObj name];
         if (mix_name == nil) {
             mix_name = NO_MIX_NAME;
         }
@@ -927,7 +927,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         NSString *colorName = [_subjColorNames objectAtIndex:row];
         UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
         
-        [label setTextColor:[self setTextColor:colorName]];
+        [label setTextColor:[ColorUtils setBestColorContrast:colorName]];
         [label setBackgroundColor:backgroundColor];
         [label setText:[_subjColorNames objectAtIndex:row]];
     }
@@ -1147,16 +1147,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 // General purpose methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- (UIColor *)setTextColor:(NSString *)colorName {
-
-    UIColor *textColor = DARK_TEXT_COLOR;
-    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
-        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
-        textColor = LIGHT_TEXT_COLOR;
-    }
-    
-    return textColor;
-}
 
 - (IBAction)goBack:(id)sender {
     [super dismissViewControllerAnimated:YES completion:NULL];
@@ -1265,7 +1255,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _subjColorValue    = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
     
     [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
-    [_subjColorName setTextColor:[self setTextColor:_colorSelected]];
+    [_subjColorName setTextColor:[ColorUtils setBestColorContrast:_colorSelected]];
     [_subjColorName setBackgroundColor:_subjColorValue];
 
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];

@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
 // NSManagedObject subclassing
@@ -141,7 +141,10 @@
     [_photoSelectionController addAction:selCancel];
     
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
-
+    
+    PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
+    _matchAssocId = [[paintSwatchType order] intValue];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -240,15 +243,15 @@
         nspath = [NSIndexPath indexPathForRow:i inSection:0];
         SwatchKeyword *skw = [self.fetchedResultsController objectAtIndexPath:nspath];
         
-        PaintSwatches *ps = (PaintSwatches *)skw.paint_swatch;
+        PaintSwatches *ps = (PaintSwatches *)[skw paint_swatch];
         
-        Keyword *kw = skw.keyword;
-        NSString *keyword = kw.name;
+        Keyword *kw = [skw keyword];
+        NSString *keyword = [kw name];
         
         int sct = 0;
         if (![keyword isEqualToString:@""] && keyword != nil) {
             id swatchKeywordNames = [_keywordNames objectForKey:keyword];
-            if ( swatchKeywordNames == nil ) {
+            if (swatchKeywordNames == nil) {
                 swatchKeywordNames = [NSMutableArray array];
                 [_keywordNames setObject:swatchKeywordNames forKey:keyword];
             }
@@ -316,7 +319,7 @@
         [self presentViewController:[AlertUtils createOkAlert:@"Error" message:@"Device has no camera"] animated:YES completion:nil];
         
     } else {
-        [self setImageAction:1];
+        [self setImageAction:TAKE_PHOTO_ACTION];
         
         NSLog(@"Image picker segue");
         [self performSegueWithIdentifier:@"ImagePickerSegue" sender:self];
@@ -324,7 +327,7 @@
 }
 
 - (void)selectPhoto {
-    [self setImageAction: 2];
+    [self setImageAction:SELECT_PHOTO_ACTION];
     [self performSegueWithIdentifier:@"ImagePickerSegue" sender:self];
 }
 
@@ -343,7 +346,7 @@
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerLabel setBackgroundColor: DARK_BG_COLOR];
     [headerLabel setTextColor: LIGHT_TEXT_COLOR];
     [headerLabel setFont: TABLE_HEADER_FONT];
@@ -354,15 +357,15 @@
 
     
     if ([_listingType isEqualToString:@"Keywords"]) {
-        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         
         if (section == 0) {
-            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT*2)];
+            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
             [headerView addSubview:headerLabel];
             [headerLabel setText: @"Keywords Listing"];
             [headerLabel setTextAlignment: NSTextAlignmentCenter];
             
-            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET+DEF_TABLE_HDR_HEIGHT+1.0, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT-2.0)];
+            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         }
         
 
@@ -397,9 +400,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if ([_listingType isEqualToString:@"Keywords"] && (section == 0)) {
-        return DEF_TABLE_HDR_HEIGHT * 2;
+        return DEF_LG_TABLE_CELL_HGT;
     } else {
-        return DEF_TABLE_HDR_HEIGHT;
+        return DEF_SM_TABLE_CELL_HGT;
     }
 }
 
@@ -517,7 +520,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
-        [cell.imageView setFrame:CGRectMake(5.0, 0.0, cell.bounds.size.height, cell.bounds.size.height)];
+        [cell.imageView setFrame:CGRectMake(DEF_FIELD_PADDING, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height)];
         [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
         [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
@@ -533,7 +536,7 @@
         
         if ([_listingType isEqualToString:@"Keywords"]) {
     
-            NSString *sectionTitle   = [_sortedLetters objectAtIndex:indexPath.section];
+            NSString *sectionTitle = [_sortedLetters objectAtIndex:indexPath.section];
             NSString *kw_name = [[_letterKeywords objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             PaintSwatches *ps = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
 
@@ -710,9 +713,9 @@
         
     } else if ([_listingType isEqualToString:@"Match"]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
-        TapArea *tapArea = paintSwatch.tap_area;
-        _matchAssociation = tapArea.match_association;
-        _associationImage = [UIImage imageWithData:_matchAssociation.image_url];
+        TapArea *tapArea = [paintSwatch tap_area];
+        _matchAssociation = [tapArea match_association];
+        _associationImage = [UIImage imageWithData:[_matchAssociation image_url]];
         
         [self performSegueWithIdentifier:@"ImageSelectionSegue" sender:self];
     }
@@ -743,7 +746,7 @@
     
     // Skip match assoc types
     //
-    [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != 3"]];
+    [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
     
     [request setSortDescriptors:@[nameSort]];
     
