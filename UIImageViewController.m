@@ -282,6 +282,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     __weak UIAlertController *deleteTapsAlertController_ = _deleteTapsAlertController;
     
     _deleteTapsYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+
+        [self.context rollback];
+        
         if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
             [self deleteMatchAssoc];
             [self matchButtonsHide];
