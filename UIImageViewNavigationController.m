@@ -34,9 +34,9 @@
     return NO;
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskPortrait;//choose portrait or landscape, same as above
-}
+//- (NSUInteger)supportedInterfaceOrientations{
+//    return UIInterfaceOrientationMaskPortrait;//choose portrait or landscape, same as above
+//}
 
 /*
 #pragma mark - Navigation

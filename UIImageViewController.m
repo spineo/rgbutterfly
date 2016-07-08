@@ -2205,6 +2205,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 }
 
 - (IBAction)goBack:(id)sender {
+    [self.context rollback];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
