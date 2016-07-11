@@ -385,7 +385,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     }];
 
     [updateAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchDescTextField) {
-        if (_matchAssociation != nil) {
+        if ((_matchAssociation != nil) && !([[_matchAssociation desc] isEqualToString:@""] || ([_matchAssociation desc] == nil))) {
             [matchDescTextField setText:[_matchAssociation desc]];
         } else {
             [matchDescTextField setPlaceholder: NSLocalizedString(@"Match description.", nil)];
