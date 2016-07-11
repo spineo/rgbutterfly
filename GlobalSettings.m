@@ -122,6 +122,7 @@ int const MATCH_BTN_TAG      = 72;
 int const INCR_ALG_BTN_TAG   = 73;
 int const DECR_TAP_BTN_TAG   = 74;
 int const INCR_TAP_BTN_TAG   = 75;
+int const ASSOC_BTN_TAG      = 76;
 
 int const NAME_FIELD_TAG     = 81;
 int const TYPE_FIELD_TAG     = 82;

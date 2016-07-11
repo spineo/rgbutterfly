@@ -464,6 +464,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                                                                 action: @selector(selectMatchAction)];
                                                 
                                                 [matchButton setTintColor:LIGHT_TEXT_COLOR];
+                                                [matchButton setTag:MATCH_BTN_TAG];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
                                                 [items replaceObjectAtIndex:3 withObject:matchButton];
@@ -488,6 +489,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                                                                 action: @selector(selectAssocAction)];
 
                                                 [assocButton setTintColor: LIGHT_TEXT_COLOR];
+                                                [assocButton setTag:ASSOC_BTN_TAG];
                                                 
                                                 [self removeUpArrow];
                                                 
@@ -1726,6 +1728,10 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         //
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
         
+        // Disable the Match/Assoc toggle (no reason to switch back)
+        //
+        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:ASSOC_BTN_TAG isEnabled:FALSE];
+        
         [_assocSave setEnabled:FALSE];
     }
 }
@@ -1937,7 +1943,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
-        
+
         [self matchButtonsHide];
         
         [_matchSave setEnabled:FALSE];

@@ -136,6 +136,7 @@ extern int const MATCH_BTN_TAG;
 extern int const INCR_ALG_BTN_TAG;
 extern int const DECR_TAP_BTN_TAG;
 extern int const INCR_TAP_BTN_TAG;
+extern int const ASSOC_BTN_TAG;
 
 extern int const NAME_FIELD_TAG;
 extern int const TYPE_FIELD_TAG;

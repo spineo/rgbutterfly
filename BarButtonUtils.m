@@ -59,7 +59,7 @@
         int buttonTag = (int)refButton.tag;
         
         if (refTag == buttonTag) {
-            [ [toolbarItems objectAtIndex:i ] setEnabled:(isEnabled) ];
+            [ [toolbarItems objectAtIndex:i ] setEnabled:isEnabled ];
         }
     }
 }
