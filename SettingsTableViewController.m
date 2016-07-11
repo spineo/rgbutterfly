@@ -218,10 +218,10 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
         _shapeTitle = SHAPE_CIRCLE_VALUE;
         
-        // Rectangle
-        //
+    // Rectangle
+    //
     } else {
-        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+        [_tapImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
         [_tapImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
         _shapeTitle = SHAPE_RECT_VALUE;
     }
@@ -229,7 +229,6 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     
     _shapeButton = [BarButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
     [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
-    
     
     // Label displaying the value in the stepper
     //
@@ -717,13 +716,12 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     if ([_shapeButton.titleLabel.text isEqualToString:SHAPE_CIRCLE_VALUE]) {
         _shapeTitle = SHAPE_RECT_VALUE;
         _shapeGeom  = SHAPE_RECT_VALUE;
-        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+        [_tapImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
 
     } else {
         _shapeTitle = SHAPE_CIRCLE_VALUE;
         _shapeGeom  = SHAPE_CIRCLE_VALUE;
         [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
-        
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
     

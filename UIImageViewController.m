@@ -1184,7 +1184,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             [DARK_TEXT_COLOR setStroke];
         }
 
-        CGPoint pt = CGPointFromString(swatchObj.coord_pt);
+        CGPoint pt = CGPointFromString([swatchObj coord_pt]);
         
         CGFloat xpoint = pt.x - (_shapeLength / 2);
         CGFloat ypoint = pt.y - (_shapeLength / 2);
@@ -1196,7 +1196,17 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         // draw rectangle or ellipse
         //
         if ([type isEqualToString:_rectLabel]) {
-            CGContextStrokeRect(ctx, rect);
+            CGFloat minx = CGRectGetMinX(rect), midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect);
+            CGFloat miny = CGRectGetMinY(rect), midy = CGRectGetMidY(rect), maxy = CGRectGetMaxY(rect);
+            CGContextMoveToPoint(ctx, minx, midy);
+            CGFloat radius = DEF_CORNER_RADIUS;
+            CGContextAddArcToPoint(ctx, minx, miny, midx, miny, radius);
+            CGContextAddArcToPoint(ctx, maxx, miny, maxx, midy, radius);
+            CGContextAddArcToPoint(ctx, maxx, maxy, midx, maxy, radius);
+            CGContextAddArcToPoint(ctx, minx, maxy, minx, midy, radius);
+            CGContextClosePath(ctx);
+            CGContextStrokePath(ctx);
+
         } else {
             CGContextStrokeEllipseInRect(ctx, rect);
         }
