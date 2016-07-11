@@ -598,7 +598,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     [_titleView addSubview:_titleLabel];
     self.navigationItem.titleView = _titleView;
 
-    
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         [self setTapAreas];
     }
@@ -616,6 +615,10 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     if (assocName != nil && ! [assocName isEqualToString:@""]) {
         [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:assocName];
     }
+    
+    // Make any changes to tap areas in Settings VC effective immediately
+    //
+    [self setTapAreas];
 }
 
 
@@ -834,7 +837,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
 - (void)scrollViewDecrease {
 
-    
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
         if (_imageViewSize == IMAGE_VIEW) {
@@ -1199,11 +1201,10 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             CGFloat minx = CGRectGetMinX(rect), midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect);
             CGFloat miny = CGRectGetMinY(rect), midy = CGRectGetMidY(rect), maxy = CGRectGetMaxY(rect);
             CGContextMoveToPoint(ctx, minx, midy);
-            CGFloat radius = DEF_CORNER_RADIUS;
-            CGContextAddArcToPoint(ctx, minx, miny, midx, miny, radius);
-            CGContextAddArcToPoint(ctx, maxx, miny, maxx, midy, radius);
-            CGContextAddArcToPoint(ctx, maxx, maxy, midx, maxy, radius);
-            CGContextAddArcToPoint(ctx, minx, maxy, minx, midy, radius);
+            CGContextAddArcToPoint(ctx, minx, miny, midx, miny, DEF_CORNER_RADIUS);
+            CGContextAddArcToPoint(ctx, maxx, miny, maxx, midy, DEF_CORNER_RADIUS);
+            CGContextAddArcToPoint(ctx, maxx, maxy, midx, maxy, DEF_CORNER_RADIUS);
+            CGContextAddArcToPoint(ctx, minx, maxy, minx, midy, DEF_CORNER_RADIUS);
             CGContextClosePath(ctx);
             CGContextStrokePath(ctx);
 

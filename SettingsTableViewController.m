@@ -705,7 +705,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     if ([_shapeGeom isEqualToString:SHAPE_CIRCLE_VALUE]) {
         [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
     } else {
-        [_tapImageView.layer setCornerRadius:CORNER_RADIUS_NONE];
+        [_tapImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     }
     [self.tableView reloadData];
     
