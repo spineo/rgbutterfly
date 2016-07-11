@@ -644,11 +644,16 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 //        _imageViewSize = IMAGE_VIEW;
 //    }
     _imageViewSize = SPLIT_VIEW;
-
+    [self.context rollback];
+    _currTapSection = 0;
+    [self.imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
 - (void)selectAssocAction {
+    [self.context rollback];
+    _currTapSection = 0;
+    [self.imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
@@ -1277,21 +1282,19 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     }
 
     if (indexPath.section == HEADER_TABLEVIEW_SECTION) {
-        //return DEF_XSM_TBL_HDR_HGT;
-        return DEF_TABLE_CELL_HEIGHT;
+        if (_currTapSection == 0) {
+            return DEF_NIL_CELL;
+        } else {
+            return DEF_TABLE_CELL_HEIGHT;
+        }
     } else {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"*********************** Section=%i, Row=%i, CurrTapSection=%i", (int)indexPath.section, (int)indexPath.row, _currTapSection);
-    
     if (indexPath.section == COLLECT_TABLEVIEW_SECTION) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
-        
-        NSLog(@"****************************** COLLECT TV RELOAD ******************************");
         
         if (! custCell) {
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
@@ -1306,9 +1309,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         int match_algorithm_id = _matchAlgIndex;
         int swatch_ct          = _maxMatchNum;
         
-        int tap_obj_ct = (int)[[_matchAssociation.tap_area allObjects] count];
+        int tap_obj_ct = (int)[[[_matchAssociation tap_area] allObjects] count];
         if (tapIndex < tap_obj_ct) {
-            TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+            TapArea *tapArea = [[[_matchAssociation tap_area] allObjects] objectAtIndex:tapIndex];
             if (tapArea != nil) {
                 match_algorithm_id = [[tapArea match_algorithm_id] intValue];
                 swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
@@ -1327,34 +1330,19 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         return custCell;
 
     } else {
-        NSLog(@"****************************** TV RELOAD ******************************");
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier];
-        //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
         [cell setBackgroundColor:DARK_BG_COLOR];
         
         NSString *headerTitle = @"";
         if (_currTapSection > 0) {
             headerTitle = HDR_TABLEVIEW_TITLE;
-            //            [_scrollViewUp setEnabled:TRUE];
         }
-        //
-        //        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
-        //            [_scrollViewUp setEnabled:FALSE];
-        //        } else {
-        //            [_scrollViewUp setEnabled:TRUE];
-        //        }
         
         UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
         [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
         
         UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:headerTitle style:UIBarButtonItemStylePlain target:nil action:nil];
-        
-//        UIBarButtonItem *scrollViewUp = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewDecrease)];
-//        [scrollViewUp setTintColor:LIGHT_TEXT_COLOR];
-//        
-//        UIBarButtonItem *scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
-//        [scrollViewDown setTintColor:LIGHT_TEXT_COLOR];
         
         scrollViewToolbar.items = @[
                                     headerButtonLabel,
