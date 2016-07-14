@@ -41,6 +41,18 @@
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
+// Resize UISearchBar when rotated
+//
+@property (nonatomic) CGRect navBarBounds;
+@property (nonatomic) CGFloat navBarWidth, navBarHeight;
+@property (nonatomic, strong) UIButton *cancelButton;
+
+// SearchBar related
+//
+@property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) UISearchBar *mainSearchBar;
+@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton;
+
 // NSManagedObject subclassing
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
@@ -60,6 +72,8 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
+    
+    NSLog(@"LEFT BAR ITEM=%f", self.navigationController.navigationItem.leftBarButtonItem.width);
     
     [GlobalSettings init];
     
@@ -144,7 +158,42 @@
     
     PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
     _matchAssocId = [[paintSwatchType order] intValue];
+
     
+    // SearchBar related
+    //
+    _imageLibButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_LIB_NAME]
+                                                   style:UIBarButtonItemStylePlain
+                                                  target:self
+                                                  action:@selector(goBack)];
+    
+    _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
+                                                     style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(search)];
+    
+    // Adjust the layout when the orientation changes
+    //
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchBarSetFrames)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+    
+    _titleView = [[UIView alloc] init];
+    
+    _cancelButton = [BarButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
+    [_cancelButton addTarget:self action:@selector(pressCancel) forControlEvents:UIControlEventTouchUpInside];
+    
+    _mainSearchBar = [[UISearchBar alloc] init];
+    [_mainSearchBar setBackgroundColor:CLEAR_COLOR];
+    [_mainSearchBar setBarTintColor:CLEAR_COLOR];
+    [_mainSearchBar setReturnKeyType:UIReturnKeyDone];
+    [_mainSearchBar setDelegate:self];
+    
+    [_titleView addSubview:_mainSearchBar];
+    [_titleView addSubview:_cancelButton];
+    
+    [self searchBarSetFrames];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -730,6 +779,99 @@
     UICollectionView *collectionView = (UICollectionView *)scrollView;
     NSInteger index = collectionView.tag;
     self.contentOffsetDictionary[[@(index) stringValue]] = @(horizontalOffset);
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// SearchBar Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - SearchBar Methods
+
+- (IBAction)search:(id)sender {
+    [self search];
+}
+
+- (void)search {
+    [self.navigationItem setTitleView:_titleView];
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem setRightBarButtonItem:nil];
+    
+    [_mainSearchBar becomeFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    _searchString = searchText;
+//    
+//    if ([searchText length] == 0) {
+//        [self loadTable];
+//    } else {
+//        [self updateTable];
+//    }
+}
+
+// Need index of items that have been checked
+//
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+//    [self updateTable];
+//    
+    [_mainSearchBar resignFirstResponder];
+    [self.navigationItem setTitleView:nil];
+    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
+    [self.navigationItem setRightBarButtonItem:_searchButton];
+}
+
+- (void)pressCancel {
+    [self.navigationItem setTitleView:nil];
+    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
+    [self.navigationItem setRightBarButtonItem:_searchButton];
+//    
+//    // Refresh the list
+//    //
+//    [self loadTable];
+}
+//
+//- (void)updateTable {
+//    int count = (int)[_paintSwatchList count];
+//    
+//    NSMutableArray *tmpPaintSwatches = [[NSMutableArray alloc] init];
+//    
+//    _searchMatch  = FALSE;
+//    
+//    for (int i=0; i<count; i++) {
+//        PaintSwatchSelection *sel_obj = [_paintSwatchList objectAtIndex:i];
+//        NSString *matchName = [[sel_obj paintSwatch] name];
+//        
+//        NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
+//        
+//        if (rangeValue.length > 0) {
+//            _searchMatch = TRUE;
+//            
+//            [tmpPaintSwatches addObject:sel_obj];
+//        }
+//    }
+//    
+//    _paintSwatchList = tmpPaintSwatches;
+//    
+//    [self.tableView reloadData];
+//    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+//}
+
+- (void)searchBarSetFrames {
+    CGSize navBarSize = self.view.bounds.size;
+    [_titleView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarSize.width, navBarSize.height)];
+    
+    CGSize buttonSize  = _cancelButton.bounds.size;
+    CGFloat xPoint     = navBarSize.width - buttonSize.width - DEF_MD_FIELD_PADDING;
+    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / 2;
+    [_cancelButton setFrame:CGRectMake(xPoint, yPoint, buttonSize.width, buttonSize.height)];
+    
+    CGFloat xOffset;
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+        xOffset = DEF_NAVBAR_X_OFFSET;
+    } else {
+        xOffset = DEF_X_OFFSET;
+    }
+    [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

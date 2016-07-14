@@ -12,7 +12,7 @@
 #import "ColorUtils.h"
 #import "UIImageViewController.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic) int imageAction;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;

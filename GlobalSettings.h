@@ -251,6 +251,7 @@ extern NSString * const NO_MIX_NAME;
 //
 extern NSString * const DEF_IMAGE_NAME;
 
+extern NSString * const IMAGE_LIB_NAME;
 extern NSString * const PALETTE_IMAGE_NAME;
 extern NSString * const RGB_IMAGE_NAME;
 extern NSString * const BACK_BUTTON_IMAGE_NAME;

@@ -61,14 +61,17 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Acrylics Color Picker" id="Ade-hS-Xh0">
-                        <barButtonItem key="leftBarButtonItem" tag="51" image="photo 2" id="YaG-pI-rV6">
+                        <barButtonItem key="leftBarButtonItem" tag="51" image="photo 2" id="Jc1-jH-kAa">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="showPhotoOptions:" destination="BYZ-38-t0r" id="Lps-gK-UBf"/>
+                                <action selector="showPhotoOptions:" destination="BYZ-38-t0r" id="ffp-1r-sCF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="53" systemItem="search" id="wvt-NW-SHl">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="search:" destination="BYZ-38-t0r" id="f1h-NX-cCp"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -744,10 +747,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="9H9-9R-KDD"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

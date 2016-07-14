@@ -34,8 +34,6 @@
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 
-@property (nonatomic, strong) UIBarButtonItem *backButton, *searchButton;
-
 
 // Resize UISearchBar when rotated
 //
@@ -47,6 +45,7 @@
 //
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UISearchBar *mixSearchBar;
+@property (nonatomic, strong) UIBarButtonItem *backButton, *searchButton;
 
 // NSManagedObject subclassing
 //
@@ -318,10 +317,9 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
 #pragma mark - Rotation, Resizing, and Navigation Methods
 
-
 - (void)searchBarSetFrames {
 
-    CGSize navBarSize = self.tableView.bounds.size;
+    CGSize navBarSize = self.view.bounds.size;
     [_titleView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarSize.width, navBarSize.height)];
 
     CGSize buttonSize  = _cancelButton.bounds.size;

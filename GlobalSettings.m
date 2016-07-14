@@ -258,6 +258,7 @@ NSString * const DEF_IMAGE_NAME = @"Reference Image";
 
 // Image Names
 //
+NSString * const IMAGE_LIB_NAME         = @"photo 2.png";
 NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
 NSString * const RGB_IMAGE_NAME         = @"rgb.png";
 NSString * const BACK_BUTTON_IMAGE_NAME = @"arrow.png";
