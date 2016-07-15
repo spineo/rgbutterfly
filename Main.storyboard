@@ -67,12 +67,6 @@
                                 <action selector="showPhotoOptions:" destination="BYZ-38-t0r" id="ffp-1r-sCF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="53" systemItem="search" id="wvt-NW-SHl">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="search:" destination="BYZ-38-t0r" id="f1h-NX-cCp"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="colorTableView" destination="ikM-89-GOK" id="y6K-5N-15c"/>

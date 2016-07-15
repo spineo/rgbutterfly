@@ -224,7 +224,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchString = searchText;
 
-    if ([searchText length] == 0) {
+    if ([_searchString length] == 0) {
         [self loadTable];
     } else {
         [self updateTable];

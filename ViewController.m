@@ -52,6 +52,7 @@
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UISearchBar *mainSearchBar;
 @property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton;
+@property (nonatomic, strong) NSString *searchString;
 
 // NSManagedObject subclassing
 //
@@ -72,8 +73,6 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    
-    NSLog(@"LEFT BAR ITEM=%f", self.navigationController.navigationItem.leftBarButtonItem.width);
     
     [GlobalSettings init];
     
@@ -172,6 +171,8 @@
                                                     target:self
                                                     action:@selector(search)];
     
+    self.navigationItem.rightBarButtonItem = _searchButton;
+    
     // Adjust the layout when the orientation changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -194,21 +195,21 @@
     [_titleView addSubview:_cancelButton];
     
     [self searchBarSetFrames];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
     [self initPaintSwatchFetchedResultsController];
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
  
-    if ([_listingType isEqualToString:@"Mix"]) {
-        [self loadMixCollectionViewData];
-        
-    } else if ([_listingType isEqualToString:@"Match"]) {
-        [self loadMatchCollectionViewData];
-        
-    } else if ([_listingType isEqualToString:@"Keywords"]) {
-        [self loadKeywordData];
-    }
+//    if ([_listingType isEqualToString:@"Mix"]) {
+//        [self loadMixCollectionViewData];
+//        
+//    } else if ([_listingType isEqualToString:@"Match"]) {
+//        [self loadMatchCollectionViewData];
+//        
+//    } else if ([_listingType isEqualToString:@"Keywords"]) {
+//        [self loadKeywordData];
+//    }
     [_colorTableView reloadData];
 }
 
@@ -245,7 +246,6 @@
 }
 
 - (void)loadMatchCollectionViewData {
-    
     _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context];
     int num_tableview_rows = (int)[_matchAssocObjs count];
     
@@ -275,7 +275,6 @@
 }
 
 - (void)loadKeywordData {
-    
     [self initializeKeywordResultsController];
     
     _keywordNames   = [[NSMutableDictionary alloc] init];
@@ -664,15 +663,19 @@
     _listingType = listingType;
     
     if ([_listingType isEqualToString:@"Mix"]) {
+        [_searchButton setEnabled:FALSE];
         [self loadMixCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
+        [_searchButton setEnabled:FALSE];
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
+        [_searchButton setEnabled:FALSE];
         [self loadKeywordData];
         
     } else {
+        [_searchButton setEnabled:TRUE];
         [self initPaintSwatchFetchedResultsController];
     }
     [_colorTableView reloadData];
@@ -787,9 +790,9 @@
 
 #pragma mark - SearchBar Methods
 
-- (IBAction)search:(id)sender {
-    [self search];
-}
+//- (IBAction)search:(id)sender {
+//    [self search];
+//}
 
 - (void)search {
     [self.navigationItem setTitleView:_titleView];
@@ -800,20 +803,20 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-//    _searchString = searchText;
-//    
-//    if ([searchText length] == 0) {
-//        [self loadTable];
-//    } else {
-//        [self updateTable];
-//    }
+    _searchString = searchText;
+    
+    if ([_searchString length] == 0) {
+        [self loadTable];
+    } else {
+        [self updateTable];
+    }
 }
 
 // Need index of items that have been checked
 //
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//    [self updateTable];
-//    
+    [self updateTable];
+    
     [_mainSearchBar resignFirstResponder];
     [self.navigationItem setTitleView:nil];
     [self.navigationItem setLeftBarButtonItem:_imageLibButton];
@@ -824,13 +827,13 @@
     [self.navigationItem setTitleView:nil];
     [self.navigationItem setLeftBarButtonItem:_imageLibButton];
     [self.navigationItem setRightBarButtonItem:_searchButton];
-//    
-//    // Refresh the list
-//    //
-//    [self loadTable];
+    
+    // Refresh the list
+    //
+    [self loadTable];
 }
 //
-//- (void)updateTable {
+- (void)updateTable {
 //    int count = (int)[_paintSwatchList count];
 //    
 //    NSMutableArray *tmpPaintSwatches = [[NSMutableArray alloc] init];
@@ -854,7 +857,34 @@
 //    
 //    [self.tableView reloadData];
 //    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-//}
+}
+
+- (void)loadTable {
+    
+//    // Get the full list of Paint Swatches and filter out the ones from the source MixAssociation
+//    //
+//    NSMutableDictionary *currPaintSwatchNames = [[NSMutableDictionary alloc] init];
+//    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+//        NSString *paintSwatchName = [(PaintSwatches *)[[_mixAssocSwatches objectAtIndex:i] paint_swatch] name];
+//        [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
+//    }
+//    
+//    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
+//    _paintSwatchList    = [[NSMutableArray alloc] init];
+//    for (PaintSwatches *paintSwatch in _allPaintSwatches) {
+//        NSString *name = [paintSwatch name];
+//        
+//        if (![currPaintSwatchNames valueForKey:name]) {
+//            PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
+//            [paintSwatchSelection setPaintSwatch:paintSwatch];
+//            [paintSwatchSelection setIs_selected:FALSE];
+//            [_paintSwatchList addObject:paintSwatchSelection];
+//        }
+//    }
+//    
+//    [self.tableView reloadData];
+//    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
 
 - (void)searchBarSetFrames {
     CGSize navBarSize = self.view.bounds.size;
