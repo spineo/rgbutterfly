@@ -676,6 +676,7 @@
         
     } else {
         [_searchButton setEnabled:TRUE];
+        _searchString = nil;
         [self initPaintSwatchFetchedResultsController];
     }
     [_colorTableView reloadData];
@@ -790,10 +791,6 @@
 
 #pragma mark - SearchBar Methods
 
-//- (IBAction)search:(id)sender {
-//    [self search];
-//}
-
 - (void)search {
     [self.navigationItem setTitleView:_titleView];
     [self.navigationItem setLeftBarButtonItem:nil];
@@ -805,17 +802,13 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchString = searchText;
     
-    if ([_searchString length] == 0) {
-        [self loadTable];
-    } else {
-        [self updateTable];
-    }
+    [self initPaintSwatchFetchedResultsController];
 }
 
 // Need index of items that have been checked
 //
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self updateTable];
+    [self initPaintSwatchFetchedResultsController];
     
     [_mainSearchBar resignFirstResponder];
     [self.navigationItem setTitleView:nil];
@@ -828,62 +821,8 @@
     [self.navigationItem setLeftBarButtonItem:_imageLibButton];
     [self.navigationItem setRightBarButtonItem:_searchButton];
     
-    // Refresh the list
-    //
-    [self loadTable];
-}
-//
-- (void)updateTable {
-//    int count = (int)[_paintSwatchList count];
-//    
-//    NSMutableArray *tmpPaintSwatches = [[NSMutableArray alloc] init];
-//    
-//    _searchMatch  = FALSE;
-//    
-//    for (int i=0; i<count; i++) {
-//        PaintSwatchSelection *sel_obj = [_paintSwatchList objectAtIndex:i];
-//        NSString *matchName = [[sel_obj paintSwatch] name];
-//        
-//        NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
-//        
-//        if (rangeValue.length > 0) {
-//            _searchMatch = TRUE;
-//            
-//            [tmpPaintSwatches addObject:sel_obj];
-//        }
-//    }
-//    
-//    _paintSwatchList = tmpPaintSwatches;
-//    
-//    [self.tableView reloadData];
-//    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-}
-
-- (void)loadTable {
-    
-//    // Get the full list of Paint Swatches and filter out the ones from the source MixAssociation
-//    //
-//    NSMutableDictionary *currPaintSwatchNames = [[NSMutableDictionary alloc] init];
-//    for (int i=0; i<[_mixAssocSwatches count]; i++) {
-//        NSString *paintSwatchName = [(PaintSwatches *)[[_mixAssocSwatches objectAtIndex:i] paint_swatch] name];
-//        [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
-//    }
-//    
-//    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
-//    _paintSwatchList    = [[NSMutableArray alloc] init];
-//    for (PaintSwatches *paintSwatch in _allPaintSwatches) {
-//        NSString *name = [paintSwatch name];
-//        
-//        if (![currPaintSwatchNames valueForKey:name]) {
-//            PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
-//            [paintSwatchSelection setPaintSwatch:paintSwatch];
-//            [paintSwatchSelection setIs_selected:FALSE];
-//            [_paintSwatchList addObject:paintSwatchSelection];
-//        }
-//    }
-//    
-//    [self.tableView reloadData];
-//    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    _searchString = nil;
+    [self initPaintSwatchFetchedResultsController];
 }
 
 - (void)searchBarSetFrames {
@@ -916,9 +855,13 @@
     
     NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     
-    // Skip match assoc types
+    // Skip match assoc types, and search if requested
     //
-    [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
+    if ((_searchString == nil) || [_searchString isEqualToString:@""]) {
+        [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
+    } else {
+        [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name contains[c] %@", _matchAssocId, _searchString]];
+    }
     
     [request setSortDescriptors:@[nameSort]];
     
@@ -934,6 +877,8 @@
     } @catch (NSException *exception) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
     }
+    
+    [self.colorTableView reloadData];
 }
 
 - (void)initializeKeywordResultsController {
