@@ -38,6 +38,16 @@
                ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "21DE32DD1D3BF847007669DF"
+               BuildableName = "AcrylicsColorPickerUITests.xctest"
+               BlueprintName = "AcrylicsColorPickerUITests"
+               ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

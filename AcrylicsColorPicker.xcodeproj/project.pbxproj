@@ -80,10 +80,18 @@
 		21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BE8EEB1D18261F0039A9FA /* PickerUtils.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */; };
+		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		210C89811A9F6C440003CC85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210C89661A9F6C440003CC85;
+			remoteInfo = AcrylicsColorPicker;
+		};
+		21DE32E31D3BF847007669DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
 			proxyType = 1;
@@ -233,6 +241,9 @@
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
+		21DE32E21D3BF847007669DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +255,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		210C897D1A9F6C440003CC85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21DE32DB1D3BF847007669DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -466,6 +484,7 @@
 				2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */,
 				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
 				210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */,
+				21DE32DF1D3BF847007669DF /* AcrylicsColorPickerUITests */,
 				210C89681A9F6C440003CC85 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -475,6 +494,7 @@
 			children = (
 				210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */,
 				210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */,
+				21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -494,6 +514,15 @@
 				210C89851A9F6C440003CC85 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		21DE32DF1D3BF847007669DF /* AcrylicsColorPickerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */,
+				21DE32E21D3BF847007669DF /* Info.plist */,
+			);
+			path = AcrylicsColorPickerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,6 +563,24 @@
 			productReference = 210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		21DE32DD1D3BF847007669DF /* AcrylicsColorPickerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerUITests" */;
+			buildPhases = (
+				21DE32DA1D3BF847007669DF /* Sources */,
+				21DE32DB1D3BF847007669DF /* Frameworks */,
+				21DE32DC1D3BF847007669DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21DE32E41D3BF847007669DF /* PBXTargetDependency */,
+			);
+			name = AcrylicsColorPickerUITests;
+			productName = AcrylicsColorPickerUITests;
+			productReference = 21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -556,6 +603,10 @@
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = 210C89661A9F6C440003CC85;
 					};
+					21DE32DD1D3BF847007669DF = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 210C89661A9F6C440003CC85;
+					};
 				};
 			};
 			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "AcrylicsColorPicker" */;
@@ -573,6 +624,7 @@
 			targets = (
 				210C89661A9F6C440003CC85 /* AcrylicsColorPicker */,
 				210C897F1A9F6C440003CC85 /* AcrylicsColorPickerTests */,
+				21DE32DD1D3BF847007669DF /* AcrylicsColorPickerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -599,6 +651,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		210C897E1A9F6C440003CC85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21DE32DC1D3BF847007669DF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -682,6 +741,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		21DE32DA1D3BF847007669DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -689,6 +756,11 @@
 			isa = PBXTargetDependency;
 			target = 210C89661A9F6C440003CC85 /* AcrylicsColorPicker */;
 			targetProxy = 210C89811A9F6C440003CC85 /* PBXContainerItemProxy */;
+		};
+		21DE32E41D3BF847007669DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210C89661A9F6C440003CC85 /* AcrylicsColorPicker */;
+			targetProxy = 21DE32E31D3BF847007669DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -842,6 +914,35 @@
 			};
 			name = Release;
 		};
+		21DE32E61D3BF847007669DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AcrylicsColorPicker;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		21DE32E71D3BF847007669DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = AcrylicsColorPicker;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -871,6 +972,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21DE32E61D3BF847007669DF /* Debug */,
+				21DE32E71D3BF847007669DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

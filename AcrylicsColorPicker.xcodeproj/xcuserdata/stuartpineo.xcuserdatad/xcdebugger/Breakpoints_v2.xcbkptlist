@@ -772,7 +772,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490277965.044836"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "691"
@@ -788,7 +788,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490277965.044836"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "684"
@@ -852,7 +852,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "480"
@@ -868,7 +868,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
@@ -884,7 +884,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "515"
@@ -900,7 +900,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "516"
@@ -916,7 +916,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "509"
@@ -932,7 +932,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "519"
@@ -948,7 +948,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "488"
@@ -964,7 +964,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewController.m"
-            timestampString = "490276554.098869"
+            timestampString = "490475831.648814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "500"
@@ -2982,6 +2982,38 @@
             startingLineNumber = "202"
             endingLineNumber = "202"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AcrylicsColorPickerTests/AcrylicsColorPickerUnitTests.m"
+            timestampString = "490467632.311358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "@implementation AcrylicsColorPickerUnitTests"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AcrylicsColorPickerUITests/AcrylicsColorPickerUITests.m"
+            timestampString = "490538342.444819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-test2_DetailView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
