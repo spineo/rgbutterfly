@@ -145,6 +145,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     // TableView defaults
     //

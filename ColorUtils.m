@@ -242,5 +242,24 @@
     return textColor;
 }
 
++ (void)setNavBarGlaze:(UINavigationBar *)navigationBar {
+    CGRect bounds = navigationBar.bounds;
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    visualEffectView.frame = bounds;
+    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [navigationBar addSubview:visualEffectView];
+    navigationBar.backgroundColor = [UIColor clearColor];
+    [navigationBar sendSubviewToBack:visualEffectView];
+}
+
++ (void)setToolbarGlaze:(UIToolbar *)toolbar {
+    CGRect bounds = toolbar.bounds;
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    visualEffectView.frame = bounds;
+    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [toolbar addSubview:visualEffectView];
+    toolbar.backgroundColor = [UIColor clearColor];
+    [toolbar sendSubviewToBack:visualEffectView];
+}
 
 @end

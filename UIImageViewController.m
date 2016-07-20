@@ -137,6 +137,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
@@ -554,6 +557,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     
     _scrollViewDown = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(scrollViewIncrease)];
     [_scrollViewDown setTintColor:LIGHT_TEXT_COLOR];
+    
+    [self resizeViews];
 
     // Notification center
     //
@@ -592,6 +597,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _titleLabel = [FieldUtils createLabel:DEF_IMAGE_NAME];
     [_titleLabel setTextAlignment: NSTextAlignmentCenter];
     [_titleLabel setFont:TITLE_VIEW_FONT];
+    [_titleLabel setBackgroundColor:[UIColor clearColor]];
     [_titleLabel sizeToFit];
     
     // Title View containing the Label (i.e., association name)
@@ -716,17 +722,26 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 - (void)resizeViews {
 
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat width  = [[UIScreen mainScreen] bounds].size.width;
+    
+    CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
+    
+    CGFloat visibleHeight = height - navBarHeight;
 
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
+        
+        self.edgesForExtendedLayout = UIRectEdgeNone;
         
 //        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
                 
             if (_imageViewSize == TABLE_VIEW) {
                 [_imageScrollView setHidden:YES];
                 [_imageTableView setHidden:NO];
-                self.tableHeightConstraint.constant = height;
+                
+                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, 0.0, 0.0)];
+                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
                 
                 [self matchButtonsShow];
                 
@@ -738,19 +753,25 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             } else if (_imageViewSize == SPLIT_VIEW) {
                 [_imageScrollView setHidden:NO];
                 [_imageTableView setHidden:NO];
-                self.tableHeightConstraint.constant =  _defTableViewSize.height;
+                
+                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
+                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5)];
                 
                 [_scrollViewUp setEnabled:YES];
                 [_scrollViewDown setEnabled:YES];
                 
                 [self removeUpArrow];
+                
+                [self.imageTableView reloadData];
             
             // Full-screen image
             //
             } else {
                 [_imageScrollView setHidden:NO];
                 [_imageTableView setHidden:YES];
-                self.tableHeightConstraint.constant =  DEF_NIL_CONSTRAINT;
+                
+                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
+                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
                 
                 [self matchButtonsHide];
                 

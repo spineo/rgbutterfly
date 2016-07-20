@@ -9,6 +9,7 @@
 #import "PickerViewController.h"
 #import "UIImageViewController.h"
 #import "GlobalSettings.h"
+#import "ColorUtils.h"
 
 
 @interface PickerViewController ()
@@ -26,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _picker = [[UIImagePickerController alloc] init];
+    
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

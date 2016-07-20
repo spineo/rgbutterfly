@@ -87,6 +87,8 @@ const int ASSOC_COLORS_TAG     = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //

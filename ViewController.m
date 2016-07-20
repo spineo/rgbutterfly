@@ -74,6 +74,10 @@
 
     [super viewDidLoad];
     
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
+
+    
     [GlobalSettings init];
     
     // NSManagedObject subclassing

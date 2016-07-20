@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
+#import "ColorUtils.h"
 
 @interface SettingsTableViewController ()
 
@@ -70,6 +71,8 @@ const int SETTINGS_MAX_SECTIONS   = 5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     _editFlag = FALSE;
     _reuseCellIdentifier = @"SettingsTableCell";

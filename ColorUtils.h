@@ -23,5 +23,7 @@
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
 + (UIColor *)setBestColorContrast:(NSString *)colorName;
++ (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
++ (void)setToolbarGlaze:(UIToolbar *)toolbar;
 
 @end
