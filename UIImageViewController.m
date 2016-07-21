@@ -138,7 +138,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     [super viewDidLoad];
     
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-
     
     // NSManagedObject subclassing
     //
@@ -229,16 +228,16 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     [self setRectLabel:SHAPE_RECT_VALUE];
     [self setCircleLabel:SHAPE_CIRCLE_VALUE];
 
-
+    
     // Add the selected image
     //
-    [_imageView setImage: _selectedImage];
-    [_imageView setUserInteractionEnabled: YES];
+    [_imageView setImage:_selectedImage];
+    [_imageView setUserInteractionEnabled:YES];
     [_imageView setContentMode:UIViewContentModeScaleToFill];
     [_imageScrollView setScrollEnabled:YES];
     [_imageScrollView setClipsToBounds:YES];
     [_imageScrollView setContentSize:_selectedImage.size];
-    [_imageScrollView setDelegate: self];
+    [_imageScrollView setDelegate:self];
 
     
     // Initialize a tap gesture recognizer for selected image regions
@@ -458,8 +457,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _matchView   = [UIAlertAction actionWithTitle:@"Match View (default)" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = MATCH_VIEW_TYPE;
-                                                [self resetViews];
-                                                
                                                 
                                                 UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_VIEW_TYPE
                                                                 style: UIBarButtonItemStylePlain
@@ -479,12 +476,13 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                                                 [self viewButtonHide];
                                                 [self matchButtonsHide];
                                                 [self editButtonDisable];
+                                                
+                                                [self resetViews];
                                             }];
     
     _associateMixes = [UIAlertAction actionWithTitle:@"Associate Mixes" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = ASSOC_VIEW_TYPE;
-                                                [self resetViews];
 
                                                 UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_VIEW_TYPE
                                                                 style: UIBarButtonItemStylePlain
@@ -506,6 +504,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                                                 [self viewButtonHide];
                                                 [self matchButtonsHide];
                                                 [self editButtonDisable];
+                                                
+                                                [self resetViews];
                                             }];
     
     _alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -646,15 +646,10 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 }
 
 - (void)selectMatchAction {
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
-//        _imageViewSize = SPLIT_VIEW;
-//    } else {
-//        _imageViewSize = IMAGE_VIEW;
-//    }
     _imageViewSize = SPLIT_VIEW;
     [self.context rollback];
     _currTapSection = 0;
-    [self.imageTableView reloadData];
+    //[self.imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
@@ -723,10 +718,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     CGFloat width  = [[UIScreen mainScreen] bounds].size.width;
-    
-    CGFloat navBarHeight = self.navigationController.navigationBar.bounds.size.height;
-    
-    CGFloat visibleHeight = height - navBarHeight;
 
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchView setEnabled:FALSE];
@@ -734,90 +725,50 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         
         self.edgesForExtendedLayout = UIRectEdgeNone;
         
-//        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
-                
-            if (_imageViewSize == TABLE_VIEW) {
-                [_imageScrollView setHidden:YES];
-                [_imageTableView setHidden:NO];
-                
-                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, 0.0, 0.0)];
-                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-                
-                [self matchButtonsShow];
-                
-                [_scrollViewUp setEnabled:NO];
-                [_scrollViewDown setEnabled:YES];
-                
-                [self removeUpArrow];
-                
-            } else if (_imageViewSize == SPLIT_VIEW) {
-                [_imageScrollView setHidden:NO];
-                [_imageTableView setHidden:NO];
-                
-                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
-                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5)];
-                
-                [_scrollViewUp setEnabled:YES];
-                [_scrollViewDown setEnabled:YES];
-                
-                [self removeUpArrow];
-                
-                [self.imageTableView reloadData];
+        if (_imageViewSize == TABLE_VIEW) {
+            [_imageScrollView setHidden:YES];
+            [_imageTableView setHidden:NO];
             
-            // Full-screen image
-            //
-            } else {
-                [_imageScrollView setHidden:NO];
-                [_imageTableView setHidden:YES];
-                
-                [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-                [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
-                
-                [self matchButtonsHide];
-                
-                [self removeUpArrow];
-                [self addUpArrow];
-            }
-    
-//        // In landscape, expand either the scroll view or the table view (as it looks kludgy otherwise on most devices)
-//        //
-//        } else if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
-//
-//            if (_imageViewSize == TABLE_VIEW) {
-//                [_imageScrollView setHidden:YES];
-//                [_imageTableView setHidden:NO];
-//                self.tableHeightConstraint.constant = height;
-//
-//                [self matchButtonsShow];
-//                
-//                [_scrollViewUp setEnabled:FALSE];
-//                [_scrollViewDown setEnabled:TRUE];
-//                
-//                [self removeUpArrow];
-//                
-////                [self.view setNeedsDisplay]; // repaint
-////                [self.view setNeedsLayout]; // re-layout
-//            
-//            // _imageViewSize > TABLE_VIEW (full-screen image)
-//            //
-//            } else {
-//                [_imageScrollView setHidden:NO];
-//                [_imageScrollView setAutoresizesSubviews:YES];
-//                [_imageTableView setHidden:YES];
-//                self.tableHeightConstraint.constant = DEF_NIL_CONSTRAINT;
-//                
-//                [self matchButtonsHide];
-//                
-//                [self removeUpArrow];
-//                [self addUpArrow];
-//            }
-//        }
+            [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
+            
+            [self matchButtonsShow];
+            
+            [_scrollViewUp setEnabled:NO];
+            [_scrollViewDown setEnabled:YES];
+            
+            [self removeUpArrow];
+            
+        } else if (_imageViewSize == SPLIT_VIEW) {
+            [_imageScrollView setHidden:NO];
+            [_imageTableView setHidden:NO];
+            
+            [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5)];
+            
+            [_scrollViewUp setEnabled:YES];
+            [_scrollViewDown setEnabled:YES];
+            
+            [self removeUpArrow];
         
+        // Full-screen image
+        //
+        } else {
+            [_imageScrollView setHidden:NO];
+            [_imageTableView setHidden:YES];
+            
+            [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
+            //[_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+            
+            [self matchButtonsHide];
+            
+            [self removeUpArrow];
+            [self addUpArrow];
+        }
+
     // Assoc type
     //
     } else {
-        self.tableHeightConstraint.constant = DEF_NIL_CONSTRAINT;
-        
         [_matchView setEnabled:TRUE];
         [_associateMixes setEnabled:FALSE];
         [self viewButtonHide];
@@ -825,6 +776,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [_imageTableView setHidden:YES];
         [_imageScrollView setHidden:NO];
         
+        [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
+        //[_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+
         [self matchButtonsHide];
         
         if (_currTapSection > 0) {
@@ -833,14 +787,12 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         
         [self removeUpArrow];
     }
-    
-    [self.imageTableView needsUpdateConstraints];
 }
 
 - (void)resetViews {
     [self.context rollback];
     
-    [self setPaintSwatches: nil];
+    [self setPaintSwatches:nil];
     [_imageView setImage:_selectedImage];
     
     _currTapSection = 0;
