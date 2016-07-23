@@ -14,7 +14,8 @@
 CGFloat const DEF_X_OFFSET          = 0.0;
 CGFloat const DEF_Y_OFFSET          = 0.0;
 CGFloat const DEF_NIL_CELL          = 0.0;
-CGFloat const DEF_NIL_HEADER        = 0.0;
+CGFloat const DEF_NIL_HEADER        = 1.0;
+CGFloat const DEF_NIL_FOOTER        = 1.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
 CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
@@ -45,6 +46,8 @@ CGFloat const DEF_NAVBAR_X_OFFSET   = 10.0;
 CGFloat const DEF_FIELD_PADDING     = 5.0;
 CGFloat const DEF_MD_FIELD_PADDING  = 10.0;
 CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
+CGFloat const DEF_VLG_FIELD_PADDING = 20.0;
+
 CGFloat const DEF_CORNER_RADIUS     = 5.0;
 CGFloat const DEF_BORDER_WIDTH      = 1.0;
 CGFloat const BORDER_WIDTH_NONE     = 0.0;
@@ -56,10 +59,15 @@ CGFloat const DEF_TBL_HDR_Y_OFFSET  = 1.0;
 CGFloat const DEF_TABLE_CELL_HEIGHT = 44.0;
 CGFloat const DEF_SM_TABLE_CELL_HGT = 33.0;
 CGFloat const DEF_MD_TABLE_CELL_HGT = 55.0;
+
+CGFloat const DEF_TBL_DIVIDER_HGT   = 5.0;
+
 CGFloat const DEF_XSM_TBL_HDR_HGT   = 11.0;
 CGFloat const DEF_SM_TBL_HDR_HEIGHT = 22.0;
-CGFloat const DEF_TBL_DIVIDER_HGT   = 5.0;
 CGFloat const DEF_TABLE_HDR_HEIGHT  = 33.0;
+CGFloat const DEF_LG_TABLE_HDR_HGT  = 44.0;
+CGFloat const DEF_VLG_TABLE_HDR_HGT = 55.0;
+
 CGFloat const DEF_LG_TABLE_CELL_HGT = 66.0;
 CGFloat const DEF_VLG_TBL_CELL_HGT  = 88.0;
 CGFloat const DEF_XLG_TBL_CELL_HGT  = 110.0;

@@ -116,7 +116,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     _psReadOnlySwitch = [[UISwitch alloc] init];
     _widgetHeight = _psReadOnlySwitch.bounds.size.height;
-    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
     [_psReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_psReadOnlySwitch setOn:_swatchesReadOnly];
     
@@ -127,7 +127,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _psReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     CGFloat labelWidth = _psReadOnlyLabel.bounds.size.width;
     CGFloat labelHeight = _psReadOnlyLabel.bounds.size.height;
-    CGFloat labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_psReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
@@ -160,7 +160,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     _maReadOnlySwitch = [[UISwitch alloc] init];
     _widgetHeight = _maReadOnlySwitch.bounds.size.height;
-    _widgetYOffset = (DEF_TABLE_CELL_HEIGHT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
     [_maReadOnlySwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
     [_maReadOnlySwitch setOn:_assocsReadOnly];
     
@@ -171,7 +171,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _maReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     labelWidth = _maReadOnlyLabel.bounds.size.width;
     labelHeight = _maReadOnlyLabel.bounds.size.height;
-    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_maReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
@@ -322,8 +322,8 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     [_rgbDisplayButton setBackgroundColor:LIGHT_BG_COLOR];
     [_rgbDisplayButton.layer setCornerRadius:DEF_CORNER_RADIUS];
     
-    CGFloat cellHeight   = DEF_TABLE_CELL_HEIGHT;
-    CGFloat buttonHeight = cellHeight - DEF_FIELD_PADDING;
+    CGFloat cellHeight   = DEF_LG_TABLE_CELL_HGT;
+    CGFloat buttonHeight = cellHeight - DEF_VLG_FIELD_PADDING;
     CGFloat yOffset      = (cellHeight - buttonHeight) / DEF_HGT_ALIGN_FACTOR;
     [_rgbDisplayButton setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, buttonHeight, buttonHeight)];
 
@@ -334,7 +334,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _rgbDisplayLabel   = [FieldUtils createLabel:_rgbDisplayText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     labelWidth = _rgbDisplayLabel.bounds.size.width;
     labelHeight = _rgbDisplayLabel.bounds.size.height;
-    labelYOffset = (DEF_TABLE_CELL_HEIGHT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -450,19 +450,16 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     if (indexPath.section == MIX_RATIOS_SETTINGS) {
         return DEF_XLG_TBL_CELL_HGT;
         
-    } else if (indexPath.section == TAP_AREA_SETTINGS) {
+    } else if ((indexPath.section == TAP_AREA_SETTINGS) ||  (indexPath.section == MATCH_NUM_SETTINGS)) {
         return DEF_VLG_TBL_CELL_HGT;
         
-    } else if (indexPath.section == MATCH_NUM_SETTINGS) {
-        return DEF_LG_TABLE_CELL_HGT;
-        
     } else {
-        return DEF_TABLE_CELL_HEIGHT;
+        return DEF_LG_TABLE_CELL_HGT;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return DEF_SM_TBL_HDR_HEIGHT;
+    return DEF_LG_TABLE_HDR_HGT;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -485,8 +482,65 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
     }
+    
     return headerStr;
 }
+
+- (CGFloat)tableView:(UITableView*)tableView
+heightForFooterInSection:(NSInteger)section {
+    return DEF_NIL_FOOTER;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    [[((UITableViewHeaderFooterView*) view) textLabel] setTextColor:LIGHT_TEXT_COLOR];
+}
+
+//- (UIView*)tableView:(UITableView*)tableView
+//viewForFooterInSection:(NSInteger)section {
+//    return [[UIView alloc] initWithFrame:CGRectZero];
+//}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+//    [headerView setBackgroundColor:CLEAR_COLOR];
+//    
+//    NSString *headerStr;
+//    if (section == READ_ONLY_SETTINGS) {
+//        headerStr = @"Read-Only";
+//        
+//    } else if (section == TAP_AREA_SETTINGS) {
+//        headerStr = @"Tap Area";
+//        
+//    } else if (section == MATCH_NUM_SETTINGS) {
+//        headerStr = @"Match Number";
+//        
+//    } else if (section == RGB_DISPLAY_SETTINGS) {
+//        headerStr = @"RGB Display";
+//        
+//    } else if (section == ADD_BRANDS_SETTINGS) {
+//        headerStr = @"Add Paint Brands";
+//        
+//    } else if (section == MIX_RATIOS_SETTINGS) {
+//        headerStr = @"Default Paint Mix Ratios";
+//    }
+//    
+//    UILabel *headerLabel = [FieldUtils createLabel:headerStr xOffset:DEF_X_OFFSET yOffset:DEF_Y_OFFSET width:tableView.bounds.size.width height:DEF_TABLE_HDR_HEIGHT];
+//    [headerLabel setBackgroundColor:CLEAR_COLOR];
+//    [headerView addSubview:headerLabel];
+//    
+//    return headerView;
+//}
+
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+//    // Background color
+//    view.tintColor = [UIColor greenColor];
+//    
+//    [view setBackgroundColor:[UIColor grayColor]];
+//    
+//    // Text Color
+//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+//    [header.textLabel setTextColor:[UIColor whiteColor]];
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -506,6 +560,10 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     [cell.imageView setImage:nil];
     [cell.textLabel setText:@""];
     
+    for (UIView *subview in [cell.contentView subviews]) {
+        [subview removeFromSuperview];
+    }
+    
     CGFloat tableViewWidth = self.tableView.bounds.size.width;
     
     if (indexPath.section == READ_ONLY_SETTINGS) {
@@ -522,10 +580,10 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         }
         
     } else if (indexPath.section == TAP_AREA_SETTINGS) {
-        [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
+        [_tapSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_tapSettingsLabel];
 
-        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
+        CGFloat yOffset = _tapSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING;
         [_tapAreaStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_tapAreaStepper];
         
@@ -543,10 +601,10 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         
         
     } else if (indexPath.section == MATCH_NUM_SETTINGS) {
-        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
+        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_matchSettingsLabel];
         
-        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_FIELD_PADDING;
+        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING;
         [_matchNumStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
         [cell.contentView addSubview:_matchNumStepper];
         
@@ -565,10 +623,10 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         [cell.contentView addSubview:_addBrandsTextField];
         
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
-        [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_Y_OFFSET, tableViewWidth, DEF_LABEL_HEIGHT)];
+        [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosLabel];
         
-        CGFloat yOffset = _mixRatiosLabel.bounds.size.height + DEF_FIELD_PADDING;
+        CGFloat yOffset = _mixRatiosLabel.bounds.size.height + DEF_MD_FIELD_PADDING;
         CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
         [_mixRatiosTextView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTVIEW_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosTextView];
