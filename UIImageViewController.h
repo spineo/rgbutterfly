@@ -18,8 +18,8 @@
 
 @interface UIImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, weak) IBOutlet UIScrollView *imageScrollView;
-@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIScrollView *imageScrollView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *selectedImage;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) NSString *sourceViewContext, *viewType;

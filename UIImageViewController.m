@@ -136,7 +136,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     // NSManagedObject subclassing
@@ -718,6 +718,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     CGFloat width  = [[UIScreen mainScreen] bounds].size.width;
+    
+    _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
 
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
         [_matchView setEnabled:FALSE];
@@ -746,6 +748,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
             [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5)];
             
+            [_imageScrollView setNeedsDisplay];
+            [_imageView setNeedsDisplay];
+            
             [_scrollViewUp setEnabled:YES];
             [_scrollViewDown setEnabled:YES];
             
@@ -758,7 +763,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             [_imageTableView setHidden:YES];
             
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-            //[_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
             
             [self matchButtonsHide];
             
@@ -777,7 +782,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         [_imageScrollView setHidden:NO];
         
         [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-        //[_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+        [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
 
         [self matchButtonsHide];
         
@@ -817,6 +822,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
 - (void)scrollViewDecrease {
 
+    _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
         if (_imageViewSize == IMAGE_VIEW) {
@@ -840,7 +846,8 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
 - (void)scrollViewIncrease {
     
-    //[_imageScrollView setHidden:NO];
+    _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
+    [_imageScrollView setHidden:NO];
     
 //    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
@@ -975,6 +982,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         _currTapSection++;
         
         [_imageTableView setHidden:NO];
+        [_imageScrollView setHidden:NO];
         
         
         // Instantiate the new PaintSwatch Object
@@ -1025,6 +1033,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         _currTapSection--;
         
         [_imageTableView setHidden:NO];
+        [_imageScrollView setHidden:NO];
         
         int index = _currTapSection - 1;
         _swatchObj = [_paintSwatches objectAtIndex:index];
@@ -1052,9 +1061,17 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     
     tempImage = [self drawText:tempImage];
     
-    [_imageView setImage: tempImage];
+    [_imageView setImage:tempImage];
     [_imageView.layer setMasksToBounds:YES];
     [_imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+    
+//    // Add the selected image
+//    //
+//    [_imageView setContentMode:UIViewContentModeScaleToFill];
+//    [_imageScrollView setScrollEnabled:YES];
+//    [_imageScrollView setClipsToBounds:YES];
+//    [_imageScrollView setContentSize:_selectedImage.size];
+//    [_imageScrollView setDelegate:self];
     
     // Set the reference image (used by the detail views)
     //
