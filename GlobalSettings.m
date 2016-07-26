@@ -14,7 +14,7 @@
 CGFloat const DEF_X_OFFSET          = 0.0;
 CGFloat const DEF_Y_OFFSET          = 0.0;
 CGFloat const DEF_NIL_CELL          = 0.0;
-CGFloat const DEF_NIL_HEADER        = 1.0;
+CGFloat const DEF_NIL_HEADER        = 0.0;
 CGFloat const DEF_NIL_FOOTER        = 1.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;

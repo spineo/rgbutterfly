@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
 // Resize UISearchBar when rotated
@@ -199,22 +199,21 @@
     [_titleView addSubview:_cancelButton];
     
     [self searchBarSetFrames];
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated {
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self initPaintSwatchFetchedResultsController];
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
  
-//    if ([_listingType isEqualToString:@"Mix"]) {
-//        [self loadMixCollectionViewData];
-//        
-//    } else if ([_listingType isEqualToString:@"Match"]) {
-//        [self loadMatchCollectionViewData];
-//        
-//    } else if ([_listingType isEqualToString:@"Keywords"]) {
-//        [self loadKeywordData];
-//    }
-    [_colorTableView reloadData];
+    if ([_listingType isEqualToString:@"Mix"]) {
+        [self loadMixCollectionViewData];
+    
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
+    
+    } else if ([_listingType isEqualToString:@"Keywords"]) {
+        [self loadKeywordData];
+    }
 }
 
 - (void)loadMixCollectionViewData {
@@ -442,8 +441,9 @@
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
         
     } else {
+        NSString *colorListing = [[NSString alloc] initWithFormat:@"Color Listing (%i)", _numSwatches];
         [headerView addSubview:headerLabel];
-        [headerLabel setText: @"Colors Listing"];
+        [headerLabel setText:colorListing];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
     }
 
@@ -486,6 +486,7 @@
     } else {
         id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
         objCount = [sectionInfo numberOfObjects];
+        _numSwatches = (int)objCount;
     }
     return objCount;
 }
@@ -683,7 +684,6 @@
         _searchString = nil;
         [self initPaintSwatchFetchedResultsController];
     }
-    [_colorTableView reloadData];
 }
 
 - (IBAction)showPhotoOptions:(id)sender {

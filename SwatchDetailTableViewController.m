@@ -726,7 +726,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     if (_editFlag == FALSE) {
         [self makeTextFieldsNonEditable];
-        [self presentViewController:_saveAlertController animated:YES completion:nil];
+        if (([_save isEnabled] == TRUE) || ([_delete isEnabled] == TRUE)) {
+            [self presentViewController:_saveAlertController animated:YES completion:nil];
+        }
     } else {
         [self makeTextFieldsEditable];
     }
