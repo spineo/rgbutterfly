@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
 // Resize UISearchBar when rotated
@@ -360,6 +360,8 @@
         [_letterKeywords setObject:keywordList forKey:letter];
         [_letterSwatches setObject:swatchList  forKey:letter];
     }
+    
+    _numKeywords = (int)[sortedKeywords count];
 
     [_colorTableView reloadData];
 }
@@ -391,16 +393,16 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerView setBackgroundColor: DARK_BG_COLOR];
+    [headerView setBackgroundColor:DARK_BG_COLOR];
     
     [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerLabel setBackgroundColor: DARK_BG_COLOR];
-    [headerLabel setTextColor: LIGHT_TEXT_COLOR];
-    [headerLabel setFont: TABLE_HEADER_FONT];
+    [headerLabel setBackgroundColor:DARK_BG_COLOR];
+    [headerLabel setTextColor:LIGHT_TEXT_COLOR];
+    [headerLabel setFont:TABLE_HEADER_FONT];
     
     [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
      UIViewAutoresizingFlexibleLeftMargin |
@@ -411,39 +413,39 @@
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         
         if (section == 0) {
+            NSString *keywordsListing = [[NSString alloc] initWithFormat:@"Keywords Listing (%i)", _numKeywords];
             [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
             [headerView addSubview:headerLabel];
-            [headerLabel setText: @"Keywords Listing"];
-            [headerLabel setTextAlignment: NSTextAlignmentCenter];
+            [headerLabel setText:keywordsListing];
+            [headerLabel setTextAlignment:NSTextAlignmentCenter];
             
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         }
         
-
-        [letterLabel setBackgroundColor: DARK_BG_COLOR];
-        [letterLabel setTextColor: LIGHT_TEXT_COLOR];
-        [letterLabel setFont: TABLE_HEADER_FONT];
+        [letterLabel setBackgroundColor:DARK_BG_COLOR];
+        [letterLabel setTextColor:LIGHT_TEXT_COLOR];
+        [letterLabel setFont:TABLE_HEADER_FONT];
         
         [letterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
          UIViewAutoresizingFlexibleLeftMargin |
          UIViewAutoresizingFlexibleRightMargin];
         [headerView addSubview:letterLabel];
-        [letterLabel setText: [_sortedLetters objectAtIndex:section]];
+        [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:@"Mix"]) {
         [headerView addSubview:headerLabel];
-        [headerLabel setText: @"Mix Associations Listing"];
-        [headerLabel setTextAlignment: NSTextAlignmentCenter];
+        [headerLabel setText:@"Mix Associations Listing"];
+        [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
         [headerView addSubview:headerLabel];
-        [headerLabel setText: @"Match Associations Listing"];
-        [headerLabel setTextAlignment: NSTextAlignmentCenter];
+        [headerLabel setText:@"Match Associations Listing"];
+        [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else {
-        NSString *colorListing = [[NSString alloc] initWithFormat:@"Color Listing (%i)", _numSwatches];
+        NSString *colorsListing = [[NSString alloc] initWithFormat:@"Colors Listing (%i)", _numSwatches];
         [headerView addSubview:headerLabel];
-        [headerLabel setText:colorListing];
+        [headerLabel setText:colorsListing];
         [headerLabel setTextAlignment: NSTextAlignmentCenter];
     }
 
@@ -475,6 +477,7 @@
     NSInteger objCount;
     if ([_listingType isEqualToString:@"Mix"]) {
         objCount = [_mixAssocObjs count];
+        _numMixAssocs = (int)objCount;
 
     } else if ([_listingType isEqualToString:@"Match"]) {
         objCount = [_matchAssocObjs count];
@@ -494,7 +497,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if ([_listingType isEqualToString:@"Mix"] || [_listingType isEqualToString:@"Match"]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
-    
+
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
