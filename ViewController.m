@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 
 // Resize UISearchBar when rotated
@@ -217,11 +217,11 @@
 }
 
 - (void)loadMixCollectionViewData {
-    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
-    int num_tableview_rows = (int)[_mixAssocObjs count];
+    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];;
+    _numMixAssocs = (int)[_mixAssocObjs count];
     
     NSMutableArray *mixAssociationIds = [[NSMutableArray alloc] init];
-    for (int i=0; i<num_tableview_rows; i++) {
+    for (int i=0; i<_numMixAssocs; i++) {
         
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:i];
         
@@ -250,11 +250,10 @@
 
 - (void)loadMatchCollectionViewData {
     _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context];
-    int num_tableview_rows = (int)[_matchAssocObjs count];
+    _numMatchAssocs = (int)[_matchAssocObjs count];
     
     NSMutableArray *matchAssociationIds = [[NSMutableArray alloc] init];
-    for (int i=0; i<num_tableview_rows; i++) {
-        
+    for (int i=0; i<_numMatchAssocs; i++) {
         MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:i];
         
         NSMutableArray *tap_area_ids = [ManagedObjectUtils queryTapAreas:matchAssocObj.objectID context:self.context];
@@ -433,13 +432,15 @@
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:@"Mix"]) {
+        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Mix Associations Listing (%i)", _numMixAssocs];
         [headerView addSubview:headerLabel];
-        [headerLabel setText:@"Mix Associations Listing"];
+        [headerLabel setText:mixAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
+        NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"Match Associations Listing (%i)", _numMatchAssocs];
         [headerView addSubview:headerLabel];
-        [headerLabel setText:@"Match Associations Listing"];
+        [headerLabel setText:matchAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else {
