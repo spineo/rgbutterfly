@@ -67,6 +67,10 @@
 
 @implementation ViewController
 
+// Minimum number of elements to display a mix association
+//
+int MIN_MIXASSOC_SIZE = 3;
+
 
 #pragma mark - Initialization and Load Methods
 
@@ -217,11 +221,12 @@
 }
 
 - (void)loadMixCollectionViewData {
-    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];;
-    _numMixAssocs = (int)[_mixAssocObjs count];
+    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
+    int num_mix_assocs = (int)[_mixAssocObjs count];
+    _numMixAssocs = 0;
     
     NSMutableArray *mixAssociationIds = [[NSMutableArray alloc] init];
-    for (int i=0; i<_numMixAssocs; i++) {
+    for (int i=0; i<num_mix_assocs; i++) {
         
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:i];
         
@@ -229,6 +234,10 @@
         NSMutableArray *swatch_ids = (NSMutableArray *)[[ManagedObjectUtils queryMixAssocSwatches:mixAssocObj.objectID context:self.context]sortedArrayUsingDescriptors:@[orderSort]];
         
         int num_collectionview_cells = (int)[swatch_ids count];
+
+        if (num_collectionview_cells > MIN_MIXASSOC_SIZE) {
+            _numMixAssocs = _numMixAssocs + 1;
+        }
         
         NSMutableArray *paintSwatches = [NSMutableArray arrayWithCapacity:num_collectionview_cells];
         
@@ -478,7 +487,6 @@
     NSInteger objCount;
     if ([_listingType isEqualToString:@"Mix"]) {
         objCount = [_mixAssocObjs count];
-        _numMixAssocs = (int)objCount;
 
     } else if ([_listingType isEqualToString:@"Match"]) {
         objCount = [_matchAssocObjs count];
@@ -496,9 +504,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ([_listingType isEqualToString:@"Mix"] || [_listingType isEqualToString:@"Match"]) {
+    if ([_listingType isEqualToString:@"Mix"]) {
+        int index = (int)indexPath.row;
+        int ct = (int)[[self.mixColorArray objectAtIndex:index] count];
+        if (ct < MIN_MIXASSOC_SIZE) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        }
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
-
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -743,11 +759,11 @@
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
     
-    [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-    [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-    [swatchImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-    [swatchImageView setContentMode: UIViewContentModeScaleAspectFill];
-    [swatchImageView setClipsToBounds: YES];
+    [swatchImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+    [swatchImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+    [swatchImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+    [swatchImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [swatchImageView setClipsToBounds:YES];
     [swatchImageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
     
     cell.backgroundView = swatchImageView;
