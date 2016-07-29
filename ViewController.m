@@ -34,12 +34,13 @@
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
-@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage;
-@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs;
-@property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords;
-@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs;
+@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *downArrowImage, *upArrowImage;
+@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray;
+@property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
+@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
+
 
 // Resize UISearchBar when rotated
 //
@@ -69,7 +70,7 @@
 
 // Minimum number of elements to display a mix association
 //
-int MIN_MIXASSOC_SIZE = 3;
+int MIN_MIXASSOC_SIZE = 1;
 
 
 #pragma mark - Initialization and Load Methods
@@ -84,10 +85,17 @@ int MIN_MIXASSOC_SIZE = 3;
     
     [GlobalSettings init];
     
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
+    
+    // Subjective color data
+    //
+    _subjColorNames = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
+    _numSubjColors  = (int)[_subjColorNames count];
+    _subjColorData  = [ManagedObjectUtils fetchSubjectiveColors:self.context];
     
     [_colorTableView setDelegate:self];
     [_colorTableView setDataSource:self];
@@ -127,6 +135,10 @@ int MIN_MIXASSOC_SIZE = 3;
         [self updateTable:@"Match"];
     }];
     
+    UIAlertAction *listByColors = [UIAlertAction actionWithTitle:@"List By Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self updateTable:@"Colors"];
+    }];
+    
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [_listingController dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -135,6 +147,7 @@ int MIN_MIXASSOC_SIZE = 3;
     [_listingController addAction:mixAssociations];
     [_listingController addAction:sortByKeywords];
     [_listingController addAction:matchAssociations];
+    [_listingController addAction:listByColors];
     [_listingController addAction:alertCancel];
     
     
@@ -203,6 +216,9 @@ int MIN_MIXASSOC_SIZE = 3;
     [_titleView addSubview:_cancelButton];
     
     [self searchBarSetFrames];
+    
+    _upArrowImage = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -217,6 +233,9 @@ int MIN_MIXASSOC_SIZE = 3;
     
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         [self loadKeywordData];
+        
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        [self loadColorsData];
     }
 }
 
@@ -235,7 +254,7 @@ int MIN_MIXASSOC_SIZE = 3;
         
         int num_collectionview_cells = (int)[swatch_ids count];
 
-        if (num_collectionview_cells > MIN_MIXASSOC_SIZE) {
+        if (num_collectionview_cells >= MIN_MIXASSOC_SIZE) {
             _numMixAssocs = _numMixAssocs + 1;
         }
         
@@ -374,6 +393,23 @@ int MIN_MIXASSOC_SIZE = 3;
     [_colorTableView reloadData];
 }
 
+- (void)loadColorsData {
+    _subjColorsArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<=_numSubjColors; i++) {
+        
+        NSArray *psArray = [ManagedObjectUtils queryPaintSwatchesBySubjColorId:i context:self.context];
+        
+        NSMutableArray *paintSwatches = [NSMutableArray arrayWithCapacity:[psArray count]];
+        for (PaintSwatches *ps in psArray) {
+            NSLog(@"PS NAME=%@", ps.name);
+            [paintSwatches addObject:ps];
+        }
+        
+        [_subjColorsArray addObject:paintSwatches];
+    }
+    
+    [_colorTableView reloadData];
+}
 
 - (void)takePhoto {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -426,7 +462,6 @@ int MIN_MIXASSOC_SIZE = 3;
             [headerView addSubview:headerLabel];
             [headerLabel setText:keywordsListing];
             [headerLabel setTextAlignment:NSTextAlignmentCenter];
-            
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         }
         
@@ -452,6 +487,49 @@ int MIN_MIXASSOC_SIZE = 3;
         [headerLabel setText:matchAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+
+        if (section == 0) {
+            [headerLabel setText:@"Subjective Colors Listing"];
+            [headerLabel setTextAlignment:NSTextAlignmentCenter];
+            [headerView addSubview:headerLabel];
+        } else {
+            int index = (int)section - 1;
+            NSString *colorName = [_subjColorNames objectAtIndex:index];
+            UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+            [headerLabel setTextColor:[ColorUtils setBestColorContrast:colorName]];
+            [headerLabel setBackgroundColor:backgroundColor];
+            [headerLabel setText:[_subjColorNames objectAtIndex:index]];
+            
+            UIBarButtonItem *arrowButtonItem  = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
+            int buttonTag = (int)section;
+            [arrowButtonItem setTag:buttonTag];
+            
+            UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
+            [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
+            
+            UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:[_subjColorNames objectAtIndex:index] style:UIBarButtonItemStylePlain target:nil action:nil];
+            
+            scrollViewToolbar.items = @[
+                                        headerButtonLabel,
+                                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                        arrowButtonItem
+                                        ];
+            
+            [headerView addSubview:scrollViewToolbar];
+            
+            if ([colorName isEqualToString:@"Black"]) {
+                [headerButtonLabel setTintColor:LIGHT_TEXT_COLOR];
+                [arrowButtonItem   setTintColor:LIGHT_TEXT_COLOR];
+                
+            } else {
+                [headerButtonLabel setTintColor:backgroundColor];
+                [arrowButtonItem setTintColor:backgroundColor];
+            }
+            [scrollViewToolbar sizeToFit];
+
+        }
+        
     } else {
         NSString *colorsListing = [[NSString alloc] initWithFormat:@"Colors Listing (%i)", _numSwatches];
         [headerView addSubview:headerLabel];
@@ -465,6 +543,10 @@ int MIN_MIXASSOC_SIZE = 3;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if ([_listingType isEqualToString:@"Keywords"] && (section == 0)) {
         return DEF_LG_TABLE_CELL_HGT;
+
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        return DEF_LG_TABLE_HDR_HGT;
+
     } else {
         return DEF_SM_TABLE_CELL_HGT;
     }
@@ -475,6 +557,10 @@ int MIN_MIXASSOC_SIZE = 3;
     //
     if ([_listingType isEqualToString:@"Keywords"]) {
         return [_sortedLetters count];
+    
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        return [_subjColorNames count] + 1;
+
     } else {
         return [[[self fetchedResultsController] sections] count];
     }
@@ -494,6 +580,9 @@ int MIN_MIXASSOC_SIZE = 3;
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         NSString *sectionTitle = [_sortedLetters objectAtIndex:section];
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
+        
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        objCount = [[_subjColorsArray objectAtIndex:section] count];
         
     } else {
         id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
@@ -617,6 +706,13 @@ int MIN_MIXASSOC_SIZE = 3;
             
             [cell.textLabel setText:kw_name];
             
+        } else if ([_listingType isEqualToString:@"Colors"]) {
+            
+            //PaintSwatches *ps = [[_subjColorsArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+            
+            //[cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            //[cell.textLabel setText:[ps valueForKeyPath:@"name"]];
+            
         } else {
             
             PaintSwatches *ps = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
@@ -673,7 +769,7 @@ int MIN_MIXASSOC_SIZE = 3;
 // UIBarButton actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - UIBarButton and UIAlertController Methods
+#pragma mark - UIBarButton, UIBarButtonItem and UIAlertController Methods
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -699,6 +795,10 @@ int MIN_MIXASSOC_SIZE = 3;
         [_searchButton setEnabled:FALSE];
         [self loadKeywordData];
         
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        [_searchButton setEnabled:FALSE];
+        [self loadColorsData];
+        
     } else {
         [_searchButton setEnabled:TRUE];
         _searchString = nil;
@@ -708,6 +808,12 @@ int MIN_MIXASSOC_SIZE = 3;
 
 - (IBAction)showPhotoOptions:(id)sender {
     [self presentViewController:_photoSelectionController animated:YES completion:nil];
+}
+
+- (void)expandOrCollapseSection:(id)sender {
+    _selSubjColorSection = (int)[sender tag] - 1;
+
+    [self.colorTableView reloadData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

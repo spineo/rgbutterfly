@@ -573,6 +573,26 @@
     }
 }
 
++ (NSArray *)queryPaintSwatchesBySubjColorId:(int)subj_color_id context:(NSManagedObjectContext *)context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    [fetch setPredicate: [NSPredicate predicateWithFormat:@"subj_color_id == %i", subj_color_id]];
+    
+    NSError *error      = nil;
+    NSArray *results    = [context executeFetchRequest:fetch error:&error];
+    
+    if ([results count] == 0) {
+        return nil;
+    } else {
+        return results;
+    }
+}
+
 + (Keyword *)queryKeyword:(NSString *)keyword context:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     

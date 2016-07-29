@@ -542,7 +542,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     // Shrink and expand image shown in the tableView header (for UIImageScrollView hide/show)
     //
     _upArrowImage = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
     _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     // Initial state until tapped areas are added
@@ -1408,7 +1407,6 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
                                     _scrollViewUp,
                                     _scrollViewDown,
                                     ];
-
 
         [headerView addSubview:scrollViewToolbar];
         [scrollViewToolbar sizeToFit];
