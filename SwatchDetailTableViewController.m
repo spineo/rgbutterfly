@@ -1168,10 +1168,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Add subjective color if not 'Other'
     //
-    NSString *subj_color = [_subjColorName text];
-    if (![subj_color isEqualToString:@"Other"]) {
-        [keywords addObject:subj_color];
-    }
+//    NSString *subj_color = [_subjColorName text];
+//    if (![subj_color isEqualToString:@"Other"]) {
+//        [keywords addObject:subj_color];
+//    }
     
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {

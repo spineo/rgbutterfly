@@ -401,10 +401,8 @@ int MIN_MIXASSOC_SIZE = 1;
         
         NSMutableArray *paintSwatches = [NSMutableArray arrayWithCapacity:[psArray count]];
         for (PaintSwatches *ps in psArray) {
-            NSLog(@"PS NAME=%@", ps.name);
             [paintSwatches addObject:ps];
         }
-        
         [_subjColorsArray addObject:paintSwatches];
     }
     
@@ -582,7 +580,12 @@ int MIN_MIXASSOC_SIZE = 1;
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
-        objCount = [[_subjColorsArray objectAtIndex:section] count];
+        if (section == 0) {
+            objCount = 0;
+        } else {
+            int index = (int)section - 1;
+            objCount = [[_subjColorsArray objectAtIndex:index] count];
+        }
         
     } else {
         id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][section];
@@ -707,11 +710,11 @@ int MIN_MIXASSOC_SIZE = 1;
             [cell.textLabel setText:kw_name];
             
         } else if ([_listingType isEqualToString:@"Colors"]) {
+            int index = (int)indexPath.section - 1;
+            PaintSwatches *ps = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
             
-            //PaintSwatches *ps = [[_subjColorsArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-            
-            //[cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-            //[cell.textLabel setText:[ps valueForKeyPath:@"name"]];
+            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
             
         } else {
             
