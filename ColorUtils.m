@@ -262,4 +262,14 @@
     [toolbar sendSubviewToBack:visualEffectView];
 }
 
++ (void)setViewGlaze:(UIView *)view {
+    CGRect bounds = view.bounds;
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    visualEffectView.frame = bounds;
+    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:visualEffectView];
+    view.backgroundColor = [UIColor clearColor];
+    [view sendSubviewToBack:visualEffectView];
+}
+
 @end

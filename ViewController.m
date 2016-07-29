@@ -498,6 +498,7 @@ int MIN_MIXASSOC_SIZE = 1;
             [headerLabel setTextColor:[ColorUtils setBestColorContrast:colorName]];
             [headerLabel setBackgroundColor:backgroundColor];
             [headerLabel setText:[_subjColorNames objectAtIndex:index]];
+//            [headerView addSubview:headerLabel];
             
             UIBarButtonItem *arrowButtonItem  = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
             int buttonTag = (int)section;
@@ -525,6 +526,8 @@ int MIN_MIXASSOC_SIZE = 1;
                 [arrowButtonItem setTintColor:backgroundColor];
             }
             [scrollViewToolbar sizeToFit];
+
+            [ColorUtils setViewGlaze:headerView];
 
         }
         
