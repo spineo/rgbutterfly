@@ -994,11 +994,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     [picker selectRow:selectRow inComponent:0 animated:YES];
     
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self action:action];
-    tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
-    [picker addGestureRecognizer:tapRecognizer];
-    [tapRecognizer setDelegate:self];
+//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                                             initWithTarget:self action:action];
+//    tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
+//    [picker addGestureRecognizer:tapRecognizer];
+//    [tapRecognizer setDelegate:self];
     
     return picker;
 }
