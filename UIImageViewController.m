@@ -2116,29 +2116,32 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         // Save the MatchAssociation first
         //
         if (_matchAssociation == nil || _tapAreasChanged == TRUE) {
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
-            [self presentViewController:myAlert animated:YES completion:nil];
-
-        } else {
-            PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:_currSelectedSection] objectAtIndex:0];
-            
-            UINavigationController *navigationViewController = [segue destinationViewController];
-            MatchTableViewController *matchTableViewController = (MatchTableViewController *)([navigationViewController viewControllers][0]);
-            
-            [matchTableViewController setSelPaintSwatch:paintSwatch];
-            
-            int currTapSection = _currTapSection - _currSelectedSection;
-            [matchTableViewController setCurrTapSection:currTapSection];
-            [matchTableViewController setReferenceImage:_referenceTappedImage];
-
-            [matchTableViewController setMaxMatchNum:_maxMatchNum];
-            [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
-            
-            int tapIndex = currTapSection - 1;
-            TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
-            [matchTableViewController setTapArea:tapArea];
-            [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
+            //UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
+            //[self presentViewController:myAlert animated:YES completion:nil];
+            [self updateMatchAssoc];
         }
+
+
+//        } else {
+        PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:_currSelectedSection] objectAtIndex:0];
+        
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        MatchTableViewController *matchTableViewController = (MatchTableViewController *)([navigationViewController viewControllers][0]);
+        
+        [matchTableViewController setSelPaintSwatch:paintSwatch];
+        
+        int currTapSection = _currTapSection - _currSelectedSection;
+        [matchTableViewController setCurrTapSection:currTapSection];
+        [matchTableViewController setReferenceImage:_referenceTappedImage];
+
+        [matchTableViewController setMaxMatchNum:_maxMatchNum];
+        [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+        
+        int tapIndex = currTapSection - 1;
+        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+        [matchTableViewController setTapArea:tapArea];
+        [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
+//        }
 
     } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
