@@ -1005,10 +1005,15 @@ const int ASSOC_COLORS_TAG     = 5;
         [paintSwatch setName:swatchName];
         [paintSwatch setRef_parts_ratio:[NSNumber numberWithInt:ratio_1]];
         [paintSwatch setMix_parts_ratio:[NSNumber numberWithInt:ratio_2]];
-
     }
+    
+    // Rename the MixAssociation
+    //
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@", refName_1, refName_2];
+    
     //[_applyButton setEnabled:FALSE];
     [_save setEnabled:TRUE];
+
     
     [self.tableView reloadData];
 }
@@ -1071,11 +1076,11 @@ const int ASSOC_COLORS_TAG     = 5;
         [_pickerTextField setInputView:pickerParentView];
         [self.view addSubview:_pickerTextField];
         
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-                                                 initWithTarget:self action:@selector(ratiosSelection)];
-        tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
-        [mixRatiosPicker addGestureRecognizer:tapRecognizer];
-        [tapRecognizer setDelegate:self];
+//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                                                 initWithTarget:self action:@selector(ratiosSelection)];
+//        tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
+//        [mixRatiosPicker addGestureRecognizer:tapRecognizer];
+//        [tapRecognizer setDelegate:self];
         
         [_pickerTextField becomeFirstResponder];
     }
