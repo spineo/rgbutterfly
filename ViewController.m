@@ -741,9 +741,13 @@ int MIN_MIXASSOC_SIZE = 1;
         //_selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
 
     } else if ([_listingType isEqualToString:@"Keywords"]) {
-        
         NSString *sectionTitle   = [_sortedLetters objectAtIndex:indexPath.section];
         _selPaintSwatch = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
+        
+    } else if ([_listingType isEqualToString:@"Colors"]) {
+        int index = (int)indexPath.section - 1;
+        _selPaintSwatch = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
 
     } else {
