@@ -18,10 +18,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel;
-@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *addMixFilterLabel;
+@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *addMixFilterSwitch;
+@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, addMixShowAll;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *addMixFilterText, *addMixRefOnlyLabel, *addMixShowAllLabel;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -64,10 +64,14 @@ const int RGB_DISPLAY_ROWS        = 1;
 const int MIX_RATIOS_SETTINGS     = 4;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int ADD_BRANDS_SETTINGS     = 5;
+const int ADD_MIX_SETTINGS        = 5;
+const int ADD_MIX_ROWS            = 1;
+
+const int ADD_BRANDS_SETTINGS     = 6;
 const int ADD_BRANDS_ROWS         = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 5;
+const int SETTINGS_MAX_SECTIONS   = 6;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,19 +101,18 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _psMakeReadOnlyLabel  = @"Paint Swatches set to Read-Only";
     _psMakeReadWriteLabel = @"Paint Swatches set to Read/Write";
     
-    NSString *labelText;
     if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
           [_userDefaults stringForKey:_psReadOnlyText])
        ) {
         _swatchesReadOnly = FALSE;
-        labelText = _psMakeReadWriteLabel;
+        _labelText = _psMakeReadWriteLabel;
         
         [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
-        [_userDefaults setValue:labelText forKey:_psReadOnlyText];
+        [_userDefaults setValue:_labelText forKey:_psReadOnlyText];
         
     } else {
         _swatchesReadOnly = [_userDefaults boolForKey:PAINT_SWATCH_RO_KEY];
-        labelText = [_userDefaults stringForKey:_psReadOnlyText];
+        _labelText = [_userDefaults stringForKey:_psReadOnlyText];
     }
     
     // Create the label and switch, set the last state or default values
@@ -124,7 +127,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     [_psReadOnlySwitch addTarget:self action:@selector(setPSSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _psReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    _psReadOnlyLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     CGFloat labelWidth = _psReadOnlyLabel.bounds.size.width;
     CGFloat labelHeight = _psReadOnlyLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
@@ -141,19 +144,19 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     _maMakeReadOnlyLabel  = @"Mix Associations set to Read-Only";
     _maMakeReadWriteLabel = @"Mix Associations set to Read/Write";
     
-    labelText = @"";
+    _labelText = @"";
     if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
           [_userDefaults stringForKey:_maReadOnlyText])
        ) {
         _assocsReadOnly = FALSE;
-        labelText = _maMakeReadWriteLabel;
+        _labelText = _maMakeReadWriteLabel;
         
         [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
-        [_userDefaults setValue:labelText forKey:_maReadOnlyText];
+        [_userDefaults setValue:_labelText forKey:_maReadOnlyText];
         
     } else {
         _assocsReadOnly = [_userDefaults boolForKey:MIX_ASSOC_RO_KEY];
-        labelText = [_userDefaults stringForKey:_maReadOnlyText];
+        _labelText = [_userDefaults stringForKey:_maReadOnlyText];
     }
     
     // Create the label and switch, set the last state or default values
@@ -168,7 +171,7 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     //
     [_maReadOnlySwitch addTarget:self action:@selector(setMASwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _maReadOnlyLabel   = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    _maReadOnlyLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     labelWidth = _maReadOnlyLabel.bounds.size.width;
     labelHeight = _maReadOnlyLabel.bounds.size.height;
     labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
@@ -385,6 +388,49 @@ const int SETTINGS_MAX_SECTIONS   = 5;
     }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // AddMix Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _addMixFilterText    = @"addmix_filter_text";
+    
+    _addMixRefOnlyLabel  = @"List Only Reference Swatches";
+    _addMixShowAllLabel  = @"List All The Paint Swatches ";
+
+    _labelText = @"";
+    if(! ([_userDefaults boolForKey:ADD_MIX_FILTER_KEY] &&
+          [_userDefaults stringForKey:_addMixFilterText])
+       ) {
+        _addMixShowAll = FALSE;
+        _labelText = _addMixRefOnlyLabel;
+        
+        [_userDefaults setBool:_addMixShowAll forKey:ADD_MIX_FILTER_KEY];
+        [_userDefaults setValue:_labelText forKey:_addMixFilterText];
+        
+    } else {
+        _addMixShowAll = [_userDefaults boolForKey:ADD_MIX_FILTER_KEY];
+        _labelText = [_userDefaults stringForKey:_addMixFilterText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _addMixFilterSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _addMixFilterSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_addMixFilterSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_addMixFilterSwitch setOn:_addMixShowAll];
+    
+    // Add the switch target
+    //
+    [_addMixFilterSwitch addTarget:self action:@selector(setAddMixFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _addMixFilterLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _addMixFilterLabel.bounds.size.width;
+    labelHeight = _addMixFilterLabel.bounds.size.height;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_addMixFilterLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -442,6 +488,9 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         
     } else if (section == MIX_RATIOS_SETTINGS) {
         return MIX_RATIOS_ROWS;
+        
+    } else if (section == ADD_MIX_SETTINGS) {
+        return ADD_MIX_ROWS;
     }
     return 0;
 }
@@ -481,6 +530,9 @@ const int SETTINGS_MAX_SECTIONS   = 5;
         
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
+        
+    } else if (section == ADD_MIX_SETTINGS) {
+        headerStr = @"Add Mix";
     }
     
     return headerStr;
@@ -630,6 +682,10 @@ heightForFooterInSection:(NSInteger)section {
         CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
         [_mixRatiosTextView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTVIEW_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosTextView];
+        
+    } else if (indexPath.section == ADD_MIX_SETTINGS) {
+        [cell.contentView addSubview:_addMixFilterSwitch];
+        [cell.contentView addSubview:_addMixFilterLabel];
     }
     
     return cell;
@@ -818,6 +874,19 @@ heightForFooterInSection:(NSInteger)section {
     _editFlag = TRUE;
 }
 
+- (void)setAddMixFilterSwitchState:(id)sender {
+    _addMixShowAll = [sender isOn];
+    
+    if (_addMixShowAll == TRUE) {
+        [_addMixFilterLabel setText:_addMixShowAllLabel];
+        
+    } else {
+        [_addMixFilterLabel setText:_addMixRefOnlyLabel];
+    }
+    _editFlag = TRUE;
+}
+
+
 - (IBAction)save:(id)sender {
     
     // Perform any validations first
@@ -866,6 +935,11 @@ heightForFooterInSection:(NSInteger)section {
             // Paint Mix Ratios
             //
             [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
+            
+            // Add Mix Settings
+            //
+            [_userDefaults setBool:_addMixShowAll forKey:ADD_MIX_FILTER_KEY];
+            [_userDefaults setValue:[_addMixFilterLabel text] forKey:_addMixFilterText];
             
             [_userDefaults synchronize];
             

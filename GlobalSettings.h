@@ -201,6 +201,7 @@ extern NSString * const MATCH_NUM_KEY;
 extern NSString * const RGB_DISPLAY_KEY;
 extern NSString * const ADD_BRANDS_KEY;
 extern NSString * const MIX_RATIOS_KEY;
+extern NSString * const ADD_MIX_FILTER_KEY;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

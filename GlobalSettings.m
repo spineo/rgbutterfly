@@ -187,6 +187,7 @@ NSString * const MATCH_NUM_KEY       = @"MatchNum";
 NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
+NSString * const ADD_MIX_FILTER_KEY  = @"AddMixFilter";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

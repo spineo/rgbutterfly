@@ -58,6 +58,11 @@
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic) CGColorRef defColorBorder;
 
+// NSUserDefaults
+//
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic) BOOL addMixShowAll;
+
 @end
 
 @implementation AddMixTableViewController
@@ -72,6 +77,11 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     [super viewDidLoad];
     
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    
+    // Check the PaintSwatch filter (all or ref only?)
+    //
+    _userDefaults = [NSUserDefaults standardUserDefaults];
+    _addMixShowAll = [_userDefaults boolForKey:ADD_MIX_FILTER_KEY];
     
     // NSManagedObject subclassing
     //
@@ -300,6 +310,22 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     _paintSwatchList    = [[NSMutableArray alloc] init];
     for (PaintSwatches *paintSwatch in _allPaintSwatches) {
         NSString *name = [paintSwatch name];
+        
+        // Filter by Reference only
+        //
+        if (_addMixShowAll == FALSE) {
+            int type_id     = [[paintSwatch type_id] intValue];
+            
+            // Filter out match association swatches
+            //
+            PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Reference" context:self.context];
+            int ref_type_id = [[paintSwatchType order] intValue];
+            
+            if (type_id != ref_type_id) {
+                continue;
+            }
+        }
+
         
         if (![currPaintSwatchNames valueForKey:name]) {
             PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
