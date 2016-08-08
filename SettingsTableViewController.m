@@ -18,10 +18,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *addMixFilterLabel;
-@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *addMixFilterSwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, addMixShowAll;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *addMixFilterText, *addMixRefOnlyLabel, *addMixShowAllLabel;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *addMixFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *addMixFilterSwitch, *mixAssocCountSwitch;
+@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, addMixShowAll, mixAssocLt3;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *addMixFilterText, *addMixRefOnlyLabel, *addMixShowAllLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -64,13 +64,16 @@ const int RGB_DISPLAY_ROWS        = 1;
 const int MIX_RATIOS_SETTINGS     = 4;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int ADD_MIX_SETTINGS        = 5;
+const int MIX_ASSOC_SETTINGS      = 5;
+const int MIX_ASSOC_ROWS          = 1;
+
+const int ADD_MIX_SETTINGS        = 6;
 const int ADD_MIX_ROWS            = 1;
 
-const int ADD_BRANDS_SETTINGS     = 6;
+const int ADD_BRANDS_SETTINGS     = 7;
 const int ADD_BRANDS_ROWS         = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 6;
+const int SETTINGS_MAX_SECTIONS   = 7;
 
 
 - (void)viewDidLoad {
@@ -341,25 +344,6 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // New Brands Settings
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-//    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
-//    [_addBrandsTextField setAutoresizingMask:NO];
-//    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
-//    [_addBrandsTextField setDelegate:self];
-//    
-//    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
-//    
-//    // Add a place holder if no text
-//    //
-//    if (! [_addBrandsText isEqualToString:@""] && (_addBrandsText != nil)) {
-//        [_addBrandsTextField setText:_addBrandsText];
-//    } else {
-//        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
-//    }
-    
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Mix Ratios Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -388,7 +372,7 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // AddMix Settings
+    // Add Mix Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
@@ -429,6 +413,70 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     labelHeight = _addMixFilterLabel.bounds.size.height;
     labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_addMixFilterLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Mix Association Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _mixAssocCountText    = @"mixassoc_count_text";
+    
+    _mixAssocGt2Text  = @"List Associations Size > Two";
+    _mixAssocAllText  = @"List Associations All Sizes ";
+    
+    _labelText = @"";
+    if(! ([_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY] &&
+          [_userDefaults stringForKey:_mixAssocCountText])
+       ) {
+        _mixAssocLt3 = FALSE;
+        _labelText = _mixAssocGt2Text;
+        
+        [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
+        [_userDefaults setValue:_labelText forKey:_mixAssocCountText];
+        
+    } else {
+        _mixAssocLt3 = [_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY];
+        _labelText = [_userDefaults stringForKey:_mixAssocCountText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _mixAssocCountSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _mixAssocCountSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_mixAssocCountSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_mixAssocCountSwitch setOn:_mixAssocLt3];
+    
+    // Add the switch target
+    //
+    [_mixAssocCountSwitch addTarget:self action:@selector(setMixAssocCountSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _mixAssocCountLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _mixAssocCountLabel.bounds.size.width;
+    labelHeight = _mixAssocCountLabel.bounds.size.height;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_mixAssocCountLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // New Brands Settings
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    //    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
+    //    [_addBrandsTextField setAutoresizingMask:NO];
+    //    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
+    //    [_addBrandsTextField setDelegate:self];
+    //
+    //    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
+    //
+    //    // Add a place holder if no text
+    //    //
+    //    if (! [_addBrandsText isEqualToString:@""] && (_addBrandsText != nil)) {
+    //        [_addBrandsTextField setText:_addBrandsText];
+    //    } else {
+    //        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
+    //    }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
@@ -483,14 +531,17 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     } else if (section == RGB_DISPLAY_SETTINGS) {
         return RGB_DISPLAY_ROWS;
         
-    } else if (section == ADD_BRANDS_SETTINGS) {
-        return ADD_BRANDS_ROWS;
-        
     } else if (section == MIX_RATIOS_SETTINGS) {
         return MIX_RATIOS_ROWS;
         
     } else if (section == ADD_MIX_SETTINGS) {
         return ADD_MIX_ROWS;
+        
+    } else if (section == MIX_ASSOC_SETTINGS) {
+        return MIX_ASSOC_ROWS;
+        
+    } else if (section == ADD_BRANDS_SETTINGS) {
+        return ADD_BRANDS_ROWS;
     }
     return 0;
 }
@@ -525,14 +576,17 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     } else if (section == RGB_DISPLAY_SETTINGS) {
         headerStr = @"RGB Display";
         
-    } else if (section == ADD_BRANDS_SETTINGS) {
-        headerStr = @"Add Paint Brands";
-        
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
         
     } else if (section == ADD_MIX_SETTINGS) {
         headerStr = @"Add Mix";
+
+    } else if (section == MIX_ASSOC_SETTINGS) {
+        headerStr = @"Mix Associations";
+        
+    } else if (section == ADD_BRANDS_SETTINGS) {
+        headerStr = @"Add Paint Brands";
     }
     
     return headerStr;
@@ -686,6 +740,10 @@ heightForFooterInSection:(NSInteger)section {
     } else if (indexPath.section == ADD_MIX_SETTINGS) {
         [cell.contentView addSubview:_addMixFilterSwitch];
         [cell.contentView addSubview:_addMixFilterLabel];
+        
+    } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
+        [cell.contentView addSubview:_mixAssocCountSwitch];
+        [cell.contentView addSubview:_mixAssocCountLabel];
     }
     
     return cell;
@@ -886,6 +944,17 @@ heightForFooterInSection:(NSInteger)section {
     _editFlag = TRUE;
 }
 
+- (void)setMixAssocCountSwitchState:(id)sender {
+    _mixAssocLt3 = [sender isOn];
+    
+    if (_mixAssocLt3 == TRUE) {
+        [_mixAssocCountLabel setText:_mixAssocAllText];
+        
+    } else {
+        [_mixAssocCountLabel setText:_mixAssocGt2Text];
+    }
+    _editFlag = TRUE;
+}
 
 - (IBAction)save:(id)sender {
     
@@ -940,6 +1009,11 @@ heightForFooterInSection:(NSInteger)section {
             //
             [_userDefaults setBool:_addMixShowAll forKey:ADD_MIX_FILTER_KEY];
             [_userDefaults setValue:[_addMixFilterLabel text] forKey:_addMixFilterText];
+            
+            // Mix Assoc Settings
+            //
+            [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
+            [_userDefaults setValue:[_mixAssocCountLabel text] forKey:_mixAssocCountText];
             
             [_userDefaults synchronize];
             

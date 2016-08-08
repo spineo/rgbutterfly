@@ -63,6 +63,12 @@
 @property (nonatomic, strong) MixAssociation *mixAssociation;
 @property (nonatomic, strong) MatchAssociations *matchAssociation;
 
+// NSUserDefaults
+//
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic) BOOL mixAssocUnfilter;
+@property (nonatomic) int minAssocSize;
+
 @end
 
 
@@ -70,7 +76,8 @@
 
 // Minimum number of elements to display a mix association
 //
-int MIN_MIXASSOC_SIZE = 1;
+int MIX_ASSOC_RESTRICT_SIZE = 3;
+int MIX_ASSOC_MIN_SIZE = 1;
 
 
 #pragma mark - Initialization and Load Methods
@@ -81,8 +88,11 @@ int MIN_MIXASSOC_SIZE = 1;
     
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
-
     
+    
+    // Initialization
+    //
+    _userDefaults = [NSUserDefaults standardUserDefaults];
     [GlobalSettings init];
     
     
@@ -240,6 +250,16 @@ int MIN_MIXASSOC_SIZE = 1;
 }
 
 - (void)loadMixCollectionViewData {
+    
+    _minAssocSize = MIX_ASSOC_RESTRICT_SIZE;
+    
+    // Check the PaintSwatch filter (all or ref only?)
+    //
+    _mixAssocUnfilter = [_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY];
+    if (_mixAssocUnfilter == TRUE) {
+        _minAssocSize = MIX_ASSOC_MIN_SIZE;
+    }
+    
     _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
     int num_mix_assocs = (int)[_mixAssocObjs count];
     _numMixAssocs = 0;
@@ -254,7 +274,7 @@ int MIN_MIXASSOC_SIZE = 1;
         
         int num_collectionview_cells = (int)[swatch_ids count];
 
-        if (num_collectionview_cells >= MIN_MIXASSOC_SIZE) {
+        if (num_collectionview_cells >= _minAssocSize) {
             _numMixAssocs = _numMixAssocs + 1;
         }
         
@@ -602,7 +622,7 @@ int MIN_MIXASSOC_SIZE = 1;
     if ([_listingType isEqualToString:@"Mix"]) {
         int index = (int)indexPath.row;
         int ct = (int)[[self.mixColorArray objectAtIndex:index] count];
-        if (ct < MIN_MIXASSOC_SIZE) {
+        if (ct < _minAssocSize) {
             return DEF_NIL_HEADER;
         } else {
             return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;

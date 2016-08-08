@@ -185,9 +185,10 @@ NSString * const TAP_AREA_SIZE_KEY   = @"TapAreaSize";
 NSString * const SHAPE_GEOMETRY_KEY  = @"ShapeGeometry";
 NSString * const MATCH_NUM_KEY       = @"MatchNum";
 NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
-NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const ADD_MIX_FILTER_KEY  = @"AddMixFilter";
+NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
+NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
