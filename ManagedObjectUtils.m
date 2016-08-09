@@ -318,9 +318,19 @@
     
     [fetchRequest setEntity:entity];
     
+    // Sort paint swatches
+    //
+    NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    
     // Skip match assoc types
     //
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != 3"]];
+    // Filter out match association swatches
+    //
+    PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
+    int match_assoc_id = [[paintSwatchType order] intValue];
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
+    
+    [fetchRequest setSortDescriptors:@[nameSort]];
 
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
