@@ -131,6 +131,10 @@ CGFloat TAP_AREA_LABEL_INSET    = 2.0;
 CGFloat TAP_AREA_BORDER_WIDTH   = 2.0;
 NSString *TAP_AREA_LIGHT_STROKE = @"white";
 
+// Tableview Constants
+//
+CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
+
 
 #pragma mark - Initialization Methods
 
@@ -648,14 +652,14 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _imageViewSize = SPLIT_VIEW;
     [self.context rollback];
     _currTapSection = 0;
-    //[self.imageTableView reloadData];
+    //[_imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
 - (void)selectAssocAction {
     [self.context rollback];
     _currTapSection = 0;
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
@@ -731,7 +735,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             [_imageTableView setHidden:NO];
             
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
-            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height - TABLEVIEW_BOTTOM_OFFSET)];
             
             [self matchButtonsShow];
             
@@ -745,10 +749,11 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
             [_imageTableView setHidden:NO];
             
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
-            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5 - TABLEVIEW_BOTTOM_OFFSET)];
             
             [_imageScrollView setNeedsDisplay];
             [_imageView setNeedsDisplay];
+            [self.view setAutoresizingMask:TRUE];
             
             [_scrollViewUp setEnabled:YES];
             [_scrollViewDown setEnabled:YES];
@@ -1575,7 +1580,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     for (int i=0; i<_currTapSection; i++) {
         [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
     [_matchSave setEnabled:TRUE];
 }
 
@@ -1594,7 +1599,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     for (int i=0; i<_currTapSection; i++) {
         [self sortTapSection:[swatches objectAtIndex:i] tapSection:i+1];
     }
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
     [_matchSave setEnabled:TRUE];
 }
 
@@ -1607,7 +1612,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         //
         [self refreshViews];
         
-        [self.imageTableView reloadData];
+        [_imageTableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
         [_matchSave setEnabled:TRUE];
     }
@@ -1625,7 +1630,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
         //
         [self refreshViews];
         
-        [self.imageTableView reloadData];
+        [_imageTableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         [_matchSave setEnabled:TRUE];
         
@@ -1752,7 +1757,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _currTapSection = 0;
     
     [self drawTapAreas];
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
 }
 
 - (BOOL)updateMatchAssoc {
@@ -1962,7 +1967,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     [self.context deleteObject:paintSwatch];
     
     [self drawTapAreas];
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
 }
 
 - (void)deleteTapAreaSwatches:(TapArea *)tapArea {
@@ -2072,7 +2077,7 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
     _currTapSection = 0;
 
     [self drawTapAreas];
-    [self.imageTableView reloadData];
+    [_imageTableView reloadData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

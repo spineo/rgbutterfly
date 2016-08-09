@@ -996,11 +996,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "936"
-            endingLineNumber = "936"
+            startingLineNumber = "937"
+            endingLineNumber = "937"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1012,11 +1012,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "941"
-            endingLineNumber = "941"
+            startingLineNumber = "942"
+            endingLineNumber = "942"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1028,11 +1028,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "946"
-            endingLineNumber = "946"
+            startingLineNumber = "947"
+            endingLineNumber = "947"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1044,11 +1044,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "949"
-            endingLineNumber = "949"
+            startingLineNumber = "950"
+            endingLineNumber = "950"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1060,11 +1060,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "955"
-            endingLineNumber = "955"
+            startingLineNumber = "956"
+            endingLineNumber = "956"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1076,55 +1076,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "971"
-            endingLineNumber = "971"
-            landmarkName = "-drawTouchShape"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "982"
-            endingLineNumber = "982"
-            landmarkName = "-drawTouchShape"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "980"
-            endingLineNumber = "980"
-            landmarkName = "-drawTouchShape"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "972"
@@ -1140,11 +1092,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "974"
-            endingLineNumber = "974"
+            startingLineNumber = "983"
+            endingLineNumber = "983"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1156,11 +1108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "976"
-            endingLineNumber = "976"
+            startingLineNumber = "981"
+            endingLineNumber = "981"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1172,11 +1124,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1020"
-            endingLineNumber = "1020"
+            startingLineNumber = "973"
+            endingLineNumber = "973"
+            landmarkName = "-drawTouchShape"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "975"
+            endingLineNumber = "975"
+            landmarkName = "-drawTouchShape"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "977"
+            endingLineNumber = "977"
+            landmarkName = "-drawTouchShape"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1021"
+            endingLineNumber = "1021"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
             <Locations>
@@ -1220,11 +1220,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1030"
-            endingLineNumber = "1030"
+            startingLineNumber = "1031"
+            endingLineNumber = "1031"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1236,11 +1236,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1043"
-            endingLineNumber = "1043"
+            startingLineNumber = "1044"
+            endingLineNumber = "1044"
             landmarkName = "-setTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -1252,11 +1252,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1028"
-            endingLineNumber = "1028"
+            startingLineNumber = "1029"
+            endingLineNumber = "1029"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1268,11 +1268,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1037"
-            endingLineNumber = "1037"
+            startingLineNumber = "1038"
+            endingLineNumber = "1038"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1284,23 +1284,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1052"
-            endingLineNumber = "1052"
-            landmarkName = "-setTapAreas"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1053"
@@ -1316,11 +1300,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1519"
-            endingLineNumber = "1519"
+            startingLineNumber = "1054"
+            endingLineNumber = "1054"
+            landmarkName = "-setTapAreas"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1520"
+            endingLineNumber = "1520"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1332,11 +1332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1542"
-            endingLineNumber = "1542"
+            startingLineNumber = "1543"
+            endingLineNumber = "1543"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1348,23 +1348,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1544"
-            endingLineNumber = "1544"
-            landmarkName = "-sortTapSection:tapSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1545"
@@ -1380,7 +1364,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1546"
@@ -1396,11 +1380,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1548"
-            endingLineNumber = "1548"
+            startingLineNumber = "1547"
+            endingLineNumber = "1547"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1412,11 +1396,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1548"
-            endingLineNumber = "1548"
+            startingLineNumber = "1549"
+            endingLineNumber = "1549"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1428,11 +1412,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1551"
-            endingLineNumber = "1551"
+            startingLineNumber = "1549"
+            endingLineNumber = "1549"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1444,7 +1428,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1552"
@@ -1460,11 +1444,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1519"
-            endingLineNumber = "1519"
+            startingLineNumber = "1553"
+            endingLineNumber = "1553"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1476,11 +1460,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "907"
-            endingLineNumber = "907"
+            startingLineNumber = "1520"
+            endingLineNumber = "1520"
+            landmarkName = "-sortTapSection:tapSection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "908"
+            endingLineNumber = "908"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1492,11 +1492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "903"
-            endingLineNumber = "903"
+            startingLineNumber = "904"
+            endingLineNumber = "904"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1508,11 +1508,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "988"
-            endingLineNumber = "988"
+            startingLineNumber = "989"
+            endingLineNumber = "989"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1524,23 +1524,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1000"
-            endingLineNumber = "1000"
-            landmarkName = "-drawTouchShape"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1001"
@@ -1556,11 +1540,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1007"
-            endingLineNumber = "1007"
+            startingLineNumber = "1002"
+            endingLineNumber = "1002"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1572,11 +1556,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1021"
-            endingLineNumber = "1021"
+            startingLineNumber = "1008"
+            endingLineNumber = "1008"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1588,11 +1572,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1036"
-            endingLineNumber = "1036"
+            startingLineNumber = "1022"
+            endingLineNumber = "1022"
+            landmarkName = "-drawTouchShape"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1037"
+            endingLineNumber = "1037"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -1680,11 +1680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2114"
-            endingLineNumber = "2114"
+            startingLineNumber = "2115"
+            endingLineNumber = "2115"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1696,27 +1696,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2118"
-            endingLineNumber = "2118"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "492280627.392991"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2119"
             endingLineNumber = "2119"
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2120"
+            endingLineNumber = "2120"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1760,11 +1760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1535"
-            endingLineNumber = "1535"
+            startingLineNumber = "1536"
+            endingLineNumber = "1536"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1776,11 +1776,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1539"
-            endingLineNumber = "1539"
+            startingLineNumber = "1540"
+            endingLineNumber = "1540"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1792,11 +1792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1523"
-            endingLineNumber = "1523"
+            startingLineNumber = "1524"
+            endingLineNumber = "1524"
             landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1840,23 +1840,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1553"
-            endingLineNumber = "1553"
-            landmarkName = "-sortTapSection:tapSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1554"
@@ -1872,12 +1856,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1575"
-            endingLineNumber = "1575"
-            landmarkName = "-incrMatchAlgorithm:"
+            startingLineNumber = "1555"
+            endingLineNumber = "1555"
+            landmarkName = "-sortTapSection:tapSection:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1888,7 +1872,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1576"
@@ -1904,7 +1888,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1577"
@@ -1920,7 +1904,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1578"
@@ -1936,12 +1920,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1048"
-            endingLineNumber = "1048"
-            landmarkName = "-setTapAreas"
+            startingLineNumber = "1579"
+            endingLineNumber = "1579"
+            landmarkName = "-incrMatchAlgorithm:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1952,7 +1936,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1049"
@@ -1968,7 +1952,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1050"
@@ -1984,11 +1968,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1054"
-            endingLineNumber = "1054"
+            startingLineNumber = "1051"
+            endingLineNumber = "1051"
             landmarkName = "-setTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -2000,11 +1984,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1057"
-            endingLineNumber = "1057"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
+            landmarkName = "-setTapAreas"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1058"
+            endingLineNumber = "1058"
             landmarkName = "-drawTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -2016,11 +2016,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1059"
-            endingLineNumber = "1059"
+            startingLineNumber = "1060"
+            endingLineNumber = "1060"
             landmarkName = "-drawTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -2032,11 +2032,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1066"
-            endingLineNumber = "1066"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
             landmarkName = "-drawTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -2048,11 +2048,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1080"
-            endingLineNumber = "1080"
+            startingLineNumber = "1081"
+            endingLineNumber = "1081"
             landmarkName = "-drawText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2064,11 +2064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1089"
-            endingLineNumber = "1089"
+            startingLineNumber = "1090"
+            endingLineNumber = "1090"
             landmarkName = "-drawText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2080,11 +2080,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1101"
-            endingLineNumber = "1101"
+            startingLineNumber = "1102"
+            endingLineNumber = "1102"
             landmarkName = "-drawText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2096,11 +2096,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1091"
-            endingLineNumber = "1091"
+            startingLineNumber = "1092"
+            endingLineNumber = "1092"
             landmarkName = "-drawText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2112,11 +2112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1077"
-            endingLineNumber = "1077"
+            startingLineNumber = "1078"
+            endingLineNumber = "1078"
             landmarkName = "-drawTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -2128,11 +2128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1755"
-            endingLineNumber = "1755"
+            startingLineNumber = "1756"
+            endingLineNumber = "1756"
             landmarkName = "-deleteMixAssoc"
             landmarkType = "7">
          </BreakpointContent>
@@ -2144,11 +2144,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1298"
-            endingLineNumber = "1298"
+            startingLineNumber = "1299"
+            endingLineNumber = "1299"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2160,11 +2160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1298"
-            endingLineNumber = "1298"
+            startingLineNumber = "1299"
+            endingLineNumber = "1299"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2176,11 +2176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1300"
-            endingLineNumber = "1300"
+            startingLineNumber = "1301"
+            endingLineNumber = "1301"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2192,11 +2192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1697"
-            endingLineNumber = "1697"
+            startingLineNumber = "1698"
+            endingLineNumber = "1698"
             landmarkName = "-saveMixAssoc"
             landmarkType = "7">
             <Locations>
@@ -2768,11 +2768,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1411"
-            endingLineNumber = "1411"
+            startingLineNumber = "1412"
+            endingLineNumber = "1412"
             landmarkName = "-tableView:viewForHeaderInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2784,27 +2784,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1402"
+            endingLineNumber = "1402"
+            landmarkName = "-tableView:viewForHeaderInSection:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1401"
             endingLineNumber = "1401"
-            landmarkName = "-tableView:viewForHeaderInSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1400"
-            endingLineNumber = "1400"
             landmarkName = "-tableView:viewForHeaderInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2864,11 +2864,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1024"
-            endingLineNumber = "1024"
+            startingLineNumber = "1025"
+            endingLineNumber = "1025"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -2880,11 +2880,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1022"
-            endingLineNumber = "1022"
+            startingLineNumber = "1023"
+            endingLineNumber = "1023"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -2896,11 +2896,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1032"
-            endingLineNumber = "1032"
+            startingLineNumber = "1033"
+            endingLineNumber = "1033"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -2912,11 +2912,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1008"
-            endingLineNumber = "1008"
+            startingLineNumber = "1009"
+            endingLineNumber = "1009"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -2928,11 +2928,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1324"
-            endingLineNumber = "1324"
+            startingLineNumber = "1325"
+            endingLineNumber = "1325"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2944,11 +2944,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "843"
-            endingLineNumber = "843"
+            startingLineNumber = "844"
+            endingLineNumber = "844"
             landmarkName = "-scrollViewDecrease"
             landmarkType = "7">
          </BreakpointContent>
@@ -3056,7 +3056,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "748"
@@ -3104,11 +3104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1054"
-            endingLineNumber = "1054"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "-setTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -3120,7 +3120,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492356037.472071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "751"
@@ -3136,7 +3136,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492356037.472071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "750"
@@ -3152,11 +3152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "904"
-            endingLineNumber = "904"
+            startingLineNumber = "905"
+            endingLineNumber = "905"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3168,11 +3168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "906"
-            endingLineNumber = "906"
+            startingLineNumber = "907"
+            endingLineNumber = "907"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3184,11 +3184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "908"
-            endingLineNumber = "908"
+            startingLineNumber = "909"
+            endingLineNumber = "909"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3200,11 +3200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "940"
-            endingLineNumber = "940"
+            startingLineNumber = "941"
+            endingLineNumber = "941"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -3216,11 +3216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "975"
-            endingLineNumber = "975"
+            startingLineNumber = "976"
+            endingLineNumber = "976"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -3232,11 +3232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "981"
-            endingLineNumber = "981"
+            startingLineNumber = "982"
+            endingLineNumber = "982"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -3248,23 +3248,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1034"
-            endingLineNumber = "1034"
-            landmarkName = "-drawTouchShape"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1035"
@@ -3280,11 +3264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1041"
-            endingLineNumber = "1041"
+            startingLineNumber = "1036"
+            endingLineNumber = "1036"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -3296,11 +3280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1026"
-            endingLineNumber = "1026"
+            startingLineNumber = "1042"
+            endingLineNumber = "1042"
             landmarkName = "-drawTouchShape"
             landmarkType = "7">
          </BreakpointContent>
@@ -3312,7 +3296,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1027"
@@ -3328,11 +3312,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1046"
-            endingLineNumber = "1046"
+            startingLineNumber = "1028"
+            endingLineNumber = "1028"
+            landmarkName = "-drawTouchShape"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1047"
+            endingLineNumber = "1047"
             landmarkName = "-setTapAreas"
             landmarkType = "7">
          </BreakpointContent>
@@ -3344,23 +3344,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1063"
-            endingLineNumber = "1063"
-            landmarkName = "-drawTapAreas"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1064"
@@ -3376,7 +3360,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1065"
@@ -3392,11 +3376,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "491401756.757304"
+            timestampString = "492355690.225756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "911"
-            endingLineNumber = "911"
+            startingLineNumber = "1066"
+            endingLineNumber = "1066"
+            landmarkName = "-drawTapAreas"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UIImageViewController.m"
+            timestampString = "492355690.225756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "912"
+            endingLineNumber = "912"
             landmarkName = "-respondToTap:"
             landmarkType = "7">
          </BreakpointContent>
