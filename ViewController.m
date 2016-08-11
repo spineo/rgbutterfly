@@ -35,11 +35,12 @@
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *downArrowImage, *upArrowImage;
-@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray;
+@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
+@property (nonatomic) BOOL isCollapsedAll;
 
 
 // Resize UISearchBar when rotated
@@ -106,6 +107,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _subjColorNames = [ManagedObjectUtils fetchDictNames:@"SubjectiveColor" context:self.context];
     _numSubjColors  = (int)[_subjColorNames count];
     _subjColorData  = [ManagedObjectUtils fetchSubjectiveColors:self.context];
+    _isCollapsedAll = TRUE;
     
     [_colorTableView setDelegate:self];
     [_colorTableView setDataSource:self];
@@ -227,8 +229,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     [self searchBarSetFrames];
     
-    _upArrowImage = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -414,7 +416,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
 }
 
 - (void)loadColorsData {
-    _subjColorsArray = [[NSMutableArray alloc] init];
+    _subjColorsArray      = [[NSMutableArray alloc] init];
+    _subjColorsArrayState = [[NSMutableArray alloc] init];
+    
     for (int i=0; i<=_numSubjColors; i++) {
         
         NSArray *psArray = [ManagedObjectUtils queryPaintSwatchesBySubjColorId:i context:self.context];
@@ -424,6 +428,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [paintSwatches addObject:ps];
         }
         [_subjColorsArray addObject:paintSwatches];
+        
+        
+        // Initialized to closed (i.e., show no rows)
+        //
+        BOOL isCollapsed = _isCollapsedAll;
+        [_subjColorsArrayState addObject:[NSNumber numberWithBool:isCollapsed]];
     }
     
     [_colorTableView reloadData];
@@ -508,9 +518,37 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Colors"]) {
 
         if (section == 0) {
-            [headerLabel setText:@"Subjective Colors Listing"];
-            [headerLabel setTextAlignment:NSTextAlignmentCenter];
-            [headerView addSubview:headerLabel];
+            UIBarButtonItem *arrowDownButtonItem = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandAllSections)];
+            
+            UIBarButtonItem *arrowUpButtonItem = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(collapseAllSections)];
+            
+            UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
+            [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
+            
+            //[headerLabel setText:@"Subjective Colors Listing"];
+            //[headerLabel setTextAlignment:NSTextAlignmentLeft];
+            
+            UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:@"Subjective Colors Listing" style:UIBarButtonItemStylePlain target:nil action:nil];
+            
+            scrollViewToolbar.items = @[
+                                        headerButtonLabel,
+                                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                        ];
+            
+            NSMutableArray *newItems = [scrollViewToolbar.items mutableCopy];
+            
+            UIBarButtonItem *arrowButtonItem;
+            
+            if (_isCollapsedAll == TRUE) {
+                arrowButtonItem = arrowDownButtonItem;
+            } else {
+                arrowButtonItem = arrowUpButtonItem;
+            }
+            [newItems addObject:arrowButtonItem];
+
+            scrollViewToolbar.items = newItems;
+            [headerView addSubview:scrollViewToolbar];
+
         } else {
             int index = (int)section - 1;
             NSString *colorName = [_subjColorNames objectAtIndex:index];
@@ -520,9 +558,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [headerLabel setText:[_subjColorNames objectAtIndex:index]];
 //            [headerView addSubview:headerLabel];
             
-            UIBarButtonItem *arrowButtonItem  = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
-            int buttonTag = (int)section;
-            [arrowButtonItem setTag:buttonTag];
+            UIBarButtonItem *arrowDownButtonItem = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
+            
+            UIBarButtonItem *arrowUpButtonItem = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
             
             UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
             [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
@@ -532,19 +570,35 @@ int MIX_ASSOC_MIN_SIZE = 1;
             scrollViewToolbar.items = @[
                                         headerButtonLabel,
                                         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                                        arrowButtonItem
                                         ];
+            
+            NSMutableArray *newItems = [scrollViewToolbar.items mutableCopy];
+            
+            UIBarButtonItem *arrowButtonItem;
+            
+            BOOL isCollapsed = [[_subjColorsArrayState objectAtIndex:index] boolValue];
+            if (isCollapsed == TRUE) {
+                arrowButtonItem = arrowDownButtonItem;
+            } else {
+                arrowButtonItem = arrowUpButtonItem;
+            }
+            [newItems addObject:arrowButtonItem];
+            int buttonTag = (int)section;
+            [arrowButtonItem setTag:buttonTag];
+            
+            scrollViewToolbar.items = newItems;
             
             [headerView addSubview:scrollViewToolbar];
             
             if ([colorName isEqualToString:@"Black"]) {
                 [headerButtonLabel setTintColor:LIGHT_TEXT_COLOR];
-                [arrowButtonItem   setTintColor:LIGHT_TEXT_COLOR];
+                [arrowButtonItem setTintColor:LIGHT_TEXT_COLOR];
                 
             } else {
                 [headerButtonLabel setTintColor:backgroundColor];
                 [arrowButtonItem setTintColor:backgroundColor];
-            }
+            };
+            
             [scrollViewToolbar sizeToFit];
 
             [ColorUtils setViewGlaze:headerView];
@@ -607,7 +661,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
             objCount = 0;
         } else {
             int index = (int)section - 1;
-            objCount = [[_subjColorsArray objectAtIndex:index] count];
+            BOOL isCollapsed = [[_subjColorsArrayState objectAtIndex:index] boolValue];
+            if (isCollapsed == TRUE) {
+                objCount = 0;
+            } else {
+                objCount = [[_subjColorsArray objectAtIndex:index] count];
+            }
         }
         
     } else {
@@ -842,8 +901,34 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (void)expandOrCollapseSection:(id)sender {
     _selSubjColorSection = (int)[sender tag] - 1;
+    
+    BOOL isCollapsed = [[_subjColorsArrayState objectAtIndex:_selSubjColorSection] boolValue];
 
-    [self.colorTableView reloadData];
+    // Change state
+    //
+    if (isCollapsed == TRUE) {
+        isCollapsed = FALSE;
+    } else {
+        isCollapsed = TRUE;
+    }
+    
+    [_subjColorsArrayState replaceObjectAtIndex:_selSubjColorSection withObject:[NSNumber numberWithBool:isCollapsed]];
+    
+    [_colorTableView reloadData];
+    //[_colorTableView reloadSections:[NSIndexSet indexSetWithIndex:_selSubjColorSection] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)expandAllSections {
+    _isCollapsedAll = FALSE;
+    
+    [self loadColorsData];
+}
+
+- (void)collapseAllSections {
+    
+    _isCollapsedAll = TRUE;
+    
+    [self loadColorsData];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
