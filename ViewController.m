@@ -40,7 +40,7 @@
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
-@property (nonatomic) BOOL isCollapsedAll;
+@property (nonatomic) BOOL initColors, isCollapsedAll;
 
 
 // Resize UISearchBar when rotated
@@ -108,6 +108,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _numSubjColors  = (int)[_subjColorNames count];
     _subjColorData  = [ManagedObjectUtils fetchSubjectiveColors:self.context];
     _isCollapsedAll = TRUE;
+    _initColors     = TRUE;
     
     [_colorTableView setDelegate:self];
     [_colorTableView setDataSource:self];
@@ -417,10 +418,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (void)loadColorsData {
     _subjColorsArray      = [[NSMutableArray alloc] init];
-    _subjColorsArrayState = [[NSMutableArray alloc] init];
     
     for (int i=0; i<=_numSubjColors; i++) {
-        
         NSArray *psArray = [ManagedObjectUtils queryPaintSwatchesBySubjColorId:i context:self.context];
         
         NSMutableArray *paintSwatches = [NSMutableArray arrayWithCapacity:[psArray count]];
@@ -428,12 +427,28 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [paintSwatches addObject:ps];
         }
         [_subjColorsArray addObject:paintSwatches];
+    }
+    
+    if (_initColors == TRUE) {
+        _subjColorsArrayState = [[NSMutableArray alloc] init];
+        [self updateColorsState:_isCollapsedAll];
+        _initColors = FALSE;
         
-        
+    } else {
+        [_colorTableView reloadData];
+    }
+}
+
+- (void)updateColorsState:(BOOL)isCollapsed {
+    for (int i=0; i<=_numSubjColors; i++) {
+
         // Initialized to closed (i.e., show no rows)
         //
-        BOOL isCollapsed = _isCollapsedAll;
-        [_subjColorsArrayState addObject:[NSNumber numberWithBool:isCollapsed]];
+        if (_initColors == TRUE) {
+            [_subjColorsArrayState addObject:[NSNumber numberWithBool:isCollapsed]];
+        } else {
+            [_subjColorsArrayState replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isCollapsed]];
+        }
     }
     
     [_colorTableView reloadData];
@@ -523,12 +538,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
             UIBarButtonItem *arrowUpButtonItem = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(collapseAllSections)];
             
             UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
-            [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
-            
-            //[headerLabel setText:@"Subjective Colors Listing"];
-            //[headerLabel setTextAlignment:NSTextAlignmentLeft];
+            [scrollViewToolbar setBarStyle:UIBarStyleBlack];
             
             UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:@"Subjective Colors Listing" style:UIBarButtonItemStylePlain target:nil action:nil];
+            [headerButtonLabel setTintColor:LIGHT_TEXT_COLOR];
             
             scrollViewToolbar.items = @[
                                         headerButtonLabel,
@@ -921,14 +934,14 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)expandAllSections {
     _isCollapsedAll = FALSE;
     
-    [self loadColorsData];
+    [self updateColorsState:_isCollapsedAll];
 }
 
 - (void)collapseAllSections {
     
     _isCollapsedAll = TRUE;
     
-    [self loadColorsData];
+    [self updateColorsState:_isCollapsedAll];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
