@@ -492,6 +492,9 @@
     
     [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", mix_assoc_id]];
     
+    NSSortDescriptor *orderSort = [[NSSortDescriptor alloc] initWithKey:@"mix_order" ascending:YES];
+    [fetchRequest setSortDescriptors:@[ orderSort ]];
+    
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     
@@ -659,7 +662,10 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssocSwatch" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"paint_swatch == %@", swatch_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"paint_swatch == %@", swatch_id]];
+    
+    NSSortDescriptor *orderSort = [[NSSortDescriptor alloc] initWithKey:@"mix_order" ascending:YES];
+    [fetchRequest setSortDescriptors:@[ orderSort ]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
