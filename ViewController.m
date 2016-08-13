@@ -277,7 +277,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:i];
         
         NSSortDescriptor *orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
-        NSMutableArray *swatch_ids = (NSMutableArray *)[[ManagedObjectUtils queryMixAssocSwatches:mixAssocObj.objectID context:self.context]sortedArrayUsingDescriptors:@[orderSort]];
+        NSMutableArray *swatch_ids = (NSMutableArray *)[[ManagedObjectUtils queryMixAssocSwatches:mixAssocObj.objectID context:self.context] sortedArrayUsingDescriptors:@[orderSort]];
         
         int num_collectionview_cells = (int)[swatch_ids count];
 

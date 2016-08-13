@@ -348,6 +348,9 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [fetchRequest setSortDescriptors:@[ nameSort ]];
+    
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     
@@ -363,6 +366,9 @@
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [fetchRequest setSortDescriptors:@[ nameSort ]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
