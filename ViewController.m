@@ -34,7 +34,7 @@
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
-@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *downArrowImage, *upArrowImage;
+@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
@@ -123,6 +123,13 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _imageViewXOffset   = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
     _imageViewWidth     = DEF_TABLE_CELL_HEIGHT;
     _imageViewHeight    = DEF_TABLE_CELL_HEIGHT;
+    
+
+    // Images
+    //
+    _searchImage    = [[UIImage imageNamed:SEARCH_IMAGE_NAME]     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]   imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     
     // Listing Controller
@@ -140,11 +147,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [self updateTable:@"Mix"];
     }];
     
-    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Sort By Keywords" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"List By Keywords" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:@"Keywords"];
     }];
     
-    UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"MatchAssociations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:@"Match"];
     }];
     
@@ -229,9 +236,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_titleView addSubview:_cancelButton];
     
     [self searchBarSetFrames];
-    
-    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -533,34 +537,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Colors"]) {
 
         if (section == 0) {
-            UIBarButtonItem *arrowDownButtonItem = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandAllSections)];
-            
-            UIBarButtonItem *arrowUpButtonItem = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(collapseAllSections)];
-            
-            UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
-            [scrollViewToolbar setBarStyle:UIBarStyleBlack];
-            
-            UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:@"Subjective Colors Listing" style:UIBarButtonItemStylePlain target:nil action:nil];
-            [headerButtonLabel setTintColor:LIGHT_TEXT_COLOR];
-            
-            scrollViewToolbar.items = @[
-                                        headerButtonLabel,
-                                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                                        ];
-            
-            NSMutableArray *newItems = [scrollViewToolbar.items mutableCopy];
-            
-            UIBarButtonItem *arrowButtonItem;
-            
-            if (_isCollapsedAll == TRUE) {
-                arrowButtonItem = arrowDownButtonItem;
-            } else {
-                arrowButtonItem = arrowUpButtonItem;
-            }
-            [newItems addObject:arrowButtonItem];
+            [headerLabel setText:@"Subjective Color Listing"];
+            [headerLabel setTextAlignment: NSTextAlignmentCenter];
 
-            scrollViewToolbar.items = newItems;
-            [headerView addSubview:scrollViewToolbar];
+            [headerView addSubview:headerLabel];
 
         } else {
             int index = (int)section - 1;
@@ -569,7 +549,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [headerLabel setTextColor:[ColorUtils setBestColorContrast:colorName]];
             [headerLabel setBackgroundColor:backgroundColor];
             [headerLabel setText:[_subjColorNames objectAtIndex:index]];
-//            [headerView addSubview:headerLabel];
             
             UIBarButtonItem *arrowDownButtonItem = [[UIBarButtonItem alloc] initWithImage:_downArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
             
@@ -886,22 +865,32 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _listingType = listingType;
     
     if ([_listingType isEqualToString:@"Mix"]) {
+        [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:FALSE];
         [self loadMixCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
+        [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:FALSE];
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
+        [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:FALSE];
         [self loadKeywordData];
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
-        [_searchButton setEnabled:FALSE];
+        [_searchButton setImage:_downArrowImage];
+        [_searchButton setAction:@selector(expandAllSections)];
+        [_searchButton setEnabled:TRUE];
+
+        //[_searchButton setAction(
+        
         [self loadColorsData];
         
     } else {
+        [_searchButton setImage:_searchImage];
+        [_searchButton setAction:@selector(search)];
         [_searchButton setEnabled:TRUE];
         _searchString = nil;
         [self initPaintSwatchFetchedResultsController];
@@ -934,12 +923,18 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)expandAllSections {
     _isCollapsedAll = FALSE;
     
+    [_searchButton setImage:_upArrowImage];
+    [_searchButton setAction:@selector(collapseAllSections)];
+    
     [self updateColorsState:_isCollapsedAll];
 }
 
 - (void)collapseAllSections {
     
     _isCollapsedAll = TRUE;
+    
+    [_searchButton setImage:_downArrowImage];
+    [_searchButton setAction:@selector(expandAllSections)];
     
     [self updateColorsState:_isCollapsedAll];
 }

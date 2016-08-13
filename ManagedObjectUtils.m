@@ -591,12 +591,19 @@
     
     [fetch setEntity:entity];
     
+    // Sort paint swatches
+    //
+    NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    
+    
     // Filter out match association swatches
     //
     PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
     int match_assoc_id = [[paintSwatchType order] intValue];
     
     [fetch setPredicate: [NSPredicate predicateWithFormat:@"subj_color_id == %i and type_id != %i", subj_color_id, match_assoc_id]];
+    
+    [fetch setSortDescriptors:@[nameSort]];
     
     NSError *error      = nil;
     NSArray *results    = [context executeFetchRequest:fetch error:&error];
