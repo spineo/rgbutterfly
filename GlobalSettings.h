@@ -67,6 +67,7 @@ extern CGFloat const DEF_SM_TBL_HDR_HEIGHT;
 extern CGFloat const DEF_TABLE_HDR_HEIGHT;
 extern CGFloat const DEF_LG_TABLE_HDR_HGT;
 extern CGFloat const DEF_VLG_TABLE_HDR_HGT;
+extern CGFloat const DEF_XLG_TABLE_HDR_HGT;
 
 extern CGFloat const DEF_LG_TABLE_CELL_HGT;
 extern CGFloat const DEF_XLG_TBL_CELL_HGT;

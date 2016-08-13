@@ -66,15 +66,13 @@
 
 // Table sections
 //
-const int IMAGE_SECTION = 0;
-const int DIV1_SECTION  = 1;
-const int MATCH_SECTION = 2;
-const int DIV2_SECTION  = 3;
-const int NAME_SECTION  = 4;
-const int KEYW_SECTION  = 5;
-const int DESC_SECTION  = 6;
+const int MATCH_SECTION = 0;
+const int DIV_SECTION   = 1;
+const int NAME_SECTION  = 2;
+const int KEYW_SECTION  = 3;
+const int DESC_SECTION  = 4;
 
-const int MAX_SECTION   = 7;
+const int MAX_SECTION   = 5;
 
 
 // Table views tags
@@ -118,7 +116,7 @@ const int IMAGE_TAG  = 6;
     // Tableview defaults
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _imageViewXOffset     = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
+    _imageViewXOffset     = DEF_TABLE_X_OFFSET;
     _imageViewYOffset     = DEF_Y_OFFSET;
     _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
@@ -221,13 +219,14 @@ const int IMAGE_TAG  = 6;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     //
-    if ((
-         ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
-         ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
-         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
-         ) && (_editFlag == FALSE)) {
-        return 0;
-    } else if (section != MATCH_SECTION) {
+//    if ((
+//         ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
+//         ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
+//         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
+//         ) && (_editFlag == FALSE)) {
+//        return 0;
+//    } else
+    if (section != MATCH_SECTION) {
         return 1;
     } else {
         return [_matchedSwatches count] - 1;
@@ -235,13 +234,11 @@ const int IMAGE_TAG  = 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == IMAGE_SECTION) {
-        return DEF_VLG_TBL_CELL_HGT + DEF_FIELD_PADDING;
-        
-    } else if (indexPath.section == DIV1_SECTION || indexPath.section == DIV2_SECTION) {
+    if (indexPath.section == DIV_SECTION) {
         return DEF_TBL_DIVIDER_HGT;
+    } else {
+        return DEF_TABLE_CELL_HEIGHT;
     }
-    return DEF_TABLE_CELL_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -325,54 +322,6 @@ const int IMAGE_TAG  = 6;
         } else {
             [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:TRUE];
         }
-        [cell setAccessoryType: UITableViewCellAccessoryNone];
-        
-    } else if (indexPath.section == IMAGE_SECTION) {
-
-        cell.imageView.image = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        
-        // Tag the first reference image
-        //
-        cell.imageView.image = [ColorUtils drawTapAreaLabel:cell.imageView.image count:_currTapSection];
-        [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        
-        [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
-        [cell.imageView setClipsToBounds: YES];
-        [cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _imageViewWidth, _imageViewHeight)];
-        
-        // Compute the xpt
-        //
-        CGFloat xpt = CGPointFromString(_selPaintSwatch.coord_pt).x - _imageViewWidth;
-        xpt = (xpt < 0.0) ? 0.0 : xpt;
-        
-        CGFloat xAxisLimit = _referenceImage.size.width - (_imageViewWidth * 2);
-        xpt = (xpt > xAxisLimit) ? xAxisLimit : xpt;
-        
-        // Compute the ypt
-        //
-        CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / 2;
-        ypt = (ypt < 0.0) ? 0.0 : ypt;
-        
-        CGFloat yAxisLimit = _referenceImage.size.height - _imageViewHeight;
-        ypt = (ypt > yAxisLimit) ? yAxisLimit : ypt;
-
-    
-        UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, _imageViewWidth * 2, _imageViewHeight)];
-        UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
-        [croppedImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [croppedImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [croppedImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-
-        [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
-        [croppedImageView setClipsToBounds: YES];
-        CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
-        [croppedImageView setFrame:CGRectMake(croppedImageXOffset, _imageViewYOffset + 2.0, _imageViewWidth * 2, _imageViewHeight)];
-        [croppedImageView setTag:IMAGE_TAG];
-        
-        [cell.contentView addSubview:croppedImageView];
-        
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         
     } else if (indexPath.section == MATCH_SECTION) {
@@ -460,69 +409,157 @@ const int IMAGE_TAG  = 6;
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    if (section == NAME_SECTION) {
-        if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-        
-    } else if (section == KEYW_SECTION) {
-        if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-        
-    } else if (section == DESC_SECTION) {
-        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-        
-    } else if (section == DIV1_SECTION || section == DIV2_SECTION) {
+//    if (section == NAME_SECTION) {
+//        if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
+//            return DEF_NIL_HEADER;
+//        } else {
+//            return DEF_TABLE_HDR_HEIGHT;
+//        }
+//        
+//    } else if (section == KEYW_SECTION) {
+//        if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
+//            return DEF_NIL_HEADER;
+//        } else {
+//            return DEF_TABLE_HDR_HEIGHT;
+//        }
+//        
+//    } else if (section == DESC_SECTION) {
+//        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
+//            return DEF_NIL_HEADER;
+//        } else {
+//            return DEF_TABLE_HDR_HEIGHT;
+//        }
+//        
+    if (section == DIV_SECTION) {
         return DEF_NIL_HEADER;
+    
+    } else if (section == MATCH_SECTION) {
+        return DEF_TABLE_HDR_HEIGHT + _imageViewHeight + DEF_FIELD_PADDING;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    // Background color
-    //
-    [view setTintColor:DARK_TEXT_COLOR];
-    
-    // Text Color
-    //
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
-    [header.contentView setBackgroundColor:DARK_BG_COLOR];
-    [header.textLabel setFont:TABLE_CELL_FONT];
-}
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+//    // Background color
+//    //
+//    [view setTintColor:DARK_TEXT_COLOR];
+//    
+//    // Text Color
+//    //
+//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+//    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
+//    [header.contentView setBackgroundColor:DARK_BG_COLOR];
+//    [header.textLabel setFont:TABLE_CELL_FONT];
+//}
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    [headerView setBackgroundColor:DARK_BG_COLOR];
+    
+    [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
+     UIViewAutoresizingFlexibleLeftMargin |
+     UIViewAutoresizingFlexibleRightMargin];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    [headerLabel setBackgroundColor:DARK_BG_COLOR];
+    [headerLabel setTextColor:LIGHT_TEXT_COLOR];
+    [headerLabel setFont:TABLE_HEADER_FONT];
+    
+    [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
+     UIViewAutoresizingFlexibleLeftMargin |
+     UIViewAutoresizingFlexibleRightMargin];
+    
     NSString *headerStr;
     if (section == NAME_SECTION) {
         headerStr = _nameHeader;
         
     } else if (section == KEYW_SECTION) {
         headerStr = _keywHeader;
-
+        
     } else if (section == DESC_SECTION) {
         headerStr = _descHeader;
-        
-    } else if (section == IMAGE_SECTION) {
-        headerStr = _imagesHeader;
         
     } else if (section == MATCH_SECTION) {
         int match_ct = (int)[_matchedSwatches count] - 1;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
+        
+        
+        UIImage *refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        //UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
+        
+        // Tag the first reference image
+        //
+        refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+        UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
+        
+        [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+        [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        
+        [refImageView setContentMode: UIViewContentModeScaleAspectFit];
+        [refImageView setClipsToBounds: YES];
+        [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth, _imageViewHeight)];
+        
+        // Compute the xpt
+        //
+        CGFloat xpt = CGPointFromString(_selPaintSwatch.coord_pt).x - _imageViewWidth;
+        xpt = (xpt < 0.0) ? 0.0 : xpt;
+        
+        CGFloat xAxisLimit = _referenceImage.size.width - (_imageViewWidth * 2);
+        xpt = (xpt > xAxisLimit) ? xAxisLimit : xpt;
+        
+        // Compute the ypt
+        //
+        CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / 2;
+        ypt = (ypt < 0.0) ? 0.0 : ypt;
+        
+        CGFloat yAxisLimit = _referenceImage.size.height - _imageViewHeight;
+        ypt = (ypt > yAxisLimit) ? yAxisLimit : ypt;
+        
+        
+        UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, _imageViewWidth * 2, _imageViewHeight)];
+        UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
+        [croppedImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+        [croppedImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [croppedImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        
+        [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
+        [croppedImageView setClipsToBounds: YES];
+        CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
+        [croppedImageView setFrame:CGRectMake(croppedImageXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth * 2, _imageViewHeight)];
+        [croppedImageView setTag:IMAGE_TAG];
+        
+        [headerView addSubview:refImageView];
+        [headerView addSubview:croppedImageView];
+        
     }
-    
-    return headerStr;
+    [headerLabel setText:headerStr];
+    [headerView addSubview:headerLabel];
+ 
+    return headerView;
 }
+
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    NSString *headerStr;
+//    if (section == NAME_SECTION) {
+//        headerStr = _nameHeader;
+//        
+//    } else if (section == KEYW_SECTION) {
+//        headerStr = _keywHeader;
+//
+//    } else if (section == DESC_SECTION) {
+//        headerStr = _descHeader;
+//        
+//    } else if (section == MATCH_SECTION) {
+//        int match_ct = (int)[_matchedSwatches count] - 1;
+//        headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
+//    }
+//    
+//    return headerStr;
+//}
 
 /*
 // Override to support editing the table view.
