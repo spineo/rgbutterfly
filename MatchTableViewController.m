@@ -36,7 +36,7 @@
 @property (nonatomic) BOOL textReturn;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
-@property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
+@property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag;
 @property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches;
@@ -71,8 +71,9 @@ const int DIV_SECTION   = 1;
 const int NAME_SECTION  = 2;
 const int KEYW_SECTION  = 3;
 const int DESC_SECTION  = 4;
+const int EMPTY_SECTION = 5;
 
-const int MAX_SECTION   = 5;
+const int MAX_SECTION   = 6;
 
 
 // Table views tags
@@ -122,6 +123,7 @@ const int IMAGE_TAG  = 6;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
     _matchImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
     _matchImageViewHeight = DEF_TABLE_CELL_HEIGHT;
+    _matchSectionHeight   = DEF_TABLE_HDR_HEIGHT + _imageViewHeight + DEF_FIELD_PADDING;
     
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -219,15 +221,19 @@ const int IMAGE_TAG  = 6;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     //
-//    if ((
-//         ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
-//         ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
-//         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
-//         ) && (_editFlag == FALSE)) {
-//        return 0;
-//    } else
-    if (section != MATCH_SECTION) {
+    if ((
+         ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
+         ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
+         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
+         ) && (_editFlag == FALSE)) {
+        return 0;
+    
+    } else if (section == EMPTY_SECTION) {
+        return 0;
+
+    } else if (section != MATCH_SECTION) {
         return 1;
+
     } else {
         return [_matchedSwatches count] - 1;
     }
@@ -237,32 +243,34 @@ const int IMAGE_TAG  = 6;
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    //    if (section == NAME_SECTION) {
-    //        if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
-    //            return DEF_NIL_HEADER;
-    //        } else {
-    //            return DEF_TABLE_HDR_HEIGHT;
-    //        }
-    //
-    //    } else if (section == KEYW_SECTION) {
-    //        if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
-    //            return DEF_NIL_HEADER;
-    //        } else {
-    //            return DEF_TABLE_HDR_HEIGHT;
-    //        }
-    //
-    //    } else if (section == DESC_SECTION) {
-    //        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
-    //            return DEF_NIL_HEADER;
-    //        } else {
-    //            return DEF_TABLE_HDR_HEIGHT;
-    //        }
-    //
-    if (section == DIV_SECTION) {
+    if (section == NAME_SECTION) {
+        if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+
+    } else if (section == KEYW_SECTION) {
+        if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+
+    } else if (section == DESC_SECTION) {
+        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
+            return DEF_NIL_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
+    } else if (section == DIV_SECTION) {
         return DEF_NIL_HEADER;
         
     } else if (section == MATCH_SECTION) {
-        return DEF_TABLE_HDR_HEIGHT + _imageViewHeight + DEF_FIELD_PADDING;
+        return _matchSectionHeight;
+        
+    } else if (section == EMPTY_SECTION) {
+        return self.tableView.bounds.size.height - _matchSectionHeight - ((DEF_TABLE_HDR_HEIGHT + DEF_TABLE_CELL_HEIGHT) * 3);
         
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -392,6 +400,10 @@ const int IMAGE_TAG  = 6;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == DIV_SECTION) {
         return DEF_TBL_DIVIDER_HGT;
+
+    } else if (indexPath.section == EMPTY_SECTION) {
+        return DEF_NIL_CELL;
+
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
