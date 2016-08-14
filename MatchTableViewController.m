@@ -802,10 +802,28 @@ const int IMAGE_TAG  = 6;
         // Query the mix association ids
         //
         PaintSwatches *paintSwatch = [_matchedSwatches objectAtIndex:index];
+        int type_id = [[paintSwatch type_id] intValue];
+        
+        PaintSwatchType *paintSwatchType = [ManagedObjectUtils  queryDictionaryName:@"PaintSwatchType" entityId:type_id context:self.context];
+        
         NSMutableArray *mixAssocSwatches = [ManagedObjectUtils queryMixAssocBySwatch:paintSwatch.objectID context:self.context];
         
         [swatchDetailTableViewController setPaintSwatch:paintSwatch];
         [swatchDetailTableViewController setMixAssocSwatches:mixAssocSwatches];
+        
+        if ([paintSwatchType.name isEqualToString:@"MixAssoc"]) {
+            MixAssocSwatch *assocSwatchObj = [mixAssocSwatches objectAtIndex:0];
+            MixAssociation *mixAssocObj = [assocSwatchObj mix_association];
+            NSMutableArray *swatch_ids = [ManagedObjectUtils queryMixAssocSwatches:mixAssocObj.objectID context:self.context];
+            
+            MixAssocSwatch *refAssocSwatchObj = [swatch_ids objectAtIndex:0];
+            PaintSwatches *refPaintSwatch = (PaintSwatches *)refAssocSwatchObj.paint_swatch;
+            [swatchDetailTableViewController setRefPaintSwatch:refPaintSwatch];
+            
+            MixAssocSwatch *mixAssocSwatchObj = [swatch_ids objectAtIndex:1];
+            PaintSwatches *mixPaintSwatch = (PaintSwatches *)mixAssocSwatchObj.paint_swatch;
+            [swatchDetailTableViewController setMixPaintSwatch:mixPaintSwatch];
+        }
     }
 }
 

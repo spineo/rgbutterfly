@@ -12,7 +12,7 @@
 
 @interface SwatchDetailTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIActionSheetDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) PaintSwatches *paintSwatch;
+@property (nonatomic, strong) PaintSwatches *paintSwatch, *refPaintSwatch, *mixPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches;
 
 @end

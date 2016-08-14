@@ -38,7 +38,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *bodyTypeName, *pigmentTypeName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *bodyTypeHeader, *pigmentTypeHeader, *keywHeader, *descHeader, *mixAssocHeader, *otherName;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *bodyTypeHeader, *pigmentTypeHeader, *keywHeader, *descHeader, *refsHeader, *mixAssocHeader, *otherName;
 
 // Subjective color related
 //
@@ -70,6 +70,10 @@
 @property (nonatomic, strong) NSEntityDescription *keywordEntity, *swatchKeywordEntity;
 
 
+// PaintSwatches
+//
+@property (nonatomic, strong) PaintSwatches *selPaintSwatch;
+
 @end
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -96,9 +100,10 @@ int DETAIL_PIGMENT_SECTION = 4;
 int DETAIL_BODY_SECTION    = 5;
 int DETAIL_KEYW_SECTION    = 6;
 int DETAIL_DESC_SECTION    = 7;
-int DETAIL_MIX_SECTION     = 8;
+int DETAIL_REF_SECTION     = 8;
+int DETAIL_ASSOC_SECTION   = 9;
 
-int DETAIL_MAX_SECTION     = 9;
+int DETAIL_MAX_SECTION     = 10;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
@@ -182,6 +187,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _pigmentTypeHeader = @"Pigment Type Selection";
     _keywHeader        = @"Keywords";
     _descHeader        = @"Description";
+    _refsHeader         = @"Reference Colors";
     _mixAssocHeader    = @"Mix Associations";
     
     // Set the placeholders
@@ -388,8 +394,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (NUM_TABLEVIEW_ROWS > 0) {
         return DETAIL_MAX_SECTION;
+
     } else {
-        return DETAIL_MAX_SECTION - 1;
+        return DETAIL_MAX_SECTION - 3;
     }
 }
 
@@ -421,8 +428,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             return 1;
         }
 
-    } else if (section == DETAIL_MIX_SECTION) {
+    } else if (section == DETAIL_ASSOC_SECTION) {
         return NUM_TABLEVIEW_ROWS;
+        
+    } else if ((section == DETAIL_REF_SECTION) && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
+        return 2;
 
     } else {
         return 1;
@@ -430,9 +440,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == DETAIL_MIX_SECTION) {
+    if (indexPath.section == DETAIL_ASSOC_SECTION) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
         
+    } else if ((indexPath.section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
+        return DEF_NIL_CELL;
+
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -440,7 +453,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section <= DETAIL_DESC_SECTION) {
+    if (indexPath.section < DETAIL_ASSOC_SECTION) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DETAIL_REUSE_CELL_IDENTIFIER forIndexPath:indexPath];
         
         // Global defaults
@@ -565,7 +578,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
         // Description field
         //
-        } else {
+        } else if (indexPath.section == DETAIL_DESC_SECTION) {
         
             // Create the description text field
             //
@@ -583,6 +596,33 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                 [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:TRUE];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
+        
+        } else if ((indexPath.section == DETAIL_REF_SECTION) && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
+
+            [cell.imageView setFrame:CGRectMake(DEF_FIELD_PADDING, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height)];
+            [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+            [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+            
+            [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
+            [cell.imageView setClipsToBounds:YES];
+            
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            [cell.textLabel setFont:TABLE_CELL_FONT];
+            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            
+            if (indexPath.row == 0) {
+                [cell.imageView setImage:[ColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.textLabel setText:[_refPaintSwatch name]];
+
+            } else {
+                // Detail Mix Section
+                //
+                [cell.imageView setImage:[ColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.textLabel setText:[_mixPaintSwatch name]];
+            }
         }
         
         return cell;
@@ -659,6 +699,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
          ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
          ) && (_editFlag == FALSE)) {
         return DEF_NIL_HEADER;
+        
+    } else if ((section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
+        return DEF_NIL_HEADER;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -704,11 +747,28 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else if (section == DETAIL_DESC_SECTION) {
         headerStr = _descHeader;
         
+    } else if (section == DETAIL_REF_SECTION) {
+        headerStr = _refsHeader;
+        
     } else {
         headerStr = _mixAssocHeader;
     }
 
     return headerStr;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == DETAIL_REF_SECTION) {
+        if (indexPath.row == 0) {
+            _selPaintSwatch = _refPaintSwatch;
+        } else {
+            _selPaintSwatch = _mixPaintSwatch;
+        }
+
+        [self performSegueWithIdentifier:@"DetailToRefSegue" sender:self];
+    }
+    
 }
 
 // Only the field contents can be edited
@@ -1134,15 +1194,25 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navigationViewController = [segue destinationViewController];
-    AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
-    
-    [assocTableViewController setPaintSwatches:self.colorArray[_collectViewSelRow]];
-    [assocTableViewController setMixAssociation:[[_mixAssocSwatches objectAtIndex:_collectViewSelRow] mix_association]];
-    [assocTableViewController setSaveFlag:TRUE];
-    [assocTableViewController setSourceViewName:@"SwatchDetail"];
+    //
+    if ([[segue identifier] isEqualToString:@"DetailToAssocSegue"]) {
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
+        
+        [assocTableViewController setPaintSwatches:self.colorArray[_collectViewSelRow]];
+        [assocTableViewController setMixAssociation:[[_mixAssocSwatches objectAtIndex:_collectViewSelRow] mix_association]];
+        [assocTableViewController setSaveFlag:TRUE];
+        [assocTableViewController setSourceViewName:@"SwatchDetail"];
+
+    } else {
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
+        
+        [swatchDetailTableViewController setPaintSwatch:_selPaintSwatch];
+    }
 }
 
 
