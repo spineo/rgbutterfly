@@ -37,7 +37,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
-@property (nonatomic) BOOL editFlag;
+@property (nonatomic) BOOL editFlag, scrollFlag;
 @property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
@@ -100,7 +100,8 @@ const int IMAGE_TAG  = 6;
     _tapAreaKeywordEntity = [NSEntityDescription entityForName:@"TapAreaKeyword" inManagedObjectContext:self.context];
     _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"        inManagedObjectContext:self.context];
     
-    _editFlag = FALSE;
+    _editFlag   = FALSE;
+    _scrollFlag = FALSE;
     _reuseCellIdentifier = @"MatchTableCell";
 
 
@@ -322,54 +323,75 @@ const int IMAGE_TAG  = 6;
         int match_ct = (int)[_matchedSwatches count] - 1;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
         
-        
-        UIImage *refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        //UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
-        
-        // Tag the first reference image
-        //
-        refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
-        UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
-        
-        [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        
-        [refImageView setContentMode: UIViewContentModeScaleAspectFit];
-        [refImageView setClipsToBounds: YES];
-        [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth, _imageViewHeight)];
-        
-        // Compute the xpt
-        //
-        CGFloat xpt = CGPointFromString(_selPaintSwatch.coord_pt).x - _imageViewWidth;
-        xpt = (xpt < 0.0) ? 0.0 : xpt;
-        
-        CGFloat xAxisLimit = _referenceImage.size.width - (_imageViewWidth * 2);
-        xpt = (xpt > xAxisLimit) ? xAxisLimit : xpt;
-        
-        // Compute the ypt
-        //
-        CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / 2;
-        ypt = (ypt < 0.0) ? 0.0 : ypt;
-        
-        CGFloat yAxisLimit = _referenceImage.size.height - _imageViewHeight;
-        ypt = (ypt > yAxisLimit) ? yAxisLimit : ypt;
-        
-        
-        UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, _imageViewWidth * 2, _imageViewHeight)];
-        UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
-        [croppedImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [croppedImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-        [croppedImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-        
-        [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
-        [croppedImageView setClipsToBounds: YES];
-        CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
-        [croppedImageView setFrame:CGRectMake(croppedImageXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth * 2, _imageViewHeight)];
-        [croppedImageView setTag:IMAGE_TAG];
-        
-        [headerView addSubview:refImageView];
-        [headerView addSubview:croppedImageView];
+        if (_scrollFlag == FALSE) {
+            UIImage *refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            
+            // Tag the first reference image
+            //
+            refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+            UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
+            
+            [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            
+            [refImageView setContentMode: UIViewContentModeScaleAspectFit];
+            [refImageView setClipsToBounds: YES];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth, _imageViewHeight)];
+            
+            // Compute the xpt
+            //
+            CGFloat xpt = CGPointFromString(_selPaintSwatch.coord_pt).x - _imageViewWidth;
+            xpt = (xpt < 0.0) ? 0.0 : xpt;
+            
+            CGFloat xAxisLimit = _referenceImage.size.width - (_imageViewWidth * 2);
+            xpt = (xpt > xAxisLimit) ? xAxisLimit : xpt;
+            
+            // Compute the ypt
+            //
+            CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / 2;
+            ypt = (ypt < 0.0) ? 0.0 : ypt;
+            
+            CGFloat yAxisLimit = _referenceImage.size.height - _imageViewHeight;
+            ypt = (ypt > yAxisLimit) ? yAxisLimit : ypt;
+            
+            CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
+            CGFloat croppedImageWidth = self.tableView.bounds.size.width - croppedImageXOffset - DEF_FIELD_PADDING;
+            
+            UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
+            UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
+            [croppedImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [croppedImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [croppedImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            
+            [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
+            [croppedImageView setClipsToBounds: YES];
+            
+            [croppedImageView setFrame:CGRectMake(croppedImageXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, croppedImageWidth, _imageViewHeight)];
+            [croppedImageView setTag:IMAGE_TAG];
+            
+            [headerView addSubview:refImageView];
+            [headerView addSubview:croppedImageView];
+        } else {
+            CGFloat imageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
+            
+            UIImage *refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:imageViewWidth cellHeight:_imageViewHeight];
+            
+            // Tag the first reference image
+            //
+            refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+            UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
+            
+            [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            
+            [refImageView setContentMode: UIViewContentModeScaleAspectFit];
+            [refImageView setClipsToBounds: YES];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, imageViewWidth, _imageViewHeight)];
+            
+            [headerView addSubview:refImageView];
+        }
         
     }
     [headerLabel setText:headerStr];
@@ -603,6 +625,23 @@ const int IMAGE_TAG  = 6;
 //    }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    _scrollFlag = TRUE;
+    [self.tableView reloadData];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        [self scrollingFinish];
+    }
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self scrollingFinish];
+}
+- (void)scrollingFinish {
+    _scrollFlag = FALSE;
+    [self.tableView reloadData];
+}
 
 #pragma mark - UITextField Delegate Methods
 
