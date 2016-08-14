@@ -323,7 +323,7 @@ const int IMAGE_TAG  = 6;
         int match_ct = (int)[_matchedSwatches count] - 1;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
         
-        if (_scrollFlag == FALSE) {
+        if (_scrollFlag == FALSE || _editFlag == FALSE) {
             UIImage *refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             
             // Tag the first reference image
@@ -360,9 +360,9 @@ const int IMAGE_TAG  = 6;
             
             UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
             UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
-            [croppedImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [croppedImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [croppedImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            [croppedImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [croppedImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+            [croppedImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
             
             [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
             [croppedImageView setClipsToBounds: YES];
@@ -382,9 +382,9 @@ const int IMAGE_TAG  = 6;
             refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
-            [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            [refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [refImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+            [refImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
@@ -517,8 +517,6 @@ const int IMAGE_TAG  = 6;
     } else if (indexPath.section == MATCH_SECTION) {
 
         PaintSwatches *paintSwatch = [_matchedSwatches objectAtIndex:indexPath.row + 1];
-
-        cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
         
         // Tag the first reference image
         //
@@ -528,17 +526,32 @@ const int IMAGE_TAG  = 6;
         
         [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [cell.imageView setClipsToBounds:YES];
-        [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _matchImageViewWidth, _matchImageViewHeight)];
         
-        [cell.textLabel setFont:TABLE_CELL_FONT];
-        [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
-        [cell.textLabel setText:[paintSwatch name]];
-        
-        if (_editFlag == TRUE) {
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
+        if (_scrollFlag == FALSE || _editFlag == FALSE) {
+            cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
+            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _matchImageViewWidth, _matchImageViewHeight)];
+            
+            [cell.textLabel setFont:TABLE_CELL_FONT];
+            [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+            [cell.textLabel setText:[paintSwatch name]];
+            
+            if (_editFlag == TRUE) {
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+            } else {
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            }
+            
         } else {
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
+            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_matchImageViewHeight];
+            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _matchImageViewHeight)];
+            
+            [cell.textLabel setText:@""];
+            
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
+        
+
     }
 
     return cell;
