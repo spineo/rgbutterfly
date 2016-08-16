@@ -36,9 +36,9 @@
 @property (nonatomic) BOOL textReturn;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
-@property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchImageViewWidth, matchImageViewHeight, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
-@property (nonatomic) BOOL editFlag, scrollFlag;
-@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow;
+@property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
+@property (nonatomic) BOOL editFlag, scrollFlag, panFlag;
+@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, panSelectedRow;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -102,6 +102,7 @@ const int IMAGE_TAG  = 6;
     
     _editFlag   = FALSE;
     _scrollFlag = FALSE;
+    _panFlag    = FALSE;
     _reuseCellIdentifier = @"MatchTableCell";
 
 
@@ -122,8 +123,6 @@ const int IMAGE_TAG  = 6;
     _imageViewYOffset     = DEF_Y_OFFSET;
     _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
-    _matchImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
-    _matchImageViewHeight = DEF_TABLE_CELL_HEIGHT;
     _matchSectionHeight   = DEF_TABLE_HDR_HEIGHT + _imageViewHeight + DEF_FIELD_PADDING;
     
 
@@ -427,7 +426,7 @@ const int IMAGE_TAG  = 6;
         return DEF_NIL_CELL;
 
     } else {
-        return DEF_TABLE_CELL_HEIGHT;
+        return _imageViewHeight;
     }
 }
 
@@ -527,34 +526,49 @@ const int IMAGE_TAG  = 6;
         [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [cell.imageView setClipsToBounds:YES];
         
-        if (_scrollFlag == FALSE || _editFlag == FALSE) {
-            cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_matchImageViewWidth cellHeight:_matchImageViewHeight];
-            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _matchImageViewWidth, _matchImageViewHeight)];
+        int index = (int)indexPath.row;
+        
+        if (_editFlag == FALSE || _scrollFlag == FALSE || _panSelectedRow != index) {
+            cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
             
             [cell.textLabel setFont:TABLE_CELL_FONT];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell.textLabel setText:[paintSwatch name]];
+            [cell.textLabel setTag:indexPath.row + 1];
+            [cell.textLabel setNumberOfLines:0];
+            [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
             
             if (_editFlag == TRUE) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
             } else {
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
+
+            cell.textLabel.userInteractionEnabled = YES;
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCellLabel:)];
+            panGesture.delegate = self;
+            [cell.textLabel addGestureRecognizer:panGesture];
             
-        } else {
+        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _panSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
-            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_matchImageViewHeight];
-            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _matchImageViewHeight)];
+            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
+            [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
             
             [cell.textLabel setText:@""];
             
             [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
-        
-
     }
 
     return cell;
+}
+
+- (void)panCellLabel:(UILongPressGestureRecognizer *)panGesture {
+    UILabel *label = (UILabel *)panGesture.view;
+    _panSelectedRow = (int)[label tag] - 1;
+    _panFlag = TRUE;
+    //[self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -640,6 +654,7 @@ const int IMAGE_TAG  = 6;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     _scrollFlag = TRUE;
+
     [self.tableView reloadData];
 }
 
@@ -653,8 +668,11 @@ const int IMAGE_TAG  = 6;
 }
 - (void)scrollingFinish {
     _scrollFlag = FALSE;
+    _panFlag    = FALSE;
+
     [self.tableView reloadData];
 }
+
 
 #pragma mark - UITextField Delegate Methods
 
