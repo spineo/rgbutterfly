@@ -37,8 +37,8 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
-@property (nonatomic) BOOL editFlag, scrollFlag, panFlag;
-@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, panSelectedRow;
+@property (nonatomic) BOOL editFlag, scrollFlag;
+@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -102,7 +102,6 @@ const int IMAGE_TAG  = 6;
     
     _editFlag   = FALSE;
     _scrollFlag = FALSE;
-    _panFlag    = FALSE;
     _reuseCellIdentifier = @"MatchTableCell";
 
 
@@ -425,8 +424,11 @@ const int IMAGE_TAG  = 6;
     } else if (indexPath.section == EMPTY_SECTION) {
         return DEF_NIL_CELL;
 
-    } else {
+    } else if (indexPath.section == MATCH_SECTION) {
         return _imageViewHeight;
+        
+    } else {
+        return DEF_TABLE_CELL_HEIGHT;
     }
 }
 
@@ -439,6 +441,7 @@ const int IMAGE_TAG  = 6;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:GRAY_BG_COLOR];
+    [tableView setAllowsSelectionDuringEditing:YES];
 
     [cell.imageView setImage:nil];
     [cell.textLabel setText:nil];
@@ -528,7 +531,7 @@ const int IMAGE_TAG  = 6;
         
         int index = (int)indexPath.row;
         
-        if (_editFlag == FALSE || _scrollFlag == FALSE || _panSelectedRow != index) {
+        if (_editFlag == FALSE || _scrollFlag == FALSE || _pressSelectedRow != index) {
             cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
             
@@ -545,12 +548,14 @@ const int IMAGE_TAG  = 6;
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
 
-            cell.textLabel.userInteractionEnabled = YES;
-            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panCellLabel:)];
+            // Add the Gesture Recognizer
+            //
+            [cell.textLabel setUserInteractionEnabled:YES];
+            UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pressCell:)];
             panGesture.delegate = self;
             [cell.textLabel addGestureRecognizer:panGesture];
             
-        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _panSelectedRow == index) {
+        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _pressSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
             cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
@@ -564,17 +569,25 @@ const int IMAGE_TAG  = 6;
     return cell;
 }
 
-- (void)panCellLabel:(UILongPressGestureRecognizer *)panGesture {
+- (void)pressCell:(UIPanGestureRecognizer *)panGesture {
     UILabel *label = (UILabel *)panGesture.view;
-    _panSelectedRow = (int)[label tag] - 1;
-    _panFlag = TRUE;
-    //[self.tableView reloadData];
+    _pressSelectedRow = (int)[label tag] - 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedRow = (int)indexPath.row;
-    if (indexPath.section == MATCH_SECTION) {
+
+    if (indexPath.section == MATCH_SECTION && _editFlag == FALSE)  {
         [self performSegueWithIdentifier:@"ShowSwatchDetailSegue" sender:self];
+        
+    } else {
+//        if (_scrollFlag == FALSE) {
+//            _scrollFlag = TRUE;
+//            _pressSelectedRow = (int)indexPath.row;
+//        } else {
+//            _scrollFlag = FALSE;
+//        }
+        [tableView reloadData];
     }
 }
 
@@ -668,7 +681,6 @@ const int IMAGE_TAG  = 6;
 }
 - (void)scrollingFinish {
     _scrollFlag = FALSE;
-    _panFlag    = FALSE;
 
     [self.tableView reloadData];
 }
@@ -1005,6 +1017,21 @@ const int IMAGE_TAG  = 6;
         NSLog(@"TapArea save successful");
         
         [_save setEnabled:FALSE];
+    }
+}
+
+- (void)deleteSwatches {
+    TapArea *tapArea = [_selPaintSwatch tap_area];
+    
+    NSArray *tapAreaSwatches = [[tapArea tap_area_swatch] allObjects];
+    for (int i=0; i<[tapAreaSwatches count]; i++) {
+        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+        
+        [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+        [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+        
+        [self.context deleteObject:tapAreaSwatch];
     }
 }
 
