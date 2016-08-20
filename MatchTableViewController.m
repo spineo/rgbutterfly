@@ -152,7 +152,13 @@ const int IMAGE_TAG  = 6;
     //
     _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
-    _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    
+    if (_maManualOverride == TRUE) {
+        _matchedSwatches = [_dbPaintSwatches mutableCopy];
+        
+    } else {
+        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    }
     [self initTappedSwatches:(int)[_matchedSwatches count]];
     
     

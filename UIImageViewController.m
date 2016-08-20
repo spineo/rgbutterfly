@@ -1580,10 +1580,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     for (int i=0; i<maxMatchNum; i++) {
         TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
         PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
-        
-        if ((int)[tapAreaSwatch match_order] > 1) {
-            [tmpSwatches addObject:paintSwatch];
-        }
+        [tmpSwatches addObject:paintSwatch];
     }
     
     return [tmpSwatches mutableCopy];
@@ -2170,7 +2167,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [matchTableViewController setReferenceImage:_referenceTappedImage];
 
         [matchTableViewController setMaxMatchNum:_maxMatchNum];
-        //[matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
         
         int tapIndex = currTapSection - 1;
         TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
