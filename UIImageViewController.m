@@ -1527,25 +1527,35 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // If MatchAssociation exists (or has already been saved) then get the actual Match Algorithm or manual override
     //
     int matchAlgValue = _matchAlgIndex;
+    BOOL maManualOverride = FALSE;
     int tapIndex = tapSection - 1;
     
     // Default
     //
     int maxMatchNum = _maxMatchNum;
+    NSArray *tapAreaObjects;
+    TapArea *tapArea;
+    NSArray *tapAreaSwatches;
     
     if (_matchAssociation != nil) {
-        NSArray *tapAreaObjects = [_matchAssociation.tap_area allObjects];
+        tapAreaObjects = [_matchAssociation.tap_area allObjects];
         if ([tapAreaObjects count] >= tapSection) {
-            TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+            tapArea = [tapAreaObjects objectAtIndex:tapIndex];
             matchAlgValue = [tapArea.match_algorithm_id intValue];
+            maManualOverride = [tapArea.ma_manual_override boolValue];
             
             // Get the existing match count
             //
-            maxMatchNum = (int)[[tapArea.tap_area_swatch allObjects] count];
+            tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+            maxMatchNum = (int)[tapAreaSwatches count];
         }
     }
     
-    _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    if (maManualOverride == FALSE) {
+        _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    } else {
+        _compPaintSwatches = [self getManualOverrideSwatches:refObj tapIndex:tapIndex];
+    }
     
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];
@@ -1557,6 +1567,26 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSArray *tapNumberArrayReverse = [[_tapNumberArray reverseObjectEnumerator] allObjects];
         self.collectionMatchArray = [NSMutableArray arrayWithArray:tapNumberArrayReverse];
     }
+}
+
+- (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex {
+    NSArray *tapAreaObjects = [_matchAssociation.tap_area allObjects];
+    TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+    NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+    int maxMatchNum = (int)[tapAreaSwatches count];
+    
+    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
+    [tmpSwatches addObject:refObj];
+    for (int i=0; i<maxMatchNum; i++) {
+        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
+        
+        if ((int)[tapAreaSwatch match_order] > 1) {
+            [tmpSwatches addObject:paintSwatch];
+        }
+    }
+    
+    return [tmpSwatches mutableCopy];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2140,12 +2170,21 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [matchTableViewController setReferenceImage:_referenceTappedImage];
 
         [matchTableViewController setMaxMatchNum:_maxMatchNum];
-        [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+        //[matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
         
         int tapIndex = currTapSection - 1;
         TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
         [matchTableViewController setTapArea:tapArea];
         [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
+        
+        BOOL maManualOverride = [[tapArea ma_manual_override] boolValue];
+        if (maManualOverride == TRUE) {
+            [matchTableViewController setDbPaintSwatches:[self getManualOverrideSwatches:paintSwatch tapIndex:tapIndex]];
+        } else {
+            [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
+        }
+        [matchTableViewController setMaManualOverride:maManualOverride];
+        
 //        }
 
     } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {

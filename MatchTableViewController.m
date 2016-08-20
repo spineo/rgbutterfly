@@ -5,7 +5,6 @@
 //  Created by Stuart Pineo on 8/25/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-
 #import "MatchTableViewController.h"
 #import "SwatchDetailTableViewController.h"
 #import "GlobalSettings.h"
@@ -38,8 +37,8 @@
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag, scrollFlag;
-@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow;
-@property (nonatomic, strong) NSMutableArray *matchedSwatches;
+@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount;
+@property (nonatomic, strong) NSMutableArray *matchedSwatches, *tappedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
 // Picker views
@@ -100,8 +99,9 @@ const int IMAGE_TAG  = 6;
     _tapAreaKeywordEntity = [NSEntityDescription entityForName:@"TapAreaKeyword" inManagedObjectContext:self.context];
     _keywordEntity        = [NSEntityDescription entityForName:@"Keyword"        inManagedObjectContext:self.context];
     
-    _editFlag   = FALSE;
-    _scrollFlag = FALSE;
+    _editFlag    = FALSE;
+    _scrollFlag  = FALSE;
+    _tappedCount = 0;
     _reuseCellIdentifier = @"MatchTableCell";
 
 
@@ -153,6 +153,7 @@ const int IMAGE_TAG  = 6;
     _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    [self initTappedSwatches:(int)[_matchedSwatches count]];
     
     
     // Initialize
@@ -544,6 +545,11 @@ const int IMAGE_TAG  = 6;
             
             if (_editFlag == TRUE) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
+                
+                BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
+                if (tappedStat == TRUE) {
+                    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+                }
             } else {
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
@@ -581,12 +587,16 @@ const int IMAGE_TAG  = 6;
         [self performSegueWithIdentifier:@"ShowSwatchDetailSegue" sender:self];
         
     } else {
-//        if (_scrollFlag == FALSE) {
-//            _scrollFlag = TRUE;
-//            _pressSelectedRow = (int)indexPath.row;
-//        } else {
-//            _scrollFlag = FALSE;
-//        }
+        BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
+        if (tappedStat == FALSE) {
+            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:TRUE]];
+            _tappedCount++;
+
+        } else {
+            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:FALSE]];
+            _tappedCount--;
+        }
+        
         [tableView reloadData];
     }
 }
@@ -626,10 +636,15 @@ const int IMAGE_TAG  = 6;
     _editFlag = flag;
     
     if (_editFlag == FALSE) {
+        if (_tappedCount > 0) {
+            [_save setEnabled:TRUE];
+        }
         [self matchButtonsHide];
         [self presentViewController:_saveAlertController animated:YES completion:nil];
     } else {
-        [self matchButtonsShow];
+        if (_maManualOverride == FALSE) {
+            [self matchButtonsShow];
+        }
     }
     
     [self.tableView reloadData];
@@ -786,6 +801,7 @@ const int IMAGE_TAG  = 6;
     // Re-run the comparison algorithm
     //
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    [self initTappedSwatches:(int)[_matchedSwatches count]];
     
     [_save setEnabled:TRUE];
     
@@ -804,6 +820,7 @@ const int IMAGE_TAG  = 6;
     // Re-run the comparison algorithm
     //
     _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+    [self initTappedSwatches:(int)[_matchedSwatches count]];
     
     [_save setEnabled:TRUE];
 
@@ -813,6 +830,7 @@ const int IMAGE_TAG  = 6;
 - (IBAction)removeTableRows:(id)sender {
     if (_maxMatchNum > 1) {
         [_matchedSwatches removeLastObject];
+        [_tappedSwatches removeLastObject];
         _maxMatchNum--;
 
         [self.tableView reloadData];
@@ -833,6 +851,7 @@ const int IMAGE_TAG  = 6;
         // Re-run the comparison algorithm
         //
         _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+        [self initTappedSwatches:(int)[_matchedSwatches count]];
     
         [self.tableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
@@ -881,6 +900,12 @@ const int IMAGE_TAG  = 6;
     _doneButtonXOffset  = _imageViewWidth + _selTextFieldWidth + DEF_FIELD_PADDING;
 }
 
+- (void)initTappedSwatches:(int)count {
+    _tappedSwatches = [[NSMutableArray alloc] init];
+    for (int i=0; i<count; i++) {
+        [_tappedSwatches addObject:[NSNumber numberWithBool:FALSE]];
+    }
+}
 
 #pragma mark - Navigation/Save
 
@@ -970,6 +995,11 @@ const int IMAGE_TAG  = 6;
     //
     int saved_algorithm_id = [[_tapArea match_algorithm_id] intValue];
     int saved_swatch_count = (int)[tapAreaSwatches count];
+    
+    // If needed
+    //
+    [self deleteSwatches];
+    [_tapArea setMa_manual_override:[NSNumber numberWithBool:_maManualOverride]];
 
     
     // If either of the currently saved values differ, recreate the tapAreaSwatches
@@ -1005,7 +1035,6 @@ const int IMAGE_TAG  = 6;
             [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
         }
     }
-
     
     NSError *error = nil;
     if (![self.context save:&error]) {
@@ -1018,21 +1047,32 @@ const int IMAGE_TAG  = 6;
         
         [_save setEnabled:FALSE];
     }
+    
+    [self.tableView reloadData];
 }
 
 - (void)deleteSwatches {
-    TapArea *tapArea = [_selPaintSwatch tap_area];
+    // Initialize with the comparison swatch
+    //
+    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
+    [tmpSwatches addObject:[_matchedSwatches objectAtIndex:0]];
     
-    NSArray *tapAreaSwatches = [[tapArea tap_area_swatch] allObjects];
-    for (int i=0; i<[tapAreaSwatches count]; i++) {
-        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-        PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
-        
-        [tapArea removeTap_area_swatchObject:tapAreaSwatch];
-        [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
-        
-        [self.context deleteObject:tapAreaSwatch];
+    int max_ct = (int)[_matchedSwatches count] - 1;
+    for (int i=0; i<max_ct; i++) {
+        BOOL tappedSwatch = [[_tappedSwatches objectAtIndex:i] boolValue];
+
+        PaintSwatches *paintSwatch = [_matchedSwatches objectAtIndex:i+1];
+        if (tappedSwatch == TRUE) {
+            [tmpSwatches addObject:paintSwatch];
+        }
     }
+
+    if ([tmpSwatches count] > 1) {
+        _matchedSwatches  = [tmpSwatches mutableCopy];
+        _maManualOverride = TRUE;
+        [self initTappedSwatches:(int)[_matchedSwatches count]];
+    }
+    
 }
 
 

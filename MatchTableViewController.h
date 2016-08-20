@@ -17,5 +17,6 @@
 @property (nonatomic, strong) UIImage *referenceImage;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches;
 @property (nonatomic, strong) TapArea *tapArea;
+@property (nonatomic) BOOL maManualOverride;
 
 @end

@@ -173,7 +173,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     
     BOOL test_val = [[_paintSwatchList objectAtIndex:indexPath.row] is_selected];
     if (test_val == TRUE) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }
     
     [cell.textLabel setText:[[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] name]];
