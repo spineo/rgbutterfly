@@ -601,7 +601,7 @@ const int ASSOC_COLORS_TAG     = 5;
         } else {
             [FieldUtils makeTextFieldNonEditable:refName content:_mixAssocDesc border:TRUE];
         }
-        [cell setAccessoryType: UITableViewCellAccessoryNone];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
     return cell;
 }
@@ -1062,10 +1062,10 @@ const int ASSOC_COLORS_TAG     = 5;
         UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, mixRatiosPicker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
         [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
         
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(ratiosSelection)];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(ratiosSelection)];
         [doneButton setTintColor:LIGHT_TEXT_COLOR];
         
-        [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+        [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
         
         UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, mixRatiosPicker.bounds.size.width, mixRatiosPicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
         [pickerParentView setBackgroundColor:DARK_BG_COLOR];

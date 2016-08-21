@@ -34,13 +34,13 @@
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
 @property (nonatomic, strong) UIView *bgColorView;
-@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage;
+@property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
-@property (nonatomic) BOOL initColors, isCollapsedAll;
+@property (nonatomic) BOOL initColors, isCollapsedAll, showReferenceOnly;
 
 
 // Resize UISearchBar when rotated
@@ -53,8 +53,9 @@
 //
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UISearchBar *mainSearchBar;
-@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton;
+@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *filterLabel, *filterButton;
 @property (nonatomic, strong) NSString *searchString;
+
 
 // NSManagedObject subclassing
 //
@@ -127,9 +128,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     // Images
     //
-    _searchImage    = [[UIImage imageNamed:SEARCH_IMAGE_NAME]     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]   imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _searchImage    = [[UIImage imageNamed:SEARCH_IMAGE_NAME]           imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME]       imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _emptySquareImage   = [[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _checkboxSquareImage = [[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     
     // Listing Controller
@@ -196,23 +199,42 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
-    PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
-    _matchAssocId = [[paintSwatchType order] intValue];
+    
+    // Match Association (filter out)
+    //
+    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
+    _matchAssocId = [[matchSwatchType order] intValue];
+    
+    PaintSwatchType *refSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Reference" context:self.context];
+    _refTypeId = [[refSwatchType order] intValue];
 
     
     // SearchBar related
     //
     _imageLibButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_LIB_NAME]
-                                                   style:UIBarButtonItemStylePlain
+                                                  style:UIBarButtonItemStylePlain
                                                   target:self
                                                   action:@selector(goBack)];
     
     _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
-                                                     style:UIBarButtonItemStylePlain
+                                                    style:UIBarButtonItemStylePlain
                                                     target:self
                                                     action:@selector(search)];
     
+    _filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
+                                                    style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(filterByReference)];
+    
+    _filterLabel = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_filterLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                          LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
+                                          TABLE_HEADER_FONT, NSFontAttributeName, nil]
+                                forState:UIControlStateNormal];
+    _showReferenceOnly = FALSE;
+    
     self.navigationItem.rightBarButtonItem = _searchButton;
+
     
     // Adjust the layout when the orientation changes
     //
@@ -598,10 +620,28 @@ int MIX_ASSOC_MIN_SIZE = 1;
         }
         
     } else {
-        NSString *colorsListing = [[NSString alloc] initWithFormat:@"Colors Listing (%i)", _numSwatches];
-        [headerView addSubview:headerLabel];
-        [headerLabel setText:colorsListing];
-        [headerLabel setTextAlignment: NSTextAlignmentCenter];
+        [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT)];
+        
+        UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
+        [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
+
+        NSString *colorsListing;
+        if (_showReferenceOnly == TRUE) {
+            colorsListing = [[NSString alloc] initWithFormat:@"Reference Colors Only (%i)", _numSwatches];
+            
+        } else {
+            colorsListing = [[NSString alloc] initWithFormat:@"Displaying All Colors (%i)", _numSwatches];
+        }
+        [_filterLabel setTitle:colorsListing];
+
+        [filterToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterLabel, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterButton]];
+        
+        CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
+        
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, filterToolbarHgt, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT - filterToolbarHgt)];
+
+        [headerView addSubview:filterToolbar];
+        [headerView addSubview:paddingView];
     }
 
     return headerView;
@@ -613,6 +653,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     } else if ([_listingType isEqualToString:@"Colors"]) {
         return DEF_LG_TABLE_HDR_HGT;
+        
+    } else if ([_listingType isEqualToString:@"Default"]) {
+        return DEF_TABLE_CELL_HEIGHT;
 
     } else {
         return DEF_SM_TABLE_CELL_HGT;
@@ -1042,7 +1085,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 // SearchBar Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - SearchBar Methods
+#pragma mark - SearchBar and Filter Methods
 
 - (void)search {
     [self.navigationItem setTitleView:_titleView];
@@ -1096,6 +1139,20 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
 }
 
+- (void)filterByReference {
+
+    if (_showReferenceOnly == FALSE) {
+        _showReferenceOnly = TRUE;
+        [_filterButton setImage:_checkboxSquareImage];
+        [self initPaintSwatchFetchedResultsController];
+
+    } else {
+        _showReferenceOnly = FALSE;
+        [_filterButton setImage:_emptySquareImage];
+        [self initPaintSwatchFetchedResultsController];
+    }
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSFetchedResultsController Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1111,9 +1168,17 @@ int MIX_ASSOC_MIN_SIZE = 1;
     // Skip match assoc types, and search if requested
     //
     if ((_searchString == nil) || [_searchString isEqualToString:@""]) {
-        [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
+        if (_showReferenceOnly == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _refTypeId]];
+        } else {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
+        }
     } else {
-        [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name contains[c] %@", _matchAssocId, _searchString]];
+        if (_showReferenceOnly == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name contains[c] %@", _refTypeId, _searchString]];
+        } else {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name contains[c] %@", _matchAssocId, _searchString]];
+        }
     }
     
     [request setSortDescriptors:@[nameSort]];

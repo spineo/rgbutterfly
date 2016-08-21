@@ -90,6 +90,7 @@ CGFloat const DEF_TOOLBAR_WIDTH     = 320.0;
 
 // UI Buttons
 //
+CGFloat const DEF_SM_BUTTON_WIDTH   = 30.0;
 CGFloat const DEF_BUTTON_WIDTH      = 60.0;
 CGFloat const DEF_BUTTON_HEIGHT     = 26.0;
 CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
@@ -275,6 +276,8 @@ NSString * const BACK_BUTTON_IMAGE_NAME = @"arrow.png";
 NSString * const SEARCH_IMAGE_NAME      = @"search.png";
 NSString * const ARROW_UP_IMAGE_NAME    = @"arrow up.png";
 NSString * const ARROW_DOWN_IMAGE_NAME  = @"arrow down.png";
+NSString * const EMPTY_SQ_IMAGE_NAME    = @"square.png";
+NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // Default listing type
 //

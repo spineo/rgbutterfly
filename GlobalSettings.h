@@ -104,6 +104,7 @@ extern CGFloat const ALLOWABLE_MOVE;
 
 // UI Button
 //
+extern CGFloat const DEF_SM_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_HEIGHT;
 extern CGFloat const HIDE_BUTTON_WIDTH;
@@ -268,6 +269,8 @@ extern NSString * const BACK_BUTTON_IMAGE_NAME;
 extern NSString * const SEARCH_IMAGE_NAME;
 extern NSString * const ARROW_UP_IMAGE_NAME;
 extern NSString * const ARROW_DOWN_IMAGE_NAME;
+extern NSString * const EMPTY_SQ_IMAGE_NAME;
+extern NSString * const CHECKBOX_SQ_IMAGE_NAME;
 
 // Default listing type
 //

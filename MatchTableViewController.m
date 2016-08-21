@@ -646,7 +646,9 @@ const int IMAGE_TAG  = 6;
             [_save setEnabled:TRUE];
         }
         [self matchButtonsHide];
-        [self presentViewController:_saveAlertController animated:YES completion:nil];
+        if ([_save isEnabled] == TRUE) {
+            [self presentViewController:_saveAlertController animated:YES completion:nil];
+        }
     } else {
         if (_maManualOverride == FALSE) {
             [self matchButtonsShow];
