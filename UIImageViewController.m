@@ -1533,14 +1533,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Default
     //
     int maxMatchNum = _maxMatchNum;
-    NSArray *tapAreaObjects;
+    NSMutableArray *tapAreaObjects;
     TapArea *tapArea;
     NSArray *tapAreaSwatches;
     
     if (_matchAssociation != nil) {
-        tapAreaObjects = [_matchAssociation.tap_area allObjects];
+        tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
+
         if ([tapAreaObjects count] >= tapSection) {
             tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+            
             matchAlgValue = [tapArea.match_algorithm_id intValue];
             maManualOverride = [tapArea.ma_manual_override boolValue];
             
@@ -1556,7 +1558,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else {
         _compPaintSwatches = [self getManualOverrideSwatches:refObj tapIndex:tapIndex];
     }
-    
+
+
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];
     }
@@ -1567,10 +1570,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSArray *tapNumberArrayReverse = [[_tapNumberArray reverseObjectEnumerator] allObjects];
         self.collectionMatchArray = [NSMutableArray arrayWithArray:tapNumberArrayReverse];
     }
+    
 }
 
 - (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex {
-    NSArray *tapAreaObjects = [_matchAssociation.tap_area allObjects];
+    NSArray *tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
     TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
     NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
     int maxMatchNum = (int)[tapAreaSwatches count];
@@ -2169,7 +2173,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [matchTableViewController setMaxMatchNum:_maxMatchNum];
         
         int tapIndex = currTapSection - 1;
-        TapArea *tapArea = [[_matchAssociation.tap_area allObjects] objectAtIndex:tapIndex];
+        TapArea *tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
         [matchTableViewController setTapArea:tapArea];
         [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
         
