@@ -37,7 +37,7 @@
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
-@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *letterSwatches, *subjColorData;
+@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *keywordNames, *letters, *letterKeywords, *keywordSwatches, *subjColorData;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 @property (nonatomic) BOOL initColors, isCollapsedAll, showReferenceOnly;
@@ -358,7 +358,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     _keywordNames   = [[NSMutableDictionary alloc] init];
     _letterKeywords = [[NSMutableDictionary alloc] init];
-    _letterSwatches = [[NSMutableDictionary alloc] init];
+    _keywordSwatches = [[NSMutableDictionary alloc] init];
     
     id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
     
@@ -427,20 +427,112 @@ int MIX_ASSOC_MIN_SIZE = 1;
         keywordList = [[NSMutableArray alloc] init];
         swatchList  = [[NSMutableArray alloc] init];
         for (NSString *kw in sectionKeywords) {
+            [keywordList addObject:kw];
+            [swatchList  addObject:kw];
+
             NSArray *paintSwatches = [_keywordNames objectForKey:kw];
             for (PaintSwatches *ps in paintSwatches) {
-                [keywordList addObject:kw];
                 [swatchList addObject:ps];
             }
+            [_keywordSwatches setObject:swatchList  forKey:kw];
         }
-        [_letterKeywords setObject:keywordList forKey:letter];
-        [_letterSwatches setObject:swatchList  forKey:letter];
+        //[_letterKeywords setObject:keywordList forKey:letter];
+        [_letterKeywords setObject:swatchList forKey:letter];
     }
     
     _numKeywords = (int)[sortedKeywords count];
 
     [_colorTableView reloadData];
 }
+
+//- (void)loadKeywordData {
+//    [self initializeKeywordResultsController];
+//    
+//    _keywordNames   = [[NSMutableDictionary alloc] init];
+//    _letterKeywords = [[NSMutableDictionary alloc] init];
+//    _keywordSwatches = [[NSMutableDictionary alloc] init];
+//    
+//    id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
+//    
+//    NSInteger objcount = [sectionInfo numberOfObjects];
+//    
+//    NSIndexPath *nspath;
+//    for (int i=0; i<objcount; i++) {
+//        
+//        nspath = [NSIndexPath indexPathForRow:i inSection:0];
+//        SwatchKeyword *skw = [self.fetchedResultsController objectAtIndexPath:nspath];
+//        
+//        PaintSwatches *ps = (PaintSwatches *)[skw paint_swatch];
+//        
+//        Keyword *kw = [skw keyword];
+//        NSString *keyword = [kw name];
+//        
+//        int sct = 0;
+//        if (![keyword isEqualToString:@""] && keyword != nil) {
+//            id swatchKeywordNames = [_keywordNames objectForKey:keyword];
+//            if (swatchKeywordNames == nil) {
+//                swatchKeywordNames = [NSMutableArray array];
+//                [_keywordNames setObject:swatchKeywordNames forKey:keyword];
+//            }
+//            [swatchKeywordNames addObject:ps];
+//            sct = (int)[swatchKeywordNames count];
+//        }
+//    }
+//    
+//    NSMutableArray *keywordPaintSwatches = [[NSMutableArray alloc] init];
+//    
+//    NSMutableArray *sortedKeywords = [NSMutableArray arrayWithArray:[_keywordNames allKeys]];
+//    [sortedKeywords sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+//    
+//    _letters = [[NSMutableDictionary alloc] init];
+//    
+//    NSString *curr_letter = @"";
+//    keywordPaintSwatches = [[NSMutableArray alloc] init];
+//    
+//    
+//    NSMutableArray *keywordList = [[NSMutableArray alloc] init];
+//    NSMutableArray *swatchList  = [[NSMutableArray alloc] init];
+//    
+//    for (id keyword_name in sortedKeywords) {
+//        
+//        NSString *firstLetter = [keyword_name substringToIndex:1];
+//        firstLetter = [firstLetter uppercaseString];
+//        
+//        if (![firstLetter isEqualToString:curr_letter]) {
+//            keywordPaintSwatches = [[NSMutableArray alloc] init];
+//        }
+//        [keywordPaintSwatches addObject:keyword_name];
+//        
+//        // Add to alphabet array
+//        //
+//        [_letters setObject:keywordPaintSwatches forKey:firstLetter];
+//        
+//        curr_letter = firstLetter;
+//    }
+//    
+//    _sortedLetters = [NSMutableArray arrayWithArray:[_letters allKeys]];
+//    [_sortedLetters sortUsingSelector:@selector(localizedStandardCompare:)];
+//    
+//    for (NSString *letter in _sortedLetters) {
+//        NSArray *sectionKeywords = [_letters objectForKey:letter];
+//        
+//        keywordList = [[NSMutableArray alloc] init];
+//        swatchList  = [[NSMutableArray alloc] init];
+//        for (NSString *kw in sectionKeywords) {
+//            NSArray *paintSwatches = [_keywordNames objectForKey:kw];
+//            for (PaintSwatches *ps in paintSwatches) {
+//                [keywordList addObject:kw];
+//                [swatchList addObject:ps];
+//            }
+//        }
+//        [_letterKeywords setObject:keywordList forKey:letter];
+//        [_keywordSwatches setObject:swatchList  forKey:letter];
+//    }
+//    
+//    _numKeywords = (int)[sortedKeywords count];
+//    
+//    [_colorTableView reloadData];
+//}
 
 - (void)loadColorsData {
     _subjColorsArray      = [[NSMutableArray alloc] init];
@@ -690,6 +782,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         NSString *sectionTitle = [_sortedLetters objectAtIndex:section];
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
+//        int kwCount = (int)[keywords count];
+//        objCount = 0;
+//        for (int i=0; i<kwCount; i++) {
+//            NSString *kw = [keywords objectAtIndex:i];
+//            objCount = objCount + [[_keywordSwatches objectForKey:kw] count];
+//        }
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
         if (section == 0) {
@@ -819,12 +917,20 @@ int MIX_ASSOC_MIN_SIZE = 1;
         if ([_listingType isEqualToString:@"Keywords"]) {
     
             NSString *sectionTitle = [_sortedLetters objectAtIndex:indexPath.section];
-            NSString *kw_name = [[_letterKeywords objectForKey:sectionTitle] objectAtIndex:indexPath.row];
-            PaintSwatches *ps = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
-
-            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            id obj = [[_letterKeywords objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             
-            [cell.textLabel setText:kw_name];
+            if ([obj isKindOfClass:[NSString class]]) {
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
+                [cell.imageView setImage:nil];
+                [cell.textLabel setText:obj];
+                cell.userInteractionEnabled = NO;
+        
+            } else {
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+                [cell.imageView setImage:[ColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.textLabel setText:[(PaintSwatches *)obj name]];
+                cell.userInteractionEnabled = YES;
+            }
             
         } else if ([_listingType isEqualToString:@"Colors"]) {
             int index = (int)indexPath.section - 1;
@@ -856,7 +962,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         NSString *sectionTitle   = [_sortedLetters objectAtIndex:indexPath.section];
-        _selPaintSwatch = [[_letterSwatches objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+        _selPaintSwatch = [[_letterKeywords objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
