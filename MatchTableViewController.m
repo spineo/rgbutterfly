@@ -405,25 +405,6 @@ const int IMAGE_TAG  = 6;
     return headerView;
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    NSString *headerStr;
-//    if (section == NAME_SECTION) {
-//        headerStr = _nameHeader;
-//
-//    } else if (section == KEYW_SECTION) {
-//        headerStr = _keywHeader;
-//
-//    } else if (section == DESC_SECTION) {
-//        headerStr = _descHeader;
-//
-//    } else if (section == MATCH_SECTION) {
-//        int match_ct = (int)[_matchedSwatches count] - 1;
-//        headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
-//    }
-//    
-//    return headerStr;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == DIV_SECTION) {
         return DEF_TBL_DIVIDER_HGT;

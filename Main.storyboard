@@ -405,7 +405,7 @@
             </objects>
             <point key="canvasLocation" x="1414" y="1122"/>
         </scene>
-        <!--Matched Colors-->
+        <!--Possible Matches-->
         <scene sceneID="IfU-Gf-ydV">
             <objects>
                 <tableViewController id="kOh-IX-qcO" customClass="MatchTableViewController" sceneMemberID="viewController">
@@ -450,33 +450,37 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="XTe-OD-4gI"/>
-                        <barButtonItem tag="71" title="&lt;" id="ofc-Ji-BsY">
+                        <barButtonItem tag="71" image="arrow fat left" id="ofc-Ji-BsY">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="decrMatchAlgorithm:" destination="kOh-IX-qcO" id="pZQ-m5-Czj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="73" title="Match &gt;" id="5Vj-gF-Y4V">
+                        <barButtonItem title="Match" id="9k2-Mz-UD8">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem tag="73" image="arrow fat right" id="5Vj-gF-Y4V">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="incrMatchAlgorithm:" destination="kOh-IX-qcO" id="bav-fX-f81"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bnl-v2-ffu"/>
-                        <barButtonItem tag="74" image="minus" id="aDY-YU-la5">
+                        <barButtonItem tag="74" image="minus sign" id="aDY-YU-la5">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="removeTableRows:" destination="kOh-IX-qcO" id="ekt-bm-B6c"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="75" image="plus-1" id="n1H-dj-YSh">
+                        <barButtonItem width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
+                        <barButtonItem tag="75" image="plus sign-1" id="n1H-dj-YSh">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="kOh-IX-qcO" id="E07-uw-3Cd"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Matched Colors" id="rA5-8M-vXc">
+                    <navigationItem key="navigationItem" title="Possible Matches" id="rA5-8M-vXc">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="0zy-2C-Uae">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -715,18 +719,22 @@
     </scenes>
     <resources>
         <image name="arrow" width="30" height="30"/>
+        <image name="arrow fat left" width="30" height="30"/>
+        <image name="arrow fat right" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="minus" width="25" height="25"/>
+        <image name="minus sign" width="20" height="20"/>
         <image name="photo 2" width="22" height="18"/>
+        <image name="plus sign-1" width="20" height="20"/>
         <image name="plus-1" width="25" height="25"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Szt-18-Btg"/>
+        <segue reference="cr4-CJ-FMT"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="7OV-Go-gIV"/>
         <segue reference="Stq-UR-tQY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
