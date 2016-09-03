@@ -1213,34 +1213,48 @@ const int ASSOC_COLORS_TAG     = 5;
     
     if ([_addPaintSwatches count] > 0) {
         
-        int mix_assoc_ct = (int)[_mixAssocSwatches count];
+        int add_swatch_ct = (int)[_addPaintSwatches count];
+        int mix_assoc_ct  = (int)[_mixAssocSwatches count] + add_swatch_ct;
         
-        for (int i=0; i<[_addPaintSwatches count]; i++) {
-            PaintSwatch *paintSwatch = [_addPaintSwatches objectAtIndex:i];
-            MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
-            
-            // Add MixAssoc relations
-            //
-            [mixAssocSwatch setPaint_swatch:paintSwatch];
-            [mixAssocSwatch setMix_association:_mixAssociation];
-            
-            // Add PaintSwatch and MixAssociation relations
-            //
-            PaintSwatches *pswatches = (PaintSwatches *)paintSwatch;
-            [pswatches addMix_assoc_swatchObject:mixAssocSwatch];
-            [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
-            
-            // Set the mix_order
-            //
-            mix_assoc_ct += 1;
-            [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_assoc_ct]];
-            
-            // Flag it as an added paint swatch (so it will not be editable)
-            //
-            [mixAssocSwatch setPaint_swatch_is_add:[NSNumber numberWithBool:TRUE]];
-            
-            [_paintSwatches addObject:paintSwatch];
+        // Add the paint swatches
+        //
+        MixAssocSwatch *mixAssocSwatch;
+        for (int i=0; i < mix_assoc_ct; i++) {
+            if (i < add_swatch_ct) {
+                PaintSwatch *paintSwatch = [_addPaintSwatches objectAtIndex:i];
+                mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
+                
+                // Add MixAssoc relations
+                //
+                [mixAssocSwatch setPaint_swatch:paintSwatch];
+                [mixAssocSwatch setMix_association:_mixAssociation];
+                
+                // Add PaintSwatch and MixAssociation relations
+                //
+                PaintSwatches *pswatches = (PaintSwatches *)paintSwatch;
+                [pswatches addMix_assoc_swatchObject:mixAssocSwatch];
+                [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
+                
+                // Set the mix_order
+                //
+                //mix_assoc_ct += 1;
+                //[mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_assoc_ct]];
+                
+                // Flag it as an added paint swatch (so it will not be editable)
+                //
+                [mixAssocSwatch setPaint_swatch_is_add:[NSNumber numberWithBool:TRUE]];
+                
+                //[_paintSwatches addObject:paintSwatch];
+                [_paintSwatches insertObject:paintSwatch atIndex:0];
+                
+            } else {
+                int mix_assoc_index = i - add_swatch_ct;
+                mixAssocSwatch = [_mixAssocSwatches objectAtIndex:mix_assoc_index];
+            }
+            int mix_order = i + 1;
+            [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_order]];
         }
+        
         _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
 
         [_applyButton setEnabled:TRUE];
