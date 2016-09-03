@@ -73,6 +73,9 @@
 		214430E81CB1A19B0014AABD /* MixAssocKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E41CB1A19B0014AABD /* MixAssocKeyword.m */; };
 		214430ED1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430EA1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m */; };
 		214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430EC1CB1A2AE0014AABD /* Keyword.m */; };
+		2174C58F1D79B1610093E48F /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2174C58E1D79B1610093E48F /* CanvasCoverage.txt */; };
+		2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */; };
+		2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */; };
 		21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */; };
 		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
@@ -223,6 +226,11 @@
 		214430EB1CB1A2AE0014AABD /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
 		214430EC1CB1A2AE0014AABD /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
+		2174C58E1D79B1610093E48F /* CanvasCoverage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CanvasCoverage.txt; sourceTree = "<group>"; };
+		2174C5921D79BCC50093E48F /* CanvasCoverage+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CanvasCoverage+CoreDataClass.h"; sourceTree = "<group>"; };
+		2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CanvasCoverage+CoreDataClass.m"; sourceTree = "<group>"; };
+		2174C5941D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CanvasCoverage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CanvasCoverage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
@@ -323,6 +331,10 @@
 		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				2174C5921D79BCC50093E48F /* CanvasCoverage+CoreDataClass.h */,
+				2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */,
+				2174C5941D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.h */,
+				2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */,
 				2133F2211CFB532200FB91AD /* BodyType+CoreDataProperties.h */,
 				2133F2221CFB532200FB91AD /* BodyType+CoreDataProperties.m */,
 				2133F2231CFB532200FB91AD /* BodyType.h */,
@@ -419,6 +431,7 @@
 				2133F20F1CFB2DF800FB91AD /* PaintBrand.txt */,
 				2133F2171CFB51DD00FB91AD /* PigmentType.txt */,
 				2133F2191CFB521800FB91AD /* BodyType.txt */,
+				2174C58E1D79B1610093E48F /* CanvasCoverage.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -637,6 +650,7 @@
 			files = (
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
 				21397E631C8482E1001C3F05 /* colorwheel.png in Resources */,
+				2174C58F1D79B1610093E48F /* CanvasCoverage.txt in Resources */,
 				2134C8A81C99812300E3E959 /* MatchAlgorithm.txt in Resources */,
 				2133F2181CFB51DD00FB91AD /* PigmentType.txt in Resources */,
 				2133F21A1CFB521800FB91AD /* BodyType.txt in Resources */,
@@ -712,6 +726,7 @@
 				214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */,
 				214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
+				2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2133F2261CFB532200FB91AD /* BodyType.m in Sources */,
 				213DACDB1D284FF000204D0C /* UIImageViewNavigationController.m in Sources */,
 				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
@@ -725,6 +740,7 @@
 				21397ED91C848674001C3F05 /* SwatchDetailTableViewController.m in Sources */,
 				2133F21F1CFB530600FB91AD /* PigmentType+CoreDataProperties.m in Sources */,
 				21397E9A1C8484D7001C3F05 /* ACPString.m in Sources */,
+				2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */,
 				21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */,
 				21397ED81C848674001C3F05 /* PickerViewController.m in Sources */,
 				2133F2151CFB366100FB91AD /* PaintBrand+CoreDataProperties.m in Sources */,

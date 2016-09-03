@@ -113,11 +113,13 @@
         if ([comps count] == 1) {
             NSString *name = [comps objectAtIndex:0];
             
-            id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-            [managedObject setName:name];
-            [managedObject setOrder:[NSNumber numberWithInt:order]];
-            
-            order++;
+            if (! [name isEqualToString:@""]) {
+                id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                [managedObject setName:name];
+                [managedObject setOrder:[NSNumber numberWithInt:order]];
+                
+                order++;
+            }
         }
     }
     

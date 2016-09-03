@@ -167,6 +167,8 @@ extern int const PIGMENT_FIELD_TAG;
 extern int const PIGMENT_PICKER_TAG;
 extern int const PIGMENT_BTN_TAG;
 extern int const RATIOS_PICKER_TAG;
+extern int const COVERAGE_FIELD_TAG;
+extern int const COVERAGE_PICKER_TAG;
 
 // Settings
 //

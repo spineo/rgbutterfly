@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *body_type_id;
 @property (nullable, nonatomic, retain) NSString *brightness;
 @property (nullable, nonatomic, retain) NSString *coord_pt;
+@property (nullable, nonatomic, retain) NSNumber *coverage_id;
 @property (nullable, nonatomic, retain) NSDate *create_date;
 @property (nullable, nonatomic, retain) NSNumber *deg_hue;
 @property (nullable, nonatomic, retain) NSString *desc;

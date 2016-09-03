@@ -36,17 +36,17 @@
 
 // SwatchName and Reference Label and Name fields
 //
-@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *bodyTypeName, *pigmentTypeName, *swatchKeyw;
+@property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *bodyTypeHeader, *pigmentTypeHeader, *keywHeader, *descHeader, *refsHeader, *mixAssocHeader, *otherName;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *descHeader, *refsHeader, *mixAssocHeader, *otherName;
 
 // Subjective color related
 //
-@property (nonatomic, strong) UIPickerView *subjColorPicker, *swatchTypesPicker, *paintBrandPicker, *bodyTypePicker, *pigmentTypePicker;
+@property (nonatomic, strong) UIPickerView *subjColorPicker, *swatchTypesPicker, *paintBrandPicker, *pigmentTypePicker, *bodyTypePicker, *coveragePicker;
 
-@property (nonatomic, strong) NSArray *subjColorNames, *swatchTypeNames, *paintBrandNames, *bodyTypeNames, *pigmentTypeNames;
+@property (nonatomic, strong) NSArray *subjColorNames, *swatchTypeNames, *paintBrandNames, *pigmentTypeNames, *bodyTypeNames, *coverageNames;
 
-@property (nonatomic, strong) NSDictionary *subjColorData, *swatchTypeData, *paintBrandData, *bodyTypeData, *pigmentTypeData;
+@property (nonatomic, strong) NSDictionary *subjColorData, *swatchTypeData, *paintBrandData, *pigmentTypeData, *bodyTypeData, *canvasCoverageData;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 
@@ -54,13 +54,13 @@
 
 @property (nonatomic) CGFloat imageViewXOffset, imageViewWidth, imageViewHeight, textFieldYOffset, colorTextFieldWidth;
 
-@property (nonatomic) int typesPickerSelRow, colorPickerSelRow, brandPickerSelRow, bodyPickerSelRow, pigmentPickerSelRow, collectViewSelRow;
+@property (nonatomic) int typesPickerSelRow, colorPickerSelRow, brandPickerSelRow, pigmentPickerSelRow, bodyPickerSelRow, coveragePickerSelRow, collectViewSelRow;
 
 @property (nonatomic, strong) NSMutableArray *colorArray, *paintSwatches;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 
 
-@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, bodyPickerFlag, pigmentPickerFlag, isReadOnly, isShipped;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, pigmentPickerFlag, bodyPickerFlag, coveragePickerFlag, isReadOnly, isShipped;
 
 
 // NSManagedObject subclassing
@@ -92,18 +92,19 @@ int NUM_TABLEVIEW_ROWS = 0;
 
 // Globals
 //
-int DETAIL_NAME_SECTION    = 0;
-int DETAIL_COLOR_SECTION   = 1;
-int DETAIL_TYPES_SECTION   = 2;
-int DETAIL_BRAND_SECTION   = 3;
-int DETAIL_PIGMENT_SECTION = 4;
-int DETAIL_BODY_SECTION    = 5;
-int DETAIL_KEYW_SECTION    = 6;
-int DETAIL_DESC_SECTION    = 7;
-int DETAIL_REF_SECTION     = 8;
-int DETAIL_ASSOC_SECTION   = 9;
+int DETAIL_NAME_SECTION     = 0;
+int DETAIL_COLOR_SECTION    = 1;
+int DETAIL_TYPES_SECTION    = 2;
+int DETAIL_BRAND_SECTION    = 3;
+int DETAIL_PIGMENT_SECTION  = 4;
+int DETAIL_BODY_SECTION     = 5;
+int DETAIL_COVERAGE_SECTION = 6;
+int DETAIL_KEYW_SECTION     = 7;
+int DETAIL_DESC_SECTION     = 8;
+int DETAIL_REF_SECTION      = 9;
+int DETAIL_ASSOC_SECTION    = 10;
 
-int DETAIL_MAX_SECTION     = 10;
+int DETAIL_MAX_SECTION      = 11;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
@@ -167,6 +168,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     int body_type_id     = [[_paintSwatch body_type_id] intValue];
     int pigment_type_id  = [[_paintSwatch pigment_type_id] intValue];
     
+    int coverage_id      = [[_paintSwatch coverage_id] intValue];
+    
     
     // Default edit behaviour
     //
@@ -179,16 +182,18 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Table View Headers
     //
-    _nameHeader        = @"Name";
-    _subjColorHeader   = @"Subjective Color Selection";
-    _swatchTypeHeader  = @"Swatch Type Selection";
-    _paintBrandHeader  = @"Paint Brand Selection";
-    _bodyTypeHeader    = @"Body Type Selection";
-    _pigmentTypeHeader = @"Pigment Type Selection";
-    _keywHeader        = @"Keywords";
-    _descHeader        = @"Description";
-    _refsHeader         = @"Reference Colors";
-    _mixAssocHeader    = @"Mix Associations";
+    _nameHeader           = @"Name";
+    _subjColorHeader      = @"Subjective Color Selection";
+    _swatchTypeHeader     = @"Swatch Type Selection";
+    _paintBrandHeader     = @"Paint Brand Selection";
+    _bodyTypeHeader       = @"Body Type Selection";
+    _pigmentTypeHeader    = @"Pigment Type Selection";
+    _canvasCoverageHeader = @"Canvas Coverage Selection";
+    _keywHeader           = @"Keywords";
+    _descHeader           = @"Description";
+    _refsHeader           = @"Reference Colors";
+    _mixAssocHeader       = @"Mix Associations";
+
     
     // Set the placeholders
     //
@@ -200,20 +205,23 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // A few defaults
     //
-    _imageViewWidth      = DEF_VLG_TBL_CELL_HGT;
-    _imageViewHeight     = DEF_VLG_TBL_CELL_HGT;
-    _typesPickerSelRow   = type_id         ? type_id         : 0;
-    _colorPickerSelRow   = subj_color_id   ? subj_color_id   : 0;
-    _brandPickerSelRow   = brand_id        ? brand_id        : 0;
-    _otherName           = brand_name      ? brand_name      : @"";
-    _bodyPickerSelRow    = body_type_id    ? body_type_id    : 0;
-    _pigmentPickerSelRow = pigment_type_id ? pigment_type_id : 0;
+    _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
+    _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
+    _typesPickerSelRow    = type_id         ? type_id         : 0;
+    _colorPickerSelRow    = subj_color_id   ? subj_color_id   : 0;
+    _brandPickerSelRow    = brand_id        ? brand_id        : 0;
+    _otherName            = brand_name      ? brand_name      : @"";
+    _bodyPickerSelRow     = body_type_id    ? body_type_id    : 0;
+    _pigmentPickerSelRow  = pigment_type_id ? pigment_type_id : 0;
+    _coveragePickerSelRow = coverage_id     ? coverage_id     : 0;
+
     
-    _colorPickerFlag   = FALSE;
-    _typesPickerFlag   = FALSE;
-    _brandPickerFlag   = FALSE;
-    _bodyPickerFlag    = FALSE;
-    _pigmentPickerFlag = FALSE;
+    _colorPickerFlag    = FALSE;
+    _typesPickerFlag    = FALSE;
+    _brandPickerFlag    = FALSE;
+    _bodyPickerFlag     = FALSE;
+    _pigmentPickerFlag  = FALSE;
+    _coveragePickerFlag = FALSE;
 
 
     // Offsets and Widths
@@ -272,6 +280,14 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_pigmentTypeName setDelegate:self];
     _pigmentTypeNames  = [ManagedObjectUtils fetchDictNames:@"PigmentType" context:self.context];
     _pigmentTypePicker = [self createPicker:PIGMENT_PICKER_TAG selectRow:[[_paintSwatch pigment_type_id] intValue] action:@selector(pigmentSelection) textField:_pigmentTypeName];
+    
+    id coverageObj = [ManagedObjectUtils queryDictionaryName:@"CanvasCoverage" entityId:_coveragePickerSelRow context:self.context];
+    NSString *coverageName = [coverageObj name];
+    _coverageName = [FieldUtils createTextField:coverageName tag:COVERAGE_FIELD_TAG];
+    [_coverageName setTextAlignment:NSTextAlignmentCenter];
+    [_coverageName setDelegate:self];
+    _coverageNames  = [ManagedObjectUtils fetchDictNames:@"CanvasCoverage" context:self.context];
+    _coveragePicker = [self createPicker:COVERAGE_PICKER_TAG selectRow:[[_paintSwatch coverage_id] intValue] action:@selector(coverageSelection) textField:_coverageName];
     
     NSSet *swatchKeywords = [_paintSwatch swatch_keyword];
     NSMutableArray *keywords = [[NSMutableArray alloc] init];
@@ -382,6 +398,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_paintBrandName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_bodyTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_pigmentTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_coverageName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
 }
 
 
@@ -554,6 +571,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         //
         } else if (indexPath.section == DETAIL_PIGMENT_SECTION) {
             [cell.contentView addSubview:_pigmentTypeName];
+            
+        // Canvas Coverage field
+        //
+        } else if (indexPath.section == DETAIL_COVERAGE_SECTION) {
+            [cell.contentView addSubview:_coverageName];
         
         // Keywords field
         //
@@ -740,6 +762,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     } else if (section == DETAIL_PIGMENT_SECTION) {
         headerStr = _pigmentTypeHeader;
+
+    } else if (section == DETAIL_COVERAGE_SECTION) {
+        headerStr = _canvasCoverageHeader;
         
     } else if (section == DETAIL_KEYW_SECTION) {
         headerStr = _keywHeader;
@@ -821,6 +846,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     } else if (textField.tag == PIGMENT_FIELD_TAG) {
         _pigmentPickerFlag = TRUE;
+        
+    } else if (textField.tag == COVERAGE_FIELD_TAG) {
+        _coveragePickerFlag = TRUE;
     }
     [self setFrameSizes];
 }
@@ -856,11 +884,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     }
     
     [textField resignFirstResponder];
-    _typesPickerFlag   = FALSE;
-    _colorPickerFlag   = FALSE;
-    _brandPickerFlag   = FALSE;
-    _bodyPickerFlag    = FALSE;
-    _pigmentPickerFlag = FALSE;
+    _typesPickerFlag    = FALSE;
+    _colorPickerFlag    = FALSE;
+    _brandPickerFlag    = FALSE;
+    _bodyPickerFlag     = FALSE;
+    _pigmentPickerFlag  = FALSE;
+    _coveragePickerFlag = FALSE;
 
     [self.tableView reloadData];
     
@@ -924,6 +953,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else if (pickerView.tag == BODY_PICKER_TAG) {
         return (long)[_bodyTypeNames count];
 
+    } else if (pickerView.tag == COVERAGE_PICKER_TAG) {
+        return (long)[_coverageNames count];
+
     } else {
         return (long)[_pigmentTypeNames count];
     }
@@ -950,6 +982,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else if (pickerView.tag == BODY_PICKER_TAG) {
         return [_bodyTypeNames objectAtIndex:row];
     
+    } else if (pickerView.tag == COVERAGE_PICKER_TAG) {
+        return [_coverageNames objectAtIndex:row];
+        
     } else {
         return [_pigmentTypeNames objectAtIndex:row];
     }
@@ -985,7 +1020,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [label setTextColor: LIGHT_TEXT_COLOR];
         [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-        
+
+    } else if (pickerView.tag == COVERAGE_PICKER_TAG) {
+        [label setText:[_coverageNames objectAtIndex:row]];
+        [label setTextColor: LIGHT_TEXT_COLOR];
+        [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        [label.layer setBorderWidth: DEF_BORDER_WIDTH];
+
     } else {
         NSString *colorName = [_subjColorNames objectAtIndex:row];
         UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
@@ -1021,7 +1062,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         NSString *pigmentType = [_pigmentTypeNames objectAtIndex:row];
         [_pigmentTypeName setText:pigmentType];
         [_paintSwatch setPigment_type_id:[NSNumber numberWithInteger:row]];
-        
+
+    } else if (pickerView.tag == COVERAGE_PICKER_TAG) {
+        NSString *coverageType = [_coverageNames objectAtIndex:row];
+        [_coverageName setText:coverageType];
+        [_paintSwatch setCoverage_id:[NSNumber numberWithInteger:row]];
+
     } else {
         [self setColorPickerValues:(int)row];
         [_paintSwatch setSubj_color_id:[NSNumber numberWithInt:[[[_subjColorData objectForKey:_colorSelected] valueForKey:@"id"] intValue]]];
@@ -1091,6 +1137,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_bodyTypeName setText:[_bodyTypeNames objectAtIndex:row]];
     [_bodyTypePicker selectRow:row inComponent:0 animated:YES];
     [_bodyTypeName resignFirstResponder];
+}
+
+- (void)coverageSelection {
+    int row = [[_paintSwatch coverage_id] intValue];
+    [_coverageName setText:[_coverageNames objectAtIndex:row]];
+    [_coveragePicker selectRow:row inComponent:0 animated:YES];
+    [_coverageName resignFirstResponder];
 }
 
 - (void)pigmentSelection {
@@ -1308,7 +1361,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (void)hideSwatch {
-
+    
     // Set the is_visible flag
     //
     [_paintSwatch setIs_hidden:[NSNumber numberWithBool:TRUE]];
@@ -1340,6 +1393,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [FieldUtils makeTextFieldEditable:_paintBrandName content:@""];
     [FieldUtils makeTextFieldEditable:_bodyTypeName content:@""];
     [FieldUtils makeTextFieldEditable:_pigmentTypeName content:@""];
+    [FieldUtils makeTextFieldEditable:_coverageName content:@""];
 }
 
 - (void)makeTextFieldsNonEditable {
@@ -1348,6 +1402,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [FieldUtils makeTextFieldNonEditable:_paintBrandName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:@"" border:TRUE];
     [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_coverageName content:@"" border:TRUE];
 }
 
 @end

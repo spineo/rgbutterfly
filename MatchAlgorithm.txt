@@ -5,4 +5,3 @@ RGB+HSB
 WGT RGB
 WGT RGB+HSB
 Hue Only
-Messy One

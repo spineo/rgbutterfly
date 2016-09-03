@@ -112,47 +112,49 @@ int const DEF_TAG_NUM    = 200;
 
 // UI Button Tags
 //
-int const IMAGELIB_BTN_TAG   = 51;
-int const PHOTO_BTN_TAG      = 52;
-int const SEARCH_BTN_TAG     = 53;
-int const LISTING_BTN_TAG    = 54;
-int const RGB_BTN_TAG        = 55;
+int const IMAGELIB_BTN_TAG    = 51;
+int const PHOTO_BTN_TAG       = 52;
+int const SEARCH_BTN_TAG      = 53;
+int const LISTING_BTN_TAG     = 54;
+int const RGB_BTN_TAG         = 55;
 
-int const BACK_BTN_TAG       = 56;
-int const EDIT_BTN_TAG       = 57;
-int const SETTINGS_BTN_TAG   = 58;
-int const SAVE_BTN_TAG       = 59;
-int const VIEW_BTN_TAG       = 60;
-int const DONE_BTN_TAG       = 61;
-int const HOME_BTN_TAG       = 62;
+int const BACK_BTN_TAG        = 56;
+int const EDIT_BTN_TAG        = 57;
+int const SETTINGS_BTN_TAG    = 58;
+int const SAVE_BTN_TAG        = 59;
+int const VIEW_BTN_TAG        = 60;
+int const DONE_BTN_TAG        = 61;
+int const HOME_BTN_TAG        = 62;
 
-int const DECR_ALG_BTN_TAG   = 71;
-int const MATCH_BTN_TAG      = 72;
-int const INCR_ALG_BTN_TAG   = 73;
-int const DECR_TAP_BTN_TAG   = 74;
-int const INCR_TAP_BTN_TAG   = 75;
-int const ASSOC_BTN_TAG      = 76;
+int const DECR_ALG_BTN_TAG    = 71;
+int const MATCH_BTN_TAG       = 72;
+int const INCR_ALG_BTN_TAG    = 73;
+int const DECR_TAP_BTN_TAG    = 74;
+int const INCR_TAP_BTN_TAG    = 75;
+int const ASSOC_BTN_TAG       = 76;
 
-int const NAME_FIELD_TAG     = 81;
-int const TYPE_FIELD_TAG     = 82;
-int const COLOR_FIELD_TAG    = 83;
-int const KEYW_FIELD_TAG     = 84;
-int const DESC_FIELD_TAG     = 85;
-int const SWATCH_PICKER_TAG  = 86;
-int const COLOR_PICKER_TAG   = 87;
-int const COLOR_BTN_TAG      = 88;
-int const TYPE_BTN_TAG       = 89;
-int const BRAND_FIELD_TAG    = 90;
-int const BRAND_PICKER_TAG   = 91;
-int const BRAND_BTN_TAG      = 92;
-int const OTHER_FIELD_TAG    = 93;
-int const BODY_FIELD_TAG     = 94;
-int const BODY_PICKER_TAG    = 95;
-int const BODY_BTN_TAG       = 96;
-int const PIGMENT_FIELD_TAG  = 97;
-int const PIGMENT_PICKER_TAG = 98;
-int const PIGMENT_BTN_TAG    = 99;
-int const RATIOS_PICKER_TAG  = 100;
+int const NAME_FIELD_TAG      = 81;
+int const TYPE_FIELD_TAG      = 82;
+int const COLOR_FIELD_TAG     = 83;
+int const KEYW_FIELD_TAG      = 84;
+int const DESC_FIELD_TAG      = 85;
+int const SWATCH_PICKER_TAG   = 86;
+int const COLOR_PICKER_TAG    = 87;
+int const COLOR_BTN_TAG       = 88;
+int const TYPE_BTN_TAG        = 89;
+int const BRAND_FIELD_TAG     = 90;
+int const BRAND_PICKER_TAG    = 91;
+int const BRAND_BTN_TAG       = 92;
+int const OTHER_FIELD_TAG     = 93;
+int const BODY_FIELD_TAG      = 94;
+int const BODY_PICKER_TAG     = 95;
+int const BODY_BTN_TAG        = 96;
+int const PIGMENT_FIELD_TAG   = 97;
+int const PIGMENT_PICKER_TAG  = 98;
+int const PIGMENT_BTN_TAG     = 99;
+int const RATIOS_PICKER_TAG   = 100;
+int const COVERAGE_FIELD_TAG  = 101;
+int const COVERAGE_PICKER_TAG = 102;
 
 // Settings
 //
@@ -319,6 +321,8 @@ static NSDictionary *swatchTypes;
     [ManagedObjectUtils deleteDictionaryEntity:@"BodyType"];
     [ManagedObjectUtils insertFromDataFile:@"BodyType"];
 
+    [ManagedObjectUtils deleteDictionaryEntity:@"CanvasCoverage"];
+    [ManagedObjectUtils insertFromDataFile:@"CanvasCoverage"];
 
     // NSUserDefaults intialization
     //

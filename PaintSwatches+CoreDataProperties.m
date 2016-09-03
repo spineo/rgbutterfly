@@ -19,6 +19,7 @@
 @dynamic body_type_id;
 @dynamic brightness;
 @dynamic coord_pt;
+@dynamic coverage_id;
 @dynamic create_date;
 @dynamic deg_hue;
 @dynamic desc;
