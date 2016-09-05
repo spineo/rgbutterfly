@@ -136,6 +136,12 @@
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="Szt-18-Btg"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem image="home" id="SXH-ap-PzU">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindToViewController:" id="Eu3-ie-x2Y"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="F6j-7M-mxg"/>
                         <barButtonItem tag="71" enabled="NO" title="&lt;" id="l35-1Z-PGd">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,6 +207,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNT-qs-PzS" sceneMemberID="firstResponder"/>
+                <exit id="6Dy-2G-g4i" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2160.8000000000002" y="-958.4707646176912"/>
         </scene>
@@ -545,7 +552,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HR0-As-h4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4468" y="-41"/>
+            <point key="canvasLocation" x="4401" y="-102"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jiu-af-eJz">
@@ -732,10 +739,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cr4-CJ-FMT"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="7OV-Go-gIV"/>
-        <segue reference="Stq-UR-tQY"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
