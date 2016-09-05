@@ -81,7 +81,7 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
-    _editFlag = FALSE;
+    [self saveEnable:FALSE];
     _reuseCellIdentifier = @"SettingsTableCell";
     
     // NSUserDefaults
@@ -815,7 +815,7 @@ heightForFooterInSection:(NSInteger)section {
         
     }
     
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -855,7 +855,7 @@ heightForFooterInSection:(NSInteger)section {
     } else {
         [_psReadOnlyLabel setText:_psMakeReadWriteLabel];
     }
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)setMASwitchState:(id)sender {
@@ -867,7 +867,7 @@ heightForFooterInSection:(NSInteger)section {
     } else {
         [_maReadOnlyLabel setText:_maMakeReadWriteLabel];
     }
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)tapAreaStepperPressed {
@@ -883,8 +883,7 @@ heightForFooterInSection:(NSInteger)section {
         [_tapImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     }
     [self.tableView reloadData];
-    
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)changeShape {
@@ -899,16 +898,14 @@ heightForFooterInSection:(NSInteger)section {
         [_tapImageView.layer setCornerRadius:_tapAreaSize / DEF_CORNER_RAD_FACTOR];
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
-    
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)matchNumStepperPressed {
     _maxMatchNum = (int)[_matchNumStepper value];
     
     [_matchNumTextField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
-    
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)setRGBDisplayState {
@@ -928,8 +925,7 @@ heightForFooterInSection:(NSInteger)section {
     UIImage *renderedImage = [UIImage imageNamed:_rgbDisplayImage];
     [_rgbDisplayButton setImage:renderedImage forState:UIControlStateNormal];
     [_rgbDisplayLabel setText:_rgbDisplayText];
-    
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)setAddMixFilterSwitchState:(id)sender {
@@ -941,7 +937,7 @@ heightForFooterInSection:(NSInteger)section {
     } else {
         [_addMixFilterLabel setText:_addMixRefOnlyLabel];
     }
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (void)setMixAssocCountSwitchState:(id)sender {
@@ -953,7 +949,7 @@ heightForFooterInSection:(NSInteger)section {
     } else {
         [_mixAssocCountLabel setText:_mixAssocGt2Text];
     }
-    _editFlag = TRUE;
+    [self saveEnable:TRUE];
 }
 
 - (IBAction)save:(id)sender {
@@ -1017,7 +1013,11 @@ heightForFooterInSection:(NSInteger)section {
             
             [_userDefaults synchronize];
             
-            _editFlag = FALSE;
+            // Disable button?
+            //
+            if (_editFlag == TRUE) {
+                [self saveEnable:FALSE];
+            }
         }
         
     } else {
@@ -1064,6 +1064,11 @@ heightForFooterInSection:(NSInteger)section {
     }
     
     return TRUE;
+}
+
+- (void)saveEnable:(BOOL)saveFlag {
+    _editFlag = saveFlag;
+    [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:saveFlag];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
