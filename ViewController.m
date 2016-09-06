@@ -287,56 +287,20 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self initPaintSwatchFetchedResultsController];
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
     
-//    _defaultsNames    = [[NSMutableDictionary alloc] init];
-//    _letterDefaults   = [[NSMutableDictionary alloc] init];
-//    _defaultsSwatches = [[NSMutableDictionary alloc] init];
-    
     id< NSFetchedResultsSectionInfo> sectionInfo = [[self fetchedResultsController] sections][0];
     
     NSInteger objcount = [sectionInfo numberOfObjects];
-    
-//    NSIndexPath *nspath;
-//    for (int i=0; i<objcount; i++) {
-//        
-//        nspath = [NSIndexPath indexPathForRow:i inSection:0];
-//        SwatchKeyword *skw = [self.fetchedResultsController objectAtIndexPath:nspath];
-//        PaintSwatches *ps = (PaintSwatches *)[skw paint_swatch];
-//        
-//        Keyword *kw = [skw keyword];
-//        NSString *keyword = [[kw name] stringByReplacingOccurrencesOfString:@"/"
-//                                                                 withString:@", "];
-//        
-//        int sct = 0;
-//        if (![keyword isEqualToString:@""] && keyword != nil) {
-//            id swatchKeywordNames = [_keywordNames objectForKey:keyword];
-//            if (swatchKeywordNames == nil) {
-//                swatchKeywordNames = [NSMutableArray array];
-//                [_keywordNames setObject:swatchKeywordNames forKey:keyword];
-//            }
-//            [swatchKeywordNames addObject:ps];
-//            sct = (int)[swatchKeywordNames count];
-//        }
-//    }
-//
-//    
-//    NSMutableArray *sortedKeywords = [NSMutableArray arrayWithArray:[_keywordNames allKeys]];
-//    [sortedKeywords sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     NSMutableDictionary *letters = [[NSMutableDictionary alloc] init];
     
     NSString *curr_letter = @"";
     
-//    NSMutableArray *keywordList = [[NSMutableArray alloc] init];
-//    NSMutableArray *swatchList  = [[NSMutableArray alloc] init];
-    
-    //NSArray *sortedPaintSwatches = [[self fetchedResultsController] sections];
     NSMutableArray *letterPaintSwatches = [[NSMutableArray alloc] init];
     
     NSIndexPath *nspath;
     for (int i=0; i<objcount; i++) {
         nspath = [NSIndexPath indexPathForRow:i inSection:0];
         PaintSwatches *paint_swatch = [self.fetchedResultsController objectAtIndexPath:nspath];
-        //PaintSwatches *paint_swatch = (PaintSwatches *)paint_swatch_obj;
         NSString *swatch_name = [paint_swatch name];
         
         NSString *firstLetter = [swatch_name substringToIndex:1];
@@ -354,39 +318,20 @@ int MIX_ASSOC_MIN_SIZE = 1;
         curr_letter = firstLetter;
     }
 
-//    for (NSString *letter in letters) {
-//        NSLog(@"====>%@", letter);
-//        
-//        NSArray *sw = [letters objectForKey:letter];
-//        for (PaintSwatches *ps in sw) {
-//            NSLog(@"PS NAME: %@", ps.name);
-//        }
-//    }
     
     _sortedLettersDefaults = [NSMutableArray arrayWithArray:[letters allKeys]];
     [_sortedLettersDefaults sortUsingSelector:@selector(localizedStandardCompare:)];
     
     _letterDefaults = [[NSMutableDictionary alloc] init];
 
+    _numSwatches = 0;
     for (NSString *letter in _sortedLettersDefaults) {
-        
         NSMutableArray *sectionSwatches = [[NSMutableArray alloc] init];
         sectionSwatches = [letters objectForKey:letter];
+        _numSwatches = _numSwatches + (int)[sectionSwatches count];
         
-//        NSMutableArray *swatchList  = [[NSMutableArray alloc] init];
-//        for (PaintSwatches *swatch_obj in sectionSwatches) {
-//            [swatchList  addObject:swatch_obj];
-////
-////            NSArray *paintSwatches = [_keywordNames objectForKey:kw];
-////            for (PaintSwatches *ps in paintSwatches) {
-////                [swatchList addObject:ps];
-////            }
-////            [_keywordSwatches setObject:swatchList  forKey:kw];
-//        }
         [_letterDefaults setObject:sectionSwatches forKey:letter];
     }
-////    
-////    _numKeywords = (int)[sortedKeywords count];
     
     [_colorTableView reloadData];
 }
@@ -735,42 +680,35 @@ int MIX_ASSOC_MIN_SIZE = 1;
         }
         
     } else {
-//        [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT)];
-//        
-//        UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
-//        [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
-//
-//        NSString *colorsListing;
-//        if (_showReferenceOnly == TRUE) {
-//            colorsListing = [[NSString alloc] initWithFormat:@"Reference Colors Only (%i)", _numSwatches];
-//            
-//        } else {
-//            colorsListing = [[NSString alloc] initWithFormat:@"Displaying All Colors (%i)", _numSwatches];
-//        }
-//        [_filterLabel setTitle:colorsListing];
-//
-//        [filterToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterLabel, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterButton]];
-//        
-//        CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
-//        
-//        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, filterToolbarHgt, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT - filterToolbarHgt)];
-//
-//        [headerView addSubview:filterToolbar];
-//        [headerView addSubview:paddingView];
-        
-        
-        
-        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         
         if (section == 0) {
-            NSString *keywordsListing = [[NSString alloc] initWithFormat:@"Default Listing (%i)", _numSwatches];
             [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
-            [headerView addSubview:headerLabel];
-            [headerLabel setText:keywordsListing];
-            [headerLabel setTextAlignment:NSTextAlignmentCenter];
+            
+            UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
+            [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+            NSString *colorsListing;
+            if (_showReferenceOnly == TRUE) {
+                colorsListing = [[NSString alloc] initWithFormat:@"Reference Colors Only (%i)", _numSwatches];
+    
+            } else {
+                colorsListing = [[NSString alloc] initWithFormat:@"Displaying All Colors (%i)", _numSwatches];
+            }
+            [_filterLabel setTitle:colorsListing];
+    
+            [filterToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterLabel, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterButton]];
+    
+            CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
+    
+            UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, filterToolbarHgt, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT - filterToolbarHgt)];
+    
+            [headerView addSubview:filterToolbar];
+            [headerView addSubview:paddingView];
+
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         }
-        
+    
         [letterLabel setBackgroundColor:DARK_BG_COLOR];
         [letterLabel setTextColor:LIGHT_TEXT_COLOR];
         [letterLabel setFont:TABLE_HEADER_FONT];
@@ -778,8 +716,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [letterLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
          UIViewAutoresizingFlexibleLeftMargin |
          UIViewAutoresizingFlexibleRightMargin];
-        [headerView addSubview:letterLabel];
         [letterLabel setText:[_sortedLettersDefaults objectAtIndex:section]];
+        
+        [headerView addSubview:letterLabel];
     }
 
     return headerView;
@@ -997,28 +936,13 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
             
         } else {
-            
-//            PaintSwatches *ps = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
-//
-//            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-//            [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
-            
             NSString *sectionTitle = [_sortedLettersDefaults objectAtIndex:indexPath.section];
-            id obj = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
+            PaintSwatches *swatch = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             
-//            if ([obj isKindOfClass:[NSString class]]) {
-//                [cell setAccessoryType:UITableViewCellAccessoryNone];
-//                [cell.imageView setImage:nil];
-//                [cell.textLabel setText:obj];
-//                [cell.textLabel setFont:TABLE_HEADER_FONT];
-//                cell.userInteractionEnabled = NO;
-//                
-//            } else {
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                [cell.imageView setImage:[ColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
-                [cell.textLabel setText:[(PaintSwatches *)obj name]];
-                cell.userInteractionEnabled = YES;
-//            }
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            [cell.imageView setImage:[ColorUtils renderSwatch:swatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            [cell.textLabel setText:[swatch name]];
+            cell.userInteractionEnabled = YES;
         }
 
         return cell;
@@ -1046,7 +970,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
 
     } else {
-        _selPaintSwatch = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
+        NSString *sectionTitle = [_sortedLettersDefaults objectAtIndex:indexPath.section];
+        _selPaintSwatch = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
     }
     
@@ -1333,12 +1258,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if (_showReferenceOnly == FALSE) {
         _showReferenceOnly = TRUE;
         [_filterButton setImage:_checkboxSquareImage];
-        [self initPaintSwatchFetchedResultsController];
+        [self loadDefaultListing];
 
     } else {
         _showReferenceOnly = FALSE;
         [_filterButton setImage:_emptySquareImage];
-        [self initPaintSwatchFetchedResultsController];
+        [self loadDefaultListing];
     }
 }
 
