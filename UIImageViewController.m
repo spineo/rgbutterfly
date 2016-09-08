@@ -2119,11 +2119,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (IBAction)segueToMatchOrAssoc:(id)sender {
     if ([_viewType isEqualToString:ASSOC_VIEW_TYPE]) {
-        if ([_paintSwatches count] == 1) {
-            [self performSegueWithIdentifier:@"AssocToDetailSegue" sender:self];
-        } else {
+//        if ([_paintSwatches count] == 1) {
+//            [self performSegueWithIdentifier:@"AssocToDetailSegue" sender:self];
+//        } else {
             [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
-        }
+//        }
     }
 }
 

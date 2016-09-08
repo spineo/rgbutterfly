@@ -1074,7 +1074,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_subjColorsArrayState replaceObjectAtIndex:_selSubjColorSection withObject:[NSNumber numberWithBool:isCollapsed]];
     
     [_colorTableView reloadData];
-    //[_colorTableView reloadSections:[NSIndexSet indexSetWithIndex:_selSubjColorSection] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)expandAllSections {
