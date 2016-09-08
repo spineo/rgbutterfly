@@ -147,4 +147,35 @@
     [refName setEnabled:TRUE];
 }
 
++ (void)makeTextViewNonEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border {
+    
+    if (![content isEqualToString:@""]) {
+        [refName setText:content];
+    }
+    
+    [refName setFont:TEXT_FIELD_FONT];
+    [refName setTextColor:LIGHT_TEXT_COLOR];
+    [refName setBackgroundColor:DARK_BG_COLOR];
+    
+    if (border == TRUE) {
+        [refName.layer setBorderWidth: DEF_BORDER_WIDTH];
+        [refName.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [refName.layer setBorderColor:[GRAY_BORDER_COLOR CGColor]];
+    }
+    [refName setEditable:FALSE];
+}
+
++ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content {
+    
+    if (![content isEqualToString:@""]) {
+        [refName setText:content];
+    }
+    
+    [refName setFont:TEXT_FIELD_FONT];
+    [refName setTextColor:DARK_TEXT_COLOR];
+    [refName setBackgroundColor:LIGHT_BG_COLOR];
+    
+    [refName setEditable:TRUE];
+}
+
 @end

@@ -39,6 +39,7 @@ CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
 CGFloat const DEF_TEXTFIELD_HEIGHT  = 30.0;
 CGFloat const DEF_SM_TXTFIELD_WIDTH = 60.0;
 CGFloat const DEF_TEXTVIEW_HEIGHT   = 60.0;
+CGFloat const DEF_SM_TEXTVIEW_HGT   = 44.0;
 CGFloat const DEF_NAVBAR_X_OFFSET   = 10.0;
 
 // Generic Defaults

@@ -152,6 +152,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [super viewDidLoad];
 
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+
+    [self.navigationController.navigationBar setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
+
     
     // TableView defaults
     //
@@ -462,6 +465,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     } else if ((indexPath.section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
         return DEF_NIL_CELL;
+        
+    } else if (indexPath.section == DETAIL_NAME_SECTION) {
+        return DEF_MD_TABLE_CELL_HGT;
 
     } else {
         return DEF_TABLE_CELL_HEIGHT;
@@ -480,8 +486,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         [tableView setSeparatorColor:GRAY_BG_COLOR];
         [cell.imageView setImage:nil];
-        [cell.textLabel setText:nil];
         [cell.textLabel setText:@""];
+
 
         // Set the widget frame sizes
         //
@@ -502,22 +508,24 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
             // Create the name text field
             //
-            UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            //UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
+            UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
+            //[refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_SM_TEXTVIEW_HGT)];
             [refName setDelegate:self];
             [cell.contentView addSubview:refName];
             
             if (_editFlag == TRUE) {
                 if ([_nameEntered isEqualToString:@""]) {
-                    [refName setPlaceholder:_namePlaceholder];
+                    //[refName setPlaceholder:_namePlaceholder];
                 }
                 
                 if (_isReadOnly == TRUE) {
-                    [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
+                    [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:TRUE];
                 }
                 
             } else {
-                [FieldUtils makeTextFieldNonEditable:refName content:_nameEntered border:TRUE];
+                [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:TRUE];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         
@@ -860,19 +868,23 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     textField.text = [GenericUtils trimString:textField.text];
     
-    if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
-        UIAlertController *myAlert = [AlertUtils noValueAlert];
-        [self presentViewController:myAlert animated:YES completion:nil];
-    
-    } else if ((textField.tag == OTHER_FIELD_TAG) && [textField.text isEqualToString:@""] && (_brandPickerSelRow == 0)) {
+//    if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
+//        UIAlertController *myAlert = [AlertUtils noValueAlert];
+//        [self presentViewController:myAlert animated:YES completion:nil];
+//    
+//    } else
+
+    if ((textField.tag == OTHER_FIELD_TAG) && [textField.text isEqualToString:@""] && (_brandPickerSelRow == 0)) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
     
-        if (textField.tag == NAME_FIELD_TAG) {
-            _nameEntered = textField.text;
-        } else if (textField.tag == KEYW_FIELD_TAG) {
+//        if (textField.tag == NAME_FIELD_TAG) {
+//            _nameEntered = textField.text;
+//        } else
+        
+        if (textField.tag == KEYW_FIELD_TAG) {
             _keywEntered = textField.text;
         } else if (textField.tag == DESC_FIELD_TAG) {
             _descEntered = textField.text;
@@ -903,11 +915,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.tag == NAME_FIELD_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
-        [self presentViewController:myAlert animated:YES completion:nil];
-        return NO;
-    } else if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
+//    if (textField.tag == NAME_FIELD_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
+//        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
+//        [self presentViewController:myAlert animated:YES completion:nil];
+//        return NO;
+//    } else
+    
+    if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
@@ -922,6 +936,28 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else {
         return YES;
     }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TextView Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - TextView methods
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    textView.text = [GenericUtils trimString:textView.text];
+    
+    if ([textView.text isEqualToString:@""]) {
+        UIAlertController *myAlert = [AlertUtils noValueAlert];
+        [self presentViewController:myAlert animated:YES completion:nil];
+    }
+    _nameEntered = textView.text;
+    
+    NSLog(@"Name: %@", _nameEntered);
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    _nameEntered = textView.text;
 }
 
 

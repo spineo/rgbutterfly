@@ -33,4 +33,8 @@
 
 + (void)makeTextFieldEditable:(UITextField *)refName content:(NSString *)content;
 
++ (void)makeTextViewNonEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border;
+
++ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border;
+
 @end

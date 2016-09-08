@@ -42,6 +42,7 @@ extern CGFloat const DEF_TAP_AREA_SIZE;
 extern CGFloat const DEF_TEXTFIELD_HEIGHT;
 extern CGFloat const DEF_SM_TXTFIELD_WIDTH;
 extern CGFloat const DEF_TEXTVIEW_HEIGHT;
+extern CGFloat const DEF_SM_TEXTVIEW_HGT;
 extern CGFloat const DEF_NAVBAR_X_OFFSET;
 
 // Generic Defaults

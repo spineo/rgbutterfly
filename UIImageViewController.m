@@ -2119,11 +2119,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (IBAction)segueToMatchOrAssoc:(id)sender {
     if ([_viewType isEqualToString:ASSOC_VIEW_TYPE]) {
-//        if ([_paintSwatches count] == 1) {
-//            [self performSegueWithIdentifier:@"AssocToDetailSegue" sender:self];
-//        } else {
-            [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
-//        }
+        [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
     }
 }
 
@@ -2202,17 +2198,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             
         } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
             [self updateMatchAssoc];
-            //[settingsTableViewController setParentContext:self.context];
         }
-//        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
-//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
-//            [self presentViewController:myAlert animated:YES completion:nil];
-//        
-//        } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
-//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
-//            [self presentViewController:myAlert animated:YES completion:nil];
-//        }
-//        NSLog(@"Segue Identifier %@, row %i", [segue identifier], _currTapSection);
     }
 }
 

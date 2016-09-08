@@ -10,7 +10,7 @@
 #import "PaintSwatches.h"
 
 
-@interface SwatchDetailTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIActionSheetDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SwatchDetailTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UIActionSheetDelegate, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) PaintSwatches *paintSwatch, *refPaintSwatch, *mixPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches;
