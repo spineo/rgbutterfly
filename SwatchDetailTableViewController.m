@@ -34,6 +34,7 @@
 @property (nonatomic, strong) UIAlertController *saveAlertController;
 @property (nonatomic, strong) UIAlertAction *save, *delete;
 
+
 // SwatchName and Reference Label and Name fields
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
@@ -185,7 +186,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Table View Headers
     //
-    _nameHeader           = @"Name";
+    _nameHeader           = @"Paint Swatch and Name";
     _subjColorHeader      = @"Subjective Color Selection";
     _swatchTypeHeader     = @"Swatch Type Selection";
     _paintBrandHeader     = @"Paint Brand Selection";
@@ -505,19 +506,23 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         // Name, and reference type
         //
         if (indexPath.section == DETAIL_NAME_SECTION) {
-
-            // Create the name text field
-            //
-            //UITextField *refName  = [FieldUtils createTextField:_nameEntered tag:NAME_FIELD_TAG];
+            [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
+            cell.imageView.clipsToBounds = YES;
+            cell.imageView.image = [ColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            
+            CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - (DEF_FIELD_PADDING * 2);
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
-            //[refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_SM_TEXTVIEW_HGT)];
+            [refName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, refNameWidth, DEF_SM_TEXTVIEW_HGT)];
             [refName setDelegate:self];
+
             [cell.contentView addSubview:refName];
             
             if (_editFlag == TRUE) {
                 if ([_nameEntered isEqualToString:@""]) {
-                    //[refName setPlaceholder:_namePlaceholder];
+                    [refName setText:_namePlaceholder];
                 }
                 
                 if (_isReadOnly == TRUE) {
@@ -952,12 +957,28 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [self presentViewController:myAlert animated:YES completion:nil];
     }
     _nameEntered = textView.text;
-    
-    NSLog(@"Name: %@", _nameEntered);
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
     _nameEntered = textView.text;
+    [_save setEnabled:TRUE];
+}
+
+-(BOOL)textViewShouldReturn:(UITextView *)textView {
+    [textView resignFirstResponder];
+    return YES;
+}
+
+// Disable the return button for newlines (resignFirstResponder instead_
+//
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 
@@ -1214,7 +1235,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     PaintSwatches *paintSwatch = [[self.colorArray objectAtIndex:index] objectAtIndex:indexPath.row];
     
-    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
+    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[ColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
     
     [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
