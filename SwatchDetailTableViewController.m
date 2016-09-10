@@ -762,7 +762,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _nameHeader;
         
     } else if (section == DETAIL_COLOR_SECTION) {
-        headerStr = _subjColorHeader;
+        headerStr = [[NSString alloc] initWithFormat:@"RGB(%i,%i,%i) and %@", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], _subjColorHeader];
         
     } else if (section == DETAIL_TYPES_SECTION) {
         headerStr = _swatchTypeHeader;

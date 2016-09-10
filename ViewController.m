@@ -338,7 +338,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 
 - (void)loadMixCollectionViewData {
-    
     _minAssocSize = MIX_ASSOC_RESTRICT_SIZE;
     
     // Check the PaintSwatch filter (all or ref only?)
@@ -676,7 +675,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [scrollViewToolbar sizeToFit];
 
             [ColorUtils setViewGlaze:headerView];
-
         }
         
     } else {
