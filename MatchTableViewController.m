@@ -334,6 +334,8 @@ const int IMAGE_TAG  = 6;
             // Tag the first reference image
             //
             refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+
+            
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
             [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
@@ -382,9 +384,13 @@ const int IMAGE_TAG  = 6;
             
             UIImage *refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:imageViewWidth cellHeight:_imageViewHeight];
             
+            // Add the RGB label
+            //
+            refImage = [ColorUtils drawRGBLabel:refImage rgbValue:_selPaintSwatch];
+            
             // Tag the first reference image
             //
-            refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+            //refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
             [refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
@@ -397,7 +403,6 @@ const int IMAGE_TAG  = 6;
             
             [headerView addSubview:refImageView];
         }
-        
     }
     [headerLabel setText:headerStr];
     [headerView addSubview:headerLabel];
@@ -550,7 +555,13 @@ const int IMAGE_TAG  = 6;
             
         } else if (_editFlag == TRUE && _scrollFlag == TRUE && _pressSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
-            cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
+
+            UIImage *refImage = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
+            
+            // Add the RGB label
+            //
+            cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch];
+            
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
             
             [cell.textLabel setText:@""];

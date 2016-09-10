@@ -187,12 +187,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Table View Headers
     //
     _nameHeader           = @"Paint Swatch and Name";
-    _subjColorHeader      = @"Subjective Color Selection";
-    _swatchTypeHeader     = @"Swatch Type Selection";
-    _paintBrandHeader     = @"Paint Brand Selection";
-    _bodyTypeHeader       = @"Body Type Selection";
-    _pigmentTypeHeader    = @"Pigment Type Selection";
-    _canvasCoverageHeader = @"Canvas Coverage Selection";
+    _subjColorHeader      = @"Subjective Color";
+    _swatchTypeHeader     = @"Swatch Type";
+    _paintBrandHeader     = @"Paint Brand";
+    _bodyTypeHeader       = @"Body Type";
+    _pigmentTypeHeader    = @"Pigment Type";
+    _canvasCoverageHeader = @"Canvas Coverage";
     _keywHeader           = @"Keywords";
     _descHeader           = @"Description";
     _refsHeader           = @"Reference Colors";
@@ -762,7 +762,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _nameHeader;
         
     } else if (section == DETAIL_COLOR_SECTION) {
-        headerStr = [[NSString alloc] initWithFormat:@"RGB(%i,%i,%i) and %@", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], _subjColorHeader];
+        headerStr = [[NSString alloc] initWithFormat:@"RGB (%i,%i,%i) Swatch and %@", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], _subjColorHeader];
         
     } else if (section == DETAIL_TYPES_SECTION) {
         headerStr = _swatchTypeHeader;

@@ -21,6 +21,7 @@
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count;
++ (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
 + (UIColor *)setBestColorContrast:(NSString *)colorName;
 + (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
