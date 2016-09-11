@@ -102,6 +102,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
+
     
     // Subjective color data
     //
@@ -263,7 +264,14 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)viewDidAppear:(BOOL)animated {
 //    [self initPaintSwatchFetchedResultsController];
 //    _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
- 
+
+    // Perform cleanup
+    //
+    [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
+    [ManagedObjectUtils deleteChildlessMatchAssoc:self.context];
+//    [ManagedObjectUtils deleteChildlessMixAssoc:self.context];
+
+    
     if ([_listingType isEqualToString:@"Mix"]) {
         [self loadMixCollectionViewData];
     
@@ -780,7 +788,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Default"]) {
         NSString *letter = [_sortedLettersDefaults objectAtIndex:section];
         objCount = [[_letterDefaults objectForKey:letter] count];
-        NSLog(@"LETTER=%@", letter);
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
         if (section == 0) {

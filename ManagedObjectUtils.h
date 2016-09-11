@@ -77,4 +77,10 @@
 + (void)deletePaintSwatchKeywords:(PaintSwatches *)paintSwatchObj context:(NSManagedObjectContext *)context;
 + (void)deleteMixAssociation:(MixAssociation *)mixAssocObj context:(NSManagedObjectContext *)context;
 
+// Cleanup methods
+//
++ (void)deleteOrphanPaintSwatches:(NSManagedObjectContext *)context;
++ (void)deleteChildlessMatchAssoc:(NSManagedObjectContext *)context;
++ (void)deleteChildlessMixAssoc:(NSManagedObjectContext *)context;
+
 @end

@@ -938,5 +938,73 @@
     [context deleteObject:mixAssocObj];
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Cleanup methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Cleanup methods
+
++ (void)deleteOrphanPaintSwatches:(NSManagedObjectContext *)context {
+    
+    // Exclude match assoc types
+    //
+    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
+    int match_assoc_id = [[matchSwatchType order] intValue];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        for (PaintSwatches *paintSwatch in results) {
+            NSArray *assoc_relations = [[paintSwatch mix_assoc_swatch] allObjects];
+            if ([assoc_relations count] == 0) {
+                [context deleteObject:paintSwatch];
+            }
+        }
+    }
+}
+
++ (void)deleteChildlessMatchAssoc:(NSManagedObjectContext *)context {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        for (MatchAssociations *matchAssoc in results) {
+            NSArray *tap_areas = [[matchAssoc tap_area] allObjects];
+            if ([tap_areas count] == 0) {
+                [context deleteObject:matchAssoc];
+            }
+        }
+    }
+}
+
++ (void)deleteChildlessMixAssoc:(NSManagedObjectContext *)context {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        for (MixAssociation *mixAssoc in results) {
+            NSArray *mix_swatches = [[mixAssoc mix_assoc_swatch] allObjects];
+            if ([mix_swatches count] == 0) {
+                [context deleteObject:mixAssoc];
+            }
+        }
+    }
+}
+
 
 @end
