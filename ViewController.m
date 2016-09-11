@@ -1216,13 +1216,13 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchString = searchText;
     
-    [self initPaintSwatchFetchedResultsController];
+    [self loadDefaultListing];
 }
 
 // Need index of items that have been checked
 //
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self initPaintSwatchFetchedResultsController];
+    [self loadDefaultListing];
     
     [_mainSearchBar resignFirstResponder];
     [self.navigationItem setTitleView:nil];
@@ -1236,7 +1236,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self.navigationItem setRightBarButtonItem:_searchButton];
     
     _searchString = nil;
-    [self initPaintSwatchFetchedResultsController];
+    [self loadDefaultListing];
 }
 
 - (void)searchBarSetFrames {
