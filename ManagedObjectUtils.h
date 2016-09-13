@@ -38,7 +38,7 @@
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context;
 + (NSArray *)fetchKeywords:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchPaintSwatches:(NSManagedObjectContext *)context;
-+ (NSMutableArray *)fetchMixAssociations:(NSManagedObjectContext *)context;
++ (NSMutableArray *)fetchMixAssociations:(NSManagedObjectContext *)context name:(NSString *)name;
 + (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context;
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchDictNames:(NSString *)entityName context:(NSManagedObjectContext *)context;

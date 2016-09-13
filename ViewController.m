@@ -355,7 +355,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         _minAssocSize = MIX_ASSOC_MIN_SIZE;
     }
     
-    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context];
+    _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context name:_searchString];
     int num_mix_assocs = (int)[_mixAssocObjs count];
     _numMixAssocs = 0;
     
@@ -1028,7 +1028,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     if ([_listingType isEqualToString:@"Mix"]) {
         [_searchButton setImage:_searchImage];
-        [_searchButton setEnabled:FALSE];
+        [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Match"]) {
@@ -1216,13 +1216,21 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchString = searchText;
     
-    [self loadDefaultListing];
+    if ([_listingType isEqualToString:@"Default"]) {
+        [self loadDefaultListing];
+    } else {
+        [self loadMixCollectionViewData];
+    }
 }
 
 // Need index of items that have been checked
 //
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self loadDefaultListing];
+    if ([_listingType isEqualToString:@"Default"]) {
+        [self loadDefaultListing];
+    } else {
+        [self loadMixCollectionViewData];
+    }
     
     [_mainSearchBar resignFirstResponder];
     [self.navigationItem setTitleView:nil];
@@ -1236,7 +1244,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self.navigationItem setRightBarButtonItem:_searchButton];
     
     _searchString = nil;
-    [self loadDefaultListing];
+    if ([_listingType isEqualToString:@"Default"]) {
+        [self loadDefaultListing];
+    } else {
+        [self loadMixCollectionViewData];
+    }
 }
 
 - (void)searchBarSetFrames {
@@ -1292,10 +1304,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
         }
     } else {
+        NSString *regexSearchString = [[NSString alloc] initWithFormat:@"%@*", _searchString];
         if (_showReferenceOnly == TRUE) {
-            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name contains[c] %@", _refTypeId, _searchString]];
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name like[c] %@", _refTypeId, regexSearchString]];
         } else {
-            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name contains[c] %@", _matchAssocId, _searchString]];
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name like[c] %@", _matchAssocId, regexSearchString]];
         }
     }
     
@@ -1316,46 +1329,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     [self.colorTableView reloadData];
 }
-
-//- (void)initPaintSwatchFetchedResultsController {
-//    
-//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"PaintSwatch"];
-//    
-//    NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-//    
-//    // Skip match assoc types, and search if requested
-//    //
-//    if ((_searchString == nil) || [_searchString isEqualToString:@""]) {
-//        if (_showReferenceOnly == TRUE) {
-//            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _refTypeId]];
-//        } else {
-//            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
-//        }
-//    } else {
-//        if (_showReferenceOnly == TRUE) {
-//            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name contains[c] %@", _refTypeId, _searchString]];
-//        } else {
-//            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name contains[c] %@", _matchAssocId, _searchString]];
-//        }
-//    }
-//    
-//    [request setSortDescriptors:@[nameSort]];
-//    
-//    [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.context sectionNameKeyPath:nil cacheName:nil]];
-//    
-//    
-//    [[self fetchedResultsController] setDelegate:self];
-//    
-//    NSError *error = nil;
-//    
-//    @try {
-//        [[self fetchedResultsController] performFetch:&error];
-//    } @catch (NSException *exception) {
-//        NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
-//    }
-//    
-//    [self.colorTableView reloadData];
-//}
 
 - (void)initializeKeywordResultsController {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SwatchKeyword"];
