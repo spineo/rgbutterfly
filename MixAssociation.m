@@ -13,6 +13,7 @@
 @implementation MixAssociation
 
 @dynamic create_date;
+@dynamic def_coverage_id;
 @dynamic desc;
 @dynamic image_url;
 @dynamic last_update;

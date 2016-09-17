@@ -34,6 +34,7 @@
     </entity>
     <entity name="MixAssociation" representedClassName="MixAssociation" syncable="YES">
         <attribute name="create_date" attributeType="Date" defaultDateTimeInterval="476293080" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="def_coverage_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image_url" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="is_hidden" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
@@ -135,11 +136,12 @@
     </entity>
     <elements>
         <element name="BodyType" positionX="16" positionY="135" width="128" height="75"/>
+        <element name="CanvasCoverage" positionX="-576" positionY="-9" width="128" height="75"/>
         <element name="Keyword" positionX="-506" positionY="491" width="128" height="118"/>
         <element name="MatchAlgorithm" positionX="-801" positionY="-153" width="128" height="73"/>
         <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="148"/>
         <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="73"/>
-        <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="195"/>
+        <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="208"/>
         <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="73"/>
         <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="105"/>
         <element name="PaintBrand" positionX="18" positionY="36" width="128" height="73"/>
@@ -151,6 +153,5 @@
         <element name="TapArea" positionX="-578" positionY="-180" width="128" height="210"/>
         <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="73"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="88"/>
-        <element name="CanvasCoverage" positionX="-576" positionY="-9" width="128" height="75"/>
     </elements>
 </model>

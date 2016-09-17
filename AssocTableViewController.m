@@ -26,13 +26,14 @@
 
 @property (nonatomic, strong) PaintSwatches *addPaintSwatch, *selPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches, *mixRatiosList, *mixRatiosComps, *mixRatiosSeen;
+@property (nonatomic, strong) NSArray *coverageNames;
 
 @property (nonatomic, strong) UIAlertController *saveAlertController;
 @property (nonatomic, strong) UIAlertAction *save, *delete;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *applyRenameText, *mixRatiosText;
+@property (nonatomic, strong) NSString *coverHeader, *nameHeader, *colorsHeader, *keywHeader, *descHeader, *setRenameText, *applyRenameText, *mixRatiosText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, textReturn, isReadOnly;
 
@@ -42,9 +43,9 @@
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 @property (nonatomic) CGFloat imageViewXOffset, imageViewYOffset, imageViewWidth, imageViewHeight, assocImageViewWidth, assocImageViewHeight, textFieldYOffset;
 
-@property (nonatomic, strong) UIButton *applyButton;
-@property (nonatomic, strong) UITextField *pickerTextField;
-@property (nonatomic) int mixCount, mixRatiosSelRow;
+@property (nonatomic, strong) UIButton *setButton, *applyButton;
+@property (nonatomic, strong) UITextField *pickerTextField, *coverageName;
+@property (nonatomic) int mixCount, mixRatiosSelRow, coveragePickerSelRow;
 
 @property (nonatomic, strong) AddMixTableViewController *sourceViewController;
 
@@ -58,6 +59,7 @@
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
 @property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
 @property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId;
+@property (nonatomic, strong) UIPickerView *coveragePicker;
 
 @end
 
@@ -65,18 +67,21 @@
 
 const int ASSOC_COLORS_SECTION = 0;
 const int ASSOC_ADD_SECTION    = 1;
-const int ASSOC_APPLY_SECTION  = 2;
-const int ASSOC_NAME_SECTION   = 3;
-const int ASSOC_KEYW_SECTION   = 4;
-const int ASSOC_DESC_SECTION   = 5;
+const int ASSOC_COVER_SECTION  = 2;
+const int ASSOC_APPLY_SECTION  = 3;
+const int ASSOC_NAME_SECTION   = 4;
+const int ASSOC_KEYW_SECTION   = 5;
+const int ASSOC_DESC_SECTION   = 6;
 
-const int ASSOC_MAX_SECTION    = 6;
+const int ASSOC_MAX_SECTION    = 7;
 
-const int ASSOC_APPLY_TAG      = 1;
-const int ASSOC_NAME_TAG       = 2;
-const int ASSOC_KEYW_TAG       = 3;
-const int ASSOC_DESC_TAG       = 4;
-const int ASSOC_COLORS_TAG     = 5;
+const int ASSOC_COVER_TAG      = 1;
+const int ASSOC_APPLY_TAG      = 2;
+const int ASSOC_NAME_TAG       = 3;
+const int ASSOC_KEYW_TAG       = 4;
+const int ASSOC_DESC_TAG       = 5;
+const int ASSOC_COLORS_TAG     = 6;
+const int ASSOC_SET_TAG        = 7;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,8 +113,10 @@ const int ASSOC_COLORS_TAG     = 5;
 
     // Set the name and desc values
     //
-    _mixAssocName = [_mixAssociation name] ? [_mixAssociation name] : @"";
-    _mixAssocDesc = [_mixAssociation desc] ? [_mixAssociation desc] : @"";
+    _mixAssocName  = [_mixAssociation name] ? [_mixAssociation name] : @"";
+    _mixAssocDesc  = [_mixAssociation desc] ? [_mixAssociation desc] : @"";
+    _coveragePickerSelRow = [[_mixAssociation def_coverage_id] intValue];
+    
     
     // Keywords
     //
@@ -138,6 +145,7 @@ const int ASSOC_COLORS_TAG     = 5;
     
     // Header labels
     //
+    _coverHeader       = @"Default Canvas Coverage";
     _colorsHeader      = @"Mix Association Colors";
     _nameHeader        = @"Mix Association Name";
     _keywHeader        = @"Mix Association Keywords";
@@ -239,7 +247,16 @@ const int ASSOC_COLORS_TAG     = 5;
         
     }
     
-    
+    // Canvas Coverage Picker
+    //
+    id coverageObj = [ManagedObjectUtils queryDictionaryName:@"CanvasCoverage" entityId:_coveragePickerSelRow context:self.context];
+    NSString *coverageName = [coverageObj name];
+    _coverageName = [FieldUtils createTextField:coverageName tag:ASSOC_COVER_TAG];
+    [_coverageName setTextAlignment:NSTextAlignmentCenter];
+    [_coverageName setDelegate:self];
+    _coverageNames  = [ManagedObjectUtils fetchDictNames:@"CanvasCoverage" context:self.context];
+
+
     // Adjust the layout when the orientation changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -275,10 +292,14 @@ const int ASSOC_COLORS_TAG     = 5;
     [_saveAlertController addAction:discard];
    
     
-    // Apply renaming button
+    // Set canvas coverage and Apply renaming button
     //
+    _setRenameText = @"Set the Canvas Coverage";
+    [self recreateSetCanvasButton];
+    [_setButton setEnabled:TRUE];
+    
     _applyRenameText = @"Apply Renaming with Ratios";
-    [self recreateApplyButton];
+    [self recreateRatiosApplyButton];
     [_applyButton setEnabled:TRUE];
     
     
@@ -304,10 +325,34 @@ const int ASSOC_COLORS_TAG     = 5;
 
 - (void)viewDidRotate {
     [self.tableView reloadData];
-    [self recreateApplyButton];
+    [self recreateSetCanvasButton];
+    [self recreateRatiosApplyButton];
+    //[self setFrameSizes];
 }
 
-- (void)recreateApplyButton {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// General methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- (void)setFrameSizes {
+    
+    // Text view widths
+    //
+    CGFloat viewWidth = self.tableView.bounds.size.width;
+    CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+
+    [_coverageName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+}
+
+- (void)recreateSetCanvasButton {
+    CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
+    _setButton = [BarButtonUtils create3DButton:_setRenameText tag:ASSOC_SET_TAG frame:colorButtonFrame];
+    [_setButton.titleLabel setFont:TABLE_CELL_FONT];
+    
+    [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)recreateRatiosApplyButton {
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
@@ -371,6 +416,9 @@ const int ASSOC_COLORS_TAG     = 5;
     } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_APPLY_SECTION)) {
         return DEF_NIL_HEADER;
         
+    } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
+        return DEF_NIL_HEADER;
+        
     } else {
         return DEF_TABLE_HDR_HEIGHT;
     }
@@ -392,7 +440,11 @@ const int ASSOC_COLORS_TAG     = 5;
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
-    if (section == ASSOC_NAME_SECTION) {
+    
+    if (section == ASSOC_COVER_SECTION) {
+        headerStr = _coverHeader;
+    
+    } else if (section == ASSOC_NAME_SECTION) {
         headerStr = _nameHeader;
         
     } else if (section == ASSOC_KEYW_SECTION) {
@@ -429,7 +481,6 @@ const int ASSOC_COLORS_TAG     = 5;
         ((_editFlag == FALSE) || (_isReadOnly == TRUE))
     ) {
         return 0;
-
 
     } else if (section == ASSOC_COLORS_SECTION) {
         return [_mixAssocSwatches count];
@@ -471,6 +522,11 @@ const int ASSOC_COLORS_TAG     = 5;
     for (int tag=1; tag<=max_tag; tag++) {
         [[cell.contentView viewWithTag:tag] removeFromSuperview];
     }
+    
+    // Set the widget frame sizes
+    //
+    //[self setFrameSizes];
+
     
     if (indexPath.section == ASSOC_COLORS_SECTION) {
         //MixAssocSwatch *mixAssocSwatch = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:ASSOC_COLORS_SECTION]];
@@ -530,6 +586,18 @@ const int ASSOC_COLORS_TAG     = 5;
         [cell.textLabel setFont: TABLE_CELL_FONT];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+        
+    } else if (indexPath.section == ASSOC_COVER_SECTION) {
+        
+        if (_editFlag == TRUE) {
+            [cell.contentView addSubview:_setButton];
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
+        } else {
+            [cell setBackgroundColor: DARK_BG_COLOR];
+            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont: TABLE_CELL_FONT];
+            [cell.textLabel setText:[_coverageNames objectAtIndex:_coveragePickerSelRow]];
+        }
         
     } else if (indexPath.section == ASSOC_APPLY_SECTION) {
         cell.accessoryType       = UITableViewCellAccessoryNone;
@@ -785,12 +853,6 @@ const int ASSOC_COLORS_TAG     = 5;
 #pragma mark - UITextField Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    //    if (textField.tag == COLTXT_TAG) {
-    //        [_doneColorButton setHidden:FALSE];
-    //
-    //    } else if (textField.tag == TYPTXT_TAG) {
-    //        [_doneTypeButton setHidden:FALSE];
-    //    };
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -827,6 +889,12 @@ const int ASSOC_COLORS_TAG     = 5;
         }
         [_save setEnabled:TRUE];
     }
+    
+    [textField resignFirstResponder];
+    
+    [self.tableView reloadData];
+    
+    //[self setFrameSizes];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -872,6 +940,7 @@ const int ASSOC_COLORS_TAG     = 5;
 
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
+    [_mixAssociation setDef_coverage_id:[NSNumber numberWithInt:_coveragePickerSelRow]];
 
     
     // Delete all MixAssociation Keywords and first
@@ -943,10 +1012,15 @@ const int ASSOC_COLORS_TAG     = 5;
 - (void)applyRenaming {
 
     [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
-    //[_applyButton setEnabled:FALSE];
-    
     
     NSString *refName_1, *refName_2;
+    
+    // Determine th Canvas Coverage component (skip 'Unknown' and 'Thick')
+    //
+    NSString *coverageName = @"";
+    if (_coveragePickerSelRow > 1) {
+        coverageName = [[NSString alloc] initWithFormat:@" (%@)", [_coverageName text]];
+    }
 
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
@@ -988,8 +1062,11 @@ const int ASSOC_COLORS_TAG     = 5;
             
             isMix = YES;
 
-            swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", refName_1, refName_2, ratio_1, ratio_2];
+            swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i%@", refName_1, refName_2, ratio_1, ratio_2, coverageName];
+
             swatchId = _mixTypeId;
+            
+            [paintSwatch setCoverage_id:[NSNumber numberWithInt:_coveragePickerSelRow]];
         }
 
         // Skip any Paint Swatch that is an add
@@ -1009,7 +1086,7 @@ const int ASSOC_COLORS_TAG     = 5;
     
     // Rename the MixAssociation
     //
-    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@", refName_1, refName_2];
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@%@", refName_1, refName_2, coverageName];
     
     //[_applyButton setEnabled:FALSE];
     [_save setEnabled:TRUE];
@@ -1076,12 +1153,6 @@ const int ASSOC_COLORS_TAG     = 5;
         [_pickerTextField setInputView:pickerParentView];
         [self.view addSubview:_pickerTextField];
         
-//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-//                                                 initWithTarget:self action:@selector(ratiosSelection)];
-//        tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
-//        [mixRatiosPicker addGestureRecognizer:tapRecognizer];
-//        [tapRecognizer setDelegate:self];
-        
         [_pickerTextField becomeFirstResponder];
     }
 }
@@ -1102,6 +1173,41 @@ const int ASSOC_COLORS_TAG     = 5;
     }
 }
 
+- (void)showCoveragePicker {
+
+    // Tie the set Coverage button to a UI Picker
+    //
+    _coveragePicker = [FieldUtils createPickerView:self.view.frame.size.width tag:ASSOC_COVER_TAG xOffset:DEF_X_OFFSET yOffset:DEF_TOOLBAR_HEIGHT];
+    [_coveragePicker setDataSource:self];
+    [_coveragePicker setDelegate:self];
+    
+    UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _coveragePicker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
+    [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(coverageSelection)];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    
+    [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+    
+    UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _coveragePicker.bounds.size.width, _coveragePicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
+    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView addSubview:pickerToolbar];
+    [pickerParentView addSubview:_coveragePicker];
+    
+    _coverageName = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    [_coverageName setInputView:pickerParentView];
+    [self.view addSubview:_coverageName];
+    
+    [_coveragePicker selectRow:_coveragePickerSelRow inComponent:0 animated:YES];
+    
+    [_coverageName becomeFirstResponder];
+}
+
+- (void)coverageSelection {
+    [_coverageName setText:[_coverageNames objectAtIndex:_coveragePickerSelRow]];
+    [_coveragePicker selectRow:_coveragePickerSelRow inComponent:0 animated:YES];
+    [_coverageName resignFirstResponder];
+}
 
 // The number of columns of data
 //
@@ -1112,7 +1218,12 @@ const int ASSOC_COLORS_TAG     = 5;
 // The number of rows of data
 //
 - (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return (long)[_mixRatiosList count];
+
+    if (pickerView.tag == ASSOC_COVER_TAG) {
+        return (long)[_coverageNames count];
+    } else {
+        return (long)[_mixRatiosList count];
+    }
 }
 
 // Row height
@@ -1124,7 +1235,12 @@ const int ASSOC_COLORS_TAG     = 5;
 // The data to return for the row and component (column) that's being passed in
 //
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [_mixRatiosList objectAtIndex:row];
+    
+    if (pickerView.tag == ASSOC_COVER_TAG) {
+        return [_coverageNames objectAtIndex:row];
+    } else {
+        return [_mixRatiosList objectAtIndex:row];
+    }
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
@@ -1134,29 +1250,73 @@ const int ASSOC_COLORS_TAG     = 5;
         label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
     }
     
-    [label setText:[_mixRatiosList objectAtIndex:row]];
     [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [label.layer setBorderWidth: DEF_BORDER_WIDTH];
-    [label setTextAlignment:NSTextAlignmentCenter];
+
+    if (pickerView.tag == ASSOC_COVER_TAG) {
+        [label setText:[_coverageNames objectAtIndex:row]];
+        [label setTextColor: LIGHT_TEXT_COLOR];
     
-    BOOL mixRatioSeen = [[_mixRatiosSeen objectAtIndex:row] boolValue];
-    CGColorRef backgroundCellColor;
-    UIColor *textColor;
-    if (mixRatioSeen == TRUE) {
-        backgroundCellColor = [[UIColor greenColor] CGColor];
-        textColor = DARK_TEXT_COLOR;
     } else {
-        backgroundCellColor = [[UIColor redColor] CGColor];
-        textColor = LIGHT_TEXT_COLOR;
+        [label setText:[_mixRatiosList objectAtIndex:row]];
+        
+        BOOL mixRatioSeen = [[_mixRatiosSeen objectAtIndex:row] boolValue];
+        CGColorRef backgroundCellColor;
+        UIColor *textColor;
+        if (mixRatioSeen == TRUE) {
+            backgroundCellColor = [[UIColor greenColor] CGColor];
+            textColor = DARK_TEXT_COLOR;
+        } else {
+            backgroundCellColor = [[UIColor redColor] CGColor];
+            textColor = LIGHT_TEXT_COLOR;
+        }
+        [label.layer setBackgroundColor:backgroundCellColor];
+        [label setTextColor:textColor];
     }
-    [label.layer setBackgroundColor:backgroundCellColor];
-    [label setTextColor:textColor];
+    [label setTextAlignment:NSTextAlignmentCenter];
     
     return label;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    _mixRatiosSelRow = (int)row;
+    if (pickerView.tag == ASSOC_COVER_TAG) {
+        NSString *coverageType = [_coverageNames objectAtIndex:row];
+        [_coverageName setText:coverageType];
+        _coveragePickerSelRow = (int)row;
+
+    } else {
+        _mixRatiosSelRow      = (int)row;
+    }
+    [_save setEnabled:TRUE];
+}
+
+// Generic Picker method
+//
+- (UIPickerView *)createPicker:(int)pickerTag selectRow:(int)selectRow action:(SEL)action textField:(UITextField *)textField {
+    UIPickerView *picker = [FieldUtils createPickerView:self.view.frame.size.width tag:pickerTag xOffset:DEF_X_OFFSET yOffset:DEF_TOOLBAR_HEIGHT];
+    [picker setDataSource:self];
+    [picker setDelegate:self];
+    
+    UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
+    [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:action];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    
+    [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+    
+    UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
+    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView addSubview:pickerToolbar];
+    [pickerParentView addSubview:picker];
+    
+    [textField setInputView:pickerParentView];
+    
+    // Need to prevent text from clearing
+    
+    [picker selectRow:selectRow inComponent:0 animated:YES];
+    
+    return picker;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

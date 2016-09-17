@@ -14,6 +14,7 @@
 @interface MixAssociation : NSManagedObject
 
 @property (nonatomic, retain) NSDate * create_date;
+@property (nonatomic, retain) NSNumber *def_coverage_id;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) id image_url;
 @property (nonatomic, retain) NSDate * last_update;

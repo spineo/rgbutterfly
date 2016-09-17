@@ -814,7 +814,6 @@ heightForFooterInSection:(NSInteger)section {
         _addBrandsText = textField.text;
         
     }
-    
     [self saveEnable:TRUE];
 }
 
@@ -825,6 +824,7 @@ heightForFooterInSection:(NSInteger)section {
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     _mixRatiosText = [GenericUtils removeSpaces:textView.text];
+    [self saveEnable:TRUE];
 }
 
 -(BOOL)textViewShouldReturn:(UITextView *)textView {
