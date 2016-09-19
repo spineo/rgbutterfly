@@ -329,7 +329,13 @@ const int IMAGE_TAG  = 6;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
         
         if (_scrollFlag == FALSE || _editFlag == FALSE) {
-            UIImage *refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            UIImage *refImage;
+            
+            if (_editFlag == TRUE) {
+                refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            } else {
+                refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            }
             
             // Tag the first reference image
             //
@@ -537,6 +543,7 @@ const int IMAGE_TAG  = 6;
             
             if (_editFlag == TRUE) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
+                cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
                 
                 BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
                 if (tappedStat == TRUE) {

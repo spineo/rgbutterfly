@@ -311,6 +311,8 @@ extern float const DEF_BORDER_THRESHOLD;
 //
 #define CLEAR_COLOR        [UIColor clearColor]
 #define LIGHT_YELLOW_COLOR [UIColor colorWithRed:242.0/255.0 green:255.0/255.0 blue:224.0/255.0 alpha:1.0]
+#define WIDGET_GREEN_COLOR [UIColor colorWithRed:83.0/255.0  green:215.0/255.0 blue:105.0/255.0 alpha:1.0]
+#define WIDGET_RED_COLOR   [UIColor colorWithRed:252.0/255.0 green:61.0/255.0  blue:57.0/255.0 alpha:1.0]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

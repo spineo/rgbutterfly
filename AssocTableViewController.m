@@ -33,7 +33,7 @@
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *coverHeader, *nameHeader, *colorsHeader, *keywHeader, *descHeader, *setRenameText, *applyRenameText, *mixRatiosText;
+@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *setRenameText, *applyRenameText, *mixRatiosText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, textReturn, isReadOnly;
 
@@ -145,7 +145,6 @@ const int ASSOC_SET_TAG        = 7;
     
     // Header labels
     //
-    _coverHeader       = @"Default Canvas Coverage";
     _colorsHeader      = @"Mix Association Colors";
     _nameHeader        = @"Mix Association Name";
     _keywHeader        = @"Mix Association Keywords";
@@ -153,7 +152,7 @@ const int ASSOC_SET_TAG        = 7;
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
-    _addColorLabel     = @"Add Mix Association Color";
+    _addColorLabel     = @"Add Ref/Mix Association";
     
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
@@ -348,6 +347,8 @@ const int ASSOC_SET_TAG        = 7;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _setButton = [BarButtonUtils create3DButton:_setRenameText tag:ASSOC_SET_TAG frame:colorButtonFrame];
     [_setButton.titleLabel setFont:TABLE_CELL_FONT];
+    [_setButton setTintColor:LIGHT_TEXT_COLOR];
+    [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -356,6 +357,8 @@ const int ASSOC_SET_TAG        = 7;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
+    [_applyButton setTintColor:LIGHT_TEXT_COLOR];
+    [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];
 
     [_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -413,7 +416,7 @@ const int ASSOC_SET_TAG        = 7;
             return DEF_TABLE_HDR_HEIGHT;
         }
 
-    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_APPLY_SECTION)) {
+    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_COVER_SECTION) || (section == ASSOC_APPLY_SECTION)) {
         return DEF_NIL_HEADER;
         
     } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
@@ -441,10 +444,7 @@ const int ASSOC_SET_TAG        = 7;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     
-    if (section == ASSOC_COVER_SECTION) {
-        headerStr = _coverHeader;
-    
-    } else if (section == ASSOC_NAME_SECTION) {
+    if (section == ASSOC_NAME_SECTION) {
         headerStr = _nameHeader;
         
     } else if (section == ASSOC_KEYW_SECTION) {
@@ -581,9 +581,9 @@ const int ASSOC_SET_TAG        = 7;
         cell.accessoryType       = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
         
-        [cell setBackgroundColor: DARK_BG_COLOR];
-        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-        [cell.textLabel setFont: TABLE_CELL_FONT];
+        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+        [cell.textLabel setFont:TABLE_CELL_FONT];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         
@@ -593,10 +593,10 @@ const int ASSOC_SET_TAG        = 7;
             [cell.contentView addSubview:_setButton];
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         } else {
-            [cell setBackgroundColor: DARK_BG_COLOR];
-            [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-            [cell.textLabel setFont: TABLE_CELL_FONT];
-            [cell.textLabel setText:[_coverageNames objectAtIndex:_coveragePickerSelRow]];
+            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont:TABLE_HEADER_FONT];
+            [cell.textLabel setText:[[NSString alloc] initWithFormat:@"Canvas Coverage: %@", [_coverageNames objectAtIndex:_coveragePickerSelRow]]];
         }
         
     } else if (indexPath.section == ASSOC_APPLY_SECTION) {
@@ -1264,10 +1264,10 @@ const int ASSOC_SET_TAG        = 7;
         CGColorRef backgroundCellColor;
         UIColor *textColor;
         if (mixRatioSeen == TRUE) {
-            backgroundCellColor = [[UIColor greenColor] CGColor];
+            backgroundCellColor = [WIDGET_GREEN_COLOR CGColor];
             textColor = DARK_TEXT_COLOR;
         } else {
-            backgroundCellColor = [[UIColor redColor] CGColor];
+            backgroundCellColor = [WIDGET_RED_COLOR CGColor];
             textColor = LIGHT_TEXT_COLOR;
         }
         [label.layer setBackgroundColor:backgroundCellColor];
