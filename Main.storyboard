@@ -136,14 +136,14 @@
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="Szt-18-Btg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem image="home" id="SXH-ap-PzU">
+                        <barButtonItem tag="62" image="home" id="SXH-ap-PzU">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindToViewController:" id="Eu3-ie-x2Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="F6j-7M-mxg"/>
-                        <barButtonItem tag="71" enabled="NO" title="&lt;" id="l35-1Z-PGd">
+                        <barButtonItem tag="1000" systemItem="flexibleSpace" id="F6j-7M-mxg"/>
+                        <barButtonItem tag="71" enabled="NO" image="arrow fat left" id="l35-1Z-PGd">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="decrMatchAlgorithm:" destination="6Nq-8K-N9m" id="RFn-nb-U0J"/>
@@ -155,20 +155,20 @@
                                 <action selector="showTypeOptions:" destination="6Nq-8K-N9m" id="4dN-tB-NFP"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="73" enabled="NO" title="&gt;" id="37g-rn-RDV" propertyAccessControl="none">
+                        <barButtonItem tag="73" enabled="NO" image="arrow fat right" id="37g-rn-RDV" propertyAccessControl="none">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="incrMatchAlgorithm:" destination="6Nq-8K-N9m" id="LV1-sF-R6R"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem title="Item" systemItem="flexibleSpace" id="xbA-K7-BUX"/>
-                        <barButtonItem tag="74" enabled="NO" image="minus" id="jWd-qs-4rX">
+                        <barButtonItem tag="74" enabled="NO" image="minus sign" id="jWd-qs-4rX">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="removeTableRows:" destination="6Nq-8K-N9m" id="kun-zU-pLc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="75" enabled="NO" image="plus-1" id="hs8-VJ-7uF">
+                        <barButtonItem tag="75" enabled="NO" image="plus sign-1" id="hs8-VJ-7uF">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
@@ -463,7 +463,7 @@
                                 <action selector="decrMatchAlgorithm:" destination="kOh-IX-qcO" id="pZQ-m5-Czj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Match" id="9k2-Mz-UD8">
+                        <barButtonItem tag="72" title="Match" id="9k2-Mz-UD8">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem tag="73" image="arrow fat right" id="5Vj-gF-Y4V">
@@ -729,19 +729,17 @@
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
-        <image name="minus" width="25" height="25"/>
         <image name="minus sign" width="20" height="20"/>
         <image name="photo 2" width="22" height="18"/>
         <image name="plus sign-1" width="20" height="20"/>
-        <image name="plus-1" width="25" height="25"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Szt-18-Btg"/>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="Omc-kQ-4iW"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -116,8 +116,8 @@ NSString *HDR_TABLEVIEW_TITLE = @"Match Method and Count";
 
 // View Types
 //
-NSString *MATCH_VIEW_TYPE = @"match";
-NSString *ASSOC_VIEW_TYPE = @"assoc";
+NSString *MATCH_VIEW_TYPE = @"Match";
+NSString *ASSOC_VIEW_TYPE = @"Assoc";
 
 // Pinch Image
 //
@@ -471,7 +471,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 [matchButton setTag:MATCH_BTN_TAG];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:3 withObject:matchButton];
+                                                [items replaceObjectAtIndex:4 withObject:matchButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -499,7 +499,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 [self removeUpArrow];
                                                 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:3 withObject:assocButton];
+                                                [items replaceObjectAtIndex:4 withObject:assocButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -1019,7 +1019,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [self matchButtonsShow];
             
         } else {
-            
             [self viewButtonShow];
         }
         
