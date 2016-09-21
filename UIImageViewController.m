@@ -2130,17 +2130,19 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         // Save the MixAssociation first
         //
         if (_mixAssociation == nil || _tapAreasChanged == TRUE) {
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
-            [self presentViewController:myAlert animated:YES completion:nil];
+//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
+//            [self presentViewController:myAlert animated:YES completion:nil];
+            [self saveMixAssoc];
+        }
             
-        } else {
+        //} else {
             UINavigationController *navigationViewController = [segue destinationViewController];
             AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
             
             [assocTableViewController setPaintSwatches:_paintSwatches];
             [assocTableViewController setMixAssociation:_mixAssociation];
             [assocTableViewController setSaveFlag:_saveFlag];
-        }
+        //}
 
         
     } else if ([[segue identifier] isEqualToString:@"MatchTableViewSegue"]) {

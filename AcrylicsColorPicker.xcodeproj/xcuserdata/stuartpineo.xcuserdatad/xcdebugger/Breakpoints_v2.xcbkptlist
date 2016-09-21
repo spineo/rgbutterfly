@@ -1648,11 +1648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "495032738.823859"
+            timestampString = "496153437.426893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2201"
-            endingLineNumber = "2201"
+            startingLineNumber = "2203"
+            endingLineNumber = "2203"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3504,11 +3504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UIImageViewController.m"
-            timestampString = "495032738.823859"
+            timestampString = "496153437.426893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2215"
-            endingLineNumber = "2215"
+            startingLineNumber = "2217"
+            endingLineNumber = "2217"
             landmarkName = "-unwindToImageViewFromAssoc:"
             landmarkType = "7">
             <Locations>

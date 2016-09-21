@@ -347,7 +347,7 @@ const int ASSOC_SET_TAG        = 7;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _setButton = [BarButtonUtils create3DButton:_setRenameText tag:ASSOC_SET_TAG frame:colorButtonFrame];
     [_setButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_setButton setTintColor:LIGHT_TEXT_COLOR];
+    [_setButton setTintColor:DARK_TEXT_COLOR];
     [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
@@ -357,7 +357,7 @@ const int ASSOC_SET_TAG        = 7;
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_applyButton setTintColor:LIGHT_TEXT_COLOR];
+    [_applyButton setTintColor:DARK_TEXT_COLOR];
     [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];
 
     [_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
