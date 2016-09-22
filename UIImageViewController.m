@@ -116,8 +116,8 @@ NSString *HDR_TABLEVIEW_TITLE = @"Match Method and Count";
 
 // View Types
 //
-NSString *MATCH_VIEW_TYPE = @"Match";
-NSString *ASSOC_VIEW_TYPE = @"Assoc";
+NSString *MATCH_VIEW_TYPE = @"match";
+NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 // Pinch Image
 //

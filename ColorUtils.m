@@ -217,7 +217,7 @@
     
     UIImage *retImage = image;
     
-    NSString *rgbValue = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i", [[paintSwatch red] intValue], [[paintSwatch green] intValue], [[paintSwatch blue] intValue]];
+    NSString *rgbValue = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i Hue=%i", [[paintSwatch red] intValue], [[paintSwatch green] intValue], [[paintSwatch blue] intValue], [[paintSwatch deg_hue] intValue]];
     
     UIGraphicsBeginImageContext(image.size);
     
