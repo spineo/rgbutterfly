@@ -762,7 +762,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _nameHeader;
         
     } else if (section == DETAIL_COLOR_SECTION) {
-        headerStr = [[NSString alloc] initWithFormat:@"RGB (%i,%i,%i), Hue (%i) and %@", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], [[_paintSwatch deg_hue] intValue], _subjColorHeader];
+        int degHue = [[_paintSwatch deg_hue] intValue];
+        NSString *colorName = [ColorUtils colorCategoryFromHue:degHue];
+        headerStr = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i Hue=%i (%@)", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], degHue, colorName];
         
     } else if (section == DETAIL_TYPES_SECTION) {
         headerStr = _swatchTypeHeader;

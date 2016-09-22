@@ -127,6 +127,93 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
++ (NSString *)colorCategoryFromHue:(int)degHue {
+    NSString *colorCategory;
+    
+    // Red
+    //
+    if ((degHue >= 355) || (degHue <= 10)) {
+        colorCategory = @"Red";
+    
+    // Red-Orange
+    //
+    } else if ((degHue >= 11) && (degHue <= 20)) {
+        colorCategory = @"Red-Orange";
+    
+    // Orange & Brown
+    //
+    } else if ((degHue >= 21) && (degHue <= 40)) {
+        colorCategory = @"Orange & Brown";
+    
+    // Orange-Yellow
+    //
+    } else if ((degHue >= 41) && (degHue <= 50)) {
+        colorCategory = @"Orange-Yellow";
+
+    // Yellow
+    //
+    } else if ((degHue >= 51) && (degHue <= 60)) {
+        colorCategory = @"Yellow";
+    
+    // Yellow-Green
+    //
+    } else if ((degHue >= 61) && (degHue <= 80)) {
+        colorCategory = @"Yellow-Green";
+
+    // Green
+    //
+    } else if ((degHue >= 81) && (degHue <= 140)) {
+        colorCategory = @"Green";
+
+    // Green-Cyan
+    //
+    } else if ((degHue >= 141) && (degHue <= 169)) {
+        colorCategory = @"Green-Cyan";
+    
+    // Cyan
+    //
+    } else if ((degHue >= 170) && (degHue <= 200)) {
+        colorCategory = @"Cyan";
+    
+    // Cyan-Blue
+    //
+    } else if ((degHue >= 201) && (degHue <= 220)) {
+        colorCategory = @"Cyan-Blue";
+    
+    // Blue
+    //
+    } else if ((degHue >= 221) && (degHue <= 240)) {
+        colorCategory = @"Blue";
+    
+    // Blue-Magenta
+    //
+    } else if ((degHue >= 241) && (degHue <= 280)) {
+        colorCategory = @"Blue-Magenta";
+    
+    // Magenta
+    //
+    } else if ((degHue >= 281) && (degHue <= 320)) {
+        colorCategory = @"Magenta";
+    
+    // Magenta-Pink
+    //
+    } else if ((degHue >= 321) && (degHue <= 330)) {
+        colorCategory = @"Magenta-Pink";
+    
+    // Pink
+    //
+    } else if ((degHue >= 331) && (degHue <= 345)) {
+        colorCategory = @"Pink";
+    
+    // Pink-Red
+    //
+    } else if ((degHue >= 346) && (degHue <= 355)) {
+        colorCategory = @"Pink-Red";
+    }
+    
+    return colorCategory;
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
