@@ -127,12 +127,34 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-+ (NSString *)colorCategoryFromHue:(int)degHue {
++ (NSString *)colorCategoryFromHue:(PaintSwatches *)swatchObj {
+    
+    int degHue = [[swatchObj deg_hue] intValue];
+
+    int red    = [[swatchObj red] intValue];
+    int green  = [[swatchObj green] intValue];
+    int blue   = [[swatchObj blue] intValue];
+    
+    // Aproximate
+    //
+    int black_threshold = 45;
+    int white_threshold = 210;
+
     NSString *colorCategory;
+    
+    // Black/Off-Black
+    //
+    if ((red <= black_threshold) && (green <= black_threshold) && (blue <= black_threshold)) {
+        colorCategory = @"Black/Dark";
+    
+    // White/Off-White
+    //
+    } else if ((red >= white_threshold) && (green >= white_threshold) && (blue >= white_threshold)) {
+        colorCategory = @"White/Off-White";
     
     // Red
     //
-    if ((degHue >= 355) || (degHue <= 10)) {
+    } else if ((degHue >= 355) || (degHue <= 10)) {
         colorCategory = @"Red";
     
     // Red-Orange

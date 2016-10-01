@@ -15,7 +15,7 @@
 + (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
-+ (NSString *)colorCategoryFromHue:(int)degHue;
++ (NSString *)colorCategoryFromHue:(PaintSwatches *)swatchObj;
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 + (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
