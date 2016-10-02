@@ -20,6 +20,7 @@
 #import "MatchAssociations.h"
 #import "MatchAssocKeyword.h"
 #import "TapArea.h"
+#import "TapAreaSwatch.h"
 #import "TapAreaKeyword.h"
 #import "MatchAlgorithm.h"
 
@@ -62,6 +63,7 @@
 + (Keyword *)queryKeyword:(NSString *)keyword context:(NSManagedObjectContext *)context;
 + (MixAssociation *)queryMixAssociation:(int)mix_assoc_id context:(NSManagedObjectContext *)context;
 + (NSMutableArray *)queryMixAssocBySwatch:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
++ (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex matchAssociation:(MatchAssociations *)matchAssociation context:(NSManagedObjectContext *)context;
 
 // Update methods
 //

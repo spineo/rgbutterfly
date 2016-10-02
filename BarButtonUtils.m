@@ -73,8 +73,8 @@
         int buttonTag = (int)refButton.tag;
         
         if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i ] setEnabled:TRUE ];
-            [[toolbarItems objectAtIndex:i ] setTintColor:nil];
+            [[toolbarItems objectAtIndex:i] setEnabled:TRUE ];
+            [[toolbarItems objectAtIndex:i] setTintColor:nil];
         }
     }
 }
@@ -88,8 +88,22 @@
         int buttonTag = (int)refButton.tag;
         
         if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i ] setEnabled:FALSE ];
-            [[toolbarItems objectAtIndex:i ] setTintColor: CLEAR_COLOR];
+            [[toolbarItems objectAtIndex:i] setEnabled:FALSE];
+            [[toolbarItems objectAtIndex:i] setTintColor:CLEAR_COLOR];
+        }
+    }
+}
+
++ (void)buttonSetTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title {
+    
+    int buttonCount = (int)toolbarItems.count;
+    
+    for (int i=0; i<buttonCount; i++) {
+        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
+        int buttonTag = (int)refButton.tag;
+        
+        if (refTag == buttonTag) {
+            [[toolbarItems objectAtIndex:i] setTitle:title];
         }
     }
 }
@@ -103,7 +117,7 @@
         int buttonTag = (int)refButton.tag;
         
         if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i ] setWidth:width ];
+            [[toolbarItems objectAtIndex:i] setWidth:width ];
         }
     }
 }

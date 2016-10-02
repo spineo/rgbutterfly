@@ -1555,7 +1555,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (maManualOverride == FALSE) {
         _compPaintSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:refObj swatches:_dbPaintSwatches matchAlgorithm:matchAlgValue maxMatchNum:maxMatchNum context:self.context entity:_paintSwatchEntity]];
     } else {
-        _compPaintSwatches = [self getManualOverrideSwatches:refObj tapIndex:tapIndex];
+        _compPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:refObj tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
     }
 
 
@@ -1572,22 +1572,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
 }
 
-- (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex {
-    NSArray *tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
-    TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
-    NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-    int maxMatchNum = (int)[tapAreaSwatches count];
-    
-    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
-    [tmpSwatches addObject:refObj];
-    for (int i=0; i<maxMatchNum; i++) {
-        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-        PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
-        [tmpSwatches addObject:paintSwatch];
-    }
-    
-    return [tmpSwatches mutableCopy];
-}
+//- (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex {
+//    NSArray *tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
+//    TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+//    NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+//    int maxMatchNum = (int)[tapAreaSwatches count];
+//    
+//    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
+//    [tmpSwatches addObject:refObj];
+//    for (int i=0; i<maxMatchNum; i++) {
+//        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+//        PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
+//        [tmpSwatches addObject:paintSwatch];
+//    }
+//    
+//    return [tmpSwatches mutableCopy];
+//}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // BarButton Methods
@@ -2154,8 +2154,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [self updateMatchAssoc];
         }
 
-
-//        } else {
         PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:_currSelectedSection] objectAtIndex:0];
         
         UINavigationController *navigationViewController = [segue destinationViewController];
@@ -2165,6 +2163,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         int currTapSection = _currTapSection - _currSelectedSection;
         [matchTableViewController setCurrTapSection:currTapSection];
+        [matchTableViewController setTapSections:self.collectionMatchArray];
+    
         [matchTableViewController setReferenceImage:_referenceTappedImage];
 
         [matchTableViewController setMaxMatchNum:_maxMatchNum];
@@ -2176,13 +2176,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         BOOL maManualOverride = [[tapArea ma_manual_override] boolValue];
         if (maManualOverride == TRUE) {
-            [matchTableViewController setDbPaintSwatches:[self getManualOverrideSwatches:paintSwatch tapIndex:tapIndex]];
+            [matchTableViewController setDbPaintSwatches:[ManagedObjectUtils getManualOverrideSwatches:paintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context]];
         } else {
             [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
         }
         [matchTableViewController setMaManualOverride:maManualOverride];
         
-//        }
+        [matchTableViewController setMatchAssociation:_matchAssociation];
+
 
     } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];

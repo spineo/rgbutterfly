@@ -16,7 +16,9 @@
 @property (nonatomic) int currTapSection, matchAlgIndex, maxMatchNum;
 @property (nonatomic, strong) UIImage *referenceImage;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches;
+@property (nonatomic, strong) NSArray *tapSections;
 @property (nonatomic, strong) TapArea *tapArea;
 @property (nonatomic) BOOL maManualOverride;
+@property (nonatomic, strong) MatchAssociations *matchAssociation;
 
 @end

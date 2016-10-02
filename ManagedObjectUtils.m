@@ -769,6 +769,25 @@
     }
 }
 
+// Match Association
+//
++ (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex matchAssociation:(MatchAssociations *)matchAssociation context:(NSManagedObjectContext *)context {
+    NSArray *tapAreaObjects = [ManagedObjectUtils queryTapAreas:matchAssociation.objectID context:context];
+    TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
+    NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+    int maxMatchNum = (int)[tapAreaSwatches count];
+    
+    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
+    [tmpSwatches addObject:refObj];
+    for (int i=0; i<maxMatchNum; i++) {
+        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
+        [tmpSwatches addObject:paintSwatch];
+    }
+    
+    return [tmpSwatches mutableCopy];
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Update methods

@@ -21,6 +21,8 @@
 
 + (void)buttonHide:(NSArray *)toolbarItems refTag:(int)refTag;
 
++ (void)buttonSetTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title;
+
 + (void)buttonSetWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width;
 
 + (BOOL)changeButtonRendering:(BOOL)isRGB refTag:(int)refTag toolBarItems:(NSArray *)toolBarItems;

@@ -37,9 +37,10 @@
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag, scrollFlag;
-@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount;
+@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount, numTapSections;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches, *tappedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
+
 
 // Picker views
 //
@@ -103,6 +104,10 @@ const int IMAGE_TAG  = 6;
     _scrollFlag  = FALSE;
     _tappedCount = 0;
     _reuseCellIdentifier = @"MatchTableCell";
+    
+    // Number of tap sections
+    //
+    _numTapSections = (int)[_tapSections count];
 
 
     // Header names
@@ -147,39 +152,43 @@ const int IMAGE_TAG  = 6;
 
     _maxRowLimit = (_dbSwatchesCount > DEF_MAX_MATCH) ? DEF_MAX_MATCH : _dbSwatchesCount;
 
-
+    
     // Match algorithms
     //
-    _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _matchAlgorithms = [ManagedObjectUtils fetchDictNames:@"MatchAlgorithm" context:self.context];
     
-    if (_maManualOverride == TRUE) {
-        _matchedSwatches = [_dbPaintSwatches mutableCopy];
-        
-    } else {
-        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
-    }
-    [self initTappedSwatches:(int)[_matchedSwatches count]];
-    
-    
-    // Initialize
+    // Render the TapArea Data
     //
-    // Override the default Algorithm index?
-    //
-    _matchAlgIndex = [[_tapArea match_algorithm_id] intValue];
-    _nameEntered   = [_tapArea name] ? [_tapArea name] : @"";
-    _descEntered   = [_tapArea desc] ? [_tapArea desc] : @"";
+    [self renderTapAreaData];
 
-
-    // Keywords
-    //
-    NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
-    NSMutableArray *keywords = [[NSMutableArray alloc] init];
-    for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
-        Keyword *keyword = tap_area_keyword.keyword;
-        [keywords addObject:[keyword name]];
-    }
-    _keywEntered = [keywords componentsJoinedByString:@", "];
+//
+//    if (_maManualOverride == TRUE) {
+//        _matchedSwatches = [_dbPaintSwatches mutableCopy];
+//        
+//    } else {
+//        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
+//    }
+//    [self initTappedSwatches:(int)[_matchedSwatches count]];
+//    
+//    
+//    // Initialize
+//    //
+//    // Override the default Algorithm index?
+//    //
+//    _matchAlgIndex = [[_tapArea match_algorithm_id] intValue];
+//    _nameEntered   = [_tapArea name] ? [_tapArea name] : @"";
+//    _descEntered   = [_tapArea desc] ? [_tapArea desc] : @"";
+//
+//
+//    // Keywords
+//    //
+//    NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
+//    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+//    for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
+//        Keyword *keyword = tap_area_keyword.keyword;
+//        [keywords addObject:[keyword name]];
+//    }
+//    _keywEntered = [keywords componentsJoinedByString:@", "];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
@@ -211,6 +220,7 @@ const int IMAGE_TAG  = 6;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+
     // Reset some widths and offset per rotation
     //
     [self resizeSelFieldAndDone:_doneButtonWidth];
@@ -651,6 +661,9 @@ const int IMAGE_TAG  = 6;
     } else {
         if (_maManualOverride == FALSE) {
             [self matchButtonsShow];
+            
+        } else {
+            [self algButtonsHide];
         }
     }
     
@@ -797,41 +810,113 @@ const int IMAGE_TAG  = 6;
 // UIBarButton actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- (IBAction)decrMatchAlgorithm:(id)sender {
+- (IBAction)decr:(id)sender {
     
-    _matchAlgIndex--;
+    if (_editFlag == FALSE) {
+
+        if (_currTapSection > 1) {
+            _currTapSection = _currTapSection - 1;
+
+        } else {
+            _currTapSection = _numTapSections;
+        }
+        [self renderTapAreaData];
     
-    if (_matchAlgIndex < 0) {
-        _matchAlgIndex = (int)[_matchAlgorithms count] - 1;
+    } else {
+    
+        _matchAlgIndex--;
+        
+        if (_matchAlgIndex < 0) {
+            _matchAlgIndex = (int)[_matchAlgorithms count] - 1;
+        }
+        
+        // Re-run the comparison algorithm
+        //
+        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum+1 context:self.context entity:_paintSwatchEntity]];
+        [_matchedSwatches removeObjectAtIndex:0];
+        [self initTappedSwatches:(int)[_matchedSwatches count]];
+        
+        [_save setEnabled:TRUE];
     }
-    
-    // Re-run the comparison algorithm
-    //
-    _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
-    [self initTappedSwatches:(int)[_matchedSwatches count]];
-    
-    [_save setEnabled:TRUE];
     
     [self.tableView reloadData];
 }
 
 
-- (IBAction)incrMatchAlgorithm:(id)sender {
+- (IBAction)incr:(id)sender {
+        
+    if (_editFlag == FALSE) {
 
-    _matchAlgIndex++;
-    
-    if (_matchAlgIndex >= [_matchAlgorithms count]) {
-        _matchAlgIndex = 0;
+        if (_currTapSection < _numTapSections) {
+            _currTapSection = _currTapSection + 1;
+
+        } else {
+            _currTapSection = 1;
+        }
+        [self renderTapAreaData];
+        
+    } else {
+
+        _matchAlgIndex++;
+        
+        if (_matchAlgIndex >= [_matchAlgorithms count]) {
+            _matchAlgIndex = 0;
+        }
+        
+        // Re-run the comparison algorithm
+        //
+        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum+1 context:self.context entity:_paintSwatchEntity]];
+        [_matchedSwatches removeObjectAtIndex:0];
+        [self initTappedSwatches:(int)[_matchedSwatches count]];
+        
+        [_save setEnabled:TRUE];
     }
-    
-    // Re-run the comparison algorithm
-    //
-    _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
-    [self initTappedSwatches:(int)[_matchedSwatches count]];
-    
-    [_save setEnabled:TRUE];
 
     [self.tableView reloadData];
+}
+
+- (void)renderTapAreaData {
+
+    int tapSectionsIndex = _numTapSections - _currTapSection;
+    _selPaintSwatch = [[_tapSections objectAtIndex:tapSectionsIndex] objectAtIndex:0];
+
+    int tapIndex = _currTapSection - 1;
+    _tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
+    
+    // Override the default Algorithm index?
+    //
+    _matchAlgIndex = [[_tapArea match_algorithm_id] intValue];
+    _nameEntered   = [_tapArea name] ? [_tapArea name] : @"";
+    _descEntered   = [_tapArea desc] ? [_tapArea desc] : @"";
+    
+    
+    // Match algorithms
+    //
+    _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
+    _maManualOverride = [[_tapArea ma_manual_override] boolValue];
+
+    _dbPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:_selPaintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
+    if (_maManualOverride == TRUE) {
+        _matchedSwatches = [_dbPaintSwatches mutableCopy];
+        
+    } else {
+        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum+1 context:self.context entity:_paintSwatchEntity]];
+        [_matchedSwatches removeObjectAtIndex:0];
+    }
+    
+    [self initTappedSwatches:(int)[_matchedSwatches count]];
+    
+
+    // Keywords
+    //
+    NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
+    NSMutableArray *keywords = [[NSMutableArray alloc] init];
+    for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
+        Keyword *keyword = tap_area_keyword.keyword;
+        [keywords addObject:[keyword name]];
+    }
+    _keywEntered = [keywords componentsJoinedByString:@", "];
+
 }
 
 - (IBAction)removeTableRows:(id)sender {
@@ -859,7 +944,7 @@ const int IMAGE_TAG  = 6;
         //
         _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
         [self initTappedSwatches:(int)[_matchedSwatches count]];
-    
+
         [self.tableView reloadData];
         [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         
@@ -873,12 +958,12 @@ const int IMAGE_TAG  = 6;
 }
 
 - (void)matchButtonsShow {
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [self algButtonsShow];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
+    [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Match"];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
@@ -886,16 +971,31 @@ const int IMAGE_TAG  = 6;
 }
 
 - (void)matchButtonsHide {
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [self algButtonsShow];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
+    [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Areas"];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
+}
+
+- (void)algButtonsShow {
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_ALG_BTN_TAG width:SHOW_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_ALG_BTN_TAG width:SHOW_BUTTON_WIDTH];
+}
+
+- (void)algButtonsHide {
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@""];
+    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_ALG_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_ALG_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 #pragma mark - General purpose methods
