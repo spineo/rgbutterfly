@@ -215,7 +215,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _imageLibButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_LIB_NAME]
                                                   style:UIBarButtonItemStylePlain
                                                   target:self
-                                                  action:@selector(goBack)];
+                                                  action:@selector(showPhotoOptions:)];
     
     _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
                                                     style:UIBarButtonItemStylePlain
@@ -1233,15 +1233,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
     }
     
     [_mainSearchBar resignFirstResponder];
-    [self.navigationItem setTitleView:nil];
-    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
-    [self.navigationItem setRightBarButtonItem:_searchButton];
+    [self restoreNavItems];
 }
 
 - (void)pressCancel {
-    [self.navigationItem setTitleView:nil];
-    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
-    [self.navigationItem setRightBarButtonItem:_searchButton];
+    [self restoreNavItems];
     
     _searchString = nil;
     if ([_listingType isEqualToString:@"Default"]) {
@@ -1281,6 +1277,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [_filterButton setImage:_emptySquareImage];
         [self loadDefaultListing];
     }
+}
+
+- (void)restoreNavItems {
+    [self.navigationItem setTitleView:nil];
+    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
+    [self.navigationItem setRightBarButtonItem:_searchButton];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
