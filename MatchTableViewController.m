@@ -36,7 +36,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
-@property (nonatomic) BOOL editFlag, scrollFlag;
+@property (nonatomic) BOOL editFlag, scrollFlag, isRGB;
 @property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount, numTapSections;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches, *tappedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
@@ -216,6 +216,16 @@ const int IMAGE_TAG  = 6;
     
     [_save setEnabled:FALSE];
     
+    // RGB settings?
+    //
+    _isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
+    
+    if (_isRGB == TRUE) {
+        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
+    } else {
+        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
+    }
+    
     [self matchButtonsHide];
 }
 
@@ -341,10 +351,10 @@ const int IMAGE_TAG  = 6;
         if (_scrollFlag == FALSE || _editFlag == FALSE) {
             UIImage *refImage;
             
-            if (_editFlag == TRUE) {
+            if (_isRGB == TRUE) {
                 refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             } else {
-                refImage = [ColorUtils renderSwatch:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+                refImage = [ColorUtils renderPaint:_selPaintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             }
             
             // Tag the first reference image
@@ -541,7 +551,13 @@ const int IMAGE_TAG  = 6;
         int index = (int)indexPath.row;
         
         if (_editFlag == FALSE || _scrollFlag == FALSE || _pressSelectedRow != index) {
-            cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+
+            if (_isRGB == TRUE) {
+                cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            } else {
+                cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+            }
+            
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
             
             [cell.textLabel setFont:TABLE_CELL_FONT];
@@ -553,7 +569,6 @@ const int IMAGE_TAG  = 6;
             
             if (_editFlag == TRUE) {
                 [cell setAccessoryType:UITableViewCellAccessoryNone];
-                cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
                 
                 BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
                 if (tappedStat == TRUE) {
@@ -957,30 +972,34 @@ const int IMAGE_TAG  = 6;
     }
 }
 
+- (IBAction)toggleRGB:(id)sender {
+    if (_isRGB == TRUE) {
+        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
+        [self setIsRGB:FALSE];
+    } else {
+        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
+        [self setIsRGB:TRUE];
+    }
+    [self.tableView reloadData];
+}
+
+
 - (void)matchButtonsShow {
     [self algButtonsShow];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
     [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Match"];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)matchButtonsHide {
     [self algButtonsShow];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
     [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Areas"];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
 }
 
 - (void)algButtonsShow {
