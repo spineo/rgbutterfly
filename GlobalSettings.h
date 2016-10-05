@@ -337,6 +337,7 @@ extern float const DEF_BORDER_THRESHOLD;
 // Image Tap Areas
 //
 #define TAP_AREA_FONT      [UIFont systemFontOfSize:10]
+#define LG_TAP_AREA_FONT   [UIFont systemFontOfSize:12]
 
 // Generic
 //

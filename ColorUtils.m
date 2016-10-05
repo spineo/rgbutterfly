@@ -333,7 +333,7 @@
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
     
-    NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
+    NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: LG_TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
     
     [rgbValue drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
     
