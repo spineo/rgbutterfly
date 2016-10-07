@@ -26,14 +26,14 @@
 
 @property (nonatomic, strong) PaintSwatches *addPaintSwatch, *selPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches, *mixRatiosList, *mixRatiosComps, *mixRatiosSeen;
-@property (nonatomic, strong) NSArray *coverageNames;
+@property (nonatomic, strong) NSArray *assocTypeNames, *coverageNames;
 
 @property (nonatomic, strong) UIAlertController *saveAlertController;
 @property (nonatomic, strong) UIAlertAction *save, *delete;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
-@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *setRenameText, *applyRenameText, *mixRatiosText;
+@property (nonatomic, strong) NSString *nameHeader, *colorsHeader, *keywHeader, *descHeader, *assocTypeText, *setRenameText, *applyRenameText, *mixRatiosText;
 @property (nonatomic, strong) NSString *namePlaceholder, *assocName, *descPlaceholder, *assocDesc, *keywPlaceholder, *assocKeyw;
 @property (nonatomic) BOOL editFlag, mainColorFlag, textReturn, isReadOnly;
 
@@ -43,9 +43,9 @@
 @property (nonatomic, strong) UIImage *colorRenderingImage;
 @property (nonatomic) CGFloat imageViewXOffset, imageViewYOffset, imageViewWidth, imageViewHeight, assocImageViewWidth, assocImageViewHeight, textFieldYOffset;
 
-@property (nonatomic, strong) UIButton *setButton, *applyButton;
-@property (nonatomic, strong) UITextField *pickerTextField, *coverageName;
-@property (nonatomic) int mixCount, mixRatiosSelRow, coveragePickerSelRow;
+@property (nonatomic, strong) UIButton *assocTypeButton, *setButton, *applyButton;
+@property (nonatomic, strong) UITextField *pickerTextField, *assocTypeName, *coverageName;
+@property (nonatomic) int mixCount, mixRatiosSelRow, assocTypePickerSelRow, coveragePickerSelRow;
 
 @property (nonatomic, strong) AddMixTableViewController *sourceViewController;
 
@@ -59,7 +59,7 @@
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
 @property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
 @property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId;
-@property (nonatomic, strong) UIPickerView *coveragePicker;
+@property (nonatomic, strong) UIPickerView *assocTypePicker, *coveragePicker;
 
 @end
 
@@ -67,21 +67,23 @@
 
 const int ASSOC_COLORS_SECTION = 0;
 const int ASSOC_ADD_SECTION    = 1;
-const int ASSOC_COVER_SECTION  = 2;
-const int ASSOC_APPLY_SECTION  = 3;
-const int ASSOC_NAME_SECTION   = 4;
-const int ASSOC_KEYW_SECTION   = 5;
-const int ASSOC_DESC_SECTION   = 6;
+const int ASSOC_TYPE_SECTION   = 2;
+const int ASSOC_COVER_SECTION  = 3;
+const int ASSOC_APPLY_SECTION  = 4;
+const int ASSOC_NAME_SECTION   = 5;
+const int ASSOC_KEYW_SECTION   = 6;
+const int ASSOC_DESC_SECTION   = 7;
 
-const int ASSOC_MAX_SECTION    = 7;
+const int ASSOC_MAX_SECTION    = 8;
 
-const int ASSOC_COVER_TAG      = 1;
-const int ASSOC_APPLY_TAG      = 2;
-const int ASSOC_NAME_TAG       = 3;
-const int ASSOC_KEYW_TAG       = 4;
-const int ASSOC_DESC_TAG       = 5;
-const int ASSOC_COLORS_TAG     = 6;
-const int ASSOC_SET_TAG        = 7;
+const int ASSOC_TYPE_TAG       = 1;
+const int ASSOC_COVER_TAG      = 2;
+const int ASSOC_APPLY_TAG      = 3;
+const int ASSOC_NAME_TAG       = 4;
+const int ASSOC_KEYW_TAG       = 5;
+const int ASSOC_DESC_TAG       = 6;
+const int ASSOC_COLORS_TAG     = 7;
+const int ASSOC_SET_TAG        = 8;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,7 +117,8 @@ const int ASSOC_SET_TAG        = 7;
     //
     _mixAssocName  = [_mixAssociation name] ? [_mixAssociation name] : @"";
     _mixAssocDesc  = [_mixAssociation desc] ? [_mixAssociation desc] : @"";
-    _coveragePickerSelRow = [[_mixAssociation def_coverage_id] intValue];
+    _coveragePickerSelRow  = [[_mixAssociation def_coverage_id] intValue];
+    _assocTypePickerSelRow = [[_mixAssociation assoc_type_id] intValue];
     
     
     // Keywords
@@ -246,6 +249,15 @@ const int ASSOC_SET_TAG        = 7;
         
     }
     
+    // Assoc Types Picker
+    //
+    id assocTypeObj = [ManagedObjectUtils queryDictionaryName:@"AssociationType" entityId:_assocTypePickerSelRow context:self.context];
+    NSString *assocTypeName = [assocTypeObj name];
+    _assocTypeName = [FieldUtils createTextField:assocTypeName tag:ASSOC_TYPE_TAG];
+    [_assocTypeName setTextAlignment:NSTextAlignmentCenter];
+    [_assocTypeName setDelegate:self];
+    _assocTypeNames  = [ManagedObjectUtils fetchDictNames:@"AssociationType" context:self.context];
+    
     // Canvas Coverage Picker
     //
     id coverageObj = [ManagedObjectUtils queryDictionaryName:@"CanvasCoverage" entityId:_coveragePickerSelRow context:self.context];
@@ -291,14 +303,18 @@ const int ASSOC_SET_TAG        = 7;
     [_saveAlertController addAction:discard];
    
     
-    // Set canvas coverage and Apply renaming button
+    // Set the Association type, Canvas coverage and Apply renaming button
     //
+    _assocTypeText = @"Set the Association Type";
+    [self recreateAssocTypeButton];
+    [_assocTypeButton setEnabled:TRUE];
+    
     _setRenameText = @"Set the Canvas Coverage";
     [self recreateSetCanvasButton];
     [_setButton setEnabled:TRUE];
     
-    _applyRenameText = @"Apply Renaming with Ratios";
-    [self recreateRatiosApplyButton];
+    _applyRenameText = @"";
+    [self recreateApplyButton];
     [_applyButton setEnabled:TRUE];
     
     
@@ -324,8 +340,9 @@ const int ASSOC_SET_TAG        = 7;
 
 - (void)viewDidRotate {
     [self.tableView reloadData];
+    [self recreateAssocTypeButton];
     [self recreateSetCanvasButton];
-    [self recreateRatiosApplyButton];
+    [self recreateApplyButton];
     //[self setFrameSizes];
 }
 
@@ -343,6 +360,16 @@ const int ASSOC_SET_TAG        = 7;
     [_coverageName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
 }
 
+- (void)recreateAssocTypeButton {
+    CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
+    _assocTypeButton = [BarButtonUtils create3DButton:_assocTypeText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
+    [_assocTypeButton.titleLabel setFont:TABLE_CELL_FONT];
+    [_assocTypeButton setTintColor:DARK_TEXT_COLOR];
+    [_assocTypeButton setBackgroundColor:WIDGET_GREEN_COLOR];
+    
+    [_assocTypeButton addTarget:self action:@selector(showAssocTypePicker) forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)recreateSetCanvasButton {
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _setButton = [BarButtonUtils create3DButton:_setRenameText tag:ASSOC_SET_TAG frame:colorButtonFrame];
@@ -353,14 +380,24 @@ const int ASSOC_SET_TAG        = 7;
     [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)recreateRatiosApplyButton {
+- (void)recreateApplyButton {
+    if ([[_assocTypeName text] isEqualToString:@"Mix"]) {
+        _applyRenameText = @"Apply Renaming with Ratios";
+        
+    } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
+        _applyRenameText = @"Apply Generic Renaming";
+        
+    } else if ([[_assocTypeName text] isEqualToString:@"Coverage"]) {
+        _applyRenameText = @"Apply Coverage Renaming";
+    }
+    
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
     [_applyButton setTintColor:DARK_TEXT_COLOR];
     [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];
-
-    [_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initializeFetchedResultsController {
@@ -416,11 +453,11 @@ const int ASSOC_SET_TAG        = 7;
             return DEF_TABLE_HDR_HEIGHT;
         }
 
-    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_COVER_SECTION) || (section == ASSOC_APPLY_SECTION)) {
+    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_TYPE_SECTION) || (section == ASSOC_COVER_SECTION) || (section == ASSOC_APPLY_SECTION)) {
         return DEF_NIL_HEADER;
         
-    } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
-        return DEF_NIL_HEADER;
+//    } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
+//        return DEF_NIL_HEADER;
         
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -480,6 +517,9 @@ const int ASSOC_SET_TAG        = 7;
     } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_ADD_SECTION)) &&
         ((_editFlag == FALSE) || (_isReadOnly == TRUE))
     ) {
+        return 0;
+        
+    } else if ((section == ASSOC_APPLY_SECTION) && ([[_assocTypeName text] isEqualToString:@"Unknown"])) {
         return 0;
 
     } else if (section == ASSOC_COLORS_SECTION) {
@@ -586,6 +626,18 @@ const int ASSOC_SET_TAG        = 7;
         [cell.textLabel setFont:TABLE_CELL_FONT];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+        
+    } else if (indexPath.section == ASSOC_TYPE_SECTION) {
+        
+        if (_editFlag == TRUE) {
+            [cell.contentView addSubview:_assocTypeButton];
+            [cell setAccessoryType: UITableViewCellAccessoryNone];
+        } else {
+            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont:TABLE_HEADER_FONT];
+            [cell.textLabel setText:[[NSString alloc] initWithFormat:@"Association Type: %@", [_assocTypeNames objectAtIndex:_assocTypePickerSelRow]]];
+        }
         
     } else if (indexPath.section == ASSOC_COVER_SECTION) {
         
@@ -941,6 +993,7 @@ const int ASSOC_SET_TAG        = 7;
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
     [_mixAssociation setDef_coverage_id:[NSNumber numberWithInt:_coveragePickerSelRow]];
+    [_mixAssociation setAssoc_type_id:[NSNumber numberWithInt:_assocTypePickerSelRow]];
 
     
     // Delete all MixAssociation Keywords and first
@@ -1010,8 +1063,23 @@ const int ASSOC_SET_TAG        = 7;
 #pragma mark - Object Methods
 
 - (void)applyRenaming {
+    if ([[_assocTypeName text] isEqualToString:@"Mix"]) {
+        [self showMixRatiosPicker];
+        
+    } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
+        [self applyGenericRenaming];
 
-    [_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
+    } else {
+        [self applyCoverageRenaming];
+    }
+    
+    [_save setEnabled:TRUE];
+    [self.tableView reloadData];
+}
+
+- (void)applyMixRenaming {
+
+    //[_applyButton setTitle:_applyRenameText forState:UIControlStateNormal];
     
     NSString *refName_1, *refName_2;
     
@@ -1084,15 +1152,49 @@ const int ASSOC_SET_TAG        = 7;
         [paintSwatch setMix_parts_ratio:[NSNumber numberWithInt:ratio_2]];
     }
     
-    // Rename the MixAssociation
+    // Rename the Mix Association
     //
     _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@%@", refName_1, refName_2, coverageName];
-    
-    //[_applyButton setEnabled:FALSE];
-    [_save setEnabled:TRUE];
+}
 
+- (void)applyGenericRenaming {
     
-    [self.tableView reloadData];
+    int swatch_ct = (int)[_mixAssocSwatches count];
+    for (int i=0; i<swatch_ct; i++) {
+
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
+        // Skip any Paint Swatch that is an add
+        //
+        BOOL paintSwatchIsAdd = [[mixAssocSwatch paint_swatch_is_add] boolValue];
+        if (paintSwatchIsAdd == TRUE) {
+            continue;
+        }
+    
+        [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
+        
+        PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:self.context];
+        int assoc_id = [[paintSwatchType order] intValue];
+        [paintSwatch setType_id:[NSNumber numberWithInt:assoc_id]];
+    
+        int num = i + 1;
+        [paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i (%@)", num, [_assocTypeName text]]];
+    }
+    
+    // Rename the Generic Association
+    //
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ Assoc %@", [_assocTypeName text], [GenericUtils getCurrDateString]];
+}
+
+- (void)applyCoverageRenaming {
+
+    // Rename the Coverage Association
+    //
+    MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:0];
+    PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+    
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ (%@)", [paintSwatch name], [_assocTypeName text]];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1173,6 +1275,42 @@ const int ASSOC_SET_TAG        = 7;
     }
 }
 
+- (void)showAssocTypePicker {
+    
+    // Tie the set Coverage button to a UI Picker
+    //
+    _assocTypePicker = [FieldUtils createPickerView:self.view.frame.size.width tag:ASSOC_TYPE_TAG xOffset:DEF_X_OFFSET yOffset:DEF_TOOLBAR_HEIGHT];
+    [_assocTypePicker setDataSource:self];
+    [_assocTypePicker setDelegate:self];
+    
+    UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _assocTypePicker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
+    [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(assocTypeSelection)];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    
+    [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+    
+    UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _assocTypePicker.bounds.size.width, _assocTypePicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
+    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView addSubview:pickerToolbar];
+    [pickerParentView addSubview:_assocTypePicker];
+    
+    _assocTypeName = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    [_assocTypeName setInputView:pickerParentView];
+    [self.view addSubview:_assocTypeName];
+    
+    [_assocTypePicker selectRow:_assocTypePickerSelRow inComponent:0 animated:YES];
+    
+    [_assocTypeName becomeFirstResponder];
+}
+
+- (void)assocTypeSelection {
+    [_assocTypeName setText:[_assocTypeNames objectAtIndex:_assocTypePickerSelRow]];
+    [_assocTypePicker selectRow:_assocTypePickerSelRow inComponent:0 animated:YES];
+    [_assocTypeName resignFirstResponder];
+}
+
 - (void)showCoveragePicker {
 
     // Tie the set Coverage button to a UI Picker
@@ -1219,8 +1357,12 @@ const int ASSOC_SET_TAG        = 7;
 //
 - (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
 
-    if (pickerView.tag == ASSOC_COVER_TAG) {
+    if (pickerView.tag == ASSOC_TYPE_TAG) {
+        return (long)[_assocTypeNames count];
+    
+    } else if (pickerView.tag == ASSOC_COVER_TAG) {
         return (long)[_coverageNames count];
+
     } else {
         return (long)[_mixRatiosList count];
     }
@@ -1236,8 +1378,12 @@ const int ASSOC_SET_TAG        = 7;
 //
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
-    if (pickerView.tag == ASSOC_COVER_TAG) {
+    if (pickerView.tag == ASSOC_TYPE_TAG) {
+        return [_assocTypeNames objectAtIndex:row];
+        
+    } else if (pickerView.tag == ASSOC_COVER_TAG) {
         return [_coverageNames objectAtIndex:row];
+
     } else {
         return [_mixRatiosList objectAtIndex:row];
     }
@@ -1253,7 +1399,11 @@ const int ASSOC_SET_TAG        = 7;
     [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [label.layer setBorderWidth: DEF_BORDER_WIDTH];
 
-    if (pickerView.tag == ASSOC_COVER_TAG) {
+    if (pickerView.tag == ASSOC_TYPE_TAG) {
+        [label setText:[_assocTypeNames objectAtIndex:row]];
+        [label setTextColor: LIGHT_TEXT_COLOR];
+    
+    } else if (pickerView.tag == ASSOC_COVER_TAG) {
         [label setText:[_coverageNames objectAtIndex:row]];
         [label setTextColor: LIGHT_TEXT_COLOR];
     
@@ -1279,7 +1429,13 @@ const int ASSOC_SET_TAG        = 7;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (pickerView.tag == ASSOC_COVER_TAG) {
+    
+    if (pickerView.tag == ASSOC_TYPE_TAG) {
+        NSString *assocType = [_assocTypeNames objectAtIndex:row];
+        [_assocTypeName setText:assocType];
+        _assocTypePickerSelRow = (int)row;
+
+    } else if (pickerView.tag == ASSOC_COVER_TAG) {
         NSString *coverageType = [_coverageNames objectAtIndex:row];
         [_coverageName setText:coverageType];
         _coveragePickerSelRow = (int)row;
@@ -1287,6 +1443,9 @@ const int ASSOC_SET_TAG        = 7;
     } else {
         _mixRatiosSelRow      = (int)row;
     }
+
+    [self recreateApplyButton];
+    [self.tableView reloadData];
     [_save setEnabled:TRUE];
 }
 

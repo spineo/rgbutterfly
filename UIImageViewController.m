@@ -1691,7 +1691,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-         _assocName = [[NSString alloc] initWithFormat:@"MixAssoc %@", [GenericUtils getCurrDateString]];
+         _assocName = [[NSString alloc] initWithFormat:@"Association %@", [GenericUtils getCurrDateString]];
     }
     
     [_mixAssociation setName:_assocName];
@@ -1721,7 +1721,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         NSString *name = [paintSwatch name];
         if (name == nil) {
-            [paintSwatch setName:[[NSString alloc] initWithFormat:@"Mix %i", mix_ct]];
+            [paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i", mix_ct]];
         }
         
         MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];

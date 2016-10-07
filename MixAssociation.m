@@ -12,6 +12,7 @@
 
 @implementation MixAssociation
 
+@dynamic assoc_type_id;
 @dynamic create_date;
 @dynamic def_coverage_id;
 @dynamic desc;

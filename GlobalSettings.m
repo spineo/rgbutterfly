@@ -324,6 +324,10 @@ static NSDictionary *swatchTypes;
 
     [ManagedObjectUtils deleteDictionaryEntity:@"CanvasCoverage"];
     [ManagedObjectUtils insertFromDataFile:@"CanvasCoverage"];
+    
+    [ManagedObjectUtils deleteDictionaryEntity:@"AssociationType"];
+    [ManagedObjectUtils insertFromDataFile:@"AssociationType"];
+
 
     // NSUserDefaults intialization
     //

@@ -147,7 +147,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                                 [self updateTable:DEFAULT_LISTING_TYPE];
                                                             }];
     
-    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Mix Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
         [self updateTable:@"Mix"];
     }];
     
@@ -612,7 +612,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:@"Mix"]) {
-        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Mix Associations Listing (%i)", _numMixAssocs];
+        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Associations Listing (%i)", _numMixAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];

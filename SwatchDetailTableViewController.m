@@ -434,7 +434,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
          (section == DETAIL_PIGMENT_SECTION)
         ) && (![[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Reference"])) {
         return 0;
-    
+        
+    } else if ((section == DETAIL_COVERAGE_SECTION)
+            && ([[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Generic"])) {
+        return 0;
+
     } else if ((section == DETAIL_BRAND_SECTION) &&
                ([[_paintBrandNames objectAtIndex:_brandPickerSelRow] isEqualToString:@"Other"]) &&
                ((_editFlag == TRUE) || ![_otherName isEqualToString:@""])) {
@@ -732,6 +736,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
          (section == DETAIL_BODY_SECTION)    ||
          (section == DETAIL_PIGMENT_SECTION)
          ) && (![[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Reference"])) {
+        return DEF_NIL_HEADER;
+        
+    } else if ((section == DETAIL_COVERAGE_SECTION)
+               && ([[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Generic"])) {
         return DEF_NIL_HEADER;
 
     } else if ((

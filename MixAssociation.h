@@ -13,6 +13,7 @@
 
 @interface MixAssociation : NSManagedObject
 
+@property (nonatomic, retain) NSNumber *assoc_type_id;
 @property (nonatomic, retain) NSDate * create_date;
 @property (nonatomic, retain) NSNumber *def_coverage_id;
 @property (nonatomic, retain) NSString * desc;

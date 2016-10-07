@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
+            startingLineNumber = "674"
+            endingLineNumber = "674"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "681"
-            endingLineNumber = "681"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "700"
+            endingLineNumber = "700"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,55 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "697"
-            endingLineNumber = "697"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "699"
-            endingLineNumber = "699"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "702"
-            endingLineNumber = "702"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "701"
@@ -186,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "692"
-            endingLineNumber = "692"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "686"
-            endingLineNumber = "686"
+            startingLineNumber = "706"
+            endingLineNumber = "706"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "684"
-            endingLineNumber = "684"
+            startingLineNumber = "705"
+            endingLineNumber = "705"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,7 +186,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "696"
+            endingLineNumber = "696"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwatchDetailTableViewController.m"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "690"
@@ -250,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "689"
-            endingLineNumber = "689"
+            startingLineNumber = "688"
+            endingLineNumber = "688"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "671"
-            endingLineNumber = "671"
+            startingLineNumber = "694"
+            endingLineNumber = "694"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +250,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "678"
-            endingLineNumber = "678"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwatchDetailTableViewController.m"
+            timestampString = "497449197.886097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwatchDetailTableViewController.m"
+            timestampString = "497449197.886097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "682"
+            endingLineNumber = "682"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,23 +346,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "683"
-            endingLineNumber = "683"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "687"
@@ -378,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
+            startingLineNumber = "691"
+            endingLineNumber = "691"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "694"
-            endingLineNumber = "694"
+            startingLineNumber = "692"
+            endingLineNumber = "692"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +394,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwatchDetailTableViewController.m"
-            timestampString = "497039679.131424"
+            timestampString = "497449197.886097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "695"
-            endingLineNumber = "695"
+            startingLineNumber = "698"
+            endingLineNumber = "698"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwatchDetailTableViewController.m"
+            timestampString = "497449197.886097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1420"
-            endingLineNumber = "1420"
+            startingLineNumber = "1579"
+            endingLineNumber = "1579"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1422"
-            endingLineNumber = "1422"
+            startingLineNumber = "1581"
+            endingLineNumber = "1581"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1424"
-            endingLineNumber = "1424"
+            startingLineNumber = "1583"
+            endingLineNumber = "1583"
             landmarkName = "-unwindToAssocFromAdd:"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1428"
-            endingLineNumber = "1428"
+            startingLineNumber = "1587"
+            endingLineNumber = "1587"
             landmarkName = "-unwindToAssocFromDetail:"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,11 +490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1429"
-            endingLineNumber = "1429"
+            startingLineNumber = "1588"
+            endingLineNumber = "1588"
             landmarkName = "-unwindToAssocFromDetail:"
             landmarkType = "7">
          </BreakpointContent>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1460"
-            endingLineNumber = "1460">
+            startingLineNumber = "1619"
+            endingLineNumber = "1619">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1461"
-            endingLineNumber = "1461">
+            startingLineNumber = "1620"
+            endingLineNumber = "1620">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -534,11 +534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1462"
-            endingLineNumber = "1462">
+            startingLineNumber = "1621"
+            endingLineNumber = "1621">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -948,11 +948,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MixAssociation.h"
-            timestampString = "495824351.737553"
+            timestampString = "497452018.15597"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "@interface MixAssociation(CoreDataGeneratedAccessors)"
             landmarkType = "2">
          </BreakpointContent>
@@ -2128,11 +2128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497541997.205629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "821"
-            endingLineNumber = "821"
+            startingLineNumber = "873"
+            endingLineNumber = "873"
             landmarkName = "-tableView:canEditRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2144,11 +2144,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497541997.205629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "775"
-            endingLineNumber = "775"
+            startingLineNumber = "827"
+            endingLineNumber = "827"
             landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2160,11 +2160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497541997.205629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "775"
-            endingLineNumber = "775"
+            startingLineNumber = "827"
+            endingLineNumber = "827"
             landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2176,11 +2176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497541997.205629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "767"
-            endingLineNumber = "767"
+            startingLineNumber = "819"
+            endingLineNumber = "819"
             landmarkName = "-tableView:moveRowAtIndexPath:toIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2192,11 +2192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1453"
-            endingLineNumber = "1453">
+            startingLineNumber = "1612"
+            endingLineNumber = "1612">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2206,11 +2206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1448"
-            endingLineNumber = "1448">
+            startingLineNumber = "1607"
+            endingLineNumber = "1607">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2220,11 +2220,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1448"
-            endingLineNumber = "1448">
+            startingLineNumber = "1607"
+            endingLineNumber = "1607">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2234,11 +2234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1440"
-            endingLineNumber = "1440">
+            startingLineNumber = "1599"
+            endingLineNumber = "1599">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2688,11 +2688,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AssocTableViewController.m"
-            timestampString = "495982526.260165"
+            timestampString = "497543202.189505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1148"
-            endingLineNumber = "1148"
+            startingLineNumber = "1250"
+            endingLineNumber = "1250"
             landmarkName = "-showMixRatiosPicker"
             landmarkType = "7">
          </BreakpointContent>
@@ -4214,6 +4214,70 @@
             startingLineNumber = "1063"
             endingLineNumber = "1063"
             landmarkName = "-showPhotoOptions:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "497543202.189505"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1187"
+            endingLineNumber = "1187"
+            landmarkName = "-applyGenericRenaming"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "497543202.189505"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1182"
+            endingLineNumber = "1182"
+            landmarkName = "-applyGenericRenaming"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "497543054.386872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1179"
+            endingLineNumber = "1179"
+            landmarkName = "-applyGenericRenaming"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssocTableViewController.m"
+            timestampString = "497543054.386872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1176"
+            endingLineNumber = "1176"
+            landmarkName = "-applyGenericRenaming"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

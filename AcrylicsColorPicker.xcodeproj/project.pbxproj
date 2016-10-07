@@ -81,6 +81,9 @@
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
 		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
 		21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BE8EEB1D18261F0039A9FA /* PickerUtils.m */; };
+		21CBAEC01DA6757100E0C6BF /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */; };
+		21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */; };
+		21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */; };
 		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
@@ -246,6 +249,11 @@
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21BE8EEA1D18261F0039A9FA /* PickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerUtils.h; sourceTree = "<group>"; };
 		21BE8EEB1D18261F0039A9FA /* PickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerUtils.m; sourceTree = "<group>"; };
+		21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AssociationType.txt; sourceTree = "<group>"; };
+		21CBAEC11DA6801B00E0C6BF /* AssociationType+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AssociationType+CoreDataClass.h"; sourceTree = "<group>"; };
+		21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssociationType+CoreDataClass.m"; sourceTree = "<group>"; };
+		21CBAEC31DA6801B00E0C6BF /* AssociationType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AssociationType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssociationType+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
@@ -331,6 +339,10 @@
 		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				21CBAEC11DA6801B00E0C6BF /* AssociationType+CoreDataClass.h */,
+				21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */,
+				21CBAEC31DA6801B00E0C6BF /* AssociationType+CoreDataProperties.h */,
+				21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */,
 				2174C5921D79BCC50093E48F /* CanvasCoverage+CoreDataClass.h */,
 				2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */,
 				2174C5941D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.h */,
@@ -432,6 +444,7 @@
 				2133F2171CFB51DD00FB91AD /* PigmentType.txt */,
 				2133F2191CFB521800FB91AD /* BodyType.txt */,
 				2174C58E1D79B1610093E48F /* CanvasCoverage.txt */,
+				21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -660,6 +673,7 @@
 				21397EDD1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements in Resources */,
 				2133F2101CFB2DF800FB91AD /* PaintBrand.txt in Resources */,
 				21397E871C848457001C3F05 /* SubjectiveColor.txt in Resources */,
+				21CBAEC01DA6757100E0C6BF /* AssociationType.txt in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
 			);
@@ -715,6 +729,7 @@
 				21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
+				21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */,
 				21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
 				21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */,
@@ -739,6 +754,7 @@
 				214430ED1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m in Sources */,
 				21397ED91C848674001C3F05 /* SwatchDetailTableViewController.m in Sources */,
 				2133F21F1CFB530600FB91AD /* PigmentType+CoreDataProperties.m in Sources */,
+				21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */,
 				21397E9A1C8484D7001C3F05 /* ACPString.m in Sources */,
 				2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */,
 				21397E9F1C8484D7001C3F05 /* FieldUtils.m in Sources */,
