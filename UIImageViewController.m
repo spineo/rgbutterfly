@@ -416,7 +416,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Assoc Edit Button Alert Controller
     //
-    _assocEditAlertController = [UIAlertController alertControllerWithTitle:@"Mix Association Edit"
+    _assocEditAlertController = [UIAlertController alertControllerWithTitle:@"Association Edit"
                                                                     message:@"Please select operation"
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
@@ -484,7 +484,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 [self resetViews];
                                             }];
     
-    _associateMixes = [UIAlertAction actionWithTitle:@"Associate Mixes" style:UIAlertActionStyleDefault
+    _associateMixes = [UIAlertAction actionWithTitle:@"Associations" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = ASSOC_VIEW_TYPE;
 
@@ -1739,11 +1739,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MixAssociation and relations save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and relations save" message:@"Error saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
-        NSLog(@"MixAssociation and relations save successful");
+        NSLog(@"Association and relations save successful");
         
         _tapAreasChanged = FALSE;
         
@@ -1770,11 +1770,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MixAssociation and relations delete" message:@"Error saving"];
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and relations delete" message:@"Error saving"];
             [self presentViewController:myAlert animated:YES completion:nil];
             
         } else {
-            NSLog(@"MixAssociation and relations delete successful");
+            NSLog(@"Association and relations delete successful");
             
 //            // Update the title
 //            //
@@ -2126,10 +2126,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"AssocTableViewSegue"]) {
         
-        // Save the MixAssociation first
+        // Save the Association first
         //
         if (_mixAssociation == nil || _tapAreasChanged == TRUE) {
-//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Mix Association" message:@"Please save first"];
+//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association" message:@"Please save first"];
 //            [self presentViewController:myAlert animated:YES completion:nil];
             [self saveMixAssoc];
         }

@@ -58,7 +58,7 @@
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
 @property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
-@property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId;
+@property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId, *genTypeId;
 @property (nonatomic, strong) UIPickerView *assocTypePicker, *coveragePicker;
 
 @end
@@ -112,6 +112,8 @@ const int ASSOC_SET_TAG        = 8;
     _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
     _refTypeId = [_paintSwatchTypes valueForKey:@"Reference"];
     _mixTypeId = [_paintSwatchTypes valueForKey:@"MixAssoc"];
+    _genTypeId = [_paintSwatchTypes valueForKey:@"Generic"];
+
 
     // Set the name and desc values
     //
@@ -136,9 +138,9 @@ const int ASSOC_SET_TAG        = 8;
     
     _textReturn = FALSE;
     
-    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Name (max. of %i chars) - ", MAX_NAME_LEN];
+    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Association Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Mix Association Description (max. %i chars) - ", MAX_DESC_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Association Description (max. %i chars) - ", MAX_DESC_LEN];
     
     _reuseCellIdentifier = @"AssocTableCell";
     
@@ -148,14 +150,14 @@ const int ASSOC_SET_TAG        = 8;
     
     // Header labels
     //
-    _colorsHeader      = @"Mix Association Colors";
-    _nameHeader        = @"Mix Association Name";
-    _keywHeader        = @"Mix Association Keywords";
-    _descHeader        = @"Mix Association Description";
+    _colorsHeader      = @"Association Colors";
+    _nameHeader        = @"Association Name";
+    _keywHeader        = @"Association Keywords";
+    _descHeader        = @"Association Description";
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
-    _addColorLabel     = @"Add Ref/Mix Association";
+    _addColorLabel     = @"Add Ref/Mix/Generic to Association";
     
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
@@ -277,7 +279,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Match Edit Button Alert Controller
     //
-    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Mix Association Edit"
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Association Edit"
                                                                     message:@"Please select operation"
                                                              preferredStyle:UIAlertControllerStyleAlert];
     
@@ -288,7 +290,7 @@ const int ASSOC_SET_TAG        = 8;
                                                      [self saveData];
     }];
     
-    _delete = [UIAlertAction actionWithTitle:@"Delete Mix" style:UIAlertActionStyleDefault
+    _delete = [UIAlertAction actionWithTitle:@"Delete Association" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [self deleteData];
 
@@ -317,7 +319,6 @@ const int ASSOC_SET_TAG        = 8;
     [self recreateApplyButton];
     [_applyButton setEnabled:TRUE];
     
-    
     [_save setEnabled:FALSE];
 
     [self homeButtonShow];
@@ -339,10 +340,10 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (void)viewDidRotate {
-    [self.tableView reloadData];
     [self recreateAssocTypeButton];
     [self recreateSetCanvasButton];
     [self recreateApplyButton];
+    [self.tableView reloadData];
     //[self setFrameSizes];
 }
 
@@ -368,6 +369,7 @@ const int ASSOC_SET_TAG        = 8;
     [_assocTypeButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_assocTypeButton addTarget:self action:@selector(showAssocTypePicker) forControlEvents:UIControlEventTouchUpInside];
+    //[_assocTypeButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)recreateSetCanvasButton {
@@ -378,17 +380,25 @@ const int ASSOC_SET_TAG        = 8;
     [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
+    //[_setButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)recreateApplyButton {
+    SEL selector;
     if ([[_assocTypeName text] isEqualToString:@"Mix"]) {
         _applyRenameText = @"Apply Renaming with Ratios";
+        //[_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
+        selector = @selector(showMixRatiosPicker);
         
     } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
         _applyRenameText = @"Apply Generic Renaming";
+        //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+        selector = @selector(applyRenaming);
         
     } else if ([[_assocTypeName text] isEqualToString:@"Coverage"]) {
         _applyRenameText = @"Apply Coverage Renaming";
+        //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+        selector = @selector(applyRenaming);
     }
     
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
@@ -397,7 +407,7 @@ const int ASSOC_SET_TAG        = 8;
     [_applyButton setTintColor:DARK_TEXT_COLOR];
     [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
-    [_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
+    [_applyButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initializeFetchedResultsController {
@@ -519,7 +529,10 @@ const int ASSOC_SET_TAG        = 8;
     ) {
         return 0;
         
-    } else if ((section == ASSOC_APPLY_SECTION) && ([[_assocTypeName text] isEqualToString:@"Unknown"])) {
+    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Unknown"]) {
+        return 0;
+    
+    } else if (((section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Generic"]) {
         return 0;
 
     } else if (section == ASSOC_COLORS_SECTION) {
@@ -656,9 +669,9 @@ const int ASSOC_SET_TAG        = 8;
         cell.imageView.image = nil;
         [cell.contentView addSubview:_applyButton];
         
-        [cell setBackgroundColor: DARK_BG_COLOR];
-        [cell.textLabel setTextColor: LIGHT_TEXT_COLOR];
-        [cell.textLabel setFont: TABLE_CELL_FONT];
+        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+        [cell.textLabel setFont:TABLE_CELL_FONT];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
 
@@ -987,7 +1000,7 @@ const int ASSOC_SET_TAG        = 8;
     // Add a placeholder value if missing
     //
     if ([_mixAssocName isEqualToString:@""]) {
-        _mixAssocName = [[NSString alloc] initWithFormat:@"MixAssoc %i", (int)[_mixAssociation objectID]];
+        _mixAssocName = [[NSString alloc] initWithFormat:@"Association %i", (int)[_mixAssociation objectID]];
     }
 
     [_mixAssociation setName:_mixAssocName];
@@ -996,7 +1009,7 @@ const int ASSOC_SET_TAG        = 8;
     [_mixAssociation setAssoc_type_id:[NSNumber numberWithInt:_assocTypePickerSelRow]];
 
     
-    // Delete all MixAssociation Keywords and first
+    // Delete all Association Keywords and first
     //
     [ManagedObjectUtils deleteMixAssocKeywords:_mixAssociation context:self.context];
     
@@ -1031,7 +1044,7 @@ const int ASSOC_SET_TAG        = 8;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Mix assoc save successful");
+        NSLog(@"Association save successful");
         
         [_applyButton setEnabled:FALSE];
         [_save setEnabled:FALSE];
@@ -1050,7 +1063,7 @@ const int ASSOC_SET_TAG        = 8;
     if (![self.context save:&error]) {
         NSLog(@"Error delete context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Mix delete successful");
+        NSLog(@"Association delete successful");
         
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -1064,7 +1077,7 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)applyRenaming {
     if ([[_assocTypeName text] isEqualToString:@"Mix"]) {
-        [self showMixRatiosPicker];
+        [self applyMixRenaming];
         
     } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
         [self applyGenericRenaming];
@@ -1152,7 +1165,7 @@ const int ASSOC_SET_TAG        = 8;
         [paintSwatch setMix_parts_ratio:[NSNumber numberWithInt:ratio_2]];
     }
     
-    // Rename the Mix Association
+    // Rename the Association
     //
     _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@%@", refName_1, refName_2, coverageName];
 }
@@ -1173,10 +1186,7 @@ const int ASSOC_SET_TAG        = 8;
         }
     
         [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
-        
-        PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:self.context];
-        int assoc_id = [[paintSwatchType order] intValue];
-        [paintSwatch setType_id:[NSNumber numberWithInt:assoc_id]];
+        [paintSwatch setType_id:_genTypeId];
     
         int num = i + 1;
         [paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i (%@)", num, [_assocTypeName text]]];
@@ -1184,7 +1194,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Rename the Generic Association
     //
-    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ Assoc %@", [_assocTypeName text], [GenericUtils getCurrDateString]];
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ Association %@", [_assocTypeName text], [GenericUtils getCurrDateString]];
 }
 
 - (void)applyCoverageRenaming {
@@ -1435,6 +1445,8 @@ const int ASSOC_SET_TAG        = 8;
         [_assocTypeName setText:assocType];
         _assocTypePickerSelRow = (int)row;
 
+        [self recreateApplyButton];
+
     } else if (pickerView.tag == ASSOC_COVER_TAG) {
         NSString *coverageType = [_coverageNames objectAtIndex:row];
         [_coverageName setText:coverageType];
@@ -1444,7 +1456,6 @@ const int ASSOC_SET_TAG        = 8;
         _mixRatiosSelRow      = (int)row;
     }
 
-    [self recreateApplyButton];
     [self.tableView reloadData];
     [_save setEnabled:TRUE];
 }
@@ -1516,7 +1527,7 @@ const int ASSOC_SET_TAG        = 8;
         UINavigationController *navigationViewController = [segue destinationViewController];
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
         
-        // Query the mix association ids
+        // Query the association ids
         //
         NSMutableArray *mixAssocSwatches = [ManagedObjectUtils queryMixAssocBySwatch:_addPaintSwatch.objectID context:self.context];
         
