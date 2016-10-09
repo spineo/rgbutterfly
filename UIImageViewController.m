@@ -1294,12 +1294,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (! custCell) {
             custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
-        
+        [custCell setXOffset:custCell.bounds.origin.x + DEF_TABLE_CELL_HEIGHT + DEF_FIELD_PADDING*2];
         [custCell setBackgroundColor:DARK_BG_COLOR];
-        
+        [custCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
-        int tapIndex = _currTapSection - (int)indexPath.row - 1;
+        int tapNum = _currTapSection - (int)indexPath.row;
+        int tapIndex = tapNum - 1;
 
         int match_algorithm_id = _matchAlgIndex;
         int swatch_ct          = _maxMatchNum;
@@ -1320,6 +1321,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSInteger index = custCell.collectionView.tag;
         
         CGFloat horizontalOffset = [self.contentOffsetDictionary[[@(index) stringValue]] floatValue];
+        
+        PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:indexPath.row] objectAtIndex:0];
+        
+        UIImage *image = [ColorUtils renderSwatch:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        
+        custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum];
+
+        
+        // Tag the first reference image
+        //
+        [custCell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+        [custCell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+        [custCell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+        [custCell.imageView setContentMode: UIViewContentModeScaleAspectFit];
+        [custCell.imageView setClipsToBounds: YES];
+
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
         return custCell;
@@ -1353,6 +1370,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell.imageView setFrame:CGRectMake(2, 15, cell.imageView.frame.size.width, cell.imageView.frame.size.height)];
+}
+
 
 // Unused (delegate set to the collection view)
 //
@@ -1436,7 +1458,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     NSArray *collectionViewArray = [self.collectionMatchArray objectAtIndex:index];
     
-    return (int)[collectionViewArray count];
+    return (int)[collectionViewArray count] - 1;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -1444,22 +1466,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     int index = (int)collectionView.tag;
     
-    PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:index] objectAtIndex:indexPath.row];
+    PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:index] objectAtIndex:indexPath.row + 1];
     
     UIImage *swatchImage = [ColorUtils renderSwatch:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     
     // Tag the first reference image
     //
-    if (indexPath.row == 0) {
-        int area = _currTapSection - index;
-        swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:area];
-    }
+//    if (indexPath.row == 0) {
+//        int area = _currTapSection - index;
+//        swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:area];
+//    }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
 
-    [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-    [swatchImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-    [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [swatchImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+    [swatchImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+    [swatchImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
     [swatchImageView setContentMode: UIViewContentModeScaleAspectFit];
     [swatchImageView setClipsToBounds: YES];

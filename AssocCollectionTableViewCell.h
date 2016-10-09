@@ -13,6 +13,7 @@ static NSString *CollectionViewCellIdentifier = @"CollectionViewCellIdentifier";
 @interface AssocCollectionTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic) CGFloat xOffset;
 
 - (void)setAssocName:(NSString *)desc;
 - (void)setNoLabelLayout;
