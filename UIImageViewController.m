@@ -59,7 +59,8 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
-@property (nonatomic) CGPoint touchPoint;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic) CGPoint touchPoint, dragStartPoint, dragEndPoint;
 
 @property (nonatomic, strong) PaintSwatches *swatchObj;
 @property (nonatomic, strong) TapArea *tapArea;
@@ -266,12 +267,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self setBorderThreshold:DEF_BORDER_THRESHOLD];
     
     
-    // Long press recognizer
+    // Long press recognizer (commented out, use button instead)
     //
-    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
-    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
-    [_imageView addGestureRecognizer:_longPressRecognizer];
+//    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+//    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
+//    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
+//    [_imageView addGestureRecognizer:_longPressRecognizer];
+    
+    // Pan gesture recognizer
+    //
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveTapArea:)];
+    [_imageView addGestureRecognizer:_panGestureRecognizer];
     
     
     // Hide the "arrow" buttons by default
@@ -939,6 +945,25 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
 }
 
+- (void)moveTapArea:(UIPanGestureRecognizer *)gesture {
+
+    CGPoint touchPoint = [gesture locationInView:_imageView];
+    
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        _dragStartPoint = touchPoint;
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        _dragEndPoint = touchPoint;
+        
+        [self dragShape];
+        
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        _dragEndPoint = touchPoint;
+    
+        [self dragShape];
+    }
+}
+
 - (void)drawTouchShape {
     int listCount = (int)[_paintSwatches count];
     
@@ -999,7 +1024,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Set the RGB and HSB value
         //
-        [self setColorValues];
+        [self setColorValues:_touchPoint];
 
         // Save the thumbnail image
         //
@@ -1044,6 +1069,78 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     [self setTapAreas];
 }
+
+- (void)dragShape {
+    int listCount = (int)[_paintSwatches count];
+    
+    [self setTapAreaSeen:0];
+    
+    NSMutableArray *tempPaintSwatches = [[NSMutableArray alloc] initWithArray:_paintSwatches];
+    _paintSwatches = [[NSMutableArray alloc] init];
+    
+    int seen_index = 0;
+    
+    for (int i=0; i<listCount; i++) {
+        PaintSwatches *swatchObj = [tempPaintSwatches objectAtIndex:i];
+        
+        CGPoint pt = CGPointFromString(swatchObj.coord_pt);
+        
+        CGFloat xpt = pt.x - (_shapeLength / 2);
+        CGFloat ypt = pt.y - (_shapeLength / 2);
+        
+        CGFloat xtpt= _dragStartPoint.x - (_shapeLength / 2);
+        CGFloat ytpt= _dragStartPoint.y - (_shapeLength / 2);
+        
+        
+        if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
+            
+            //[_imageTableView setHidden:NO];
+            //[_imageScrollView setHidden:NO];
+            
+            // Remove the PaintSwatch and any existing relations
+            //
+            [_paintSwatches removeObject:swatchObj];
+            [self deleteTapArea:swatchObj];
+            
+            
+            // Insert the new PaintSwatch
+            //
+            // Instantiate the new PaintSwatch Object
+            //
+            _swatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
+            
+            [_swatchObj setCoord_pt:NSStringFromCGPoint(_dragEndPoint)];
+
+            
+            // Set the RGB and HSB value
+            //
+            [self setColorValues:_dragEndPoint];
+            
+            // Save the thumbnail image
+            //
+            CGFloat xpt= _dragEndPoint.x - (_shapeLength / 2);
+            CGFloat ypt= _dragEndPoint.y - (_shapeLength / 2);
+            UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+            [_swatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
+            
+            [_paintSwatches addObject:_swatchObj];
+            
+            if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+                [self matchButtonsShow];
+                
+            } else {
+                [self viewButtonShow];
+            }
+            
+        } else {
+            [_paintSwatches addObject:swatchObj];
+        }
+    }
+    tempPaintSwatches = nil;
+
+    [self setTapAreas];
+}
+
 
 - (void)setTapAreas {
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
@@ -1225,11 +1322,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     return retImage;
 }
 
--(void)setColorValues {
+-(void)setColorValues:(CGPoint)touchPoint {
     
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
-    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:_touchPoint image:_cgiImage];
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
     
     CGColorRef rgbPixelRef = [rgbColor CGColor];
     
