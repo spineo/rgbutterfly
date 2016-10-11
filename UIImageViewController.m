@@ -67,7 +67,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, tapAreasChanged;
+@property (nonatomic) BOOL saveFlag, tapAreasChanged, dragAreaEnabled;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -269,15 +269,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Long press recognizer (commented out, use button instead)
     //
-//    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-//    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
-//    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
-//    [_imageView addGestureRecognizer:_longPressRecognizer];
+    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
+    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
+    [_imageView addGestureRecognizer:_longPressRecognizer];
     
     // Pan gesture recognizer
     //
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveTapArea:)];
-    [_imageView addGestureRecognizer:_panGestureRecognizer];
+    //[_imageView addGestureRecognizer:_panGestureRecognizer];
+    _dragAreaEnabled = FALSE;
+
     
     
     // Hide the "arrow" buttons by default
@@ -444,13 +446,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     [_assocSave setEnabled:FALSE];
 
-    
-    // Adjust the NavBar layout when the orientation changes
-    //
-//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidAppear:)
-//                                                 name:UIDeviceOrientationDidChangeNotification
-//                                               object:nil];
     
     // Navigation Item Title
     //
@@ -833,23 +828,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)scrollViewDecrease {
 
     _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
-        if (_imageViewSize == IMAGE_VIEW) {
-            _imageViewSize = SPLIT_VIEW;
+    if (_imageViewSize == IMAGE_VIEW) {
+        _imageViewSize = SPLIT_VIEW;
 
-        // Split View
-        //
-        } else if (_currTapSection > 0) {
-            _imageViewSize = TABLE_VIEW;
-        }
-//    }
-        
-    // Landscape
+    // Split View
     //
-//    } else if (_currTapSection > 0) {
-//        _imageViewSize = TABLE_VIEW;
-//    }
+    } else if (_currTapSection > 0) {
+        _imageViewSize = TABLE_VIEW;
+    }
+
     
     [self resizeViews];
 }
@@ -858,25 +846,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
     [_imageScrollView setHidden:NO];
-    
-//    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         
-        if (_imageViewSize == TABLE_VIEW) {
-            _imageViewSize = SPLIT_VIEW;
-            
-        } else if (_imageViewSize == SPLIT_VIEW) {
-            _imageViewSize = IMAGE_VIEW;
-        }
+    if (_imageViewSize == TABLE_VIEW) {
+        _imageViewSize = SPLIT_VIEW;
         
-    // Landscape
-    //
-    //} else  if (_currTapSection > 0) {
-//    }
-    
-//    } else {
-//        _imageViewSize = IMAGE_VIEW;
-//
-//    }
+    } else if (_imageViewSize == SPLIT_VIEW) {
+        _imageViewSize = IMAGE_VIEW;
+    }
     
     [self resizeViews];
 }
@@ -941,7 +917,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        [self presentViewController:_deleteTapsAlertController animated:YES completion:nil];
+        if (_dragAreaEnabled == FALSE) {
+            [_imageView addGestureRecognizer:_panGestureRecognizer];
+            _dragAreaEnabled = TRUE;
+
+        } else {
+            [_imageView removeGestureRecognizer:_panGestureRecognizer];
+            _dragAreaEnabled = FALSE;
+        }
     }
 }
 
@@ -1073,12 +1056,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)dragShape {
     int listCount = (int)[_paintSwatches count];
     
-    [self setTapAreaSeen:0];
-    
     NSMutableArray *tempPaintSwatches = [[NSMutableArray alloc] initWithArray:_paintSwatches];
     _paintSwatches = [[NSMutableArray alloc] init];
-    
-    int seen_index = 0;
+
     
     for (int i=0; i<listCount; i++) {
         PaintSwatches *swatchObj = [tempPaintSwatches objectAtIndex:i];
@@ -1093,7 +1073,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
-            
+
             //[_imageTableView setHidden:NO];
             //[_imageScrollView setHidden:NO];
             
