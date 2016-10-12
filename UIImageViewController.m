@@ -916,15 +916,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        
+        NSString *imageInteraction;
         if (_dragAreaEnabled == FALSE) {
             [_imageView addGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = TRUE;
+            imageInteraction = @"Tap Area Drag Enabled";
 
         } else {
             [_imageView removeGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = FALSE;
+            imageInteraction = @"Image Drag Enabled";
         }
+        
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Image Interaction" message:imageInteraction];
+        [self presentViewController:myAlert animated:YES completion:nil];
     }
 }
 
@@ -935,15 +942,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (gesture.state == UIGestureRecognizerStateBegan) {
         _dragStartPoint = touchPoint;
         
-    } else if (gesture.state == UIGestureRecognizerStateChanged) {
-        _dragEndPoint = touchPoint;
-        
-        [self dragShape];
-        
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+    } else if (gesture.state == UIGestureRecognizerStateChanged || gesture.state == UIGestureRecognizerStateEnded) {
         _dragEndPoint = touchPoint;
     
         [self dragShape];
+    }
+    
+    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        [_matchSave setEnabled:TRUE];
+    } else {
+        [_assocSave setEnabled:TRUE];
     }
 }
 
@@ -1413,6 +1421,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [custCell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         [custCell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [custCell.imageView setClipsToBounds: YES];
+        
+//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+//                          initWithTarget:self action:@selector(respondToImageViewTap:)];
+//        [tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
+//        [custCell.imageView addGestureRecognizer:_tapRecognizer];
 
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
