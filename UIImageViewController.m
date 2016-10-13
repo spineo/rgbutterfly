@@ -62,12 +62,15 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic) CGPoint touchPoint, dragStartPoint, dragEndPoint;
 
+@property (nonatomic, strong) NSDate *now;
+@property (nonatomic) CGFloat pressStartTime;
+
 @property (nonatomic, strong) PaintSwatches *swatchObj;
 @property (nonatomic, strong) TapArea *tapArea;
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, tapAreasChanged, dragAreaEnabled;
+@property (nonatomic) BOOL saveFlag, isRGB, tapAreasChanged, dragAreaEnabled;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -563,6 +566,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_scrollViewDown setTintColor:LIGHT_TEXT_COLOR];
     
     [self resizeViews];
+    
+    // RGB settings?
+    //
+    _isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
 
     // Notification center
     //
@@ -916,6 +923,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
+    
     if (gesture.state == UIGestureRecognizerStateEnded) {
         
         NSString *imageInteraction;
@@ -933,6 +941,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         UIAlertController *myAlert = [AlertUtils createOkAlert:@"Image Interaction" message:imageInteraction];
         [self presentViewController:myAlert animated:YES completion:nil];
     }
+}
+
+- (void)respondToImageViewTap:(id)sender {
+    UIAlertController *myAlert = [AlertUtils createOkAlert:@"Image Interaction" message:@""];
+    [self presentViewController:myAlert animated:YES completion:nil];
 }
 
 - (void)moveTapArea:(UIPanGestureRecognizer *)gesture {
@@ -1409,7 +1422,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:indexPath.row] objectAtIndex:0];
         
-        UIImage *image = [ColorUtils renderSwatch:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        UIImage *image;
+        if (_isRGB == TRUE) {
+            image = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        } else {
+            image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        }
         
         custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum];
 
@@ -1425,8 +1443,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 //        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
 //                          initWithTarget:self action:@selector(respondToImageViewTap:)];
 //        [tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
-//        [custCell.imageView addGestureRecognizer:_tapRecognizer];
-
+//        [custCell.imageView addGestureRecognizer:tapRecognizer];
+//        [tapRecognizer setDelegate:self];
+//
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
         return custCell;
@@ -1465,11 +1484,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [cell.imageView setFrame:CGRectMake(2, 15, cell.imageView.frame.size.width, cell.imageView.frame.size.height)];
 }
 
-
-// Unused (delegate set to the collection view)
+// Use to switch between RGB and Paint
 //
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_isRGB == FALSE) {
+        _isRGB = TRUE;
+    } else {
+        _isRGB = FALSE;
+    }
+    [_imageTableView reloadData];
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
@@ -1557,8 +1581,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     int index = (int)collectionView.tag;
     
     PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:index] objectAtIndex:indexPath.row + 1];
-    
-    UIImage *swatchImage = [ColorUtils renderSwatch:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+
+    UIImage *swatchImage;
+    if (_isRGB == TRUE) {
+        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+    } else {
+        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+    }
     
     // Tag the first reference image
     //
@@ -1585,6 +1614,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     _currSelectedSection = (int)collectionView.tag;
+
     
     [self performSegueWithIdentifier:@"MatchTableViewSegue" sender:self];
 }
