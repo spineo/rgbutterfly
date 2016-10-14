@@ -1403,13 +1403,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         int match_algorithm_id = _matchAlgIndex;
         int swatch_ct          = _maxMatchNum;
         
-        int tap_obj_ct = (int)[[[_matchAssociation tap_area] allObjects] count];
-        if (tapIndex < tap_obj_ct) {
-            TapArea *tapArea = [[[_matchAssociation tap_area] allObjects] objectAtIndex:tapIndex];
-            if (tapArea != nil) {
-                match_algorithm_id = [[tapArea match_algorithm_id] intValue];
-                swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
-            }
+        TapArea *tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
+        if (tapArea != nil) {
+            match_algorithm_id = [[tapArea match_algorithm_id] intValue];
+            swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
         }
         
         NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
