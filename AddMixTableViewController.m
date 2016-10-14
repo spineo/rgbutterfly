@@ -277,7 +277,8 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
         NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
 
-        if (rangeValue.length > 0) {
+        BOOL isSelected = [sel_obj is_selected];
+        if (rangeValue.length > 0 || isSelected == TRUE) {
             _searchMatch = TRUE;
 
             [tmpPaintSwatches addObject:sel_obj];
@@ -288,6 +289,22 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
     [self.tableView reloadData];
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
+
+- (NSMutableDictionary *)returnSelected:(NSMutableArray *)swatchList {
+    int count = (int)[swatchList count];
+    
+    NSMutableDictionary *selected = [[NSMutableDictionary alloc] init];
+    
+    for (int i=0; i<count; i++) {
+        PaintSwatchSelection *sel_obj = [swatchList objectAtIndex:i];
+        BOOL isSelected = [sel_obj is_selected];
+        if (isSelected == TRUE) {
+            [selected setValue:@"selected" forKey:[[sel_obj paintSwatch] name]];
+        }
+    }
+    
+    return selected;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -306,8 +323,10 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
         [currPaintSwatchNames setValue:@"seen" forKey:paintSwatchName];
     }
     
-    _allPaintSwatches    = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    _paintSwatchList    = [[NSMutableArray alloc] init];
+    _allPaintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    NSMutableDictionary *selectedSwatchNames = [self returnSelected:_paintSwatchList];
+    _paintSwatchList  = [[NSMutableArray alloc] init];
+
     for (PaintSwatches *paintSwatch in _allPaintSwatches) {
         NSString *name = [paintSwatch name];
         
@@ -327,10 +346,15 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
         }
 
         
-        if (![currPaintSwatchNames valueForKey:name]) {
+        if (![currPaintSwatchNames valueForKey:name] || [selectedSwatchNames valueForKey:name]) {
             PaintSwatchSelection *paintSwatchSelection = [[PaintSwatchSelection alloc] init];
             [paintSwatchSelection setPaintSwatch:paintSwatch];
-            [paintSwatchSelection setIs_selected:FALSE];
+            
+            if ([selectedSwatchNames valueForKey:name]) {
+                [paintSwatchSelection setIs_selected:TRUE];
+            } else {
+                [paintSwatchSelection setIs_selected:FALSE];
+            }
             [_paintSwatchList addObject:paintSwatchSelection];
         }
     }
