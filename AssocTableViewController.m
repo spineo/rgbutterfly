@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches, *addPaintSwatches, *mixRatiosList, *mixRatiosComps, *mixRatiosSeen;
 @property (nonatomic, strong) NSArray *assocTypeNames, *coverageNames;
 
-@property (nonatomic, strong) UIAlertController *saveAlertController;
+@property (nonatomic, strong) UIAlertController *saveAlertController, *deleteAlertController;
 @property (nonatomic, strong) UIAlertAction *save, *delete;
 
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
@@ -322,6 +322,33 @@ const int ASSOC_SET_TAG        = 8;
     [_save setEnabled:FALSE];
 
     [self homeButtonShow];
+    
+    
+    _deleteAlertController =   [UIAlertController
+                                  alertControllerWithTitle:@"Delete Association"
+                                  message:@"Are you sure you want to delete this Association?"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"Yes"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [_deleteAlertController dismissViewControllerAnimated:YES completion:nil];
+                             [self deleteMixAssociation];
+                             
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"No"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [_deleteAlertController dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [_deleteAlertController addAction:ok];
+    [_deleteAlertController addAction:cancel];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -1062,7 +1089,10 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (void)deleteData {
+    [self presentViewController:_deleteAlertController animated:YES completion:nil];
+}
     
+- (void)deleteMixAssociation {
     [ManagedObjectUtils deleteMixAssociation:_mixAssociation context:self.context];
 
     NSError *error = nil;
