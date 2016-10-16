@@ -307,11 +307,11 @@ const int ASSOC_SET_TAG        = 8;
     
     // Set the Association type, Canvas coverage and Apply renaming button
     //
-    _assocTypeText = @"Set the Association Type";
+    _assocTypeText = @"Association Type";
     [self recreateAssocTypeButton];
     [_assocTypeButton setEnabled:TRUE];
     
-    _setRenameText = @"Set the Canvas Coverage";
+    _setRenameText = @"Canvas Coverage";
     [self recreateSetCanvasButton];
     [_setButton setEnabled:TRUE];
     
@@ -362,19 +362,22 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (void)recreateAssocTypeButton {
+    NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _assocTypeText, [_assocTypeName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _assocTypeButton = [BarButtonUtils create3DButton:_assocTypeText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
+    _assocTypeButton = [BarButtonUtils create3DButton:buttonText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
     [_assocTypeButton.titleLabel setFont:TABLE_CELL_FONT];
     [_assocTypeButton setTintColor:DARK_TEXT_COLOR];
     [_assocTypeButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_assocTypeButton addTarget:self action:@selector(showAssocTypePicker) forControlEvents:UIControlEventTouchUpInside];
+    
     //[_assocTypeButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)recreateSetCanvasButton {
+    NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _setRenameText, [_coverageName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _setButton = [BarButtonUtils create3DButton:_setRenameText tag:ASSOC_SET_TAG frame:colorButtonFrame];
+    _setButton = [BarButtonUtils create3DButton:buttonText tag:ASSOC_SET_TAG frame:colorButtonFrame];
     [_setButton.titleLabel setFont:TABLE_CELL_FONT];
     [_setButton setTintColor:DARK_TEXT_COLOR];
     [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
@@ -642,14 +645,17 @@ const int ASSOC_SET_TAG        = 8;
         
     } else if (indexPath.section == ASSOC_TYPE_SECTION) {
         
+        NSString *assocTypeText = [[NSString alloc] initWithFormat:@"Association Type: %@", [_assocTypeNames objectAtIndex:_assocTypePickerSelRow]];
+    
         if (_editFlag == TRUE) {
+            [_assocTypeButton setTitle:assocTypeText forState:UIControlStateNormal];
             [cell.contentView addSubview:_assocTypeButton];
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         } else {
             [cell setBackgroundColor:DARK_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell.textLabel setFont:TABLE_HEADER_FONT];
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@"Association Type: %@", [_assocTypeNames objectAtIndex:_assocTypePickerSelRow]]];
+            [cell.textLabel setText:assocTypeText];
         }
         
     } else if (indexPath.section == ASSOC_COVER_SECTION) {
