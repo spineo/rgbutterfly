@@ -38,9 +38,9 @@
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLettersDefaults, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *defaultsIndexTitles, *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *defaultsNames, *keywordNames, *letters, *letterDefaults, *letterKeywords, *defaultsSwatches, *keywordSwatches, *subjColorData;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
-@property (nonatomic) BOOL initColors, isCollapsedAll, showReferenceOnly;
+@property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefOnly, showGenOnly;
 
 
 // Resize UISearchBar when rotated
@@ -53,7 +53,7 @@
 //
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UISearchBar *mainSearchBar;
-@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *filterLabel, *filterButton;
+@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton;
 @property (nonatomic, strong) NSString *searchString;
 
 
@@ -208,6 +208,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     PaintSwatchType *refSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Reference" context:self.context];
     _refTypeId = [[refSwatchType order] intValue];
+    
+    PaintSwatchType *genSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:self.context];
+    _genTypeId = [[genSwatchType order] intValue];
 
     
     // SearchBar related
@@ -222,17 +225,42 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                     target:self
                                                     action:@selector(search)];
     
-    _filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
+    _allButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME]
+                                                  style:UIBarButtonItemStylePlain
+                                                 target:self
+                                                 action:@selector(showAllColors)];
+    
+    _refButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
                                                     style:UIBarButtonItemStylePlain
                                                     target:self
                                                     action:@selector(filterByReference)];
     
-    _filterLabel = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [_filterLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    _genButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
+                                                  style:UIBarButtonItemStylePlain
+                                                 target:self
+                                                 action:@selector(filterByGenerics)];
+    
+    _allLabel = [[UIBarButtonItem alloc] initWithTitle:@"All" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_allLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                       LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
+                                       TABLE_HEADER_FONT, NSFontAttributeName, nil]
+                             forState:UIControlStateNormal];
+    
+    _refLabel = [[UIBarButtonItem alloc] initWithTitle:@"Reference" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_refLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                           LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
                                           TABLE_HEADER_FONT, NSFontAttributeName, nil]
                                 forState:UIControlStateNormal];
-    _showReferenceOnly = FALSE;
+    
+    _genLabel = [[UIBarButtonItem alloc] initWithTitle:@"Generics" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_genLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                       LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
+                                       TABLE_HEADER_FONT, NSFontAttributeName, nil]
+                             forState:UIControlStateNormal];
+
+    _showAll     = TRUE;
+    _showRefOnly = FALSE;
+    _showGenOnly = FALSE;
     
     self.navigationItem.rightBarButtonItem = _searchButton;
 
@@ -694,16 +722,25 @@ int MIX_ASSOC_MIN_SIZE = 1;
             UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
-            NSString *colorsListing;
-            if (_showReferenceOnly == TRUE) {
-                colorsListing = [[NSString alloc] initWithFormat:@"Reference Colors Only (%i)", _numSwatches];
+            NSString *allListing = @"All";
+            NSString *refListing = @"Reference";
+            NSString *genListing = @"Generics";
+            if (_showRefOnly == TRUE) {
+                refListing = [[NSString alloc] initWithFormat:@"Reference (%i)", _numSwatches];
+                
+            } else if (_showGenOnly == TRUE) {
+                genListing = [[NSString alloc] initWithFormat:@"Generics (%i)", _numSwatches];
     
             } else {
-                colorsListing = [[NSString alloc] initWithFormat:@"Displaying All Colors (%i)", _numSwatches];
+                allListing = [[NSString alloc] initWithFormat:@"All (%i)", _numSwatches];
             }
-            [_filterLabel setTitle:colorsListing];
+            [_allLabel setTitle:allListing];
+            [_refLabel setTitle:refListing];
+            [_genLabel setTitle:genListing];
+            
+            UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-            [filterToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterLabel, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], _filterButton]];
+            [filterToolbar setItems: @[_allButton,_allLabel, flexibleSpace, _refButton, _refLabel, flexibleSpace, _genButton,_genLabel]];
     
             CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
     
@@ -779,12 +816,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Keywords"]) {
         NSString *sectionTitle = [_sortedLetters objectAtIndex:section];
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
-//        int kwCount = (int)[keywords count];
-//        objCount = 0;
-//        for (int i=0; i<kwCount; i++) {
-//            NSString *kw = [keywords objectAtIndex:i];
-//            objCount = objCount + [[_keywordSwatches objectForKey:kw] count];
-//        }
+
     } else if ([_listingType isEqualToString:@"Default"]) {
         NSString *letter = [_sortedLettersDefaults objectAtIndex:section];
         objCount = [[_letterDefaults objectForKey:letter] count];
@@ -1265,18 +1297,37 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
 }
 
+- (void)showAllColors {
+    _showAll     = TRUE;
+    _showRefOnly = FALSE;
+    _showGenOnly = FALSE;
+    [_allButton setImage:_checkboxSquareImage];
+    [_refButton setImage:_emptySquareImage];
+    [_genButton setImage:_emptySquareImage];
+    
+    [self loadDefaultListing];
+}
+
 - (void)filterByReference {
+    _showRefOnly = TRUE;
+    _showAll     = FALSE;
+    _showGenOnly = FALSE;
+    [_refButton setImage:_checkboxSquareImage];
+    [_allButton setImage:_emptySquareImage];
+    [_genButton setImage:_emptySquareImage];
 
-    if (_showReferenceOnly == FALSE) {
-        _showReferenceOnly = TRUE;
-        [_filterButton setImage:_checkboxSquareImage];
-        [self loadDefaultListing];
+    [self loadDefaultListing];
+}
 
-    } else {
-        _showReferenceOnly = FALSE;
-        [_filterButton setImage:_emptySquareImage];
-        [self loadDefaultListing];
-    }
+- (void)filterByGenerics {
+    _showGenOnly = TRUE;
+    _showAll     = FALSE;
+    _showRefOnly = FALSE;
+    [_genButton setImage:_checkboxSquareImage];
+    [_allButton setImage:_emptySquareImage];
+    [_refButton setImage:_emptySquareImage];
+    
+    [self loadDefaultListing];
 }
 
 - (void)restoreNavItems {
@@ -1300,15 +1351,23 @@ int MIX_ASSOC_MIN_SIZE = 1;
     // Skip match assoc types, and search if requested
     //
     if ((_searchString == nil) || [_searchString isEqualToString:@""]) {
-        if (_showReferenceOnly == TRUE) {
+        if (_showRefOnly == TRUE) {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _refTypeId]];
+        
+        } else if (_showGenOnly == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _genTypeId]];
+            
         } else {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
         }
     } else {
         NSString *regexSearchString = [[NSString alloc] initWithFormat:@"%@*", _searchString];
-        if (_showReferenceOnly == TRUE) {
+        if (_showRefOnly == TRUE) {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name like[c] %@", _refTypeId, regexSearchString]];
+            
+        } else if (_showGenOnly == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name like[c] %@", _genTypeId, regexSearchString]];
+            
         } else {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name like[c] %@", _matchAssocId, regexSearchString]];
         }
