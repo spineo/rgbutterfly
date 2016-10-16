@@ -142,24 +142,24 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                                    message:@"Please select a listing type"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction   = [UIAlertAction actionWithTitle:@"Default Colors Listing" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction   = [UIAlertAction actionWithTitle:@"Default Listing" style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
                                                                 [self updateTable:DEFAULT_LISTING_TYPE];
                                                             }];
-    
-    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
-        [self updateTable:@"Mix"];
-    }];
-    
-    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"List By Keywords" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Keywords"];
-    }];
     
     UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:@"Match"];
     }];
     
-    UIAlertAction *listByColors = [UIAlertAction actionWithTitle:@"List By Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+        [self updateTable:@"Mix"];
+    }];
+    
+    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Keywords Listing" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self updateTable:@"Keywords"];
+    }];
+    
+    UIAlertAction *listByColors = [UIAlertAction actionWithTitle:@"Subjective Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:@"Colors"];
     }];
     
@@ -168,9 +168,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
     }];
     
     [_listingController addAction:defaultAction];
+    [_listingController addAction:matchAssociations];
     [_listingController addAction:mixAssociations];
     [_listingController addAction:sortByKeywords];
-    [_listingController addAction:matchAssociations];
     [_listingController addAction:listByColors];
     [_listingController addAction:alertCancel];
     
@@ -201,7 +201,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
     
-    // Match Association (filter out)
+    // Filters
     //
     PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
     _matchAssocId = [[matchSwatchType order] intValue];
@@ -654,7 +654,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else if ([_listingType isEqualToString:@"Colors"]) {
 
         if (section == 0) {
-            [headerLabel setText:@"Subjective Color Listing"];
+            [headerLabel setText:@"Subjective Colors Groupings"];
             [headerLabel setTextAlignment: NSTextAlignmentCenter];
 
             [headerView addSubview:headerLabel];
@@ -723,16 +723,16 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"All";
-            NSString *refListing = @"Reference";
-            NSString *genListing = @"Generics";
+            NSString *refListing = @"Ref.";
+            NSString *genListing = @"Gen.";
             if (_showRefOnly == TRUE) {
-                refListing = [[NSString alloc] initWithFormat:@"Reference (%i)", _numSwatches];
+                refListing = [[NSString alloc] initWithFormat:@"%@ (%i)", refListing, _numSwatches];
                 
             } else if (_showGenOnly == TRUE) {
-                genListing = [[NSString alloc] initWithFormat:@"Generics (%i)", _numSwatches];
+                genListing = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
     
             } else {
-                allListing = [[NSString alloc] initWithFormat:@"All (%i)", _numSwatches];
+                allListing = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, _numSwatches];
             }
             [_allLabel setTitle:allListing];
             [_refLabel setTitle:refListing];
@@ -740,7 +740,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             
             UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-            [filterToolbar setItems: @[_allButton,_allLabel, flexibleSpace, _refButton, _refLabel, flexibleSpace, _genButton,_genLabel]];
+            [filterToolbar setItems: @[_allButton,_allLabel, flexibleSpace, _refButton, _refLabel, flexibleSpace, _genButton,_genLabel, flexibleSpace]];
     
             CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
     

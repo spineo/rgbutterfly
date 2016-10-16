@@ -67,13 +67,13 @@ const int MIX_RATIOS_ROWS         = 1;
 const int MIX_ASSOC_SETTINGS      = 5;
 const int MIX_ASSOC_ROWS          = 1;
 
-const int ADD_MIX_SETTINGS        = 6;
-const int ADD_MIX_ROWS            = 1;
+//const int ADD_MIX_SETTINGS        = 6;
+//const int ADD_MIX_ROWS            = 1;
 
-const int ADD_BRANDS_SETTINGS     = 7;
+const int ADD_BRANDS_SETTINGS     = 6;
 const int ADD_BRANDS_ROWS         = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 7;
+const int SETTINGS_MAX_SECTIONS   = 6;
 
 
 - (void)viewDidLoad {
@@ -534,8 +534,8 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     } else if (section == MIX_RATIOS_SETTINGS) {
         return MIX_RATIOS_ROWS;
         
-    } else if (section == ADD_MIX_SETTINGS) {
-        return ADD_MIX_ROWS;
+//    } else if (section == ADD_MIX_SETTINGS) {
+//        return ADD_MIX_ROWS;
         
     } else if (section == MIX_ASSOC_SETTINGS) {
         return MIX_ASSOC_ROWS;
@@ -579,8 +579,8 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
         
-    } else if (section == ADD_MIX_SETTINGS) {
-        headerStr = @"Add Mix";
+//    } else if (section == ADD_MIX_SETTINGS) {
+//        headerStr = @"Add Mix";
 
     } else if (section == MIX_ASSOC_SETTINGS) {
         headerStr = @"Mix Associations";
@@ -737,9 +737,9 @@ heightForFooterInSection:(NSInteger)section {
         [_mixRatiosTextView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTVIEW_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosTextView];
         
-    } else if (indexPath.section == ADD_MIX_SETTINGS) {
-        [cell.contentView addSubview:_addMixFilterSwitch];
-        [cell.contentView addSubview:_addMixFilterLabel];
+//    } else if (indexPath.section == ADD_MIX_SETTINGS) {
+//        [cell.contentView addSubview:_addMixFilterSwitch];
+//        [cell.contentView addSubview:_addMixFilterLabel];
         
     } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
         [cell.contentView addSubview:_mixAssocCountSwitch];
