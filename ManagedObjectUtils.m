@@ -368,11 +368,16 @@
     }
 }
 
-+ (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context {
++ (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context name:(NSString *)name {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
+    
+    if (name != nil) {
+        NSString *regexName = [[NSString alloc] initWithFormat:@"%@*", name];
+        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
+    }
     
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:@[ nameSort ]];

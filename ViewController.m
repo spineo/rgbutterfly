@@ -420,7 +420,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 }
 
 - (void)loadMatchCollectionViewData {
-    _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context];
+    _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context name:_searchString];
     _numMatchAssocs = (int)[_matchAssocObjs count];
     
     NSMutableArray *matchAssociationIds = [[NSMutableArray alloc] init];
@@ -1065,7 +1065,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
     } else if ([_listingType isEqualToString:@"Match"]) {
         [_searchButton setImage:_searchImage];
-        [_searchButton setEnabled:FALSE];
+        [_searchButton setEnabled:TRUE];
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
@@ -1250,6 +1250,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
+
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
+        
     } else {
         [self loadMixCollectionViewData];
     }
@@ -1260,6 +1264,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
+
     } else {
         [self loadMixCollectionViewData];
     }
@@ -1274,6 +1282,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _searchString = nil;
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
+        
+    } else if ([_listingType isEqualToString:@"Match"]) {
+        [self loadMatchCollectionViewData];
+
     } else {
         [self loadMixCollectionViewData];
     }
