@@ -173,7 +173,7 @@ int const MAX_TAG            = 120;
 
 // Maximum Text field lengths (characters)
 //
-int const MAX_NAME_LEN  = 64;
+int const MAX_NAME_LEN  = 96;
 int const MAX_KEYW_LEN  = 128;
 int const MAX_DESC_LEN  = 128;
 int const MAX_BRAND_LEN = 32;
