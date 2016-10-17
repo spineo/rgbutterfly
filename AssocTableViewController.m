@@ -421,7 +421,7 @@ const int ASSOC_SET_TAG        = 8;
         selector = @selector(showMixRatiosPicker);
         
     } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
-        _applyRenameText = @"Apply Generic Renaming";
+        _applyRenameText = @"Apply Generic Properties";
         //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
         selector = @selector(applyRenaming);
         
@@ -1224,8 +1224,8 @@ const int ASSOC_SET_TAG        = 8;
         [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
         [paintSwatch setType_id:_genTypeId];
     
-        int num = i + 1;
-        [paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i (%@)", num, [_assocTypeName text]]];
+        //int num = i + 1;
+        //[paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i (%@)", num, [_assocTypeName text]]];
     }
     
     // Rename the Generic Association
