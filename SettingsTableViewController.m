@@ -18,10 +18,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *addMixFilterLabel, *mixAssocCountLabel;
-@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *addMixFilterSwitch, *mixAssocCountSwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, addMixShowAll, mixAssocLt3;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *addMixFilterText, *addMixRefOnlyLabel, *addMixShowAllLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
+@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
+@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -67,13 +67,13 @@ const int MIX_RATIOS_ROWS         = 1;
 const int MIX_ASSOC_SETTINGS      = 5;
 const int MIX_ASSOC_ROWS          = 1;
 
-//const int ADD_MIX_SETTINGS        = 6;
-//const int ADD_MIX_ROWS            = 1;
+const int ALERTS_SETTINGS         = 6;
+const int ALERTS_ROWS             = 1;
 
-const int ADD_BRANDS_SETTINGS     = 6;
+const int ADD_BRANDS_SETTINGS     = 7;
 const int ADD_BRANDS_ROWS         = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 6;
+const int SETTINGS_MAX_SECTIONS   = 7;
 
 
 - (void)viewDidLoad {
@@ -372,47 +372,61 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Add Mix Settings
+    // Alerts Filter Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _addMixFilterText    = @"addmix_filter_text";
+    _alertsFilterText    = @"alerts_filter_text";
     
-    _addMixRefOnlyLabel  = @"List Only Reference Swatches";
-    _addMixShowAllLabel  = @"List All The Paint Swatches ";
+    _alertsNoneLabel = @"Turn Off All Alerts";
+    _alertsShowLabel = @"Turn On All Alerts ";
+    
+    BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
 
     _labelText = @"";
-    if(! ([_userDefaults boolForKey:ADD_MIX_FILTER_KEY] &&
-          [_userDefaults stringForKey:_addMixFilterText])
-       ) {
-        _addMixShowAll = FALSE;
-        _labelText = _addMixRefOnlyLabel;
-        
-        [_userDefaults setBool:_addMixShowAll forKey:ADD_MIX_FILTER_KEY];
-        [_userDefaults setValue:_labelText forKey:_addMixFilterText];
-        
+    if (imageInteractAlert == TRUE) {
+        _alertsShow = TRUE;
+        _labelText  = _alertsNoneLabel;
+
     } else {
-        _addMixShowAll = [_userDefaults boolForKey:ADD_MIX_FILTER_KEY];
-        _labelText = [_userDefaults stringForKey:_addMixFilterText];
+        _alertsShow = FALSE;
+        _labelText  = _alertsShowLabel;
     }
+    
+    
+//    if(! ([_userDefaults boolForKey:ALERTS_FILTER_KEY] &&
+//          [_userDefaults stringForKey:_alertsFilterText])
+//       ) {
+//        _alertsShow = TRUE;
+//        _labelText = _alertsShowLabel;
+//        
+//        [_userDefaults setBool:_alertsShow forKey:ALERTS_FILTER_KEY];
+//        [_userDefaults setValue:_labelText forKey:_alertsFilterText];
+//        
+//    } else {
+//        _alertsShow = [_userDefaults boolForKey:ALERTS_FILTER_KEY];
+//        _labelText = [_userDefaults stringForKey:_alertsFilterText];
+//    }
+    
+    
     
     // Create the label and switch, set the last state or default values
     //
-    _addMixFilterSwitch = [[UISwitch alloc] init];
-    _widgetHeight = _addMixFilterSwitch.bounds.size.height;
+    _alertsFilterSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _alertsFilterSwitch.bounds.size.height;
     _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_addMixFilterSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
-    [_addMixFilterSwitch setOn:_addMixShowAll];
+    [_alertsFilterSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_alertsFilterSwitch setOn:_alertsShow];
     
     // Add the switch target
     //
-    [_addMixFilterSwitch addTarget:self action:@selector(setAddMixFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
+    [_alertsFilterSwitch addTarget:self action:@selector(setAlertsFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _addMixFilterLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _addMixFilterLabel.bounds.size.width;
-    labelHeight = _addMixFilterLabel.bounds.size.height;
+    _alertsFilterLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _alertsFilterLabel.bounds.size.width;
+    labelHeight = _alertsFilterLabel.bounds.size.height;
     labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_addMixFilterLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    [_alertsFilterLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -534,8 +548,8 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     } else if (section == MIX_RATIOS_SETTINGS) {
         return MIX_RATIOS_ROWS;
         
-//    } else if (section == ADD_MIX_SETTINGS) {
-//        return ADD_MIX_ROWS;
+    } else if (section == ALERTS_SETTINGS) {
+        return ALERTS_ROWS;
         
     } else if (section == MIX_ASSOC_SETTINGS) {
         return MIX_ASSOC_ROWS;
@@ -579,8 +593,8 @@ const int SETTINGS_MAX_SECTIONS   = 6;
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
         
-//    } else if (section == ADD_MIX_SETTINGS) {
-//        headerStr = @"Add Mix";
+    } else if (section == ALERTS_SETTINGS) {
+        headerStr = @"Alerts";
 
     } else if (section == MIX_ASSOC_SETTINGS) {
         headerStr = @"Mix Associations";
@@ -737,9 +751,9 @@ heightForFooterInSection:(NSInteger)section {
         [_mixRatiosTextView setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTVIEW_HEIGHT)];
         [cell.contentView addSubview:_mixRatiosTextView];
         
-//    } else if (indexPath.section == ADD_MIX_SETTINGS) {
-//        [cell.contentView addSubview:_addMixFilterSwitch];
-//        [cell.contentView addSubview:_addMixFilterLabel];
+    } else if (indexPath.section == ALERTS_SETTINGS) {
+        [cell.contentView addSubview:_alertsFilterSwitch];
+        [cell.contentView addSubview:_alertsFilterLabel];
         
     } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
         [cell.contentView addSubview:_mixAssocCountSwitch];
@@ -928,14 +942,14 @@ heightForFooterInSection:(NSInteger)section {
     [self saveEnable:TRUE];
 }
 
-- (void)setAddMixFilterSwitchState:(id)sender {
-    _addMixShowAll = [sender isOn];
+- (void)setAlertsFilterSwitchState:(id)sender {
+    _alertsShow = [sender isOn];
     
-    if (_addMixShowAll == TRUE) {
-        [_addMixFilterLabel setText:_addMixShowAllLabel];
+    if (_alertsShow == TRUE) {
+        [_alertsFilterLabel setText:_alertsNoneLabel];
         
     } else {
-        [_addMixFilterLabel setText:_addMixRefOnlyLabel];
+        [_alertsFilterLabel setText:_alertsShowLabel];
     }
     [self saveEnable:TRUE];
 }
@@ -1003,8 +1017,8 @@ heightForFooterInSection:(NSInteger)section {
             
             // Add Mix Settings
             //
-            [_userDefaults setBool:_addMixShowAll forKey:ADD_MIX_FILTER_KEY];
-            [_userDefaults setValue:[_addMixFilterLabel text] forKey:_addMixFilterText];
+            [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
+            //[_userDefaults setValue:[_alertsFilterLabel text] forKey:_alertsFilterText];
             
             // Mix Assoc Settings
             //

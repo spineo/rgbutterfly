@@ -190,9 +190,16 @@ NSString * const SHAPE_GEOMETRY_KEY  = @"ShapeGeometry";
 NSString * const MATCH_NUM_KEY       = @"MatchNum";
 NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
 NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
-NSString * const ADD_MIX_FILTER_KEY  = @"AddMixFilter";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
+
+// Alerts related
+//
+NSString * const ALERTS_FILTER_KEY   = @"AlertsFilter";
+NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
+NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
+NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -331,9 +338,25 @@ static NSDictionary *swatchTypes;
 
     // NSUserDefaults intialization
     //
-    // isRGB settings
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // isRGB settings (false by default)
     //
-    [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:RGB_DISPLAY_KEY];
+    if ([userDefaults objectForKey:RGB_DISPLAY_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:RGB_DISPLAY_KEY];
+    }
+    
+    // Alerts (on by default)
+    //
+    if ([userDefaults objectForKey:APP_INTRO_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:APP_INTRO_KEY];
+    }
+    if ([userDefaults objectForKey:IMAGE_INTERACT_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:IMAGE_INTERACT_KEY];
+    }
+    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
+    }
 }
 
 @end

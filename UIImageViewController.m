@@ -70,7 +70,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, isRGB, tapAreasChanged, dragAreaEnabled;
+@property (nonatomic) BOOL saveFlag, imageInteractAlert, isRGB, tapAreasChanged, dragAreaEnabled;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -190,6 +190,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         _maxMatchNum = DEF_MATCH_NUM;
     }
     [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+    
+    // Alerts
+    //
+    _imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
+    if (_imageInteractAlert == TRUE) {
+        NSString *instructions = @"Press image for one second to toggle between moving image and drag tap area (turn off this alert in Settings)";
+        UIAlertController *imageAlert = [AlertUtils createNoShowAlert:@"Image Interaction" message:instructions key:IMAGE_INTERACT_KEY];
+    
+        [self presentViewController:imageAlert animated:YES completion:nil];
+    }
+    
     [_userDefaults synchronize];
 
     

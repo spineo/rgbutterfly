@@ -205,9 +205,16 @@ extern NSString * const SHAPE_GEOMETRY_KEY;
 extern NSString * const MATCH_NUM_KEY;
 extern NSString * const RGB_DISPLAY_KEY;
 extern NSString * const MIX_RATIOS_KEY;
-extern NSString * const ADD_MIX_FILTER_KEY;
 extern NSString * const MIX_ASSOC_COUNT_KEY;
 extern NSString * const ADD_BRANDS_KEY;
+
+// Alerts related
+//
+extern NSString * const ALERTS_FILTER_KEY;
+extern NSString * const APP_INTRO_KEY;
+extern NSString * const IMAGE_INTERACT_KEY;
+extern NSString * const COLLECT_TAP_KEY;
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values

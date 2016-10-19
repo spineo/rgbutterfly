@@ -31,6 +31,32 @@
     return myAlertController;
 }
 
++ (UIAlertController *)createNoShowAlert:(NSString *)title message:(NSString *)message key:(NSString *)key {
+    
+    UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:title
+                                                                               message:message
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* NoShowButton = [UIAlertAction
+                               actionWithTitle:@"Do not show this alert again"
+                               style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                       [userDefaults setBool:FALSE forKey:key];
+                                   }];
+    
+    UIAlertAction* OKButton = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:nil];
+    
+    [myAlertController addAction:NoShowButton];
+    [myAlertController addAction:OKButton];
+    
+    return myAlertController;
+}
+
+
 // The alert text set in GlobalSettings
 //
 + (UIAlertController *)noValueAlert {
