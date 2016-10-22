@@ -68,7 +68,7 @@
 // NSUserDefaults
 //
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) BOOL mixAssocUnfilter;
+@property (nonatomic) BOOL appIntroAlert, mixAssocUnfilter;
 @property (nonatomic) int minAssocSize;
 
 @end
@@ -97,7 +97,15 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _userDefaults = [NSUserDefaults standardUserDefaults];
     [GlobalSettings init];
     
-    
+    // Welcome alert
+    //
+    _appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
+    if (_appIntroAlert == TRUE) {
+        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Welcome to the Acrylics Color Picker App" message:APP_INTRO_INSTRUCTIONS key:APP_INTRO_KEY];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+
     // NSManagedObject subclassing
     //
     self.appDelegate = [[UIApplication sharedApplication] delegate];
@@ -292,6 +300,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)viewDidAppear:(BOOL)animated {
 //    [self initPaintSwatchFetchedResultsController];
 //    _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
+
 
     // Perform cleanup
     //

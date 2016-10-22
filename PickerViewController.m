@@ -99,6 +99,7 @@
         UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
         
         [imageViewController setSelectedImage:_selectedImage];
+        [imageViewController setNewImage:TRUE];
     }
 }
 

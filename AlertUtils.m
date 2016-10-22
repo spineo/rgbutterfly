@@ -43,6 +43,7 @@
                                    handler:^(UIAlertAction * action) {
                                        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                                        [userDefaults setBool:FALSE forKey:key];
+                                       [userDefaults synchronize];
                                    }];
     
     UIAlertAction* OKButton = [UIAlertAction

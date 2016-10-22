@@ -21,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UIScrollView *imageScrollView;
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic) BOOL newImage;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) NSString *sourceViewContext, *viewType;
 

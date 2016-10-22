@@ -382,9 +382,10 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     _alertsShowLabel = @"Turn On All Alerts ";
     
     BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
+    BOOL tapCollectAlert    = [_userDefaults boolForKey:TAP_COLLECT_KEY];
 
     _labelText = @"";
-    if (imageInteractAlert == TRUE) {
+    if (imageInteractAlert == TRUE && tapCollectAlert == TRUE) {
         _alertsShow = TRUE;
         _labelText  = _alertsNoneLabel;
 
@@ -1017,7 +1018,9 @@ heightForFooterInSection:(NSInteger)section {
             
             // Add Mix Settings
             //
+            [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
+            [_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
             //[_userDefaults setValue:[_alertsFilterLabel text] forKey:_alertsFilterText];
             
             // Mix Assoc Settings

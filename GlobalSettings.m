@@ -200,6 +200,11 @@ NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
 NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
 NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
 
+// Alerts Instructions
+//
+NSString * const APP_INTRO_INSTRUCTIONS = @"To get started click the top left 'picture' icon and either select a photo from your library or take a new one";
+NSString * const INTERACT_INSTRUCTIONS = @"Single tap on the image selects a new area and single tap on any selected area deselects that area. Pressing the image for at least one second allows dragging a tap area and single press for one second reverts back to image scrolling.";
+NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between the RGB coloring and image rendering. Tap on any other row element to view the association.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -357,6 +362,8 @@ static NSDictionary *swatchTypes;
     if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
     }
+    
+    [userDefaults synchronize];
 }
 
 @end

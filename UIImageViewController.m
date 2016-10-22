@@ -70,7 +70,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, imageInteractAlert, isRGB, tapAreasChanged, dragAreaEnabled;
+@property (nonatomic) BOOL saveFlag, imageInteractAlert, tapCollectAlert, isRGB, tapAreasChanged, dragAreaEnabled, firstTap;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -177,9 +177,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     _paintSwatchCount = 0;
     
-    // Keep track of any changes to the TapAreas'
+    // Keep track of any changes to the TapAreas
     //
     _tapAreasChanged  = FALSE;
+
+    // First tap?
+    //
+    [self setFirstTap:TRUE];
 
 
     // Existing MatchAssociation
@@ -190,19 +194,18 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         _maxMatchNum = DEF_MATCH_NUM;
     }
     [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+    [_userDefaults synchronize];
     
     // Alerts
     //
+    // Image Interaction
+    //
     _imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
-    if (_imageInteractAlert == TRUE) {
-        NSString *instructions = @"Press image for one second to toggle between moving image and drag tap area (turn off this alert in Settings)";
-        UIAlertController *imageAlert = [AlertUtils createNoShowAlert:@"Image Interaction" message:instructions key:IMAGE_INTERACT_KEY];
+    if (_imageInteractAlert == TRUE && _newImage == TRUE) {
+        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Image Interaction" message:INTERACT_INSTRUCTIONS key:IMAGE_INTERACT_KEY];
     
-        [self presentViewController:imageAlert animated:YES completion:nil];
+        [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    [_userDefaults synchronize];
-
     
     // Load the paint swatches
     //
@@ -913,6 +916,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self drawTouchShape];
     
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        if (_newImage == TRUE && _firstTap == TRUE) {
+            // Tap Collection View
+            //
+            _tapCollectAlert = [_userDefaults boolForKey:TAP_COLLECT_KEY];
+            if (_tapCollectAlert == TRUE) {
+                UIAlertController *alert = [AlertUtils createNoShowAlert:@"Tap First Row Element" message:TAP_COLLECT_INSTRUCTIONS key:TAP_COLLECT_KEY];
+                
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+        _firstTap = FALSE;
         [_matchSave setEnabled:TRUE];
     } else {
         [_assocSave setEnabled:TRUE];
