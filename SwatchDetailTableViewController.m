@@ -1458,12 +1458,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (void)setColorPickerValues:(int)row {
     _colorSelected = [_subjColorNames objectAtIndex:row];
-    _subjColorValue    = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
-    
     [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
+    _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
     [_subjColorName setTextColor:[ColorUtils setBestColorContrast:_colorSelected]];
     [_subjColorName setBackgroundColor:_subjColorValue];
-
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];
 }
 

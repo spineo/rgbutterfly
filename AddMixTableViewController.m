@@ -386,11 +386,16 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     for (int i=0; i<count; i++) {
         PaintSwatchSelection *sel_obj = [_paintSwatchList objectAtIndex:i];
         NSString *matchName = [[sel_obj paintSwatch] name];
-
-        NSRange rangeValue = [matchName rangeOfString:_searchString options:NSCaseInsensitiveSearch];
+        
+        NSError *error = NULL;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:_searchString
+                                                                               options:NSRegularExpressionCaseInsensitive
+                                                                                 error:&error];
+        NSRange searchedRange = NSMakeRange(0, [matchName length]);
+        NSArray *rangeValue = [regex matchesInString:matchName options:0 range:searchedRange];
 
         BOOL isSelected = [sel_obj is_selected];
-        if (rangeValue.length > 0 || isSelected == TRUE) {
+        if ([rangeValue count] > 0 || isSelected == TRUE) {
             _searchMatch = TRUE;
 
             [tmpPaintSwatches addObject:sel_obj];
