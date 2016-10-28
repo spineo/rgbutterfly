@@ -149,8 +149,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // NSManagedObject subclassing
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
-    self.context = [self.appDelegate managedObjectContext];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context     = [self.appDelegate managedObjectContext];
     
     // Initialize the PaintSwatch entity
     //
@@ -363,6 +363,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     UIAlertAction *matchDelete = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self presentViewController:_deleteTapsAlertController animated:YES completion:nil];
     }];
+
     
     UIAlertAction *matchCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [_matchEditAlertController dismissViewControllerAnimated:YES completion:nil];
@@ -375,6 +376,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     [_matchSave setEnabled:FALSE];
     
+
     
     // Match Update Edit button Alert Controller
     //
@@ -950,21 +952,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        
-        NSString *imageInteraction;
+
         if (_dragAreaEnabled == FALSE) {
             [_imageView addGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = TRUE;
-            imageInteraction = @"Tap Area Drag Enabled";
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:@"Drag Enabled"];
 
         } else {
             [_imageView removeGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = FALSE;
-            imageInteraction = @"Image Drag Enabled";
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
         }
-        
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Image Interaction" message:imageInteraction];
-        [self presentViewController:myAlert animated:YES completion:nil];
     }
 }
 
@@ -979,11 +977,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
         _dragStartPoint = touchPoint;
-        
-    } else if (gesture.state == UIGestureRecognizerStateChanged || gesture.state == UIGestureRecognizerStateEnded) {
+
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
         _dragEndPoint = touchPoint;
-    
         [self dragShape];
+        
+        [_imageView removeGestureRecognizer:_panGestureRecognizer];
+        _dragAreaEnabled = FALSE;
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
     }
     
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
@@ -1053,7 +1054,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Set the RGB and HSB value
         //
-        [self setColorValues:_touchPoint];
+        [self setColorValues:_touchPoint paintSwatch:_swatchObj];
 
         // Save the thumbnail image
         //
@@ -1099,15 +1100,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self setTapAreas];
 }
 
-- (void)dragShape {
+- (BOOL)dragShape {
     int listCount = (int)[_paintSwatches count];
     
     NSMutableArray *tempPaintSwatches = [[NSMutableArray alloc] initWithArray:_paintSwatches];
     _paintSwatches = [[NSMutableArray alloc] init];
-
     
     for (int i=0; i<listCount; i++) {
+
         PaintSwatches *swatchObj = [tempPaintSwatches objectAtIndex:i];
+        [_paintSwatches addObject:swatchObj];
         
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
@@ -1117,39 +1119,41 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CGFloat xtpt= _dragStartPoint.x - (_shapeLength / 2);
         CGFloat ytpt= _dragStartPoint.y - (_shapeLength / 2);
         
-        
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
-
-            //[_imageTableView setHidden:NO];
-            //[_imageScrollView setHidden:NO];
             
-            // Remove the PaintSwatch and any existing relations
-            //
+            if ([self existsEndPoint:listCount paintSwatches:tempPaintSwatches] == TRUE) {
+                UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please delete first the destination tap area."];
+                [self presentViewController:myAlert animated:YES completion:nil];
+                
+                return FALSE;
+            }
+            
+            [self setTapAreasChanged:TRUE];
+            
             [_paintSwatches removeObject:swatchObj];
             [self deleteTapArea:swatchObj];
-            
             
             // Insert the new PaintSwatch
             //
             // Instantiate the new PaintSwatch Object
             //
-            _swatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
+            PaintSwatches *newSwatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
             
-            [_swatchObj setCoord_pt:NSStringFromCGPoint(_dragEndPoint)];
+            [newSwatchObj setCoord_pt:NSStringFromCGPoint(_dragEndPoint)];
 
             
-            // Set the RGB and HSB value
+            // Set the RGB and HSB valuetf
             //
-            [self setColorValues:_dragEndPoint];
+            [self setColorValues:_dragEndPoint paintSwatch:newSwatchObj];
             
             // Save the thumbnail image
             //
             CGFloat xpt= _dragEndPoint.x - (_shapeLength / 2);
             CGFloat ypt= _dragEndPoint.y - (_shapeLength / 2);
             UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
-            [_swatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
+            [newSwatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
             
-            [_paintSwatches addObject:_swatchObj];
+            [_paintSwatches addObject:newSwatchObj];
             
             if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
                 [self matchButtonsShow];
@@ -1158,18 +1162,43 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                 [self viewButtonShow];
             }
             
-        } else {
-            [_paintSwatches addObject:swatchObj];
+            //_swatchObj = [_paintSwatches objectAtIndex:i];
         }
     }
-    tempPaintSwatches = nil;
 
     [self setTapAreas];
+    
+    [_imageTableView reloadData];
+    
+    return TRUE;
+}
+
+- (BOOL)existsEndPoint:(int)count paintSwatches:(NSMutableArray *)paintSwatches {
+    
+    for (int i=0; i<count; i++) {
+        
+        PaintSwatches *swatchObj = [paintSwatches objectAtIndex:i];
+        
+        CGPoint pt = CGPointFromString(swatchObj.coord_pt);
+        
+        CGFloat xpt = pt.x - (_shapeLength / 2);
+        CGFloat ypt = pt.y - (_shapeLength / 2);
+        
+        CGFloat xtpt= _dragEndPoint.x - (_shapeLength / 2);
+        CGFloat ytpt= _dragEndPoint.y - (_shapeLength / 2);
+        
+        
+        if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 
 - (void)setTapAreas {
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        
         NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
         
         for (int i=0; i<_currTapSection; i++) {
@@ -1208,7 +1237,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     UIImage *retImage = image;
     
-    for (int i=0; i<(int)[_paintSwatches count]; i++) {
+    int listCount = (int)[_paintSwatches count];
+    
+    for (int i=0; i<listCount; i++) {
         
         int count = i + 1;
         NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
@@ -1348,7 +1379,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     return retImage;
 }
 
--(void)setColorValues:(CGPoint)touchPoint {
+-(void)setColorValues:(CGPoint)touchPoint paintSwatch:(PaintSwatches *)swatchObj {
     
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
@@ -1359,18 +1390,18 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     if(CGColorGetNumberOfComponents(rgbPixelRef) == 4) {
         const CGFloat *components = CGColorGetComponents(rgbPixelRef);
-        _swatchObj.red   = [NSString stringWithFormat:@"%f", components[0] * 255];
-        _swatchObj.green = [NSString stringWithFormat:@"%f", components[1] * 255];
-        _swatchObj.blue  = [NSString stringWithFormat:@"%f", components[2] * 255];
+        swatchObj.red   = [NSString stringWithFormat:@"%f", components[0] * 255];
+        swatchObj.green = [NSString stringWithFormat:@"%f", components[1] * 255];
+        swatchObj.blue  = [NSString stringWithFormat:@"%f", components[2] * 255];
     }
     
     [rgbColor getHue:&_hue saturation:&_sat brightness:&_bri alpha:&_alpha];
 
-    _swatchObj.hue        = [NSString stringWithFormat:@"%f", _hue];
-    _swatchObj.saturation = [NSString stringWithFormat:@"%f", _sat];
-    _swatchObj.brightness = [NSString stringWithFormat:@"%f", _bri];
-    _swatchObj.alpha      = [NSString stringWithFormat:@"%f", _alpha];
-    _swatchObj.deg_hue    = [NSNumber numberWithFloat:_hue * 360];
+    swatchObj.hue        = [NSString stringWithFormat:@"%f", _hue];
+    swatchObj.saturation = [NSString stringWithFormat:@"%f", _sat];
+    swatchObj.brightness = [NSString stringWithFormat:@"%f", _bri];
+    swatchObj.alpha      = [NSString stringWithFormat:@"%f", _alpha];
+    swatchObj.deg_hue    = [NSNumber numberWithFloat:_hue * 360];
 }
 
 
@@ -1428,11 +1459,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         int match_algorithm_id = _matchAlgIndex;
         int swatch_ct          = _maxMatchNum;
         
-        TapArea *tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
+        TapArea *tapArea;
+        
+        if (_tapAreasChanged == FALSE) {
+            tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
+ 
+        } else {
+            int tap_obj_ct = (int)[[[_matchAssociation tap_area] allObjects] count];
+            if (tapIndex < tap_obj_ct) {
+                tapArea = [[[_matchAssociation tap_area] allObjects] objectAtIndex:tapIndex];
+            }
+        }
         if (tapArea != nil) {
             match_algorithm_id = [[tapArea match_algorithm_id] intValue];
             swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
         }
+
         
         NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
         
@@ -1696,12 +1738,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Default
     //
     int maxMatchNum = _maxMatchNum;
-    NSMutableArray *tapAreaObjects;
+    NSArray *tapAreaObjects;
     TapArea *tapArea;
     NSArray *tapAreaSwatches;
     
     if (_matchAssociation != nil) {
-        tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
+
+        if (_tapAreasChanged == FALSE) {
+            tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
+        } else {
+            tapAreaObjects = [[_matchAssociation tap_area] allObjects];
+        }
 
         if ([tapAreaObjects count] >= tapSection) {
             tapArea = [tapAreaObjects objectAtIndex:tapIndex];
@@ -2359,7 +2406,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Settings or Other Segue (for now, no action)
     //
     } else {
-        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged)) {
+        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
             [self saveMixAssoc];
             
         } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
@@ -2390,7 +2437,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (IBAction)unwindToImageViewFromMatch:(UIStoryboardSegue *)segue {
     MatchTableViewController *sourceViewController = [segue sourceViewController];
 
-    _maxMatchNum = sourceViewController.maxMatchNum;
+    _maxMatchNum = [sourceViewController maxMatchNum];
+    
+    [self setTapAreasChanged:FALSE];
     
     [self drawTapAreas];
     [self refreshViews];
