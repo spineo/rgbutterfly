@@ -81,7 +81,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     
     // NSManagedObject subclassing
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
     // Images

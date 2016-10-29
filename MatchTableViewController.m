@@ -90,7 +90,7 @@ const int IMAGE_TAG  = 6;
 
     // NSManagedObject subclassing
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
     // Initialize the PaintSwatch entity

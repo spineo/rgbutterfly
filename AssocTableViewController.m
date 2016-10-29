@@ -99,7 +99,7 @@ const int ASSOC_SET_TAG        = 8;
 
     // NSManagedObject subclassing
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
     _mixAssocEntity        = [NSEntityDescription entityForName:@"MixAssociation"    inManagedObjectContext:self.context];

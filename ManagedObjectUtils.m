@@ -25,7 +25,7 @@
 //
 + (void)insertSubjectiveColors {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
     NSEntityDescription *subjColorEntity = [NSEntityDescription entityForName:@"SubjectiveColor" inManagedObjectContext:context];
@@ -80,7 +80,7 @@
 //
 + (void)insertFromDataFile:(NSString *)entityName {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
@@ -260,7 +260,7 @@
 //
 + (int)fetchCount:(NSString *)entityName {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
@@ -826,7 +826,7 @@
 // Generic
 //
 + (void)deleteDictionaryEntity:(NSString *)entityName {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     

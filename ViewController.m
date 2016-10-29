@@ -108,7 +108,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     // NSManagedObject subclassing
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
 
     

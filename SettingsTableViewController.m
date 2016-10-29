@@ -90,7 +90,7 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     
     // NSManagedObject
     //
-    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context  = [self.appDelegate managedObjectContext];
 
 
