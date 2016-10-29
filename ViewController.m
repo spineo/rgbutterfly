@@ -156,7 +156,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                             }];
     
     UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Match"];
+        [self updateTable:MATCH_TYPE];
     }];
     
     UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
@@ -312,7 +312,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Mix"]) {
         [self loadMixCollectionViewData];
     
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
     
     } else if ([_listingType isEqualToString:@"Keywords"]) {
@@ -654,7 +654,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [headerLabel setText:mixAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"Match Associations Listing (%i)", _numMatchAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:matchAssocsListing];
@@ -819,7 +819,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Mix"]) {
         objCount = [_mixAssocObjs count];
 
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         objCount = [_matchAssocObjs count];
         
     } else if ([_listingType isEqualToString:@"Keywords"]) {
@@ -861,7 +861,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
         }
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     } else {
         return DEF_TABLE_CELL_HEIGHT;
@@ -914,7 +914,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
         return custCell;
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
             AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
             
             if (! custCell) {
@@ -1002,7 +1002,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
         
-    } else    if ([_listingType isEqualToString:@"Match"]) {
+    } else    if ([_listingType isEqualToString:MATCH_TYPE]) {
         //_selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
 
     } else if ([_listingType isEqualToString:@"Keywords"]) {
@@ -1073,7 +1073,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMatchCollectionViewData];
@@ -1220,7 +1220,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
         [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = [paintSwatch tap_area];
         _matchAssociation = [tapArea match_association];
@@ -1261,7 +1261,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
 
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
         
     } else {
@@ -1275,7 +1275,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
 
     } else {
@@ -1293,7 +1293,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Default"]) {
         [self loadDefaultListing];
         
-    } else if ([_listingType isEqualToString:@"Match"]) {
+    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
 
     } else {
@@ -1466,7 +1466,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [imageViewController setSelectedImage:_associationImage];
         [imageViewController setSourceViewContext:@"CollectionViewController"];
         [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
-        [imageViewController setViewType:@"match"];
+        [imageViewController setViewType:MATCH_TYPE];
         [imageViewController setMatchAssociation:_matchAssociation];
         
     // MainSwatchDetailSegue

@@ -118,10 +118,6 @@ int MAX_TABLEVIEW_SECTIONS    = 2;
 int MAX_COLLECTVIEW_SECTIONS  = 1;
 NSString *HDR_TABLEVIEW_TITLE = @"Match Method and Count";
 
-// View Types
-//
-NSString *MATCH_VIEW_TYPE = @"match";
-NSString *ASSOC_VIEW_TYPE = @"assoc";
 
 // Pinch Image
 //
@@ -225,7 +221,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 
     if (_viewType == nil) {
-        _viewType           = MATCH_VIEW_TYPE;
+        _viewType           = MATCH_TYPE;
     }
     
     [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
@@ -316,7 +312,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         [self.context rollback];
         
-        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        if ([_viewType isEqualToString:MATCH_TYPE]) {
             [self deleteMatchAssoc];
             [self matchButtonsHide];
         } else {
@@ -480,9 +476,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _matchView   = [UIAlertAction actionWithTitle:@"Match View (default)" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                _viewType = MATCH_VIEW_TYPE;
+                                                _viewType = MATCH_TYPE;
                                                 
-                                                UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_VIEW_TYPE
+                                                UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectMatchAction)];
@@ -506,9 +502,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _associateMixes = [UIAlertAction actionWithTitle:@"Associations" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                _viewType = ASSOC_VIEW_TYPE;
+                                                _viewType = ASSOC_TYPE;
 
-                                                UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_VIEW_TYPE
+                                                UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectAssocAction)];
@@ -547,7 +543,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
         [self matchButtonHide];
-        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        if ([_viewType isEqualToString:MATCH_TYPE]) {
             [self matchButtonsShow];
         }
 
@@ -638,10 +634,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
     
     NSString *assocName;
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && _matchAssociation != nil) {
+    if ([_viewType isEqualToString:MATCH_TYPE] && _matchAssociation != nil) {
         assocName = [_matchAssociation name];
         
-    } else if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && _mixAssociation != nil) {
+    } else if ([_viewType isEqualToString:ASSOC_TYPE] && _mixAssociation != nil) {
         assocName = [_mixAssociation name];
     }
 
@@ -748,7 +744,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _imageScrollView.translatesAutoresizingMaskIntoConstraints = YES;
 
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         [_matchView setEnabled:FALSE];
         [_associateMixes setEnabled:TRUE];
         
@@ -881,9 +877,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)setAlertButtonStates {
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         
-    } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    } else if ([_viewType isEqualToString:MATCH_TYPE]) {
         
     } else {
         [_associateMixes setEnabled:FALSE];
@@ -917,7 +913,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     [self drawTouchShape];
     
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         if (_newImage == TRUE && _firstTap == TRUE) {
             // Tap Collection View
             //
@@ -993,7 +989,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self.navigationItem.titleView setBackgroundColor:CLEAR_COLOR];
     }
     
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         [_matchSave setEnabled:TRUE];
     } else {
         [_assocSave setEnabled:TRUE];
@@ -1070,7 +1066,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         [_paintSwatches addObject:_swatchObj];
         
-        if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+        if ([_viewType isEqualToString:MATCH_TYPE]) {
 //            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < IMAGE_VIEW) {
 //                [self matchButtonsShow];
 //            } else {
@@ -1155,7 +1151,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_paintSwatches removeObjectAtIndex:i+1];
             [self deleteTapArea:swatchObj];
             
-            if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+            if ([_viewType isEqualToString:MATCH_TYPE]) {
                 [self matchButtonsShow];
                 
             } else {
@@ -1197,7 +1193,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 
 - (void)setTapAreas {
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         
         NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
         
@@ -1343,7 +1339,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 // Display alert view with textfields when clicking on the 'Edit' button (Match only)
 //
 - (IBAction)editAlertShow:(id)sender {
-    if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:MATCH_TYPE]) {
         [self presentViewController:_matchEditAlertController animated:YES completion:nil];
     } else {
         [self presentViewController:_assocEditAlertController animated:YES completion:nil];
@@ -2424,7 +2420,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 #pragma mark - Segue and Navigation Methods
 
 - (IBAction)segueToMatchOrAssoc:(id)sender {
-    if ([_viewType isEqualToString:ASSOC_VIEW_TYPE]) {
+    if ([_viewType isEqualToString:ASSOC_TYPE]) {
         [self performSegueWithIdentifier:@"AssocTableViewSegue" sender:self];
     }
 }
@@ -2502,10 +2498,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Settings or Other Segue (for now, no action)
     //
     } else {
-        if ([_viewType isEqualToString:ASSOC_VIEW_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
+        if ([_viewType isEqualToString:ASSOC_TYPE] && (_mixAssociation == nil || _tapAreasChanged == TRUE)) {
             [self saveMixAssoc];
             
-        } else if ([_viewType isEqualToString:MATCH_VIEW_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
+        } else if ([_viewType isEqualToString:MATCH_TYPE] && (_matchAssociation == nil || _tapAreasChanged == TRUE)) {
             [self updateMatchAssoc];
         }
     }
@@ -2518,6 +2514,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _mixAssociation = sourceViewController.mixAssociation;
     _saveFlag       = sourceViewController.saveFlag;
 
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
+    [items replaceObjectAtIndex:4 withObject:flexibleSpace];
+    [self setToolbarItems:items];
     
     // Disable the view and algorithm buttons
     //

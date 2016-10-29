@@ -195,6 +195,11 @@ extern int const MAX_KEYW_LEN;
 extern int const MAX_DESC_LEN;
 extern int const MAX_BRAND_LEN;
 
+// View Types
+//
+extern NSString * const MATCH_TYPE;
+extern NSString * const ASSOC_TYPE;
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

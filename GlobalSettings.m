@@ -178,6 +178,10 @@ int const MAX_KEYW_LEN  = 128;
 int const MAX_DESC_LEN  = 128;
 int const MAX_BRAND_LEN = 32;
 
+// View Types
+//
+NSString * const MATCH_TYPE     = @"Match";
+NSString * const ASSOC_TYPE     = @"Assoc";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys

@@ -991,7 +991,7 @@ const int IMAGE_TAG  = 6;
     [self algButtonsShow];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Match"];
+    [BarButtonUtils buttonSetTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:MATCH_TYPE];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
