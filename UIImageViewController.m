@@ -951,8 +951,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
     
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-
+    if ([_paintSwatches count] > 0  && gesture.state == UIGestureRecognizerStateEnded) {
         if (_dragAreaEnabled == FALSE) {
             [_imageView addGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = TRUE;
@@ -1478,7 +1477,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         const CGFloat *components = CGColorGetComponents(rgbPixelRef);
         backgroundColor = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:1.0];
     } else {
-        backgroundColor = LIGHT_BG_COLOR;
+        backgroundColor = CLEAR_COLOR;
     }
     
     [view setBackgroundColor:backgroundColor];

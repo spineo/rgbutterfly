@@ -20,16 +20,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="0.0" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ikM-89-GOK">
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -168,7 +168,7 @@
                                 <action selector="removeTableRows:" destination="6Nq-8K-N9m" id="kun-zU-pLc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="75" enabled="NO" image="B7D186CA-D847-4035-9650-1277C115D8B8" id="hs8-VJ-7uF">
+                        <barButtonItem tag="75" enabled="NO" image="775DBD7E-F31C-4A15-B1A6-A835D65BFCEF" id="hs8-VJ-7uF">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
@@ -719,7 +719,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="B7D186CA-D847-4035-9650-1277C115D8B8" width="25" height="25">
+        <image name="775DBD7E-F31C-4A15-B1A6-A835D65BFCEF" width="25" height="25">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -825,10 +825,10 @@ AEEAAAAAAAAAAAAAAAAAABQQA
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

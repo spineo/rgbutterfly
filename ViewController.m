@@ -975,6 +975,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             }
             
         } else if ([_listingType isEqualToString:@"Colors"]) {
+            
             int index = (int)indexPath.section - 1;
             PaintSwatches *ps = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
             
