@@ -102,6 +102,7 @@ extern int const DEF_STEP_MATCH;
 extern int const DEF_NUM_TAPS;
 extern CGFloat const MIN_PRESS_DUR;
 extern CGFloat const ALLOWABLE_MOVE;
+extern CGFloat const MIN_DRAG_DIFF;
 
 // UI Button
 //

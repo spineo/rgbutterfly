@@ -348,7 +348,8 @@ const int IMAGE_TAG  = 6;
         int match_ct = (int)[_matchedSwatches count] - 1;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
         
-        if (_scrollFlag == FALSE || _editFlag == FALSE) {
+        //if (_scrollFlag == FALSE || _editFlag == FALSE) {
+        if (_scrollFlag == FALSE) {
             UIImage *refImage;
             
             if (_isRGB == TRUE) {
@@ -550,7 +551,8 @@ const int IMAGE_TAG  = 6;
         
         int index = (int)indexPath.row;
         
-        if (_editFlag == FALSE || _scrollFlag == FALSE || _pressSelectedRow != index) {
+//        if (_editFlag == FALSE || _scrollFlag == FALSE || _pressSelectedRow != index) {
+        if (_scrollFlag == FALSE || _pressSelectedRow != index) {
 
             if (_isRGB == TRUE) {
                 cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
@@ -567,16 +569,16 @@ const int IMAGE_TAG  = 6;
             [cell.textLabel setNumberOfLines:0];
             [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
             
-            if (_editFlag == TRUE) {
-                [cell setAccessoryType:UITableViewCellAccessoryNone];
-                
-                BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
-                if (tappedStat == TRUE) {
-                    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-                }
-            } else {
+//            if (_editFlag == TRUE) {
+//                [cell setAccessoryType:UITableViewCellAccessoryNone];
+//                
+//                BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
+//                if (tappedStat == TRUE) {
+//                    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+//                }
+//            } else {
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
+//            }
 
             // Add the Gesture Recognizer
             //
@@ -585,7 +587,8 @@ const int IMAGE_TAG  = 6;
             panGesture.delegate = self;
             [cell.textLabel addGestureRecognizer:panGesture];
             
-        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _pressSelectedRow == index) {
+//        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _pressSelectedRow == index) {
+        } else if (_scrollFlag == TRUE && _pressSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
 
             UIImage *refImage = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
@@ -613,22 +616,22 @@ const int IMAGE_TAG  = 6;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedRow = (int)indexPath.row;
 
-    if (indexPath.section == MATCH_SECTION && _editFlag == FALSE)  {
+//    if (indexPath.section == MATCH_SECTION && _editFlag == FALSE)  {
         [self performSegueWithIdentifier:@"ShowSwatchDetailSegue" sender:self];
         
-    } else {
-        BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
-        if (tappedStat == FALSE) {
-            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:TRUE]];
-            _tappedCount++;
-
-        } else {
-            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:FALSE]];
-            _tappedCount--;
-        }
-        
-        [tableView reloadData];
-    }
+//    } else {
+//        BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
+//        if (tappedStat == FALSE) {
+//            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:TRUE]];
+//            _tappedCount++;
+//
+//        } else {
+//            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:FALSE]];
+//            _tappedCount--;
+//        }
+//        
+//        [tableView reloadData];
+//    }
 }
 
 // For now (perhaps even this version), disallow the manual override

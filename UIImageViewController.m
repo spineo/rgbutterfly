@@ -60,7 +60,7 @@
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
-@property (nonatomic) CGPoint touchPoint, dragStartPoint, dragEndPoint;
+@property (nonatomic) CGPoint touchPoint, dragStartPoint, dragChangePoint, dragEndPoint;
 
 @property (nonatomic, strong) NSDate *now;
 @property (nonatomic) CGFloat pressStartTime;
@@ -957,11 +957,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageView addGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = TRUE;
             [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:@"Drag Enabled"];
-
         } else {
             [_imageView removeGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = FALSE;
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
+            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:[self getTitle]];
         }
     }
 }
@@ -976,15 +975,23 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     CGPoint touchPoint = [gesture locationInView:_imageView];
     
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        _dragStartPoint = touchPoint;
+        _dragStartPoint  = touchPoint;
+        _dragChangePoint = _dragStartPoint;
+        
+    } else if (gesture.state == UIGestureRecognizerStateChanged) {
+        _dragEndPoint = touchPoint;
 
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:@""];
+        [self setViewBackgroundColor:_dragEndPoint view:self.navigationItem.titleView];
+ 
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        _dragAreaEnabled = FALSE;
         _dragEndPoint = touchPoint;
         [self dragShape];
         
         [_imageView removeGestureRecognizer:_panGestureRecognizer];
-        _dragAreaEnabled = FALSE;
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
+        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:[self getTitle]];
+        [self.navigationItem.titleView setBackgroundColor:CLEAR_COLOR];
     }
     
     if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
@@ -1014,8 +1021,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         CGFloat xtpt= _touchPoint.x - (_shapeLength / 2);
         CGFloat ytpt= _touchPoint.y - (_shapeLength / 2);
-        
-    
+
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             [self setTapAreaSeen:1];
             seen_index   = i;
@@ -1103,13 +1109,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (BOOL)dragShape {
     int listCount = (int)[_paintSwatches count];
     
-    NSMutableArray *tempPaintSwatches = [[NSMutableArray alloc] initWithArray:_paintSwatches];
-    _paintSwatches = [[NSMutableArray alloc] init];
-    
-    for (int i=0; i<listCount; i++) {
+    int i=0;
+    while (i < listCount) {
 
-        PaintSwatches *swatchObj = [tempPaintSwatches objectAtIndex:i];
-        [_paintSwatches addObject:swatchObj];
+        PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:i];
         
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
@@ -1121,7 +1124,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             
-            if ([self existsEndPoint:listCount paintSwatches:tempPaintSwatches] == TRUE) {
+            if (_dragAreaEnabled == FALSE && [self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
                 UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please delete first the destination tap area."];
                 [self presentViewController:myAlert animated:YES completion:nil];
                 
@@ -1129,12 +1132,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             }
             
             [self setTapAreasChanged:TRUE];
-            
-            [_paintSwatches removeObject:swatchObj];
-            [self deleteTapArea:swatchObj];
-            
-            // Insert the new PaintSwatch
-            //
+
             // Instantiate the new PaintSwatch Object
             //
             PaintSwatches *newSwatchObj = [[PaintSwatches alloc] initWithEntity:_paintSwatchEntity insertIntoManagedObjectContext:self.context];
@@ -1153,7 +1151,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
             [newSwatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
             
-            [_paintSwatches addObject:newSwatchObj];
+            [_paintSwatches insertObject:newSwatchObj atIndex:i];
+            
+            [_paintSwatches removeObjectAtIndex:i+1];
+            [self deleteTapArea:swatchObj];
             
             if ([_viewType isEqualToString:MATCH_VIEW_TYPE]) {
                 [self matchButtonsShow];
@@ -1161,17 +1162,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             } else {
                 [self viewButtonShow];
             }
-            
-            //_swatchObj = [_paintSwatches objectAtIndex:i];
         }
+        i++;
     }
 
     [self setTapAreas];
-    
     [_imageTableView reloadData];
+
     
     return TRUE;
 }
+
 
 - (BOOL)existsEndPoint:(int)count paintSwatches:(NSMutableArray *)paintSwatches {
     
@@ -1210,6 +1211,29 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self drawTapAreas];
 }
 
+- (void)drawTapArea:(int)index {
+    
+    UIImage *tempImage = [self imageWithBorderFromImage:_selectedImage rectSize:_selectedImage.size shapeType:_shapeGeom lineColor:TAP_AREA_LIGHT_STROKE];
+    
+    tempImage = [self drawText:tempImage index:(int)index];
+    
+    [_imageView setImage:tempImage];
+    [_imageView.layer setMasksToBounds:YES];
+    [_imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+    
+    //    // Add the selected image
+    //    //
+    //    [_imageView setContentMode:UIViewContentModeScaleToFill];
+    //    [_imageScrollView setScrollEnabled:YES];
+    //    [_imageScrollView setClipsToBounds:YES];
+    //    [_imageScrollView setContentSize:_selectedImage.size];
+    //    [_imageScrollView setDelegate:self];
+    
+    // Set the reference image (used by the detail views)
+    //
+    _referenceTappedImage = tempImage;
+}
+
 - (void)drawTapAreas {
 
     UIImage *tempImage = [self imageWithBorderFromImage:_selectedImage rectSize:_selectedImage.size shapeType:_shapeGeom lineColor:TAP_AREA_LIGHT_STROKE];
@@ -1231,6 +1255,43 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Set the reference image (used by the detail views)
     //
     _referenceTappedImage = tempImage;
+}
+
+-(UIImage*)drawText:(UIImage*)image index:(int)i {
+    
+    UIImage *retImage = image;
+    
+        
+        int count = i + 1;
+        NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
+        
+        PaintSwatches *swatchObj = [_paintSwatches objectAtIndex:i];
+        
+        CGPoint pt = CGPointFromString(swatchObj.coord_pt);
+        CGFloat x, y;
+        if ([_shapeGeom isEqualToString:_circleLabel]) {
+            x = pt.x - (_shapeLength / 3.3);
+            y = pt.y - (_shapeLength / 3.3);
+        } else {
+            x = pt.x - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
+            y = pt.y - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
+        }
+        
+        UIGraphicsBeginImageContext(image.size);
+        
+        [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
+        CGRect rect = CGRectMake(x, y, image.size.width, image.size.height);
+        
+        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
+        
+        [countStr drawInRect:CGRectInset(rect, TAP_AREA_LABEL_INSET, TAP_AREA_LABEL_INSET) withAttributes:attr];
+        
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        retImage = newImage;
+    
+    return retImage;
 }
 
 -(UIImage*)drawText:(UIImage*)image {
@@ -1404,6 +1465,25 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     swatchObj.deg_hue    = [NSNumber numberWithFloat:_hue * 360];
 }
 
+-(void)setViewBackgroundColor:(CGPoint)touchPoint view:(UIView *)view {
+        
+    _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
+    
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
+    
+    CGColorRef rgbPixelRef = [rgbColor CGColor];
+    
+    UIColor *backgroundColor;
+    if(CGColorGetNumberOfComponents(rgbPixelRef) == 4) {
+        const CGFloat *components = CGColorGetComponents(rgbPixelRef);
+        backgroundColor = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:1.0];
+    } else {
+        backgroundColor = LIGHT_BG_COLOR;
+    }
+    
+    [view setBackgroundColor:backgroundColor];
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TableView Methods
@@ -1567,7 +1647,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        //return DEF_TABLE_HDR_HEIGHT;
         return DEF_NIL_HEADER;
     } else {
         return DEF_NIL_HEADER;
@@ -1799,6 +1878,24 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 //    
 //    return [tmpSwatches mutableCopy];
 //}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// General Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - General Methods
+
+-(NSString *)getTitle {
+
+    NSString *titleText = DEF_IMAGE_NAME;
+    if (_matchAssociation != nil) {
+        titleText = [_matchAssociation name];
+    } else if (_mixAssociation != nil) {
+        titleText = [_mixAssociation name];
+    }
+    
+    return titleText;
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // BarButton Methods

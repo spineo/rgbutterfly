@@ -237,11 +237,12 @@ int const DEF_MATCH_NUM  = 10;
 int const DEF_MIN_MATCH  = 5;
 int const DEF_STEP_MATCH = 5;
 
-// Tap Related
+// Tap/Drag Related
 //
 int const DEF_NUM_TAPS       = 1;
 CGFloat const MIN_PRESS_DUR  = 0.5f;
 CGFloat const ALLOWABLE_MOVE = 100.0f;
+CGFloat const MIN_DRAG_DIFF  = 5.0;
 
 // Alert Types
 //

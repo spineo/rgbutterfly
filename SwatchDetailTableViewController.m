@@ -155,7 +155,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
-    [self.navigationController.navigationBar setBackgroundColor: [UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 
     
     // TableView defaults
