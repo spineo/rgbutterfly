@@ -10,7 +10,8 @@
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
 
-
+// NIL constants
+//
 CGFloat const DEF_X_OFFSET          = 0.0;
 CGFloat const DEF_Y_OFFSET          = 0.0;
 CGFloat const DEF_NIL_CELL          = 0.0;
@@ -19,6 +20,10 @@ CGFloat const DEF_NIL_FOOTER        = 1.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
 CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
+
+// MIN constants (i.e., tableview header instead of zero) which prevents default setting
+//
+CGFloat const DEF_MIN_HEADER        = 1.0;
 
 // Widget alignment related
 //
@@ -182,6 +187,7 @@ int const MAX_BRAND_LEN = 32;
 //
 NSString * const MATCH_TYPE     = @"Match";
 NSString * const ASSOC_TYPE     = @"Assoc";
+NSString * const MIX_TYPE       = @"Mix";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
@@ -302,6 +308,12 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 // Default listing type
 //
 NSString * const DEFAULT_LISTING_TYPE  = @"Default";
+
+// "About" section text
+//
+NSString * const ABOUT_TEXT = @"\nAcrylics Color Picker \n\n"
+"This app aims to help users find potential acrylic "
+"color paint matches associated with selected areas of a photo.";
 
 
 // Threshold brightness value under which a white border is drawn around the RGB image view

@@ -12,7 +12,7 @@
 @interface GlobalSettings : NSObject
 
 
-// TableView Constants
+// NIL constants
 //
 extern CGFloat const DEF_X_OFFSET;
 extern CGFloat const DEF_Y_OFFSET;
@@ -22,6 +22,10 @@ extern CGFloat const DEF_NIL_FOOTER;
 extern CGFloat const DEF_NIL_WIDTH;
 extern CGFloat const DEF_NIL_HEIGHT;
 extern CGFloat const DEF_NIL_CONSTRAINT;
+
+// MIN constants (i.e., tableview header instead of zero) which prevents default setting
+//
+extern CGFloat const DEF_MIN_HEADER;
 
 // Widget alignment related
 //
@@ -199,6 +203,7 @@ extern int const MAX_BRAND_LEN;
 //
 extern NSString * const MATCH_TYPE;
 extern NSString * const ASSOC_TYPE;
+extern NSString * const MIX_TYPE;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
@@ -298,6 +303,9 @@ extern NSString * const CHECKBOX_SQ_IMAGE_NAME;
 //
 extern NSString * const DEFAULT_LISTING_TYPE;
 
+// "About" section text
+//
+extern NSString * const ABOUT_TEXT;
 
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)
@@ -324,6 +332,7 @@ extern float const DEF_BORDER_THRESHOLD;
 //
 #define LIGHT_BG_COLOR     [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define GRAY_BG_COLOR      [UIColor grayColor]
+#define DARK_GRAY_BG_COLOR [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:1.0]
 #define DARK_BG_COLOR      [UIColor blackColor]
 
 // Colors (across the board)
@@ -345,6 +354,7 @@ extern float const DEF_BORDER_THRESHOLD;
 // UITable cell font
 //
 #define TABLE_CELL_FONT    [UIFont systemFontOfSize:12]
+#define LG_TABLE_CELL_FONT [UIFont systemFontOfSize:14]
 #define TABLE_HEADER_FONT  [UIFont boldSystemFontOfSize:14]
 
 // UITextField and UITextView font
@@ -352,6 +362,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define TEXT_LABEL_FONT    [UIFont systemFontOfSize:12]
 #define TEXT_FIELD_FONT    [UIFont systemFontOfSize:12]
 #define PLACEHOLDER_FONT   [UIFont italicSystemFontOfSize:12]
+#define LG_TEXT_FIELD_FONT [UIFont systemFontOfSize:14]
 
 // Image Tap Areas
 //
@@ -363,6 +374,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define SMALL_FONT         [UIFont systemFontOfSize:10]
 #define LARGE_BOLD_FONT    [UIFont boldSystemFontOfSize:14]
 #define ITALIC_FONT        [UIFont italicSystemFontOfSize:12]
+#define LARGE_ITALIC_FONT  [UIFont italicSystemFontOfSize:14]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -18,7 +18,7 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
@@ -47,33 +47,38 @@
 
 // Section 1: READ-ONLY Settings
 //
-const int READ_ONLY_SETTINGS      = 0;
+const int ABOUT_SECTION           = 0;
+const int ABOUT_ROW               = 0;
+const int DISCLAIMER_ROW          = 1;
+const int ABOUT_ROWS              = 2;
+
+const int READ_ONLY_SETTINGS      = 1;
 const int PSWATCH_READ_ONLY_ROW   = 0;
 const int MIXASSOC_READ_ONLY_ROW  = 1;
 const int READ_ONLY_SETTINGS_ROWS = 2;
 
-const int TAP_AREA_SETTINGS       = 1;
+const int TAP_AREA_SETTINGS       = 2;
 const int TAP_AREA_ROWS           = 1;
 
-const int MATCH_NUM_SETTINGS      = 2;
+const int MATCH_NUM_SETTINGS      = 3;
 const int MATCH_NUM_ROWS          = 1;
 
-const int RGB_DISPLAY_SETTINGS    = 3;
+const int RGB_DISPLAY_SETTINGS    = 4;
 const int RGB_DISPLAY_ROWS        = 1;
 
-const int MIX_RATIOS_SETTINGS     = 4;
+const int MIX_RATIOS_SETTINGS     = 5;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int MIX_ASSOC_SETTINGS      = 5;
+const int MIX_ASSOC_SETTINGS      = 6;
 const int MIX_ASSOC_ROWS          = 1;
 
-const int ALERTS_SETTINGS         = 6;
+const int ALERTS_SETTINGS         = 7;
 const int ALERTS_ROWS             = 1;
 
-const int ADD_BRANDS_SETTINGS     = 7;
-const int ADD_BRANDS_ROWS         = 1;
+const int FEEDBACK_SECTION        = 8;
+const int FEEDBACK_ROWS           = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 7;
+const int SETTINGS_MAX_SECTIONS   = 9;
 
 
 - (void)viewDidLoad {
@@ -92,6 +97,16 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context  = [self.appDelegate managedObjectContext];
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // About section
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    _aboutLabel = [FieldUtils createLabel:@"About this App" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
+    [_aboutLabel setFont:LG_TABLE_CELL_FONT];
+    
+    _disclaimerLabel = [FieldUtils createLabel:@"Disclaimer" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
+    [_disclaimerLabel setFont:LG_TABLE_CELL_FONT];
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -185,7 +200,7 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     // Tap Area Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
-    _tapSettingsLabel = [FieldUtils createLabel:@"Change the Size/Shape of the Tap Area"];
+    _tapSettingsLabel = [FieldUtils createLabel:@"Change the Size/Shape of the Tap Areas"];
     
     // Sizing parameters
     //
@@ -347,7 +362,7 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     // Mix Ratios Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _mixRatiosLabel = [FieldUtils createLabel:@"Comma-separated ratios, separate line per group"];
+    _mixRatiosLabel = [FieldUtils createLabel:@"Comma-separated mix ratios, separate line/group"];
     
     _mixRatiosTextView = [FieldUtils createTextView:@"" tag:MIX_RATIOS_TAG];
     [_mixRatiosTextView setKeyboardType:UIKeyboardTypeDefault];
@@ -437,8 +452,8 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     //
     _mixAssocCountText    = @"mixassoc_count_text";
     
-    _mixAssocGt2Text  = @"List Associations Size > Two";
-    _mixAssocAllText  = @"List Associations All Sizes ";
+    _mixAssocGt2Text  = @"List Associations Size GT Two";
+    _mixAssocAllText  = @"List Associations of All Sizes";
     
     _labelText = @"";
     if(! ([_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY] &&
@@ -534,7 +549,10 @@ const int SETTINGS_MAX_SECTIONS   = 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == READ_ONLY_SETTINGS) {
+    if (section == ABOUT_SECTION) {
+        return ABOUT_ROWS;
+        
+    } else if (section == READ_ONLY_SETTINGS) {
         return READ_ONLY_SETTINGS_ROWS;
         
     } else if (section == TAP_AREA_SETTINGS) {
@@ -555,14 +573,17 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     } else if (section == MIX_ASSOC_SETTINGS) {
         return MIX_ASSOC_ROWS;
         
-    } else if (section == ADD_BRANDS_SETTINGS) {
-        return ADD_BRANDS_ROWS;
+//    } else if (section == ADD_BRANDS_SETTINGS) {
+//        return ADD_BRANDS_ROWS;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (indexPath.section == MIX_RATIOS_SETTINGS) {
+    if (indexPath.section == ABOUT_SECTION) {
+        return DEF_VLG_TABLE_HDR_HGT;
+        
+    } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
         return DEF_XLG_TBL_CELL_HGT;
         
     } else if ((indexPath.section == TAP_AREA_SETTINGS) ||  (indexPath.section == MATCH_NUM_SETTINGS)) {
@@ -574,12 +595,15 @@ const int SETTINGS_MAX_SECTIONS   = 7;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return DEF_LG_TABLE_HDR_HGT;
+    return DEF_TABLE_HDR_HEIGHT;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *headerStr;
-    if (section == READ_ONLY_SETTINGS) {
+    NSString *headerStr = @"";
+    if (section == ABOUT_SECTION) {
+        headerStr = @"About";
+        
+    } else if (section == READ_ONLY_SETTINGS) {
         headerStr = @"Read-Only";
         
     } else if (section == TAP_AREA_SETTINGS) {
@@ -600,8 +624,8 @@ const int SETTINGS_MAX_SECTIONS   = 7;
     } else if (section == MIX_ASSOC_SETTINGS) {
         headerStr = @"Mix Associations";
         
-    } else if (section == ADD_BRANDS_SETTINGS) {
-        headerStr = @"Add Paint Brands";
+//    } else if (section == ADD_BRANDS_SETTINGS) {
+//        headerStr = @"Add Paint Brands";
     }
     
     return headerStr;
@@ -672,14 +696,19 @@ heightForFooterInSection:(NSInteger)section {
     
     // Global defaults
     //
-    [cell setBackgroundColor:DARK_BG_COLOR];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:GRAY_BG_COLOR];
+    [cell.contentView setBackgroundColor:DARK_BG_COLOR];
+    [cell setBackgroundColor:DARK_BG_COLOR];
+
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+
     [cell.textLabel setFont:TABLE_CELL_FONT];
     [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
     [cell.imageView setImage:nil];
     [cell.textLabel setText:@""];
+    
     
     for (UIView *subview in [cell.contentView subviews]) {
         [subview removeFromSuperview];
@@ -687,7 +716,20 @@ heightForFooterInSection:(NSInteger)section {
     
     CGFloat tableViewWidth = self.tableView.bounds.size.width;
     
-    if (indexPath.section == READ_ONLY_SETTINGS) {
+    if (indexPath.section == ABOUT_SECTION) {
+        //[cell.contentView setBackgroundColor:DARK_GRAY_BG_COLOR];
+        //[cell setBackgroundColor:DARK_GRAY_BG_COLOR];
+        //[_aboutLabel setBackgroundColor:CLEAR_COLOR];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        
+        if (indexPath.row == ABOUT_ROW) {
+            [cell.contentView addSubview:_aboutLabel];
+            
+        } else {
+            [cell.contentView addSubview:_disclaimerLabel];
+        }
+        
+    } else if (indexPath.section == READ_ONLY_SETTINGS) {
     
         // Name, and reference type
         //
@@ -737,11 +779,11 @@ heightForFooterInSection:(NSInteger)section {
         [cell.contentView addSubview:_rgbDisplayButton];
         [cell.contentView addSubview:_rgbDisplayLabel];
         
-    } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
-        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / DEF_HGT_ALIGN_FACTOR;
-        CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
-        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTFIELD_HEIGHT)];
-        [cell.contentView addSubview:_addBrandsTextField];
+//    } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
+//        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / DEF_HGT_ALIGN_FACTOR;
+//        CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+//        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTFIELD_HEIGHT)];
+//        [cell.contentView addSubview:_addBrandsTextField];
         
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
         [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
@@ -763,6 +805,16 @@ heightForFooterInSection:(NSInteger)section {
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == ABOUT_SECTION) {
+        if (indexPath.row == ABOUT_ROW) {
+            [self performSegueWithIdentifier:@"AboutSegue" sender:self];
+        }
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.

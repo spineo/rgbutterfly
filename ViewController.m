@@ -160,7 +160,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     }];
     
     UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
-        [self updateTable:@"Mix"];
+        [self updateTable:MIX_TYPE];
     }];
     
     UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Keywords Listing" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -309,7 +309,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 //    [ManagedObjectUtils deleteChildlessMixAssoc:self.context];
 
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         [self loadMixCollectionViewData];
     
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
@@ -648,7 +648,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [headerView addSubview:letterLabel];
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
-    } else if ([_listingType isEqualToString:@"Mix"]) {
+    } else if ([_listingType isEqualToString:MIX_TYPE]) {
         NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Associations Listing (%i)", _numMixAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
@@ -816,7 +816,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     // Return the number of rows in the section.
     //
     NSInteger objCount;
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         objCount = [_mixAssocObjs count];
 
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
@@ -852,7 +852,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         int index = (int)indexPath.row;
         int ct = (int)[[self.mixColorArray objectAtIndex:index] count];
         if (ct < _minAssocSize) {
@@ -870,7 +870,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
@@ -998,7 +998,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
         
@@ -1068,7 +1068,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)updateTable:(NSString *)listingType {
     _listingType = listingType;
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
@@ -1156,7 +1156,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         return [[self.mixColorArray objectAtIndex:index] count];
 
     // Match
@@ -1173,7 +1173,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     UIImage *swatchImage;
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
     
         PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
 
@@ -1208,7 +1208,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     [self setCollectViewSelRow:index];
     
-    if ([_listingType isEqualToString:@"Mix"]) {
+    if ([_listingType isEqualToString:MIX_TYPE]) {
         PaintSwatches *paintSwatch = [[self.mixColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         
         // Doesn't matter which one

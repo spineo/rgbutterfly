@@ -68,7 +68,7 @@
     [textField setTag: tag];
     [textField setTextAlignment:NSTextAlignmentLeft];
     [textField setClearButtonMode: UITextFieldViewModeWhileEditing];
-    [textField setFont: TEXT_FIELD_FONT];
+    [textField setFont:TEXT_FIELD_FONT];
     [textField setText:name];
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
@@ -85,8 +85,8 @@
 + (UITextView *)createTextView:(NSString *)name tag:(NSInteger)tag {
     
     UITextView *textView = [[UITextView alloc] init];
-    [textView setBackgroundColor: LIGHT_BG_COLOR];
-    [textView setTextColor: DARK_TEXT_COLOR];
+    [textView setBackgroundColor:LIGHT_BG_COLOR];
+    [textView setTextColor:DARK_TEXT_COLOR];
     [textView.layer setCornerRadius: DEF_CORNER_RADIUS];
     [textView.layer setBorderWidth: DEF_BORDER_WIDTH];
     [textView setTag: tag];
