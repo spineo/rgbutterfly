@@ -18,7 +18,7 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
 @property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
 @property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
@@ -50,7 +50,8 @@
 const int ABOUT_SECTION           = 0;
 const int ABOUT_ROW               = 0;
 const int DISCLAIMER_ROW          = 1;
-const int ABOUT_ROWS              = 2;
+const int FEEDBACK_ROW            = 2;
+const int ABOUT_ROWS              = 3;
 
 const int READ_ONLY_SETTINGS      = 1;
 const int PSWATCH_READ_ONLY_ROW   = 0;
@@ -75,10 +76,7 @@ const int MIX_ASSOC_ROWS          = 1;
 const int ALERTS_SETTINGS         = 7;
 const int ALERTS_ROWS             = 1;
 
-const int FEEDBACK_SECTION        = 8;
-const int FEEDBACK_ROWS           = 1;
-
-const int SETTINGS_MAX_SECTIONS   = 9;
+const int SETTINGS_MAX_SECTIONS   = 8;
 
 
 - (void)viewDidLoad {
@@ -107,6 +105,9 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     _disclaimerLabel = [FieldUtils createLabel:@"Disclaimer" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_disclaimerLabel setFont:LG_TABLE_CELL_FONT];
+    
+    _feedbackLabel = [FieldUtils createLabel:@"Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
+    [_feedbackLabel setFont:LG_TABLE_CELL_FONT];
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -601,28 +602,28 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr = @"";
     if (section == ABOUT_SECTION) {
-        headerStr = @"About";
+        headerStr = @"About & Feedback";
         
     } else if (section == READ_ONLY_SETTINGS) {
-        headerStr = @"Read-Only";
+        headerStr = @"Read-Only Settings";
         
     } else if (section == TAP_AREA_SETTINGS) {
-        headerStr = @"Tap Area";
+        headerStr = @"Tap Area Settings";
         
     } else if (section == MATCH_NUM_SETTINGS) {
-        headerStr = @"Match Number";
+        headerStr = @"Match Number Settings";
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
-        headerStr = @"RGB Display";
+        headerStr = @"RGB/Paint Display";
         
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
         
     } else if (section == ALERTS_SETTINGS) {
-        headerStr = @"Alerts";
+        headerStr = @"Alerts Settings";
 
     } else if (section == MIX_ASSOC_SETTINGS) {
-        headerStr = @"Mix Associations";
+        headerStr = @"Mix Associations Count";
         
 //    } else if (section == ADD_BRANDS_SETTINGS) {
 //        headerStr = @"Add Paint Brands";
@@ -725,8 +726,13 @@ heightForFooterInSection:(NSInteger)section {
         if (indexPath.row == ABOUT_ROW) {
             [cell.contentView addSubview:_aboutLabel];
             
-        } else {
+        } else if (indexPath.row == DISCLAIMER_ROW) {
             [cell.contentView addSubview:_disclaimerLabel];
+        
+        // Feedback row
+        //
+        } else {
+            [cell.contentView addSubview:_feedbackLabel];
         }
         
     } else if (indexPath.section == READ_ONLY_SETTINGS) {
@@ -811,6 +817,9 @@ heightForFooterInSection:(NSInteger)section {
     if (indexPath.section == ABOUT_SECTION) {
         if (indexPath.row == ABOUT_ROW) {
             [self performSegueWithIdentifier:@"AboutSegue" sender:self];
+            
+        } else if (indexPath.row == DISCLAIMER_ROW) {
+            [self performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
         }
     }
 }

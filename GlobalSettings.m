@@ -311,9 +311,28 @@ NSString * const DEFAULT_LISTING_TYPE  = @"Default";
 
 // "About" section text
 //
-NSString * const ABOUT_TEXT = @"\nAcrylics Color Picker \n\n"
-"This app aims to help users find potential acrylic "
+NSString * const ABOUT_TEXT = @"\nThis app aims to help users find potential acrylic "
 "color paint matches associated with selected areas of a photo.";
+
+
+// "Disclaimer" section text
+//
+NSString * const DISCLAIMER_TEXT = @"\nThis app attempts to find matching paint references "
+"and/or mixes associated with a user selected area in a photo. It does this by "
+"applying a selected algorithm based on the RGB and/or HSB color properties. "
+"In many cases the heuristic misses the mark or is unable to find a "
+"suitable match against the database. My hope is to continue to improve that match "
+"rate with future releases as a result of both refinements in the algorithm and "
+"new paint references/mixes added to the database.\n\n"
+"While I have attempted to capture, as carefully as possible, the real colors of "
+"the reference paints and mixes, inaccuracies resulting from the paint mixing process "
+"and/or photographic lighting are likely to exist (the 'Methodology' paragraph "
+"in the 'About this App' section describes this process)\n\n"
+"While most of my references are based on the Liquitex brand this does not mean I "
+"endorse that brand. Likewise, none of the paint brands or any other entity has financed "
+"the development of this app. Finally, the reference colors or mixes linked "
+"to any brand may not necessarily be a true representation of that brand.";
+
 
 
 // Threshold brightness value under which a white border is drawn around the RGB image view

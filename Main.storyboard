@@ -168,7 +168,7 @@
                                 <action selector="removeTableRows:" destination="6Nq-8K-N9m" id="kun-zU-pLc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="75" enabled="NO" image="34151366-9A11-407A-90B3-3E4A64519EE2" id="hs8-VJ-7uF">
+                        <barButtonItem tag="75" enabled="NO" image="AEA6F06C-5015-4E5B-9BA5-BCE097EEDA27" id="hs8-VJ-7uF">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
@@ -271,7 +271,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vo-Od-8t5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="jHz-zW-4v8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3159.1999999999998" y="1121.2893553223389"/>
+            <point key="canvasLocation" x="4098.3999999999996" y="1121.2893553223389"/>
         </scene>
         <!--Add Mix Color-->
         <scene sceneID="POy-4G-l1X">
@@ -333,7 +333,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZU-3B-3In" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BSv-Zk-y6q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5100" y="1108.6956521739132"/>
+            <point key="canvasLocation" x="6039.1999999999998" y="1108.6956521739132"/>
         </scene>
         <!--Image Picker View-->
         <scene sceneID="XTf-W8-Gk5">
@@ -410,7 +410,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQG-fE-O9E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2352.8000000000002" y="1121.2893553223389"/>
+            <point key="canvasLocation" x="3292" y="1121.2893553223389"/>
         </scene>
         <!--Possible Matches-->
         <scene sceneID="IfU-Gf-ydV">
@@ -569,7 +569,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVJ-Rn-ahD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4404" y="1108.6956521739132"/>
+            <point key="canvasLocation" x="5343.1999999999998" y="1108.6956521739132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y94-PZ-YFD">
@@ -690,6 +690,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Hl2-Fv-ZhM" kind="show" identifier="AboutSegue" id="dfY-1M-v1H"/>
+                        <segue destination="EIi-BM-RXv" kind="presentation" identifier="DisclaimerSegue" id="5CS-vS-QDv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQj-pA-LKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -724,15 +725,6 @@
         <scene sceneID="Xpe-CD-fZ6">
             <objects>
                 <viewController id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hib-J4-qL9"/>
-                        <viewControllerLayoutGuide type="bottom" id="bcN-tj-Va7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="orO-QQ-ZOR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                    </view>
                     <navigationItem key="navigationItem" title="About this App" id="6rs-A3-XCv">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="frn-Qm-Jeu">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -745,6 +737,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22u-HA-7Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="748" y="659.82008995502258"/>
+        </scene>
+        <!--Disclaimer-->
+        <scene sceneID="F4T-3K-PxL">
+            <objects>
+                <viewController id="u2b-ZP-TIC" customClass="DisclaimerViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Disclaimer" id="ieF-sc-5xX">
+                        <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="cgf-RR-2dr">
+                            <connections>
+                                <action selector="goBack:" destination="u2b-ZP-TIC" id="Quu-cR-SFz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bEh-vD-EKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740" y="1333"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wie-Pz-YjX">
@@ -770,9 +778,34 @@
             </objects>
             <point key="canvasLocation" x="1" y="665"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dxT-O4-cFy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="EIi-BM-RXv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="CGl-5w-MNw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="KJv-WI-xO4">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="u2b-ZP-TIC" kind="relationship" relationship="rootViewController" id="Tid-Vw-sQV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fVH-bX-cHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7" y="1334"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="34151366-9A11-407A-90B3-3E4A64519EE2" width="25" height="25">
+        <image name="AEA6F06C-5015-4E5B-9BA5-BCE097EEDA27" width="25" height="25">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

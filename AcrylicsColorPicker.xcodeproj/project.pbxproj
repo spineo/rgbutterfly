@@ -86,6 +86,7 @@
 		21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21D105CC1DC772D600628980 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D105CB1DC772D600628980 /* AboutViewController.m */; };
+		21D105CF1DCB69AC00628980 /* DisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D105CE1DCB69AC00628980 /* DisclaimerViewController.m */; };
 		21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */; };
 		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
 /* End PBXBuildFile section */
@@ -258,6 +259,8 @@
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21D105CA1DC772D600628980 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		21D105CB1DC772D600628980 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		21D105CD1DCB69AC00628980 /* DisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclaimerViewController.h; sourceTree = "<group>"; };
+		21D105CE1DCB69AC00628980 /* DisclaimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclaimerViewController.m; sourceTree = "<group>"; };
 		21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,6 +320,8 @@
 		2108C5E61C820C5800DD7B9E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				21D105CD1DCB69AC00628980 /* DisclaimerViewController.h */,
+				21D105CE1DCB69AC00628980 /* DisclaimerViewController.m */,
 				21D746991CE0C5CC009672C3 /* SettingsTableViewController.h */,
 				21D7469A1CE0C5CC009672C3 /* SettingsTableViewController.m */,
 				21397E591C848259001C3F05 /* AddMixTableViewController.h */,
@@ -716,6 +721,7 @@
 				21D7469B1CE0C5CC009672C3 /* SettingsTableViewController.m in Sources */,
 				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
 				214430E81CB1A19B0014AABD /* MixAssocKeyword.m in Sources */,
+				21D105CF1DCB69AC00628980 /* DisclaimerViewController.m in Sources */,
 				21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */,
 				21397EDB1C848674001C3F05 /* ViewController.m in Sources */,
 				21397E5D1C848259001C3F05 /* AddMixTableViewController.m in Sources */,

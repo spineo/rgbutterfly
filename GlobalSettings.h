@@ -307,6 +307,10 @@ extern NSString * const DEFAULT_LISTING_TYPE;
 //
 extern NSString * const ABOUT_TEXT;
 
+// "Disclaimer" section text
+//
+extern NSString * const DISCLAIMER_TEXT;
+
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)
 //
