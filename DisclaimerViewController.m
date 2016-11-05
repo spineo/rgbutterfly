@@ -25,7 +25,9 @@
     [disclaimerTextView setFont:LG_TEXT_FIELD_FONT];
     [disclaimerTextView setTextColor:LIGHT_TEXT_COLOR];
     [disclaimerTextView setBackgroundColor:DARK_BG_COLOR];
-    [disclaimerTextView setUserInteractionEnabled:FALSE];
+    [disclaimerTextView setScrollEnabled:TRUE];
+    [disclaimerTextView setEditable:FALSE];
+    [disclaimerTextView setContentOffset:CGPointMake(DEF_X_OFFSET, self.navigationController.navigationBar.bounds.size.height) animated:YES];
     
     [self.view addSubview:disclaimerTextView];
 }

@@ -26,7 +26,9 @@
     [aboutTextView setFont:LG_TEXT_FIELD_FONT];
     [aboutTextView setTextColor:LIGHT_TEXT_COLOR];
     [aboutTextView setBackgroundColor:DARK_BG_COLOR];
-    [aboutTextView setUserInteractionEnabled:FALSE];
+    [aboutTextView setScrollEnabled:TRUE];
+    [aboutTextView setEditable:FALSE];
+    [aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
     
     [self.view addSubview:aboutTextView];
 }

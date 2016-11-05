@@ -37,7 +37,7 @@
     return (float)color_diff;
 }
 
-// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2) on RGB + Hue
+// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2) on RGB + Hue
 //
 + (float)colorDiffAlgorithm2:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
     double color_diff = sqrt(
@@ -50,7 +50,7 @@
     return (float)color_diff;
 }
 
-// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2) on RGB (add HSB to the mix from algorithm 2)
+// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2 + (s2-s1)^2 + (br2-br1)^2) on RGB + HSB
 //
 + (float)colorDiffAlgorithm3:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
     double color_diff = sqrt(
