@@ -331,7 +331,7 @@ NSString * const ABOUT_TEXT = @"\nThis app aims to help users find potential acr
 "The Match Methodology:\n"
 "The user may apply seven algorithms to find one or more potential matches. Each algorithm "
 "compares the tap area against the database of swatches to yield a difference (d). The "
-"smaller the d value the better the match. The algorithms, based on RGB and/or HSB color properties, are as follows:\n"
+"smaller the d value the better the match. For those curious the algorithms, based on RGB and/or HSB color properties, are as follows:\n"
 "\nRGB only (default):\n"
 "d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2)\n"
 "\nHSB only:\n"
@@ -370,6 +370,11 @@ NSString * const DISCLAIMER_TEXT = @"\nThis app attempts to find matching paint 
 "in the data capture methodologies.\n\n"
 "Finally, this app grew out of my passion for art and programming. Since I am not a professional artist, photographer, or expert in color theory I had to first research and then implement (much through trial and error) the methods and algorithms used for this app. My hope is that this is just the first version of what might become a work in progress. I would like to hear from you on how I might improve it!\n";
 
+// Feedback (Email)
+//
+NSString * const SUBJECT   = @"Feedback";
+NSString * const BODY      = @"Please provide me feedback!";
+NSString * const RECIPIENT = @"svpineo@gmail.com";
 
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)

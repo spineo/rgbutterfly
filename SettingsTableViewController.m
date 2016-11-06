@@ -106,7 +106,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     _disclaimerLabel = [FieldUtils createLabel:@"Disclaimer" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_disclaimerLabel setFont:LG_TABLE_CELL_FONT];
     
-    _feedbackLabel = [FieldUtils createLabel:@"Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
+    _feedbackLabel = [FieldUtils createLabel:@"Provide Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_feedbackLabel setFont:LG_TABLE_CELL_FONT];
 
 
@@ -820,10 +820,14 @@ heightForFooterInSection:(NSInteger)section {
             
         } else if (indexPath.row == DISCLAIMER_ROW) {
             [self performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
+        
+        // Feedback Section
+        //
+        } else {
+            [self showEmail];
         }
     }
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -1150,11 +1154,54 @@ heightForFooterInSection:(NSInteger)section {
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Feedback (Email)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Feedback (Email)
+
+- (void)showEmail {
+
+    NSString *subject = SUBJECT;
+    NSString *body    = BODY;
+    NSArray *recipent = [NSArray arrayWithObject:RECIPIENT];
+    
+    MFMailComposeViewController *mailCompose = [[MFMailComposeViewController alloc] init];
+    mailCompose.mailComposeDelegate = self;
+    [mailCompose setSubject:subject];
+    [mailCompose setMessageBody:body isHTML:NO];
+    [mailCompose setToRecipients:recipent];
+    
+    [self presentViewController:mailCompose animated:YES completion:NULL];
+    
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail send failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Navigation
-
 
 /*
 // In a storyboard-based application, you will often want to do a little preparation before navigation

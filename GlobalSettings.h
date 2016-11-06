@@ -311,6 +311,12 @@ extern NSString * const ABOUT_TEXT;
 //
 extern NSString * const DISCLAIMER_TEXT;
 
+// Feedback (Email)
+//
+extern NSString * const SUBJECT;
+extern NSString * const BODY;
+extern NSString * const RECIPIENT;
+
 // Threshold brightness value under which a white border is drawn around the RGB image view
 // (default border is black)
 //

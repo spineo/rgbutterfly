@@ -27,7 +27,7 @@
     [disclaimerTextView setBackgroundColor:DARK_BG_COLOR];
     [disclaimerTextView setScrollEnabled:TRUE];
     [disclaimerTextView setEditable:FALSE];
-    [disclaimerTextView setContentOffset:CGPointMake(DEF_X_OFFSET, self.navigationController.navigationBar.bounds.size.height) animated:YES];
+    [disclaimerTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
     
     [self.view addSubview:disclaimerTextView];
 }
