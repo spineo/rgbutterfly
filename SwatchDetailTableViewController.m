@@ -153,7 +153,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 

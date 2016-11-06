@@ -82,7 +82,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     [self saveEnable:FALSE];
     _reuseCellIdentifier = @"SettingsTableCell";
@@ -1150,7 +1150,8 @@ heightForFooterInSection:(NSInteger)section {
 
 - (void)saveEnable:(BOOL)saveFlag {
     _editFlag = saveFlag;
-    [BarButtonUtils buttonEnabled:self.toolbarItems refTag:SAVE_BTN_TAG isEnabled:saveFlag];
+    //[BarButtonUtils buttonEnabled:self.navigationItem.rightBarButtonItem refTag:SAVE_BTN_TAG isEnabled:saveFlag];
+    [self.navigationItem.rightBarButtonItem setEnabled:saveFlag];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

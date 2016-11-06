@@ -307,7 +307,7 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // Default listing type
 //
-NSString * const DEFAULT_LISTING_TYPE  = @"Default";
+NSString * const FULL_LISTING_TYPE     = @"Full Colors Listings";
 
 // "About" section text
 //

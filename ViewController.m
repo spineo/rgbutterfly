@@ -88,7 +88,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     [super viewDidLoad];
     
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
     
     
@@ -126,7 +126,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _reuseCellIdentifier = @"InitTableCell";
     
 
-    _listingType        = DEFAULT_LISTING_TYPE;
+    //_listingType        = DEFAULT_LISTING_TYPE;
+    _listingType        = MIX_TYPE;
     
     // TableView defaults
     //
@@ -150,18 +151,18 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                                    message:@"Please select a listing type"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction   = [UIAlertAction actionWithTitle:@"Default Listing" style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction * action) {
-                                                                [self updateTable:DEFAULT_LISTING_TYPE];
-                                                            }];
+    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+        [self updateTable:MIX_TYPE];
+    }];
     
     UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:MATCH_TYPE];
     }];
     
-    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
-        [self updateTable:MIX_TYPE];
-    }];
+    UIAlertAction* fullColorsAction   = [UIAlertAction actionWithTitle:FULL_LISTING_TYPE style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action) {
+                                                                   [self updateTable:FULL_LISTING_TYPE];
+                                                               }];
     
     UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Keywords Listing" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:@"Keywords"];
@@ -175,9 +176,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [_listingController dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [_listingController addAction:defaultAction];
-    [_listingController addAction:matchAssociations];
     [_listingController addAction:mixAssociations];
+    [_listingController addAction:matchAssociations];
+    [_listingController addAction:fullColorsAction];
     [_listingController addAction:sortByKeywords];
     [_listingController addAction:listByColors];
     [_listingController addAction:alertCancel];
@@ -320,15 +321,13 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
     } else if ([_listingType isEqualToString:@"Colors"]) {
         [self loadColorsData];
-        
-    // Default
-    //
+
     } else {
-        [self loadDefaultListing];
+        [self loadFullColorsListing];
     }
 }
 
-- (void)loadDefaultListing {
+- (void)loadFullColorsListing {
     [self initPaintSwatchFetchedResultsController];
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
     
@@ -383,6 +382,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 
 - (void)loadMixCollectionViewData {
+    [self initPaintSwatchFetchedResultsController];
     _minAssocSize = MIX_ASSOC_RESTRICT_SIZE;
     
     // Check the PaintSwatch filter (all or ref only?)
@@ -780,14 +780,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Keywords"] && (section == 0)) {
         return DEF_LG_TABLE_CELL_HGT;
         
-    } else if ([_listingType isEqualToString:@"Default"] && (section == 0)) {
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
             return DEF_LG_TABLE_CELL_HGT;
 
     } else if ([_listingType isEqualToString:@"Colors"]) {
         return DEF_LG_TABLE_HDR_HGT;
-        
-//    } else if ([_listingType isEqualToString:@"Default"]) {
-//        return DEF_TABLE_CELL_HEIGHT;
 
     } else {
         return DEF_SM_TABLE_CELL_HGT;
@@ -800,7 +797,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Keywords"]) {
         return [_sortedLetters count];
         
-    } else if ([_listingType isEqualToString:@"Default"]) {
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         return [_sortedLettersDefaults count];
     
     } else if ([_listingType isEqualToString:@"Colors"]) {
@@ -826,7 +823,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         NSString *sectionTitle = [_sortedLetters objectAtIndex:section];
         objCount = [[_letterKeywords objectForKey:sectionTitle] count];
 
-    } else if ([_listingType isEqualToString:@"Default"]) {
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         NSString *letter = [_sortedLettersDefaults objectAtIndex:section];
         objCount = [[_letterDefaults objectForKey:letter] count];
         
@@ -1030,7 +1027,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Keywords"]) {
         return _keywordsIndexTitles;
         
-    } else if ([_listingType isEqualToString:@"Default"]) {
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         return _keywordsIndexTitles;
     
     } else {
@@ -1042,7 +1039,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     if ([_listingType isEqualToString:@"Keywords"]) {
         return [_sortedLetters indexOfObject:title];
 
-    } else if ([_listingType isEqualToString:@"Default"]) {
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         return [_sortedLettersDefaults indexOfObject:title];
     
     } else {
@@ -1097,7 +1094,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [_searchButton setAction:@selector(search)];
         [_searchButton setEnabled:TRUE];
         _searchString = nil;
-        [self initPaintSwatchFetchedResultsController];
+        //[self initPaintSwatchFetchedResultsController];
+        [self loadFullColorsListing];
     }
 }
 
@@ -1258,8 +1256,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     _searchString = searchText;
     
-    if ([_listingType isEqualToString:@"Default"]) {
-        [self loadDefaultListing];
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
+        [self loadFullColorsListing];
 
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
@@ -1272,8 +1270,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
 // Need index of items that have been checked
 //
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    if ([_listingType isEqualToString:@"Default"]) {
-        [self loadDefaultListing];
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
+        [self loadFullColorsListing];
         
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
@@ -1290,8 +1288,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self restoreNavItems];
     
     _searchString = nil;
-    if ([_listingType isEqualToString:@"Default"]) {
-        [self loadDefaultListing];
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
+        [self loadFullColorsListing];
         
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
@@ -1327,7 +1325,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_refButton setImage:_emptySquareImage];
     [_genButton setImage:_emptySquareImage];
     
-    [self loadDefaultListing];
+    [self loadFullColorsListing];
 }
 
 - (void)filterByReference {
@@ -1338,7 +1336,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_allButton setImage:_emptySquareImage];
     [_genButton setImage:_emptySquareImage];
 
-    [self loadDefaultListing];
+    [self loadFullColorsListing];
 }
 
 - (void)filterByGenerics {
@@ -1349,7 +1347,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_allButton setImage:_emptySquareImage];
     [_refButton setImage:_emptySquareImage];
     
-    [self loadDefaultListing];
+    [self loadFullColorsListing];
 }
 
 - (void)restoreNavItems {

@@ -95,7 +95,7 @@ const int ASSOC_SET_TAG        = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //
@@ -322,6 +322,7 @@ const int ASSOC_SET_TAG        = 8;
     [_save setEnabled:FALSE];
 
     [self homeButtonShow];
+    [self settingsButtonShow];
     
     
     _deleteAlertController =   [UIAlertController
@@ -896,11 +897,11 @@ const int ASSOC_SET_TAG        = 8;
     [_applyButton setEnabled:TRUE];
 
     if (_editFlag == FALSE) {
-        [self homeButtonShow];
+        //[self homeButtonShow];
         [self presentViewController:_saveAlertController animated:YES completion:nil];
         
     } else {;
-        [self settingsButtonShow];
+        //[self settingsButtonShow];
     }
     
     [self.tableView reloadData];
@@ -932,15 +933,15 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)homeButtonShow {
     [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
+    //[BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)settingsButtonShow {
     [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
+    //[BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
 

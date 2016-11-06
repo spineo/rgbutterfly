@@ -46,17 +46,21 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="hK8-5n-amq"/>
-                            </connections>
+                        <barButtonItem image="home" id="oxW-w8-0ZM">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bT9-ul-ruX"/>
+                        <barButtonItem systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
                         <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="eSc-da-vKc"/>
+                        <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="hK8-5n-amq"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -68,6 +72,8 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <connections>
                         <outlet property="colorTableView" destination="ikM-89-GOK" id="y6K-5N-15c"/>
                         <segue destination="LVy-Pe-LHL" kind="presentation" identifier="MainSwatchDetailSegue" id="aqc-zq-dwj"/>
@@ -136,13 +142,8 @@
                                 <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindToViewController:" id="Eu3-ie-x2Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="58" image="settings" id="Ok2-x2-peI">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="Szt-18-Btg"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem tag="1000" systemItem="flexibleSpace" id="F6j-7M-mxg"/>
+                        <barButtonItem systemItem="flexibleSpace" id="MRg-Jy-ext"/>
+                        <barButtonItem systemItem="flexibleSpace" id="v06-VT-3JE"/>
                         <barButtonItem tag="71" enabled="NO" image="arrow fat left" id="l35-1Z-PGd">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -161,23 +162,29 @@
                                 <action selector="incrMatchAlgorithm:" destination="6Nq-8K-N9m" id="LV1-sF-R6R"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Item" systemItem="flexibleSpace" id="xbA-K7-BUX"/>
+                        <barButtonItem tag="60" enabled="NO" title="View" id="EeV-8v-URe">
+                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="segueToMatchOrAssoc:" destination="6Nq-8K-N9m" id="mq7-T0-yVb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="Jgn-ng-npR"/>
                         <barButtonItem tag="74" enabled="NO" image="minus sign" id="jWd-qs-4rX">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="removeTableRows:" destination="6Nq-8K-N9m" id="kun-zU-pLc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="75" enabled="NO" image="AEA6F06C-5015-4E5B-9BA5-BCE097EEDA27" id="hs8-VJ-7uF">
+                        <barButtonItem tag="75" enabled="NO" image="plus sign-1" id="hs8-VJ-7uF">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="60" enabled="NO" title="View" id="EeV-8v-URe">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem tag="58" image="settings" id="Ok2-x2-peI">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="segueToMatchOrAssoc:" destination="6Nq-8K-N9m" id="mq7-T0-yVb"/>
+                                <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="Szt-18-Btg"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -245,13 +252,13 @@
                                 <segue destination="jHz-zW-4v8" kind="unwind" unwindAction="unwindToViewController:" id="aH0-rO-C2q"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="N3S-rM-GJZ"/>
                         <barButtonItem tag="58" image="settings" id="L1b-Mq-W0G">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="L2p-PG-tYf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Item" systemItem="flexibleSpace" id="MaY-oG-r6t"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="Maj-ib-srW">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="k9c-gm-4aI">
@@ -372,9 +379,11 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Wpw-aM-NEc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Wpw-aM-NEc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="FBo-zj-csB">
@@ -395,9 +404,10 @@
                 <navigationController storyboardIdentifier="Nav1" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="tpP-IS-lqc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="2La-VL-UJi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="2La-VL-UJi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="lb6-O2-V00">
@@ -554,9 +564,10 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LrQ-R1-k2d" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="5PK-nJ-X9q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="5PK-nJ-X9q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="Rts-ut-Htf">
@@ -578,9 +589,10 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="cJX-J3-cUN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="cJX-J3-cUN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="Hgy-F5-3eI">
@@ -602,9 +614,10 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="gqj-K9-5aj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="gqj-K9-5aj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="9Yt-Q3-L0s">
@@ -626,14 +639,16 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Ftb-HM-vsM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Ftb-HM-vsM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="sHs-jP-9qD">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Anw-OF-l8p"/>
@@ -672,12 +687,15 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
-                        <barButtonItem tag="59" title="Save" id="o7Y-Oe-dyU">
+                        <barButtonItem tag="62" image="home" id="or8-fi-xFW">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="save:" destination="z8z-Q4-bZ9" id="SmM-Yw-uGh"/>
+                                <segue destination="XHb-bs-XCU" kind="unwind" unwindAction="unwindToViewController:" id="e5D-TQ-kEn"/>
                             </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
+                        <barButtonItem image="settings" id="Ib6-Wl-QMo">
+                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Color Picker Settings" id="UFN-Ih-VPD">
@@ -687,6 +705,12 @@
                                 <action selector="goBack:" destination="z8z-Q4-bZ9" id="0Em-c0-RgW"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" tag="59" title="Save" id="VSD-vh-l8H">
+                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="save:" destination="z8z-Q4-bZ9" id="XRL-VA-WbY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="Hl2-Fv-ZhM" kind="show" identifier="AboutSegue" id="dfY-1M-v1H"/>
@@ -694,6 +718,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQj-pA-LKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XHb-bs-XCU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="801" y="-52"/>
         </scene>
@@ -761,9 +786,10 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="FoQ-BG-cJK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="FoQ-BG-cJK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="A45-Y4-FDm">
@@ -785,9 +811,10 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="CGl-5w-MNw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="CGl-5w-MNw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="KJv-WI-xO4">
@@ -805,99 +832,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AEA6F06C-5015-4E5B-9BA5-BCE097EEDA27" width="25" height="25">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
-GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
-c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MjUsIDI1fdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
-HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPERJiTU0AKgAACcwAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAJCQknFhYWVQkJCScAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHBwc
-ekZGRv8cHBx6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsbG3VCQkL/GxsbdQAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAbGxt1QkJC/xsbG3UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGxsb
-dUJCQv8bGxt1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsbG3VCQkL/GxsbdQAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAZGRluQkJC/xkZGW4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJCQknHBwcdRsbG3UbGxt1GxsbdRsbG3UbGxt1KSkp
-tEBAQP8pKSm0GxsbdRsbG3UbGxt1GxsbdRsbG3UcHBx1CQkJJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAFhYWXUZGRv9CQkL/QkJC/0JCQv9CQkL/QkJC/0BAQP87Ozv/QEBA/0JCQv9CQkL/QkJC
-/0JCQv9CQkL/RkZG/xYWFl0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkJCSccHBx1Gxsb
-dRsbG3UbGxt1GxsbdRsbG3UpKSm0QEBA/ykpKbQbGxt1GxsbdRsbG3UbGxt1GxsbdRwcHHUJCQknAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGRkZ
-bkJCQv8ZGRluAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsbG3VCQkL/GxsbdQAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAbGxt1QkJC/xsbG3UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGxsb
-dUJCQv8bGxt1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsbG3VCQkL/GxsbdQAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAcHBx6RkZG/xwcHHoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQkJ
-JxYWFlUJCQknAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4BAAADAAAAAQAZAAABAQADAAAAAQAZAAAB
-AgADAAAABAAACnoBAwADAAAAAQABAAABBgADAAAAAQACAAABEQAEAAAAAQAAAAgBEgADAAAAAQABAAAB
-FQADAAAAAQAEAAABFgADAAAAAQAZAAABFwAEAAAAAQAACcQBHAADAAAAAQABAAABUgADAAAAAQABAAAB
-UwADAAAABAAACoKHcwAHAAAH2AAACooAAAAAAAgACAAIAAgAAQABAAEAAQAAB9hhcHBsAiAAAG1udHJS
-R0IgWFlaIAfZAAIAGQALABoAC2Fjc3BBUFBMAAAAAGFwcGwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAA
-ANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC2Rlc2MA
-AAEIAAAAb2RzY20AAAF4AAAFnGNwcnQAAAcUAAAAOHd0cHQAAAdMAAAAFHJYWVoAAAdgAAAAFGdYWVoA
-AAd0AAAAFGJYWVoAAAeIAAAAFHJUUkMAAAecAAAADmNoYWQAAAesAAAALGJUUkMAAAecAAAADmdUUkMA
-AAecAAAADmRlc2MAAAAAAAAAFEdlbmVyaWMgUkdCIFByb2ZpbGUAAAAAAAAAAAAAABRHZW5lcmljIFJH
-QiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABt
-bHVjAAAAAAAAAB8AAAAMc2tTSwAAACgAAAGEZGFESwAAAC4AAAGsY2FFUwAAACQAAAHadmlWTgAAACQA
-AAH+cHRCUgAAACYAAAIidWtVQQAAACoAAAJIZnJGVQAAACgAAAJyaHVIVQAAACgAAAKaemhUVwAAABYA
-AALCbmJOTwAAACYAAALYY3NDWgAAACIAAAL+aGVJTAAAAB4AAAMgaXRJVAAAACgAAAM+cm9STwAAACQA
-AANmZGVERQAAACwAAAOKa29LUgAAABYAAAO2c3ZTRQAAACYAAALYemhDTgAAABYAAAPMamFKUAAAABoA
-AAPiZWxHUgAAACIAAAP8cHRQTwAAACYAAAQebmxOTAAAACgAAAREZXNFUwAAACYAAAQedGhUSAAAACQA
-AARsdHJUUgAAACIAAASQZmlGSQAAACgAAASyaHJIUgAAACgAAATacGxQTAAAACwAAAUCcnVSVQAAACIA
-AAUuYXJFRwAAACYAAAVQZW5VUwAAACYAAAV2AFYBYQBlAG8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIA
-bwBmAGkAbABHAGUAbgBlAHIAZQBsACAAUgBHAEIALQBiAGUAcwBrAHIAaQB2AGUAbABzAGUAUABlAHIA
-ZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAQx6lAHUAIABoAOwAbgBoACAAUgBHAEIAIABDAGgA
-dQBuAGcAUABlAHIAZgBpAGwAIABSAEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgE
-OQAgBD8EQAQ+BEQEMAQ5BDsAIABSAEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAA
-UgBWAEIAwQBsAHQAYQBsAOEAbgBvAHMAIABSAEcAQgAgAHAAcgBvAGYAaQBskBp1KAAgAFIARwBCACCC
-cl9pY8+P8ABHAGUAbgBlAHIAaQBzAGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsAE8AYgBlAGMAbgD9ACAA
-UgBHAEIAIABwAHIAbwBmAGkAbAXkBegF1QXkBdkF3AAgAFIARwBCACAF2wXcBdwF2QBQAHIAbwBmAGkA
-bABvACAAUgBHAEIAIABnAGUAbgBlAHIAaQBjAG8AUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUA
-cgBpAGMAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbMd8vBgAIABSAEcA
-QgAg1QS4XNMMx3xmbpAaACAAUgBHAEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUwoTCkMOsD
-kwO1A70DuQO6A8wAIAPAA8EDvwPGA68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUA
-bgDpAHIAaQBjAG8AQQBsAGcAZQBtAGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQO
-Hw4lDkwAIABSAEcAQgAgDhcOMQ5IDicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwA
-aQBZAGwAZQBpAG4AZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkA
-IABSAEcAQgAgAHAAcgBvAGYAaQBsAFUAbgBpAHcAZQByAHMAYQBsAG4AeQAgAHAAcgBvAGYAaQBsACAA
-UgBHAEIEHgQxBEkEOAQ5ACAEPwRABD4ERAQ4BDsETAAgAFIARwBCBkUGRAZBACAGKgY5BjEGSgZBACAA
-UgBHAEIAIAYnBkQGOQYnBkUARwBlAG4AZQByAGkAYwAgAFIARwBCACAAUAByAG8AZgBpAGwAZXRleHQA
-AAAAQ29weXJpZ2h0IDIwMDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAA
-APNSAAEAAAABFs9YWVogAAAAAAAAdE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAA
-ACgaAAAVnwAAuDZjdXJ2AAAAAAAAAAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L/
-//2jAAAD3AAAwGzSJSYnKFokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMnKSpa
-TlNJbWFnZVJlcFhOU09iamVjdNIlJiwtV05TQXJyYXmiLCrSJSYvMF5OU011dGFibGVBcnJheaMvLCrT
-MjMKNDU2V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQA4AM0iUmODlXTlNDb2xvcqI4KtIlJjs8V05T
-SW1hZ2WiOypfEA9OU0tleWVkQXJjaGl2ZXLRP0BUcm9vdIABAAgAEQAaACMALQAyADcARgBMAFcAXgBl
-AHIAeQCBAIMAhQCKAIwAjgCXAJwApwCpAKsArQCyALUAtwC5ALsAvQDCANkA2wDdE0MTSBNTE1wTbxNz
-E34ThxOME5QTlxOcE6sTrxO2E74TyxPQE9IT1BPZE+ET5BPpE/ET9BQGFAkUDgAAAAAAAAIBAAAAAAAA
-AEEAAAAAAAAAAAAAAAAAABQQA
-</mutableData>
-        </image>
         <image name="arrow" width="30" height="30"/>
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
@@ -913,8 +847,8 @@ AEEAAAAAAAAAAAAAAAAAABQQA
     <inferredMetricsTieBreakers>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="Omc-kQ-4iW"/>
-        <segue reference="cln-aA-aih"/>
         <segue reference="L2p-PG-tYf"/>
+        <segue reference="x4f-Hg-Dtd"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" red="0.92156862745098034" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

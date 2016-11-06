@@ -77,7 +77,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     // NSManagedObject subclassing
     //

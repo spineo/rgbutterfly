@@ -301,7 +301,7 @@ extern NSString * const CHECKBOX_SQ_IMAGE_NAME;
 
 // Default listing type
 //
-extern NSString * const DEFAULT_LISTING_TYPE;
+extern NSString * const FULL_LISTING_TYPE;
 
 // "About" section text
 //

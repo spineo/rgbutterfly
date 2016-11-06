@@ -141,7 +141,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     // NSManagedObject subclassing
     //
