@@ -15,6 +15,7 @@
 
 @dynamic mix_order;
 @dynamic paint_swatch_is_add;
+@dynamic version;
 @dynamic mix_association;
 @dynamic paint_swatch;
 

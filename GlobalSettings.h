@@ -11,6 +11,13 @@
 
 @interface GlobalSettings : NSObject
 
+// App Version and Core data/Store
+//
+extern int const VERSION;
+extern NSString * const CURR_STORE;
+extern NSString * const PREV_STORE;
+extern int const MIGRATE_STORE;
+
 
 // NIL constants
 //
@@ -271,11 +278,6 @@ extern NSString * const ROW_LIMIT_MSG;
 extern NSString * const VALUE_EXISTS;
 extern NSString * const VALUE_EXISTS_MSG;
 
-// Core Data/Store
-//
-extern NSString * const CURR_STORE;
-extern NSString * const PREV_STORE;
-extern int const MIGRATE_STORE;
 
 // NSManagedObject
 //

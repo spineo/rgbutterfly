@@ -13,6 +13,7 @@
 
 @implementation TapAreaKeyword
 
+@dynamic version;
 @dynamic keyword;
 @dynamic tap_area;
 

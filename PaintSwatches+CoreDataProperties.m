@@ -43,6 +43,7 @@
 @dynamic saturation;
 @dynamic subj_color_id;
 @dynamic type_id;
+@dynamic version;
 @dynamic mix_assoc_swatch;
 @dynamic subjective_color;
 @dynamic swatch_keyword;

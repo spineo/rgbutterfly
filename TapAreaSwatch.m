@@ -14,6 +14,7 @@
 @implementation TapAreaSwatch
 
 @dynamic match_order;
+@dynamic version;
 @dynamic paint_swatch;
 @dynamic tap_area;
 

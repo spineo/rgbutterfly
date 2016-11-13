@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) id image_url;
 @property (nullable, nonatomic, retain) NSDate *last_update;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSNumber *version;
 @property (nonatomic, retain) NSSet<TapArea *> *tap_area;
 @property (nonatomic, retain) NSSet<MatchAssocKeyword *> *match_assoc_keyword;
 

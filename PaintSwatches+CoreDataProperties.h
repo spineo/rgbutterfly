@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *saturation;
 @property (nullable, nonatomic, retain) NSNumber *subj_color_id;
 @property (nullable, nonatomic, retain) NSNumber *type_id;
+@property (nullable, nonatomic, retain) NSNumber *version;
 @property (nullable, nonatomic, retain) NSSet<MixAssocSwatch *> *mix_assoc_swatch;
 @property (nullable, nonatomic, retain) SubjectiveColor *subjective_color;
 @property (nullable, nonatomic, retain) NSSet<SwatchKeyword *> *swatch_keyword;

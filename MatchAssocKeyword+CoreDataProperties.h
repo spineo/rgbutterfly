@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MatchAssocKeyword (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *version;
 @property (nullable, nonatomic, retain) Keyword *keyword;
 @property (nullable, nonatomic, retain) MatchAssociations *match_association;
 

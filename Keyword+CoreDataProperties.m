@@ -14,6 +14,7 @@
 @implementation Keyword (CoreDataProperties)
 
 @dynamic name;
+@dynamic version;
 @dynamic match_assoc_keyword;
 @dynamic mix_assoc_keyword;
 @dynamic swatch_keyword;

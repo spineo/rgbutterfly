@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MixAssocKeyword (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSNumber *version;
 @property (nullable, nonatomic, retain) Keyword *keyword;
 @property (nullable, nonatomic, retain) MixAssociation *mix_association;
 

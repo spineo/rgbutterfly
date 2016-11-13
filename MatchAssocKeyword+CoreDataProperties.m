@@ -13,6 +13,7 @@
 
 @implementation MatchAssocKeyword (CoreDataProperties)
 
+@dynamic version;
 @dynamic keyword;
 @dynamic match_association;
 

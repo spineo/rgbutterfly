@@ -13,6 +13,7 @@
 
 @interface SwatchKeyword : NSManagedObject
 
+@property (nonatomic, retain) NSNumber *version;
 @property (nonatomic, retain) Keyword *keyword;
 @property (nonatomic, retain) PaintSwatch *paint_swatch;
 

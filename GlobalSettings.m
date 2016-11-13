@@ -10,6 +10,14 @@
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
 
+// App Version and Core data/Store
+//
+int const VERSION = 1;
+NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
+NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
+int const MIGRATE_STORE = 0;
+
+
 // NIL constants
 //
 CGFloat const DEF_X_OFFSET          = 0.0;
@@ -270,12 +278,6 @@ NSString * const ROW_LIMIT_MSG    = @"The maximum row limit of %i has been reach
 
 NSString * const VALUE_EXISTS     = @"Value Exists";
 NSString * const VALUE_EXISTS_MSG = @"Value already exists.";
-
-// Core data/Store
-//
-NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
-NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
-int const MIGRATE_STORE = 0;
 
 
 // NSManagedObject entities

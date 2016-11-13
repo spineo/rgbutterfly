@@ -18,6 +18,7 @@
 @dynamic image_url;
 @dynamic last_update;
 @dynamic name;
+@dynamic version;
 @dynamic tap_area;
 @dynamic match_assoc_keyword;
 
