@@ -32,6 +32,7 @@
 + (void)insertSubjectiveColors;
 + (void)insertFromDataFile:(NSString *)entityName;
 + (void)insertTestPaintSwatches:(NSManagedObjectContext *)context;
++ (void)updateVersions;
 
 // Fetch methods
 //

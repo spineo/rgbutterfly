@@ -324,6 +324,12 @@ extern NSString * const RECIPIENT;
 //
 extern float const DEF_BORDER_THRESHOLD;
 
+
+// List of CSV tables (map to the Core Data Entities)
+//
+#define ENTITY_LIST @[@"PaintSwatch", @"Keyword", @"SwatchKeyword", @"TapAreaSwatch", @"TapAreaKeyword", @"TapArea", @"MatchAssocKeyword", @"MatchAssociation", @"MixAssocSwatch", @"MixAssocKeyword", @"MixAssociation"]
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UIColor related
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

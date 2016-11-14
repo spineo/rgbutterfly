@@ -249,6 +249,41 @@
     }
 }
 
+// Update Versions
+//
+// Call this method from GlobalSettings: Generic insert method
+//
++ (void)updateVersions {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    for (NSString *entityName in ENTITY_LIST) {
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+        
+        NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+        
+        [fetch setEntity:entity];
+        
+        [fetch setPredicate:[NSPredicate predicateWithFormat:@"version == ''"]];
+        
+        NSArray *results = [context executeFetchRequest:fetch error:NULL];
+        
+        for (id entity in results) {
+            [entity setVersion:[NSNumber numberWithInt:VERSION]];
+        }
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Error updating context: %@\n%@", [error localizedDescription], [error userInfo]);
+        } else {
+            NSLog(@"Successfully updated %i rows for entity '%@'", (int)[results count], entityName);
+        }
+    }
+    
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Fetch methods

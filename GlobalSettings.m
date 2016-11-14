@@ -393,6 +393,7 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
+
     // Refresh the dictionary tables
     //
     [ManagedObjectUtils deleteDictionaryEntity:@"SubjectiveColor"];
@@ -418,6 +419,11 @@ static NSDictionary *swatchTypes;
     
     [ManagedObjectUtils deleteDictionaryEntity:@"AssociationType"];
     [ManagedObjectUtils insertFromDataFile:@"AssociationType"];
+
+    
+    // Update the version as needed
+    //
+    [ManagedObjectUtils updateVersions];
 
 
     // NSUserDefaults intialization
