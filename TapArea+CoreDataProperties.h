@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *ma_manual_override;
 @property (nonatomic, retain) NSNumber *match_algorithm_id;
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSNumber *version;
+@property (nonatomic, retain) NSNumber *version_tag;
 @property (nonatomic, retain) MatchAssociations *match_association;
 @property (nullable, nonatomic, retain) NSSet<TapAreaKeyword *> *tap_area_keyword;
 @property (nonatomic, retain) NSSet<TapAreaSwatch *> *tap_area_swatch;

@@ -1989,7 +1989,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         _mixAssociation = [[MixAssociation alloc] initWithEntity:_mixAssocEntity insertIntoManagedObjectContext:self.context];
         
         [_mixAssociation setCreate_date:currDate];
-        [_mixAssociation setVersion:[NSNumber numberWithInt:VERSION]];
+        [_mixAssociation setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     }
     
     // Applies to both updates and new
@@ -2027,7 +2027,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (name == nil) {
             [paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i", mix_ct]];
         }
-        [paintSwatch setVersion:[NSNumber numberWithInt:VERSION]];
+        [paintSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         
         MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:_mixAssocSwatchEntity insertIntoManagedObjectContext:self.context];
         [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
@@ -2035,7 +2035,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         int mix_order = i + 1;
         [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_order]];
-        [mixAssocSwatch setVersion:[NSNumber numberWithInt:VERSION]];
+        [mixAssocSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         
         [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
         [paintSwatch addMix_assoc_swatchObject:mixAssocSwatch];
@@ -2199,7 +2199,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         // Based on order
         //
         [tapAreaRef setType_id:[NSNumber numberWithInt:3]];
-        [tapAreaRef setVersion:[NSNumber numberWithInt:VERSION]];
+        [tapAreaRef setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         
         
         // Check if TapArea already exists
@@ -2216,7 +2216,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [tapArea setCoord_pt:tapAreaRef.coord_pt];
             [tapArea setMatch_association:_matchAssociation];
             [tapArea setName:[[NSString alloc] initWithFormat:@"%@ Tap Area", _assocName]];
-            [tapArea setVersion:[NSNumber numberWithInt:VERSION]];
+            [tapArea setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
             [tapArea setTap_area_match:tapAreaRef];
             [tapAreaRef setTap_area:tapArea];
 
@@ -2250,7 +2250,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
             [tapAreaSwatch setTap_area:tapArea];
             [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:j]];
-            [tapAreaSwatch setVersion:[NSNumber numberWithInt:VERSION]];
+            [tapAreaSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
             
             [tapArea addTap_area_swatchObject:tapAreaSwatch];
             [paintSwatch addTap_area_swatchObject:tapAreaSwatch];

@@ -33,6 +33,7 @@
 + (void)insertFromDataFile:(NSString *)entityName;
 + (void)insertTestPaintSwatches:(NSManagedObjectContext *)context;
 + (void)updateVersions;
++ (void)createEntityCSVFiles;
 
 // Fetch methods
 //

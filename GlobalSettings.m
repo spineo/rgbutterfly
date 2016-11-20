@@ -12,10 +12,12 @@
 
 // App Version and Core data/Store
 //
-int const VERSION = 1;
+int const VERSION_TAG = 1;
 NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
 int const MIGRATE_STORE = 0;
+
+NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
 
 
 // NIL constants
@@ -424,6 +426,11 @@ static NSDictionary *swatchTypes;
     // Update the version as needed
     //
     [ManagedObjectUtils updateVersions];
+    
+    
+    // Create the data CSV files
+    //
+    //[ManagedObjectUtils createEntityCSVFiles];
 
 
     // NSUserDefaults intialization

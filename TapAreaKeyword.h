@@ -13,7 +13,7 @@
 
 @interface TapAreaKeyword : NSManagedObject
 
-@property (nonatomic, retain) NSNumber *version;
+@property (nonatomic, retain) NSNumber *version_tag;
 @property (nonatomic, retain) Keyword *keyword;
 @property (nonatomic, retain) TapArea *tap_area;
 

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Keyword (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSNumber *version;
+@property (nullable, nonatomic, retain) NSNumber *version_tag;
 @property (nullable, nonatomic, retain) NSSet<MatchAssocKeyword *> *match_assoc_keyword;
 @property (nullable, nonatomic, retain) NSSet<MixAssocKeyword *> *mix_assoc_keyword;
 @property (nullable, nonatomic, retain) NSSet<SwatchKeyword *> *swatch_keyword;

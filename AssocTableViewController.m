@@ -1039,7 +1039,7 @@ const int ASSOC_SET_TAG        = 8;
 
     [_mixAssociation setName:_mixAssocName];
     [_mixAssociation setDesc:_mixAssocDesc];
-    [_mixAssociation setVersion:[NSNumber numberWithInt:VERSION]];
+    [_mixAssociation setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     [_mixAssociation setDef_coverage_id:[NSNumber numberWithInt:_coveragePickerSelRow]];
     [_mixAssociation setAssoc_type_id:[NSNumber numberWithInt:_assocTypePickerSelRow]];
 
@@ -1061,7 +1061,7 @@ const int ASSOC_SET_TAG        = 8;
         if (kwObj == nil) {
             kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
             [kwObj setName:keyword];
-            [kwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [kwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         }
         
         MixAssocKeyword *maKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_mixAssociation.objectID relationName:@"mix_association" entityName:@"MixAssocKeyword" context:self.context];
@@ -1070,7 +1070,7 @@ const int ASSOC_SET_TAG        = 8;
             maKwObj = [[MixAssocKeyword alloc] initWithEntity:_mixAssocKeywordEntity insertIntoManagedObjectContext:self.context];
             [maKwObj setKeyword:kwObj];
             [maKwObj setMix_association:_mixAssociation];
-            [maKwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [maKwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
             
             [_mixAssociation addMix_assoc_keywordObject:maKwObj];
             [kwObj addMix_assoc_keywordObject:maKwObj];

@@ -22,7 +22,7 @@
 @dynamic is_shipped;
 @dynamic is_hidden;
 @dynamic is_readonly;
-@dynamic version;
+@dynamic version_tag;
 @dynamic mix_assoc_swatch;
 @dynamic mix_assoc_keyword;
 

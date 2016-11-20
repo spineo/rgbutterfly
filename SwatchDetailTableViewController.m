@@ -1385,7 +1385,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         if (kwObj == nil) {
             kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
             [kwObj setName:keyword];
-            [kwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [kwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         }
         
         SwatchKeyword *swKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_paintSwatch.objectID relationName:@"paint_swatch" entityName:@"SwatchKeyword" context:self.context];
@@ -1394,7 +1394,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             swKwObj = [[SwatchKeyword alloc] initWithEntity:_swatchKeywordEntity insertIntoManagedObjectContext:self.context];
             [swKwObj setKeyword:kwObj];
             [swKwObj setPaint_swatch:(PaintSwatch *)_paintSwatch];
-            [swKwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [swKwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
 
             [_paintSwatch addSwatch_keywordObject:swKwObj];
             [kwObj addSwatch_keywordObject:swKwObj];
@@ -1402,7 +1402,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     }
     [_paintSwatch setName:_nameEntered];
     [_paintSwatch setDesc:_descEntered];
-    [_paintSwatch setVersion:[NSNumber numberWithInt:VERSION]];
+    [_paintSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     
     if (_brandPickerSelRow == 0) {
         [_paintSwatch setPaint_brand_name:_otherName];

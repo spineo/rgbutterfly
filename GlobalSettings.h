@@ -13,10 +13,12 @@
 
 // App Version and Core data/Store
 //
-extern int const VERSION;
+extern int const VERSION_TAG;
 extern NSString * const CURR_STORE;
 extern NSString * const PREV_STORE;
 extern int const MIGRATE_STORE;
+
+extern NSString * const LOCAL_PATH;
 
 
 // NIL constants

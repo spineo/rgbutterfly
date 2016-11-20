@@ -13,7 +13,7 @@
 
 @implementation MixAssocKeyword (CoreDataProperties)
 
-@dynamic version;
+@dynamic version_tag;
 @dynamic keyword;
 @dynamic mix_association;
 

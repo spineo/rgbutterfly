@@ -1085,7 +1085,7 @@ const int IMAGE_TAG  = 6;
     }
     
     [_tapArea setDesc:_descEntered];
-    [_tapArea setVersion:[NSNumber numberWithInt:VERSION]];
+    [_tapArea setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     
     // Delete all tapAreaKeywords and associations first
     //
@@ -1104,7 +1104,7 @@ const int IMAGE_TAG  = 6;
         if (kwObj == nil) {
             kwObj = [[Keyword alloc] initWithEntity:_keywordEntity insertIntoManagedObjectContext:self.context];
             [kwObj setName:keyword];
-            [kwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [kwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         }
         
         TapAreaKeyword *taKwObj = [ManagedObjectUtils queryObjectKeyword:kwObj.objectID objId:_tapArea.objectID relationName:@"tap_area" entityName:@"TapAreaKeyword" context:self.context];
@@ -1113,7 +1113,7 @@ const int IMAGE_TAG  = 6;
             taKwObj = [[TapAreaKeyword alloc] initWithEntity:_tapAreaKeywordEntity insertIntoManagedObjectContext:self.context];
             [taKwObj setKeyword:kwObj];
             [taKwObj setTap_area:_tapArea];
-            [taKwObj setVersion:[NSNumber numberWithInt:VERSION]];
+            [taKwObj setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
             
             [_tapArea addTap_area_keywordObject:taKwObj];
             [kwObj addTap_area_keywordObject:taKwObj];
@@ -1162,7 +1162,7 @@ const int IMAGE_TAG  = 6;
             [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
             [tapAreaSwatch setTap_area:_tapArea];
             [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:i]];
-            [tapAreaSwatch setVersion:[NSNumber numberWithInt:VERSION]];
+            [tapAreaSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
 
             [_tapArea addTap_area_swatchObject:tapAreaSwatch];
             [paintSwatch addTap_area_swatchObject:tapAreaSwatch];

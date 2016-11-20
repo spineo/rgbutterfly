@@ -20,7 +20,7 @@
 @dynamic ma_manual_override;
 @dynamic match_algorithm_id;
 @dynamic name;
-@dynamic version;
+@dynamic version_tag;
 @dynamic match_association;
 @dynamic tap_area_keyword;
 @dynamic tap_area_swatch;

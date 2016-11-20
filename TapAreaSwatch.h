@@ -14,7 +14,7 @@
 @interface TapAreaSwatch : NSManagedObject
 
 @property (nonatomic, retain) NSNumber *match_order;
-@property (nonatomic, retain) NSNumber *version;
+@property (nonatomic, retain) NSNumber *version_tag;
 @property (nonatomic, retain) PaintSwatch *paint_swatch;
 @property (nonatomic, retain) TapArea *tap_area;
 

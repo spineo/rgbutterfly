@@ -266,12 +266,12 @@
         
         [fetch setEntity:entity];
         
-        [fetch setPredicate:[NSPredicate predicateWithFormat:@"version == ''"]];
+        [fetch setPredicate:[NSPredicate predicateWithFormat:@"version_tag == ''"]];
         
         NSArray *results = [context executeFetchRequest:fetch error:NULL];
         
         for (id entity in results) {
-            [entity setVersion:[NSNumber numberWithInt:VERSION]];
+            [entity setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         }
         
         NSError *error = nil;
@@ -280,6 +280,83 @@
         } else {
             NSLog(@"Successfully updated %i rows for entity '%@'", (int)[results count], entityName);
         }
+    }
+    
+}
+
++ (void)createEntityCSVFiles {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    for (NSString *entityName in ENTITY_LIST) {
+        
+        NSEntityDescription *entityDesc = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+        
+        NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+        
+        [fetch setEntity:entityDesc];
+        
+        NSArray *results = [context executeFetchRequest:fetch error:NULL];
+        
+        NSString *filePath = [[NSString alloc] initWithFormat:@"%@/%@.txt", LOCAL_PATH, entityName];
+        
+        
+        NSString *text = @"";
+        NSError *error;
+        [text writeToFile:filePath atomically:NO encoding:NSUTF8StringEncoding error:&error];
+
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+
+        for (id object in results) {
+            NSArray *keys = [[[object entity] attributesByName] allKeys];
+            NSDictionary *attributes = [object dictionaryWithValuesForKeys:keys];
+
+            text = @"";
+            for (NSString *attributeName in attributes) {
+            
+                id value = [object valueForKey: attributeName];
+
+                NSString *strValue = @"";
+                
+                if ([value isKindOfClass:[NSNull class]] || value == nil) {
+                    strValue = @"";
+
+                } else if ([value isKindOfClass:[NSNumber class]]) {
+                    if ([value intValue] == 0) {
+                        strValue = @"";
+                        
+                    } else {
+                        strValue = [value stringValue];
+                    }
+
+                } else if ([value isKindOfClass:[NSDate class]]) {
+                    strValue = [dateFormatter stringFromDate:value];
+                    
+                } else if ([value isKindOfClass:[NSData class]]) {
+                    strValue = [value base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                    
+                } else if ([value isKindOfClass:[NSString class]]) {
+                    strValue = value;
+                }
+
+                if (![text isEqualToString:@""]) {
+                    text = @",";
+                }
+                text = [[NSString alloc] initWithFormat:@"%@\"%@\"", text, strValue];
+
+                
+                [fileHandle seekToEndOfFile];
+                [fileHandle writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
+
+            }
+            [fileHandle seekToEndOfFile];
+            [fileHandle writeData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        [fileHandle closeFile];
     }
     
 }

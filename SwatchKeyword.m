@@ -13,7 +13,7 @@
 
 @implementation SwatchKeyword
 
-@dynamic version;
+@dynamic version_tag;
 @dynamic keyword;
 @dynamic paint_swatch;
 

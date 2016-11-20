@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSNumber *mix_order;
 @property (nonatomic, retain) NSNumber *paint_swatch_is_add;
-@property (nonatomic, retain) NSNumber *version;
+@property (nonatomic, retain) NSNumber *version_tag;
 @property (nonatomic, retain) MixAssociation *mix_association;
 @property (nonatomic, retain) PaintSwatch *paint_swatch;
 

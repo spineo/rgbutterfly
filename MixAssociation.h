@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSNumber *is_shipped;
 @property (nonatomic, retain) NSNumber *is_hidden;
 @property (nonatomic, retain) NSNumber *is_readonly;
-@property (nonatomic, retain) NSNumber *version;
+@property (nonatomic, retain) NSNumber *version_tag;
 @property (nonatomic, retain) NSSet *mix_assoc_swatch;
 @property (nonatomic, retain) NSSet *mix_assoc_keyword;
 
