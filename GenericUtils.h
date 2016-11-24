@@ -16,5 +16,8 @@
 + (NSString *)trimString:(NSString *)string;
 + (NSString *)removeSpaces:(NSString *)string;
 + (NSString *)getCurrDateString;
++ (NSString *)getCurrDateIdentifier;
++ (void)upgradeDB;
++ (void)testFileDeployment;
 
 @end

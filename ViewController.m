@@ -15,6 +15,7 @@
 #import "AssocTableViewController.h"
 #import "SettingsTableViewController.h"
 #import "AlertUtils.h"
+#import "GenericUtils.h"
 
 #import "ManagedObjectUtils.h"
 #import "PaintSwatches.h"

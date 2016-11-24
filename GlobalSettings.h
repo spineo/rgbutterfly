@@ -11,6 +11,9 @@
 
 @interface GlobalSettings : NSObject
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************ IMPORTANT UPGRADE SETTINGS ***********************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // App Version and Core data/Store
 //
 extern int const VERSION_TAG;
@@ -20,6 +23,15 @@ extern int const MIGRATE_STORE;
 
 extern NSString * const LOCAL_PATH;
 
+// Upgrade the database from the local path copy
+//
+extern int const UPGRADE_DB;
+
+// Testfile deployment
+//
+extern int const TESTFILE_DEPLOY;
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // NIL constants
 //

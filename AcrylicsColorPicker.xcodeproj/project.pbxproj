@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
-		210E96C21DE2289B007526A9 /* AcrylicsColorPicker v4.0.63.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 210E96C11DE2289B007526A9 /* AcrylicsColorPicker v4.0.63.sqlite */; };
 		2133F20E1CE5FA8A00FB91AD /* PaintSwatchSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F20D1CE5FA8A00FB91AD /* PaintSwatchSelection.m */; };
 		2133F2101CFB2DF800FB91AD /* PaintBrand.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2133F20F1CFB2DF800FB91AD /* PaintBrand.txt */; };
 		2133F2151CFB366100FB91AD /* PaintBrand+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F2121CFB366100FB91AD /* PaintBrand+CoreDataProperties.m */; };
@@ -114,7 +113,6 @@
 		210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
-		210E96C11DE2289B007526A9 /* AcrylicsColorPicker v4.0.63.sqlite */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "AcrylicsColorPicker v4.0.63.sqlite"; sourceTree = "<group>"; };
 		2133F20C1CE5FA8A00FB91AD /* PaintSwatchSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchSelection.h; sourceTree = "<group>"; };
 		2133F20D1CE5FA8A00FB91AD /* PaintSwatchSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchSelection.m; sourceTree = "<group>"; };
 		2133F20F1CFB2DF800FB91AD /* PaintBrand.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PaintBrand.txt; sourceTree = "<group>"; };
@@ -457,7 +455,6 @@
 				2133F2191CFB521800FB91AD /* BodyType.txt */,
 				2174C58E1D79B1610093E48F /* CanvasCoverage.txt */,
 				21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */,
-				210E96C11DE2289B007526A9 /* AcrylicsColorPicker v4.0.63.sqlite */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -687,7 +684,6 @@
 				2133F2101CFB2DF800FB91AD /* PaintBrand.txt in Resources */,
 				21397E871C848457001C3F05 /* SubjectiveColor.txt in Resources */,
 				21CBAEC01DA6757100E0C6BF /* AssociationType.txt in Resources */,
-				210E96C21DE2289B007526A9 /* AcrylicsColorPicker v4.0.63.sqlite in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
 			);

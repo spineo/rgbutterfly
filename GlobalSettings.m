@@ -10,6 +10,9 @@
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************ IMPORTANT UPGRADE SETTINGS ***********************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // App Version and Core data/Store
 //
 int const VERSION_TAG = 1;
@@ -18,6 +21,16 @@ NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
 int const MIGRATE_STORE = 0;
 
 NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
+
+// Upgrade the database from the local path copy
+//
+int const UPGRADE_DB    = 0;
+
+// Testfile deployment
+//
+int const TESTFILE_DEPLOY = 0;
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 // NIL constants
@@ -395,6 +408,18 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
+    
+    // Upgrade the database?
+    //
+    if (UPGRADE_DB == 1) {
+        [GenericUtils upgradeDB];
+    }
+    
+    // Testfile deployment to resources
+    //
+    if (TESTFILE_DEPLOY == 1) {
+        [GenericUtils testFileDeployment];
+    }
 
     // Refresh the dictionary tables
     //
