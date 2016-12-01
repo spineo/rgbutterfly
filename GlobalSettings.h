@@ -16,16 +16,43 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // App Version and Core data/Store
 //
+// App Version and Core data/Store
+//
+#define APP_NAME @"AcrylicsColorPicker";
+
 extern int const VERSION_TAG;
+
+// This value goes in the version.txt
+//
+extern NSString * const DB_VERSION;
+
+extern NSString * const VERS_FILE;
+extern NSString * const MD5SUM_EXT;
+
 extern NSString * const CURR_STORE;
 extern NSString * const PREV_STORE;
 extern int const MIGRATE_STORE;
 
 extern NSString * const LOCAL_PATH;
 
-// Upgrade the database from the local path copy
+// Upgrade the database from the local path copy or GitHub
 //
 extern int const UPGRADE_DB;
+extern int const UPGRADE_LOCAL_DB;
+
+// GitHub related
+//
+extern NSString * const GIT_TOKEN;
+extern NSString * const GIT_URL;
+
+extern NSString * const GIT_DB_FILE;
+extern NSString * const DB_CONT_TYPE;
+
+extern NSString * const GIT_MD5_FILE;
+extern NSString * const MD5_CONT_TYPE;
+
+extern NSString * const GIT_VER_FILE;
+extern NSString * const VER_CONT_TYPE;
 
 // Testfile deployment
 //

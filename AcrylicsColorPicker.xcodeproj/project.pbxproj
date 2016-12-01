@@ -76,6 +76,7 @@
 		2174C58F1D79B1610093E48F /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2174C58E1D79B1610093E48F /* CanvasCoverage.txt */; };
 		2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */; };
 		2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */; };
+		2192F55D1DEDBD3600AAFE01 /* md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2192F55C1DEDBD3600AAFE01 /* md5.m */; };
 		21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */; };
 		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
@@ -238,6 +239,8 @@
 		2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CanvasCoverage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
+		2192F55C1DEDBD3600AAFE01 /* md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = md5.m; sourceTree = "<group>"; };
+		2192F55F1DEDBE5800AAFE01 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
 		21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				21397E991C8484D7001C3F05 /* StringObjectUtils.m */,
 				21BE8EEA1D18261F0039A9FA /* PickerUtils.h */,
 				21BE8EEB1D18261F0039A9FA /* PickerUtils.m */,
+				2192F55C1DEDBD3600AAFE01 /* md5.m */,
+				2192F55F1DEDBE5800AAFE01 /* md5.h */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -710,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2192F55D1DEDBD3600AAFE01 /* md5.m in Sources */,
 				21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */,
 				2134C8AD1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,

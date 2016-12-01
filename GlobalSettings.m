@@ -13,22 +13,44 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// App Version and Core data/Store
+
+int const VERSION_TAG       = 1;
+
+// This value goes in the version.txt
 //
-int const VERSION_TAG = 1;
+NSString * const DB_VERSION = @"4.0.63-1";
+
+NSString * const MD5SUM_EXT = @"md5";
+
 NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
-int const MIGRATE_STORE = 0;
+int const MIGRATE_STORE     = 0;
 
 NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
 
-// Upgrade the database from the local path copy
+// Upgrade the database from the local path copy or GitHu
 //
-int const UPGRADE_DB    = 0;
+int const UPGRADE_DB        = 1;
+int const UPGRADE_LOCAL_DB  = 0;
+
+// GitHub related
+//
+NSString * const GIT_TOKEN     = @"90bcd646313862c8026a04a792f4efc2e3f50d94";
+NSString * const GIT_URL       = @"https://raw.githubusercontent.com/spineo/databases/master/AcrylicsColorPicker";
+
+NSString * const GIT_DB_FILE   = @"AcrylicsColorPicker v4.0.63.sqlite";
+NSString * const DB_CONT_TYPE  = @"application/x-sqlite3";
+
+NSString * const GIT_MD5_FILE  = @"AcrylicsColorPicker v4.0.63.md5";
+NSString * const MD5_CONT_TYPE = @"text/plain";
+
+NSString * const GIT_VER_FILE  = @"version.txt";
+NSString * const VER_CONT_TYPE = @"text/plain";
+
 
 // Testfile deployment
 //
-int const TESTFILE_DEPLOY = 0;
+int const TESTFILE_DEPLOY  = 0;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -412,7 +434,11 @@ static NSDictionary *swatchTypes;
     // Upgrade the database?
     //
     if (UPGRADE_DB == 1) {
-        [GenericUtils upgradeDB];
+        if (UPGRADE_LOCAL_DB == 1) {
+            [GenericUtils upgradeLocalDB];
+        } else {
+            [GenericUtils upgradeDB];
+        }
     }
     
     // Testfile deployment to resources
