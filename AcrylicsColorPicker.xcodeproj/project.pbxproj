@@ -77,6 +77,7 @@
 		2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */; };
 		2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */; };
 		2192F55D1DEDBD3600AAFE01 /* md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2192F55C1DEDBD3600AAFE01 /* md5.m */; };
+		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */; };
 		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
@@ -241,6 +242,7 @@
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		2192F55C1DEDBD3600AAFE01 /* md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = md5.m; sourceTree = "<group>"; };
 		2192F55F1DEDBE5800AAFE01 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
 		21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				21397EE51C8487A1001C3F05 /* Images.xcassets */,
 				21397EE71C8487C7001C3F05 /* Media.xcassets */,
 				21397EE21C84876D001C3F05 /* Info.plist */,
+				2192F5601DF3185500AAFE01 /* README */,
 			);
 			name = AcrylicsColorPicker;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				21397E631C8482E1001C3F05 /* colorwheel.png in Resources */,
 				2174C58F1D79B1610093E48F /* CanvasCoverage.txt in Resources */,
 				2134C8A81C99812300E3E959 /* MatchAlgorithm.txt in Resources */,
+				2192F5611DF3185500AAFE01 /* README in Resources */,
 				2133F2181CFB51DD00FB91AD /* PigmentType.txt in Resources */,
 				2133F21A1CFB521800FB91AD /* BodyType.txt in Resources */,
 				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
