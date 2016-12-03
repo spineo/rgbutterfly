@@ -18,7 +18,7 @@
 + (NSString *)getCurrDateString;
 + (NSString *)getCurrDateIdentifier;
 + (void)upgradeLocalDB;
-+ (void)upgradeDB;
++ (NSString *)upgradeDB;
 + (void)testFileDeployment;
 
 @end

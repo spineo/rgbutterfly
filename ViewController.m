@@ -92,18 +92,33 @@ int MIX_ASSOC_MIN_SIZE = 1;
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
     
-    
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // Upgrade the database?
+    //
+    NSString *errStr;
+    if (UPGRADE_DB == 1) {
+        if (UPGRADE_LOCAL_DB == 1) {
+            [GenericUtils upgradeLocalDB];
+        } else {
+            errStr = [GenericUtils upgradeDB];
+            NSLog(@"*************** ERR=%@", errStr);
+            if (![errStr isEqualToString:@""]) {
+                UIAlertController *alert = [AlertUtils createOkAlert:@"Upgrade Status" message:errStr];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }
+    }
     [GlobalSettings init];
+
     
     // Welcome alert
     //
     _appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
     if (_appIntroAlert == TRUE) {
         UIAlertController *alert = [AlertUtils createNoShowAlert:@"Welcome to the Acrylics Color Picker App" message:APP_INTRO_INSTRUCTIONS key:APP_INTRO_KEY];
-        
         [self presentViewController:alert animated:YES completion:nil];
     }
 

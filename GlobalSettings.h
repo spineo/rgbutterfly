@@ -54,6 +54,10 @@ extern NSString * const MD5_CONT_TYPE;
 extern NSString * const GIT_VER_FILE;
 extern NSString * const VER_CONT_TYPE;
 
+// Default sleep duration for asynchronous threads
+//
+extern NSTimeInterval const ASYNC_THREAD_SLEEP;
+
 // Testfile deployment
 //
 extern int const TESTFILE_DEPLOY;

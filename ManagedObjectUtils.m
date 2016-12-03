@@ -10,7 +10,6 @@
 
 #import "GlobalSettings.h"
 #import "GenericUtils.h"
-#import "AlertUtils.h"
 
 
 @implementation ManagedObjectUtils

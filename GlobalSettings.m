@@ -47,6 +47,10 @@ NSString * const MD5_CONT_TYPE = @"text/plain";
 NSString * const GIT_VER_FILE  = @"version.txt";
 NSString * const VER_CONT_TYPE = @"text/plain";
 
+// Default sleep duration for asynchronous threads
+//
+NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
+
 
 // Testfile deployment
 //
@@ -430,16 +434,6 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
-    
-    // Upgrade the database?
-    //
-    if (UPGRADE_DB == 1) {
-        if (UPGRADE_LOCAL_DB == 1) {
-            [GenericUtils upgradeLocalDB];
-        } else {
-            [GenericUtils upgradeDB];
-        }
-    }
     
     // Testfile deployment to resources
     //
