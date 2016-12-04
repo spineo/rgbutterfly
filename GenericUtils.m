@@ -157,8 +157,8 @@
     // Account for asynchronous writes
     //
     NSString *versionNumber = [self lineFromFile:GIT_VER_FILE];
-    if ([versionNumber isEqualToString:DB_VERSION]) {
-        //return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
+    if ([versionNumber isEqualToString:DB_VERSION] && ! FORCE_UPDATE_DB) {
+        return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
     }
 
     

@@ -99,8 +99,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
     // Upgrade the database?
     //
     NSString *errStr;
-    if (UPGRADE_DB == 1) {
-        if (UPGRADE_LOCAL_DB == 1) {
+    if (UPDATE_DB == 1) {
+        if (UPDATE_LOCAL_DB == 1) {
             [GenericUtils upgradeLocalDB];
         } else {
             errStr = [GenericUtils upgradeDB];
