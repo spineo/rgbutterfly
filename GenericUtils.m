@@ -125,8 +125,7 @@
     NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSString *cmdStat = nil;
+
     NSError *error = nil;
     
     // Attempt cd into data container directory
@@ -135,7 +134,7 @@
         [fileManager changeCurrentDirectoryPath:destDBPath];
 
     } @catch (NSException *exception) {
-        NSLog(@"Unable to cd into path '%@', error: %@\n", destDBPath, [error localizedDescription]);
+        NSLog(@"Unable to cd into path '%@'\n", destDBPath);
         return @"ERROR UDB1: Unable to access the data container path, please try again";
         
     }
@@ -149,9 +148,7 @@
     }
 
     @try {
-        cmdStat = [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
-        if (cmdStat != nil)
-            return cmdStat;
+        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
         
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to get file" stringByAppendingFormat:@" '%@'", GIT_VER_FILE];
@@ -161,9 +158,9 @@
     //
     NSString *versionNumber = [self lineFromFile:GIT_VER_FILE];
     if ([versionNumber isEqualToString:DB_VERSION]) {
-
+        //return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
     }
-    //NSLog(@"***** DB VERSION=>%@<=", versionNumber);
+
     
     // (2) Get the md5 file
     //
@@ -186,13 +183,13 @@
     //
     [self fileRemove:destDBOldFile fileManager:fileManager];
     
-    NSError *fileMoveError = nil;
+    error = nil;
     @try {
-        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&fileMoveError];
+        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
         NSLog(@"Successfully copied file '%@' to '%@'", destDBFile, destDBOldFile);
         
     } @catch (NSException *exception) {
-        NSLog(@"ERROR: %@\n", [fileMoveError localizedDescription]);
+        NSLog(@"ERROR: %@\n", [error localizedDescription]);
         return [@"File copy error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
     }
     
@@ -205,16 +202,17 @@
         return [@"Failed to get" stringByAppendingFormat:@" '%@'", destDBTmpFile];
     }
     
+    [fileManager removeItemAtPath:destDBFile error:&error];
+    
     // Rename the tmp file to main database
     //
-    NSError *fileRemoveError = nil;
+    error = nil;
     @try {
-        [fileManager removeItemAtPath:destDBFile error:&fileRemoveError];
-        [fileManager copyItemAtPath:destDBTmpFile toPath:destDBFile error:&fileMoveError];
+        [fileManager moveItemAtPath:destDBTmpFile toPath:destDBFile error:&error];
         NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
         
     } @catch (NSException *exception) {
-        NSLog(@"File rename error for file '%@' to '%@', error: %@\n", destDBTmpFile, destDBFile, [fileMoveError localizedDescription]);
+        NSLog(@"File rename error for file '%@' to '%@', error: %@\n", destDBTmpFile, destDBFile, [error localizedDescription]);
     }
     
     return @"Upgrade was Successful!";
@@ -223,7 +221,7 @@
 // Parameters
 // url string
 //
-+ (NSString *)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
++ (void)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
     
     // Cleanup
     //
@@ -241,11 +239,9 @@
     
     NSString *authValue = [NSString stringWithFormat:@"Token %@", GIT_TOKEN];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
-//    NSError *error = nil;
-//    if (!error) {
+
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (!error) {
+//        if (!error) {
             
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
             if (httpResponse.statusCode == 200) {
@@ -256,30 +252,33 @@
                 
                 // Remove file before writing to it
                 //
-                NSError *fileRemoveError = nil;
+                NSError *error = nil;
                 if ([fileManager fileExistsAtPath:fileName]) {
                     @try {
-                        [fileManager removeItemAtPath:fileName error:&fileRemoveError];
+                        [fileManager removeItemAtPath:fileName error:&error];
                         NSLog(@"Successfully removed file '%@'", fileName);
                         
                     } @catch (NSException *exception) {
-                        NSLog(@"File remove error for file '%@', error: %@\n", fileName, [fileRemoveError localizedDescription]);
+                        NSLog(@"File remove error for file '%@', error: %@\n", fileName, [error localizedDescription]);
                     }
                 }
                 
-                while (! [fileManager fileExistsAtPath:fileName]) {
-                    [data writeToFile:fileName atomically:YES];
-                    
-                    [NSThread sleepForTimeInterval:.5];
+                error = nil;
+                @try {
+                    while (! [fileManager fileExistsAtPath:fileName]) {
+                        [data writeToFile:fileName atomically:YES];
+                        
+                        [NSThread sleepForTimeInterval:.5];
+                    }
+                } @catch(NSException *exception) {
+                    NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
                 }
                 
-            } else {
-                NSLog(@"***** ERROR: StatusCode=%i, Description=%@, DebugDescription=%@", (int)httpResponse.statusCode, httpResponse.description, httpResponse.debugDescription);
-            }
+//            } else {
+//                NSLog(@"***** ERROR: StatusCode=%i, Description=%@, DebugDescription=%@", (int)httpResponse.statusCode, httpResponse.description, httpResponse.debugDescription);
+//            }
        }
     }] resume];
-//    }
-    return nil;
 }
 
 // Return the user error message, if any
