@@ -205,23 +205,28 @@
     // Download the latest database (as a tmp file)
     //
     @try {
-        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
+        [self fileRemove:destDBFile fileManager:fileManager];
     } @catch (NSException *exception) {
-        return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
+        return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", destDBFile];
+    }
+    
+    @try {
+        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBFile];
+    } @catch (NSException *exception) {
+        return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBFile];
     }
 
-    
     // Rename the tmp file to main database
     //
-    error = nil;
-    @try {
-        [fileManager moveItemAtPath:destDBTmpFile toPath:destDBFile error:&error];
-        NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
-        
-    } @catch (NSException *exception) {
-        NSLog(@"File rename error for file '%@' to '%@', error: %@\n", destDBTmpFile, destDBFile, [error localizedDescription]);
-        return [@"ERROR UDB4: File rename error for file" stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
-    }
+//    error = nil;
+//    @try {
+//        [fileManager moveItemAtPath:destDBTmpFile toPath:destDBFile error:&error];
+//        NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
+//
+//    } @catch (NSException *exception) {
+//        NSLog(@"File rename error for file '%@' to '%@', error: %@\n", destDBTmpFile, destDBFile, [error localizedDescription]);
+//        return [@"ERROR UDB4: File rename error for file" stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
+//    }
     
     return @"Upgrade was Successful!";
 }
@@ -247,28 +252,32 @@
     
     NSString *authValue = [NSString stringWithFormat:@"Token %@", GIT_TOKEN];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+        
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-        if (httpResponse.statusCode == 200) {
-            
-            NSLog(@"***** Success");
-            
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            
-            NSError *error = nil;
-            @try {
-                while (! [fileManager fileExistsAtPath:fileName]) {
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (data) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+            if (httpResponse.statusCode == 200) {
+                
+                NSLog(@"***** Success");
+                
+                NSError *error = nil;
+                @try {
                     [data writeToFile:fileName atomically:YES];
                     
-                    [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
+                } @catch(NSException *exception) {
+                    NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
                 }
-            } @catch(NSException *exception) {
-                NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
-            }
-       }
-    }] resume];
+           }
+        }
+        dispatch_semaphore_signal(semaphore);
+
+    }];
+                            
+    [task resume];
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
 // Return the user error message, if any
@@ -282,6 +291,9 @@
     if ([fileManager isDeletableFileAtPath:filePath]) {
         @try {
             [fileManager removeItemAtPath:filePath error:&error];
+            while([fileManager isReadableFileAtPath:filePath]) {
+                [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
+            }
             NSLog(@"Successfully removed file '%@'", filePath);
             
         } @catch (NSException *exception) {
