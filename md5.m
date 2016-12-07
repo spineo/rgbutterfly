@@ -2,7 +2,7 @@
 
 @implementation md5
 
-+(NSString *)md5Hash:(NSString *)path {
++ (NSString *)md5Hash:(NSString *)path {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
 

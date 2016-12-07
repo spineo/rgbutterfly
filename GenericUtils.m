@@ -139,6 +139,7 @@
         
     }
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the new version file
     //
     @try {
@@ -161,7 +162,7 @@
         return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
     }
 
-    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (2) Remove existing file and get the md5 file
     //
     @try {
@@ -176,25 +177,26 @@
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
     
+    // Perform the check once the updated database is downloaded
+    //
+    NSString *currMd5sum = [self lineFromFile:GIT_MD5_FILE];
+
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (3) Upgrade the sqlite database
     //
-    // Remove files -shm and -wal
+    // Remove the -old and -tmp suffix files
     //
-    [self fileRemove:destDBShmFile fileManager:fileManager];
-    [self fileRemove:destDBWalFile fileManager:fileManager];
+    [self fileRemove:destDBOldFile fileManager:fileManager];
+    [self fileRemove:destDBTmpFile fileManager:fileManager];
 
     
     // Backup the current database file
     //
-    @try {
-        [self fileRemove:destDBOldFile fileManager:fileManager];
-    } @catch (NSException *exception) {
-        return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", destDBOldFile];
-    }
-    
     error = nil;
     @try {
-        [fileManager moveItemAtPath:destDBFile toPath:destDBOldFile error:&error];
+        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:nil];
+
         NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
         
     } @catch (NSException *exception) {
@@ -202,37 +204,41 @@
         return [@"ERROR UDB4: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
     }
     
-    // Download the latest database (as a tmp file)
+    // Download the latest database to a '-tmp' suffix file
     //
     @try {
-        [self fileRemove:destDBFile fileManager:fileManager];
+        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
     } @catch (NSException *exception) {
-        return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", destDBFile];
+        return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
     
-    @try {
-        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBFile];
-    } @catch (NSException *exception) {
-        return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBFile];
-    }
+    // Verify the MD5 value and, if equal, perform the update (else, leave in place the current snapshot)
+    //
+    NSString *md5sum = [md5 md5Hash:destDBTmpFile];
+    if ([currMd5sum isEqualToString:md5sum]) {
+        @try {
+            [self fileRemove:destDBShmFile fileManager:fileManager];
+            [self fileRemove:destDBWalFile fileManager:fileManager];
+            [self fileRemove:destDBFile fileManager:fileManager];
+            
+            [self fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager];
+            
+            NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
+            
+            return @"Update was Successful!";
+            
+        } @catch (NSException *exception) {
+            return [@"ERROR UDB4: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
+        }
 
-    // Rename the tmp file to main database
-    //
-//    error = nil;
-//    @try {
-//        [fileManager moveItemAtPath:destDBTmpFile toPath:destDBFile error:&error];
-//        NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
-//
-//    } @catch (NSException *exception) {
-//        NSLog(@"File rename error for file '%@' to '%@', error: %@\n", destDBTmpFile, destDBFile, [error localizedDescription]);
-//        return [@"ERROR UDB4: File rename error for file" stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
-//    }
+    } else {
+        return @"Update Failed on md5 (keeping current snapshot, please try again)";
+    }
     
-    return @"Upgrade was Successful!";
+    return @"Update was Successful!";
 }
 
-// Parameters
-// url string
+// HTTP Get wrapper
 //
 + (void)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
     
@@ -280,8 +286,6 @@
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
-// Return the user error message, if any
-//
 + (void)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager {
     
     if (fileManager == nil)
@@ -301,6 +305,31 @@
         }
     }
 }
+
++ (void)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager {
+    
+    if (fileManager == nil)
+        fileManager = [NSFileManager defaultManager];
+
+    // Remove first
+    //
+    @try {
+        [self fileRemove:destFilePath fileManager:fileManager];
+    } @catch (NSException *exception) {
+        NSLog(@"ERROR: file remove failed");
+    }
+    
+    NSError *error = nil;
+    @try {
+        [fileManager copyItemAtPath:srcFilePath toPath:destFilePath error:&error];
+        NSLog(@"Successfully renamed file '%@' to '%@'", srcFilePath, destFilePath);
+        
+    } @catch (NSException *exception) {
+        NSLog(@"ERROR: %@\n", [error localizedDescription]);
+    }
+}
+
+
 
 + (NSString *)lineFromFile:(NSString *)filePath {
     
@@ -367,6 +396,5 @@
         NSLog(@"********** File '%@' exists **********", destDBFile);
     }
 }
-
 
 @end

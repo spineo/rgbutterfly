@@ -3,6 +3,6 @@
 
 @interface md5 : NSObject
 
-+(NSString *)md5Hash:(NSString *)path;
++ (NSString *)md5Hash:(NSString *)path;
 
 @end
