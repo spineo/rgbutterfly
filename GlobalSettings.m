@@ -53,10 +53,6 @@ NSString * const VER_CONT_TYPE = @"text/plain";
 NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
 
 
-// Testfile deployment
-//
-int const TESTFILE_DEPLOY  = 0;
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -435,12 +431,6 @@ static NSDictionary *swatchTypes;
 // Init called by the ViewController (App entry point)
 //
 + (void)init {
-    
-    // Testfile deployment to resources
-    //
-    if (TESTFILE_DEPLOY == 1) {
-        [GenericUtils testFileDeployment];
-    }
 
     // Refresh the dictionary tables
     //

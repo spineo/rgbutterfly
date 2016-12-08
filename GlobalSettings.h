@@ -59,9 +59,6 @@ extern NSString * const VER_CONT_TYPE;
 //
 extern NSTimeInterval const ASYNC_THREAD_SLEEP;
 
-// Testfile deployment
-//
-extern int const TESTFILE_DEPLOY;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

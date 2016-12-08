@@ -18,6 +18,5 @@
 + (NSString *)getCurrDateIdentifier;
 + (void)upgradeLocalDB;
 + (NSString *)upgradeDB;
-+ (void)testFileDeployment;
 
 @end

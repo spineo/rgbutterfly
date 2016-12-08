@@ -9,6 +9,8 @@
 #import "GenericUtils.h"
 #import "GlobalSettings.h"
 #import "md5.h"
+#import "FileUtils.h"
+#import "HTTPUtils.h"
 
 @implementation GenericUtils
 
@@ -114,7 +116,6 @@
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSLog(@"***** DEST DB PATH=%@", destDBPath);
     
     // Set the destination files for removal
     //
@@ -143,13 +144,13 @@
     // (1) Remove existing file and get the new version file
     //
     @try {
-        [self fileRemove:GIT_VER_FILE fileManager:fileManager];
+        [FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager];
     } @catch (NSException *exception) {
         return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_VER_FILE];
     }
 
     @try {
-        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
 
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_VER_FILE];
@@ -157,7 +158,7 @@
     
     // Account for asynchronous writes
     //
-    NSString *versionNumber = [self lineFromFile:GIT_VER_FILE];
+    NSString *versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
     if ([versionNumber isEqualToString:DB_VERSION] && ! FORCE_UPDATE_DB) {
         return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
     }
@@ -166,20 +167,20 @@
     // (2) Remove existing file and get the md5 file
     //
     @try {
-        [self fileRemove:GIT_MD5_FILE fileManager:fileManager];
+        [FileUtils fileRemove:GIT_MD5_FILE fileManager:fileManager];
     } @catch (NSException *exception) {
         return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
 
     @try {
-        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
     
     // Perform the check once the updated database is downloaded
     //
-    NSString *currMd5sum = [self lineFromFile:GIT_MD5_FILE];
+    NSString *currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -187,8 +188,8 @@
     //
     // Remove the -old and -tmp suffix files
     //
-    [self fileRemove:destDBOldFile fileManager:fileManager];
-    [self fileRemove:destDBTmpFile fileManager:fileManager];
+    [FileUtils fileRemove:destDBOldFile fileManager:fileManager];
+    [FileUtils fileRemove:destDBTmpFile fileManager:fileManager];
 
     
     // Backup the current database file
@@ -207,7 +208,7 @@
     // Download the latest database to a '-tmp' suffix file
     //
     @try {
-        [self HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
@@ -217,11 +218,11 @@
     NSString *md5sum = [md5 md5Hash:destDBTmpFile];
     if ([currMd5sum isEqualToString:md5sum]) {
         @try {
-            [self fileRemove:destDBShmFile fileManager:fileManager];
-            [self fileRemove:destDBWalFile fileManager:fileManager];
-            [self fileRemove:destDBFile fileManager:fileManager];
+            [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
+            [FileUtils fileRemove:destDBWalFile fileManager:fileManager];
+            [FileUtils fileRemove:destDBFile fileManager:fileManager];
             
-            [self fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager];
+            [FileUtils fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager];
             
             NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
             
@@ -236,165 +237,6 @@
     }
     
     return @"Update was Successful!";
-}
-
-// HTTP Get wrapper
-//
-+ (void)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
-    
-    // Cleanup
-    //
-    urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSLog(@"***** URL STR=%@", urlStr);
-
-    NSURL *url = [NSURL URLWithString:urlStr];
-    
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request.HTTPMethod = @"GET";
-    [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *authValue = [NSString stringWithFormat:@"Token %@", GIT_TOKEN];
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-        
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
-    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (data) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-            if (httpResponse.statusCode == 200) {
-                
-                NSLog(@"***** Success");
-                
-                NSError *error = nil;
-                @try {
-                    [data writeToFile:fileName atomically:YES];
-                    
-                } @catch(NSException *exception) {
-                    NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
-                }
-           }
-        }
-        dispatch_semaphore_signal(semaphore);
-
-    }];
-                            
-    [task resume];
-    
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-}
-
-+ (void)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager {
-    
-    if (fileManager == nil)
-        fileManager = [NSFileManager defaultManager];
-    
-    NSError *error = nil;
-    if ([fileManager isDeletableFileAtPath:filePath]) {
-        @try {
-            [fileManager removeItemAtPath:filePath error:&error];
-            while([fileManager isReadableFileAtPath:filePath]) {
-                [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
-            }
-            NSLog(@"Successfully removed file '%@'", filePath);
-            
-        } @catch (NSException *exception) {
-            NSLog(@"File remove error for file '%@', error: %@\n", filePath, [error localizedDescription]);
-        }
-    }
-}
-
-+ (void)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager {
-    
-    if (fileManager == nil)
-        fileManager = [NSFileManager defaultManager];
-
-    // Remove first
-    //
-    @try {
-        [self fileRemove:destFilePath fileManager:fileManager];
-    } @catch (NSException *exception) {
-        NSLog(@"ERROR: file remove failed");
-    }
-    
-    NSError *error = nil;
-    @try {
-        [fileManager copyItemAtPath:srcFilePath toPath:destFilePath error:&error];
-        NSLog(@"Successfully renamed file '%@' to '%@'", srcFilePath, destFilePath);
-        
-    } @catch (NSException *exception) {
-        NSLog(@"ERROR: %@\n", [error localizedDescription]);
-    }
-}
-
-
-
-+ (NSString *)lineFromFile:(NSString *)filePath {
-    
-    NSString *line = nil;
-    while (line == nil) {
-        line = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        
-        [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
-    }
-    return line;
-}
-
-
-// Test file deployment
-//
-+ (void)testFileDeployment {
-    
-    // Source test file (located in the resource area)
-    //
-    NSString *testFile   = [[NSString alloc] initWithFormat:@"testfile.%@", [self getCurrDateIdentifier]];
-    
-    //NSString *sourceFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:CURR_STORE];
-    NSString *sourceFile = [[NSString alloc] initWithFormat:@"%@/%@", @"/var/tmp", testFile];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager createFileAtPath:sourceFile contents:nil attributes:nil];
-
-
-    // Find the destination path
-    //
-    NSString *destFile  = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:testFile];
-    [fileManager createFileAtPath:destFile contents:nil attributes:nil];
-    
-    NSString *destDBFile  = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:CURR_STORE];
-    
-    NSLog(@"********** Source File '%@' **********", sourceFile);
-    NSLog(@"********** Dest File '%@' **********", destFile);
-    NSLog(@"********** Dest DB File '%@' **********", destDBFile);
-    
-//    if ( [fileManager isReadableFileAtPath:sourceFile] ) {
-//        
-//        NSError *fileCopyError;
-//        @try {
-//            [fileManager copyItemAtPath:sourceFile toPath:destFile error:&fileCopyError];
-//            
-//        } @catch (NSException *exception) {
-//            NSLog(@"File copy error at path '%@', error: %@\n", destFile, [fileCopyError localizedDescription]);
-//        }
-//    }
-//
-//    if ([fileManager fileExistsAtPath:destFile]) {
-//        NSLog(@"********** File '%@' successfully deployed **********", destFile);
-//        NSError *fileRemoveError;
-//        @try {
-//            [fileManager removeItemAtPath:destFile error:&fileRemoveError];
-//            NSLog(@"********** File '%@' successfully removed **********", destFile);
-//            
-//        } @catch (NSException *exception) {
-//            NSLog(@"File remove error for file '%@', error: %@\n", destFile, [fileRemoveError localizedDescription]);
-//        }
-//    }
-    
-    if ([fileManager fileExistsAtPath:destDBFile]) {
-        NSLog(@"********** File '%@' exists **********", destDBFile);
-    }
 }
 
 @end

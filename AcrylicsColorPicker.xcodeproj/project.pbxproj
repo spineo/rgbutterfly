@@ -83,6 +83,8 @@
 		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
 		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
 		21BE8EEC1D18261F0039A9FA /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BE8EEB1D18261F0039A9FA /* PickerUtils.m */; };
+		21C41E3A1DF99EA7008BD2F9 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C41E391DF99EA7008BD2F9 /* HTTPUtils.m */; };
+		21C41E3D1DF99FF1008BD2F9 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C41E3C1DF99FF1008BD2F9 /* FileUtils.m */; };
 		21CBAEC01DA6757100E0C6BF /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */; };
 		21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */; };
 		21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */; };
@@ -256,6 +258,10 @@
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21BE8EEA1D18261F0039A9FA /* PickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerUtils.h; sourceTree = "<group>"; };
 		21BE8EEB1D18261F0039A9FA /* PickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerUtils.m; sourceTree = "<group>"; };
+		21C41E381DF99EA7008BD2F9 /* HTTPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPUtils.h; sourceTree = "<group>"; };
+		21C41E391DF99EA7008BD2F9 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPUtils.m; sourceTree = "<group>"; };
+		21C41E3B1DF99FF1008BD2F9 /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
+		21C41E3C1DF99FF1008BD2F9 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
 		21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AssociationType.txt; sourceTree = "<group>"; };
 		21CBAEC11DA6801B00E0C6BF /* AssociationType+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AssociationType+CoreDataClass.h"; sourceTree = "<group>"; };
 		21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssociationType+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -448,6 +454,10 @@
 				21BE8EEB1D18261F0039A9FA /* PickerUtils.m */,
 				2192F55C1DEDBD3600AAFE01 /* md5.m */,
 				2192F55F1DEDBE5800AAFE01 /* md5.h */,
+				21C41E381DF99EA7008BD2F9 /* HTTPUtils.h */,
+				21C41E391DF99EA7008BD2F9 /* HTTPUtils.m */,
+				21C41E3B1DF99FF1008BD2F9 /* FileUtils.h */,
+				21C41E3C1DF99FF1008BD2F9 /* FileUtils.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -756,6 +766,7 @@
 				21397EA01C8484D7001C3F05 /* GenericUtils.m in Sources */,
 				21397E9B1C8484D7001C3F05 /* AlertUtils.m in Sources */,
 				2133F2161CFB366100FB91AD /* PaintBrand.m in Sources */,
+				21C41E3A1DF99EA7008BD2F9 /* HTTPUtils.m in Sources */,
 				21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
@@ -785,6 +796,7 @@
 				21397E571C8481C5001C3F05 /* MatchTableViewController.m in Sources */,
 				21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */,
 				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
+				21C41E3D1DF99FF1008BD2F9 /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
