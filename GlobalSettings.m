@@ -55,7 +55,6 @@ NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 // NIL constants
 //
 CGFloat const DEF_X_OFFSET          = 0.0;

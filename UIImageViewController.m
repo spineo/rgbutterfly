@@ -322,13 +322,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self editButtonDisable];
     }];
     
-    _deleteTapsCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+    _deleteTapsCancel = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [deleteTapsAlertController_ dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [deleteTapsAlertController_ addAction:_deleteTapsYes];
     [deleteTapsAlertController_ addAction:_deleteTapsCancel];
-    
+    [deleteTapsAlertController_ addAction:_deleteTapsYes];
+
     
     // Match Edit Button Alert Controller
     //

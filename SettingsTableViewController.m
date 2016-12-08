@@ -527,8 +527,8 @@ const int SETTINGS_MAX_SECTIONS   = 8;
                                    style:UIAlertActionStyleDefault
                                    handler:nil];
     
-    [_noSaveAlert addAction:YesButton];
     [_noSaveAlert addAction:NoButton];
+    [_noSaveAlert addAction:YesButton];
     
     
     // Uncomment the following line to preserve selection between presentations.

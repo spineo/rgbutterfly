@@ -348,8 +348,8 @@ const int ASSOC_SET_TAG        = 8;
                                  
                              }];
     
-    [_deleteAlertController addAction:ok];
     [_deleteAlertController addAction:cancel];
+    [_deleteAlertController addAction:ok];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
