@@ -100,11 +100,30 @@ int MIX_ASSOC_MIN_SIZE = 1;
     //
     int updateStat = [GenericUtils checkForDBUpdate];
     if (updateStat == 2) {
-        NSString *errStr = [GenericUtils upgradeDB];
-        if (![errStr isEqualToString:@""]) {
-            UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+        
+        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"A New Database Version was Detected" message:@"Continue with the Database Update?"];
+        
+        UIAlertAction* YesButton = [UIAlertAction
+                                    actionWithTitle:@"Yes"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        
+                                        NSString *errStr = [GenericUtils upgradeDB];
+                                        UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
+                                        [self presentViewController:alert animated:YES completion:nil];
+                                        
+                                    }];
+        
+        UIAlertAction* NoButton = [UIAlertAction
+                                   actionWithTitle:@"No"
+                                   style:UIAlertActionStyleDefault
+                                   handler:nil];
+        
+        [updateConfirm addAction:NoButton];
+        [updateConfirm addAction:YesButton];
+        
+        [self presentViewController:updateConfirm animated:YES completion:nil];
+        
     } else if (updateStat == 1) {
         UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
         [self presentViewController:alert animated:YES completion:nil];
