@@ -24,7 +24,7 @@ extern int const VERSION_TAG;
 
 // This value goes in the version.txt
 //
-extern NSString * const DB_VERSION;
+extern NSString * const DB_VERSION_KEY;
 
 extern NSString * const VERS_FILE;
 extern NSString * const MD5SUM_EXT;
@@ -37,8 +37,8 @@ extern NSString * const LOCAL_PATH;
 
 // Upgrade the database from the local path copy or GitHub
 //
-extern int const UPDATE_DB;
-extern int const UPDATE_LOCAL_DB;
+//extern int const UPDATE_DB;
+//extern int const UPDATE_LOCAL_DB;
 extern int const FORCE_UPDATE_DB;
 
 // GitHub related

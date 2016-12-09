@@ -106,7 +106,20 @@
         return 1;
     }
 
-    if (![versionNumber isEqualToString:DB_VERSION]) {
+    // NSUserDefaults
+    //
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *currVersionNumber = [userDefaults stringForKey:DB_VERSION_KEY];
+    
+    NSLog(@"***** Current Version Number=%@", currVersionNumber);
+
+    if (! (currVersionNumber && [versionNumber isEqualToString:currVersionNumber])) {
+        
+        // Store the Version in NSUserDefaults
+        //
+        [userDefaults setValue:versionNumber forKey:DB_VERSION_KEY];
+        [userDefaults synchronize];
+        
         return 2;
     }
 

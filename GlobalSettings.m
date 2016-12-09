@@ -16,22 +16,22 @@
 
 int const VERSION_TAG       = 1;
 
-// This value goes in the version.txt
+// Key references the value stored in NSUserDefaults
 //
-NSString * const DB_VERSION = @"4.0.63-3";
+NSString * const DB_VERSION_KEY = @"DB_VERSION";
 
-NSString * const MD5SUM_EXT = @"md5";
+NSString * const MD5SUM_EXT     = @"md5";
 
-NSString * const CURR_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
-NSString * const PREV_STORE = @"AcrylicsColorPicker v4.0.63.sqlite";
-int const MIGRATE_STORE     = 0;
+NSString * const CURR_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
+NSString * const PREV_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
+int const MIGRATE_STORE         = 0;
 
 NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
 
 // Upgrade the database from the local path copy or GitHub
 //
-int const UPDATE_DB         = 1;
-int const UPDATE_LOCAL_DB   = 0;
+//int const UPDATE_DB         = 1;
+//int const UPDATE_LOCAL_DB   = 0;
 int const FORCE_UPDATE_DB   = 0;
 
 // GitHub related
