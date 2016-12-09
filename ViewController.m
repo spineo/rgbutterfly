@@ -98,19 +98,18 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     // Upgrade the database?
     //
-    NSString *errStr;
-    if (UPDATE_DB == 1) {
-        if (UPDATE_LOCAL_DB == 1) {
-            [GenericUtils upgradeLocalDB];
-        } else {
-            errStr = [GenericUtils upgradeDB];
-            NSLog(@"*************** ERR=%@", errStr);
-            if (![errStr isEqualToString:@""]) {
-                UIAlertController *alert = [AlertUtils createOkAlert:@"Upgrade Status" message:errStr];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
+    int updateStat = [GenericUtils checkForDBUpdate];
+    if (updateStat == 2) {
+        NSString *errStr = [GenericUtils upgradeDB];
+        if (![errStr isEqualToString:@""]) {
+            UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
+            [self presentViewController:alert animated:YES completion:nil];
         }
+    } else if (updateStat == 1) {
+        UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
+        [self presentViewController:alert animated:YES completion:nil];
     }
+
     [GlobalSettings init];
 
     

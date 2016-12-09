@@ -49,64 +49,68 @@
     return [dateFormatter stringFromDate:currentDate];
 }
 
-// Upgrade the database to the Version used in the local path
+// Check the GITHUB version file to determine if a database update is available
 //
-+ (void)upgradeLocalDB {
+// Update Stat Values
+// 0 - Update not needed
+// 1 - Update checks failed
+// 2 - Successfully verified that update is needed
+//
++ (int)checkForDBUpdate {
     
-    // Source database file (located in the resource area_
-    //
-    NSString *sourceDBFile = [[NSString alloc] initWithFormat:@"%@/%@", LOCAL_PATH, CURR_STORE];
-
     // Find the destination path
     //
-    NSString *destDBFile    = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:CURR_STORE];
-    NSString *destDBShmFile = [destDBFile stringByAppendingString:@"-shm"];
-    NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
+    NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSLog(@"***** Data Container Path=%@", destDBPath);
     
-    NSLog(@"***** DEST DB FILE=%@", destDBFile);
-
     NSFileManager *fileManager = [NSFileManager defaultManager];
+
     
-    if ( [fileManager isReadableFileAtPath:sourceDBFile] ) {
+    // Attempt cd into data container directory
+    //
+    @try {
+        [fileManager changeCurrentDirectoryPath:destDBPath];
         
-        // Remove files (including -shm and -wal) first
-        //
-        NSError *fileRemoveError;
-        if ([fileManager fileExistsAtPath:destDBFile]) {
-            @try {
-                [fileManager removeItemAtPath:destDBFile error:&fileRemoveError];
-
-            } @catch (NSException *exception) {
-                NSLog(@"File remove error for file '%@', error: %@\n", destDBFile, [fileRemoveError localizedDescription]);
-            }
-        }
-        
-        if ([fileManager fileExistsAtPath:destDBShmFile]) {
-            @try {
-                [fileManager removeItemAtPath:destDBShmFile error:&fileRemoveError];
-                
-            } @catch (NSException *exception) {
-                NSLog(@"File remove error for file '%@', error: %@\n", destDBShmFile, [fileRemoveError localizedDescription]);
-            }
-        }
-        
-        if ([fileManager fileExistsAtPath:destDBWalFile]) {
-            @try {
-                [fileManager removeItemAtPath:destDBWalFile error:&fileRemoveError];
-                
-            } @catch (NSException *exception) {
-                NSLog(@"File remove error for file '%@', error: %@\n", destDBWalFile, [fileRemoveError localizedDescription]);
-            }
-        }
-        
-        NSError *fileCopyError;
-        @try {
-            [fileManager copyItemAtPath:sourceDBFile toPath:destDBFile error:&fileCopyError];
-
-        } @catch (NSException *exception) {
-            NSLog(@"File copy error at path '%@', error: %@\n", destDBFile, [fileCopyError localizedDescription]);
-        }
+    } @catch (NSException *exception) {
+        NSLog(@"Unable to cd into path '%@'\n", destDBPath);
+        return 1;
     }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // (1) Remove existing file and get the new version file
+    //
+    @try {
+        [FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager];
+
+    } @catch (NSException *exception) {
+        NSLog(@"Unable to remove file '%@'\n", GIT_VER_FILE);
+        return 1;
+    }
+    
+    @try {
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
+        
+    } @catch (NSException *exception) {
+        NSLog(@"Unable to HTTP Get '%@'\n", GIT_VER_FILE);
+        return 1;
+    }
+    
+    // Account for asynchronous writes
+    //
+    NSString *versionNumber;
+    @try {
+        versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
+        
+    } @catch (NSException *exception) {
+        NSLog(@"Failed to retrieve the version number for file '%@'\n", GIT_VER_FILE);
+        return 1;
+    }
+
+    if (![versionNumber isEqualToString:DB_VERSION]) {
+        return 2;
+    }
+
+    return 0;
 }
 
 // Update the database from GitHub (return string is the user status message)
@@ -139,32 +143,10 @@
         return @"ERROR UDB1: Unable to access the data container path, please try again";
         
     }
-    
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // (1) Remove existing file and get the new version file
-    //
-    @try {
-        [FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager];
-    } @catch (NSException *exception) {
-        return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_VER_FILE];
-    }
 
-    @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
-
-    } @catch (NSException *exception) {
-        return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_VER_FILE];
-    }
-    
-    // Account for asynchronous writes
-    //
-    NSString *versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
-    if ([versionNumber isEqualToString:DB_VERSION] && ! FORCE_UPDATE_DB) {
-        return @"WARNING UDB1: Schema and data version are the same. Use 'Force Update' instead.";
-    }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // (2) Remove existing file and get the md5 file
+    // (1) Remove existing file and get the md5 file
     //
     @try {
         [FileUtils fileRemove:GIT_MD5_FILE fileManager:fileManager];
@@ -184,7 +166,7 @@
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // (3) Upgrade the sqlite database
+    // (2) Upgrade the sqlite database
     //
     // Remove the -old and -tmp suffix files
     //

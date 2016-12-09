@@ -16,7 +16,7 @@
 + (NSString *)removeSpaces:(NSString *)string;
 + (NSString *)getCurrDateString;
 + (NSString *)getCurrDateIdentifier;
-+ (void)upgradeLocalDB;
++ (int)checkForDBUpdate;
 + (NSString *)upgradeDB;
 
 @end
