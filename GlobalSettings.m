@@ -26,6 +26,10 @@ NSString * const CURR_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const PREV_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
 int const MIGRATE_STORE         = 0;
 
+// Disable Write-Ahead Logging (by default this is enabled)
+//
+int const DISABLE_WAL           = 1;
+
 NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
 
 // Upgrade the database from the local path copy or GitHub

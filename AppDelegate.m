@@ -69,9 +69,20 @@
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    
-    NSDictionary *migrateOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
 
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:PREV_STORE];
+    
+    NSMutableDictionary *pragmaOptions = [NSMutableDictionary dictionary];
+    
+    if (DISABLE_WAL == 1) {
+        NSLog(@"***** Disabling Write-Ahead Logging (WAL) for %@", storeURL);
+        [pragmaOptions setObject:@"DELETE" forKey:@"journal_mode"];
+        
+    } else {
+        NSLog(@"***** Write-Ahead Loggin remains enabled for %@", storeURL);
+    }
+    
+    NSDictionary *migrateOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, pragmaOptions, NSSQLitePragmasOption, nil];
     
     // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
     if (_persistentStoreCoordinator != nil) {
@@ -83,7 +94,9 @@
     // CURR_STORE and PREV_STORE are defined in GlobalSettings.h
     //
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:PREV_STORE];
+
+
+
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:migrateOptions error:&error]) {
@@ -110,14 +123,18 @@
 - (void)migrateStore {
     
     // grab the current store
+    //
     NSPersistentStore *currentStore = self.persistentStoreCoordinator.persistentStores.lastObject;
     
     // create a new URL
+    //
     NSURL *newStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:CURR_STORE];
+    NSLog(@"Performing migration to %@", newStoreURL);
     
     // setup new options dictionary if necessary
     
-    // migrate current store to new URL
+    // Migrate current store to new URL
+    //
     [self.persistentStoreCoordinator migratePersistentStore:currentStore toURL:newStoreURL options:nil withType:NSSQLiteStoreType error:nil];
 }
 

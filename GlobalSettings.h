@@ -33,6 +33,10 @@ extern NSString * const CURR_STORE;
 extern NSString * const PREV_STORE;
 extern int const MIGRATE_STORE;
 
+// Disable Write-Ahead Logging (by default this is enabled)
+//
+extern int const DISABLE_WAL;
+
 extern NSString * const LOCAL_PATH;
 
 // Upgrade the database from the local path copy or GitHub
