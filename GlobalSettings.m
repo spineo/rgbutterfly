@@ -34,8 +34,6 @@ NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorP
 
 // Upgrade the database from the local path copy or GitHub
 //
-//int const UPDATE_DB         = 1;
-//int const UPDATE_LOCAL_DB   = 0;
 int const FORCE_UPDATE_DB   = 0;
 
 // GitHub related
