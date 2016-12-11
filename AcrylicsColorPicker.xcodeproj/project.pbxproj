@@ -10,7 +10,6 @@
 		2109A0C71DFDDC460076A095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C61DFDDC460076A095 /* ViewController.m */; };
 		2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C91DFDDD6F0076A095 /* AboutViewController.m */; };
 		2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */; };
-		2109A0E01DFDDD6F0076A095 /* AddMixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CD1DFDDD6F0076A095 /* AddMixViewController.m */; };
 		2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CF1DFDDD6F0076A095 /* AssocTableViewController.m */; };
 		2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D11DFDDD6F0076A095 /* DisclaimerViewController.m */; };
 		2109A0E31DFDDD6F0076A095 /* MatchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D31DFDDD6F0076A095 /* MatchTableViewController.m */; };
@@ -120,8 +119,6 @@
 		2109A0C91DFDDD6F0076A095 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Controllers/AboutViewController.m; sourceTree = "<group>"; };
 		2109A0CA1DFDDD6F0076A095 /* AddMixTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMixTableViewController.h; path = Controllers/AddMixTableViewController.h; sourceTree = "<group>"; };
 		2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMixTableViewController.m; path = Controllers/AddMixTableViewController.m; sourceTree = "<group>"; };
-		2109A0CC1DFDDD6F0076A095 /* AddMixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMixViewController.h; path = Controllers/AddMixViewController.h; sourceTree = "<group>"; };
-		2109A0CD1DFDDD6F0076A095 /* AddMixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMixViewController.m; path = Controllers/AddMixViewController.m; sourceTree = "<group>"; };
 		2109A0CE1DFDDD6F0076A095 /* AssocTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocTableViewController.h; path = Controllers/AssocTableViewController.h; sourceTree = "<group>"; };
 		2109A0CF1DFDDD6F0076A095 /* AssocTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocTableViewController.m; path = Controllers/AssocTableViewController.m; sourceTree = "<group>"; };
 		2109A0D01DFDDD6F0076A095 /* DisclaimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisclaimerViewController.h; path = Controllers/DisclaimerViewController.h; sourceTree = "<group>"; };
@@ -339,8 +336,6 @@
 				2109A0C91DFDDD6F0076A095 /* AboutViewController.m */,
 				2109A0CA1DFDDD6F0076A095 /* AddMixTableViewController.h */,
 				2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */,
-				2109A0CC1DFDDD6F0076A095 /* AddMixViewController.h */,
-				2109A0CD1DFDDD6F0076A095 /* AddMixViewController.m */,
 				2109A0CE1DFDDD6F0076A095 /* AssocTableViewController.h */,
 				2109A0CF1DFDDD6F0076A095 /* AssocTableViewController.m */,
 				2109A0D01DFDDD6F0076A095 /* DisclaimerViewController.h */,
@@ -734,7 +729,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2109A0E01DFDDD6F0076A095 /* AddMixViewController.m in Sources */,
 				2192F55D1DEDBD3600AAFE01 /* md5.m in Sources */,
 				21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */,
 				2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */,
