@@ -30,19 +30,29 @@
 		2109A10A1DFDE32C0076A095 /* md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FC1DFDE32C0076A095 /* md5.m */; };
 		2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FE1DFDE32C0076A095 /* PickerUtils.m */; };
 		2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1001DFDE32C0076A095 /* StringObjectUtils.m */; };
+		2109A1291DFDE4910076A095 /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A10E1DFDE4910076A095 /* AssociationType+CoreDataProperties.m */; };
+		2109A12A1DFDE4910076A095 /* BodyType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1101DFDE4910076A095 /* BodyType+CoreDataProperties.m */; };
+		2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1121DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m */; };
+		2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1141DFDE4910076A095 /* Keyword+CoreDataProperties.m */; };
+		2109A12D1DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1161DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m */; };
+		2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1181DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m */; };
+		2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A11A1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m */; };
+		2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A11C1DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m */; };
+		2109A1311DFDE4910076A095 /* PaintBrand+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A11E1DFDE4910076A095 /* PaintBrand+CoreDataProperties.m */; };
+		2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1201DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m */; };
+		2109A1331DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1221DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m */; };
+		2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1241DFDE4910076A095 /* PigmentType+CoreDataProperties.m */; };
+		2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1261DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m */; };
+		2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */; };
 		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
 		2133F20E1CE5FA8A00FB91AD /* PaintSwatchSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F20D1CE5FA8A00FB91AD /* PaintSwatchSelection.m */; };
 		2133F2101CFB2DF800FB91AD /* PaintBrand.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2133F20F1CFB2DF800FB91AD /* PaintBrand.txt */; };
-		2133F2151CFB366100FB91AD /* PaintBrand+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F2121CFB366100FB91AD /* PaintBrand+CoreDataProperties.m */; };
 		2133F2161CFB366100FB91AD /* PaintBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F2141CFB366100FB91AD /* PaintBrand.m */; };
 		2133F2181CFB51DD00FB91AD /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2133F2171CFB51DD00FB91AD /* PigmentType.txt */; };
 		2133F21A1CFB521800FB91AD /* BodyType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2133F2191CFB521800FB91AD /* BodyType.txt */; };
-		2133F21F1CFB530600FB91AD /* PigmentType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F21C1CFB530600FB91AD /* PigmentType+CoreDataProperties.m */; };
 		2133F2201CFB530600FB91AD /* PigmentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F21E1CFB530600FB91AD /* PigmentType.m */; };
-		2133F2251CFB532200FB91AD /* BodyType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F2221CFB532200FB91AD /* BodyType+CoreDataProperties.m */; };
 		2133F2261CFB532200FB91AD /* BodyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133F2241CFB532200FB91AD /* BodyType.m */; };
 		2134C8A81C99812300E3E959 /* MatchAlgorithm.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2134C8A71C99812300E3E959 /* MatchAlgorithm.txt */; };
-		2134C8AD1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */; };
 		2134C8AE1C99834500E3E959 /* MatchAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E631C8482E1001C3F05 /* colorwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 21397E621C8482E1001C3F05 /* colorwheel.png */; };
@@ -60,11 +70,8 @@
 		21397EB51C848551001C3F05 /* MixAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EA81C848551001C3F05 /* MixAssociation.m */; };
 		21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAA1C848551001C3F05 /* MixAssocSwatch.m */; };
 		21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAC1C848551001C3F05 /* PaintSwatches.m */; };
-		21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */; };
 		21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EB01C848551001C3F05 /* PaintSwatchType.m */; };
-		21397EBA1C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */; };
 		21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */; };
-		21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */; };
 		21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC01C8485B6001C3F05 /* SwatchKeyword.m */; };
 		21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC41C8485B6001C3F05 /* TapAreaKeyword.m */; };
 		21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397EC61C8485B6001C3F05 /* TapAreaSwatch.m */; };
@@ -74,23 +81,16 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
-		214430E51CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430DE1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m */; };
 		214430E61CB1A19B0014AABD /* MatchAssocKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E01CB1A19B0014AABD /* MatchAssocKeyword.m */; };
-		214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E21CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m */; };
 		214430E81CB1A19B0014AABD /* MixAssocKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430E41CB1A19B0014AABD /* MixAssocKeyword.m */; };
-		214430ED1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430EA1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m */; };
 		214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */ = {isa = PBXBuildFile; fileRef = 214430EC1CB1A2AE0014AABD /* Keyword.m */; };
 		2174C58F1D79B1610093E48F /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2174C58E1D79B1610093E48F /* CanvasCoverage.txt */; };
 		2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */; };
-		2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
-		21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */; };
 		21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */; };
-		21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */; };
 		21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A69CD01C8DAFB600B70810 /* TapArea.m */; };
 		21CBAEC01DA6757100E0C6BF /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */; };
 		21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */; };
-		21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
 /* End PBXBuildFile section */
@@ -159,6 +159,34 @@
 		2109A0FE1DFDE32C0076A095 /* PickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PickerUtils.m; path = Utilities/PickerUtils.m; sourceTree = "<group>"; };
 		2109A0FF1DFDE32C0076A095 /* StringObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringObjectUtils.h; path = Utilities/StringObjectUtils.h; sourceTree = "<group>"; };
 		2109A1001DFDE32C0076A095 /* StringObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringObjectUtils.m; path = Utilities/StringObjectUtils.m; sourceTree = "<group>"; };
+		2109A10D1DFDE4910076A095 /* AssociationType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssociationType+CoreDataProperties.h"; path = "ManagedObject/AssociationType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A10E1DFDE4910076A095 /* AssociationType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssociationType+CoreDataProperties.m"; path = "ManagedObject/AssociationType+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A10F1DFDE4910076A095 /* BodyType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BodyType+CoreDataProperties.h"; path = "ManagedObject/BodyType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1101DFDE4910076A095 /* BodyType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BodyType+CoreDataProperties.m"; path = "ManagedObject/BodyType+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1111DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CanvasCoverage+CoreDataProperties.h"; path = "ManagedObject/CanvasCoverage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1121DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CanvasCoverage+CoreDataProperties.m"; path = "ManagedObject/CanvasCoverage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1131DFDE4910076A095 /* Keyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Keyword+CoreDataProperties.h"; path = "ManagedObject/Keyword+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1141DFDE4910076A095 /* Keyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Keyword+CoreDataProperties.m"; path = "ManagedObject/Keyword+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1151DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MatchAlgorithm+CoreDataProperties.h"; path = "ManagedObject/MatchAlgorithm+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1161DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MatchAlgorithm+CoreDataProperties.m"; path = "ManagedObject/MatchAlgorithm+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1171DFDE4910076A095 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MatchAssociations+CoreDataProperties.h"; path = "ManagedObject/MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1181DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MatchAssociations+CoreDataProperties.m"; path = "ManagedObject/MatchAssociations+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1191DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MatchAssocKeyword+CoreDataProperties.h"; path = "ManagedObject/MatchAssocKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A11A1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MatchAssocKeyword+CoreDataProperties.m"; path = "ManagedObject/MatchAssocKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A11B1DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MixAssocKeyword+CoreDataProperties.h"; path = "ManagedObject/MixAssocKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A11C1DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MixAssocKeyword+CoreDataProperties.m"; path = "ManagedObject/MixAssocKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A11D1DFDE4910076A095 /* PaintBrand+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PaintBrand+CoreDataProperties.h"; path = "ManagedObject/PaintBrand+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A11E1DFDE4910076A095 /* PaintBrand+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PaintBrand+CoreDataProperties.m"; path = "ManagedObject/PaintBrand+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A11F1DFDE4910076A095 /* PaintSwatches+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PaintSwatches+CoreDataProperties.h"; path = "ManagedObject/PaintSwatches+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1201DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PaintSwatches+CoreDataProperties.m"; path = "ManagedObject/PaintSwatches+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1211DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PaintSwatchType+CoreDataProperties.h"; path = "ManagedObject/PaintSwatchType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1221DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PaintSwatchType+CoreDataProperties.m"; path = "ManagedObject/PaintSwatchType+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1231DFDE4910076A095 /* PigmentType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PigmentType+CoreDataProperties.h"; path = "ManagedObject/PigmentType+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1241DFDE4910076A095 /* PigmentType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PigmentType+CoreDataProperties.m"; path = "ManagedObject/PigmentType+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1251DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SubjectiveColor+CoreDataProperties.h"; path = "ManagedObject/SubjectiveColor+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1261DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SubjectiveColor+CoreDataProperties.m"; path = "ManagedObject/SubjectiveColor+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2109A1271DFDE4910076A095 /* TapArea+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TapArea+CoreDataProperties.h"; path = "ManagedObject/TapArea+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TapArea+CoreDataProperties.m"; path = "ManagedObject/TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcrylicsColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,23 +194,15 @@
 		2133F20C1CE5FA8A00FB91AD /* PaintSwatchSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchSelection.h; sourceTree = "<group>"; };
 		2133F20D1CE5FA8A00FB91AD /* PaintSwatchSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchSelection.m; sourceTree = "<group>"; };
 		2133F20F1CFB2DF800FB91AD /* PaintBrand.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PaintBrand.txt; sourceTree = "<group>"; };
-		2133F2111CFB366100FB91AD /* PaintBrand+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PaintBrand+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2133F2121CFB366100FB91AD /* PaintBrand+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PaintBrand+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2133F2131CFB366100FB91AD /* PaintBrand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintBrand.h; sourceTree = "<group>"; };
 		2133F2141CFB366100FB91AD /* PaintBrand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintBrand.m; sourceTree = "<group>"; };
 		2133F2171CFB51DD00FB91AD /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PigmentType.txt; sourceTree = "<group>"; };
 		2133F2191CFB521800FB91AD /* BodyType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BodyType.txt; sourceTree = "<group>"; };
-		2133F21B1CFB530600FB91AD /* PigmentType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PigmentType+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2133F21C1CFB530600FB91AD /* PigmentType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PigmentType+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2133F21D1CFB530600FB91AD /* PigmentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PigmentType.h; sourceTree = "<group>"; };
 		2133F21E1CFB530600FB91AD /* PigmentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PigmentType.m; sourceTree = "<group>"; };
-		2133F2211CFB532200FB91AD /* BodyType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BodyType+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2133F2221CFB532200FB91AD /* BodyType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BodyType+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2133F2231CFB532200FB91AD /* BodyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyType.h; sourceTree = "<group>"; };
 		2133F2241CFB532200FB91AD /* BodyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyType.m; sourceTree = "<group>"; };
 		2134C8A71C99812300E3E959 /* MatchAlgorithm.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MatchAlgorithm.txt; sourceTree = "<group>"; };
-		2134C8A91C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAlgorithm+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAlgorithm+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2134C8AB1C99834500E3E959 /* MatchAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAlgorithm.h; sourceTree = "<group>"; };
 		2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAlgorithm.m; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
@@ -212,16 +232,10 @@
 		21397EAA1C848551001C3F05 /* MixAssocSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssocSwatch.m; sourceTree = "<group>"; };
 		21397EAB1C848551001C3F05 /* PaintSwatches.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatches.h; sourceTree = "<group>"; };
 		21397EAC1C848551001C3F05 /* PaintSwatches.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatches.m; sourceTree = "<group>"; };
-		21397EAD1C848551001C3F05 /* PaintSwatches+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PaintSwatches+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PaintSwatches+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21397EAF1C848551001C3F05 /* PaintSwatchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaintSwatchType.h; sourceTree = "<group>"; };
 		21397EB01C848551001C3F05 /* PaintSwatchType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaintSwatchType.m; sourceTree = "<group>"; };
-		21397EB11C848551001C3F05 /* PaintSwatchType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PaintSwatchType+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PaintSwatchType+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21397EBB1C8485B6001C3F05 /* SubjectiveColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectiveColor.h; sourceTree = "<group>"; };
 		21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectiveColor.m; sourceTree = "<group>"; };
-		21397EBD1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SubjectiveColor+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SubjectiveColor+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchKeyword.h; sourceTree = "<group>"; };
 		21397EC01C8485B6001C3F05 /* SwatchKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchKeyword.m; sourceTree = "<group>"; };
 		21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapAreaKeyword.h; sourceTree = "<group>"; };
@@ -236,43 +250,29 @@
 		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
-		214430DD1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssocKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
-		214430DE1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAssocKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		214430DF1CB1A19B0014AABD /* MatchAssocKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssocKeyword.h; sourceTree = "<group>"; };
 		214430E01CB1A19B0014AABD /* MatchAssocKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAssocKeyword.m; sourceTree = "<group>"; };
-		214430E11CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MixAssocKeyword+CoreDataProperties.h"; sourceTree = "<group>"; };
-		214430E21CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MixAssocKeyword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		214430E31CB1A19B0014AABD /* MixAssocKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssocKeyword.h; sourceTree = "<group>"; };
 		214430E41CB1A19B0014AABD /* MixAssocKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixAssocKeyword.m; sourceTree = "<group>"; };
-		214430E91CB1A2AE0014AABD /* Keyword+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Keyword+CoreDataProperties.h"; sourceTree = "<group>"; };
-		214430EA1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Keyword+CoreDataProperties.m"; sourceTree = "<group>"; };
 		214430EB1CB1A2AE0014AABD /* Keyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keyword.h; sourceTree = "<group>"; };
 		214430EC1CB1A2AE0014AABD /* Keyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keyword.m; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		2174C58E1D79B1610093E48F /* CanvasCoverage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CanvasCoverage.txt; sourceTree = "<group>"; };
 		2174C5921D79BCC50093E48F /* CanvasCoverage+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CanvasCoverage+CoreDataClass.h"; sourceTree = "<group>"; };
 		2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CanvasCoverage+CoreDataClass.m"; sourceTree = "<group>"; };
-		2174C5941D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CanvasCoverage+CoreDataProperties.h"; sourceTree = "<group>"; };
-		2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CanvasCoverage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
-		21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MatchAssociations+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MatchAssociations+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21A69CC91C8DAD3C00B70810 /* MatchAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchAssociations.h; sourceTree = "<group>"; };
 		21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchAssociations.m; sourceTree = "<group>"; };
-		21A69CCD1C8DAFB600B70810 /* TapArea+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TapArea+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21A69CCF1C8DAFB600B70810 /* TapArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapArea.h; sourceTree = "<group>"; };
 		21A69CD01C8DAFB600B70810 /* TapArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapArea.m; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CBAEBF1DA6756D00E0C6BF /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AssociationType.txt; sourceTree = "<group>"; };
 		21CBAEC11DA6801B00E0C6BF /* AssociationType+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AssociationType+CoreDataClass.h"; sourceTree = "<group>"; };
 		21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssociationType+CoreDataClass.m"; sourceTree = "<group>"; };
-		21CBAEC31DA6801B00E0C6BF /* AssociationType+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AssociationType+CoreDataProperties.h"; sourceTree = "<group>"; };
-		21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssociationType+CoreDataProperties.m"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
@@ -361,48 +361,54 @@
 		2108C5E71C820C9C00DD7B9E /* ManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				2109A10D1DFDE4910076A095 /* AssociationType+CoreDataProperties.h */,
+				2109A10E1DFDE4910076A095 /* AssociationType+CoreDataProperties.m */,
+				2109A10F1DFDE4910076A095 /* BodyType+CoreDataProperties.h */,
+				2109A1101DFDE4910076A095 /* BodyType+CoreDataProperties.m */,
+				2109A1111DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.h */,
+				2109A1121DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m */,
+				2109A1131DFDE4910076A095 /* Keyword+CoreDataProperties.h */,
+				2109A1141DFDE4910076A095 /* Keyword+CoreDataProperties.m */,
+				2109A1151DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.h */,
+				2109A1161DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m */,
+				2109A1171DFDE4910076A095 /* MatchAssociations+CoreDataProperties.h */,
+				2109A1181DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m */,
+				2109A1191DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.h */,
+				2109A11A1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m */,
+				2109A11B1DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.h */,
+				2109A11C1DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m */,
+				2109A11D1DFDE4910076A095 /* PaintBrand+CoreDataProperties.h */,
+				2109A11E1DFDE4910076A095 /* PaintBrand+CoreDataProperties.m */,
+				2109A11F1DFDE4910076A095 /* PaintSwatches+CoreDataProperties.h */,
+				2109A1201DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m */,
+				2109A1211DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.h */,
+				2109A1221DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m */,
+				2109A1231DFDE4910076A095 /* PigmentType+CoreDataProperties.h */,
+				2109A1241DFDE4910076A095 /* PigmentType+CoreDataProperties.m */,
+				2109A1251DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.h */,
+				2109A1261DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m */,
+				2109A1271DFDE4910076A095 /* TapArea+CoreDataProperties.h */,
+				2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */,
 				21CBAEC11DA6801B00E0C6BF /* AssociationType+CoreDataClass.h */,
 				21CBAEC21DA6801B00E0C6BF /* AssociationType+CoreDataClass.m */,
-				21CBAEC31DA6801B00E0C6BF /* AssociationType+CoreDataProperties.h */,
-				21CBAEC41DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m */,
 				2174C5921D79BCC50093E48F /* CanvasCoverage+CoreDataClass.h */,
 				2174C5931D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m */,
-				2174C5941D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.h */,
-				2174C5951D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m */,
-				2133F2211CFB532200FB91AD /* BodyType+CoreDataProperties.h */,
-				2133F2221CFB532200FB91AD /* BodyType+CoreDataProperties.m */,
 				2133F2231CFB532200FB91AD /* BodyType.h */,
 				2133F2241CFB532200FB91AD /* BodyType.m */,
-				2133F21B1CFB530600FB91AD /* PigmentType+CoreDataProperties.h */,
-				2133F21C1CFB530600FB91AD /* PigmentType+CoreDataProperties.m */,
 				2133F21D1CFB530600FB91AD /* PigmentType.h */,
 				2133F21E1CFB530600FB91AD /* PigmentType.m */,
-				2133F2111CFB366100FB91AD /* PaintBrand+CoreDataProperties.h */,
-				2133F2121CFB366100FB91AD /* PaintBrand+CoreDataProperties.m */,
 				2133F2131CFB366100FB91AD /* PaintBrand.h */,
 				2133F2141CFB366100FB91AD /* PaintBrand.m */,
-				214430E91CB1A2AE0014AABD /* Keyword+CoreDataProperties.h */,
-				214430EA1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m */,
 				214430EB1CB1A2AE0014AABD /* Keyword.h */,
 				214430EC1CB1A2AE0014AABD /* Keyword.m */,
-				214430DD1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.h */,
-				214430DE1CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m */,
 				214430DF1CB1A19B0014AABD /* MatchAssocKeyword.h */,
 				214430E01CB1A19B0014AABD /* MatchAssocKeyword.m */,
-				214430E11CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.h */,
-				214430E21CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m */,
 				214430E31CB1A19B0014AABD /* MixAssocKeyword.h */,
 				214430E41CB1A19B0014AABD /* MixAssocKeyword.m */,
-				2134C8A91C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.h */,
-				2134C8AA1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m */,
 				2134C8AB1C99834500E3E959 /* MatchAlgorithm.h */,
 				2134C8AC1C99834500E3E959 /* MatchAlgorithm.m */,
-				21A69CCD1C8DAFB600B70810 /* TapArea+CoreDataProperties.h */,
-				21A69CCE1C8DAFB600B70810 /* TapArea+CoreDataProperties.m */,
 				21A69CCF1C8DAFB600B70810 /* TapArea.h */,
 				21A69CD01C8DAFB600B70810 /* TapArea.m */,
-				21A69CC71C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.h */,
-				21A69CC81C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m */,
 				21A69CC91C8DAD3C00B70810 /* MatchAssociations.h */,
 				21A69CCA1C8DAD3C00B70810 /* MatchAssociations.m */,
 				21397EA71C848551001C3F05 /* MixAssociation.h */,
@@ -411,16 +417,10 @@
 				21397EAA1C848551001C3F05 /* MixAssocSwatch.m */,
 				21397EAB1C848551001C3F05 /* PaintSwatches.h */,
 				21397EAC1C848551001C3F05 /* PaintSwatches.m */,
-				21397EAD1C848551001C3F05 /* PaintSwatches+CoreDataProperties.h */,
-				21397EAE1C848551001C3F05 /* PaintSwatches+CoreDataProperties.m */,
 				21397EAF1C848551001C3F05 /* PaintSwatchType.h */,
 				21397EB01C848551001C3F05 /* PaintSwatchType.m */,
-				21397EB11C848551001C3F05 /* PaintSwatchType+CoreDataProperties.h */,
-				21397EB21C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m */,
 				21397EBB1C8485B6001C3F05 /* SubjectiveColor.h */,
 				21397EBC1C8485B6001C3F05 /* SubjectiveColor.m */,
-				21397EBD1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.h */,
-				21397EBE1C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m */,
 				21397EBF1C8485B6001C3F05 /* SwatchKeyword.h */,
 				21397EC01C8485B6001C3F05 /* SwatchKeyword.m */,
 				21397EC31C8485B6001C3F05 /* TapAreaKeyword.h */,
@@ -732,68 +732,68 @@
 				2109A10A1DFDE32C0076A095 /* md5.m in Sources */,
 				21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */,
 				2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */,
-				2134C8AD1C99834500E3E959 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
+				2109A12A1DFDE4910076A095 /* BodyType+CoreDataProperties.m in Sources */,
+				2109A1291DFDE4910076A095 /* AssociationType+CoreDataProperties.m in Sources */,
 				2109A1031DFDE32C0076A095 /* BarButtonUtils.m in Sources */,
 				2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */,
 				2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */,
 				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,
 				21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */,
-				2133F2251CFB532200FB91AD /* BodyType+CoreDataProperties.m in Sources */,
 				2109A0E31DFDDD6F0076A095 /* MatchTableViewController.m in Sources */,
 				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
 				214430E81CB1A19B0014AABD /* MixAssocKeyword.m in Sources */,
+				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				2109A1011DFDE32C0076A095 /* ACPString.m in Sources */,
+				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				21397EB61C848551001C3F05 /* MixAssocSwatch.m in Sources */,
 				2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */,
 				21397E661C848308001C3F05 /* MatchAlgorithms.m in Sources */,
 				2133F2201CFB530600FB91AD /* PigmentType.m in Sources */,
+				2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21A69CCC1C8DAD3C00B70810 /* MatchAssociations.m in Sources */,
 				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
 				2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */,
 				21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */,
 				21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */,
-				21A69CCB1C8DAD3C00B70810 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */,
 				2133F20E1CE5FA8A00FB91AD /* PaintSwatchSelection.m in Sources */,
 				2134C8AE1C99834500E3E959 /* MatchAlgorithm.m in Sources */,
-				21397EB81C848551001C3F05 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
+				2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */,
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
+				2109A1331DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m in Sources */,
 				2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */,
 				21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */,
-				21397EC81C8485B6001C3F05 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
+				2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				2133F2161CFB366100FB91AD /* PaintBrand.m in Sources */,
+				2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21397ECC1C8485B6001C3F05 /* TapAreaSwatch.m in Sources */,
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
 				214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */,
+				2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
+				2109A1311DFDE4910076A095 /* PaintBrand+CoreDataProperties.m in Sources */,
 				2109A0E71DFDDD6F0076A095 /* UIImageViewController.m in Sources */,
+				2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */,
 				2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */,
+				2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */,
 				2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */,
 				2109A0E41DFDDD6F0076A095 /* PickerViewController.m in Sources */,
-				214430E71CB1A19B0014AABD /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
-				2174C5981D79BCC50093E48F /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2133F2261CFB532200FB91AD /* BodyType.m in Sources */,
-				21A69CD11C8DAFB600B70810 /* TapArea+CoreDataProperties.m in Sources */,
 				2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */,
 				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
-				214430E51CB1A19B0014AABD /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				214430E61CB1A19B0014AABD /* MatchAssocKeyword.m in Sources */,
-				21397EBA1C848551001C3F05 /* PaintSwatchType+CoreDataProperties.m in Sources */,
 				2109A1051DFDE32C0076A095 /* FieldUtils.m in Sources */,
 				2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */,
-				214430ED1CB1A2AE0014AABD /* Keyword+CoreDataProperties.m in Sources */,
 				2109A1081DFDE32C0076A095 /* HTTPUtils.m in Sources */,
-				2133F21F1CFB530600FB91AD /* PigmentType+CoreDataProperties.m in Sources */,
 				2109A1061DFDE32C0076A095 /* FileUtils.m in Sources */,
-				21CBAEC61DA6801B00E0C6BF /* AssociationType+CoreDataProperties.m in Sources */,
 				2174C5971D79BCC50093E48F /* CanvasCoverage+CoreDataClass.m in Sources */,
-				2133F2151CFB366100FB91AD /* PaintBrand+CoreDataProperties.m in Sources */,
+				2109A12D1DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				21A69CD21C8DAFB600B70810 /* TapArea.m in Sources */,
 				2109A0C71DFDDC460076A095 /* ViewController.m in Sources */,
 				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
