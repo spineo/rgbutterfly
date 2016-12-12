@@ -15,6 +15,9 @@
 		21064FD61DFEDA77004B0830 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */; };
 		21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCF1DFEDA77004B0830 /* PigmentType.txt */; };
 		21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */; };
+		21064FDF1DFEDB03004B0830 /* AssocCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */; };
+		21064FE01DFEDB03004B0830 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */; };
+		21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */; };
 		2109A0C71DFDDC460076A095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C61DFDDC460076A095 /* ViewController.m */; };
 		2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C91DFDDD6F0076A095 /* AboutViewController.m */; };
 		2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */; };
@@ -63,9 +66,6 @@
 		21397E631C8482E1001C3F05 /* colorwheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 21397E621C8482E1001C3F05 /* colorwheel.png */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
-		21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */; };
-		21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */; };
-		21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E711C848370001C3F05 /* AssocTableViewCell.m */; };
 		21397E791C84839E001C3F05 /* ACPMixAssociationsDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */; };
 		21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7C1C8483C6001C3F05 /* MixAssociations.m */; };
 		21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E7F1C8483DF001C3F05 /* PaintSwatchesDiff.m */; };
@@ -121,6 +121,12 @@
 		21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/PaintSwatchType.txt; sourceTree = "<group>"; };
 		21064FCF1DFEDA77004B0830 /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/PigmentType.txt; sourceTree = "<group>"; };
 		21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/SubjectiveColor.txt; sourceTree = "<group>"; };
+		21064FD91DFEDB03004B0830 /* AssocCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocCollectionTableViewCell.h; path = Custom/AssocCollectionTableViewCell.h; sourceTree = "<group>"; };
+		21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocCollectionTableViewCell.m; path = Custom/AssocCollectionTableViewCell.m; sourceTree = "<group>"; };
+		21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocDescTableViewCell.h; path = Custom/AssocDescTableViewCell.h; sourceTree = "<group>"; };
+		21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocDescTableViewCell.m; path = Custom/AssocDescTableViewCell.m; sourceTree = "<group>"; };
+		21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocTableViewCell.h; path = Custom/AssocTableViewCell.h; sourceTree = "<group>"; };
+		21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocTableViewCell.m; path = Custom/AssocTableViewCell.m; sourceTree = "<group>"; };
 		2109A0C51DFDDC460076A095 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Controllers/ViewController.h; sourceTree = "<group>"; };
 		2109A0C61DFDDC460076A095 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Controllers/ViewController.m; sourceTree = "<group>"; };
 		2109A0C81DFDDD6F0076A095 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Controllers/AboutViewController.h; sourceTree = "<group>"; };
@@ -216,12 +222,6 @@
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		21397E6A1C84833D001C3F05 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		21397E6C1C848370001C3F05 /* AssocCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocCollectionTableViewCell.h; sourceTree = "<group>"; };
-		21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocCollectionTableViewCell.m; sourceTree = "<group>"; };
-		21397E6E1C848370001C3F05 /* AssocDescTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocDescTableViewCell.h; sourceTree = "<group>"; };
-		21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocDescTableViewCell.m; sourceTree = "<group>"; };
-		21397E701C848370001C3F05 /* AssocTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssocTableViewCell.h; sourceTree = "<group>"; };
-		21397E711C848370001C3F05 /* AssocTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssocTableViewCell.m; sourceTree = "<group>"; };
 		21397E751C84839E001C3F05 /* ACPMixAssociationsDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACPMixAssociationsDesc.h; sourceTree = "<group>"; };
 		21397E761C84839E001C3F05 /* ACPMixAssociationsDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACPMixAssociationsDesc.m; sourceTree = "<group>"; };
 		21397E7B1C8483C6001C3F05 /* MixAssociations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixAssociations.h; sourceTree = "<group>"; };
@@ -495,12 +495,12 @@
 		2108C5EB1C820DA400DD7B9E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				21397E6C1C848370001C3F05 /* AssocCollectionTableViewCell.h */,
-				21397E6D1C848370001C3F05 /* AssocCollectionTableViewCell.m */,
-				21397E6E1C848370001C3F05 /* AssocDescTableViewCell.h */,
-				21397E6F1C848370001C3F05 /* AssocDescTableViewCell.m */,
-				21397E701C848370001C3F05 /* AssocTableViewCell.h */,
-				21397E711C848370001C3F05 /* AssocTableViewCell.m */,
+				21064FD91DFEDB03004B0830 /* AssocCollectionTableViewCell.h */,
+				21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */,
+				21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */,
+				21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */,
+				21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */,
+				21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -737,7 +737,6 @@
 				2109A1031DFDE32C0076A095 /* BarButtonUtils.m in Sources */,
 				2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */,
 				2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */,
-				21397E721C848370001C3F05 /* AssocCollectionTableViewCell.m in Sources */,
 				21397EC91C8485B6001C3F05 /* SwatchKeyword.m in Sources */,
 				2109A0E31DFDDD6F0076A095 /* MatchTableViewController.m in Sources */,
 				21397EC71C8485B6001C3F05 /* SubjectiveColor.m in Sources */,
@@ -753,11 +752,11 @@
 				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
 				2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */,
 				21397EB91C848551001C3F05 /* PaintSwatchType.m in Sources */,
-				21397E741C848370001C3F05 /* AssocTableViewCell.m in Sources */,
 				21397ECB1C8485B6001C3F05 /* TapAreaKeyword.m in Sources */,
 				2133F20E1CE5FA8A00FB91AD /* PaintSwatchSelection.m in Sources */,
 				2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */,
 				2134C8AE1C99834500E3E959 /* MatchAlgorithm.m in Sources */,
+				21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */,
 				21397EB51C848551001C3F05 /* MixAssociation.m in Sources */,
 				2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */,
 				21397EB71C848551001C3F05 /* PaintSwatches.m in Sources */,
@@ -765,6 +764,7 @@
 				2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */,
 				21CBAEC51DA6801B00E0C6BF /* AssociationType+CoreDataClass.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
+				21064FE01DFEDB03004B0830 /* AssocDescTableViewCell.m in Sources */,
 				2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				2133F2161CFB366100FB91AD /* PaintBrand.m in Sources */,
 				2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */,
@@ -772,6 +772,7 @@
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				21397E801C8483DF001C3F05 /* PaintSwatchesDiff.m in Sources */,
+				21064FDF1DFEDB03004B0830 /* AssocCollectionTableViewCell.m in Sources */,
 				214430EE1CB1A2AE0014AABD /* Keyword.m in Sources */,
 				2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
@@ -786,7 +787,6 @@
 				21397E7D1C8483C6001C3F05 /* MixAssociations.m in Sources */,
 				2133F2261CFB532200FB91AD /* BodyType.m in Sources */,
 				2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */,
-				21397E731C848370001C3F05 /* AssocDescTableViewCell.m in Sources */,
 				214430E61CB1A19B0014AABD /* MatchAssocKeyword.m in Sources */,
 				2109A1051DFDE32C0076A095 /* FieldUtils.m in Sources */,
 				2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */,
