@@ -18,10 +18,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
-@property (nonatomic, strong) UISwitch *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
-@property (nonatomic) BOOL editFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UISwitch *dbUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
+@property (nonatomic) BOOL editFlag, dbUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbUpdateText, *dbUpdateOnText, *dbUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -45,38 +45,41 @@
 @implementation SettingsTableViewController
 
 
-// Section 1: READ-ONLY Settings
-//
 const int ABOUT_SECTION           = 0;
 const int ABOUT_ROW               = 0;
 const int DISCLAIMER_ROW          = 1;
 const int FEEDBACK_ROW            = 2;
 const int ABOUT_ROWS              = 3;
 
-const int READ_ONLY_SETTINGS      = 1;
+const int DB_UPDATE_SETTINGS      = 1;
+const int POLL_DB_UPDATE_ROW      = 0;
+const int FORCE_DB_UPDATE_ROW     = 1;
+const int DB_UPDATE_SETTINGS_ROWS = 2;
+
+const int READ_ONLY_SETTINGS      = 2;
 const int PSWATCH_READ_ONLY_ROW   = 0;
 const int MIXASSOC_READ_ONLY_ROW  = 1;
 const int READ_ONLY_SETTINGS_ROWS = 2;
 
-const int TAP_AREA_SETTINGS       = 2;
+const int TAP_AREA_SETTINGS       = 3;
 const int TAP_AREA_ROWS           = 1;
 
-const int MATCH_NUM_SETTINGS      = 3;
+const int MATCH_NUM_SETTINGS      = 4;
 const int MATCH_NUM_ROWS          = 1;
 
-const int RGB_DISPLAY_SETTINGS    = 4;
+const int RGB_DISPLAY_SETTINGS    = 5;
 const int RGB_DISPLAY_ROWS        = 1;
 
-const int MIX_RATIOS_SETTINGS     = 5;
+const int MIX_RATIOS_SETTINGS     = 6;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int MIX_ASSOC_SETTINGS      = 6;
+const int MIX_ASSOC_SETTINGS      = 7;
 const int MIX_ASSOC_ROWS          = 1;
 
-const int ALERTS_SETTINGS         = 7;
+const int ALERTS_SETTINGS         = 8;
 const int ALERTS_ROWS             = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 8;
+const int SETTINGS_MAX_SECTIONS   = 9;
 
 
 - (void)viewDidLoad {
@@ -109,9 +112,50 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     _feedbackLabel = [FieldUtils createLabel:@"Provide Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_feedbackLabel setFont:LG_TABLE_CELL_FONT];
 
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // DBUpdate Rows
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _dbUpdateText = @"db_update_text";
+    
+    _dbUpdateOnText  = @"Perform Check for Database Update";
+    _dbUpdateOffText = @"Do Not Check for Database Update";
+    
+    if([_userDefaults boolForKey:DB_UPDATE_KEY] && [_userDefaults stringForKey:_dbUpdateOnText]) {
+        _dbUpdateFlag = TRUE;
+        _labelText = _dbUpdateOnText;
+        
+        [_userDefaults setBool:_dbUpdateOnText forKey:DB_UPDATE_KEY];
+        [_userDefaults setValue:_labelText forKey:_dbUpdateText];
+        
+    } else {
+        _dbUpdateFlag = [_userDefaults boolForKey:DB_UPDATE_KEY];
+        _labelText = [_userDefaults stringForKey:_dbUpdateText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _dbUpdateSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _dbUpdateSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_dbUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_dbUpdateSwitch setOn:_dbUpdateFlag];
+    
+    // Add the switch target
+    //
+    [_dbUpdateSwitch addTarget:self action:@selector(setDBUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _dbUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    CGFloat labelWidth = _dbUpdateLabel.bounds.size.width;
+    CGFloat labelHeight = _dbUpdateLabel.bounds.size.height;
+    CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_dbUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Swatches Read-Only Row
+    // Swatches Read-Only Rows
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
@@ -147,9 +191,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     [_psReadOnlySwitch addTarget:self action:@selector(setPSSwitchState:) forControlEvents:UIControlEventValueChanged];
     
     _psReadOnlyLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth = _psReadOnlyLabel.bounds.size.width;
-    CGFloat labelHeight = _psReadOnlyLabel.bounds.size.height;
-    CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    labelWidth = _psReadOnlyLabel.bounds.size.width;
+    labelHeight = _psReadOnlyLabel.bounds.size.height;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [_psReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
     
@@ -553,6 +597,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     if (section == ABOUT_SECTION) {
         return ABOUT_ROWS;
         
+    } else if (section == DB_UPDATE_SETTINGS) {
+        return DB_UPDATE_SETTINGS_ROWS;
+        
     } else if (section == READ_ONLY_SETTINGS) {
         return READ_ONLY_SETTINGS_ROWS;
         
@@ -604,6 +651,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     if (section == ABOUT_SECTION) {
         headerStr = @"About & Feedback";
         
+    } else if (section == DB_UPDATE_SETTINGS) {
+        headerStr = @"Database Update Settings";
+
     } else if (section == READ_ONLY_SETTINGS) {
         headerStr = @"Read-Only Settings";
         
@@ -735,10 +785,15 @@ heightForFooterInSection:(NSInteger)section {
             [cell.contentView addSubview:_feedbackLabel];
         }
         
+    } else if (indexPath.section == DB_UPDATE_SETTINGS) {
+
+        if (indexPath.row == POLL_DB_UPDATE_ROW) {
+            [cell.contentView addSubview:_dbUpdateSwitch];
+            [cell.contentView addSubview:_dbUpdateLabel];
+        }
+        
     } else if (indexPath.section == READ_ONLY_SETTINGS) {
     
-        // Name, and reference type
-        //
         if (indexPath.row == PSWATCH_READ_ONLY_ROW) {
             [cell.contentView addSubview:_psReadOnlySwitch];
             [cell.contentView addSubview:_psReadOnlyLabel];
@@ -926,6 +981,18 @@ heightForFooterInSection:(NSInteger)section {
     [_mixRatiosTextView resignFirstResponder];
 }
 
+- (void)setDBUpdateSwitchState:(id)sender {
+    _dbUpdateFlag = [sender isOn];
+    
+    if (_dbUpdateFlag == TRUE) {
+        [_dbUpdateLabel setText:_dbUpdateOnText];
+        
+    } else {
+        [_dbUpdateLabel setText:_dbUpdateOffText];
+    }
+    [self saveEnable:TRUE];
+}
+
 - (void)setPSSwitchState:(id)sender {
     _swatchesReadOnly = [sender isOn];
 
@@ -1052,6 +1119,11 @@ heightForFooterInSection:(NSInteger)section {
         }
 
         if (! saveError) {
+            // DB Update Settings
+            //
+            [_userDefaults setBool:_dbUpdateFlag forKey:DB_UPDATE_KEY];
+            [_userDefaults setValue:[_dbUpdateLabel text] forKey:_dbUpdateOnText];
+            
             // Read-Only Settings
             //
             [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];

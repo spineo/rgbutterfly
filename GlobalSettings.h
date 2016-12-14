@@ -261,6 +261,7 @@ extern NSString * const MIX_TYPE;
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+extern NSString * const DB_UPDATE_KEY;
 extern NSString * const PAINT_SWATCH_RO_KEY;
 extern NSString * const MIX_ASSOC_RO_KEY;
 extern NSString * const TAP_AREA_SIZE_KEY;
