@@ -147,11 +147,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_dbPollUpdateSwitch addTarget:self action:@selector(setDbPollUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _dbPollUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth = _dbPollUpdateLabel.bounds.size.width;
-    CGFloat labelHeight = _dbPollUpdateLabel.bounds.size.height;
-    CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_dbPollUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    _dbPollUpdateLabel   = [self createSwitchLabel:_labelText];
+
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Force DB Update Rows
@@ -187,11 +184,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_dbForceUpdateSwitch addTarget:self action:@selector(setDbForceUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _dbForceUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _dbForceUpdateLabel.bounds.size.width;
-    labelHeight = _dbForceUpdateLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_dbForceUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    _dbForceUpdateLabel   = [self createSwitchLabel:_labelText];
+
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Swatches Read-Only Rows
@@ -229,11 +223,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_psReadOnlySwitch addTarget:self action:@selector(setPSSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _psReadOnlyLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _psReadOnlyLabel.bounds.size.width;
-    labelHeight = _psReadOnlyLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_psReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    _psReadOnlyLabel   = [self createSwitchLabel:_labelText];
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -273,13 +263,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_maReadOnlySwitch addTarget:self action:@selector(setMASwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _maReadOnlyLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _maReadOnlyLabel.bounds.size.width;
-    labelHeight = _maReadOnlyLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_maReadOnlyLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
-    
-    
+    _maReadOnlyLabel   = [self createSwitchLabel:_labelText];
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Tap Area Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -436,11 +421,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_rgbDisplayButton addTarget:self action:@selector(setRGBDisplayState) forControlEvents:UIControlEventTouchUpInside];
     
-    _rgbDisplayLabel   = [FieldUtils createLabel:_rgbDisplayText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _rgbDisplayLabel.bounds.size.width;
-    labelHeight = _rgbDisplayLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_rgbDisplayLabel  setFrame:CGRectMake(cellHeight + DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, labelYOffset, labelWidth, labelHeight)];
+    _rgbDisplayLabel   = [self createSwitchLabel:_rgbDisplayText];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Mix Ratios Row
@@ -522,11 +503,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_alertsFilterSwitch addTarget:self action:@selector(setAlertsFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _alertsFilterLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _alertsFilterLabel.bounds.size.width;
-    labelHeight = _alertsFilterLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_alertsFilterLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    _alertsFilterLabel   = [self createSwitchLabel:_labelText];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -566,13 +543,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_mixAssocCountSwitch addTarget:self action:@selector(setMixAssocCountSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _mixAssocCountLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    labelWidth = _mixAssocCountLabel.bounds.size.width;
-    labelHeight = _mixAssocCountLabel.bounds.size.height;
-    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_mixAssocCountLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    _mixAssocCountLabel   = [self createSwitchLabel:_labelText];
 
-    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // New Brands Settings
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1029,9 +1001,11 @@ heightForFooterInSection:(NSInteger)section {
     
     if (_dbPollUpdateFlag == TRUE) {
         [_dbPollUpdateLabel setText:_dbPollUpdateOnText];
+        //_dbPollUpdateLabel = [self createSwitchLabel:_dbPollUpdateOnText];
         
     } else {
         [_dbPollUpdateLabel setText:_dbPollUpdateOffText];
+        //_dbPollUpdateLabel = [self createSwitchLabel:_dbPollUpdateOffText];
     }
     [self saveEnable:TRUE];
 }
@@ -1283,6 +1257,24 @@ heightForFooterInSection:(NSInteger)section {
     //[BarButtonUtils buttonEnabled:self.navigationItem.rightBarButtonItem refTag:SAVE_BTN_TAG isEnabled:saveFlag];
     [self.navigationItem.rightBarButtonItem setEnabled:saveFlag];
 }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Generic Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Generic Methods
+
+- (UILabel *)createSwitchLabel:(NSString *)labelText {
+
+    UILabel *switchLabel = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    CGFloat labelWidth   = switchLabel.bounds.size.width;
+    CGFloat labelHeight  = switchLabel.bounds.size.height;
+    CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    [switchLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+
+    return switchLabel;
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Feedback (Email)
