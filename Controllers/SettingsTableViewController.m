@@ -18,10 +18,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
-@property (nonatomic, strong) UISwitch *dbUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
-@property (nonatomic) BOOL editFlag, dbUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbUpdateText, *dbUpdateOnText, *dbUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
+@property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
+@property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -114,46 +114,85 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // DBUpdate Rows
+    // Poll for DB Update Rows
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _dbUpdateText = @"db_update_text";
+    _dbPollUpdateText = @"db_poll_update_text";
     
-    _dbUpdateOnText  = @"Perform Check for Database Update";
-    _dbUpdateOffText = @"Do Not Check for Database Update";
+    _dbPollUpdateOnText  = @"Perform Check for Database Update";
+    _dbPollUpdateOffText = @"Do Not Check for Database Update ";
     
-    if([_userDefaults boolForKey:DB_UPDATE_KEY] && [_userDefaults stringForKey:_dbUpdateOnText]) {
-        _dbUpdateFlag = TRUE;
-        _labelText = _dbUpdateOnText;
+    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] && [_userDefaults stringForKey:_dbPollUpdateOnText]) {
+        _dbPollUpdateFlag = TRUE;
+        _labelText = _dbPollUpdateOnText;
         
-        [_userDefaults setBool:_dbUpdateOnText forKey:DB_UPDATE_KEY];
-        [_userDefaults setValue:_labelText forKey:_dbUpdateText];
+        [_userDefaults setBool:_dbPollUpdateOnText forKey:DB_POLL_UPDATE_KEY];
+        [_userDefaults setValue:_labelText forKey:_dbPollUpdateText];
         
     } else {
-        _dbUpdateFlag = [_userDefaults boolForKey:DB_UPDATE_KEY];
-        _labelText = [_userDefaults stringForKey:_dbUpdateText];
+        _dbPollUpdateFlag = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+        _labelText = [_userDefaults stringForKey:_dbPollUpdateText];
     }
     
     // Create the label and switch, set the last state or default values
     //
-    _dbUpdateSwitch = [[UISwitch alloc] init];
-    _widgetHeight = _dbUpdateSwitch.bounds.size.height;
+    _dbPollUpdateSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _dbPollUpdateSwitch.bounds.size.height;
     _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_dbUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
-    [_dbUpdateSwitch setOn:_dbUpdateFlag];
+    [_dbPollUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_dbPollUpdateSwitch setOn:_dbPollUpdateFlag];
     
     // Add the switch target
     //
-    [_dbUpdateSwitch addTarget:self action:@selector(setDBUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
+    [_dbPollUpdateSwitch addTarget:self action:@selector(setDbPollUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _dbUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth = _dbUpdateLabel.bounds.size.width;
-    CGFloat labelHeight = _dbUpdateLabel.bounds.size.height;
+    _dbPollUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    CGFloat labelWidth = _dbPollUpdateLabel.bounds.size.width;
+    CGFloat labelHeight = _dbPollUpdateLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_dbUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    [_dbPollUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
-
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Force DB Update Rows
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _dbForceUpdateText = @"db_force_update_text";
+    
+    _dbForceUpdateOnText  = @"Update Even if Versions are Unchanged ";
+    _dbForceUpdateOffText = @"Do Not Perform a Force Database Update";
+    
+    if(![_userDefaults boolForKey:DB_FORCE_UPDATE_KEY] || [_userDefaults stringForKey:_dbForceUpdateOffText]) {
+        _dbForceUpdateFlag = FALSE;
+        _labelText = _dbForceUpdateOffText;
+        
+        [_userDefaults setBool:_dbForceUpdateOffText forKey:DB_FORCE_UPDATE_KEY];
+        [_userDefaults setValue:_labelText forKey:_dbForceUpdateText];
+        
+    } else {
+        _dbForceUpdateFlag = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
+        _labelText = [_userDefaults stringForKey:_dbForceUpdateText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _dbForceUpdateSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _dbForceUpdateSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_dbForceUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_dbForceUpdateSwitch setOn:_dbForceUpdateFlag];
+    
+    // Add the switch target
+    //
+    [_dbForceUpdateSwitch addTarget:self action:@selector(setDbForceUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _dbForceUpdateLabel   = [FieldUtils createLabel:_labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    labelWidth = _dbForceUpdateLabel.bounds.size.width;
+    labelHeight = _dbForceUpdateLabel.bounds.size.height;
+    labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_dbForceUpdateLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Swatches Read-Only Rows
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -161,7 +200,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     _psReadOnlyText = @"swatches_read_only_text";
     
-    _psMakeReadOnlyLabel  = @"Paint Swatches set to Read-Only";
+    _psMakeReadOnlyLabel  = @"Paint Swatches set to Read-Only ";
     _psMakeReadWriteLabel = @"Paint Swatches set to Read/Write";
     
     if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
@@ -204,7 +243,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     _maReadOnlyText = @"assoc_read_only_text";
     
-    _maMakeReadOnlyLabel  = @"Mix Associations set to Read-Only";
+    _maMakeReadOnlyLabel  = @"Mix Associations set to Read-Only ";
     _maMakeReadWriteLabel = @"Mix Associations set to Read/Write";
     
     _labelText = @"";
@@ -788,8 +827,12 @@ heightForFooterInSection:(NSInteger)section {
     } else if (indexPath.section == DB_UPDATE_SETTINGS) {
 
         if (indexPath.row == POLL_DB_UPDATE_ROW) {
-            [cell.contentView addSubview:_dbUpdateSwitch];
-            [cell.contentView addSubview:_dbUpdateLabel];
+            [cell.contentView addSubview:_dbPollUpdateSwitch];
+            [cell.contentView addSubview:_dbPollUpdateLabel];
+            
+        } else if (indexPath.row == FORCE_DB_UPDATE_ROW) {
+            [cell.contentView addSubview:_dbForceUpdateSwitch];
+            [cell.contentView addSubview:_dbForceUpdateLabel];
         }
         
     } else if (indexPath.section == READ_ONLY_SETTINGS) {
@@ -981,14 +1024,26 @@ heightForFooterInSection:(NSInteger)section {
     [_mixRatiosTextView resignFirstResponder];
 }
 
-- (void)setDBUpdateSwitchState:(id)sender {
-    _dbUpdateFlag = [sender isOn];
+- (void)setDbPollUpdateSwitchState:(id)sender {
+    _dbPollUpdateFlag = [sender isOn];
     
-    if (_dbUpdateFlag == TRUE) {
-        [_dbUpdateLabel setText:_dbUpdateOnText];
+    if (_dbPollUpdateFlag == TRUE) {
+        [_dbPollUpdateLabel setText:_dbPollUpdateOnText];
         
     } else {
-        [_dbUpdateLabel setText:_dbUpdateOffText];
+        [_dbPollUpdateLabel setText:_dbPollUpdateOffText];
+    }
+    [self saveEnable:TRUE];
+}
+
+- (void)setDbForceUpdateSwitchState:(id)sender {
+    _dbForceUpdateFlag = [sender isOn];
+    
+    if (_dbForceUpdateFlag == TRUE) {
+        [_dbForceUpdateLabel setText:_dbForceUpdateOnText];
+        
+    } else {
+        [_dbForceUpdateLabel setText:_dbForceUpdateOffText];
     }
     [self saveEnable:TRUE];
 }
@@ -1121,8 +1176,11 @@ heightForFooterInSection:(NSInteger)section {
         if (! saveError) {
             // DB Update Settings
             //
-            [_userDefaults setBool:_dbUpdateFlag forKey:DB_UPDATE_KEY];
-            [_userDefaults setValue:[_dbUpdateLabel text] forKey:_dbUpdateOnText];
+            [_userDefaults setBool:_dbPollUpdateFlag forKey:DB_POLL_UPDATE_KEY];
+            [_userDefaults setValue:[_dbPollUpdateLabel text] forKey:_dbPollUpdateText];
+            
+            [_userDefaults setBool:_dbForceUpdateFlag forKey:DB_FORCE_UPDATE_KEY];
+            [_userDefaults setValue:[_dbForceUpdateLabel text] forKey:_dbForceUpdateText];
             
             // Read-Only Settings
             //

@@ -240,7 +240,8 @@ NSString * const MIX_TYPE       = @"Mix";
 // NSUserDefaults Keys
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-NSString * const DB_UPDATE_KEY       = @"DBUpdates";
+NSString * const DB_POLL_UPDATE_KEY  = @"DBPollUpdate";
+NSString * const DB_FORCE_UPDATE_KEY = @"DBForceUpdate";
 NSString * const PAINT_SWATCH_RO_KEY = @"SwatchesReadOnly";
 NSString * const MIX_ASSOC_RO_KEY    = @"AssocReadOnly";
 NSString * const TAP_AREA_SIZE_KEY   = @"TapAreaSize";
