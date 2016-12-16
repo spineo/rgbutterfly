@@ -147,7 +147,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_dbPollUpdateSwitch addTarget:self action:@selector(setDbPollUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _dbPollUpdateLabel   = [self createSwitchLabel:_labelText];
+    _dbPollUpdateLabel   = [self createWidgetLabel:_labelText];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -184,7 +184,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_dbForceUpdateSwitch addTarget:self action:@selector(setDbForceUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _dbForceUpdateLabel   = [self createSwitchLabel:_labelText];
+    _dbForceUpdateLabel   = [self createWidgetLabel:_labelText];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -223,7 +223,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_psReadOnlySwitch addTarget:self action:@selector(setPSSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _psReadOnlyLabel   = [self createSwitchLabel:_labelText];
+    _psReadOnlyLabel   = [self createWidgetLabel:_labelText];
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -263,7 +263,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_maReadOnlySwitch addTarget:self action:@selector(setMASwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _maReadOnlyLabel   = [self createSwitchLabel:_labelText];
+    _maReadOnlyLabel   = [self createWidgetLabel:_labelText];
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Tap Area Widgets
@@ -421,7 +421,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_rgbDisplayButton addTarget:self action:@selector(setRGBDisplayState) forControlEvents:UIControlEventTouchUpInside];
     
-    _rgbDisplayLabel   = [self createSwitchLabel:_rgbDisplayText];
+    _rgbDisplayLabel   = [self createWidgetLabel:_rgbDisplayText];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Mix Ratios Row
@@ -503,7 +503,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_alertsFilterSwitch addTarget:self action:@selector(setAlertsFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _alertsFilterLabel   = [self createSwitchLabel:_labelText];
+    _alertsFilterLabel   = [self createWidgetLabel:_labelText];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -543,7 +543,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     [_mixAssocCountSwitch addTarget:self action:@selector(setMixAssocCountSwitchState:) forControlEvents:UIControlEventValueChanged];
     
-    _mixAssocCountLabel   = [self createSwitchLabel:_labelText];
+    _mixAssocCountLabel   = [self createWidgetLabel:_labelText];
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // New Brands Settings
@@ -1000,50 +1000,52 @@ heightForFooterInSection:(NSInteger)section {
     _dbPollUpdateFlag = [sender isOn];
     
     if (_dbPollUpdateFlag == TRUE) {
-        [_dbPollUpdateLabel setText:_dbPollUpdateOnText];
-        //_dbPollUpdateLabel = [self createSwitchLabel:_dbPollUpdateOnText];
+        _dbPollUpdateLabel = [self createWidgetLabel:_dbPollUpdateOnText];
         
     } else {
-        [_dbPollUpdateLabel setText:_dbPollUpdateOffText];
-        //_dbPollUpdateLabel = [self createSwitchLabel:_dbPollUpdateOffText];
+        _dbPollUpdateLabel = [self createWidgetLabel:_dbPollUpdateOffText];
     }
     [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)setDbForceUpdateSwitchState:(id)sender {
     _dbForceUpdateFlag = [sender isOn];
     
     if (_dbForceUpdateFlag == TRUE) {
-        [_dbForceUpdateLabel setText:_dbForceUpdateOnText];
+        _dbForceUpdateLabel = [self createWidgetLabel:_dbForceUpdateOnText];
         
     } else {
-        [_dbForceUpdateLabel setText:_dbForceUpdateOffText];
+        _dbForceUpdateLabel = [self createWidgetLabel:_dbForceUpdateOffText];
     }
     [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)setPSSwitchState:(id)sender {
     _swatchesReadOnly = [sender isOn];
 
     if (_swatchesReadOnly == TRUE) {
-        [_psReadOnlyLabel setText:_psMakeReadOnlyLabel];
+         _psReadOnlyLabel = [self createWidgetLabel:_psMakeReadOnlyLabel];
         
     } else {
-        [_psReadOnlyLabel setText:_psMakeReadWriteLabel];
+        _psReadOnlyLabel = [self createWidgetLabel:_psMakeReadWriteLabel];
     }
     [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)setMASwitchState:(id)sender {
     _assocsReadOnly = [sender isOn];
     
     if (_assocsReadOnly == TRUE) {
-        [_maReadOnlyLabel setText:_maMakeReadOnlyLabel];
+        _maReadOnlyLabel = [self createWidgetLabel:_maMakeReadOnlyLabel];
         
     } else {
-        [_maReadOnlyLabel setText:_maMakeReadWriteLabel];
+        _maReadOnlyLabel = [self createWidgetLabel:_maMakeReadWriteLabel];
     }
     [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)tapAreaStepperPressed {
@@ -1100,7 +1102,8 @@ heightForFooterInSection:(NSInteger)section {
     //
     UIImage *renderedImage = [UIImage imageNamed:_rgbDisplayImage];
     [_rgbDisplayButton setImage:renderedImage forState:UIControlStateNormal];
-    [_rgbDisplayLabel setText:_rgbDisplayText];
+    _rgbDisplayLabel = [self createWidgetLabel:_rgbDisplayText];
+    [self.tableView reloadData];
     [self saveEnable:TRUE];
 }
 
@@ -1108,11 +1111,12 @@ heightForFooterInSection:(NSInteger)section {
     _alertsShow = [sender isOn];
     
     if (_alertsShow == TRUE) {
-        [_alertsFilterLabel setText:_alertsNoneLabel];
+        _alertsFilterLabel = [self createWidgetLabel:_alertsNoneLabel];
         
     } else {
-        [_alertsFilterLabel setText:_alertsShowLabel];
+        _alertsFilterLabel = [self createWidgetLabel:_alertsShowLabel];
     }
+    [self.tableView reloadData];
     [self saveEnable:TRUE];
 }
 
@@ -1120,11 +1124,12 @@ heightForFooterInSection:(NSInteger)section {
     _mixAssocLt3 = [sender isOn];
     
     if (_mixAssocLt3 == TRUE) {
-        [_mixAssocCountLabel setText:_mixAssocAllText];
+        _mixAssocCountLabel = [self createWidgetLabel:_mixAssocAllText];
         
     } else {
-        [_mixAssocCountLabel setText:_mixAssocGt2Text];
+        _mixAssocCountLabel = [self createWidgetLabel:_mixAssocGt2Text];
     }
+    [self.tableView reloadData];
     [self saveEnable:TRUE];
 }
 
@@ -1264,7 +1269,7 @@ heightForFooterInSection:(NSInteger)section {
 
 #pragma mark - Generic Methods
 
-- (UILabel *)createSwitchLabel:(NSString *)labelText {
+- (UILabel *)createWidgetLabel:(NSString *)labelText {
 
     UILabel *switchLabel = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
     CGFloat labelWidth   = switchLabel.bounds.size.width;
