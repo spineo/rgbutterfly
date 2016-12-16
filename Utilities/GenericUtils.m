@@ -109,7 +109,7 @@
     // NSUserDefaults
     //
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *currVersionNumber = [userDefaults stringForKey:DB_VERSION_KEY];
+    NSString *currVersionNumber  = [userDefaults stringForKey:DB_VERSION_KEY];
     
     NSLog(@"***** Current Version Number=%@", currVersionNumber);
 

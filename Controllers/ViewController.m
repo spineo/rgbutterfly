@@ -96,37 +96,63 @@ int MIX_ASSOC_MIN_SIZE = 1;
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
     
-    // Upgrade the database?
+    // Look at what is currently in Settings
     //
-    int updateStat = [GenericUtils checkForDBUpdate];
-    if (updateStat == 2) {
+    BOOL pollUpdate = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+    
+    // Update the database?
+    //
+    if (pollUpdate == TRUE) {
         
-        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"A New Database Version was Detected" message:@"Continue with the Database Update?"];
+        BOOL dbForceUpdate           = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
         
-        UIAlertAction* YesButton = [UIAlertAction
-                                    actionWithTitle:@"Yes"
-                                    style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action) {
-                                        
-                                        NSString *errStr = [GenericUtils upgradeDB];
-                                        UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
-                                        [self presentViewController:alert animated:YES completion:nil];
-                                        
-                                    }];
+        int updateStat = 0;
+        NSString *updateMsg = @"A New Database Version was Detected";
+        if (dbForceUpdate == TRUE) {
+            updateStat = 2;
+            updateMsg = @"A Force Update was Selected";
+            
+            // Reset force update back to FALSE
+            //
+            [_userDefaults setBool:FALSE forKey:DB_FORCE_UPDATE_KEY];
+            [_userDefaults synchronize];
+            
+        } else {
+            updateStat = [GenericUtils checkForDBUpdate];
+        }
         
-        UIAlertAction* NoButton = [UIAlertAction
-                                   actionWithTitle:@"No"
-                                   style:UIAlertActionStyleDefault
-                                   handler:nil];
-        
-        [updateConfirm addAction:NoButton];
-        [updateConfirm addAction:YesButton];
-        
-        [self presentViewController:updateConfirm animated:YES completion:nil];
-        
-    } else if (updateStat == 1) {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
-        [self presentViewController:alert animated:YES completion:nil];
+        // New version detected
+        //
+        if (updateStat == 2) {
+            UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
+            
+            UIAlertAction* YesButton = [UIAlertAction
+                                        actionWithTitle:@"Yes"
+                                        style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * action) {
+                                            
+                                            NSString *errStr = [GenericUtils upgradeDB];
+                                            UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
+                                            [self presentViewController:alert animated:YES completion:nil];
+                                            
+                                        }];
+            
+            UIAlertAction* NoButton = [UIAlertAction
+                                       actionWithTitle:@"No"
+                                       style:UIAlertActionStyleDefault
+                                       handler:nil];
+            
+            [updateConfirm addAction:NoButton];
+            [updateConfirm addAction:YesButton];
+            
+            [self presentViewController:updateConfirm animated:YES completion:nil];
+         
+        // Failed update preparation
+        //
+        } else if (updateStat == 1) {
+            UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
 
     [GlobalSettings init];

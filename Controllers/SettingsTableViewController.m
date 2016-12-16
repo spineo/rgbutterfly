@@ -123,7 +123,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _dbPollUpdateOnText  = @"Perform Check for Database Update";
     _dbPollUpdateOffText = @"Do Not Check for Database Update ";
     
-    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] && [_userDefaults stringForKey:_dbPollUpdateOnText]) {
+    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] && [_userDefaults stringForKey:_dbPollUpdateText]) {
         _dbPollUpdateFlag = TRUE;
         _labelText = _dbPollUpdateOnText;
         
@@ -160,7 +160,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _dbForceUpdateOnText  = @"Update Even if Versions are Unchanged ";
     _dbForceUpdateOffText = @"Do Not Perform a Force Database Update";
     
-    if(![_userDefaults boolForKey:DB_FORCE_UPDATE_KEY] || [_userDefaults stringForKey:_dbForceUpdateOffText]) {
+    if(! ([_userDefaults boolForKey:DB_FORCE_UPDATE_KEY] && [_userDefaults stringForKey:_dbForceUpdateText])) {
         _dbForceUpdateFlag = FALSE;
         _labelText = _dbForceUpdateOffText;
         
