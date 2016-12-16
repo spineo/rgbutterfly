@@ -609,7 +609,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         return ABOUT_ROWS;
         
     } else if (section == DB_UPDATE_SETTINGS) {
-        return DB_UPDATE_SETTINGS_ROWS;
+        if (_dbPollUpdateFlag == TRUE) {
+            return DB_UPDATE_SETTINGS_ROWS;
+        } else {
+            return 1;
+        }
         
     } else if (section == READ_ONLY_SETTINGS) {
         return READ_ONLY_SETTINGS_ROWS;
@@ -802,7 +806,7 @@ heightForFooterInSection:(NSInteger)section {
             [cell.contentView addSubview:_dbPollUpdateSwitch];
             [cell.contentView addSubview:_dbPollUpdateLabel];
             
-        } else if (indexPath.row == FORCE_DB_UPDATE_ROW) {
+        } else if ((indexPath.row == FORCE_DB_UPDATE_ROW) && (_dbPollUpdateFlag == TRUE)) {
             [cell.contentView addSubview:_dbForceUpdateSwitch];
             [cell.contentView addSubview:_dbForceUpdateLabel];
         }
