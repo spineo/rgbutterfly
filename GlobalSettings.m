@@ -145,6 +145,7 @@ CGFloat const DEF_TOOLBAR_WIDTH     = 320.0;
 //
 CGFloat const DEF_SM_BUTTON_WIDTH   = 30.0;
 CGFloat const DEF_BUTTON_WIDTH      = 60.0;
+CGFloat const DEF_LG_BUTTON_WIDTH  = 90.0;
 CGFloat const DEF_BUTTON_HEIGHT     = 26.0;
 CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
 

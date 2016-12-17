@@ -164,6 +164,7 @@ extern CGFloat const MIN_DRAG_DIFF;
 //
 extern CGFloat const DEF_SM_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_WIDTH;
+extern CGFloat const DEF_LG_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_HEIGHT;
 extern CGFloat const HIDE_BUTTON_WIDTH;
 

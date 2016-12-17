@@ -127,7 +127,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         _dbPollUpdateFlag = TRUE;
         _labelText = _dbPollUpdateOnText;
         
-        [_userDefaults setBool:_dbPollUpdateOnText forKey:DB_POLL_UPDATE_KEY];
+        [_userDefaults setBool:_dbPollUpdateFlag forKey:DB_POLL_UPDATE_KEY];
         [_userDefaults setValue:_labelText forKey:_dbPollUpdateText];
         
     } else {
@@ -164,7 +164,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         _dbForceUpdateFlag = FALSE;
         _labelText = _dbForceUpdateOffText;
         
-        [_userDefaults setBool:_dbForceUpdateOffText forKey:DB_FORCE_UPDATE_KEY];
+        [_userDefaults setBool:_dbForceUpdateFlag forKey:DB_FORCE_UPDATE_KEY];
         [_userDefaults setValue:_labelText forKey:_dbForceUpdateText];
         
     } else {
@@ -269,7 +269,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Tap Area Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
-    _tapSettingsLabel = [FieldUtils createLabel:@"Change the Size/Shape of the Tap Areas"];
+    _tapSettingsLabel = [self createWidgetLabel:@"Change the Size/Shape of the Tap Areas"];
     
     // Sizing parameters
     //
@@ -336,7 +336,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Match Num Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _matchSettingsLabel = [FieldUtils createLabel:@"Change the Default Number of Tap Area matches"];
+    _matchSettingsLabel = [self createWidgetLabel:@"Change the Default Number of Tap Area matches"];
     
     _matchNumStepper = [[UIStepper alloc] init];
     [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
@@ -377,9 +377,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _rgbDisplayTrueText  = @"Swatches Display RGB Values";
-    _rgbDisplayFalseText = @"Swatches Display Paint Image";
-    
+    _rgbDisplayTrueText  = @"Swatch Shows RGB Value";
+    _rgbDisplayFalseText = @"Swatch Shows the Image";
     _rgbDisplayTrueImage  = RGB_IMAGE_NAME;
     _rgbDisplayFalseImage = PALETTE_IMAGE_NAME;
     
@@ -427,7 +426,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Mix Ratios Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _mixRatiosLabel = [FieldUtils createLabel:@"Comma-separated mix ratios, separate line/group"];
+    _mixRatiosLabel = [self createWidgetLabel:@"Comma-separated mix ratios, separate line/group"];
     
     _mixRatiosTextView = [FieldUtils createTextView:@"" tag:MIX_RATIOS_TAG];
     [_mixRatiosTextView setKeyboardType:UIKeyboardTypeDefault];
@@ -1106,7 +1105,9 @@ heightForFooterInSection:(NSInteger)section {
     //
     UIImage *renderedImage = [UIImage imageNamed:_rgbDisplayImage];
     [_rgbDisplayButton setImage:renderedImage forState:UIControlStateNormal];
-    _rgbDisplayLabel = [self createWidgetLabel:_rgbDisplayText];
+
+    [_rgbDisplayLabel setText:_rgbDisplayText];
+    
     [self.tableView reloadData];
     [self saveEnable:TRUE];
 }
@@ -1275,13 +1276,15 @@ heightForFooterInSection:(NSInteger)section {
 
 - (UILabel *)createWidgetLabel:(NSString *)labelText {
 
-    UILabel *switchLabel = [FieldUtils createLabel:labelText xOffset:DEF_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth   = switchLabel.bounds.size.width;
-    CGFloat labelHeight  = switchLabel.bounds.size.height;
+    UILabel *widgetLabel = [FieldUtils createLabel:labelText xOffset:DEF_LG_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    CGFloat labelWidth   = widgetLabel.bounds.size.width;
+    CGFloat labelHeight  = widgetLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
-    [switchLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    [widgetLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
+    
+    [widgetLabel setFont:TEXT_LABEL_FONT];
 
-    return switchLabel;
+    return widgetLabel;
 }
 
 
