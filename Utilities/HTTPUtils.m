@@ -8,8 +8,21 @@
 
 #import "HTTPUtils.h"
 #import "GlobalSettings.h"
+#import "Reachability.h"
 
 @implementation HTTPUtils
+
+// Check for network connectivity
+//
++ (BOOL)networkIsReachable {
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
 
 // HTTP Get wrapper
 //
