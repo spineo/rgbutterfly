@@ -302,7 +302,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         Keyword *keyword = [swatch_keyword keyword];
         [keywords addObject:[keyword name]];
     }
-    _keywEntered = [keywords componentsJoinedByString:@", "];
+    _keywEntered = [keywords componentsJoinedByString:KEYW_DISP_SEPARATOR];
     
     
     _descEntered = [_paintSwatch desc] ? [_paintSwatch desc] : @"";
@@ -1367,7 +1367,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Add keywords
     //
-    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:KEYW_PROC_SEPARATOR]];
     
     // Add subjective color if not 'Other'
     //

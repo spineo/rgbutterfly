@@ -933,7 +933,7 @@ const int IMAGE_TAG  = 6;
         Keyword *keyword = tap_area_keyword.keyword;
         [keywords addObject:[keyword name]];
     }
-    _keywEntered = [keywords componentsJoinedByString:@", "];
+    _keywEntered = [keywords componentsJoinedByString:KEYW_DISP_SEPARATOR];
 
 }
 
@@ -1093,7 +1093,7 @@ const int IMAGE_TAG  = 6;
     
     // Add keywords
     //
-    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:KEYW_PROC_SEPARATOR]];
     
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {

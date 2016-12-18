@@ -61,9 +61,14 @@ extern NSString * const VER_CONT_TYPE;
 //
 extern NSTimeInterval const ASYNC_THREAD_SLEEP;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Keywords
+//
+extern NSString * const KEYW_PROC_SEPARATOR;
+extern NSString * const KEYW_DISP_SEPARATOR;
+extern NSString * const KEYW_COMPS_SEPARATOR;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 // NIL constants
 //
 extern CGFloat const DEF_X_OFFSET;

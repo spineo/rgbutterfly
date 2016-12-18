@@ -131,7 +131,7 @@ const int ASSOC_SET_TAG        = 8;
         Keyword *keyword = [mix_assoc_keyword keyword];
         [keywords addObject:[keyword name]];
     }
-    _mixAssocKeyw = [keywords componentsJoinedByString:@", "];
+    _mixAssocKeyw = [keywords componentsJoinedByString:KEYW_DISP_SEPARATOR];
     
     _orderSort = [NSSortDescriptor sortDescriptorWithKey:@"mix_order" ascending:YES];
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
@@ -1050,7 +1050,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Add keywords
     //
-    NSMutableArray *keywords = [GenericUtils trimStrings:[_mixAssocKeyw componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_mixAssocKeyw componentsSeparatedByString:KEYW_PROC_SEPARATOR]];
     
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {

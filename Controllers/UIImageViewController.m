@@ -401,7 +401,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                 [keywords addObject:keyword.name];
             }
             if ([keywords count] > 0) {
-                [matchKeywTextField setText:[keywords componentsJoinedByString:@", "]];
+                [matchKeywTextField setText:[keywords componentsJoinedByString:KEYW_DISP_SEPARATOR]];
             } else {
                 [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
             }
@@ -2156,7 +2156,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Add keywords
     //
-    NSMutableArray *keywords = [GenericUtils trimStrings:[_matchKeyw componentsSeparatedByString:@","]];
+    NSMutableArray *keywords = [GenericUtils trimStrings:[_matchKeyw componentsSeparatedByString:KEYW_PROC_SEPARATOR]];
 
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {

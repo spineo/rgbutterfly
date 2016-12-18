@@ -54,9 +54,14 @@ NSString * const VER_CONT_TYPE = @"text/plain";
 //
 NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Keywords
+//
+NSString * const KEYW_PROC_SEPARATOR  = @";";
+NSString * const KEYW_DISP_SEPARATOR  = @"; ";
+NSString * const KEYW_COMPS_SEPARATOR = @", ";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 // NIL constants
 //
 CGFloat const DEF_X_OFFSET          = 0.0;
