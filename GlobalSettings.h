@@ -257,6 +257,8 @@ extern int const MAX_BRAND_LEN;
 extern NSString * const MATCH_TYPE;
 extern NSString * const ASSOC_TYPE;
 extern NSString * const MIX_TYPE;
+extern NSString * const KEYWORDS_TYPE;
+extern NSString * const COLORS_TYPE;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys

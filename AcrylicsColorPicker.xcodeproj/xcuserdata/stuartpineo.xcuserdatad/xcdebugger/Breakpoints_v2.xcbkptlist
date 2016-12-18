@@ -5465,5 +5465,81 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Controllers/ViewController.m"
+            timestampString = "503782873.64244"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController listingController]"
+                  moduleName = "AcrylicsColorPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/Controllers/ViewController.m"
+                  timestampString = "503782874.321824"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController setListingController:]"
+                  moduleName = "AcrylicsColorPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/Controllers/ViewController.m"
+                  timestampString = "503782874.32412"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "49">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController photoSelectionController]"
+                  moduleName = "AcrylicsColorPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/Controllers/ViewController.m"
+                  timestampString = "503782874.325796"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController setPhotoSelectionController:]"
+                  moduleName = "AcrylicsColorPicker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/Controllers/ViewController.m"
+                  timestampString = "503782874.326961"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

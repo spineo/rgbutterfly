@@ -236,6 +236,8 @@ int const MAX_BRAND_LEN = 32;
 NSString * const MATCH_TYPE     = @"Match";
 NSString * const ASSOC_TYPE     = @"Assoc";
 NSString * const MIX_TYPE       = @"Mix";
+NSString * const KEYWORDS_TYPE  = @"Keywords";
+NSString * const COLORS_TYPE    = @"Colors";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
