@@ -145,7 +145,7 @@ const int IMAGE_TAG  = 6;
     // Set the placeholders
     //
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Semicolon-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Description (max. %i chars) - ", MAX_DESC_LEN];
     
     _dbSwatchesCount  = (int)[_dbPaintSwatches count];

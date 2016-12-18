@@ -403,10 +403,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             if ([keywords count] > 0) {
                 [matchKeywTextField setText:[keywords componentsJoinedByString:KEYW_DISP_SEPARATOR]];
             } else {
-                [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
+                [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated keywords.", nil)];
             }
         } else {
-            [matchKeywTextField setPlaceholder:NSLocalizedString(@"Comma-separated keywords.", nil)];
+            [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated keywords.", nil)];
         }
         [matchKeywTextField setTag:MATCH_KEYW_TAG];
         [matchKeywTextField setClearButtonMode: UITextFieldViewModeWhileEditing];

@@ -139,7 +139,7 @@ const int ASSOC_SET_TAG        = 8;
     _textReturn = FALSE;
     
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Association Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Comma-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Semicolon-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Association Description (max. %i chars) - ", MAX_DESC_LEN];
     
     _reuseCellIdentifier = @"AssocTableCell";
