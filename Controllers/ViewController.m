@@ -1478,6 +1478,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else {
         [self loadMixCollectionViewData];
     }
+    [_mainSearchBar setText:@""];
 }
 
 - (void)searchBarSetFrames {
