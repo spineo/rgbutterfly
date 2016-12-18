@@ -377,8 +377,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Check for the default values
     //
-    _rgbDisplayTrueText  = @"Swatch Shows RGB Value";
-    _rgbDisplayFalseText = @"Swatch Shows the Image";
+    _rgbDisplayTrueText  = @"Swatch Displays the RGB Value";
+    _rgbDisplayFalseText = @"Swatch Displays the Paint Image";
     _rgbDisplayTrueImage  = RGB_IMAGE_NAME;
     _rgbDisplayFalseImage = PALETTE_IMAGE_NAME;
     
@@ -1277,7 +1277,7 @@ heightForFooterInSection:(NSInteger)section {
 - (UILabel *)createWidgetLabel:(NSString *)labelText {
 
     UILabel *widgetLabel = [FieldUtils createLabel:labelText xOffset:DEF_LG_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
-    CGFloat labelWidth   = widgetLabel.bounds.size.width;
+    CGFloat labelWidth   = widgetLabel.bounds.size.width + DEF_MD_FIELD_PADDING;
     CGFloat labelHeight  = widgetLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [widgetLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
