@@ -61,7 +61,9 @@
         line = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
         [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
+
     }
+
     return line;
 }
 

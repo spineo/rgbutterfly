@@ -38,7 +38,7 @@ int const FORCE_UPDATE_DB   = 0;
 
 // GitHub related
 //
-NSString * const GIT_TOKEN     = @"90bcd646313862c8026a04a792f4efc2e3f50d94";
+NSString * const GIT_TOKEN_FILE = @"Authtoken.txt";
 NSString * const GIT_URL       = @"https://raw.githubusercontent.com/spineo/Databases/master/AcrylicsColorPicker";
 
 NSString * const GIT_DB_FILE   = @"AcrylicsColorPicker v4.0.63.sqlite";

@@ -45,7 +45,7 @@ extern int const FORCE_UPDATE_DB;
 
 // GitHub related
 //
-extern NSString * const GIT_TOKEN;
+extern NSString * const GIT_TOKEN_FILE;
 extern NSString * const GIT_URL;
 
 extern NSString * const GIT_DB_FILE;

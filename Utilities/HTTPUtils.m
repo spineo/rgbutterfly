@@ -8,6 +8,7 @@
 
 #import "HTTPUtils.h"
 #import "GlobalSettings.h"
+#import "FileUtils.h"
 #import "Reachability.h"
 
 @implementation HTTPUtils
@@ -41,7 +42,11 @@
     request.HTTPMethod = @"GET";
     [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
     
-    NSString *authValue = [NSString stringWithFormat:@"Token %@", GIT_TOKEN];
+    NSString *docsDir  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *filePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", GIT_TOKEN_FILE]];
+    NSString *gitToken = [FileUtils lineFromFile:filePath];
+    
+    NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
