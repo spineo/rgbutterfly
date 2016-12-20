@@ -89,6 +89,7 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		217DFF791E09710A00E02183 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217DFF781E09710A00E02183 /* Authtoken.txt */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		21BF75F91E05C17100363BBB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BF75F81E05C17100363BBB /* Reachability.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
@@ -267,6 +268,7 @@
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
+		217DFF781E09710A00E02183 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				21397EE71C8487C7001C3F05 /* Media.xcassets */,
 				21397EE21C84876D001C3F05 /* Info.plist */,
 				2192F5601DF3185500AAFE01 /* README */,
+				217DFF781E09710A00E02183 /* Authtoken.txt */,
 			);
 			name = AcrylicsColorPicker;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				21064FD41DFEDA77004B0830 /* MatchAlgorithm.txt in Resources */,
 				21397EDD1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
+				217DFF791E09710A00E02183 /* Authtoken.txt in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

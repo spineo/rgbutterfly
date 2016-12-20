@@ -41,10 +41,18 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"GET";
     [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
-    
-    NSString *docsDir  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *filePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", GIT_TOKEN_FILE]];
-    NSString *gitToken = [FileUtils lineFromFile:filePath];
+
+    // Add a file check
+    //
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:GIT_TOKEN_FILE ofType:@"txt"];
+
+    NSString *gitToken;
+    NSError *error = nil;
+    @try {
+        gitToken = [FileUtils lineFromFile:filePath];
+    } @catch(NSException *exception) {
+        NSLog(@"Failed to get the GIT token from file '%@', error: %@\n", filePath, [error localizedDescription]);
+    }
     
     NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];

@@ -55,16 +55,7 @@
 }
 
 + (NSString *)lineFromFile:(NSString *)filePath {
-    
-    NSString *line = nil;
-    while (line == nil) {
-        line = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        
-        [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
-
-    }
-
-    return line;
+    return [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil]stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
 

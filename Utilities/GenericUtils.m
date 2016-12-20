@@ -175,9 +175,14 @@
     
     // Perform the check once the updated database is downloaded
     //
-    NSString *currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
+    NSString *currMd5sum;
+    @try {
+        currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
+    } @catch (NSException *exception) {
+        return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
+    }
 
-    
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (2) Upgrade the sqlite database
     //
@@ -192,12 +197,11 @@
     error = nil;
     @try {
         [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:nil];
-
         NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
         
     } @catch (NSException *exception) {
         NSLog(@"ERROR: %@\n", [error localizedDescription]);
-        return [@"ERROR UDB4: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
+        return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
     }
     
     // Download the latest database to a '-tmp' suffix file
@@ -224,7 +228,7 @@
             return @"Update was Successful!";
             
         } @catch (NSException *exception) {
-            return [@"ERROR UDB4: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
+            return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
         }
 
     } else {
