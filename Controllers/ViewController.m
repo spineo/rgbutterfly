@@ -1139,6 +1139,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (void)updateTable:(NSString *)listingType {
     _listingType = listingType;
+    _searchString = nil;
+    [_mainSearchBar setText:@""];
     
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
