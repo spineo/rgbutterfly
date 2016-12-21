@@ -161,35 +161,6 @@ const int IMAGE_TAG  = 6;
     //
     [self renderTapAreaData];
 
-//
-//    if (_maManualOverride == TRUE) {
-//        _matchedSwatches = [_dbPaintSwatches mutableCopy];
-//        
-//    } else {
-//        _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum context:self.context entity:_paintSwatchEntity]];
-//    }
-//    [self initTappedSwatches:(int)[_matchedSwatches count]];
-//    
-//    
-//    // Initialize
-//    //
-//    // Override the default Algorithm index?
-//    //
-//    _matchAlgIndex = [[_tapArea match_algorithm_id] intValue];
-//    _nameEntered   = [_tapArea name] ? [_tapArea name] : @"";
-//    _descEntered   = [_tapArea desc] ? [_tapArea desc] : @"";
-//
-//
-//    // Keywords
-//    //
-//    NSSet *tapAreaKeywords = _tapArea.tap_area_keyword;
-//    NSMutableArray *keywords = [[NSMutableArray alloc] init];
-//    for (TapAreaKeyword *tap_area_keyword in tapAreaKeywords) {
-//        Keyword *keyword = tap_area_keyword.keyword;
-//        [keywords addObject:[keyword name]];
-//    }
-//    _keywEntered = [keywords componentsJoinedByString:@", "];
-    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
     
@@ -245,8 +216,6 @@ const int IMAGE_TAG  = 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    //
     if ((
          ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
          ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
@@ -302,19 +271,6 @@ const int IMAGE_TAG  = 6;
         return DEF_TABLE_HDR_HEIGHT;
     }
 }
-
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-//    // Background color
-//    //
-//    [view setTintColor:DARK_TEXT_COLOR];
-//
-//    // Text Color
-//    //
-//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-//    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
-//    [header.contentView setBackgroundColor:DARK_BG_COLOR];
-//    [header.textLabel setFont:TABLE_CELL_FONT];
-//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -568,17 +524,7 @@ const int IMAGE_TAG  = 6;
             [cell.textLabel setTag:indexPath.row + 1];
             [cell.textLabel setNumberOfLines:0];
             [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
-            
-//            if (_editFlag == TRUE) {
-//                [cell setAccessoryType:UITableViewCellAccessoryNone];
-//                
-//                BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
-//                if (tappedStat == TRUE) {
-//                    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-//                }
-//            } else {
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-//            }
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
             // Add the Gesture Recognizer
             //
@@ -586,8 +532,7 @@ const int IMAGE_TAG  = 6;
             UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pressCell:)];
             panGesture.delegate = self;
             [cell.textLabel addGestureRecognizer:panGesture];
-            
-//        } else if (_editFlag == TRUE && _scrollFlag == TRUE && _pressSelectedRow == index) {
+
         } else if (_scrollFlag == TRUE && _pressSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
 
@@ -616,32 +561,12 @@ const int IMAGE_TAG  = 6;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedRow = (int)indexPath.row;
 
-//    if (indexPath.section == MATCH_SECTION && _editFlag == FALSE)  {
-        [self performSegueWithIdentifier:@"ShowSwatchDetailSegue" sender:self];
-        
-//    } else {
-//        BOOL tappedStat = [[_tappedSwatches objectAtIndex:indexPath.row] boolValue];
-//        if (tappedStat == FALSE) {
-//            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:TRUE]];
-//            _tappedCount++;
-//
-//        } else {
-//            [_tappedSwatches replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:FALSE]];
-//            _tappedCount--;
-//        }
-//        
-//        [tableView reloadData];
-//    }
+    [self performSegueWithIdentifier:@"ShowSwatchDetailSegue" sender:self];
 }
 
 // For now (perhaps even this version), disallow the manual override
 //
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == MATCH_SECTION) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
     return NO;
 }
 

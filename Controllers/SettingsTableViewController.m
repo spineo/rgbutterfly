@@ -85,8 +85,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-    
     [self saveEnable:FALSE];
     _reuseCellIdentifier = @"SettingsTableCell";
     
@@ -472,23 +470,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         _alertsShow = FALSE;
         _labelText  = _alertsShowLabel;
     }
-    
-    
-//    if(! ([_userDefaults boolForKey:ALERTS_FILTER_KEY] &&
-//          [_userDefaults stringForKey:_alertsFilterText])
-//       ) {
-//        _alertsShow = TRUE;
-//        _labelText = _alertsShowLabel;
-//        
-//        [_userDefaults setBool:_alertsShow forKey:ALERTS_FILTER_KEY];
-//        [_userDefaults setValue:_labelText forKey:_alertsFilterText];
-//        
-//    } else {
-//        _alertsShow = [_userDefaults boolForKey:ALERTS_FILTER_KEY];
-//        _labelText = [_userDefaults stringForKey:_alertsFilterText];
-//    }
-    
-    
+
     
     // Create the label and switch, set the last state or default values
     //
@@ -543,25 +525,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     [_mixAssocCountSwitch addTarget:self action:@selector(setMixAssocCountSwitchState:) forControlEvents:UIControlEventValueChanged];
     
     _mixAssocCountLabel   = [self createWidgetLabel:_labelText];
-
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // New Brands Settings
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    //    _addBrandsTextField = [FieldUtils createTextField:@"" tag:ADD_BRANDS_TAG];
-    //    [_addBrandsTextField setAutoresizingMask:NO];
-    //    [_addBrandsTextField setKeyboardType:UIKeyboardTypeDefault];
-    //    [_addBrandsTextField setDelegate:self];
-    //
-    //    _addBrandsText = [_userDefaults stringForKey:ADD_BRANDS_KEY];
-    //
-    //    // Add a place holder if no text
-    //    //
-    //    if (! [_addBrandsText isEqualToString:@""] && (_addBrandsText != nil)) {
-    //        [_addBrandsTextField setText:_addBrandsText];
-    //    } else {
-    //        [_addBrandsTextField setPlaceholder:@" -- Additional Comma-Separated Paint Brands --"];
-    //    }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
@@ -634,9 +597,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
     } else if (section == MIX_ASSOC_SETTINGS) {
         return MIX_ASSOC_ROWS;
-        
-//    } else if (section == ADD_BRANDS_SETTINGS) {
-//        return ADD_BRANDS_ROWS;
     }
     return 0;
 }
@@ -782,9 +742,6 @@ heightForFooterInSection:(NSInteger)section {
     CGFloat tableViewWidth = self.tableView.bounds.size.width;
     
     if (indexPath.section == ABOUT_SECTION) {
-        //[cell.contentView setBackgroundColor:DARK_GRAY_BG_COLOR];
-        //[cell setBackgroundColor:DARK_GRAY_BG_COLOR];
-        //[_aboutLabel setBackgroundColor:CLEAR_COLOR];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         
         if (indexPath.row == ABOUT_ROW) {
@@ -857,12 +814,6 @@ heightForFooterInSection:(NSInteger)section {
     } else if (indexPath.section == RGB_DISPLAY_SETTINGS) {
         [cell.contentView addSubview:_rgbDisplayButton];
         [cell.contentView addSubview:_rgbDisplayLabel];
-        
-//    } else if (indexPath.section == ADD_BRANDS_SETTINGS) {
-//        CGFloat yOffset = (cell.bounds.size.height - DEF_TEXTFIELD_HEIGHT) / DEF_HGT_ALIGN_FACTOR;
-//        CGFloat width   = cell.bounds.size.width - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
-//        [_addBrandsTextField setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, width, DEF_TEXTFIELD_HEIGHT)];
-//        [cell.contentView addSubview:_addBrandsTextField];
         
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
         [_mixRatiosLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
@@ -1200,7 +1151,6 @@ heightForFooterInSection:(NSInteger)section {
             [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
             [_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
-            //[_userDefaults setValue:[_alertsFilterLabel text] forKey:_alertsFilterText];
             
             // Mix Assoc Settings
             //
@@ -1264,7 +1214,6 @@ heightForFooterInSection:(NSInteger)section {
 
 - (void)saveEnable:(BOOL)saveFlag {
     _editFlag = saveFlag;
-    //[BarButtonUtils buttonEnabled:self.navigationItem.rightBarButtonItem refTag:SAVE_BTN_TAG isEnabled:saveFlag];
     [self.navigationItem.rightBarButtonItem setEnabled:saveFlag];
 }
 

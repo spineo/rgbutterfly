@@ -18,8 +18,7 @@
 //
 // App Version and Core data/Store
 //
-#define APP_NAME @"AcrylicsColorPicker";
-
+extern NSString * const APP_NAME;
 extern int const VERSION_TAG;
 
 // This value goes in the version.txt

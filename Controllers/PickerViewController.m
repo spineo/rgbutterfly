@@ -27,8 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _picker = [[UIImagePickerController alloc] init];
-    
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

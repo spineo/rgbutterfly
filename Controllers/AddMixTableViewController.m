@@ -77,8 +77,6 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -255,7 +253,6 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return MAX_ADD_MIX_SECTIONS;
 }
 

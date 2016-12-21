@@ -153,11 +153,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-
     [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 
-    
     // TableView defaults
     //
     _imageViewXOffset  = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
@@ -896,22 +893,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     textField.text = [GenericUtils trimString:textField.text];
     
-//    if ((textField.tag == NAME_FIELD_TAG) && [textField.text isEqualToString:@""]) {
-//        UIAlertController *myAlert = [AlertUtils noValueAlert];
-//        [self presentViewController:myAlert animated:YES completion:nil];
-//    
-//    } else
-
     if ((textField.tag == OTHER_FIELD_TAG) && [textField.text isEqualToString:@""] && (_brandPickerSelRow == 0)) {
         UIAlertController *myAlert = [AlertUtils noValueAlert];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
-    
-//        if (textField.tag == NAME_FIELD_TAG) {
-//            _nameEntered = textField.text;
-//        } else
-        
         if (textField.tag == KEYW_FIELD_TAG) {
             _keywEntered = textField.text;
         } else if (textField.tag == DESC_FIELD_TAG) {
@@ -943,12 +929,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    if (textField.tag == NAME_FIELD_TAG && textField.text.length >= MAX_NAME_LEN && range.length == 0) {
-//        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_NAME_LEN];
-//        [self presentViewController:myAlert animated:YES completion:nil];
-//        return NO;
-//    } else
-    
     if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
@@ -1180,12 +1160,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     [picker selectRow:selectRow inComponent:0 animated:YES];
     
-//    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-//                                             initWithTarget:self action:action];
-//    tapRecognizer.numberOfTapsRequired = DEF_NUM_TAPS;
-//    [picker addGestureRecognizer:tapRecognizer];
-//    [tapRecognizer setDelegate:self];
-    
     return picker;
 }
 
@@ -1368,13 +1342,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Add keywords
     //
     NSMutableArray *keywords = [GenericUtils trimStrings:[_keywEntered componentsSeparatedByString:KEYW_PROC_SEPARATOR]];
-    
-    // Add subjective color if not 'Other'
-    //
-//    NSString *subj_color = [_subjColorName text];
-//    if (![subj_color isEqualToString:@"Other"]) {
-//        [keywords addObject:subj_color];
-//    }
     
     for (NSString *keyword in keywords) {
         if ([keyword isEqualToString:@""]) {

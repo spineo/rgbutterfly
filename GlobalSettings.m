@@ -14,7 +14,8 @@
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int const VERSION_TAG       = 1;
+NSString * const APP_NAME       = @"AcrylicsColorPicker";
+int const VERSION_TAG           = 1;
 
 // Key references the value stored in NSUserDefaults
 //

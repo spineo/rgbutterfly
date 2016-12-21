@@ -140,8 +140,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     
     // NSManagedObject subclassing
     //
@@ -424,7 +422,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [matchDescTextField setDelegate: self];
     }];
 
-    
     _matchAssocFieldsSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateMatchAssoc];
     }];
@@ -672,7 +669,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _imageViewSize = SPLIT_VIEW;
     [self.context rollback];
     _currTapSection = 0;
-    //[_imageTableView reloadData];
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
@@ -1216,14 +1212,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_imageView.layer setMasksToBounds:YES];
     [_imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     
-    //    // Add the selected image
-    //    //
-    //    [_imageView setContentMode:UIViewContentModeScaleToFill];
-    //    [_imageScrollView setScrollEnabled:YES];
-    //    [_imageScrollView setClipsToBounds:YES];
-    //    [_imageScrollView setContentSize:_selectedImage.size];
-    //    [_imageScrollView setDelegate:self];
-    
     // Set the reference image (used by the detail views)
     //
     _referenceTappedImage = tempImage;
@@ -1238,14 +1226,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_imageView setImage:tempImage];
     [_imageView.layer setMasksToBounds:YES];
     [_imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
-    
-//    // Add the selected image
-//    //
-//    [_imageView setContentMode:UIViewContentModeScaleToFill];
-//    [_imageScrollView setScrollEnabled:YES];
-//    [_imageScrollView setClipsToBounds:YES];
-//    [_imageScrollView setContentSize:_selectedImage.size];
-//    [_imageScrollView setDelegate:self];
     
     // Set the reference image (used by the detail views)
     //
@@ -1578,13 +1558,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [custCell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
         [custCell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [custCell.imageView setClipsToBounds: YES];
-        
-//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
-//                          initWithTarget:self action:@selector(respondToImageViewTap:)];
-//        [tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
-//        [custCell.imageView addGestureRecognizer:tapRecognizer];
-//        [tapRecognizer setDelegate:self];
-//
         [custCell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
         
         return custCell;
@@ -1726,13 +1699,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else {
         swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     }
-    
-    // Tag the first reference image
-    //
-//    if (indexPath.row == 0) {
-//        int area = _currTapSection - index;
-//        swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:area];
-//    }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
 
@@ -2438,8 +2404,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         // Save the Association first
         //
         if (_mixAssociation == nil || _tapAreasChanged == TRUE) {
-//            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association" message:@"Please save first"];
-//            [self presentViewController:myAlert animated:YES completion:nil];
             [self saveMixAssoc];
         }
             
@@ -2458,8 +2422,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         // Save the MatchAssociation first
         //
         if (_matchAssociation == nil || _tapAreasChanged == TRUE) {
-            //UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Association" message:@"Please save first"];
-            //[self presentViewController:myAlert animated:YES completion:nil];
             [self updateMatchAssoc];
         }
 

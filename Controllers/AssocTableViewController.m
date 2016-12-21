@@ -933,15 +933,11 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)homeButtonShow {
     [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
-    //[BarButtonUtils buttonHide:self.toolbarItems refTag:SETTINGS_BTN_TAG];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
-    //[BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)settingsButtonShow {
     [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
-    //[BarButtonUtils buttonHide:self.toolbarItems refTag:HOME_BTN_TAG];
-    //[BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
 
@@ -1227,9 +1223,6 @@ const int ASSOC_SET_TAG        = 8;
     
         [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
         [paintSwatch setType_id:_genTypeId];
-    
-        //int num = i + 1;
-        //[paintSwatch setName:[[NSString alloc] initWithFormat:@"Color %i (%@)", num, [_assocTypeName text]]];
     }
     
     // Rename the Generic Association
@@ -1604,11 +1597,7 @@ const int ASSOC_SET_TAG        = 8;
                 PaintSwatches *pswatches = (PaintSwatches *)paintSwatch;
                 [pswatches addMix_assoc_swatchObject:mixAssocSwatch];
                 [_mixAssociation addMix_assoc_swatchObject:mixAssocSwatch];
-                
-                // Set the mix_order
-                //
-                //mix_assoc_ct += 1;
-                //[mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_assoc_ct]];
+
                 
                 // Flag it as an added paint swatch (so it will not be editable)
                 //
