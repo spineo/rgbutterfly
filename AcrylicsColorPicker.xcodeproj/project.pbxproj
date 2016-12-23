@@ -50,7 +50,6 @@
 		2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D91DFDDD6F0076A095 /* SwatchDetailTableViewController.m */; };
 		2109A0E71DFDDD6F0076A095 /* UIImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DB1DFDDD6F0076A095 /* UIImageViewController.m */; };
 		2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */; };
-		2109A1011DFDE32C0076A095 /* ACPString.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EA1DFDE32C0076A095 /* ACPString.m */; };
 		2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EC1DFDE32C0076A095 /* AlertUtils.m */; };
 		2109A1031DFDE32C0076A095 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EE1DFDE32C0076A095 /* BarButtonUtils.m */; };
 		2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F01DFDE32C0076A095 /* ColorUtils.m */; };
@@ -190,8 +189,6 @@
 		2109A0DB1DFDDD6F0076A095 /* UIImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewController.m; path = Controllers/UIImageViewController.m; sourceTree = "<group>"; };
 		2109A0DC1DFDDD6F0076A095 /* UIImageViewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageViewNavigationController.h; path = Controllers/UIImageViewNavigationController.h; sourceTree = "<group>"; };
 		2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewNavigationController.m; path = Controllers/UIImageViewNavigationController.m; sourceTree = "<group>"; };
-		2109A0E91DFDE32C0076A095 /* ACPString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACPString.h; path = Utilities/ACPString.h; sourceTree = "<group>"; };
-		2109A0EA1DFDE32C0076A095 /* ACPString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACPString.m; path = Utilities/ACPString.m; sourceTree = "<group>"; };
 		2109A0EB1DFDE32C0076A095 /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertUtils.h; path = Utilities/AlertUtils.h; sourceTree = "<group>"; };
 		2109A0EC1DFDE32C0076A095 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertUtils.m; path = Utilities/AlertUtils.m; sourceTree = "<group>"; };
 		2109A0ED1DFDE32C0076A095 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarButtonUtils.h; path = Utilities/BarButtonUtils.h; sourceTree = "<group>"; };
@@ -432,8 +429,6 @@
 		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2109A0E91DFDE32C0076A095 /* ACPString.h */,
-				2109A0EA1DFDE32C0076A095 /* ACPString.m */,
 				2109A0EB1DFDE32C0076A095 /* AlertUtils.h */,
 				2109A0EC1DFDE32C0076A095 /* AlertUtils.m */,
 				2109A0ED1DFDE32C0076A095 /* BarButtonUtils.h */,
@@ -740,7 +735,6 @@
 				21064FFD1DFEDD0A004B0830 /* Keyword.m in Sources */,
 				210650191DFEDD5A004B0830 /* TapAreaKeyword.m in Sources */,
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
-				2109A1011DFDE32C0076A095 /* ACPString.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */,
 				2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */,
