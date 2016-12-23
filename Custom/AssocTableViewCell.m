@@ -19,11 +19,6 @@
 
 @implementation AssocTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-    //
-}
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -44,7 +39,6 @@
      
         [_mixName.layer setCornerRadius: DEF_CORNER_RADIUS];
         [_mixName.layer setBorderWidth: DEF_BORDER_WIDTH];
-//        [_mixName setTag:_tagNum];
         [_mixName setTextAlignment:NSTextAlignmentLeft];
         [_mixName setFont: TEXT_FIELD_FONT];
         
@@ -66,17 +60,9 @@
     return self;
 }
 
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-
-// Minimize keyboard
-//
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    [_mixName resignFirstResponder];
-//}
-
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 }

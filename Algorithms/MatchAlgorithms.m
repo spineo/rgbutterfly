@@ -130,7 +130,6 @@
     NSMutableArray *colorDiffs = [[NSMutableArray alloc] init];
     
     for (int i=0; i<= maxIndex; i++) {
-        //PaintSwatches *compObj =  [[PaintSwatches alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
         PaintSwatches *compObj = [swatches objectAtIndex:i];
         
         float diffValue;
@@ -178,19 +177,6 @@
         int index = [[sortedArray objectAtIndex:i] index];
         
         PaintSwatches *pswatch = [swatches objectAtIndex:index];
-//        NSLog(@"INSERT PS ++ 2 ++++++++++++++++++");
-//        PaintSwatches *psdiff = [[PaintSwatches alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-//        
-//        psdiff.name        = pswatch.name;
-//        psdiff.red         = pswatch.red;
-//        psdiff.green       = pswatch.green;
-//        psdiff.blue        = pswatch.blue;
-//        psdiff.hue         = pswatch.hue;
-//        psdiff.saturation  = pswatch.saturation;
-//        psdiff.brightness  = pswatch.brightness;
-//        psdiff.image_thumb = pswatch.image_thumb;
-        
-//        [modMatchedSwatches addObject:psdiff];
         [modMatchedSwatches addObject:pswatch];
     }
     [modMatchedSwatches insertObject:refObj atIndex:0];

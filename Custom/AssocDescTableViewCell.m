@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UILabel *mainLabel;
-//@property (nonatomic, strong) UIAlertView *noTextAlert;
 
 @end
 
@@ -43,13 +42,9 @@
      
         [_descField.layer setCornerRadius: DEF_CORNER_RADIUS];
         [_descField.layer setBorderWidth: DEF_BORDER_WIDTH];
-        
-//        [_descField setTag: DEF_TAG_NUM];
-        
         [_descField setTextAlignment:NSTextAlignmentLeft];
         [_descField setFont: TEXT_FIELD_FONT];
         [_descField setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
-
 
         [self.contentView addSubview:_descField];
         

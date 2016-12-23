@@ -138,29 +138,6 @@
     [self.persistentStoreCoordinator migratePersistentStore:currentStore toURL:newStoreURL options:nil withType:NSSQLiteStoreType error:nil];
 }
 
-//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-//    if (_persistentStoreCoordinator) {
-//        return _persistentStoreCoordinator;
-//    }
-//    
-//    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-//    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"AcrylicsColorPicker v4.0.39.sqlite"];
-//    
-//    NSError *error = nil;
-//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-//    
-//    NSDictionary *options = @{ NSMigratePersistentStoresAutomaticallyOption : @(YES),
-//                               NSInferMappingModelAutomaticallyOption : @(YES) };
-//    
-//    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//        abort();
-//    }
-//    
-//    return _persistentStoreCoordinator;
-//}
-//
-
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
     if (_managedObjectContext != nil) {
