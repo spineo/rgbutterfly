@@ -22,7 +22,6 @@
 // Data model and related API
 //
 #import "PaintSwatches.h"
-#import "ACPMixAssociationsDesc.h"
 
 @interface AcrylicsColorPickerTests : XCTestCase
 

@@ -38,7 +38,6 @@
 		2106501A1DFEDD5A004B0830 /* TapAreaSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650131DFEDD5A004B0830 /* TapAreaSwatch.m */; };
 		210650221DFEDDFF004B0830 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 2106501E1DFEDDFF004B0830 /* PaintSwatchesDiff.m */; };
 		210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650201DFEDDFF004B0830 /* PaintSwatchSelection.m */; };
-		210650261DFEDF83004B0830 /* ACPMixAssociationsDesc.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650251DFEDF83004B0830 /* ACPMixAssociationsDesc.m */; };
 		210650291DFEDFBB004B0830 /* MatchAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650281DFEDFBB004B0830 /* MatchAlgorithm.m */; };
 		2109A0C71DFDDC460076A095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C61DFDDC460076A095 /* ViewController.m */; };
 		2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C91DFDDD6F0076A095 /* AboutViewController.m */; };
@@ -167,8 +166,6 @@
 		2106501E1DFEDDFF004B0830 /* PaintSwatchesDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaintSwatchesDiff.m; path = Other/PaintSwatchesDiff.m; sourceTree = "<group>"; };
 		2106501F1DFEDDFF004B0830 /* PaintSwatchSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaintSwatchSelection.h; path = Other/PaintSwatchSelection.h; sourceTree = "<group>"; };
 		210650201DFEDDFF004B0830 /* PaintSwatchSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaintSwatchSelection.m; path = Other/PaintSwatchSelection.m; sourceTree = "<group>"; };
-		210650241DFEDF83004B0830 /* ACPMixAssociationsDesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACPMixAssociationsDesc.h; path = Other/ACPMixAssociationsDesc.h; sourceTree = "<group>"; };
-		210650251DFEDF83004B0830 /* ACPMixAssociationsDesc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACPMixAssociationsDesc.m; path = Other/ACPMixAssociationsDesc.m; sourceTree = "<group>"; };
 		210650271DFEDFBB004B0830 /* MatchAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAlgorithm.h; path = ManagedObject/MatchAlgorithm.h; sourceTree = "<group>"; };
 		210650281DFEDFBB004B0830 /* MatchAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithm.m; path = ManagedObject/MatchAlgorithm.m; sourceTree = "<group>"; };
 		2109A0C51DFDDC460076A095 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Controllers/ViewController.h; sourceTree = "<group>"; };
@@ -481,8 +478,6 @@
 		2108C5EA1C820D1B00DD7B9E /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				210650241DFEDF83004B0830 /* ACPMixAssociationsDesc.h */,
-				210650251DFEDF83004B0830 /* ACPMixAssociationsDesc.m */,
 				2106501D1DFEDDFF004B0830 /* PaintSwatchesDiff.h */,
 				2106501E1DFEDDFF004B0830 /* PaintSwatchesDiff.m */,
 				2106501F1DFEDDFF004B0830 /* PaintSwatchSelection.h */,
@@ -738,7 +733,6 @@
 				2109A12A1DFDE4910076A095 /* BodyType+CoreDataProperties.m in Sources */,
 				2109A1291DFDE4910076A095 /* AssociationType+CoreDataProperties.m in Sources */,
 				2109A1031DFDE32C0076A095 /* BarButtonUtils.m in Sources */,
-				210650261DFEDF83004B0830 /* ACPMixAssociationsDesc.m in Sources */,
 				21064FE41DFEDCAA004B0830 /* AssociationType+CoreDataClass.m in Sources */,
 				2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */,
 				2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */,

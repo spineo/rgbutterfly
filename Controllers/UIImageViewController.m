@@ -8,7 +8,6 @@
 #import "UIImageViewController.h"
 #import "SwatchDetailTableViewController.h"
 #import "GlobalSettings.h"
-#import "ACPMixAssociationsDesc.h"
 #import "AppDelegate.h"
 #import "ColorUtils.h"
 #import "FieldUtils.h"

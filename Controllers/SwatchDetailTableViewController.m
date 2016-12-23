@@ -11,7 +11,6 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "ColorUtils.h"
-#import "ACPMixAssociationsDesc.h"
 #import "ManagedObjectUtils.h"
 #import "AppDelegate.h"
 #import "GenericUtils.h"
