@@ -90,28 +90,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 #pragma mark - Initialization and Load Methods
 
-- (IBAction)refreshFeed:(id)sender {
-    //main thread
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]; [self.colorTableView addSubview:spinner];
-    
-    //switch to background thread
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        //back to the main thread for the UI call
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [spinner startAnimating];
-        });
-        // more on the background thread
-        
-        // parsing code code
-        
-        //back to the main thread for the UI call
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [spinner stopAnimating];
-        });
-    });
-}
-
 - (void)startSpinner {
     _spinner = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -133,11 +111,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [_spinner stopAnimating];
 //    });
 }
-
-//- (void)loadView {
-//    [super loadView];
-//    [self startSpinner];
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -421,13 +394,17 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self startSpinner];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopSpinner];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // Perform cleanup
     //
     [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
     [ManagedObjectUtils deleteChildlessMatchAssoc:self.context];
     
-
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [self loadMixCollectionViewData];
     
@@ -1176,6 +1153,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     } else {
         return 0;
+    }
+}
+
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+        [self stopSpinner];
     }
 }
 

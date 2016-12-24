@@ -5548,11 +5548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "504298770.055649"
+            timestampString = "504299507.656053"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1425"
-            endingLineNumber = "1425"
+            startingLineNumber = "1408"
+            endingLineNumber = "1408"
             landmarkName = "-pressCancel"
             landmarkType = "7">
          </BreakpointContent>
@@ -5564,11 +5564,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "504298770.055649"
+            timestampString = "504299375.996043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
             landmarkName = "-viewDidAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5580,11 +5580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "504297460.803277"
+            timestampString = "504299144.151121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-startSpinner"
             landmarkType = "7">
             <Locations>
