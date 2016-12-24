@@ -558,16 +558,6 @@
         [results addObject:name];
     }
     
-//    // Add any supplemental names (defined by this entity key) that may have been saved to NSUserDefaults via Settings
-//    //
-//    NSString *addedNames = [[NSUserDefaults standardUserDefaults] stringForKey:entityName];
-//    if (addedNames) {
-//        NSMutableArray *addedNamesList = [GenericUtils trimStrings:[addedNames componentsSeparatedByString:@","]];
-//        for (NSString *name in addedNamesList) {
-//            [results addObject:name];
-//        }
-//    }
-    
     if ([results count] > 0) {
         return results;
     } else {

@@ -35,6 +35,6 @@
 
 + (void)makeTextViewNonEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border;
 
-+ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border;
++ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content;
 
 @end

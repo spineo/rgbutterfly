@@ -201,7 +201,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Set the placeholders
     //
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Semicolon-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
+    _keywPlaceholder  = @" - Semicolon-sep. keywords, comma-sep. comps - ";
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Description (max. %i chars) - ", MAX_DESC_LEN];
     _otherPlaceholder = [[NSString alloc] initWithFormat:@" - Other Paint Brand (max. of %i chars) - ", MAX_BRAND_LEN];
 
@@ -475,7 +475,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     } else if (indexPath.section == DETAIL_NAME_SECTION) {
         return DEF_MD_TABLE_CELL_HGT;
-
+        
+    } else if (indexPath.section == DETAIL_KEYW_SECTION) {
+        return DEF_LG_TABLE_CELL_HGT;
+        
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -600,21 +603,18 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         // Keywords field
         //
         } else if (indexPath.section == DETAIL_KEYW_SECTION) {
-
-            // Create the keyword text field
-            //
-            UITextField *refName  = [FieldUtils createTextField:_keywEntered tag:KEYW_FIELD_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            UITextView *refName  = [FieldUtils createTextView:_keywEntered tag:KEYW_FIELD_TAG];
+            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTVIEW_HEIGHT)];
             [refName setDelegate:self];
             [cell.contentView addSubview:refName];
             
             if (_editFlag == TRUE) {
                 if ([_keywEntered isEqualToString:@""]) {
-                    [refName setPlaceholder:_keywPlaceholder];
+                    [refName setText:_keywPlaceholder];
                 }
                 
             } else {
-                [FieldUtils makeTextFieldNonEditable:refName content:_keywEntered border:TRUE];
+                [FieldUtils makeTextViewNonEditable:refName content:_keywEntered border:TRUE];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
 
@@ -897,9 +897,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
-        if (textField.tag == KEYW_FIELD_TAG) {
-            _keywEntered = textField.text;
-        } else if (textField.tag == DESC_FIELD_TAG) {
+        if (textField.tag == DESC_FIELD_TAG) {
             _descEntered = textField.text;
         } else if (textField.tag == OTHER_FIELD_TAG) {
             _otherName   = textField.text;
@@ -928,11 +926,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.tag == KEYW_FIELD_TAG && textField.text.length >= MAX_KEYW_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_KEYW_LEN];
-        [self presentViewController:myAlert animated:YES completion:nil];
-        return NO;
-    } else if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
+    if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
         UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
@@ -954,15 +948,25 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 -(void)textViewDidBeginEditing:(UITextView *)textView {
     textView.text = [GenericUtils trimString:textView.text];
     
-    if ([textView.text isEqualToString:@""]) {
-        UIAlertController *myAlert = [AlertUtils noValueAlert];
-        [self presentViewController:myAlert animated:YES completion:nil];
+    if (textView.tag == NAME_FIELD_TAG) {
+        if ([textView.text isEqualToString:@""]) {
+            UIAlertController *myAlert = [AlertUtils noValueAlert];
+            [self presentViewController:myAlert animated:YES completion:nil];
+        }
+        _nameEntered = textView.text;
+
+    } else if (textView.tag == KEYW_FIELD_TAG) {
+        _keywEntered = textView.text;
     }
-    _nameEntered = textView.text;
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
-    _nameEntered = textView.text;
+    if (textView.tag == NAME_FIELD_TAG) {
+        _nameEntered = textView.text;
+
+    } else if (textView.tag == KEYW_FIELD_TAG) {
+        _keywEntered = textView.text;
+    }
     [_save setEnabled:TRUE];
 }
 
@@ -974,7 +978,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 // Disable the return button for newlines (resignFirstResponder instead_
 //
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
