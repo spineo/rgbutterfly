@@ -47,7 +47,6 @@
 }
 
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage {
-    
     CGContextRef    context = NULL;
     CGColorSpaceRef colorSpace;
     void *          bitmapData;
@@ -103,7 +102,6 @@
 }
 
 + (NSString *)colorCategoryFromHue:(PaintSwatches *)swatchObj {
-    
     int degHue = [[swatchObj deg_hue] intValue];
 
     int red    = [[swatchObj red] intValue];
@@ -232,7 +230,6 @@
 }
 
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size {
-    
     UIGraphicsBeginImageContext(size);
     
     [image drawInRect:CGRectMake(0,0,size.width,size.height)];
@@ -259,16 +256,14 @@
 }
 
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
-  
-    UIColor *swatchColor = [UIColor colorWithRed:([swatchObj.red floatValue]/255.0) green:([swatchObj.green floatValue]/255.0) blue:([swatchObj.blue floatValue]/255.0) alpha:[swatchObj.alpha floatValue]];
-    
-    UIImage *rgbImage = [ColorUtils imageWithColor:swatchColor objWidth:width objHeight:height];
-    
-    return rgbImage;
+    return [ColorUtils imageWithColor:[ColorUtils colorFromSwatch:swatchObj] objWidth:width objHeight:height];
+}
+
++ (UIColor *)colorFromSwatch:(PaintSwatches *)swatchObj {
+    return [UIColor colorWithRed:([swatchObj.red floatValue]/255.0) green:([swatchObj.green floatValue]/255.0) blue:([swatchObj.blue floatValue]/255.0) alpha:[swatchObj.alpha floatValue]];
 }
 
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
-    
     CGSize size = CGSizeMake(width, height);
     
     UIImage *resizedImage   = [self resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
@@ -277,7 +272,6 @@
 }
 
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count {
-    
     UIImage *retImage = image;
     
     NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
@@ -298,7 +292,6 @@
 }
 
 + (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch {
-    
     UIImage *retImage = image;
     
     NSString *rgbValue = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i Hue=%i", [[paintSwatch red] intValue], [[paintSwatch green] intValue], [[paintSwatch blue] intValue], [[paintSwatch deg_hue] intValue]];
@@ -319,10 +312,8 @@
 }
 
 + (UIImage*)drawLabel:(UIImage*)image label:(NSString *)label {
-    
     UIImage *retImage = image;
 
-    
     UIGraphicsBeginImageContext(image.size);
     
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
@@ -339,7 +330,6 @@
 }
 
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect {
-    
     rect = CGRectMake(rect.origin.x    * image.scale,
                       rect.origin.y    * image.scale,
                       rect.size.width  * image.scale,
@@ -357,7 +347,6 @@
 }
 
 + (UIColor *)setBestColorContrast:(NSString *)colorName {
-    
     UIColor *textColor = DARK_TEXT_COLOR;
     if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
         [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {

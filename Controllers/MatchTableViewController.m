@@ -303,8 +303,7 @@ const int IMAGE_TAG  = 6;
     } else if (section == MATCH_SECTION) {
         int match_ct = (int)[_matchedSwatches count] - 1;
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
-        
-        //if (_scrollFlag == FALSE || _editFlag == FALSE) {
+
         if (_scrollFlag == FALSE) {
             UIImage *refImage;
             
@@ -362,6 +361,7 @@ const int IMAGE_TAG  = 6;
             
             [headerView addSubview:refImageView];
             [headerView addSubview:croppedImageView];
+
         } else {
             CGFloat imageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
             
@@ -373,16 +373,15 @@ const int IMAGE_TAG  = 6;
             
             // Tag the first reference image
             //
-            //refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
-            [refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [refImageView.layer setBorderWidth:BORDER_WIDTH_NONE];
             [refImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
-            [refImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+            //[refImageView.layer setBorderColor:[[ColorUtils colorFromSwatch:_selPaintSwatch] CGColor]];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
-            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, imageViewWidth, _imageViewHeight)];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + DEF_FIELD_PADDING, imageViewWidth, _imageViewHeight)];
             
             [headerView addSubview:refImageView];
         }
@@ -415,8 +414,14 @@ const int IMAGE_TAG  = 6;
     //
     [cell setBackgroundColor:DARK_BG_COLOR];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [tableView setSeparatorColor:GRAY_BG_COLOR];
+    
+    if (_scrollFlag == TRUE) {
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    } else {
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        [tableView setSeparatorColor:GRAY_BG_COLOR];
+    }
+
     [tableView setAllowsSelectionDuringEditing:YES];
 
     [cell.imageView setImage:nil];
@@ -474,7 +479,6 @@ const int IMAGE_TAG  = 6;
     // Set up the description field
     //
     } else if (indexPath.section == DESC_SECTION) {
-        
         // Create the description text field
         //
         UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
@@ -507,9 +511,7 @@ const int IMAGE_TAG  = 6;
         
         int index = (int)indexPath.row;
         
-//        if (_editFlag == FALSE || _scrollFlag == FALSE || _pressSelectedRow != index) {
         if (_scrollFlag == FALSE || _pressSelectedRow != index) {
-
             if (_isRGB == TRUE) {
                 cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             } else {
@@ -541,8 +543,11 @@ const int IMAGE_TAG  = 6;
             // Add the RGB label
             //
             cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch];
-            
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
+            [cell.imageView.layer setBorderWidth:BORDER_WIDTH_NONE];
+            
+            [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            [tableView setSeparatorColor:CLEAR_COLOR];
             
             [cell.textLabel setText:@""];
             
