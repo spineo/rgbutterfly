@@ -73,6 +73,10 @@
 @property (nonatomic) BOOL appIntroAlert, mixAssocUnfilter;
 @property (nonatomic) int minAssocSize;
 
+// Activity Indicator
+//
+@property (nonatomic, strong) UIActivityIndicatorView *spinner;
+
 @end
 
 
@@ -86,8 +90,56 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 #pragma mark - Initialization and Load Methods
 
-- (void)viewDidLoad {
+- (IBAction)refreshFeed:(id)sender {
+    //main thread
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]; [self.colorTableView addSubview:spinner];
+    
+    //switch to background thread
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        //back to the main thread for the UI call
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner startAnimating];
+        });
+        // more on the background thread
+        
+        // parsing code code
+        
+        //back to the main thread for the UI call
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner stopAnimating];
+        });
+    });
+}
 
+- (void)startSpinner {
+    _spinner = [[UIActivityIndicatorView alloc]
+                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+
+    [_spinner setCenter:self.view.center];
+    [_spinner setHidesWhenStopped:YES];
+    [self.view addSubview:_spinner];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [_spinner startAnimating];
+ //       });
+ //   });
+}
+
+- (void)stopSpinner {
+    //[_spinner stopAnimating];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        [_spinner stopAnimating];
+//    });
+}
+
+//- (void)loadView {
+//    [super loadView];
+//    [self startSpinner];
+//}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
@@ -165,7 +217,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
     }
 
     [GlobalSettings init];
-
     
     // Welcome alert
     //
@@ -365,13 +416,18 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self searchBarSetFrames];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self startSpinner];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // Perform cleanup
     //
     [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
     [ManagedObjectUtils deleteChildlessMatchAssoc:self.context];
-
     
+
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [self loadMixCollectionViewData];
     
@@ -387,6 +443,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else {
         [self loadFullColorsListing];
     }
+    [self stopSpinner];
 }
 
 - (void)loadFullColorsListing {
@@ -438,7 +495,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
         [_letterDefaults setObject:sectionSwatches forKey:letter];
     }
-    
+
     [_colorTableView reloadData];
 }
 
