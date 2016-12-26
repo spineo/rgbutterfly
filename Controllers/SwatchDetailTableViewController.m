@@ -506,7 +506,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         // Remove dynamic text fields
         //
         for (UIView *subview in cell.contentView.subviews) {
-            if ([subview isKindOfClass:[UITextField class]]) {
+            if ([subview isKindOfClass:[UITextField class]] || [subview isKindOfClass:[UITextView class]]) {
                 [subview removeFromSuperview];
             }
         }
