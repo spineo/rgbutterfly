@@ -73,6 +73,7 @@ CGFloat const DEF_NIL_FOOTER        = 1.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
 CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
+CGFloat const DEF_NIL_CORNER_RADIUS = 0.0;
 
 // MIN constants (i.e., tableview header instead of zero) which prevents default setting
 //

@@ -376,7 +376,7 @@ const int IMAGE_TAG  = 6;
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
             [refImageView.layer setBorderWidth:BORDER_WIDTH_NONE];
-            [refImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+            [refImageView.layer setCornerRadius:DEF_NIL_CORNER_RADIUS];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
@@ -544,6 +544,7 @@ const int IMAGE_TAG  = 6;
             cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch location:@"bottom"];
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
             [cell.imageView.layer setBorderWidth:BORDER_WIDTH_NONE];
+            [cell.imageView.layer setCornerRadius:DEF_NIL_CORNER_RADIUS];
             
             [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
             [tableView setSeparatorColor:CLEAR_COLOR];
