@@ -35,7 +35,7 @@ NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorP
 
 // Upgrade the database from the local path copy or GitHub
 //
-int const FORCE_UPDATE_DB   = 0;
+int const FORCE_UPDATE_DB      = 0;
 
 // GitHub related
 //
@@ -82,6 +82,15 @@ CGFloat const DEF_MIN_HEADER        = 1.0;
 //
 CGFloat const DEF_HGT_ALIGN_FACTOR  = 2.0;
 CGFloat const DEF_CORNER_RAD_FACTOR = 2.0;
+
+// Used for embedded labels
+//
+CGFloat const DEF_X_RECT_INSET      = 2.0;
+CGFloat const DEF_Y_RECT_INSET      = 2.0;
+CGFloat const DEF_X_COORD           = 1.0;
+CGFloat const DEF_Y_COORD           = 1.0;
+CGFloat const DEF_BOTTOM_OFFSET     = 6.0;
+
 
 // UI Label
 //

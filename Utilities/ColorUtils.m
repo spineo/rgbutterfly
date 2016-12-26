@@ -279,11 +279,11 @@
     UIGraphicsBeginImageContext(image.size);
     
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
+    CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     
     NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
     
-    [countStr drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
+    [countStr drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -291,7 +291,7 @@
     return newImage;
 }
 
-+ (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch {
++ (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch location:(NSString *)location {
     UIImage *retImage = image;
     
     NSString *rgbValue = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i Hue=%i", [[paintSwatch red] intValue], [[paintSwatch green] intValue], [[paintSwatch blue] intValue], [[paintSwatch deg_hue] intValue]];
@@ -299,11 +299,17 @@
     UIGraphicsBeginImageContext(image.size);
     
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
     
-    NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: LG_TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
+    CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
+    if ([location isEqualToString:@"bottom"]) {
+        CGFloat fontHeight = [LG_TAP_AREA_FONT pointSize];
+        CGFloat yLocation = image.size.height - (fontHeight + DEF_Y_RECT_INSET + DEF_BOTTOM_OFFSET);
+        rect = CGRectMake(DEF_X_COORD, yLocation, image.size.width, image.size.height);
+    }
     
-    [rgbValue drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
+    NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:LG_TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
+    
+    [rgbValue drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -317,11 +323,11 @@
     UIGraphicsBeginImageContext(image.size);
     
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
+    CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     
     NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: LG_TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
     
-    [label drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
+    [label drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

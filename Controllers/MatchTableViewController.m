@@ -369,7 +369,7 @@ const int IMAGE_TAG  = 6;
             
             // Add the RGB label
             //
-            refImage = [ColorUtils drawRGBLabel:refImage rgbValue:_selPaintSwatch];
+            refImage = [ColorUtils drawRGBLabel:refImage rgbValue:_selPaintSwatch location:@"top"];
             
             // Tag the first reference image
             //
@@ -377,7 +377,6 @@ const int IMAGE_TAG  = 6;
             
             [refImageView.layer setBorderWidth:BORDER_WIDTH_NONE];
             [refImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
-            //[refImageView.layer setBorderColor:[[ColorUtils colorFromSwatch:_selPaintSwatch] CGColor]];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
@@ -542,7 +541,7 @@ const int IMAGE_TAG  = 6;
             
             // Add the RGB label
             //
-            cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch];
+            cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch location:@"bottom"];
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
             [cell.imageView.layer setBorderWidth:BORDER_WIDTH_NONE];
             

@@ -88,6 +88,14 @@ extern CGFloat const DEF_MIN_HEADER;
 extern CGFloat const DEF_HGT_ALIGN_FACTOR;
 extern CGFloat const DEF_CORNER_RAD_FACTOR;
 
+// Used for embedded labels
+//
+extern CGFloat const DEF_X_RECT_INSET;
+extern CGFloat const DEF_Y_RECT_INSET;
+extern CGFloat const DEF_X_COORD;
+extern CGFloat const DEF_Y_COORD;
+extern CGFloat const DEF_BOTTOM_OFFSET;
+
 // UI Label
 //
 extern CGFloat const DEF_LABEL_WIDTH;
