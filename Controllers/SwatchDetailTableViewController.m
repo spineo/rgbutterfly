@@ -946,26 +946,28 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 #pragma mark - TextView methods
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
-    textView.text = [GenericUtils trimString:textView.text];
-    
     if (textView.tag == NAME_FIELD_TAG) {
+        [textView setText:[GenericUtils trimString:[textView text]]];
         if ([textView.text isEqualToString:@""]) {
             UIAlertController *myAlert = [AlertUtils noValueAlert];
             [self presentViewController:myAlert animated:YES completion:nil];
         }
-        _nameEntered = textView.text;
+        _nameEntered = [textView text];
 
     } else if (textView.tag == KEYW_FIELD_TAG) {
-        _keywEntered = textView.text;
+        if ([[textView text] isEqualToString:_keywPlaceholder]) {
+            [textView setText:@""];
+        }
+        _keywEntered = [textView text];
     }
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.tag == NAME_FIELD_TAG) {
-        _nameEntered = textView.text;
+        _nameEntered = [textView text];
 
     } else if (textView.tag == KEYW_FIELD_TAG) {
-        _keywEntered = textView.text;
+        _keywEntered = [textView text];
     }
     [_save setEnabled:TRUE];
 }
