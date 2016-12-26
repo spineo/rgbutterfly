@@ -214,7 +214,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height {
-    CGRect rect = CGRectMake(0.0f, 0.0f, width, height);
+    CGRect rect = CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -278,7 +278,7 @@
     
     UIGraphicsBeginImageContext(image.size);
     
-    [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
     CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     
     NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
@@ -298,7 +298,7 @@
     
     UIGraphicsBeginImageContext(image.size);
     
-    [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
     
     CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     if ([location isEqualToString:@"bottom"]) {
@@ -322,7 +322,7 @@
 
     UIGraphicsBeginImageContext(image.size);
     
-    [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+    [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
     CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     
     NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: LG_TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
