@@ -319,10 +319,10 @@ const int IMAGE_TAG  = 6;
 
             
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
-            
-            [refImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [refImageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-            [refImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+        
+            [refImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+            [refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [refImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
@@ -376,11 +376,16 @@ const int IMAGE_TAG  = 6;
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
             
             [refImageView.layer setBorderWidth:BORDER_WIDTH_NONE];
+            //[refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            //[refImageView.layer setBorderColor:[[ColorUtils colorFromSwatch:_selPaintSwatch] CGColor]];
             [refImageView.layer setCornerRadius:DEF_NIL_CORNER_RADIUS];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
-            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + DEF_FIELD_PADDING, imageViewWidth, _imageViewHeight)];
+            
+            // Align this border with the cell match
+            //
+            [refImageView setFrame:CGRectMake(_imageViewXOffset + DEF_X_COORD, DEF_TABLE_HDR_HEIGHT + DEF_FIELD_PADDING, imageViewWidth, _imageViewHeight)];
             
             [headerView addSubview:refImageView];
         }
