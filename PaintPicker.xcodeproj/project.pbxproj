@@ -654,7 +654,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "ColorPicker" */;
+			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "PaintPicker" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1004,7 +1004,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "ColorPicker" */ = {
+		210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "PaintPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C89881A9F6C440003CC85 /* Debug */,
