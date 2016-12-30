@@ -164,7 +164,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 
+                                                //[self startSpinner];
                                                 NSString *errStr = [GenericUtils upgradeDB];
+                                                //[self stopSpinner];
+
                                                 UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
                                                 [self presentViewController:alert animated:YES completion:nil];
                                                 

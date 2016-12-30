@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:AcrylicsColorPicker.xcodeproj">
+      location = "self:/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/ColorPicker.xcodeproj">
    </FileRef>
 </Workspace>

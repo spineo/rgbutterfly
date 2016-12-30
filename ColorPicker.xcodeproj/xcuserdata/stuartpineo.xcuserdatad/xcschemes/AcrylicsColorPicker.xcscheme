@@ -17,7 +17,7 @@
                BlueprintIdentifier = "210C89661A9F6C440003CC85"
                BuildableName = "AcrylicsColorPicker.app"
                BlueprintName = "AcrylicsColorPicker"
-               ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+               ReferencedContainer = "container:ColorPicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "210C897F1A9F6C440003CC85"
                BuildableName = "AcrylicsColorPickerTests.xctest"
                BlueprintName = "AcrylicsColorPickerTests"
-               ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+               ReferencedContainer = "container:ColorPicker.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "21DE32DD1D3BF847007669DF"
                BuildableName = "AcrylicsColorPickerUITests.xctest"
                BlueprintName = "AcrylicsColorPickerUITests"
-               ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+               ReferencedContainer = "container:ColorPicker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,7 +55,7 @@
             BlueprintIdentifier = "210C89661A9F6C440003CC85"
             BuildableName = "AcrylicsColorPicker.app"
             BlueprintName = "AcrylicsColorPicker"
-            ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+            ReferencedContainer = "container:ColorPicker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,7 +78,7 @@
             BlueprintIdentifier = "210C89661A9F6C440003CC85"
             BuildableName = "AcrylicsColorPicker.app"
             BlueprintName = "AcrylicsColorPicker"
-            ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+            ReferencedContainer = "container:ColorPicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -97,7 +97,7 @@
             BlueprintIdentifier = "210C89661A9F6C440003CC85"
             BuildableName = "AcrylicsColorPicker.app"
             BlueprintName = "AcrylicsColorPicker"
-            ReferencedContainer = "container:AcrylicsColorPicker.xcodeproj">
+            ReferencedContainer = "container:ColorPicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
