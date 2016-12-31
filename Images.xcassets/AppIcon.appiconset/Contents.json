@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Icon-App-20x20@2x.png",
+      "size" : "20x20",
       "scale" : "2x"
     },
     {
@@ -28,8 +27,9 @@
       "scale" : "3x"
     },
     {
-      "idiom" : "iphone",
       "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-40x40@2x.png",
       "scale" : "2x"
     },
     {
@@ -51,14 +51,14 @@
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-App-60x60@2x.png",
+      "size" : "60x60",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "Icon-App-60x60@3x.png",
       "scale" : "3x"
     },
     {
@@ -68,8 +68,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-20x20@2x.png",
       "scale" : "2x"
     },
     {
@@ -79,9 +80,8 @@
       "scale" : "1x"
     },
     {
-      "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-App-29x29@2x.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -138,14 +138,14 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "car",
       "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "Icon-App-60x60@2x.png",
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
       "idiom" : "car",
-      "filename" : "Icon-App-60x60@3x.png",
+      "size" : "60x60",
       "scale" : "3x"
     },
     {
@@ -165,6 +165,7 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
+      "filename" : "Icon-App-29x29@2x.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
@@ -178,7 +179,6 @@
     {
       "size" : "40x40",
       "idiom" : "watch",
-      "filename" : "Icon-App-40x40@2x.png",
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "38mm"
