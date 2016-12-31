@@ -268,7 +268,7 @@
 		21BF75F71E05C17100363BBB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ExternalUtilities/Reachability.h; sourceTree = "<group>"; };
 		21BF75F81E05C17100363BBB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ExternalUtilities/Reachability.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21DE32DE1D3BF847007669DF /* PaintPicker.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPicker.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
 		21DE32E21D3BF847007669DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -529,7 +529,7 @@
 			children = (
 				210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */,
 				210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */,
-				21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */,
+				21DE32DE1D3BF847007669DF /* PaintPicker.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -622,7 +622,7 @@
 			);
 			name = AcrylicsColorPickerUITests;
 			productName = AcrylicsColorPickerUITests;
-			productReference = 21DE32DE1D3BF847007669DF /* AcrylicsColorPickerUITests.xctest */;
+			productReference = 21DE32DE1D3BF847007669DF /* PaintPicker.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -631,7 +631,7 @@
 		210C895F1A9F6C440003CC85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Stuart Pineo";
 				TargetAttributes = {
 					210C89661A9F6C440003CC85 = {
@@ -833,8 +833,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -844,6 +846,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -860,6 +863,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -878,8 +882,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -888,6 +894,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -896,6 +903,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -980,7 +988,7 @@
 				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PaintPicker;
 				TEST_TARGET_NAME = AcrylicsColorPicker;
 				USES_XCTRUNNER = YES;
 			};
@@ -995,7 +1003,7 @@
 				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PaintPicker;
 				TEST_TARGET_NAME = AcrylicsColorPicker;
 				USES_XCTRUNNER = YES;
 			};
