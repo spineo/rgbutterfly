@@ -121,7 +121,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _dbPollUpdateOnText  = @"Perform Check for Database Update";
     _dbPollUpdateOffText = @"Do Not Check for Database Update ";
     
-    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] && [_userDefaults stringForKey:_dbPollUpdateText]) {
+    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] == TRUE || ![[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY]) {
         _dbPollUpdateFlag = TRUE;
         _labelText = _dbPollUpdateOnText;
         
