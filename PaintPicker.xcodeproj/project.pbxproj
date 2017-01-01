@@ -241,8 +241,8 @@
 		2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TapArea+CoreDataProperties.m"; path = "ManagedObject/TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2109A1371DFED84F0076A095 /* MatchAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAlgorithms.h; path = Algorithms/MatchAlgorithms.h; sourceTree = "<group>"; };
 		2109A1381DFED84F0076A095 /* MatchAlgorithms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithms.m; path = Algorithms/MatchAlgorithms.m; sourceTree = "<group>"; };
-		210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcrylicsColorPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcrylicsColorPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89671A9F6C440003CC85 /* PaintPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
@@ -259,6 +259,7 @@
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
+		217A59181E181D04005BCE66 /* PaintPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaintPicker.entitlements; sourceTree = "<group>"; };
 		217DFF781E09710A00E02183 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -516,6 +517,7 @@
 		210C895E1A9F6C440003CC85 = {
 			isa = PBXGroup;
 			children = (
+				217A59181E181D04005BCE66 /* PaintPicker.entitlements */,
 				2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */,
 				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
 				210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */,
@@ -527,8 +529,8 @@
 		210C89681A9F6C440003CC85 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */,
-				210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */,
+				210C89671A9F6C440003CC85 /* PaintPicker.app */,
+				210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */,
 				21DE32DE1D3BF847007669DF /* PaintPicker.xctest */,
 			);
 			name = Products;
@@ -572,9 +574,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		210C89661A9F6C440003CC85 /* AcrylicsColorPicker */ = {
+		210C89661A9F6C440003CC85 /* PaintPicker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPicker" */;
+			buildConfigurationList = 210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPicker" */;
 			buildPhases = (
 				210C89631A9F6C440003CC85 /* Sources */,
 				210C89641A9F6C440003CC85 /* Frameworks */,
@@ -584,14 +586,14 @@
 			);
 			dependencies = (
 			);
-			name = AcrylicsColorPicker;
+			name = PaintPicker;
 			productName = AcrylicsColorPicker;
-			productReference = 210C89671A9F6C440003CC85 /* AcrylicsColorPicker.app */;
+			productReference = 210C89671A9F6C440003CC85 /* PaintPicker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		210C897F1A9F6C440003CC85 /* AcrylicsColorPickerTests */ = {
+		210C897F1A9F6C440003CC85 /* PaintPickerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerTests" */;
+			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPickerTests" */;
 			buildPhases = (
 				210C897C1A9F6C440003CC85 /* Sources */,
 				210C897D1A9F6C440003CC85 /* Frameworks */,
@@ -602,14 +604,14 @@
 			dependencies = (
 				210C89821A9F6C440003CC85 /* PBXTargetDependency */,
 			);
-			name = AcrylicsColorPickerTests;
+			name = PaintPickerTests;
 			productName = AcrylicsColorPickerTests;
-			productReference = 210C89801A9F6C440003CC85 /* AcrylicsColorPickerTests.xctest */;
+			productReference = 210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		21DE32DD1D3BF847007669DF /* AcrylicsColorPickerUITests */ = {
+		21DE32DD1D3BF847007669DF /* PaintPickerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerUITests" */;
+			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "PaintPickerUITests" */;
 			buildPhases = (
 				21DE32DA1D3BF847007669DF /* Sources */,
 				21DE32DB1D3BF847007669DF /* Frameworks */,
@@ -620,7 +622,7 @@
 			dependencies = (
 				21DE32E41D3BF847007669DF /* PBXTargetDependency */,
 			);
-			name = AcrylicsColorPickerUITests;
+			name = PaintPickerUITests;
 			productName = AcrylicsColorPickerUITests;
 			productReference = 21DE32DE1D3BF847007669DF /* PaintPicker.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -639,6 +641,12 @@
 						DevelopmentTeam = PEWN4D59QB;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
 							com.apple.iCloud = {
 								enabled = 0;
 							};
@@ -667,9 +675,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				210C89661A9F6C440003CC85 /* AcrylicsColorPicker */,
-				210C897F1A9F6C440003CC85 /* AcrylicsColorPickerTests */,
-				21DE32DD1D3BF847007669DF /* AcrylicsColorPickerUITests */,
+				210C89661A9F6C440003CC85 /* PaintPicker */,
+				210C897F1A9F6C440003CC85 /* PaintPickerTests */,
+				21DE32DD1D3BF847007669DF /* PaintPickerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -809,12 +817,12 @@
 /* Begin PBXTargetDependency section */
 		210C89821A9F6C440003CC85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 210C89661A9F6C440003CC85 /* AcrylicsColorPicker */;
+			target = 210C89661A9F6C440003CC85 /* PaintPicker */;
 			targetProxy = 210C89811A9F6C440003CC85 /* PBXContainerItemProxy */;
 		};
 		21DE32E41D3BF847007669DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 210C89661A9F6C440003CC85 /* AcrylicsColorPicker */;
+			target = 210C89661A9F6C440003CC85 /* PaintPicker */;
 			targetProxy = 21DE32E31D3BF847007669DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -823,7 +831,7 @@
 		210C89881A9F6C440003CC85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -862,9 +870,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -874,7 +886,7 @@
 		210C89891A9F6C440003CC85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -905,8 +917,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -922,10 +938,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -939,10 +957,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
+				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -964,7 +984,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaintPicker.app/PaintPicker";
 			};
 			name = Debug;
 		};
@@ -980,7 +1000,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcrylicsColorPicker.app/AcrylicsColorPicker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaintPicker.app/PaintPicker";
 			};
 			name = Release;
 		};
@@ -1025,7 +1045,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPicker" */ = {
+		210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C898B1A9F6C440003CC85 /* Debug */,
@@ -1034,7 +1054,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerTests" */ = {
+		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPickerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C898E1A9F6C440003CC85 /* Debug */,
@@ -1043,7 +1063,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "AcrylicsColorPickerUITests" */ = {
+		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "PaintPickerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21DE32E61D3BF847007669DF /* Debug */,
