@@ -97,19 +97,11 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_spinner setCenter:self.view.center];
     [_spinner setHidesWhenStopped:YES];
     [self.view addSubview:_spinner];
-    
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [_spinner startAnimating];
- //       });
- //   });
+    [_spinner startAnimating];
 }
 
 - (void)stopSpinner {
-    //[_spinner stopAnimating];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-        [_spinner stopAnimating];
-//    });
+    [_spinner stopAnimating];
 }
 
 - (void)viewDidLoad {
