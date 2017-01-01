@@ -116,11 +116,12 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     // Look at what is currently in Settings
     //
-    BOOL pollUpdate = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+    BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+    BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
     // Update the database?
     //
-    if (pollUpdate == TRUE) {
+    if (pollUpdate == TRUE || !existsPollUpdateKey) {
         
         // Check if there is a network connection
         //
@@ -129,14 +130,15 @@ int MIX_ASSOC_MIN_SIZE = 1;
             [self presentViewController:alert animated:YES completion:nil];
             
         } else {
-            BOOL dbForceUpdate           = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
+            BOOL dbForceUpdate          = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
+            BOOL existsDbForceUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_FORCE_UPDATE_KEY];
             
             int updateStat = 0;
             NSString *updateMsg = @"A New Database Version was Detected";
-            if (dbForceUpdate == TRUE) {
+            if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
                 updateStat = 2;
-                updateMsg = @"A Force Update was Selected";
-                
+                updateMsg = @"A Force Update was Selected or new Deployment Detected";
+
                 // Reset force update back to FALSE
                 //
                 [_userDefaults setBool:FALSE forKey:DB_FORCE_UPDATE_KEY];
@@ -156,9 +158,9 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 
-                                                [self startSpinner];
+                                                //[self startSpinner];
                                                 NSString *errStr = [GenericUtils upgradeDB];
-                                                [self stopSpinner];
+                                                //[self stopSpinner];
 
                                                 UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
                                                 [self presentViewController:alert animated:YES completion:nil];
@@ -395,6 +397,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self loadData];
+}
+
+- (void)loadData {
     // Perform cleanup
     //
     [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
@@ -402,16 +408,16 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [self loadMixCollectionViewData];
-    
+        
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
         [self loadMatchCollectionViewData];
-    
+        
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
         [self loadKeywordData];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         [self loadColorsData];
-
+        
     } else {
         [self loadFullColorsListing];
     }
@@ -1098,7 +1104,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if ([_listingType isEqualToString:MIX_TYPE]) {
         _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
@@ -1122,7 +1127,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
         _selPaintSwatch = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
     }
-    
 }
 
 // Keywords index
@@ -1552,10 +1556,14 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Segue and Unwind Methods
+// Reload, Segue, and Unwind Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Segue and Unwind Methods
+#pragma mark - Reload, Segue, and Unwind Methods
+
+- (IBAction)reload:(id)sender {
+    [self loadData];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ImagePickerSegue"]) {

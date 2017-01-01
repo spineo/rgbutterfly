@@ -142,6 +142,8 @@
     NSString *destDBShmFile = [destDBFile stringByAppendingString:@"-shm"];
     NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
     
+    NSString *successUpdMsg = @"Update was Successful! (use the bottom left Home button to refresh the table)";
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     NSError *error = nil;
@@ -225,17 +227,17 @@
             
             NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
             
-            return @"Update was Successful!";
+            return successUpdMsg;
             
         } @catch (NSException *exception) {
             return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
         }
 
     } else {
-        return @"Update Failed on md5 (keeping current snapshot, please try again)";
+        return successUpdMsg;
     }
     
-    return @"Update was Successful!";
+    return @"Update was Successful! (use the bottom left Home button to refresh the table)";
 }
 
 @end
