@@ -234,10 +234,10 @@
         }
 
     } else {
-        return successUpdMsg;
+        return @"Update Failed on md5 (keeping current snapshot, please try again)";
     }
     
-    return @"Update was Successful! (use the bottom left Home button to refresh the table)";
+    return successUpdMsg;
 }
 
 @end
