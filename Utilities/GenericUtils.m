@@ -88,7 +88,7 @@
     }
     
     @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
         
     } @catch (NSException *exception) {
         NSLog(@"Unable to HTTP Get '%@'\n", GIT_VER_FILE);
@@ -111,7 +111,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *currVersionNumber  = [userDefaults stringForKey:DB_VERSION_KEY];
     
-    NSLog(@"***** Current Version Number=%@", currVersionNumber);
+    NSLog(@"***** New Version Number=%@", versionNumber);
 
     if (! (currVersionNumber && [versionNumber isEqualToString:currVersionNumber])) {
         
@@ -170,7 +170,7 @@
     }
 
     @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
@@ -209,7 +209,7 @@
     // Download the latest database to a '-tmp' suffix file
     //
     @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", GIT_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
+        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
     } @catch (NSException *exception) {
         return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
@@ -217,6 +217,7 @@
     // Verify the MD5 value and, if equal, perform the update (else, leave in place the current snapshot)
     //
     NSString *md5sum = [md5 md5Hash:destDBTmpFile];
+    NSLog(@"******************* MD5 SUM=%@", md5sum);
     if ([currMd5sum isEqualToString:md5sum]) {
         @try {
             [FileUtils fileRemove:destDBShmFile fileManager:fileManager];

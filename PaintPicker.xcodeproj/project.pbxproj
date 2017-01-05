@@ -77,6 +77,7 @@
 		2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */; };
 		2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1381DFED84F0076A095 /* MatchAlgorithms.m */; };
 		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
+		21289D4D1E1E93C8007D8243 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 21289D4C1E1E93C8007D8243 /* NSData+Base64.m */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
@@ -245,6 +246,8 @@
 		210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
+		21289D4B1E1E93C8007D8243 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "ExternalUtilities/NSData+Base64.h"; sourceTree = "<group>"; };
+		21289D4C1E1E93C8007D8243 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "ExternalUtilities/NSData+Base64.m"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -558,6 +561,8 @@
 			children = (
 				21BF75F71E05C17100363BBB /* Reachability.h */,
 				21BF75F81E05C17100363BBB /* Reachability.m */,
+				21289D4B1E1E93C8007D8243 /* NSData+Base64.h */,
+				21289D4C1E1E93C8007D8243 /* NSData+Base64.m */,
 			);
 			name = ExternalUtilities;
 			sourceTree = "<group>";
@@ -745,6 +750,7 @@
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */,
+				21289D4D1E1E93C8007D8243 /* NSData+Base64.m in Sources */,
 				2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
 				2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */,

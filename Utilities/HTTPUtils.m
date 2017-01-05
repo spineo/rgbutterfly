@@ -10,6 +10,7 @@
 #import "GlobalSettings.h"
 #import "FileUtils.h"
 #import "Reachability.h"
+#import "NSData+Base64.h"
 
 @implementation HTTPUtils
 
@@ -32,6 +33,7 @@
     // Cleanup
     //
     urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSLog(@"************** URL STR=%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -39,6 +41,7 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
     request.HTTPMethod = @"GET";
     [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
 
@@ -54,16 +57,25 @@
         NSLog(@"Failed to get the GIT token from file '%@', error: %@\n", filePath, [error localizedDescription]);
     }
     
-    NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
+    //NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
+    NSLog(@"********** GIT TOKEN=%@", gitToken);
+    
+    //NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
+    //[request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    
+
+    NSData *authData = [gitToken dataUsingEncoding:NSASCIIStringEncoding];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+            NSError *error = nil;
             if (httpResponse.statusCode == 200) {
-                NSError *error = nil;
                 @try {
                     [data writeToFile:fileName atomically:YES];
                     
