@@ -33,7 +33,6 @@
     // Cleanup
     //
     urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSLog(@"************** URL STR=%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -56,13 +55,6 @@
     } @catch(NSException *exception) {
         NSLog(@"Failed to get the GIT token from file '%@', error: %@\n", filePath, [error localizedDescription]);
     }
-    
-    //NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
-    NSLog(@"********** GIT TOKEN=%@", gitToken);
-    
-    //NSString *authValue = [NSString stringWithFormat:@"Token %@", gitToken];
-    //[request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
 
     NSData *authData = [gitToken dataUsingEncoding:NSASCIIStringEncoding];
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];

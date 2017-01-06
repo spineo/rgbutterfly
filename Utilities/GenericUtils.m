@@ -217,7 +217,6 @@
     // Verify the MD5 value and, if equal, perform the update (else, leave in place the current snapshot)
     //
     NSString *md5sum = [md5 md5Hash:destDBTmpFile];
-    NSLog(@"******************* MD5 SUM=%@", md5sum);
     if ([currMd5sum isEqualToString:md5sum]) {
         @try {
             [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
