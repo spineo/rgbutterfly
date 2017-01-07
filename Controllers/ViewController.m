@@ -165,6 +165,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                 UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
                                                 [self presentViewController:alert animated:YES completion:nil];
                                                 
+                                                [self viewDidLoad];
+                                                [self viewDidAppear:YES];
                                             }];
                 
                 UIAlertAction* NoButton = [UIAlertAction
@@ -1560,10 +1562,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Reload, Segue, and Unwind Methods
-
-- (IBAction)reload:(id)sender {
-    [self loadData];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ImagePickerSegue"]) {
