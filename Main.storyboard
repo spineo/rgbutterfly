@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PTY-d8-b92">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1qb-fF-uAW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3" y="-972"/>
+            <point key="canvasLocation" x="935.20000000000005" y="-972.86356821589209"/>
         </scene>
         <!--Action Type Picker-->
         <scene sceneID="KBw-hp-cTX">
@@ -216,7 +216,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNT-qs-PzS" sceneMemberID="firstResponder"/>
                 <exit id="6Dy-2G-g4i" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2160.8000000000002" y="-958.4707646176912"/>
+            <point key="canvasLocation" x="3100" y="-958.4707646176912"/>
         </scene>
         <!--Assoc Table View Controller-->
         <scene sceneID="lM6-9C-2nd">
@@ -396,7 +396,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PiU-6f-IfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1303" y="-970"/>
+            <point key="canvasLocation" x="2240.8000000000002" y="-970.16491754122944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EXI-qA-9cT">
@@ -508,7 +508,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jm7-Yw-ngo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5mr-LJ-zgd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3585" y="-958"/>
+            <point key="canvasLocation" x="4524" y="-958.4707646176912"/>
         </scene>
         <!--Swatch Detail View-->
         <scene sceneID="hkB-SO-5S3">
@@ -630,7 +630,41 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aV-LG-egR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2873" y="-958"/>
+            <point key="canvasLocation" x="3812" y="-958.4707646176912"/>
+        </scene>
+        <!--Init View Controller-->
+        <scene sceneID="Z6W-gP-Xyy">
+            <objects>
+                <viewController storyboardIdentifier="InitViewController" title="Init View Controller" id="1qb-fF-uAW" customClass="InitViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vLf-CC-DZG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ez4-u8-EWc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zJ8-YI-wFE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16d-wX-7f3">
+                                <frame key="frameInset" minX="217" minY="21" width="142" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go To Application &gt;">
+                                    <color key="titleColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="goViewController:" destination="1qb-fF-uAW" eventType="touchUpInside" id="GXY-1q-49n"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ohC-U4-rE0"/>
+                    <connections>
+                        <segue destination="PTY-d8-b92" kind="presentation" identifier="InitViewControllerSegue" id="bF7-eh-oUP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZf-nX-bJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-868" y="-985.45727136431788"/>
         </scene>
         <!--Acrylics Color Picker-->
         <scene sceneID="ZsW-4B-fd7">
@@ -656,7 +690,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A95-Mb-MOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-906" y="-976"/>
+            <point key="canvasLocation" x="-68" y="-978"/>
         </scene>
         <!--Color Picker Settings-->
         <scene sceneID="tiQ-WC-TVX">

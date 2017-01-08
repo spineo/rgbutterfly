@@ -1097,6 +1097,7 @@ const int ASSOC_SET_TAG        = 8;
 
     NSError *error = nil;
     if (![self.context save:&error]) {
+        [self.context rollback];
         NSLog(@"Error delete context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
         NSLog(@"Association delete successful");

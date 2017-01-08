@@ -1099,7 +1099,7 @@ heightForFooterInSection:(NSInteger)section {
         
         [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:_swatchesReadOnly context:self.context];
         [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:_assocsReadOnly context:self.context];
-        
+
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);

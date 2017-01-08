@@ -107,88 +107,18 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    // NSManagedObject subclassing
+    //
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = [self.appDelegate managedObjectContext];
+    
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
     //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
     
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    // Look at what is currently in Settings
-    //
-    BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
-    BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
-    
-    // Update the database?
-    //
-    if (pollUpdate == TRUE || !existsPollUpdateKey) {
-        
-        // Check if there is a network connection
-        //
-        if ([HTTPUtils networkIsReachable] == FALSE) {
-            UIAlertController *alert = [AlertUtils createOkAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
-            [self presentViewController:alert animated:YES completion:nil];
-            
-        } else {
-            BOOL dbForceUpdate          = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
-            BOOL existsDbForceUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_FORCE_UPDATE_KEY];
-            
-            int updateStat = 0;
-            NSString *updateMsg = @"A New Database Version was Detected";
-            if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
-                updateStat = 2;
-                updateMsg = @"A Force Update was Selected or new Deployment Detected";
-
-                // Reset force update back to FALSE
-                //
-                [_userDefaults setBool:FALSE forKey:DB_FORCE_UPDATE_KEY];
-                [_userDefaults synchronize];
-                
-            } else {
-                updateStat = [GenericUtils checkForDBUpdate];
-            }
-            
-            // New version detected
-            //
-            if (updateStat == 2) {
-                UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
-                
-                UIAlertAction* YesButton = [UIAlertAction
-                                            actionWithTitle:@"Yes"
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * action) {
-                                                
-                                                //[self startSpinner];
-                                                NSString *errStr = [GenericUtils upgradeDB];
-                                                //[self stopSpinner];
-
-                                                UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
-                                                [self presentViewController:alert animated:YES completion:nil];
-                                                
-                                                [self viewDidLoad];
-                                                [self viewDidAppear:YES];
-                                            }];
-                
-                UIAlertAction* NoButton = [UIAlertAction
-                                           actionWithTitle:@"No"
-                                           style:UIAlertActionStyleDefault
-                                           handler:nil];
-                
-                [updateConfirm addAction:NoButton];
-                [updateConfirm addAction:YesButton];
-                
-                [self presentViewController:updateConfirm animated:YES completion:nil];
-             
-            // Failed update preparation
-            //
-            } else if (updateStat == 1) {
-                UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-        }
-    }
-
-    [GlobalSettings init];
     
     // Welcome alert
     //
@@ -198,10 +128,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         [self presentViewController:alert animated:YES completion:nil];
     }
 
-    // NSManagedObject subclassing
-    //
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.context = [self.appDelegate managedObjectContext];
+    [GlobalSettings init];
 
     
     // Subjective color data
@@ -1613,6 +1540,21 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (IBAction)unwindToViewController:(UIStoryboardSegue *)segue {
     [self.context rollback];
+}
+
+- (void) registerContextDidSaveNotificationForManagedObjectContext:(NSManagedObjectContext*) moc {
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(mergeChanges:)
+               name:NSManagedObjectContextDidSaveNotification
+             object:moc];
+}
+
+- (void)mergeChanges:(NSNotification *)notification {
+    // Merge changes into the main context on the main thread
+    [self.context performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:)
+                                  withObject:notification
+                               waitUntilDone:YES];
 }
 
 @end
