@@ -179,6 +179,7 @@ extern CGFloat const DEF_SM_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_WIDTH;
 extern CGFloat const DEF_LG_BUTTON_WIDTH;
 extern CGFloat const DEF_BUTTON_HEIGHT;
+extern CGFloat const DEF_LG_BUTTON_HEIGHT;
 extern CGFloat const HIDE_BUTTON_WIDTH;
 
 // Match Button widths
@@ -252,6 +253,10 @@ extern int const MIX_RATIOS_TAG;
 // Add Mix
 //
 extern int const CANCEL_BUTTON_TAG;
+
+// Init Controller
+//
+extern int const CONTINUE_BUTTON_TAG;
 
 // Max Tag used as reference to ensure all table view elements
 // removed from superview (see MatchTableViewController for example)
@@ -430,32 +435,33 @@ extern float const DEF_BORDER_THRESHOLD;
 
 // UI Controller
 //
-#define TITLE_VIEW_FONT    [UIFont boldSystemFontOfSize:18]
+#define TITLE_VIEW_FONT     [UIFont boldSystemFontOfSize:18]
 
 // UITable cell font
 //
-#define TABLE_CELL_FONT    [UIFont systemFontOfSize:12]
-#define LG_TABLE_CELL_FONT [UIFont systemFontOfSize:14]
-#define TABLE_HEADER_FONT  [UIFont boldSystemFontOfSize:14]
+#define TABLE_CELL_FONT     [UIFont systemFontOfSize:12]
+#define LG_TABLE_CELL_FONT  [UIFont systemFontOfSize:14]
+#define TABLE_HEADER_FONT   [UIFont boldSystemFontOfSize:14]
 
 // UITextField and UITextView font
 //
-#define TEXT_LABEL_FONT    [UIFont systemFontOfSize:12]
-#define TEXT_FIELD_FONT    [UIFont systemFontOfSize:12]
-#define PLACEHOLDER_FONT   [UIFont italicSystemFontOfSize:12]
-#define LG_TEXT_FIELD_FONT [UIFont systemFontOfSize:14]
+#define TEXT_LABEL_FONT     [UIFont systemFontOfSize:12]
+#define TEXT_FIELD_FONT     [UIFont systemFontOfSize:12]
+#define PLACEHOLDER_FONT    [UIFont italicSystemFontOfSize:12]
+#define LG_TEXT_FIELD_FONT  [UIFont systemFontOfSize:14]
+#define VLG_TEXT_FIELD_FONT [UIFont systemFontOfSize:16]
 
 // Image Tap Areas
 //
-#define TAP_AREA_FONT      [UIFont systemFontOfSize:10]
-#define LG_TAP_AREA_FONT   [UIFont systemFontOfSize:12]
+#define TAP_AREA_FONT       [UIFont systemFontOfSize:10]
+#define LG_TAP_AREA_FONT    [UIFont systemFontOfSize:12]
 
 // Generic
 //
-#define SMALL_FONT         [UIFont systemFontOfSize:10]
-#define LARGE_BOLD_FONT    [UIFont boldSystemFontOfSize:14]
-#define ITALIC_FONT        [UIFont italicSystemFontOfSize:12]
-#define LARGE_ITALIC_FONT  [UIFont italicSystemFontOfSize:14]
+#define SMALL_FONT          [UIFont systemFontOfSize:10]
+#define LARGE_BOLD_FONT     [UIFont boldSystemFontOfSize:14]
+#define ITALIC_FONT         [UIFont italicSystemFontOfSize:12]
+#define LARGE_ITALIC_FONT   [UIFont italicSystemFontOfSize:14]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
