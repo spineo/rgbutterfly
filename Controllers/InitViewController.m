@@ -30,6 +30,20 @@
 
 @implementation InitViewController
 
+- (void)startSpinner {
+    _spinner = [[UIActivityIndicatorView alloc]
+                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    
+    [_spinner setCenter:self.view.center];
+    [_spinner setHidesWhenStopped:YES];
+    [self.view addSubview:_spinner];
+    [_spinner startAnimating];
+}
+
+- (void)stopSpinner {
+    [_spinner stopAnimating];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -68,15 +82,13 @@
         // Check if there is a network connection
         //
         if ([HTTPUtils networkIsReachable] == FALSE) {
-            //UIAlertController *alert = [AlertUtils createOkAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
-            //[self presentViewController:alert animated:YES completion:nil];
-            [_initialTextView setText:@"No Network Connectivity Detected. This is needed for the database version check. Please verify your device settings"];
+            UIAlertController *alert = [AlertUtils createOkAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
+            [self presentViewController:alert animated:YES completion:nil];
             
         } else {
             BOOL dbForceUpdate          = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
             BOOL existsDbForceUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_FORCE_UPDATE_KEY];
-            
-            //int updateStat = 0;
+    
             NSString *updateMsg = @"A New Database Version was Detected";
             if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
                 _updateStat = 2;
@@ -100,14 +112,16 @@
                                             actionWithTitle:@"Yes"
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                //[self startSpinner];
+                                                [self startSpinner];
                                                 NSString *errStr = [GenericUtils upgradeDB];
                                                 
-                                                //[self stopSpinner];
-                                                
-                                                
+                                
+                            
                                                 UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
-                                                [self presentViewController:alert animated:YES completion:nil];
+                                                [self presentViewController:alert animated:YES completion:^{
+                                                    _updateStat = 0;
+                                                    [self stopSpinner];
+                                                }];
 
                                             }];
                 
@@ -156,7 +170,7 @@
         [_initialTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
         
         [self.view addSubview:_continueButton];
-        [self.view addSubview:_initialTextView];
+        //[self.view addSubview:_initialTextView];
     }
 }
 

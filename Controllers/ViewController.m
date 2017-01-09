@@ -71,7 +71,7 @@
 //
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic) BOOL appIntroAlert, mixAssocUnfilter;
-@property (nonatomic) int minAssocSize;
+@property (nonatomic) int minAssocSize, updateStat;
 
 // Activity Indicator
 //
@@ -119,6 +119,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
+    
     
     // Welcome alert
     //
