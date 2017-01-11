@@ -294,6 +294,11 @@ extern NSString * const MIX_RATIOS_KEY;
 extern NSString * const MIX_ASSOC_COUNT_KEY;
 extern NSString * const ADD_BRANDS_KEY;
 
+// Activity (i.e., spinner) label indicator
+//
+extern NSString * const SPINNER_LABEL_PROC;
+extern NSString * const SPINNER_LABEL_LOAD;
+
 // Alerts related
 //
 extern NSString * const ALERTS_FILTER_KEY;

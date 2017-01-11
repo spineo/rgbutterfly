@@ -76,6 +76,7 @@
 // Activity Indicator
 //
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
+@property (nonatomic, strong) UILabel *updateLabel;
 
 @end
 
@@ -98,15 +99,27 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [_spinner setHidesWhenStopped:YES];
     [self.view addSubview:_spinner];
     [_spinner startAnimating];
+    
+    CGFloat labelYOffset = (self.view.bounds.size.height / 2.0) - (DEF_LABEL_HEIGHT / 2.0);
+    _updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, labelYOffset, self.view.bounds.size.width, DEF_LABEL_HEIGHT)];
+    
+    [_updateLabel setText:SPINNER_LABEL_LOAD];
+    [_updateLabel setFont:VLG_TEXT_FIELD_FONT];
+    [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
+    [_updateLabel setBackgroundColor:CLEAR_COLOR];
+    [_updateLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [self.view addSubview:_updateLabel];
 }
 
 - (void)stopSpinner {
     [_spinner stopAnimating];
+    [_updateLabel setText:@""];
+    [self.view willRemoveSubview:_updateLabel];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     // NSManagedObject subclassing
     //

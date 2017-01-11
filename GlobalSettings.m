@@ -276,6 +276,11 @@ NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 
+// Activity (i.e., spinner) label indicator
+//
+NSString * const SPINNER_LABEL_PROC  = @"Processing the request...";
+NSString * const SPINNER_LABEL_LOAD  = @"Loading the View...";
+
 // Alerts related
 //
 NSString * const ALERTS_FILTER_KEY   = @"AlertsFilter";

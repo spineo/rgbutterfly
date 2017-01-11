@@ -99,7 +99,7 @@
                                  actionWithTitle:@"OK"
                                  style:UIAlertActionStyleDefault
                                  handler:^(UIAlertAction * action) {
-                                     [_updateLabel setText:@"Loading the View.."];
+                                     [_updateLabel setText:SPINNER_LABEL_LOAD];
                                      
                                      [self continue];
                                  }];
@@ -140,7 +140,7 @@
                                                                            actionWithTitle:@"OK"
                                                                            style:UIAlertActionStyleDefault
                                                                            handler:^(UIAlertAction * action) {
-                                                                               [_updateLabel setText:@"Loading the View.."];
+                                                                               [_updateLabel setText:SPINNER_LABEL_LOAD];
                                                                                [self continue];
                                                                            }];
                                                 [alert addAction:ok];
@@ -152,7 +152,7 @@
                                            actionWithTitle:@"No"
                                            style:UIAlertActionStyleDefault
                                            handler:^(UIAlertAction * action) {
-                                               [_updateLabel setText:@"Loading the View..."];
+                                               [_updateLabel setText:SPINNER_LABEL_LOAD];
                                                [self continue];
                                            }];
                 
@@ -160,7 +160,7 @@
                 [updateConfirm addAction:YesButton];
                 
                 [self presentViewController:updateConfirm animated:YES completion:^{
-                    [_updateLabel setText:@"Processing the request..."];
+                    [_updateLabel setText:SPINNER_LABEL_PROC];
                 }];
 
                 
@@ -172,7 +172,7 @@
                                      actionWithTitle:@"OK"
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
-                                         [_updateLabel setText:@"Loading the View.."];
+                                         [_updateLabel setText:SPINNER_LABEL_LOAD];
                                          [self continue];
                                      }];
                 [alert addAction:ok];
@@ -183,7 +183,7 @@
     }
     
     if (_updateStat == 0) {
-        [_updateLabel setText:@"Loading the View.."];
+        [_updateLabel setText:SPINNER_LABEL_LOAD];
         [self continue];
     }
 }
