@@ -349,19 +349,30 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
     [ManagedObjectUtils deleteChildlessMatchAssoc:self.context];
     
+    [_searchButton setAction:@selector(search)];
     if ([_listingType isEqualToString:MIX_TYPE]) {
+        [_searchButton setImage:_searchImage];
+        [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
         
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+        [_searchButton setImage:_searchImage];
+        [_searchButton setEnabled:TRUE];
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
+        [_searchButton setImage:_searchImage];
+        [_searchButton setEnabled:TRUE];
         [self loadKeywordData];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
+        [_searchButton setImage:_downArrowImage];
+        [_searchButton setAction:@selector(expandAllSections)];
         [self loadColorsData];
         
     } else {
+        [_searchButton setImage:_searchImage];
+        [_searchButton setEnabled:TRUE];
         [self loadFullColorsListing];
     }
     [self stopSpinner];
@@ -1123,6 +1134,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     _listingType = listingType;
     _searchString = nil;
     [_mainSearchBar setText:@""];
+    [_searchButton setAction:@selector(search)];
     
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
@@ -1147,7 +1159,6 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
     } else {
         [_searchButton setImage:_searchImage];
-        [_searchButton setAction:@selector(search)];
         [_searchButton setEnabled:TRUE];
         _searchString = nil;
         [self loadFullColorsListing];

@@ -188,10 +188,10 @@
     }
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:TRUE];
-//
-//}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopSpinner];
+}
 
 - (void)continue {
     [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
