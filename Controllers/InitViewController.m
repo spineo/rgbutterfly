@@ -17,7 +17,7 @@
 
 // NSUserDefaults
 //
-@property (nonatomic, strong) UITextView *initialTextView;
+@property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) UIButton *continueButton;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic) int updateStat;
@@ -62,11 +62,23 @@
     }
     
     _updateStat = 0;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:TRUE];
+    [super viewWillAppear:TRUE];
+    
+    CGFloat labelYOffset = (self.view.bounds.size.height / 2.0) - (DEF_LABEL_HEIGHT / 2.0);
+    _updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, labelYOffset, self.view.bounds.size.width, DEF_LABEL_HEIGHT)];
+    
+    [_updateLabel setText:@""];
+    [_updateLabel setFont:VLG_TEXT_FIELD_FONT];
+    [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
+    [_updateLabel setBackgroundColor:DARK_BG_COLOR];
+    [_updateLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [self.view addSubview:_updateLabel];
+    
+    [self startSpinner];
     
     //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"butterfly-background.png"]]];
     
@@ -82,7 +94,17 @@
         // Check if there is a network connection
         //
         if ([HTTPUtils networkIsReachable] == FALSE) {
-            UIAlertController *alert = [AlertUtils createOkAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
+            UIAlertController *alert = [AlertUtils createBlankAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
+            UIAlertAction* ok = [UIAlertAction
+                                 actionWithTitle:@"OK"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action) {
+                                     [_updateLabel setText:@"Loading the View.."];
+                                     
+                                     [self continue];
+                                 }];
+            [alert addAction:ok];
+            
             [self presentViewController:alert animated:YES completion:nil];
             
         } else {
@@ -107,72 +129,69 @@
             //
             if (_updateStat == 2) {
                 UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
-                
                 UIAlertAction* YesButton = [UIAlertAction
                                             actionWithTitle:@"Yes"
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                [self startSpinner];
                                                 NSString *errStr = [GenericUtils upgradeDB];
-                                                
-                                
                             
-                                                UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:errStr];
-                                                [self presentViewController:alert animated:YES completion:^{
-                                                    _updateStat = 0;
-                                                    [self stopSpinner];
-                                                }];
-
+                                                UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:errStr];
+                                                UIAlertAction* ok = [UIAlertAction
+                                                                           actionWithTitle:@"OK"
+                                                                           style:UIAlertActionStyleDefault
+                                                                           handler:^(UIAlertAction * action) {
+                                                                               [_updateLabel setText:@"Loading the View.."];
+                                                                               [self continue];
+                                                                           }];
+                                                [alert addAction:ok];
+                                                
+                                                [self presentViewController:alert animated:YES completion:nil];
                                             }];
                 
                 UIAlertAction* NoButton = [UIAlertAction
                                            actionWithTitle:@"No"
                                            style:UIAlertActionStyleDefault
-                                           handler:nil];
+                                           handler:^(UIAlertAction * action) {
+                                               [_updateLabel setText:@"Loading the View..."];
+                                               [self continue];
+                                           }];
                 
                 [updateConfirm addAction:NoButton];
                 [updateConfirm addAction:YesButton];
                 
-                [self presentViewController:updateConfirm animated:YES completion:nil];
+                [self presentViewController:updateConfirm animated:YES completion:^{
+                    [_updateLabel setText:@"Processing the request..."];
+                }];
 
                 
-                // Failed update preparation
-                //
+            // Failed update preparation
+            //
             } else if (_updateStat == 1) {
-                UIAlertController *alert = [AlertUtils createOkAlert:@"Update Status" message:@"Failed Check for Updates"];
+                UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:@"Failed Check for Updates"];
+                UIAlertAction* ok = [UIAlertAction
+                                     actionWithTitle:@"OK"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         [_updateLabel setText:@"Loading the View.."];
+                                         [self continue];
+                                     }];
+                [alert addAction:ok];
+                
                 [self presentViewController:alert animated:YES completion:nil];
             }
         }
     }
     
     if (_updateStat == 0) {
+        [_updateLabel setText:@"Loading the View.."];
         [self continue];
-        
-    } else {
-        CGFloat buttonXOffset = (self.view.bounds.size.width / 2.0) - (DEF_LG_BUTTON_WIDTH / 2.0);
-        CGFloat buttonYOffset = (self.view.bounds.size.height / 2.0) - (DEF_LG_BUTTON_HEIGHT / 2.0);
-        CGRect colorButtonFrame = CGRectMake(buttonXOffset, buttonYOffset, DEF_LG_BUTTON_WIDTH, DEF_LG_BUTTON_HEIGHT);
-        
-        _continueButton = [BarButtonUtils create3DButton:@"Continue" tag:CONTINUE_BUTTON_TAG frame:colorButtonFrame];
-        [_continueButton.titleLabel setFont:VLG_TEXT_FIELD_FONT];
-        [_continueButton setTintColor:DARK_TEXT_COLOR];
-        [_continueButton setBackgroundColor:WIDGET_GREEN_COLOR];
-        [_continueButton addTarget:self action:@selector(continue) forControlEvents:UIControlEventTouchUpInside];
-        
-        _initialTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, buttonYOffset)];
-        
-        [_initialTextView setText:@""];
-        [_initialTextView setFont:VLG_TEXT_FIELD_FONT];
-        [_initialTextView setTextColor:LIGHT_TEXT_COLOR];
-        [_initialTextView setBackgroundColor:DARK_BG_COLOR];
-        [_initialTextView setScrollEnabled:FALSE];
-        [_initialTextView setEditable:FALSE];
-        [_initialTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
-        
-        [self.view addSubview:_continueButton];
-        //[self.view addSubview:_initialTextView];
     }
 }
+
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:TRUE];
+//
+//}
 
 - (void)continue {
     [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
