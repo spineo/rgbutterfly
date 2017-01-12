@@ -392,4 +392,12 @@
     [view sendSubviewToBack:visualEffectView];
 }
 
++ (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view {
+    UIGraphicsBeginImageContext(view.frame.size);
+    [[UIImage imageNamed:@"butterfly-background.png"] drawInRect:view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    view.backgroundColor = [UIColor colorWithPatternImage:image];
+}
+
 @end

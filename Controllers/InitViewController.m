@@ -12,6 +12,7 @@
 #import "HTTPUtils.h"
 #import "GenericUtils.h"
 #import "BarButtonUtils.h"
+#import "ColorUtils.h"
 
 @interface InitViewController ()
 
@@ -48,6 +49,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:@"butterfly-background.png" view:self.view];
+
+    
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
@@ -73,14 +80,12 @@
     [_updateLabel setText:@""];
     [_updateLabel setFont:VLG_TEXT_FIELD_FONT];
     [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
-    [_updateLabel setBackgroundColor:DARK_BG_COLOR];
+    [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
     
     [self.view addSubview:_updateLabel];
     
     [self startSpinner];
-    
-    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"butterfly-background.png"]]];
     
     // Look at what is currently in Settings
     //

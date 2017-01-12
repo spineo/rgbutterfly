@@ -30,5 +30,6 @@
 + (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
 + (void)setToolbarGlaze:(UIToolbar *)toolbar;
 + (void)setViewGlaze:(UIView *)view;
++ (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view;
 
 @end
