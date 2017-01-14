@@ -40,7 +40,7 @@ int const FORCE_UPDATE_DB      = 0;
 // GitHub related
 //
 NSString * const GIT_TOKEN_FILE = @"Authtoken";
-NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/Databases/AcrylicsColorPicker";
+NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/Databases/AcrylicsColorPicke";
 
 NSString * const GIT_DB_FILE    = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const DB_CONT_TYPE   = @"application/x-sqlite3";
@@ -367,6 +367,7 @@ NSString * const DEF_IMAGE_NAME = @"Reference Image";
 
 // Image Names
 //
+NSString * const BACKGROUND_IMAGE       = @"butterfly-background.png";
 NSString * const IMAGE_LIB_NAME         = @"photo 2.png";
 NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
 NSString * const RGB_IMAGE_NAME         = @"rgb.png";

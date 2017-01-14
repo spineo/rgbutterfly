@@ -11,6 +11,6 @@
 @interface HTTPUtils : NSObject
 
 + (BOOL)networkIsReachable;
-+ (void)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName;
++ (int)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName;
 
 @end

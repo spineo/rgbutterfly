@@ -28,7 +28,9 @@
 
 // HTTP Get wrapper
 //
-+ (void)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
++ (int)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
+    
+    __block int stat = 1;
     
     // Cleanup
     //
@@ -54,6 +56,7 @@
         gitToken = [FileUtils lineFromFile:filePath];
     } @catch(NSException *exception) {
         NSLog(@"Failed to get the GIT token from file '%@', error: %@\n", filePath, [error localizedDescription]);
+        return stat;
     }
 
     NSData *authData = [gitToken dataUsingEncoding:NSASCIIStringEncoding];
@@ -62,7 +65,7 @@
     
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
+
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
@@ -70,9 +73,11 @@
             if (httpResponse.statusCode == 200) {
                 @try {
                     [data writeToFile:fileName atomically:YES];
-                    
+                    stat = 0;
+                
                 } @catch(NSException *exception) {
                     NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
+
                 }
             }
         }
@@ -83,6 +88,8 @@
     [task resume];
     
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    
+    return stat;
 }
 
 

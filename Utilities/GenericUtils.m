@@ -87,12 +87,10 @@
         return 1;
     }
     
-    @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
-        
-    } @catch (NSException *exception) {
-        NSLog(@"Unable to HTTP Get '%@'\n", GIT_VER_FILE);
-        return 1;
+    int stat = [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
+    NSLog(@"********************* STAT=%i ***********************", stat);
+    if (stat > 0) {
+        return stat;
     }
     
     // Account for asynchronous writes
@@ -169,9 +167,9 @@
         return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
 
-    @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
-    } @catch (NSException *exception) {
+
+    int stat = [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
+    if (stat == 1) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
     
