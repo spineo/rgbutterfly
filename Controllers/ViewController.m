@@ -121,6 +121,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -341,6 +345,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
 - (void)viewDidAppear:(BOOL)animated {
     [self loadData];
+    [self.view setBackgroundColor:DARK_BG_COLOR];
 }
 
 - (void)loadData {
