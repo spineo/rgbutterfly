@@ -35,6 +35,7 @@
     // Cleanup
     //
     urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSLog(@"**** URL STR=%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
