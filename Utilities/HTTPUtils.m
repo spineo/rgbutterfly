@@ -28,9 +28,9 @@
 
 // HTTP Get wrapper
 //
-+ (int)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
++ (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
     
-    __block int stat = 1;
+    __block BOOL stat = FALSE;
     
     // Cleanup
     //
@@ -69,7 +69,7 @@
 
             if (httpResponse.statusCode == 200) {
                 [data writeToFile:fileName atomically:YES];
-                stat = 0;
+                stat = TRUE;
             } else {
                 NSLog(@"File write error for file '%@'\n", fileName);
             }

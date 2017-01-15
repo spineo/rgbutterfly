@@ -47,10 +47,10 @@ extern int const FORCE_UPDATE_DB;
 extern NSString * const AUTHTOKEN_FILE;
 extern NSString * const DB_REST_URL;
 
-extern NSString * const GIT_DB_FILE;
+extern NSString * const DB_FILE;
 extern NSString * const DB_CONT_TYPE;
 
-extern NSString * const GIT_MD5_FILE;
+extern NSString * const MD5_FILE;
 extern NSString * const MD5_CONT_TYPE;
 
 extern NSString * const GIT_VER_FILE;

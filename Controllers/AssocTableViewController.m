@@ -456,10 +456,8 @@ const int ASSOC_SET_TAG        = 8;
     [[self fetchedResultsController] setDelegate:self];
     
     NSError *error = nil;
-    
-    @try {
-        [[self fetchedResultsController] performFetch:&error];
-    } @catch (NSException *exception) {
+    [[self fetchedResultsController] performFetch:&error];
+    if (error != nil) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
     }
 }

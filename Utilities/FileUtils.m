@@ -21,7 +21,6 @@
         while([fileManager isReadableFileAtPath:filePath]) {
             [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
         }
-        
         if (error == nil) {
             NSLog(@"Successfully removed file '%@'", filePath);
             return TRUE;

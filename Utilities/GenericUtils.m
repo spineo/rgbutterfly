@@ -77,10 +77,9 @@
     //
     if ([FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager] == FALSE) {
         NSLog(@"Unable to remove file '%@'\n", GIT_VER_FILE);
-        return 1;
     }
     
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE] == 1) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE] == FALSE) {
         return 1;
     }
     
@@ -145,19 +144,19 @@
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the md5 file
     //
-    if ([FileUtils fileRemove:GIT_MD5_FILE fileManager:fileManager] == FALSE) {
-        return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
+    if ([FileUtils fileRemove:MD5_FILE fileManager:fileManager] == FALSE) {
+        NSLog(@"ERROR UDB2: Failed to remove file '%@'", MD5_FILE);
     }
 
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE] == 1) {
-        return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, MD5_FILE] contentType:MD5_CONT_TYPE fileName:MD5_FILE] == FALSE) {
+        return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", MD5_FILE];
     }
     
     // Perform the check once the updated database is downloaded
     //
-    NSString *currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
+    NSString *currMd5sum = [FileUtils lineFromFile:MD5_FILE];
     if (currMd5sum == nil) {
-        return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
+        return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", MD5_FILE];
     }
 
 
@@ -183,7 +182,7 @@
     
     // Download the latest database to a '-tmp' suffix file
     //
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile] == 1) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile] == FALSE) {
         return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
     
