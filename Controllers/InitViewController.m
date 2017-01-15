@@ -138,7 +138,7 @@
                                             actionWithTitle:@"Yes"
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                NSString *errStr = [GenericUtils upgradeDB];
+                                                NSString *errStr = [GenericUtils updateDB];
                             
                                                 UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:errStr];
                                                 UIAlertAction* ok = [UIAlertAction

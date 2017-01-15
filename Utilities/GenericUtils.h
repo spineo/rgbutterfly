@@ -17,6 +17,6 @@
 + (NSString *)getCurrDateString;
 + (NSString *)getCurrDateIdentifier;
 + (int)checkForDBUpdate;
-+ (NSString *)upgradeDB;
++ (NSString *)updateDB;
 
 @end

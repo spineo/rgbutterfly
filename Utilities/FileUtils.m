@@ -11,46 +11,50 @@
 
 @implementation FileUtils
 
-+ (void)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager {
-    
++ (BOOL)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager {
     if (fileManager == nil)
         fileManager = [NSFileManager defaultManager];
     
-    NSError *error = nil;
     if ([fileManager isDeletableFileAtPath:filePath]) {
-        @try {
-            [fileManager removeItemAtPath:filePath error:&error];
-            while([fileManager isReadableFileAtPath:filePath]) {
-                [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
-            }
+        NSError *error = nil;
+        [fileManager removeItemAtPath:filePath error:&error];
+        while([fileManager isReadableFileAtPath:filePath]) {
+            [NSThread sleepForTimeInterval:ASYNC_THREAD_SLEEP];
+        }
+        
+        if (error == nil) {
             NSLog(@"Successfully removed file '%@'", filePath);
+            return TRUE;
             
-        } @catch (NSException *exception) {
+        } else {
             NSLog(@"File remove error for file '%@', error: %@\n", filePath, [error localizedDescription]);
+            return FALSE;
         }
     }
+    return FALSE;
 }
 
-+ (void)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager {
++ (BOOL)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager {
     
     if (fileManager == nil)
         fileManager = [NSFileManager defaultManager];
     
     // Remove first
     //
-    @try {
-        [self fileRemove:destFilePath fileManager:fileManager];
-    } @catch (NSException *exception) {
-        NSLog(@"ERROR: file remove failed");
+    if ([self fileRemove:destFilePath fileManager:fileManager] == FALSE) {
+        NSLog(@"ERROR: file remove of '%@' failed", destFilePath);
     }
     
     NSError *error = nil;
-    @try {
-        [fileManager copyItemAtPath:srcFilePath toPath:destFilePath error:&error];
+    [fileManager copyItemAtPath:srcFilePath toPath:destFilePath error:&error];
+    
+    if (error == nil) {
         NSLog(@"Successfully renamed file '%@' to '%@'", srcFilePath, destFilePath);
+        return TRUE;
         
-    } @catch (NSException *exception) {
-        NSLog(@"ERROR: %@\n", [error localizedDescription]);
+    } else {
+        NSLog(@"Rename file '%@' to '%@' failed. ERROR: %@\n", srcFilePath, destFilePath, [error localizedDescription]);
+        return FALSE;
     }
 }
 

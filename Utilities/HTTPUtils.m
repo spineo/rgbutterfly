@@ -35,7 +35,6 @@
     // Cleanup
     //
     urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSLog(@"**** URL STR=%@", urlStr);
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -49,18 +48,15 @@
 
     // Add a file check
     //
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:GIT_TOKEN_FILE ofType:@"txt"];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:AUTHTOKEN_FILE ofType:@"txt"];
 
-    NSString *gitToken;
-    NSError *error = nil;
-    @try {
-        gitToken = [FileUtils lineFromFile:filePath];
-    } @catch(NSException *exception) {
-        NSLog(@"Failed to get the GIT token from file '%@', error: %@\n", filePath, [error localizedDescription]);
+    NSString *authToken = [FileUtils lineFromFile:filePath];
+    if (authToken == nil) {
+        NSLog(@"Failed to get the GIT token from file '%@'\n", filePath);
         return stat;
     }
 
-    NSData *authData = [gitToken dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *authData = [authToken dataUsingEncoding:NSASCIIStringEncoding];
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     
@@ -70,16 +66,12 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (data) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-            NSError *error = nil;
-            if (httpResponse.statusCode == 200) {
-                @try {
-                    [data writeToFile:fileName atomically:YES];
-                    stat = 0;
-                
-                } @catch(NSException *exception) {
-                    NSLog(@"File write error for file '%@', error: %@\n", fileName, [error localizedDescription]);
 
-                }
+            if (httpResponse.statusCode == 200) {
+                [data writeToFile:fileName atomically:YES];
+                stat = 0;
+            } else {
+                NSLog(@"File write error for file '%@'\n", fileName);
             }
         }
         dispatch_semaphore_signal(semaphore);

@@ -10,8 +10,8 @@
 
 @interface FileUtils : NSObject
 
-+ (void)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager;
-+ (void)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager;
++ (BOOL)fileRemove:(NSString *)filePath fileManager:(NSFileManager *)fileManager;
++ (BOOL)fileRename:(NSString *)srcFilePath destFilePath:(NSString *)destFilePath fileManager:(NSFileManager *)fileManager;
 + (NSString *)lineFromFile:(NSString *)filePath;
 
 @end

@@ -62,16 +62,12 @@
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSLog(@"***** Data Container Path=%@", destDBPath);
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     
     // Attempt cd into data container directory
     //
-    @try {
-        [fileManager changeCurrentDirectoryPath:destDBPath];
-        
-    } @catch (NSException *exception) {
+    if ([fileManager changeCurrentDirectoryPath:destDBPath] == NO) {
         NSLog(@"Unable to cd into path '%@'\n", destDBPath);
         return 1;
     }
@@ -79,27 +75,19 @@
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the new version file
     //
-    @try {
-        [FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager];
-
-    } @catch (NSException *exception) {
+    if ([FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager] == FALSE) {
         NSLog(@"Unable to remove file '%@'\n", GIT_VER_FILE);
         return 1;
     }
     
-    int stat = [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
-    NSLog(@"********************* STAT=%i ***********************", stat);
-    if (stat == 1) {
-        return stat;
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE] == 1) {
+        return 1;
     }
     
     // Account for asynchronous writes
     //
-    NSString *versionNumber;
-    @try {
-        versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
-        
-    } @catch (NSException *exception) {
+    NSString *versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
+    if (versionNumber == nil) {
         NSLog(@"Failed to retrieve the version number for file '%@'\n", GIT_VER_FILE);
         return 1;
     }
@@ -126,7 +114,7 @@
 
 // Update the database from GitHub (return string is the user status message)
 //
-+ (NSString *)upgradeDB {
++ (NSString *)updateDB {
     
     // Find the destination path
     //
@@ -140,7 +128,7 @@
     NSString *destDBShmFile = [destDBFile stringByAppendingString:@"-shm"];
     NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
     
-    NSString *successUpdMsg = @"Update was Successful! (use the bottom left Home button to refresh the table)";
+    NSString *successUpdMsg = @"Update was Successful!";
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
@@ -148,37 +136,27 @@
     
     // Attempt cd into data container directory
     //
-    @try {
-        [fileManager changeCurrentDirectoryPath:destDBPath];
-
-    } @catch (NSException *exception) {
+    if ([fileManager changeCurrentDirectoryPath:destDBPath] == NO) {
         NSLog(@"Unable to cd into path '%@'\n", destDBPath);
         return @"ERROR UDB1: Unable to access the data container path, please try again";
         
     }
 
-
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the md5 file
     //
-    @try {
-        [FileUtils fileRemove:GIT_MD5_FILE fileManager:fileManager];
-    } @catch (NSException *exception) {
+    if ([FileUtils fileRemove:GIT_MD5_FILE fileManager:fileManager] == FALSE) {
         return [@"ERROR UDB2: Failed to remove file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
 
-
-    int stat = [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE];
-    if (stat == 1) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_MD5_FILE] contentType:MD5_CONT_TYPE fileName:GIT_MD5_FILE] == 1) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
     
     // Perform the check once the updated database is downloaded
     //
-    NSString *currMd5sum;
-    @try {
-        currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
-    } @catch (NSException *exception) {
+    NSString *currMd5sum = [FileUtils lineFromFile:GIT_MD5_FILE];
+    if (currMd5sum == nil) {
         return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", GIT_MD5_FILE];
     }
 
@@ -195,20 +173,17 @@
     // Backup the current database file
     //
     error = nil;
-    @try {
-        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:nil];
+    [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
+    if (error == nil) {
         NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
-        
-    } @catch (NSException *exception) {
+    } else {
         NSLog(@"ERROR: %@\n", [error localizedDescription]);
         return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
     }
     
     // Download the latest database to a '-tmp' suffix file
     //
-    @try {
-        [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile];
-    } @catch (NSException *exception) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile] == 1) {
         return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
     
@@ -216,18 +191,15 @@
     //
     NSString *md5sum = [md5 md5Hash:destDBTmpFile];
     if ([currMd5sum isEqualToString:md5sum]) {
-        @try {
-            [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
-            [FileUtils fileRemove:destDBWalFile fileManager:fileManager];
-            [FileUtils fileRemove:destDBFile fileManager:fileManager];
+        [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
+        [FileUtils fileRemove:destDBWalFile fileManager:fileManager];
+        [FileUtils fileRemove:destDBFile fileManager:fileManager];
             
-            [FileUtils fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager];
-            
+        if ([FileUtils fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager] == TRUE) {
             NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
-            
             return successUpdMsg;
             
-        } @catch (NSException *exception) {
+        } else {
             return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
         }
 
