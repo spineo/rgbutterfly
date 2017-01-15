@@ -89,7 +89,7 @@
     
     int stat = [HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE];
     NSLog(@"********************* STAT=%i ***********************", stat);
-    if (stat > 0) {
+    if (stat == 1) {
         return stat;
     }
     

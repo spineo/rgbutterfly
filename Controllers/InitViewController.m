@@ -52,7 +52,7 @@
 
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
 
     
     // Initialization

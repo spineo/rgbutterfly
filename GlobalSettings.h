@@ -362,6 +362,7 @@ extern NSString * const NO_MIX_NAME;
 
 // Image Related
 //
+extern NSString * const BACKGROUND_IMAGE_TITLE;
 extern NSString * const BACKGROUND_IMAGE;
 extern NSString * const DEF_IMAGE_NAME;
 extern NSString * const IMAGE_LIB_NAME;
