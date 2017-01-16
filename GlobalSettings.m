@@ -48,7 +48,7 @@ NSString * const DB_CONT_TYPE   = @"application/x-sqlite3";
 NSString * const MD5_FILE       = @"AcrylicsColorPicker v4.0.63.md5";
 NSString * const MD5_CONT_TYPE  = @"text/plain";
 
-NSString * const GIT_VER_FILE   = @"version.txt";
+NSString * const VERSION_FILE   = @"version.txt";
 NSString * const VER_CONT_TYPE  = @"text/plain";
 
 // Default sleep duration for asynchronous threads

@@ -75,19 +75,19 @@
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the new version file
     //
-    if ([FileUtils fileRemove:GIT_VER_FILE fileManager:fileManager] == FALSE) {
-        NSLog(@"Unable to remove file '%@'\n", GIT_VER_FILE);
+    if ([FileUtils fileRemove:VERSION_FILE fileManager:fileManager] == FALSE) {
+        NSLog(@"Unable to remove file '%@'\n", VERSION_FILE);
     }
     
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, GIT_VER_FILE] contentType:VER_CONT_TYPE fileName:GIT_VER_FILE] == FALSE) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, VERSION_FILE] contentType:VER_CONT_TYPE fileName:VERSION_FILE] == FALSE) {
         return 1;
     }
     
-    // Account for asynchronous writes
+    // Version number
     //
-    NSString *versionNumber = [FileUtils lineFromFile:GIT_VER_FILE];
+    NSString *versionNumber = [FileUtils lineFromFile:VERSION_FILE];
     if (versionNumber == nil) {
-        NSLog(@"Failed to retrieve the version number for file '%@'\n", GIT_VER_FILE);
+        NSLog(@"Failed to retrieve the version number for file '%@'\n", VERSION_FILE);
         return 1;
     }
 
@@ -99,12 +99,6 @@
     NSLog(@"***** New Version Number=%@", versionNumber);
 
     if (! (currVersionNumber && [versionNumber isEqualToString:currVersionNumber])) {
-        
-        // Store the Version in NSUserDefaults
-        //
-        [userDefaults setValue:versionNumber forKey:DB_VERSION_KEY];
-        [userDefaults synchronize];
-        
         return 2;
     }
 
@@ -114,10 +108,10 @@
 // Update the database from GitHub (return string is the user status message)
 //
 + (NSString *)updateDB {
-    
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSLog(@"********************* DEST DB PATH=%@", destDBPath);
     
     // Set the destination files for removal
     //
@@ -196,6 +190,16 @@
             
         if ([FileUtils fileRename:destDBTmpFile destFilePath:destDBFile fileManager:fileManager] == TRUE) {
             NSLog(@"Successfully renamed file '%@' to '%@'", destDBTmpFile, destDBFile);
+            
+            // Update the version number in NSUserDefaults
+            //
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSString *versionNumber = [FileUtils lineFromFile:VERSION_FILE];
+            if (versionNumber != nil) {
+                [userDefaults setValue:versionNumber forKey:DB_VERSION_KEY];
+                [userDefaults synchronize];
+            }
+            
             return successUpdMsg;
             
         } else {
@@ -205,8 +209,6 @@
     } else {
         return @"Update Failed on md5 (keeping current snapshot, please try again)";
     }
-    
-    return successUpdMsg;
 }
 
 @end

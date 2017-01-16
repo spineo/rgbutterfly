@@ -52,7 +52,7 @@
 
     NSString *authToken = [FileUtils lineFromFile:filePath];
     if (authToken == nil) {
-        NSLog(@"Failed to get the GIT token from file '%@'\n", filePath);
+        NSLog(@"Failed to get the authorization token(s) from file '%@'\n", filePath);
         return stat;
     }
 

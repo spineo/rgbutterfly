@@ -53,7 +53,7 @@ extern NSString * const DB_CONT_TYPE;
 extern NSString * const MD5_FILE;
 extern NSString * const MD5_CONT_TYPE;
 
-extern NSString * const GIT_VER_FILE;
+extern NSString * const VERSION_FILE;
 extern NSString * const VER_CONT_TYPE;
 
 // Default sleep duration for asynchronous threads
