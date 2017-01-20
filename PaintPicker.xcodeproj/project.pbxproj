@@ -103,13 +103,6 @@
 			remoteGlobalIDString = 210C89661A9F6C440003CC85;
 			remoteInfo = AcrylicsColorPicker;
 		};
-		21334B4A1E30FD06007D5B5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21334B451E30FD05007D5B5E /* Reachability.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 21334B2F1E30F881007D5B5E;
-			remoteInfo = Reachability;
-		};
 		21DE32E31D3BF847007669DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
@@ -256,9 +249,6 @@
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
 		21289D4B1E1E93C8007D8243 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "ExternalUtilities/NSData+Base64.h"; sourceTree = "<group>"; };
 		21289D4C1E1E93C8007D8243 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "ExternalUtilities/NSData+Base64.m"; sourceTree = "<group>"; };
-		21334B241E30F658007D5B5E /* libReachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libReachability.a; path = "../ios-external-utilities/Reachability/lib/libReachability.a"; sourceTree = "<group>"; };
-		21334B431E30FCDE007D5B5E /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../ios-external-utilities/Reachability/Reachability.h"; sourceTree = "<group>"; };
-		21334B451E30FD05007D5B5E /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = "../ios-external-utilities/Reachability/Reachability.xcodeproj"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -591,19 +581,8 @@
 		21334B231E30F658007D5B5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				21334B451E30FD05007D5B5E /* Reachability.xcodeproj */,
-				21334B431E30FCDE007D5B5E /* Reachability.h */,
-				21334B241E30F658007D5B5E /* libReachability.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		21334B461E30FD05007D5B5E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				21334B4B1E30FD06007D5B5E /* libReachability.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2137956B1E05B5C700CD5308 /* ExternalUtilities */ = {
@@ -728,12 +707,6 @@
 			mainGroup = 210C895E1A9F6C440003CC85;
 			productRefGroup = 210C89681A9F6C440003CC85 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 21334B461E30FD05007D5B5E /* Products */;
-					ProjectRef = 21334B451E30FD05007D5B5E /* Reachability.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				210C89661A9F6C440003CC85 /* PaintPicker */,
@@ -742,16 +715,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		21334B4B1E30FD06007D5B5E /* libReachability.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReachability.a;
-			remoteRef = 21334B4A1E30FD06007D5B5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		210C89651A9F6C440003CC85 /* Resources */ = {
