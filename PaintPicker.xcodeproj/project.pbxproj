@@ -87,10 +87,10 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		214C3AD91E323A19004679A4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 214C3AD81E323A19004679A4 /* Reachability.m */; };
 		217DFF791E09710A00E02183 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217DFF781E09710A00E02183 /* Authtoken.txt */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
-		21BF75F91E05C17100363BBB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 21BF75F81E05C17100363BBB /* Reachability.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
 /* End PBXBuildFile section */
@@ -102,6 +102,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 210C89661A9F6C440003CC85;
 			remoteInfo = AcrylicsColorPicker;
+		};
+		21334B4A1E30FD06007D5B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21334B451E30FD05007D5B5E /* Reachability.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 21334B2F1E30F881007D5B5E;
+			remoteInfo = Reachability;
 		};
 		21DE32E31D3BF847007669DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -249,6 +256,9 @@
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
 		21289D4B1E1E93C8007D8243 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "ExternalUtilities/NSData+Base64.h"; sourceTree = "<group>"; };
 		21289D4C1E1E93C8007D8243 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "ExternalUtilities/NSData+Base64.m"; sourceTree = "<group>"; };
+		21334B241E30F658007D5B5E /* libReachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libReachability.a; path = "../ios-external-utilities/Reachability/lib/libReachability.a"; sourceTree = "<group>"; };
+		21334B431E30FCDE007D5B5E /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../ios-external-utilities/Reachability/Reachability.h"; sourceTree = "<group>"; };
+		21334B451E30FD05007D5B5E /* Reachability.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Reachability.xcodeproj; path = "../ios-external-utilities/Reachability/Reachability.xcodeproj"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -261,6 +271,8 @@
 		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
+		214C3AD71E323A19004679A4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ExternalUtilities/Reachability.h; sourceTree = "<group>"; };
+		214C3AD81E323A19004679A4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ExternalUtilities/Reachability.m; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		217A59181E181D04005BCE66 /* PaintPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaintPicker.entitlements; sourceTree = "<group>"; };
@@ -272,8 +284,6 @@
 		219C47791E22A93B00DADF0F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewController.h; path = Controllers/InitViewController.h; sourceTree = "<group>"; };
 		219C477A1E22A93B00DADF0F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitViewController.m; path = Controllers/InitViewController.m; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
-		21BF75F71E05C17100363BBB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ExternalUtilities/Reachability.h; sourceTree = "<group>"; };
-		21BF75F81E05C17100363BBB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ExternalUtilities/Reachability.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21DE32DE1D3BF847007669DF /* PaintPicker.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPicker.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
@@ -308,6 +318,8 @@
 		2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */ = {
 			isa = PBXGroup;
 			children = (
+				21334B001E2E57FA007D5B5E /* lib */,
+				21334AFF1E2E57EB007D5B5E /* include */,
 				2137956B1E05B5C700CD5308 /* ExternalUtilities */,
 				2108C5ED1C82108200DD7B9E /* Algorithms */,
 				2108C5EC1C820DF000DD7B9E /* Delegates & Main */,
@@ -531,6 +543,7 @@
 				210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */,
 				21DE32DF1D3BF847007669DF /* AcrylicsColorPickerUITests */,
 				210C89681A9F6C440003CC85 /* Products */,
+				21334B231E30F658007D5B5E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -561,11 +574,43 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		21334AFF1E2E57EB007D5B5E /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		21334B001E2E57FA007D5B5E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		21334B231E30F658007D5B5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21334B451E30FD05007D5B5E /* Reachability.xcodeproj */,
+				21334B431E30FCDE007D5B5E /* Reachability.h */,
+				21334B241E30F658007D5B5E /* libReachability.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		21334B461E30FD05007D5B5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				21334B4B1E30FD06007D5B5E /* libReachability.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2137956B1E05B5C700CD5308 /* ExternalUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				21BF75F71E05C17100363BBB /* Reachability.h */,
-				21BF75F81E05C17100363BBB /* Reachability.m */,
+				214C3AD71E323A19004679A4 /* Reachability.h */,
+				214C3AD81E323A19004679A4 /* Reachability.m */,
 				21289D4B1E1E93C8007D8243 /* NSData+Base64.h */,
 				21289D4C1E1E93C8007D8243 /* NSData+Base64.m */,
 			);
@@ -683,6 +728,12 @@
 			mainGroup = 210C895E1A9F6C440003CC85;
 			productRefGroup = 210C89681A9F6C440003CC85 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 21334B461E30FD05007D5B5E /* Products */;
+					ProjectRef = 21334B451E30FD05007D5B5E /* Reachability.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				210C89661A9F6C440003CC85 /* PaintPicker */,
@@ -691,6 +742,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		21334B4B1E30FD06007D5B5E /* libReachability.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReachability.a;
+			remoteRef = 21334B4A1E30FD06007D5B5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		210C89651A9F6C440003CC85 /* Resources */ = {
@@ -776,7 +837,6 @@
 				2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21064FFC1DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m in Sources */,
-				21BF75F91E05C17100363BBB /* Reachability.m in Sources */,
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				210650221DFEDDFF004B0830 /* PaintSwatchesDiff.m in Sources */,
@@ -788,6 +848,7 @@
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
 				2109A1311DFDE4910076A095 /* PaintBrand+CoreDataProperties.m in Sources */,
 				2109A0E71DFDDD6F0076A095 /* UIImageViewController.m in Sources */,
+				214C3AD91E323A19004679A4 /* Reachability.m in Sources */,
 				2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */,
 				2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */,
 				2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */,
@@ -843,7 +904,7 @@
 		210C89881A9F6C440003CC85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -882,12 +943,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
@@ -898,7 +963,7 @@
 		210C89891A9F6C440003CC85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -929,11 +994,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				SDKROOT = iphoneos;
@@ -945,6 +1015,9 @@
 		210C898B1A9F6C440003CC85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ADDITIONAL_SDKS[arch=*]" = "";
+				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -954,29 +1027,40 @@
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 			};
 			name = Debug;
 		};
 		210C898C1A9F6C440003CC85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"ADDITIONAL_SDKS[arch=*]" = "";
+				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 			};
 			name = Release;
 		};
