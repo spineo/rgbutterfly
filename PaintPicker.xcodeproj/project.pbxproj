@@ -268,6 +268,7 @@
 		217A59181E181D04005BCE66 /* PaintPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaintPicker.entitlements; sourceTree = "<group>"; };
 		217DFF781E09710A00E02183 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
+		218BF2F01E32563B004EB75A /* libTestLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestLib.a; path = "../../Library/Developer/Xcode/DerivedData/TestLib-fhmzxdchzjrapzemxnkeamzjjykc/Build/Products/Debug-iphoneos/libTestLib.a"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		219B9E741CD78D9300973926 /* AcrylicsColorPicker v4.0.62.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.62.xcdatamodel"; sourceTree = "<group>"; };
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
@@ -581,6 +582,7 @@
 		21334B231E30F658007D5B5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				218BF2F01E32563B004EB75A /* libTestLib.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -906,6 +908,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
@@ -915,6 +918,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
@@ -957,6 +961,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
@@ -966,6 +971,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
@@ -985,12 +991,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
@@ -1010,6 +1018,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "";
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = AcrylicsColorPicker/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
@@ -1018,6 +1027,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;

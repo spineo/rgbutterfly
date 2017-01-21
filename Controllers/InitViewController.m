@@ -47,9 +47,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
