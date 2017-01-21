@@ -79,7 +79,10 @@
         NSLog(@"Unable to remove file '%@'\n", VERSION_FILE);
     }
     
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, VERSION_FILE] contentType:VER_CONT_TYPE fileName:VERSION_FILE] == FALSE) {
+    // Authtoken
+    //
+    NSString *authToken = [FileUtils lineFromFile:[[NSBundle mainBundle] pathForResource:AUTHTOKEN_FILE ofType:@"txt"]];
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, VERSION_FILE] contentType:VER_CONT_TYPE fileName:VERSION_FILE authToken:authToken] == FALSE) {
         return 1;
     }
     
@@ -142,7 +145,10 @@
         NSLog(@"ERROR UDB2: Failed to remove file '%@'", MD5_FILE);
     }
 
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, MD5_FILE] contentType:MD5_CONT_TYPE fileName:MD5_FILE] == FALSE) {
+    // Authtoken
+    //
+    NSString *authToken = [FileUtils lineFromFile:[[NSBundle mainBundle] pathForResource:AUTHTOKEN_FILE ofType:@"txt"]];
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, MD5_FILE] contentType:MD5_CONT_TYPE fileName:MD5_FILE authToken:authToken] == FALSE) {
         return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", MD5_FILE];
     }
     
@@ -176,7 +182,7 @@
     
     // Download the latest database to a '-tmp' suffix file
     //
-    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile] == FALSE) {
+    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile authToken:authToken] == FALSE) {
         return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
     }
     
