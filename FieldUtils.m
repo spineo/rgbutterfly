@@ -25,17 +25,17 @@
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-
+    
     UILabel *label = [self createLabel:name];
     [label sizeToFit];
     CGFloat width = label.bounds.size.width;
     [label setFrame:CGRectMake(x, y, width, DEF_LABEL_HEIGHT)];
-
+    
     return label;
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height {
-
+    
     UILabel *label = [self createLabel:name];
     [label setFrame:CGRectMake(x, y, width, height)];
     
@@ -43,7 +43,7 @@
 }
 
 + (UILabel *)createSmallLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-
+    
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
     [label setFont: SMALL_FONT];
     
@@ -51,7 +51,7 @@
 }
 
 + (UILabel *)createLargeLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-
+    
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
     [label setFont: LARGE_BOLD_FONT];
     
@@ -121,7 +121,7 @@
     if (![content isEqualToString:@""]) {
         [refName setText:content];
     }
-
+    
     [refName setFont:TEXT_FIELD_FONT];
     [refName setTextColor:LIGHT_TEXT_COLOR];
     [refName setBackgroundColor:DARK_BG_COLOR];
