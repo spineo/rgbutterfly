@@ -12,7 +12,7 @@
 #import "HTTPUtils.h"
 #import "GenericUtils.h"
 #import "BarButtonUtils.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 
 @interface InitViewController ()
 
@@ -49,7 +49,7 @@
     [super viewDidLoad];
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
+    [AppColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
 
     
     // Initialization

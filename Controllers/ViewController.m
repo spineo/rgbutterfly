@@ -123,15 +123,15 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    [AppColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
     
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-    //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
+    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[AppColorUtils setToolbarGlaze:self.navigationController.toolbar];
     
     // Initialization
     //
@@ -740,8 +740,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
         } else {
             int index = (int)section - 1;
             NSString *colorName = [_subjColorNames objectAtIndex:index];
-            UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
-            [headerLabel setTextColor:[ColorUtils setBestColorContrast:colorName]];
+            UIColor *backgroundColor = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+            [headerLabel setTextColor:[AppColorUtils setBestColorContrast:colorName]];
             [headerLabel setBackgroundColor:backgroundColor];
             [headerLabel setText:[_subjColorNames objectAtIndex:index]];
             
@@ -788,7 +788,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             
             [scrollViewToolbar sizeToFit];
 
-            [ColorUtils setViewGlaze:headerView];
+            [AppColorUtils setViewGlaze:headerView];
         }
         
     } else {
@@ -1035,7 +1035,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         
             } else {
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                [cell.imageView setImage:[ColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
                 [cell.textLabel setText:[(PaintSwatches *)obj name]];
                 cell.userInteractionEnabled = YES;
             }
@@ -1045,7 +1045,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             int index = (int)indexPath.section - 1;
             PaintSwatches *ps = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
             
-            [cell.imageView setImage:[ColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            [cell.imageView setImage:[AppColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
             
         } else {
@@ -1053,7 +1053,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             PaintSwatches *swatch = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            [cell.imageView setImage:[ColorUtils renderSwatch:swatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            [cell.imageView setImage:[AppColorUtils renderSwatch:swatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             [cell.textLabel setText:[swatch name]];
             cell.userInteractionEnabled = YES;
         }
@@ -1246,7 +1246,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
         PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
 
-        swatchImage = [ColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [AppColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
 
 
     // Match
@@ -1254,8 +1254,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
     } else {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
-        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue]];
+        swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+        swatchImage = [AppColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue]];
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];

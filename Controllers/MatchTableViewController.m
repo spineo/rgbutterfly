@@ -10,7 +10,7 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "BarButtonUtils.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "MatchAlgorithms.h"
 #import "AlertUtils.h"
 #import "StringObjectUtils.h"
@@ -86,7 +86,7 @@ const int IMAGE_TAG  = 6;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //
@@ -308,14 +308,14 @@ const int IMAGE_TAG  = 6;
             UIImage *refImage;
             
             if (_isRGB == TRUE) {
-                refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+                refImage = [AppColorUtils renderRGB:_selPaintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             } else {
-                refImage = [ColorUtils renderPaint:_selPaintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+                refImage = [AppColorUtils renderPaint:_selPaintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             }
             
             // Tag the first reference image
             //
-            refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+            refImage =  [AppColorUtils drawTapAreaLabel:refImage count:_currTapSection];
 
             
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];
@@ -347,7 +347,7 @@ const int IMAGE_TAG  = 6;
             CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
             CGFloat croppedImageWidth = self.tableView.bounds.size.width - croppedImageXOffset - DEF_FIELD_PADDING;
             
-            UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
+            UIImage *croppedImage = [AppColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
             UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
             [croppedImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
             [croppedImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
@@ -365,11 +365,11 @@ const int IMAGE_TAG  = 6;
         } else {
             CGFloat imageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
             
-            UIImage *refImage = [ColorUtils renderRGB:_selPaintSwatch cellWidth:imageViewWidth cellHeight:_imageViewHeight];
+            UIImage *refImage = [AppColorUtils renderRGB:_selPaintSwatch cellWidth:imageViewWidth cellHeight:_imageViewHeight];
             
             // Add the RGB label
             //
-            refImage = [ColorUtils drawRGBLabel:refImage rgbValue:_selPaintSwatch location:@"top"];
+            refImage = [AppColorUtils drawRGBLabel:refImage rgbValue:_selPaintSwatch location:@"top"];
             
             // Tag the first reference image
             //
@@ -377,7 +377,7 @@ const int IMAGE_TAG  = 6;
             
             [refImageView.layer setBorderWidth:BORDER_WIDTH_NONE];
             //[refImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
-            //[refImageView.layer setBorderColor:[[ColorUtils colorFromSwatch:_selPaintSwatch] CGColor]];
+            //[refImageView.layer setBorderColor:[[AppColorUtils colorFromSwatch:_selPaintSwatch] CGColor]];
             [refImageView.layer setCornerRadius:DEF_NIL_CORNER_RADIUS];
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
@@ -517,9 +517,9 @@ const int IMAGE_TAG  = 6;
         
         if (_scrollFlag == FALSE || _pressSelectedRow != index) {
             if (_isRGB == TRUE) {
-                cell.imageView.image = [ColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+                cell.imageView.image = [AppColorUtils renderRGB:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             } else {
-                cell.imageView.image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
+                cell.imageView.image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
             }
             
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
@@ -542,11 +542,11 @@ const int IMAGE_TAG  = 6;
         } else if (_scrollFlag == TRUE && _pressSelectedRow == index) {
             CGFloat matchImageViewWidth = self.tableView.bounds.size.width - _imageViewXOffset - DEF_FIELD_PADDING;
 
-            UIImage *refImage = [ColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
+            UIImage *refImage = [AppColorUtils renderRGB:paintSwatch cellWidth:matchImageViewWidth cellHeight:_imageViewHeight];
             
             // Add the RGB label
             //
-            cell.imageView.image = [ColorUtils drawRGBLabel:refImage rgbValue:paintSwatch location:@"bottom"];
+            cell.imageView.image = [AppColorUtils drawRGBLabel:refImage rgbValue:paintSwatch location:@"bottom"];
             [cell.imageView setFrame:CGRectMake(_imageViewXOffset, DEF_Y_OFFSET, matchImageViewWidth, _imageViewHeight)];
             [cell.imageView.layer setBorderWidth:BORDER_WIDTH_NONE];
             [cell.imageView.layer setCornerRadius:DEF_NIL_CORNER_RADIUS];

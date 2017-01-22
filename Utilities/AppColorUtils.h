@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "PaintSwatches.h"
 
-@interface ColorUtils : NSObject
+@interface AppColorUtils : NSObject
 
 + (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;

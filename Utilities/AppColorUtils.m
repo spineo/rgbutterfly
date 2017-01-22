@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
 
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "GlobalSettings.h"
 
-@implementation ColorUtils
+@implementation AppColorUtils
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,10 +64,7 @@
         fprintf(stderr, "Error allocating color space\n");
         return NULL;
     }
-    
-    // Allocate memory for image data. This is the destination in memory
-    // where any drawing to the bitmap context will be rendered.
-    //
+
     bitmapData = malloc( bitmapByteCount );
     if (bitmapData == NULL) {
         fprintf (stderr, "Memory not allocated!");
@@ -78,7 +75,7 @@
     context = CGBitmapContextCreate(bitmapData,
                                     pixelsWide,
                                     pixelsHigh,
-                                    8,      // bits per component
+                                    8,
                                     bitmapBytesPerRow,
                                     colorSpace,
                                     (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
@@ -86,8 +83,7 @@
         free (bitmapData);
         fprintf (stderr, "Context not created!");
     }
-    
-    // Make sure and release colorspace before returning
+
     CGColorSpaceRelease( colorSpace );
     
     return context;
@@ -248,15 +244,15 @@
     
     UIImage *swatchImage;
     if (isRGB == FALSE) {
-        swatchImage = [ColorUtils renderPaint:swatchObj.image_thumb cellWidth:width cellHeight:height];
+        swatchImage = [self renderPaint:swatchObj.image_thumb cellWidth:width cellHeight:height];
     } else {
-        swatchImage = [ColorUtils renderRGB:swatchObj cellWidth:width cellHeight:height];
+        swatchImage = [self renderRGB:swatchObj cellWidth:width cellHeight:height];
     }
     return swatchImage;
 }
 
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
-    return [ColorUtils imageWithColor:[ColorUtils colorFromSwatch:swatchObj] objWidth:width objHeight:height];
+    return [self imageWithColor:[self colorFromSwatch:swatchObj] objWidth:width objHeight:height];
 }
 
 + (UIColor *)colorFromSwatch:(PaintSwatches *)swatchObj {
@@ -394,7 +390,7 @@
 
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view {
     UIGraphicsBeginImageContext(view.frame.size);
-    [[UIImage imageNamed:@"butterfly-background.png"] drawInRect:view.bounds];
+    [[UIImage imageNamed:imageName] drawInRect:view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     view.backgroundColor = [UIColor colorWithPatternImage:image];

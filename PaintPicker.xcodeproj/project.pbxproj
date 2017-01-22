@@ -52,7 +52,7 @@
 		2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */; };
 		2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EC1DFDE32C0076A095 /* AlertUtils.m */; };
 		2109A1031DFDE32C0076A095 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EE1DFDE32C0076A095 /* BarButtonUtils.m */; };
-		2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F01DFDE32C0076A095 /* ColorUtils.m */; };
+		2109A1041DFDE32C0076A095 /* AppColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F01DFDE32C0076A095 /* AppColorUtils.m */; };
 		2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F61DFDE32C0076A095 /* GenericUtils.m */; };
 		2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FA1DFDE32C0076A095 /* ManagedObjectUtils.m */; };
 		2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FE1DFDE32C0076A095 /* PickerUtils.m */; };
@@ -78,6 +78,7 @@
 		212F25B11E3403B7002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B01E3403B7002466E7 /* HTTPUtils.m */; };
 		212F25B41E3548A0002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B31E3548A0002466E7 /* FileUtils.m */; };
 		212F25B71E354964002466E7 /* FieldUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B61E354964002466E7 /* FieldUtils.m */; };
+		212F25BA1E355BA7002466E7 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B91E355BA7002466E7 /* ColorUtils.m */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
@@ -194,8 +195,8 @@
 		2109A0EC1DFDE32C0076A095 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertUtils.m; path = Utilities/AlertUtils.m; sourceTree = "<group>"; };
 		2109A0ED1DFDE32C0076A095 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarButtonUtils.h; path = Utilities/BarButtonUtils.h; sourceTree = "<group>"; };
 		2109A0EE1DFDE32C0076A095 /* BarButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarButtonUtils.m; path = Utilities/BarButtonUtils.m; sourceTree = "<group>"; };
-		2109A0EF1DFDE32C0076A095 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = Utilities/ColorUtils.h; sourceTree = "<group>"; };
-		2109A0F01DFDE32C0076A095 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = Utilities/ColorUtils.m; sourceTree = "<group>"; };
+		2109A0EF1DFDE32C0076A095 /* AppColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColorUtils.h; path = Utilities/AppColorUtils.h; sourceTree = "<group>"; };
+		2109A0F01DFDE32C0076A095 /* AppColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppColorUtils.m; path = Utilities/AppColorUtils.m; sourceTree = "<group>"; };
 		2109A0F51DFDE32C0076A095 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericUtils.h; path = Utilities/GenericUtils.h; sourceTree = "<group>"; };
 		2109A0F61DFDE32C0076A095 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericUtils.m; path = Utilities/GenericUtils.m; sourceTree = "<group>"; };
 		2109A0F91DFDE32C0076A095 /* ManagedObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagedObjectUtils.h; path = Utilities/ManagedObjectUtils.h; sourceTree = "<group>"; };
@@ -248,6 +249,8 @@
 		212F25B31E3548A0002466E7 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileUtils.m; path = "../ios-utilities/FileUtils/FileUtils.m"; sourceTree = "<group>"; };
 		212F25B51E3548EC002466E7 /* FieldUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldUtils.h; sourceTree = "<group>"; };
 		212F25B61E354964002466E7 /* FieldUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldUtils.m; sourceTree = "<group>"; };
+		212F25B81E355BA7002466E7 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = "../ios-utilities/ColorUtils/ColorUtils.h"; sourceTree = "<group>"; };
+		212F25B91E355BA7002466E7 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = "../ios-utilities/ColorUtils/ColorUtils.m"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -436,6 +439,8 @@
 		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				212F25B81E355BA7002466E7 /* ColorUtils.h */,
+				212F25B91E355BA7002466E7 /* ColorUtils.m */,
 				212F25B21E3548A0002466E7 /* FileUtils.h */,
 				212F25B31E3548A0002466E7 /* FileUtils.m */,
 				212F25AF1E3403B7002466E7 /* HTTPUtils.h */,
@@ -444,8 +449,8 @@
 				2109A0EC1DFDE32C0076A095 /* AlertUtils.m */,
 				2109A0ED1DFDE32C0076A095 /* BarButtonUtils.h */,
 				2109A0EE1DFDE32C0076A095 /* BarButtonUtils.m */,
-				2109A0EF1DFDE32C0076A095 /* ColorUtils.h */,
-				2109A0F01DFDE32C0076A095 /* ColorUtils.m */,
+				2109A0EF1DFDE32C0076A095 /* AppColorUtils.h */,
+				2109A0F01DFDE32C0076A095 /* AppColorUtils.m */,
 				2109A0F51DFDE32C0076A095 /* GenericUtils.h */,
 				2109A0F61DFDE32C0076A095 /* GenericUtils.m */,
 				2109A0F91DFDE32C0076A095 /* ManagedObjectUtils.h */,
@@ -745,6 +750,7 @@
 				21064FFB1DFEDD0A004B0830 /* BodyType.m in Sources */,
 				2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */,
 				210650291DFEDFBB004B0830 /* MatchAlgorithm.m in Sources */,
+				212F25BA1E355BA7002466E7 /* ColorUtils.m in Sources */,
 				210650001DFEDD0A004B0830 /* MixAssociation.m in Sources */,
 				210650141DFEDD5A004B0830 /* PaintSwatchType.m in Sources */,
 				2109A12A1DFDE4910076A095 /* BodyType+CoreDataProperties.m in Sources */,
@@ -773,7 +779,7 @@
 				210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */,
 				210650171DFEDD5A004B0830 /* SwatchKeyword.m in Sources */,
 				2109A1331DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m in Sources */,
-				2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */,
+				2109A1041DFDE32C0076A095 /* AppColorUtils.m in Sources */,
 				210650051DFEDD0A004B0830 /* PaintSwatches.m in Sources */,
 				210650151DFEDD5A004B0830 /* PigmentType.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,

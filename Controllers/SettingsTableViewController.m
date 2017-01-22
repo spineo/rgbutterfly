@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 
 @interface SettingsTableViewController ()
 

@@ -9,7 +9,7 @@
 #import "SwatchDetailTableViewController.h"
 #import "GlobalSettings.h"
 #import "AppDelegate.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "FieldUtils.h"
 #import "AssocTableViewController.h"
 #import "MatchTableViewController.h"
@@ -1056,7 +1056,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         //
         CGFloat xpt= _touchPoint.x - (_shapeLength / 2);
         CGFloat ypt= _touchPoint.y - (_shapeLength / 2);
-        UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+        UIImage *imageThumb = [AppColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
         [_swatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
         
         [_paintSwatches addObject:_swatchObj];
@@ -1138,7 +1138,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             //
             CGFloat xpt= _dragEndPoint.x - (_shapeLength / 2);
             CGFloat ypt= _dragEndPoint.y - (_shapeLength / 2);
-            UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+            UIImage *imageThumb = [AppColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
             [newSwatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
             
             [_paintSwatches insertObject:newSwatchObj atIndex:i];
@@ -1418,7 +1418,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
-    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
+    UIColor *rgbColor = [AppColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
     
     CGColorRef rgbPixelRef = [rgbColor CGColor];
     
@@ -1443,7 +1443,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
-    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
+    UIColor *rgbColor = [AppColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
     
     CGColorRef rgbPixelRef = [rgbColor CGColor];
     
@@ -1542,12 +1542,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         UIImage *image;
         if (_isRGB == TRUE) {
-            image = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
         } else {
-            image = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
         }
         
-        custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum];
+        custCell.imageView.image = [AppColorUtils drawTapAreaLabel:image count:tapNum];
 
         
         // Tag the first reference image
@@ -1694,9 +1694,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     UIImage *swatchImage;
     if (_isRGB == TRUE) {
-        swatchImage = [ColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        swatchImage = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     } else {
-        swatchImage = [ColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];

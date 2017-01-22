@@ -9,7 +9,7 @@
 #import "AddMixTableViewController.h"
 #import "AssocTableViewController.h"
 #import "GlobalSettings.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "PaintSwatches.h"
 #import "BarButtonUtils.h"
 #import "AppDelegate.h"
@@ -275,7 +275,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
     [cell.imageView setClipsToBounds:YES];
 
-    cell.imageView.image = [ColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
+    cell.imageView.image = [AppColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height];
     
     cell.accessoryType   = UITableViewCellSeparatorStyleNone;
 

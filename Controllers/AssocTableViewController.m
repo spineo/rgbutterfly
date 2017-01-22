@@ -10,7 +10,7 @@
 #import "AssocTableViewCell.h"
 #import "AssocDescTableViewCell.h"
 #import "AddMixTableViewController.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "SwatchDetailTableViewController.h"
 #import "ManagedObjectUtils.h"
 #import "FieldUtils.h"
@@ -95,7 +95,7 @@ const int ASSOC_SET_TAG        = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //
@@ -619,7 +619,7 @@ const int ASSOC_SET_TAG        = 8;
         
         NSString *name = [paintSwatch name];
 
-        cell.imageView.image = [ColorUtils renderSwatch:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
+        cell.imageView.image = [AppColorUtils renderSwatch:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight];
         
         // Tag the first reference image
         //

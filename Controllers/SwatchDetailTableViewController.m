@@ -10,7 +10,7 @@
 #import "AssocTableViewController.h"
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "ManagedObjectUtils.h"
 #import "AppDelegate.h"
 #import "GenericUtils.h"
@@ -520,7 +520,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
-            cell.imageView.image = [ColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
             
             CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - (DEF_FIELD_PADDING * 2);
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
@@ -551,7 +551,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
-            cell.imageView.image = [ColorUtils renderRGB:_paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
+            cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
 
             [cell.contentView addSubview:_subjColorName];
 
@@ -656,13 +656,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if (indexPath.row == 0) {
-                [cell.imageView setImage:[ColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
                 [cell.textLabel setText:[_refPaintSwatch name]];
 
             } else {
                 // Detail Mix Section
                 //
-                [cell.imageView setImage:[ColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
                 [cell.textLabel setText:[_mixPaintSwatch name]];
             }
         }
@@ -777,7 +777,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _nameHeader;
         
     } else if (section == DETAIL_COLOR_SECTION) {
-        NSString *colorName = [ColorUtils colorCategoryFromHue:_paintSwatch];
+        NSString *colorName = [AppColorUtils colorCategoryFromHue:_paintSwatch];
         headerStr = [[NSString alloc] initWithFormat:@"%@ (Hue: %@)", _subjColorHeader, colorName];
         
     } else if (section == DETAIL_PROPS_SECTION) {
@@ -1093,9 +1093,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     } else {
         NSString *colorName = [_subjColorNames objectAtIndex:row];
-        UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+        UIColor *backgroundColor = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
         
-        [label setTextColor:[ColorUtils setBestColorContrast:colorName]];
+        [label setTextColor:[AppColorUtils setBestColorContrast:colorName]];
         [label setBackgroundColor:backgroundColor];
         [label setText:[_subjColorNames objectAtIndex:row]];
     }
@@ -1236,7 +1236,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     PaintSwatches *paintSwatch = [[self.colorArray objectAtIndex:index] objectAtIndex:indexPath.row];
     
-    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[ColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
+    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[AppColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
     
     [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];
@@ -1433,8 +1433,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)setColorPickerValues:(int)row {
     _colorSelected = [_subjColorNames objectAtIndex:row];
     [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
-    _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
-    [_subjColorName setTextColor:[ColorUtils setBestColorContrast:_colorSelected]];
+    _subjColorValue = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
+    [_subjColorName setTextColor:[AppColorUtils setBestColorContrast:_colorSelected]];
     [_subjColorName setBackgroundColor:_subjColorValue];
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];
 }

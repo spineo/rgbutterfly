@@ -9,7 +9,7 @@
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 #import "GlobalSettings.h"
-#import "ColorUtils.h"
+#import "AppColorUtils.h"
 #import "UIImageViewController.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
