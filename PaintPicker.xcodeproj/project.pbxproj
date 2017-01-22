@@ -55,7 +55,6 @@
 		2109A1041DFDE32C0076A095 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F01DFDE32C0076A095 /* ColorUtils.m */; };
 		2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F61DFDE32C0076A095 /* GenericUtils.m */; };
 		2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FA1DFDE32C0076A095 /* ManagedObjectUtils.m */; };
-		2109A10A1DFDE32C0076A095 /* md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FC1DFDE32C0076A095 /* md5.m */; };
 		2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FE1DFDE32C0076A095 /* PickerUtils.m */; };
 		2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1001DFDE32C0076A095 /* StringObjectUtils.m */; };
 		2109A1291DFDE4910076A095 /* AssociationType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A10E1DFDE4910076A095 /* AssociationType+CoreDataProperties.m */; };
@@ -201,8 +200,6 @@
 		2109A0F61DFDE32C0076A095 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericUtils.m; path = Utilities/GenericUtils.m; sourceTree = "<group>"; };
 		2109A0F91DFDE32C0076A095 /* ManagedObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagedObjectUtils.h; path = Utilities/ManagedObjectUtils.h; sourceTree = "<group>"; };
 		2109A0FA1DFDE32C0076A095 /* ManagedObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagedObjectUtils.m; path = Utilities/ManagedObjectUtils.m; sourceTree = "<group>"; };
-		2109A0FB1DFDE32C0076A095 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = Utilities/md5.h; sourceTree = "<group>"; };
-		2109A0FC1DFDE32C0076A095 /* md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = md5.m; path = Utilities/md5.m; sourceTree = "<group>"; };
 		2109A0FD1DFDE32C0076A095 /* PickerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickerUtils.h; path = Utilities/PickerUtils.h; sourceTree = "<group>"; };
 		2109A0FE1DFDE32C0076A095 /* PickerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PickerUtils.m; path = Utilities/PickerUtils.m; sourceTree = "<group>"; };
 		2109A0FF1DFDE32C0076A095 /* StringObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringObjectUtils.h; path = Utilities/StringObjectUtils.h; sourceTree = "<group>"; };
@@ -453,8 +450,6 @@
 				2109A0F61DFDE32C0076A095 /* GenericUtils.m */,
 				2109A0F91DFDE32C0076A095 /* ManagedObjectUtils.h */,
 				2109A0FA1DFDE32C0076A095 /* ManagedObjectUtils.m */,
-				2109A0FB1DFDE32C0076A095 /* md5.h */,
-				2109A0FC1DFDE32C0076A095 /* md5.m */,
 				2109A0FD1DFDE32C0076A095 /* PickerUtils.h */,
 				2109A0FE1DFDE32C0076A095 /* PickerUtils.m */,
 				2109A0FF1DFDE32C0076A095 /* StringObjectUtils.h */,
@@ -747,7 +742,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2109A10A1DFDE32C0076A095 /* md5.m in Sources */,
 				21064FFB1DFEDD0A004B0830 /* BodyType.m in Sources */,
 				2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */,
 				210650291DFEDFBB004B0830 /* MatchAlgorithm.m in Sources */,

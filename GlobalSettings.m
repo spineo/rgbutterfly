@@ -51,9 +51,6 @@ NSString * const MD5_CONT_TYPE  = @"text/plain";
 NSString * const VERSION_FILE   = @"version.txt";
 NSString * const VER_CONT_TYPE  = @"text/plain";
 
-// Default sleep duration for asynchronous threads
-//
-NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords

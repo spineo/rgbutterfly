@@ -56,9 +56,6 @@ extern NSString * const MD5_CONT_TYPE;
 extern NSString * const VERSION_FILE;
 extern NSString * const VER_CONT_TYPE;
 
-// Default sleep duration for asynchronous threads
-//
-extern NSTimeInterval const ASYNC_THREAD_SLEEP;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords

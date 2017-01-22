@@ -5,10 +5,8 @@
 //  Created by Stuart Pineo on 2/13/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
-
 #import "GenericUtils.h"
 #import "GlobalSettings.h"
-#import "md5.h"
 #import "FileUtils.h"
 #import "HTTPUtils.h"
 
@@ -188,7 +186,7 @@
     
     // Verify the MD5 value and, if equal, perform the update (else, leave in place the current snapshot)
     //
-    NSString *md5sum = [md5 md5Hash:destDBTmpFile];
+    NSString *md5sum = [FileUtils md5Hash:destDBTmpFile fileManager:fileManager];
     if ([currMd5sum isEqualToString:md5sum]) {
         [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
         [FileUtils fileRemove:destDBWalFile fileManager:fileManager];
