@@ -75,10 +75,10 @@
 		210C89871A9F6C440003CC85 /* AcrylicsColorPickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */; };
 		212F25AB1E33FEE0002466E7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AA1E33FEE0002466E7 /* Reachability.m */; };
 		212F25AE1E33FF13002466E7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AD1E33FF13002466E7 /* NSData+Base64.m */; };
-		212F25B11E3403B7002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B01E3403B7002466E7 /* HTTPUtils.m */; };
-		212F25B41E3548A0002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B31E3548A0002466E7 /* FileUtils.m */; };
 		212F25B71E354964002466E7 /* FieldUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B61E354964002466E7 /* FieldUtils.m */; };
-		212F25BA1E355BA7002466E7 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B91E355BA7002466E7 /* ColorUtils.m */; };
+		212F25C11E363919002466E7 /* ColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25BC1E363919002466E7 /* ColorUtils.m */; };
+		212F25C21E363919002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25BE1E363919002466E7 /* FileUtils.m */; };
+		212F25C31E363919002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25C01E363919002466E7 /* HTTPUtils.m */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
@@ -243,14 +243,14 @@
 		212F25AA1E33FEE0002466E7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../ios-external-utilities/Reachability/Reachability.m"; sourceTree = "<group>"; };
 		212F25AC1E33FF13002466E7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "../ios-external-utilities/NSData+Base64/NSData+Base64.h"; sourceTree = "<group>"; };
 		212F25AD1E33FF13002466E7 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "../ios-external-utilities/NSData+Base64/NSData+Base64.m"; sourceTree = "<group>"; };
-		212F25AF1E3403B7002466E7 /* HTTPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPUtils.h; path = "../ios-utilities/HTTPUtils/HTTPUtils.h"; sourceTree = "<group>"; };
-		212F25B01E3403B7002466E7 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPUtils.m; path = "../ios-utilities/HTTPUtils/HTTPUtils.m"; sourceTree = "<group>"; };
-		212F25B21E3548A0002466E7 /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileUtils.h; path = "../ios-utilities/FileUtils/FileUtils.h"; sourceTree = "<group>"; };
-		212F25B31E3548A0002466E7 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileUtils.m; path = "../ios-utilities/FileUtils/FileUtils.m"; sourceTree = "<group>"; };
 		212F25B51E3548EC002466E7 /* FieldUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldUtils.h; sourceTree = "<group>"; };
 		212F25B61E354964002466E7 /* FieldUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldUtils.m; sourceTree = "<group>"; };
-		212F25B81E355BA7002466E7 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = "../ios-utilities/ColorUtils/ColorUtils.h"; sourceTree = "<group>"; };
-		212F25B91E355BA7002466E7 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = "../ios-utilities/ColorUtils/ColorUtils.m"; sourceTree = "<group>"; };
+		212F25BB1E363919002466E7 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = "../ios-utilities/ColorUtils.h"; sourceTree = "<group>"; };
+		212F25BC1E363919002466E7 /* ColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtils.m; path = "../ios-utilities/ColorUtils.m"; sourceTree = "<group>"; };
+		212F25BD1E363919002466E7 /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileUtils.h; path = "../ios-utilities/FileUtils.h"; sourceTree = "<group>"; };
+		212F25BE1E363919002466E7 /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileUtils.m; path = "../ios-utilities/FileUtils.m"; sourceTree = "<group>"; };
+		212F25BF1E363919002466E7 /* HTTPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPUtils.h; path = "../ios-utilities/HTTPUtils.h"; sourceTree = "<group>"; };
+		212F25C01E363919002466E7 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPUtils.m; path = "../ios-utilities/HTTPUtils.m"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -439,12 +439,12 @@
 		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				212F25B81E355BA7002466E7 /* ColorUtils.h */,
-				212F25B91E355BA7002466E7 /* ColorUtils.m */,
-				212F25B21E3548A0002466E7 /* FileUtils.h */,
-				212F25B31E3548A0002466E7 /* FileUtils.m */,
-				212F25AF1E3403B7002466E7 /* HTTPUtils.h */,
-				212F25B01E3403B7002466E7 /* HTTPUtils.m */,
+				212F25BB1E363919002466E7 /* ColorUtils.h */,
+				212F25BC1E363919002466E7 /* ColorUtils.m */,
+				212F25BD1E363919002466E7 /* FileUtils.h */,
+				212F25BE1E363919002466E7 /* FileUtils.m */,
+				212F25BF1E363919002466E7 /* HTTPUtils.h */,
+				212F25C01E363919002466E7 /* HTTPUtils.m */,
 				2109A0EB1DFDE32C0076A095 /* AlertUtils.h */,
 				2109A0EC1DFDE32C0076A095 /* AlertUtils.m */,
 				2109A0ED1DFDE32C0076A095 /* BarButtonUtils.h */,
@@ -750,7 +750,7 @@
 				21064FFB1DFEDD0A004B0830 /* BodyType.m in Sources */,
 				2109A0E21DFDDD6F0076A095 /* DisclaimerViewController.m in Sources */,
 				210650291DFEDFBB004B0830 /* MatchAlgorithm.m in Sources */,
-				212F25BA1E355BA7002466E7 /* ColorUtils.m in Sources */,
+				212F25C11E363919002466E7 /* ColorUtils.m in Sources */,
 				210650001DFEDD0A004B0830 /* MixAssociation.m in Sources */,
 				210650141DFEDD5A004B0830 /* PaintSwatchType.m in Sources */,
 				2109A12A1DFDE4910076A095 /* BodyType+CoreDataProperties.m in Sources */,
@@ -773,7 +773,7 @@
 				2106501A1DFEDD5A004B0830 /* TapAreaSwatch.m in Sources */,
 				210650181DFEDD5A004B0830 /* TapArea.m in Sources */,
 				2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */,
-				212F25B41E3548A0002466E7 /* FileUtils.m in Sources */,
+				212F25C21E363919002466E7 /* FileUtils.m in Sources */,
 				21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */,
 				2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */,
 				210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */,
@@ -802,8 +802,8 @@
 				2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */,
 				2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */,
 				2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */,
+				212F25C31E363919002466E7 /* HTTPUtils.m in Sources */,
 				2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */,
-				212F25B11E3403B7002466E7 /* HTTPUtils.m in Sources */,
 				2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */,
 				2109A0E41DFDDD6F0076A095 /* PickerViewController.m in Sources */,
 				2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */,
