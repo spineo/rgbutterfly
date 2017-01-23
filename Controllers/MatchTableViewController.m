@@ -11,6 +11,7 @@
 #import "FieldUtils.h"
 #import "BarButtonUtils.h"
 #import "AppColorUtils.h"
+#import "ColorUtils.h"
 #import "MatchAlgorithms.h"
 #import "AlertUtils.h"
 #import "StringObjectUtils.h"
@@ -315,7 +316,7 @@ const int IMAGE_TAG  = 6;
             
             // Tag the first reference image
             //
-            refImage =  [AppColorUtils drawTapAreaLabel:refImage count:_currTapSection];
+            refImage =  [ColorUtils drawTapAreaLabel:refImage count:_currTapSection attrs:nil inset:DEF_RECT_INSET];
 
             
             UIImageView *refImageView = [[UIImageView alloc] initWithImage:refImage];

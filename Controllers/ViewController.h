@@ -8,9 +8,11 @@
 
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+#import "UIImageViewController.h"
 #import "GlobalSettings.h"
 #import "AppColorUtils.h"
-#import "UIImageViewController.h"
+#import "ColorUtils.h"
+
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
@@ -19,6 +21,5 @@
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
 
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
-
 
 @end

@@ -267,26 +267,6 @@
     return resizedImage;
 }
 
-+ (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count {
-    UIImage *retImage = image;
-    
-    NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
-    
-    UIGraphicsBeginImageContext(image.size);
-    
-    [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
-    
-    NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
-    
-    [countStr drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
 + (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch location:(NSString *)location {
     UIImage *retImage = image;
     
@@ -299,31 +279,13 @@
     CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
     if ([location isEqualToString:@"bottom"]) {
         CGFloat fontHeight = [LG_TAP_AREA_FONT pointSize];
-        CGFloat yLocation = image.size.height - (fontHeight + DEF_Y_RECT_INSET + DEF_BOTTOM_OFFSET);
+        CGFloat yLocation = image.size.height - (fontHeight + DEF_RECT_INSET + DEF_BOTTOM_OFFSET);
         rect = CGRectMake(DEF_X_COORD, yLocation, image.size.width, image.size.height);
     }
     
     NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:LG_TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
     
-    [rgbValue drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
-+ (UIImage*)drawLabel:(UIImage*)image label:(NSString *)label {
-    UIImage *retImage = image;
-
-    UIGraphicsBeginImageContext(image.size);
-    
-    [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(DEF_X_COORD, DEF_Y_COORD, image.size.width, image.size.height);
-    
-    NSDictionary *attr = @{NSForegroundColorAttributeName: LIGHT_TEXT_COLOR, NSFontAttributeName: LG_TAP_AREA_FONT, NSBackgroundColorAttributeName: DARK_BG_COLOR};
-    
-    [label drawInRect:CGRectInset(rect, DEF_X_RECT_INSET, DEF_Y_RECT_INSET) withAttributes:attr];
+    [rgbValue drawInRect:CGRectInset(rect, DEF_RECT_INSET, DEF_RECT_INSET) withAttributes:attr];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -376,16 +338,6 @@
     [toolbar addSubview:visualEffectView];
     toolbar.backgroundColor = [UIColor clearColor];
     [toolbar sendSubviewToBack:visualEffectView];
-}
-
-+ (void)setViewGlaze:(UIView *)view {
-    CGRect bounds = view.bounds;
-    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
-    visualEffectView.frame = bounds;
-    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [view addSubview:visualEffectView];
-    view.backgroundColor = [UIColor clearColor];
-    [view sendSubviewToBack:visualEffectView];
 }
 
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view {

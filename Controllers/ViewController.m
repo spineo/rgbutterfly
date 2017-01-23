@@ -18,6 +18,7 @@
 #import "GenericUtils.h"
 #import "HTTPUtils.h"
 
+
 #import "ManagedObjectUtils.h"
 #import "PaintSwatches.h"
 #import "SwatchKeyword.h"
@@ -123,7 +124,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     // Set the background image
     //
-    [AppColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    [AppColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
     
     // NSManagedObject subclassing
     //
@@ -788,7 +789,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             
             [scrollViewToolbar sizeToFit];
 
-            [AppColorUtils setViewGlaze:headerView];
+            [ColorUtils setViewGlaze:headerView];
         }
         
     } else {
@@ -1255,7 +1256,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = paintSwatch.tap_area;
         swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:_imageViewWidth cellHeight:_imageViewHeight];
-        swatchImage = [AppColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue]];
+        swatchImage = [ColorUtils drawTapAreaLabel:swatchImage count:[tapArea.tap_order intValue] attrs:nil inset:DEF_RECT_INSET];
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];

@@ -317,7 +317,7 @@
             text = @"";
             for (NSString *attributeName in attributes) {
             
-                id value = [object valueForKey: attributeName];
+                id value = [object valueForKey:attributeName];
 
                 NSString *strValue = @"";
                 

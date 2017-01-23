@@ -83,8 +83,7 @@ CGFloat const DEF_CORNER_RAD_FACTOR = 2.0;
 
 // Used for embedded labels
 //
-CGFloat const DEF_X_RECT_INSET      = 2.0;
-CGFloat const DEF_Y_RECT_INSET      = 2.0;
+CGFloat const DEF_RECT_INSET        = 2.0;
 CGFloat const DEF_X_COORD           = 1.0;
 CGFloat const DEF_Y_COORD           = 1.0;
 CGFloat const DEF_BOTTOM_OFFSET     = 6.0;

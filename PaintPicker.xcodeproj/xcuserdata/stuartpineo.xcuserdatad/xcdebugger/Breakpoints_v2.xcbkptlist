@@ -5472,11 +5472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "503782873.64244"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28">
+            startingLineNumber = "29"
+            endingLineNumber = "29">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -5548,11 +5548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506115717.043032"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1366"
-            endingLineNumber = "1366"
+            startingLineNumber = "1367"
+            endingLineNumber = "1367"
             landmarkName = "-pressCancel"
             landmarkType = "7">
          </BreakpointContent>
@@ -5596,11 +5596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506115717.043032"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1119"
-            endingLineNumber = "1119"
+            startingLineNumber = "1120"
+            endingLineNumber = "1120"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5612,11 +5612,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506115717.043032"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1119"
-            endingLineNumber = "1119"
+            startingLineNumber = "1120"
+            endingLineNumber = "1120"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5628,11 +5628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "505847891.584287"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "-stopSpinner"
             landmarkType = "7">
          </BreakpointContent>
@@ -5644,11 +5644,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "505847891.584287"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "-stopSpinner"
             landmarkType = "7">
          </BreakpointContent>
@@ -5660,11 +5660,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "505847459.882838"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "-startSpinner"
             landmarkType = "7">
          </BreakpointContent>
@@ -5676,11 +5676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "505847459.882838"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "-startSpinner"
             landmarkType = "7">
          </BreakpointContent>
@@ -5692,11 +5692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506115627.700725"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5708,11 +5708,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "505847891.584287"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-stopSpinner"
             landmarkType = "7">
          </BreakpointContent>
@@ -5724,11 +5724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506206273.021369"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1573"
-            endingLineNumber = "1573"
+            startingLineNumber = "1574"
+            endingLineNumber = "1574"
             landmarkName = "-registerContextDidSaveNotificationForManagedObjectContext:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5740,11 +5740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "506206273.021369"
+            timestampString = "506871192.602318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1582"
-            endingLineNumber = "1582"
+            startingLineNumber = "1583"
+            endingLineNumber = "1583"
             landmarkName = "-mergeChanges:"
             landmarkType = "7">
          </BreakpointContent>

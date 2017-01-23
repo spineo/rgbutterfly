@@ -10,6 +10,7 @@
 #import "GlobalSettings.h"
 #import "AppDelegate.h"
 #import "AppColorUtils.h"
+#import "ColorUtils.h"
 #import "FieldUtils.h"
 #import "AssocTableViewController.h"
 #import "MatchTableViewController.h"
@@ -1547,7 +1548,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
         }
         
-        custCell.imageView.image = [AppColorUtils drawTapAreaLabel:image count:tapNum];
+        custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET];
 
         
         // Tag the first reference image
