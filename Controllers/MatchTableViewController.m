@@ -87,7 +87,7 @@ const int IMAGE_TAG  = 6;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //

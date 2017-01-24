@@ -25,8 +25,5 @@
 + (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch location:(NSString *)location;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
 + (UIColor *)setBestColorContrast:(NSString *)colorName;
-+ (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
-+ (void)setToolbarGlaze:(UIToolbar *)toolbar;
-+ (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view;
 
 @end

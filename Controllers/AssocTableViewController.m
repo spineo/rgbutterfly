@@ -11,6 +11,7 @@
 #import "AssocDescTableViewCell.h"
 #import "AddMixTableViewController.h"
 #import "AppColorUtils.h"
+#import "ColorUtils.h"
 #import "SwatchDetailTableViewController.h"
 #import "ManagedObjectUtils.h"
 #import "FieldUtils.h"
@@ -95,7 +96,7 @@ const int ASSOC_SET_TAG        = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //

@@ -124,15 +124,15 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     // Set the background image
     //
-    [AppColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
     
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
     
-    //[AppColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-    //[AppColorUtils setToolbarGlaze:self.navigationController.toolbar];
+    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
+    //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
     
     // Initialization
     //
@@ -789,7 +789,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             
             [scrollViewToolbar sizeToFit];
 
-            [ColorUtils setViewGlaze:headerView];
+            [ColorUtils setGlaze:headerView];
         }
         
     } else {
