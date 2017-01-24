@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "PaintSwatches.h"
+#import "ColorUtils.h"
 
 @interface AppColorUtils : NSObject
 
-+ (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
-+ (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
-+ (UIColor *)colorFromHexString:(NSString *)hexString;
 + (NSString *)colorCategoryFromHue:(PaintSwatches *)swatchObj;
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;

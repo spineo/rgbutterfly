@@ -11,6 +11,7 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "AppColorUtils.h"
+#import "ColorUtils.h"
 #import "ManagedObjectUtils.h"
 #import "AppDelegate.h"
 #import "GenericUtils.h"
@@ -1093,7 +1094,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     } else {
         NSString *colorName = [_subjColorNames objectAtIndex:row];
-        UIColor *backgroundColor = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+        UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
         
         [label setTextColor:[AppColorUtils setBestColorContrast:colorName]];
         [label setBackgroundColor:backgroundColor];
@@ -1433,7 +1434,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (void)setColorPickerValues:(int)row {
     _colorSelected = [_subjColorNames objectAtIndex:row];
     [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
-    _subjColorValue = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
+    _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
     [_subjColorName setTextColor:[AppColorUtils setBestColorContrast:_colorSelected]];
     [_subjColorName setBackgroundColor:_subjColorValue];
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];

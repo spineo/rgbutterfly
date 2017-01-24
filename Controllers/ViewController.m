@@ -741,7 +741,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
         } else {
             int index = (int)section - 1;
             NSString *colorName = [_subjColorNames objectAtIndex:index];
-            UIColor *backgroundColor = [AppColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
+            UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
             [headerLabel setTextColor:[AppColorUtils setBestColorContrast:colorName]];
             [headerLabel setBackgroundColor:backgroundColor];
             [headerLabel setText:[_subjColorNames objectAtIndex:index]];

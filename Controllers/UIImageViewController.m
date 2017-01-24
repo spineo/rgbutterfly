@@ -1419,7 +1419,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
-    UIColor *rgbColor = [AppColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
     
     CGColorRef rgbPixelRef = [rgbColor CGColor];
     
@@ -1444,7 +1444,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
     _cgiImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
     
-    UIColor *rgbColor = [AppColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:_cgiImage];
     
     CGColorRef rgbPixelRef = [rgbColor CGColor];
     
