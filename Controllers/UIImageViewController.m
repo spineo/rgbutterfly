@@ -158,8 +158,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"    inManagedObjectContext:self.context];
     
 
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
     
     
     // We also want to change this initial behaviour (see #B59) with the default MatchCount and AlgorithmId
@@ -222,7 +222,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         _viewType           = MATCH_TYPE;
     }
     
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
     
     // Match algorithms
     //
@@ -682,22 +682,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)matchButtonsShow {
     [self editButtonEnable];
     if (_matchAssociation == nil) {
-        [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-        [BarButtonUtils buttonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-        [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
+        [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+        [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+        [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+        [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+        [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+        [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
     }
 }
 
 - (void)matchButtonsHide {
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)editButtonDisable {
@@ -710,21 +710,21 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)viewButtonShow {
     [self editButtonEnable];
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:VIEW_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:DEF_BUTTON_WIDTH];
+    [BarButtonUtils setButtonShow:self.toolbarItems refTag:VIEW_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:DEF_BUTTON_WIDTH];
 }
 
 - (void)viewButtonHide {
     [self editButtonDisable];
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 // When source view controller is 'ViewController' context
 //
 - (void)matchButtonHide {
-    [BarButtonUtils buttonHide:self.toolbarItems refTag:MATCH_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:MATCH_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:MATCH_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:MATCH_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 // ******************************************************************************
@@ -1912,12 +1912,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self refreshViews];
         
         [_imageTableView reloadData];
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
         [_matchSave setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -1930,13 +1930,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self refreshViews];
         
         [_imageTableView reloadData];
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         [_matchSave setEnabled:TRUE];
         
     } else {
         UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
         [self presentViewController:myAlert animated:YES completion:nil];
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -2025,7 +2025,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:ASSOC_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:ASSOC_BTN_TAG isEnabled:FALSE];
         
         [_assocSave setEnabled:FALSE];
     }
@@ -2240,7 +2240,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
 
         [self matchButtonsHide];
         

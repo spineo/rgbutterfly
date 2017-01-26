@@ -320,9 +320,9 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     }
 
     if (_addSwatchCount > 0) {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:TRUE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:TRUE];
     } else {
-        [BarButtonUtils buttonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:FALSE];
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:DONE_BTN_TAG isEnabled:FALSE];
     }
 }
 

@@ -932,13 +932,13 @@ const int ASSOC_SET_TAG        = 8;
 #pragma mark - Buttons Show/Hide Methods
 
 - (void)homeButtonShow {
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:HOME_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
+    [BarButtonUtils setButtonShow:self.toolbarItems refTag:HOME_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:HOME_BTN_TAG     width:SHOW_BUTTON_WIDTH];
 }
 
 - (void)settingsButtonShow {
-    [BarButtonUtils buttonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
-    [BarButtonUtils buttonSetWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
+    [BarButtonUtils setButtonShow:self.toolbarItems refTag:SETTINGS_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:SETTINGS_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
