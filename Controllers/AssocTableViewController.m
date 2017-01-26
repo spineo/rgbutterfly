@@ -17,6 +17,7 @@
 #import "FieldUtils.h"
 #import "AlertUtils.h"
 #import "GenericUtils.h"
+#import "ButtonUtils.h"
 
 #import "PaintSwatches.h"
 #import "MixAssocSwatch.h"
@@ -393,7 +394,7 @@ const int ASSOC_SET_TAG        = 8;
 - (void)recreateAssocTypeButton {
     NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _assocTypeText, [_assocTypeName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _assocTypeButton = [BarButtonUtils create3DButton:buttonText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
+    _assocTypeButton = [ButtonUtils create3DButton:buttonText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
     [_assocTypeButton.titleLabel setFont:TABLE_CELL_FONT];
     [_assocTypeButton setTintColor:DARK_TEXT_COLOR];
     [_assocTypeButton setBackgroundColor:WIDGET_GREEN_COLOR];
@@ -406,7 +407,7 @@ const int ASSOC_SET_TAG        = 8;
 - (void)recreateSetCanvasButton {
     NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _setRenameText, [_coverageName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _setButton = [BarButtonUtils create3DButton:buttonText tag:ASSOC_SET_TAG frame:colorButtonFrame];
+    _setButton = [ButtonUtils create3DButton:buttonText tag:ASSOC_SET_TAG frame:colorButtonFrame];
     [_setButton.titleLabel setFont:TABLE_CELL_FONT];
     [_setButton setTintColor:DARK_TEXT_COLOR];
     [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
@@ -434,7 +435,7 @@ const int ASSOC_SET_TAG        = 8;
     }
     
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
-    _applyButton = [BarButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
+    _applyButton = [ButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
     [_applyButton setTintColor:DARK_TEXT_COLOR];
     [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];

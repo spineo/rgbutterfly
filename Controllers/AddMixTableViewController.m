@@ -12,6 +12,7 @@
 #import "AppColorUtils.h"
 #import "PaintSwatches.h"
 #import "BarButtonUtils.h"
+#import "ButtonUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 #import "PaintSwatchSelection.h"
@@ -168,7 +169,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     
     _titleView = [[UIView alloc] init];
     
-    _cancelButton = [BarButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
+    _cancelButton = [ButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
     [_cancelButton addTarget:self action:@selector(pressCancel) forControlEvents:UIControlEventTouchUpInside];
     
     _mixSearchBar = [[UISearchBar alloc] init];

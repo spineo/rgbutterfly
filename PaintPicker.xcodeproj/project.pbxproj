@@ -88,6 +88,7 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		217DFF791E09710A00E02183 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 217DFF781E09710A00E02183 /* Authtoken.txt */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
@@ -264,6 +265,8 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
+		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
+		2176DD151E3A338800812B19 /* ButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonUtils.m; path = Utilities/ButtonUtils.m; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
 		217A59181E181D04005BCE66 /* PaintPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaintPicker.entitlements; sourceTree = "<group>"; };
 		217DFF781E09710A00E02183 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				2109A1001DFDE32C0076A095 /* StringObjectUtils.m */,
 				212F25B51E3548EC002466E7 /* FieldUtils.h */,
 				212F25B61E354964002466E7 /* FieldUtils.m */,
+				2176DD141E3A338800812B19 /* ButtonUtils.h */,
+				2176DD151E3A338800812B19 /* ButtonUtils.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -765,6 +770,7 @@
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2109A1071DFDE32C0076A095 /* GenericUtils.m in Sources */,
+				2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */,
 				2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */,
 				2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */,

@@ -9,11 +9,10 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "AlertUtils.h"
-#import "BarButtonUtils.h"
+#import "ButtonUtils.h"
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
-#import "AppColorUtils.h"
 
 @interface SettingsTableViewController ()
 
@@ -318,7 +317,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     }
     [_tapImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
-    _shapeButton = [BarButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
+    _shapeButton = [ButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
     [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
     
     // Label displaying the value in the stepper

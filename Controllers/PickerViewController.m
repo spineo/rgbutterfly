@@ -9,7 +9,6 @@
 #import "PickerViewController.h"
 #import "UIImageViewController.h"
 #import "GlobalSettings.h"
-#import "AppColorUtils.h"
 
 
 @interface PickerViewController ()

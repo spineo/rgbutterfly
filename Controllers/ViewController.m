@@ -9,7 +9,7 @@
 #import "GlobalSettings.h"
 #import "PickerViewController.h"
 #import "AppDelegate.h"
-#import "BarButtonUtils.h"
+#import "ButtonUtils.h"
 #import "SwatchDetailTableViewController.h"
 #import "AssocCollectionTableViewCell.h"
 #import "AssocTableViewController.h"
@@ -319,7 +319,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     
     _titleView = [[UIView alloc] init];
     
-    _cancelButton = [BarButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
+    _cancelButton = [ButtonUtils createButton:@"Cancel" tag:CANCEL_BUTTON_TAG];
     [_cancelButton addTarget:self action:@selector(pressCancel) forControlEvents:UIControlEventTouchUpInside];
     
     _mainSearchBar = [[UISearchBar alloc] init];

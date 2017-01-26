@@ -25,12 +25,4 @@
 
 + (void)buttonSetWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width;
 
-+ (BOOL)changeButtonRendering:(BOOL)isRGB refTag:(int)refTag toolBarItems:(NSArray *)toolBarItems;
-
-+ (UIButton *)createButton:(NSString *)title tag:(int)tag;
-
-+ (UIButton *)create3DButton:(NSString *)title tag:(int)tag frame:(CGRect)frame;
-
-+ (UIButton *)create3DButton:(NSString *)title tag:(int)tag;
-
 @end

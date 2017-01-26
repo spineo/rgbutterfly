@@ -14,7 +14,6 @@
 #import "AssocTableViewController.h"
 #import "SwatchDetailTableViewController.h"
 #import "AppDelegate.h"
-#import "BarButtonUtils.h"
 #import "AssocCollectionTableViewCell.h"
 #import "ManagedObjectUtils.h"
 
