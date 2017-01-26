@@ -348,7 +348,7 @@ const int IMAGE_TAG  = 6;
             CGFloat croppedImageXOffset = _imageViewXOffset + _imageViewWidth + DEF_FIELD_PADDING;
             CGFloat croppedImageWidth = self.tableView.bounds.size.width - croppedImageXOffset - DEF_FIELD_PADDING;
             
-            UIImage *croppedImage = [AppColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
+            UIImage *croppedImage = [ColorUtils cropImage:_referenceImage frame:CGRectMake(xpt, ypt, croppedImageWidth, _imageViewHeight)];
             UIImageView *croppedImageView = [[UIImageView alloc] initWithImage:croppedImage];
             [croppedImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
             [croppedImageView.layer setCornerRadius:DEF_CORNER_RADIUS];

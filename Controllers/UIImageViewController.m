@@ -1057,7 +1057,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         //
         CGFloat xpt= _touchPoint.x - (_shapeLength / 2);
         CGFloat ypt= _touchPoint.y - (_shapeLength / 2);
-        UIImage *imageThumb = [AppColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+        UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
         [_swatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
         
         [_paintSwatches addObject:_swatchObj];
@@ -1139,7 +1139,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             //
             CGFloat xpt= _dragEndPoint.x - (_shapeLength / 2);
             CGFloat ypt= _dragEndPoint.y - (_shapeLength / 2);
-            UIImage *imageThumb = [AppColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+            UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
             [newSwatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
             
             [_paintSwatches insertObject:newSwatchObj atIndex:i];

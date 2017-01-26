@@ -1096,7 +1096,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         NSString *colorName = [_subjColorNames objectAtIndex:row];
         UIColor *backgroundColor = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:colorName] valueForKey:@"hex"]];
         
-        [label setTextColor:[AppColorUtils setBestColorContrast:colorName]];
+        [label setTextColor:[ColorUtils setBestColorContrast:colorName darkColor:DARK_TEXT_COLOR lightColor:LIGHT_TEXT_COLOR]];
         [label setBackgroundColor:backgroundColor];
         [label setText:[_subjColorNames objectAtIndex:row]];
     }
@@ -1435,7 +1435,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _colorSelected = [_subjColorNames objectAtIndex:row];
     [_subjColorName setText:[_subjColorNames objectAtIndex:row]];
     _subjColorValue = [ColorUtils colorFromHexString:[[_subjColorData objectForKey:_colorSelected] valueForKey:@"hex"]];
-    [_subjColorName setTextColor:[AppColorUtils setBestColorContrast:_colorSelected]];
+    [_subjColorName setTextColor:[ColorUtils setBestColorContrast:_colorSelected darkColor:DARK_TEXT_COLOR lightColor:LIGHT_TEXT_COLOR]];
     [_subjColorName setBackgroundColor:_subjColorValue];
     [_subjColorPicker selectRow:row inComponent:0 animated:YES];
 }

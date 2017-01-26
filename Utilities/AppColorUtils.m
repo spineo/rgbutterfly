@@ -30,36 +30,6 @@
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+ (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height {
-    CGRect rect = CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    
-    //CGContextStrokeEllipseInRect(context, rect);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
-}
-
-+ (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size);
-    
-    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
-    
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // Here is the scaled image which has been changed to the size specified
-    //
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
-
 + (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     BOOL isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
     
@@ -73,7 +43,7 @@
 }
 
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
-    return [self imageWithColor:[self colorFromSwatch:swatchObj] objWidth:width objHeight:height];
+    return [ColorUtils imageWithColor:[self colorFromSwatch:swatchObj] objWidth:width objHeight:height];
 }
 
 + (UIColor *)colorFromSwatch:(PaintSwatches *)swatchObj {
@@ -83,7 +53,7 @@
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     CGSize size = CGSizeMake(width, height);
     
-    UIImage *resizedImage   = [self resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
+    UIImage *resizedImage   = [ColorUtils resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
     
     return resizedImage;
 }
@@ -114,31 +84,5 @@
     return newImage;
 }
 
-+ (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect {
-    rect = CGRectMake(rect.origin.x    * image.scale,
-                      rect.origin.y    * image.scale,
-                      rect.size.width  * image.scale,
-                      rect.size.height * image.scale);
-    
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
-    
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
-                                                scale:image.scale
-                                          orientation:image.imageOrientation];
-    
-    CGImageRelease(imageRef);
-    
-    return croppedImage;
-}
-
-+ (UIColor *)setBestColorContrast:(NSString *)colorName {
-    UIColor *textColor = DARK_TEXT_COLOR;
-    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
-        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
-        textColor = LIGHT_TEXT_COLOR;
-    }
-    
-    return textColor;
-}
 
 @end
