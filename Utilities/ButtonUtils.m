@@ -24,7 +24,7 @@
         isRGB = FALSE;
     }
     
-    toolBarItems = [BarButtonUtils setButtonImage:toolBarItems refTag:refTag imageName:imageName];
+    [BarButtonUtils setButtonImage:toolBarItems refTag:refTag imageName:imageName];
     
     return isRGB;
 }
