@@ -12,7 +12,6 @@
 @implementation FieldUtils
 
 + (UILabel *)createLabel:(NSString *)name {
-    
     UILabel *label = [[UILabel alloc] init];
     
     [label setText:name];
@@ -25,7 +24,6 @@
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-    
     UILabel *label = [self createLabel:name];
     [label sizeToFit];
     CGFloat width = label.bounds.size.width;
@@ -35,7 +33,6 @@
 }
 
 + (UILabel *)createLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y width:(CGFloat)width height:(CGFloat)height {
-    
     UILabel *label = [self createLabel:name];
     [label setFrame:CGRectMake(x, y, width, height)];
     
@@ -51,7 +48,6 @@
 }
 
 + (UILabel *)createLargeLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-    
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
     [label setFont: LARGE_BOLD_FONT];
     
@@ -59,13 +55,12 @@
 }
 
 + (UITextField *)createTextField:(NSString *)name tag:(NSInteger)tag {
-    
     UITextField *textField = [[UITextField alloc] init];
     [textField setBackgroundColor: LIGHT_BG_COLOR];
     [textField setTextColor: DARK_TEXT_COLOR];
     [textField.layer setCornerRadius: DEF_CORNER_RADIUS];
     [textField.layer setBorderWidth: DEF_BORDER_WIDTH];
-    [textField setTag: tag];
+    [textField setTag:tag];
     [textField setTextAlignment:NSTextAlignmentLeft];
     [textField setClearButtonMode: UITextFieldViewModeWhileEditing];
     [textField setFont:TEXT_FIELD_FONT];
@@ -83,7 +78,7 @@
 }
 
 + (UITextView *)createTextView:(NSString *)name tag:(NSInteger)tag {
-    
+
     UITextView *textView = [[UITextView alloc] init];
     [textView setBackgroundColor:LIGHT_BG_COLOR];
     [textView setTextColor:DARK_TEXT_COLOR];
@@ -117,7 +112,6 @@
 }
 
 + (void)makeTextFieldNonEditable:(UITextField *)refName content:(NSString *)content border:(BOOL)border {
-    
     if (![content isEqualToString:@""]) {
         [refName setText:content];
     }
@@ -135,7 +129,6 @@
 }
 
 + (void)makeTextFieldEditable:(UITextField *)refName content:(NSString *)content {
-    
     if (![content isEqualToString:@""]) {
         [refName setText:content];
     }
@@ -148,7 +141,6 @@
 }
 
 + (void)makeTextViewNonEditable:(UITextView *)refName content:(NSString *)content border:(BOOL)border {
-    
     if (![content isEqualToString:@""]) {
         [refName setText:content];
     }
@@ -165,8 +157,7 @@
     [refName setEditable:FALSE];
 }
 
-+ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content {
-    
++ (void)makeTextViewEditable:(UITextView *)refName content:(NSString *)content {    
     if (![content isEqualToString:@""]) {
         [refName setText:content];
     }

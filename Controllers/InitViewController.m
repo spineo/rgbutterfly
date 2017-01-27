@@ -10,10 +10,9 @@
 #import "GlobalSettings.h"
 #import "AlertUtils.h"
 #import "HTTPUtils.h"
-#import "GenericUtils.h"
+#import "AppUtils.h"
 #import "BarButtonUtils.h"
 #import "ColorUtils.h"
-
 
 @interface InitViewController ()
 
@@ -124,7 +123,7 @@
                 [_userDefaults synchronize];
                 
             } else {
-                _updateStat = [GenericUtils checkForDBUpdate];
+                _updateStat = [AppUtils checkForDBUpdate];
             }
             
             // New version detected
@@ -135,7 +134,7 @@
                                             actionWithTitle:@"Yes"
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
-                                                NSString *errStr = [GenericUtils updateDB];
+                                                NSString *errStr = [AppUtils updateDB];
                             
                                                 UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:errStr];
                                                 UIAlertAction* ok = [UIAlertAction
