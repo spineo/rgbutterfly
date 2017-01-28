@@ -1228,7 +1228,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Rename the Generic Association
     //
-    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ Association %@", [_assocTypeName text], [GenericUtils getCurrDateString]];
+    _mixAssocName = [[NSString alloc] initWithFormat:@"%@ Association %@", [_assocTypeName text], [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
 }
 
 - (void)applyCoverageRenaming {
