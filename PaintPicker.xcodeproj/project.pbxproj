@@ -86,6 +86,7 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
 		2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1B1E3B934A00812B19 /* AppUtils.m */; };
@@ -262,6 +263,8 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
+		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
+		216044D21E3D3A9F007387DB /* MatchColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchColors.m; path = "../ios-algorithms/MatchColors.m"; sourceTree = "<group>"; };
 		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
 		2176DD151E3A338800812B19 /* ButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonUtils.m; path = Utilities/ButtonUtils.m; sourceTree = "<group>"; };
 		2176DD171E3A387800812B19 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarButtonUtils.h; path = "../ios-utilities/BarButtonUtils.h"; sourceTree = "<group>"; };
@@ -527,6 +530,8 @@
 		2108C5ED1C82108200DD7B9E /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				216044D11E3D3A9F007387DB /* MatchColors.h */,
+				216044D21E3D3A9F007387DB /* MatchColors.m */,
 				2109A1371DFED84F0076A095 /* MatchAlgorithms.h */,
 				2109A1381DFED84F0076A095 /* MatchAlgorithms.m */,
 			);
@@ -800,6 +805,7 @@
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				210650221DFEDDFF004B0830 /* PaintSwatchesDiff.m in Sources */,
+				216044D31E3D3A9F007387DB /* MatchColors.m in Sources */,
 				21064FFF1DFEDD0A004B0830 /* MatchAssocKeyword.m in Sources */,
 				210650031DFEDD0A004B0830 /* MixAssocSwatch.m in Sources */,
 				210650021DFEDD0A004B0830 /* MixAssocKeyword.m in Sources */,

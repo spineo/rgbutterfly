@@ -5,9 +5,9 @@
 //  Created by Stuart Pineo on 9/6/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-
 #import "MatchAlgorithms.h"
 #import "PaintSwatchesDiff.h"
+#import "MatchColors.h"
 
 
 @implementation MatchAlgorithms
@@ -16,67 +16,34 @@
 // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2) on RGB
 //
 + (float)colorDiffAlgorithm0:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.red floatValue]/255.0 - [compObj.red floatValue]/255.0),2) +
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2) +
-                             pow(fabs([mainObj.blue floatValue]/255.0 - [compObj.blue floatValue]/255.0),2)
-                             );
-
-    return (float)color_diff;
+    return [MatchColors colorDiffByRGB:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
 // d = sqrt((h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2) on HSB
 //
 + (float)colorDiffAlgorithm1:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.hue floatValue] - [compObj.hue floatValue]),2) +
-                             pow(fabs([mainObj.saturation floatValue] - [compObj.saturation floatValue]),2) +
-                             pow(fabs([mainObj.brightness floatValue] - [compObj.brightness floatValue]),2)
-                             );
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
 // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2) on RGB + Hue
 //
 + (float)colorDiffAlgorithm2:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.red floatValue]/255.0 - [compObj.red floatValue]/255.0),2) +
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2) +
-                             pow(fabs([mainObj.blue floatValue]/255.0 - [compObj.blue floatValue]/255.0),2) +
-                             pow(fabs([mainObj.hue floatValue] - [compObj.hue floatValue]),2)
-                             );
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByRGBAndHue:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
 // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2 + (s2-s1)^2 + (br2-br1)^2) on RGB + HSB
 //
 + (float)colorDiffAlgorithm3:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.red floatValue]/255.0 - [compObj.red floatValue]/255.0),2) +
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2) +
-                             pow(fabs([mainObj.blue floatValue]/255.0 - [compObj.blue floatValue]/255.0),2) +
-                             pow(fabs([mainObj.hue floatValue] - [compObj.hue floatValue]),2) +
-                             pow(fabs([mainObj.saturation floatValue] - [compObj.saturation floatValue]),2) +
-                             pow(fabs([mainObj.brightness floatValue] - [compObj.brightness floatValue]),2)
-                             );
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByRGBAndHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
-// Weighted approach on RGB only
+// Weighted on RGB only
 // d = ((r2-r1)*0.30)^2
 //  + ((g2-g1)*0.59)^2
 //  + ((b2-b1)*0.11)^2
 //
 + (float)colorDiffAlgorithm4:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff =
-    pow((fabs([mainObj.red floatValue]/255.0 - [compObj.red floatValue]/255.0) * 0.30),2) +
-    pow((fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0) * 0.59),2) +
-    pow((fabs([mainObj.blue floatValue]/255.0 - [compObj.blue floatValue]/255.0) * 0.11),2);
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByRGBW:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
 // Weighted approach on RGB + HSB
@@ -86,26 +53,14 @@
 // Plus HSB diff
 //
 + (float)colorDiffAlgorithm5:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff =
-    pow((fabs([mainObj.red floatValue]/255.0 - [compObj.red floatValue]/255.0) * 0.30),2) +
-    pow((fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0) * 0.59),2) +
-    pow((fabs([mainObj.blue floatValue]/255.0 - [compObj.blue floatValue]/255.0) * 0.11),2) +
-    pow(fabs([mainObj.hue floatValue] - [compObj.hue floatValue]),2) +
-    pow(fabs([mainObj.saturation floatValue] - [compObj.saturation floatValue]),2) +
-    pow(fabs([mainObj.brightness floatValue] - [compObj.brightness floatValue]),2);
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByRGBWAndHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
 };
 
 
 // d = sqrt((h2-h1)^2) on Hue only
 //
 + (float)colorDiffAlgorithm6:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.hue floatValue] - [compObj.hue floatValue]),2)
-                             );
-    
-    return (float)color_diff;
+    return [MatchColors colorDiffByHue:[self createDict:mainObj] compDict:[self createDict:compObj]];
 }
 
 // Messy random one
@@ -147,7 +102,6 @@
             [invocation setArgument:&refObj atIndex:2];
             [invocation setArgument:&compObj atIndex:3];
             [invocation invoke];
-            [invocation getReturnValue:&diffValue];
         }
         
         PaintSwatchesDiff *diffObj  = [[PaintSwatchesDiff alloc] init];
@@ -182,6 +136,19 @@
     [modMatchedSwatches insertObject:refObj atIndex:0];
     
     return modMatchedSwatches;
+}
+
++ (NSMutableDictionary *)createDict:(PaintSwatches *)obj {
+    NSMutableDictionary *dictObj = [[NSMutableDictionary alloc] init];
+    
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.red floatValue]/255.0] forKey:@"red"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.green      floatValue]/255.0] forKey:@"green"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.blue       floatValue]/255.0] forKey:@"blue"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.hue        floatValue]/255.0] forKey:@"hue"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.saturation floatValue]/255.0] forKey:@"saturation"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.brightness floatValue]/255.0] forKey:@"brightness"];
+    
+    return dictObj;
 }
 
 @end
