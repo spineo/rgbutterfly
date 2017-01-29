@@ -11,13 +11,6 @@
 
 @interface MatchAlgorithms : NSObject
 
-+ (float)colorDiffAlgorithm0:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm1:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm2:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm3:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm4:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm5:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
-+ (float)colorDiffAlgorithm6:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj;
 + (NSMutableArray *)sortByClosestMatch:(PaintSwatches *)refObj swatches:(NSMutableArray *)swatches matchAlgorithm:(int)matchAlgIndex maxMatchNum:(int)maxMatchNum context:(NSManagedObjectContext *)context entity:(NSEntityDescription *)entity;
 
 @end

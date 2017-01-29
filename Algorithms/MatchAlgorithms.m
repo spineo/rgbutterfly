@@ -126,7 +126,7 @@
     for (int i=0; i<= maxIndex; i++) {
         if (i >= maxMatchNum) {
             break;
-        }
+        }    
         
         int index = [[sortedArray objectAtIndex:i] index];
         
@@ -141,7 +141,7 @@
 + (NSMutableDictionary *)createDict:(PaintSwatches *)obj {
     NSMutableDictionary *dictObj = [[NSMutableDictionary alloc] init];
     
-    [dictObj setValue:[NSNumber numberWithDouble:[obj.red floatValue]/255.0] forKey:@"red"];
+    [dictObj setValue:[NSNumber numberWithDouble:[obj.red        floatValue]/255.0] forKey:@"red"];
     [dictObj setValue:[NSNumber numberWithDouble:[obj.green      floatValue]/255.0] forKey:@"green"];
     [dictObj setValue:[NSNumber numberWithDouble:[obj.blue       floatValue]/255.0] forKey:@"blue"];
     [dictObj setValue:[NSNumber numberWithDouble:[obj.hue        floatValue]/255.0] forKey:@"hue"];
