@@ -8,72 +8,67 @@
 #import "MatchAlgorithms.h"
 #import "PaintSwatchesDiff.h"
 #import "MatchColors.h"
+#import "GenericUtils.h"
 
 
 @implementation MatchAlgorithms
 
-
-// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2) on RGB
+// callMatcher - Return a diff value based on the algorithm invoked
 //
-+ (float)colorDiffAlgorithm0:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByRGB:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
++ (float)callMatcher:(MatchColors *)matchObj algIndex:(int)algIndex {
 
-// d = sqrt((h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2) on HSB
-//
-+ (float)colorDiffAlgorithm1:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
+    float diffValue;
+    switch (algIndex)
+    {
+        case 0:
+            // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2) on RGB
+            //
+            return [matchObj colorDiffByRGB];
+            
+        case 1:
+            // d = sqrt((h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2) on HSB
+            //
+            return [matchObj colorDiffByHSB];
 
-// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2) on RGB + Hue
-//
-+ (float)colorDiffAlgorithm2:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByRGBAndHue:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
+        case 2:
+            // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2) on RGB + Hue
+            //
+            return [matchObj colorDiffByRGBAndHue];
 
-// d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2 + (s2-s1)^2 + (br2-br1)^2) on RGB + HSB
-//
-+ (float)colorDiffAlgorithm3:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByRGBAndHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
+        case 3:
+            // d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2 + (s2-s1)^2 + (br2-br1)^2) on RGB + HSB
+            //
+            return [matchObj colorDiffByRGBAndHSB];
 
-// Weighted on RGB only
-// d = ((r2-r1)*0.30)^2
-//  + ((g2-g1)*0.59)^2
-//  + ((b2-b1)*0.11)^2
-//
-+ (float)colorDiffAlgorithm4:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByRGBW:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
+        case 4:
+            // Weighted on RGB only
+            // d = ((r2-r1)*0.30)^2
+            //  + ((g2-g1)*0.59)^2
+            //  + ((b2-b1)*0.11)^2
+            //
+            return [matchObj colorDiffByRGBW];
 
-// Weighted approach on RGB + HSB
-// d = ((r2-r1)*0.30)^2
-//  + ((g2-g1)*0.59)^2
-//  + ((b2-b1)*0.11)^2
-// Plus HSB diff
-//
-+ (float)colorDiffAlgorithm5:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByRGBWAndHSB:[self createDict:mainObj] compDict:[self createDict:compObj]];
-};
+        case 5:
+            // Weighted approach on RGB + HSB
+            // d = ((r2-r1)*0.30)^2
+            //  + ((g2-g1)*0.59)^2
+            //  + ((b2-b1)*0.11)^2
+            // Plus HSB diff
+            //
+            return [matchObj colorDiffByRGBWAndHSB];
 
-
-// d = sqrt((h2-h1)^2) on Hue only
-//
-+ (float)colorDiffAlgorithm6:(PaintSwatches *)mainObj  compObj:(PaintSwatches *)compObj {
-    return [MatchColors colorDiffByHue:[self createDict:mainObj] compDict:[self createDict:compObj]];
-}
-
-// Messy random one
-//
-+ (float)colorDiffAlgorithm7:(PaintSwatches *)mainObj compObj:(PaintSwatches *)compObj {
-    double color_diff = sqrt(
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2) +
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2) +
-                             pow(fabs([mainObj.green floatValue]/255.0 - [compObj.green floatValue]/255.0),2)
-                             );
-
-
-    return (float)color_diff;
+        case 6:
+            // d = sqrt((h2-h1)^2) on Hue only
+            //
+            return [matchObj colorDiffByHue];
+    
+        default:
+            // Random value
+            //
+            return [GenericUtils getRandomVal];
+    }
+    
+    return diffValue;
 }
 
 // Sort by closest match
@@ -87,22 +82,25 @@
     for (int i=0; i<= maxIndex; i++) {
         PaintSwatches *compObj = [swatches objectAtIndex:i];
         
-        float diffValue;
+        MatchColors *matchObj = [[MatchColors alloc] init];
+        [matchObj setDict:[self createDict:refObj] compDict:[self createDict:compObj]];
         
-        NSString *algorithmName = [[NSString alloc] initWithFormat:@"colorDiffAlgorithm%i:compObj:", matchAlgIndex];
-        SEL selector = NSSelectorFromString(algorithmName);
+        float diffValue = [self callMatcher:matchObj algIndex:matchAlgIndex];
         
-        NSMethodSignature *signature = [MatchAlgorithms methodSignatureForSelector:selector];
-        
-        if ([MatchAlgorithms respondsToSelector:selector]) {
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-            
-            [invocation setSelector:selector];
-            [invocation setTarget:[MatchAlgorithms class]];
-            [invocation setArgument:&refObj atIndex:2];
-            [invocation setArgument:&compObj atIndex:3];
-            [invocation invoke];
-        }
+//        NSString *algorithmName = [[NSString alloc] initWithFormat:@"colorDiffAlgorithm%i:compObj:", matchAlgIndex];
+//        SEL selector = NSSelectorFromString(algorithmName);
+//        
+//        NSMethodSignature *signature = [MatchAlgorithms methodSignatureForSelector:selector];
+//        
+//        if ([MatchAlgorithms respondsToSelector:selector]) {
+//            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+//            
+//            [invocation setSelector:selector];
+//            [invocation setTarget:[MatchAlgorithms class]];
+//            [invocation setArgument:&refObj atIndex:2];
+//            [invocation setArgument:&compObj atIndex:3];
+//            [invocation invoke];
+//        }
         
         PaintSwatchesDiff *diffObj  = [[PaintSwatchesDiff alloc] init];
         diffObj.name = compObj.name;
