@@ -880,13 +880,13 @@ const int IMAGE_TAG  = 6;
         _maxMatchNum--;
 
         [self.tableView reloadData];
-        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
+        //[BarButtonUtils setButtonEnabled:self.toolbarItems refTag:INCR_TAP_BTN_TAG isEnabled:TRUE];
         
         [_save setEnabled:TRUE];
     }
     
     if (_maxMatchNum <= 1) {
-        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
+        //[BarButtonUtils setButtonEnabled:self.toolbarItems refTag:DECR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -900,14 +900,14 @@ const int IMAGE_TAG  = 6;
         [self initTappedSwatches:(int)[_matchedSwatches count]];
 
         [self.tableView reloadData];
-        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
+        //[BarButtonUtils setButtonEnabled:self.toolbarItems refTag: DECR_TAP_BTN_TAG isEnabled:TRUE];
         
         [_save setEnabled:TRUE];
         
     } else {
         UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
         [self presentViewController:myAlert animated:YES completion:nil];
-        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
+        //[BarButtonUtils setButtonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
 }
 
@@ -925,20 +925,20 @@ const int IMAGE_TAG  = 6;
 
 - (void)matchButtonsShow {
     [self algButtonsShow];
-    [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
     [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:MATCH_TYPE];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
 
 - (void)matchButtonsHide {
     [self algButtonsShow];
-    [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
     [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Areas"];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)algButtonsShow {

@@ -477,14 +477,14 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="bnl-v2-ffu"/>
-                        <barButtonItem tag="74" image="minus sign" id="aDY-YU-la5">
+                        <barButtonItem tag="74" enabled="NO" image="minus sign" id="aDY-YU-la5">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="removeTableRows:" destination="kOh-IX-qcO" id="ekt-bm-B6c"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
-                        <barButtonItem tag="75" image="plus sign-1" id="n1H-dj-YSh">
+                        <barButtonItem tag="75" enabled="NO" image="plus sign-1" id="n1H-dj-YSh">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addTableRows:" destination="kOh-IX-qcO" id="E07-uw-3Cd"/>
@@ -866,10 +866,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Omc-kQ-4iW"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="aqc-zq-dwj"/>
-        <segue reference="9H9-9R-KDD"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="7OV-Go-gIV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
