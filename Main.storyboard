@@ -469,6 +469,9 @@
                         </barButtonItem>
                         <barButtonItem tag="72" title="Areas" id="9k2-Mz-UD8">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="toggleAction:" destination="kOh-IX-qcO" id="cxk-QG-fBd"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem tag="73" image="arrow fat right" id="5Vj-gF-Y4V">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

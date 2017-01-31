@@ -34,7 +34,7 @@
 
 
 @property (nonatomic) BOOL textReturn;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *nameEntered, *keywEntered, *descEntered, *colorSelected, *typeSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *colorName, *imagesHeader, *matchesHeader, *nameHeader, *keywHeader, *descHeader, *actionTitle;
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag, scrollFlag, isRGB;
@@ -162,8 +162,13 @@ const int IMAGE_TAG  = 6;
     //
     [self renderTapAreaData];
 
+    
+    // For initial release, this button is visible but disabled
+    //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
+    [self.editButtonItem setTintColor:LIGHT_TEXT_COLOR];
+    [self.editButtonItem setEnabled:FALSE];
+    
     
     // Match Edit Button Alert Controller
     //
@@ -624,6 +629,20 @@ const int IMAGE_TAG  = 6;
     [self.tableView reloadData];
 }
 
+// Toggle between "Areas" and "Match
+// _editFlag used for the toggle even though no editing takes place
+//
+- (IBAction)toggleAction:(id)sender {
+    if ([_actionTitle isEqualToString:@"Areas"]) {
+        [self matchButtonsShow];
+        _editFlag = TRUE;
+
+    } else {
+        [self matchButtonsHide];
+        _editFlag = FALSE;
+    }
+}
+
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -925,18 +944,20 @@ const int IMAGE_TAG  = 6;
 
 - (void)matchButtonsShow {
     [self algButtonsShow];
+    _actionTitle = @"Match";
     //[BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     //[BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:MATCH_TYPE];
+    [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:_actionTitle];
     //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
     //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
 }
 
 - (void)matchButtonsHide {
     [self algButtonsShow];
+    _actionTitle = @"Areas";
     //[BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
     //[BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:@"Areas"];
+    [BarButtonUtils setButtonTitle:self.toolbarItems refTag:MATCH_BTN_TAG title:_actionTitle];
     //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
