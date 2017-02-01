@@ -367,6 +367,13 @@ const int ASSOC_SET_TAG        = 8;
     // Used by the mixRatios Picker
     //
     _mixCount = (int)[_mixAssocSwatches count] - 2;
+    
+    // Disable the Settings Button is source is Swatch Detail TVC
+    // (back navigation currently does not refresh changes)
+    // Change is at least temporary
+    //
+    if ([_sourceViewName isEqualToString:@"SwatchDetail"])
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:SETTINGS_BTN_TAG isEnabled:FALSE];
 }
 
 - (void)viewDidRotate {

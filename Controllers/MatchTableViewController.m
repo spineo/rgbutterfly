@@ -193,6 +193,11 @@ const int IMAGE_TAG  = 6;
     
     [_save setEnabled:FALSE];
     
+    [self matchButtonsHide];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
     // RGB settings?
     //
     _isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
@@ -203,10 +208,7 @@ const int IMAGE_TAG  = 6;
         [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
     }
     
-    [self matchButtonsHide];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    _maxMatchNum = (int)[[NSUserDefaults standardUserDefaults] integerForKey:MATCH_NUM_KEY];
 
     // Reset some widths and offset per rotation
     //
