@@ -70,7 +70,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 
 
-@property (nonatomic) BOOL saveFlag, imageInteractAlert, tapCollectAlert, isRGB, tapAreasChanged, dragAreaEnabled, firstTap;
+@property (nonatomic) BOOL saveFlag, imageInteractAlert, tapCollectAlert, isRGB, tapAreasChanged, matchNumChanged, dragAreaEnabled, firstTap;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -171,9 +171,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     _paintSwatchCount = 0;
     
-    // Keep track of any changes to the TapAreas
+    // Keep track of any changes to the TapAreas and MatchNum
     //
     _tapAreasChanged  = FALSE;
+    _matchNumChanged  = FALSE;
 
     // First tap?
     //
@@ -207,6 +208,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _dbSwatchesCount = (int)[_dbPaintSwatches count];
     
     _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
+
 
     _defTableViewSize    = _imageTableView.bounds.size;
 
@@ -1190,7 +1192,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)setTapAreas {
     if ([_viewType isEqualToString:MATCH_TYPE]) {
-        
         NSArray *swatches = [[NSArray alloc] initWithArray:_paintSwatches];
         
         for (int i=0; i<_currTapSection; i++) {
@@ -1528,10 +1529,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (tapArea != nil) {
             match_algorithm_id = [[tapArea match_algorithm_id] intValue];
             swatch_ct = (int)[[[tapArea tap_area_swatch] allObjects] count];
+            if (swatch_ct != _maxMatchNum)
+                _matchNumChanged = TRUE;
         }
 
-        
-        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
+        //NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
+        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
         
         [custCell setAssocName:match_algorithm_text];
         
@@ -1799,7 +1802,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             // Get the existing match count
             //
             tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-            maxMatchNum = (int)[tapAreaSwatches count];
+            maxMatchNum = _maxMatchNum;
         }
     }
     
@@ -1808,7 +1811,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else {
         _compPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:refObj tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
     }
+    
+//    while ([_compPaintSwatches count] > _maxMatchNum) {
+//        [_compPaintSwatches removeLastObject];
+//    }
 
+//    while ([_compPaintSwatches count] < _maxMatchNum) {
+//        [self addTableRows];
+//    }
 
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];
@@ -1902,7 +1912,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_matchSave setEnabled:TRUE];
 }
 
-- (IBAction)removeTableRows:(id)sender {
+- (void)removeTableRows {
     if (_maxMatchNum > 1) {
         [_compPaintSwatches removeLastObject];
         _maxMatchNum--;
@@ -1921,7 +1931,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
 }
 
-- (IBAction)addTableRows:(id)sender {
+- (void)addTableRows {
     if (_maxMatchNum < _maxRowLimit) {
         _maxMatchNum++;
         
@@ -1934,7 +1944,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_matchSave setEnabled:TRUE];
         
     } else {
-        UIAlertController *myAlert = [AlertUtils rowLimitAlert: _maxRowLimit];
+        UIAlertController *myAlert = [AlertUtils rowLimitAlert:_maxRowLimit];
         [self presentViewController:myAlert animated:YES completion:nil];
         [BarButtonUtils setButtonEnabled:self.toolbarItems refTag: INCR_TAP_BTN_TAG isEnabled:FALSE];
     }
@@ -2421,7 +2431,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Save the MatchAssociation first
         //
-        if (_matchAssociation == nil || _tapAreasChanged == TRUE) {
+        if (_matchAssociation == nil || _tapAreasChanged == TRUE || _matchNumChanged == TRUE) {
             [self updateMatchAssoc];
         }
 
