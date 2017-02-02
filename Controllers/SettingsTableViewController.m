@@ -72,13 +72,13 @@ const int RGB_DISPLAY_ROWS        = 1;
 const int MIX_RATIOS_SETTINGS     = 6;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int MIX_ASSOC_SETTINGS      = 7;
-const int MIX_ASSOC_ROWS          = 1;
+//const int MIX_ASSOC_SETTINGS      = 7;
+//const int MIX_ASSOC_ROWS          = 1;
 
-const int ALERTS_SETTINGS         = 8;
+const int ALERTS_SETTINGS         = 7;
 const int ALERTS_ROWS             = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 9;
+const int SETTINGS_MAX_SECTIONS   = 8;
 
 
 - (void)viewDidLoad {
@@ -593,9 +593,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
     } else if (section == ALERTS_SETTINGS) {
         return ALERTS_ROWS;
-        
-    } else if (section == MIX_ASSOC_SETTINGS) {
-        return MIX_ASSOC_ROWS;
+//    } else if (section == MIX_ASSOC_SETTINGS) {
+//        return MIX_ASSOC_ROWS;
     }
     return 0;
 }
@@ -645,9 +644,9 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     } else if (section == ALERTS_SETTINGS) {
         headerStr = @"Alerts Settings";
 
-    } else if (section == MIX_ASSOC_SETTINGS) {
-        headerStr = @"Mix Associations Count";
-        
+//    } else if (section == MIX_ASSOC_SETTINGS) {
+//        headerStr = @"Mix Associations Count";
+//
 //    } else if (section == ADD_BRANDS_SETTINGS) {
 //        headerStr = @"Add Paint Brands";
     }
@@ -827,9 +826,9 @@ heightForFooterInSection:(NSInteger)section {
         [cell.contentView addSubview:_alertsFilterSwitch];
         [cell.contentView addSubview:_alertsFilterLabel];
         
-    } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
-        [cell.contentView addSubview:_mixAssocCountSwitch];
-        [cell.contentView addSubview:_mixAssocCountLabel];
+//    } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
+//        [cell.contentView addSubview:_mixAssocCountSwitch];
+//        [cell.contentView addSubview:_mixAssocCountLabel];
     }
     
     return cell;
@@ -1153,8 +1152,8 @@ heightForFooterInSection:(NSInteger)section {
             
             // Mix Assoc Settings
             //
-            [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
-            [_userDefaults setValue:[_mixAssocCountLabel text] forKey:_mixAssocCountText];
+//            [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
+//            [_userDefaults setValue:[_mixAssocCountLabel text] forKey:_mixAssocCountText];
             
             [_userDefaults synchronize];
             
