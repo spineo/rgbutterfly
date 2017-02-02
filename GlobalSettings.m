@@ -172,7 +172,6 @@ CGFloat const SHOW_BUTTON_WIDTH     = 20.0;
 int const TAKE_PHOTO_ACTION   = 1;
 int const SELECT_PHOTO_ACTION = 2;
 
-
 // Tags
 //
 int const DEF_TAG_NUM    = 200;

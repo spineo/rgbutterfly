@@ -38,7 +38,7 @@
 @property (nonatomic, strong) UIColor *subjColorValue;
 @property (nonatomic) CGFloat textFieldYOffset, refNameWidth, imageViewWidth, imageViewHeight, imageViewXOffset, imageViewYOffset, matchSectionHeight, tableViewWidth, doneButtonWidth, selTextFieldWidth, doneButtonXOffset;
 @property (nonatomic) BOOL editFlag, scrollFlag, isRGB;
-@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount, numTapSections;
+@property (nonatomic) int selectedRow, dbSwatchesCount, maxRowLimit, colorPickerSelRow, typesPickerSelRow, pressSelectedRow, tappedCount, numTapSections, changedMaxNum;
 @property (nonatomic, strong) NSMutableArray *matchedSwatches, *tappedSwatches;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -196,8 +196,9 @@ const int IMAGE_TAG  = 6;
     [self matchButtonsHide];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // RGB settings?
     //
     _isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
@@ -207,12 +208,20 @@ const int IMAGE_TAG  = 6;
     } else {
         [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
     }
-    
-    _maxMatchNum = (int)[[NSUserDefaults standardUserDefaults] integerForKey:MATCH_NUM_KEY];
 
     // Reset some widths and offset per rotation
     //
     [self resizeSelFieldAndDone:_doneButtonWidth];
+    
+    _maxMatchNum = (int)[[NSUserDefaults standardUserDefaults] integerForKey:MATCH_NUM_KEY];
+    if (_maxMatchNum && (_maxMatchNum != _changedMaxNum)) {
+        _changedMaxNum = _maxMatchNum;
+        [self viewDidLoad];
+        [self viewWillAppear:YES];
+    
+    } else {
+        _changedMaxNum = _maxMatchNum;
+    }
 }
 
 #pragma mark - Table view data source
@@ -867,10 +876,10 @@ const int IMAGE_TAG  = 6;
     
     // Match algorithms
     //
-    _maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
+    //_maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _maManualOverride = [[_tapArea ma_manual_override] boolValue];
 
-    _dbPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:_selPaintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
+    //_dbPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:_selPaintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
     if (_maManualOverride == TRUE) {
         _matchedSwatches = [_dbPaintSwatches mutableCopy];
         

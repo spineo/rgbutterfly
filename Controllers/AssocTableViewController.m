@@ -96,7 +96,7 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //[ColorUtils setGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
@@ -372,8 +372,8 @@ const int ASSOC_SET_TAG        = 8;
     // (back navigation currently does not refresh changes)
     // Change is at least temporary
     //
-    if ([_sourceViewName isEqualToString:@"SwatchDetail"])
-        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:SETTINGS_BTN_TAG isEnabled:FALSE];
+    //if ([_sourceViewName isEqualToString:@"SwatchDetail"])
+    //    [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:SETTINGS_BTN_TAG isEnabled:FALSE];
 }
 
 - (void)viewDidRotate {
