@@ -389,7 +389,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         }
         [matchNameTextField setTag:MATCH_NAME_TAG];
         [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
-        [matchNameTextField setDelegate: self];
+        [matchNameTextField setDelegate:self];
     }];
     
     [updateAlertController_ addTextFieldWithConfigurationHandler:^(UITextField *matchKeywTextField) {
@@ -2114,7 +2114,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Applies to both updates and new
     //
-    _assocName = [_matchAssociation name];
+    //_assocName = [_matchAssociation name];
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
         _assocName = [[NSString alloc] initWithFormat:@"MatchAssoc %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
         ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
