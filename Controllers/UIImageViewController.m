@@ -2204,34 +2204,34 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [tapArea setTap_order:[NSNumber numberWithInt:tap_order]];
         }
         
-        // Remove existing TapAreaSwatch elements (will add them back in)
-        //
-        NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-        for (int i=0; i<[tapAreaSwatches count]; i++) {
-            TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-            PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
-            
-            [tapArea removeTap_area_swatchObject:tapAreaSwatch];
-            [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
-            [self.context deleteObject:tapAreaSwatch];
-        }
-
-        // Add back the TapAreaSwatch elements
-        //
-        for (int j=1; j<(int)[swatches count]; j++) {
-            PaintSwatches *paintSwatch = [swatches objectAtIndex:j];
-            
-            // Check if the TapAreaSwatch already exists
-            //
-            TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
-            [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
-            [tapAreaSwatch setTap_area:tapArea];
-            [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:j]];
-            [tapAreaSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
-            
-            [tapArea addTap_area_swatchObject:tapAreaSwatch];
-            [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
-        }
+//        // Remove existing TapAreaSwatch elements (will add them back in)
+//        //
+//        NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
+//        for (int i=0; i<[tapAreaSwatches count]; i++) {
+//            TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
+//            PaintSwatches *paintSwatch   = (PaintSwatches *)tapAreaSwatch.paint_swatch;
+//            
+//            [tapArea removeTap_area_swatchObject:tapAreaSwatch];
+//            [paintSwatch removeTap_area_swatchObject:tapAreaSwatch];
+//            [self.context deleteObject:tapAreaSwatch];
+//        }
+//
+//        // Add back the TapAreaSwatch elements
+//        //
+//        for (int j=1; j<(int)[swatches count]; j++) {
+//            PaintSwatches *paintSwatch = [swatches objectAtIndex:j];
+//            
+//            // Check if the TapAreaSwatch already exists
+//            //
+//            TapAreaSwatch *tapAreaSwatch = [[TapAreaSwatch alloc] initWithEntity:_tapAreaSwatchEntity insertIntoManagedObjectContext:self.context];
+//            [tapAreaSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
+//            [tapAreaSwatch setTap_area:tapArea];
+//            [tapAreaSwatch setMatch_order:[NSNumber numberWithInt:j]];
+//            [tapAreaSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+//            
+//            [tapArea addTap_area_swatchObject:tapAreaSwatch];
+//            [paintSwatch addTap_area_swatchObject:tapAreaSwatch];
+//        }
     }
     
     NSError *error = nil;
