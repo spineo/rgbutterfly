@@ -686,20 +686,20 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (_matchAssociation == nil) {
         [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
         [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-        [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-        [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-        [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-        [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
+        //[BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+        //[BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+        //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
+        //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
     }
 }
 
 - (void)matchButtonsHide {
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-    [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)editButtonDisable {
@@ -2456,13 +2456,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [matchTableViewController setTapArea:tapArea];
         [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
         
-        BOOL maManualOverride = [[tapArea ma_manual_override] boolValue];
-        if (maManualOverride == TRUE) {
-            [matchTableViewController setDbPaintSwatches:[ManagedObjectUtils getManualOverrideSwatches:paintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context]];
-        } else {
+//        BOOL maManualOverride = [[tapArea ma_manual_override] boolValue];
+//        if (maManualOverride == TRUE) {
+//            [matchTableViewController setDbPaintSwatches:[ManagedObjectUtils getManualOverrideSwatches:paintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context]];
+//        } else {
             [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
-        }
-        [matchTableViewController setMaManualOverride:maManualOverride];
+//        }
+//        [matchTableViewController setMaManualOverride:maManualOverride];
         
         [matchTableViewController setMatchAssociation:_matchAssociation];
 
