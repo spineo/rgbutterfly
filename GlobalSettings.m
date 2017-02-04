@@ -40,7 +40,7 @@ int const FORCE_UPDATE_DB      = 0;
 // GitHub related
 //
 NSString * const AUTHTOKEN_FILE = @"Authtoken";
-NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/Databases/AcrylicsColorPicker";
+NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/databases/AcrylicsColorPicker";
 
 NSString * const DB_FILE        = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const DB_CONT_TYPE   = @"application/x-sqlite3";
