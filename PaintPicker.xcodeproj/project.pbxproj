@@ -1005,7 +1005,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USE_HEADERMAP = YES;
 			};
 			name = Debug;
@@ -1034,7 +1034,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = PaintPicker;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USE_HEADERMAP = YES;
 			};
 			name = Release;
