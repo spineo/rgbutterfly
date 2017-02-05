@@ -143,7 +143,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
     //
     _appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
     if (_appIntroAlert == TRUE) {
-        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Welcome to the Acrylics Color Picker App" message:APP_INTRO_INSTRUCTIONS key:APP_INTRO_KEY];
+        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Welcome to the RGButterfly App" message:APP_INTRO_INSTRUCTIONS key:APP_INTRO_KEY];
         [self presentViewController:alert animated:YES completion:nil];
     }
 

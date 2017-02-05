@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Acrylics Color Picker-->
+        <!--RGButterfly-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" title="Acrylics Color Picker" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" title="RGButterfly" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,10 +26,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -64,7 +64,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Acrylics Color Picker" id="Ade-hS-Xh0">
+                    <navigationItem key="navigationItem" title="RGButterfly" id="Ade-hS-Xh0">
                         <barButtonItem key="leftBarButtonItem" tag="51" image="photo 2" id="Jc1-jH-kAa">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -235,7 +235,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w7V-o5-CwR" id="vQl-iB-kFp">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -297,7 +297,7 @@
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DtR-tp-PMp" id="llz-H1-sLj">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -439,7 +439,7 @@
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ji7-aZ-2pE" id="W5m-ms-p5P">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -529,7 +529,7 @@
                                 <rect key="frame" x="0.0" y="86" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JEb-Gc-Acv" id="FZV-FJ-EKm">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -658,10 +658,10 @@
             </objects>
             <point key="canvasLocation" x="-868" y="-985.45727136431788"/>
         </scene>
-        <!--Acrylics Color Picker-->
+        <!--RGButterfly-->
         <scene sceneID="ZsW-4B-fd7">
             <objects>
-                <navigationController title="Acrylics Color Picker" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="PTY-d8-b92" sceneMemberID="viewController">
+                <navigationController title="RGButterfly" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="PTY-d8-b92" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -684,10 +684,10 @@
             </objects>
             <point key="canvasLocation" x="-68" y="-978"/>
         </scene>
-        <!--Color Picker Settings-->
+        <!--RGButterfly Settings-->
         <scene sceneID="tiQ-WC-TVX">
             <objects>
-                <tableViewController id="z8z-Q4-bZ9" customClass="SettingsTableViewController" sceneMemberID="viewController">
+                <tableViewController title="RGButterfly Settings" id="z8z-Q4-bZ9" customClass="SettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sta-Ty-Jb3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -700,7 +700,7 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g4i-jF-fKr" id="mJT-sP-E1m">
-                                    <frame key="frameInset" width="375" height="44"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -724,7 +724,7 @@
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Color Picker Settings" id="UFN-Ih-VPD">
+                    <navigationItem key="navigationItem" title="RGButterfly Settings" id="UFN-Ih-VPD">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="NKU-jd-I4P">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -748,10 +748,10 @@
             </objects>
             <point key="canvasLocation" x="726" y="-145"/>
         </scene>
-        <!--Acrylics Color Picker Settings-->
+        <!--RGButterfly Settings-->
         <scene sceneID="hvV-Wo-a3z">
             <objects>
-                <navigationController title="Acrylics Color Picker Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
+                <navigationController title="RGButterfly Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -870,10 +870,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="9H9-9R-KDD"/>
+        <segue reference="aqc-zq-dwj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
