@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "35047EEB4BE04F7E1BCA51A2D25A76F6905AEEE1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "35047EEB4BE04F7E1BCA51A2D25A76F6905AEEE1" : 9223372036854775807,
+    "A400742710406EC3B15A1C3A89C60436E8EF7BB4" : 9223372036854775807,
+    "6F81867F6D731306FE12BE617BA9F2D8F0F684C6" : 9223372036854775807,
+    "0672E5EACE52B4B411644A3AFA98259B3A9653BD" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E4CFD43A-87F6-41A1-BDB3-B4B9469928FE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "35047EEB4BE04F7E1BCA51A2D25A76F6905AEEE1" : "AcrylicsColorPicker\/",
+    "A400742710406EC3B15A1C3A89C60436E8EF7BB4" : "ios-algorithms\/",
+    "6F81867F6D731306FE12BE617BA9F2D8F0F684C6" : "ios-utilities\/",
+    "0672E5EACE52B4B411644A3AFA98259B3A9653BD" : "ios-external-utilities\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PaintPicker",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PaintPicker.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:spineo\/ios-external-utilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0672E5EACE52B4B411644A3AFA98259B3A9653BD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/spineo\/acp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "35047EEB4BE04F7E1BCA51A2D25A76F6905AEEE1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:spineo\/ios-utilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F81867F6D731306FE12BE617BA9F2D8F0F684C6"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/spineo\/ios-algorithms.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A400742710406EC3B15A1C3A89C60436E8EF7BB4"
+    }
+  ]
+}

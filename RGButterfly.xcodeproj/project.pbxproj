@@ -234,10 +234,11 @@
 		2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TapArea+CoreDataProperties.m"; path = "ManagedObject/TapArea+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2109A1371DFED84F0076A095 /* MatchAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAlgorithms.h; path = Algorithms/MatchAlgorithms.h; sourceTree = "<group>"; };
 		2109A1381DFED84F0076A095 /* MatchAlgorithms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithms.m; path = Algorithms/MatchAlgorithms.m; sourceTree = "<group>"; };
-		210C89671A9F6C440003CC85 /* PaintPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaintPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89671A9F6C440003CC85 /* RGButterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGButterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		210C89851A9F6C440003CC85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		210C89861A9F6C440003CC85 /* AcrylicsColorPickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerTests.m; sourceTree = "<group>"; };
+		2114BF381E47B694009F4A7D /* RGButterfly.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = RGButterfly.entitlements; sourceTree = "<group>"; };
 		212F25A91E33FEE0002466E7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../ios-external-utilities/Reachability/Reachability.h"; sourceTree = "<group>"; };
 		212F25AA1E33FEE0002466E7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../ios-external-utilities/Reachability/Reachability.m"; sourceTree = "<group>"; };
 		212F25AC1E33FF13002466E7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "../ios-external-utilities/NSData+Base64/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -274,7 +275,6 @@
 		2176DD1D1E3B95DC00812B19 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericUtils.h; path = "../ios-utilities/GenericUtils.h"; sourceTree = "<group>"; };
 		2176DD1E1E3B95DC00812B19 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericUtils.m; path = "../ios-utilities/GenericUtils.m"; sourceTree = "<group>"; };
 		217925A61C9C35E200741206 /* AcrylicsColorPicker v4.0.58.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.58.xcdatamodel"; sourceTree = "<group>"; };
-		217A59181E181D04005BCE66 /* PaintPicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaintPicker.entitlements; sourceTree = "<group>"; };
 		2185CE811C9F1F59006F279C /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		218BF2F01E32563B004EB75A /* libTestLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestLib.a; path = "../../Library/Developer/Xcode/DerivedData/TestLib-fhmzxdchzjrapzemxnkeamzjjykc/Build/Products/Debug-iphoneos/libTestLib.a"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 		219C477A1E22A93B00DADF0F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitViewController.m; path = Controllers/InitViewController.m; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		21DE32DE1D3BF847007669DF /* PaintPicker.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaintPicker.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21DE32DE1D3BF847007669DF /* RGButterfly.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterfly.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
 		21DE32E21D3BF847007669DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21E079DE1E46702E004B77C8 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
@@ -541,11 +541,11 @@
 		210C895E1A9F6C440003CC85 = {
 			isa = PBXGroup;
 			children = (
-				217A59181E181D04005BCE66 /* PaintPicker.entitlements */,
+				2114BF381E47B694009F4A7D /* RGButterfly.entitlements */,
 				2108C5011C8209C600DD7B9E /* AcrylicsColorPicker */,
 				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
 				210C89831A9F6C440003CC85 /* AcrylicsColorPickerTests */,
-				21DE32DF1D3BF847007669DF /* AcrylicsColorPickerUITests */,
+				21DE32DF1D3BF847007669DF /* 			 */,
 				210C89681A9F6C440003CC85 /* Products */,
 				21334B231E30F658007D5B5E /* Frameworks */,
 			);
@@ -554,9 +554,9 @@
 		210C89681A9F6C440003CC85 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				210C89671A9F6C440003CC85 /* PaintPicker.app */,
-				210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */,
-				21DE32DE1D3BF847007669DF /* PaintPicker.xctest */,
+				210C89671A9F6C440003CC85 /* RGButterfly.app */,
+				210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */,
+				21DE32DE1D3BF847007669DF /* RGButterfly.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -597,21 +597,22 @@
 			name = ExternalUtilities;
 			sourceTree = "<group>";
 		};
-		21DE32DF1D3BF847007669DF /* AcrylicsColorPickerUITests */ = {
+		21DE32DF1D3BF847007669DF /* 			 */ = {
 			isa = PBXGroup;
 			children = (
 				21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */,
 				21DE32E21D3BF847007669DF /* Info.plist */,
 			);
+			name = "			";
 			path = AcrylicsColorPickerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		210C89661A9F6C440003CC85 /* PaintPicker */ = {
+		210C89661A9F6C440003CC85 /* RGButterfly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPicker" */;
+			buildConfigurationList = 210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterfly" */;
 			buildPhases = (
 				210C89631A9F6C440003CC85 /* Sources */,
 				210C89641A9F6C440003CC85 /* Frameworks */,
@@ -621,14 +622,14 @@
 			);
 			dependencies = (
 			);
-			name = PaintPicker;
+			name = RGButterfly;
 			productName = AcrylicsColorPicker;
-			productReference = 210C89671A9F6C440003CC85 /* PaintPicker.app */;
+			productReference = 210C89671A9F6C440003CC85 /* RGButterfly.app */;
 			productType = "com.apple.product-type.application";
 		};
-		210C897F1A9F6C440003CC85 /* PaintPickerTests */ = {
+		210C897F1A9F6C440003CC85 /* RGButterflyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPickerTests" */;
+			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterflyTests" */;
 			buildPhases = (
 				210C897C1A9F6C440003CC85 /* Sources */,
 				210C897D1A9F6C440003CC85 /* Frameworks */,
@@ -639,14 +640,14 @@
 			dependencies = (
 				210C89821A9F6C440003CC85 /* PBXTargetDependency */,
 			);
-			name = PaintPickerTests;
+			name = RGButterflyTests;
 			productName = AcrylicsColorPickerTests;
-			productReference = 210C89801A9F6C440003CC85 /* PaintPickerTests.xctest */;
+			productReference = 210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		21DE32DD1D3BF847007669DF /* PaintPickerUITests */ = {
+		21DE32DD1D3BF847007669DF /* RGButterflyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "PaintPickerUITests" */;
+			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */;
 			buildPhases = (
 				21DE32DA1D3BF847007669DF /* Sources */,
 				21DE32DB1D3BF847007669DF /* Frameworks */,
@@ -657,9 +658,9 @@
 			dependencies = (
 				21DE32E41D3BF847007669DF /* PBXTargetDependency */,
 			);
-			name = PaintPickerUITests;
+			name = RGButterflyUITests;
 			productName = AcrylicsColorPickerUITests;
-			productReference = 21DE32DE1D3BF847007669DF /* PaintPicker.xctest */;
+			productReference = 21DE32DE1D3BF847007669DF /* RGButterfly.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -697,7 +698,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "PaintPicker" */;
+			buildConfigurationList = 210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "RGButterfly" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -710,9 +711,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				210C89661A9F6C440003CC85 /* PaintPicker */,
-				210C897F1A9F6C440003CC85 /* PaintPickerTests */,
-				21DE32DD1D3BF847007669DF /* PaintPickerUITests */,
+				210C89661A9F6C440003CC85 /* RGButterfly */,
+				210C897F1A9F6C440003CC85 /* RGButterflyTests */,
+				21DE32DD1D3BF847007669DF /* RGButterflyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -857,12 +858,12 @@
 /* Begin PBXTargetDependency section */
 		210C89821A9F6C440003CC85 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 210C89661A9F6C440003CC85 /* PaintPicker */;
+			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
 			targetProxy = 210C89811A9F6C440003CC85 /* PBXContainerItemProxy */;
 		};
 		21DE32E41D3BF847007669DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 210C89661A9F6C440003CC85 /* PaintPicker */;
+			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
 			targetProxy = 21DE32E31D3BF847007669DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1003,7 +1004,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = PaintPicker;
+				PRODUCT_NAME = RGButterfly;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USE_HEADERMAP = YES;
@@ -1032,7 +1033,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = PaintPicker;
+				PRODUCT_NAME = RGButterfly;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USE_HEADERMAP = YES;
@@ -1055,7 +1056,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaintPicker.app/PaintPicker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
 			};
 			name = Debug;
 		};
@@ -1071,7 +1072,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PaintPicker.app/PaintPicker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
 			};
 			name = Release;
 		};
@@ -1083,7 +1084,7 @@
 				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = PaintPicker;
+				PRODUCT_NAME = RGButterfly;
 				TEST_TARGET_NAME = AcrylicsColorPicker;
 				USES_XCTRUNNER = YES;
 			};
@@ -1098,7 +1099,7 @@
 				INFOPLIST_FILE = AcrylicsColorPickerUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = PaintPicker;
+				PRODUCT_NAME = RGButterfly;
 				TEST_TARGET_NAME = AcrylicsColorPicker;
 				USES_XCTRUNNER = YES;
 			};
@@ -1107,7 +1108,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "PaintPicker" */ = {
+		210C89621A9F6C440003CC85 /* Build configuration list for PBXProject "RGButterfly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C89881A9F6C440003CC85 /* Debug */,
@@ -1116,7 +1117,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPicker" */ = {
+		210C898A1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterfly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C898B1A9F6C440003CC85 /* Debug */,
@@ -1125,7 +1126,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "PaintPickerTests" */ = {
+		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				210C898E1A9F6C440003CC85 /* Debug */,
@@ -1134,7 +1135,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "PaintPickerUITests" */ = {
+		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				21DE32E61D3BF847007669DF /* Debug */,
