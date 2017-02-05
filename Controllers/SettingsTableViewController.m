@@ -17,10 +17,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel, *mixAssocCountLabel;
-@property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch, *mixAssocCountSwitch;
-@property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow, mixAssocLt3;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel, *mixAssocCountText, *mixAssocGt2Text, *mixAssocAllText;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
+@property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch;
+@property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -72,9 +72,6 @@ const int RGB_DISPLAY_ROWS        = 1;
 const int MIX_RATIOS_SETTINGS     = 6;
 const int MIX_RATIOS_ROWS         = 1;
 
-//const int MIX_ASSOC_SETTINGS      = 7;
-//const int MIX_ASSOC_ROWS          = 1;
-
 const int ALERTS_SETTINGS         = 7;
 const int ALERTS_ROWS             = 1;
 
@@ -85,6 +82,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     [super viewDidLoad];
     
     [self saveEnable:FALSE];
+
     _reuseCellIdentifier = @"SettingsTableCell";
     
     // NSUserDefaults
@@ -97,7 +95,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     self.context  = [self.appDelegate managedObjectContext];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // About section
+    // About, disclaimer, feedback sections
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     _aboutLabel = [FieldUtils createLabel:@"About this App" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
@@ -485,46 +483,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     
     _alertsFilterLabel   = [self createWidgetLabel:_labelText];
 
-    
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Mix Association Settings
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Check for the default values
-    //
-    _mixAssocCountText    = @"mixassoc_count_text";
-    
-    _mixAssocGt2Text  = @"List Associations Size GT Two";
-    _mixAssocAllText  = @"List Associations of All Sizes";
-    
-    _labelText = @"";
-    if(! ([_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY] &&
-          [_userDefaults stringForKey:_mixAssocCountText])
-       ) {
-        _mixAssocLt3 = FALSE;
-        _labelText = _mixAssocGt2Text;
-        
-        [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
-        [_userDefaults setValue:_labelText forKey:_mixAssocCountText];
-        
-    } else {
-        _mixAssocLt3 = [_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY];
-        _labelText = [_userDefaults stringForKey:_mixAssocCountText];
-    }
-    
-    // Create the label and switch, set the last state or default values
-    //
-    _mixAssocCountSwitch = [[UISwitch alloc] init];
-    _widgetHeight = _mixAssocCountSwitch.bounds.size.height;
-    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
-    [_mixAssocCountSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
-    [_mixAssocCountSwitch setOn:_mixAssocLt3];
-    
-    // Add the switch target
-    //
-    [_mixAssocCountSwitch addTarget:self action:@selector(setMixAssocCountSwitchState:) forControlEvents:UIControlEventValueChanged];
-    
-    _mixAssocCountLabel   = [self createWidgetLabel:_labelText];
-    
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Create No Save alert
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -593,8 +552,6 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         
     } else if (section == ALERTS_SETTINGS) {
         return ALERTS_ROWS;
-//    } else if (section == MIX_ASSOC_SETTINGS) {
-//        return MIX_ASSOC_ROWS;
     }
     return 0;
 }
@@ -643,12 +600,6 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         
     } else if (section == ALERTS_SETTINGS) {
         headerStr = @"Alerts Settings";
-
-//    } else if (section == MIX_ASSOC_SETTINGS) {
-//        headerStr = @"Mix Associations Count";
-//
-//    } else if (section == ADD_BRANDS_SETTINGS) {
-//        headerStr = @"Add Paint Brands";
     }
     
     return headerStr;
@@ -662,54 +613,6 @@ heightForFooterInSection:(NSInteger)section {
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     [[((UITableViewHeaderFooterView*) view) textLabel] setTextColor:LIGHT_TEXT_COLOR];
 }
-
-//- (UIView*)tableView:(UITableView*)tableView
-//viewForFooterInSection:(NSInteger)section {
-//    return [[UIView alloc] initWithFrame:CGRectZero];
-//}
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-//    [headerView setBackgroundColor:CLEAR_COLOR];
-//    
-//    NSString *headerStr;
-//    if (section == READ_ONLY_SETTINGS) {
-//        headerStr = @"Read-Only";
-//        
-//    } else if (section == TAP_AREA_SETTINGS) {
-//        headerStr = @"Tap Area";
-//        
-//    } else if (section == MATCH_NUM_SETTINGS) {
-//        headerStr = @"Match Number";
-//        
-//    } else if (section == RGB_DISPLAY_SETTINGS) {
-//        headerStr = @"RGB Display";
-//        
-//    } else if (section == ADD_BRANDS_SETTINGS) {
-//        headerStr = @"Add Paint Brands";
-//        
-//    } else if (section == MIX_RATIOS_SETTINGS) {
-//        headerStr = @"Default Paint Mix Ratios";
-//    }
-//    
-//    UILabel *headerLabel = [FieldUtils createLabel:headerStr xOffset:DEF_X_OFFSET yOffset:DEF_Y_OFFSET width:tableView.bounds.size.width height:DEF_TABLE_HDR_HEIGHT];
-//    [headerLabel setBackgroundColor:CLEAR_COLOR];
-//    [headerView addSubview:headerLabel];
-//    
-//    return headerView;
-//}
-
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-//    // Background color
-//    view.tintColor = [UIColor greenColor];
-//    
-//    [view setBackgroundColor:[UIColor grayColor]];
-//    
-//    // Text Color
-//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-//    [header.textLabel setTextColor:[UIColor whiteColor]];
-//}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -825,10 +728,6 @@ heightForFooterInSection:(NSInteger)section {
     } else if (indexPath.section == ALERTS_SETTINGS) {
         [cell.contentView addSubview:_alertsFilterSwitch];
         [cell.contentView addSubview:_alertsFilterLabel];
-        
-//    } else if (indexPath.section == MIX_ASSOC_SETTINGS) {
-//        [cell.contentView addSubview:_mixAssocCountSwitch];
-//        [cell.contentView addSubview:_mixAssocCountLabel];
     }
     
     return cell;
@@ -851,39 +750,6 @@ heightForFooterInSection:(NSInteger)section {
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TextField/TextView Methods
@@ -1074,19 +940,6 @@ heightForFooterInSection:(NSInteger)section {
     [self saveEnable:TRUE];
 }
 
-- (void)setMixAssocCountSwitchState:(id)sender {
-    _mixAssocLt3 = [sender isOn];
-    
-    if (_mixAssocLt3 == TRUE) {
-        _mixAssocCountLabel = [self createWidgetLabel:_mixAssocAllText];
-        
-    } else {
-        _mixAssocCountLabel = [self createWidgetLabel:_mixAssocGt2Text];
-    }
-    [self.tableView reloadData];
-    [self saveEnable:TRUE];
-}
-
 - (IBAction)save:(id)sender {
     
     // Perform any validations first
@@ -1149,11 +1002,6 @@ heightForFooterInSection:(NSInteger)section {
             [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
             [_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
-            
-            // Mix Assoc Settings
-            //
-//            [_userDefaults setBool:_mixAssocLt3 forKey:MIX_ASSOC_COUNT_KEY];
-//            [_userDefaults setValue:[_mixAssocCountLabel text] forKey:_mixAssocCountText];
             
             [_userDefaults synchronize];
             
