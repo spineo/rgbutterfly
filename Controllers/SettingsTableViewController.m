@@ -20,12 +20,12 @@
 @property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
 @property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch;
 @property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *addBrandsText, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
 @property (nonatomic, strong) UIButton *shapeButton, *rgbDisplayButton;
-@property (nonatomic, strong) UITextField *matchNumTextField, *addBrandsTextField, *mixRatiosTextField;
+@property (nonatomic, strong) UITextField *matchNumTextField, *mixRatiosTextField;
 @property (nonatomic, strong) UITextView *mixRatiosTextView;
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
@@ -777,10 +777,6 @@ heightForFooterInSection:(NSInteger)section {
         }
         [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
         [_matchNumStepper setValue:(double)_maxMatchNum];
-        
-    } else if (textField.tag == ADD_BRANDS_TAG) {
-        _addBrandsText = textField.text;
-        
     }
     [self saveEnable:TRUE];
 }
@@ -988,10 +984,6 @@ heightForFooterInSection:(NSInteger)section {
             // isRGB settings
             //
             [_userDefaults setBool:_rgbDisplayFlag forKey:RGB_DISPLAY_KEY];
-            
-            // Add Brands
-            //
-            [_userDefaults setValue:_addBrandsText forKey:ADD_BRANDS_KEY];
             
             // Paint Mix Ratios
             //

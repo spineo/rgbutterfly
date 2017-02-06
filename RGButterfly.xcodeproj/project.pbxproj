@@ -94,7 +94,6 @@
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
-		21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
 /* End PBXBuildFile section */
 
@@ -285,7 +284,6 @@
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21DE32DE1D3BF847007669DF /* RGButterfly.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterfly.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcrylicsColorPickerUITests.m; sourceTree = "<group>"; };
 		21DE32E21D3BF847007669DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21E079DE1E46702E004B77C8 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -600,7 +598,6 @@
 		21DE32DF1D3BF847007669DF /* 			 */ = {
 			isa = PBXGroup;
 			children = (
-				21DE32E01D3BF847007669DF /* AcrylicsColorPickerUITests.m */,
 				21DE32E21D3BF847007669DF /* Info.plist */,
 			);
 			name = "			";
@@ -849,7 +846,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DE32E11D3BF847007669DF /* AcrylicsColorPickerUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
