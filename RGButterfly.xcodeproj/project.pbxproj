@@ -70,8 +70,6 @@
 		2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1261DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m */; };
 		2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */; };
 		2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1381DFED84F0076A095 /* MatchAlgorithms.m */; };
-		2114BF501E4B5764009F4A7D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2114BF4F1E4B5764009F4A7D /* Info.plist */; };
-		2114BF521E4B57B3009F4A7D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2114BF511E4B57B3009F4A7D /* Info.plist */; };
 		2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2114BF561E4B5BFB009F4A7D /* Root.plist */; };
 		212F25AB1E33FEE0002466E7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AA1E33FEE0002466E7 /* Reachability.m */; };
 		212F25AE1E33FF13002466E7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AD1E33FF13002466E7 /* NSData+Base64.m */; };
@@ -88,8 +86,6 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
-		215A87071E4B66F900597C4E /* RGButterflyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A87061E4B66F900597C4E /* RGButterflyTests.m */; };
-		215A87091E4B68C600597C4E /* RGButterflyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A87061E4B66F900597C4E /* RGButterflyTests.m */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
@@ -97,9 +93,28 @@
 		2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1E1E3B95DC00812B19 /* GenericUtils.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
+		21A2639F1E4CA20D004B075C /* RGButterflyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */; };
+		21A263B11E4CA2F5004B075C /* RGButterflyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A263B01E4CA2F5004B075C /* RGButterflyTests.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		21A263991E4CA0D9004B075C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210C89661A9F6C440003CC85;
+			remoteInfo = RGButterfly;
+		};
+		21A263A91E4CA251004B075C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 210C89661A9F6C440003CC85;
+			remoteInfo = RGButterfly;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		21064FC91DFEDA77004B0830 /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AssociationType.txt; path = Data/AssociationType.txt; sourceTree = "<group>"; };
@@ -221,10 +236,7 @@
 		2109A1371DFED84F0076A095 /* MatchAlgorithms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAlgorithms.h; path = Algorithms/MatchAlgorithms.h; sourceTree = "<group>"; };
 		2109A1381DFED84F0076A095 /* MatchAlgorithms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithms.m; path = Algorithms/MatchAlgorithms.m; sourceTree = "<group>"; };
 		210C89671A9F6C440003CC85 /* RGButterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGButterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2114BF381E47B694009F4A7D /* RGButterfly.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = RGButterfly.entitlements; sourceTree = "<group>"; };
-		2114BF4F1E4B5764009F4A7D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RGButterflyUITests/Info.plist; sourceTree = "<group>"; };
-		2114BF511E4B57B3009F4A7D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/stuartpineo/AppDevelopment/AcrylicsColorPicker/RGButterflyTests/Info.plist; sourceTree = "<absolute>"; };
 		2114BF561E4B5BFB009F4A7D /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Root.plist; path = Settings.bundle/Root.plist; sourceTree = "<group>"; };
 		212F25A91E33FEE0002466E7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../ios-external-utilities/Reachability/Reachability.h"; sourceTree = "<group>"; };
 		212F25AA1E33FEE0002466E7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../ios-external-utilities/Reachability/Reachability.m"; sourceTree = "<group>"; };
@@ -251,7 +263,6 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
-		215A87061E4B66F900597C4E /* RGButterflyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGButterflyTests.m; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
 		216044D21E3D3A9F007387DB /* MatchColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchColors.m; path = "../ios-algorithms/MatchColors.m"; sourceTree = "<group>"; };
 		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
@@ -269,9 +280,14 @@
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
 		219C47791E22A93B00DADF0F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewController.h; path = Controllers/InitViewController.h; sourceTree = "<group>"; };
 		219C477A1E22A93B00DADF0F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitViewController.m; path = Controllers/InitViewController.m; sourceTree = "<group>"; };
+		21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A263981E4CA0D9004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RGButterflyUITests.m; path = "../../ios-ui-testing/RGButterflyUITests.m"; sourceTree = "<group>"; };
+		21A263A41E4CA251004B075C /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A263A81E4CA251004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A263B01E4CA2F5004B075C /* RGButterflyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RGButterflyTests.m; path = "../../ios-ui-testing/RGButterflyTests.m"; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		21DE32DE1D3BF847007669DF /* RGButterfly.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterfly.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21E079DE1E46702E004B77C8 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,14 +299,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		210C897D1A9F6C440003CC85 /* Frameworks */ = {
+		21A263911E4CA0D9004B075C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21DE32DB1D3BF847007669DF /* Frameworks */ = {
+		21A263A11E4CA251004B075C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -530,8 +546,8 @@
 				2114BF381E47B694009F4A7D /* RGButterfly.entitlements */,
 				2108C5011C8209C600DD7B9E /* RGButterfly */,
 				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
-				210C89831A9F6C440003CC85 /* RGButterflyTests */,
-				2114BF461E4A1027009F4A7D /* RGButterflyUITests */,
+				21A263951E4CA0D9004B075C /* RGButterflyUITests */,
+				21A263A51E4CA251004B075C /* RGButterflyTests */,
 				210C89681A9F6C440003CC85 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -540,28 +556,10 @@
 			isa = PBXGroup;
 			children = (
 				210C89671A9F6C440003CC85 /* RGButterfly.app */,
-				210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */,
-				21DE32DE1D3BF847007669DF /* RGButterfly.xctest */,
+				21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */,
+				21A263A41E4CA251004B075C /* RGButterflyTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		210C89831A9F6C440003CC85 /* RGButterflyTests */ = {
-			isa = PBXGroup;
-			children = (
-				215A87061E4B66F900597C4E /* RGButterflyTests.m */,
-				2114BF511E4B57B3009F4A7D /* Info.plist */,
-			);
-			name = RGButterflyTests;
-			path = "/Users/stuartpineo/AppDevelopment/ios-ui-testing";
-			sourceTree = "<absolute>";
-		};
-		2114BF461E4A1027009F4A7D /* RGButterflyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2114BF4F1E4B5764009F4A7D /* Info.plist */,
-			);
-			name = RGButterflyUITests;
 			sourceTree = "<group>";
 		};
 		2137956B1E05B5C700CD5308 /* ExternalUtilities */ = {
@@ -573,6 +571,24 @@
 				212F25AA1E33FEE0002466E7 /* Reachability.m */,
 			);
 			name = ExternalUtilities;
+			sourceTree = "<group>";
+		};
+		21A263951E4CA0D9004B075C /* RGButterflyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */,
+				21A263981E4CA0D9004B075C /* Info.plist */,
+			);
+			path = RGButterflyUITests;
+			sourceTree = "<group>";
+		};
+		21A263A51E4CA251004B075C /* RGButterflyTests */ = {
+			isa = PBXGroup;
+			children = (
+				21A263B01E4CA2F5004B075C /* RGButterflyTests.m */,
+				21A263A81E4CA251004B075C /* Info.plist */,
+			);
+			path = RGButterflyTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,39 +611,41 @@
 			productReference = 210C89671A9F6C440003CC85 /* RGButterfly.app */;
 			productType = "com.apple.product-type.application";
 		};
-		210C897F1A9F6C440003CC85 /* RGButterflyTests */ = {
+		21A263931E4CA0D9004B075C /* RGButterflyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterflyTests" */;
+			buildConfigurationList = 21A2639B1E4CA0D9004B075C /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */;
 			buildPhases = (
-				210C897C1A9F6C440003CC85 /* Sources */,
-				210C897D1A9F6C440003CC85 /* Frameworks */,
-				210C897E1A9F6C440003CC85 /* Resources */,
+				21A263901E4CA0D9004B075C /* Sources */,
+				21A263911E4CA0D9004B075C /* Frameworks */,
+				21A263921E4CA0D9004B075C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = RGButterflyTests;
-			productName = AcrylicsColorPickerTests;
-			productReference = 210C89801A9F6C440003CC85 /* RGButterflyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		21DE32DD1D3BF847007669DF /* RGButterflyUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */;
-			buildPhases = (
-				21DE32DA1D3BF847007669DF /* Sources */,
-				21DE32DB1D3BF847007669DF /* Frameworks */,
-				21DE32DC1D3BF847007669DF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
+				21A2639A1E4CA0D9004B075C /* PBXTargetDependency */,
 			);
 			name = RGButterflyUITests;
-			productName = AcrylicsColorPickerUITests;
-			productReference = 21DE32DE1D3BF847007669DF /* RGButterfly.xctest */;
+			productName = RGButterflyUITests;
+			productReference = 21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		21A263A31E4CA251004B075C /* RGButterflyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21A263AB1E4CA251004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */;
+			buildPhases = (
+				21A263A01E4CA251004B075C /* Sources */,
+				21A263A11E4CA251004B075C /* Frameworks */,
+				21A263A21E4CA251004B075C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21A263AA1E4CA251004B075C /* PBXTargetDependency */,
+			);
+			name = RGButterflyTests;
+			productName = RGButterflyTests;
+			productReference = 21A263A41E4CA251004B075C /* RGButterflyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -654,13 +672,17 @@
 							};
 						};
 					};
-					210C897F1A9F6C440003CC85 = {
-						CreatedOnToolsVersion = 6.0;
+					21A263931E4CA0D9004B075C = {
+						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = PEWN4D59QB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 210C89661A9F6C440003CC85;
 					};
-					21DE32DD1D3BF847007669DF = {
-						CreatedOnToolsVersion = 7.2;
+					21A263A31E4CA251004B075C = {
+						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = PEWN4D59QB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 210C89661A9F6C440003CC85;
 					};
 				};
 			};
@@ -678,8 +700,8 @@
 			projectRoot = "";
 			targets = (
 				210C89661A9F6C440003CC85 /* RGButterfly */,
-				210C897F1A9F6C440003CC85 /* RGButterflyTests */,
-				21DE32DD1D3BF847007669DF /* RGButterflyUITests */,
+				21A263931E4CA0D9004B075C /* RGButterflyUITests */,
+				21A263A31E4CA251004B075C /* RGButterflyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -691,7 +713,6 @@
 			files = (
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
 				21064FD31DFEDA77004B0830 /* CanvasCoverage.txt in Resources */,
-				2114BF521E4B57B3009F4A7D /* Info.plist in Resources */,
 				2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */,
 				21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */,
 				21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */,
@@ -701,7 +722,6 @@
 				2192F5611DF3185500AAFE01 /* README in Resources */,
 				21064FD11DFEDA77004B0830 /* AssociationType.txt in Resources */,
 				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
-				2114BF501E4B5764009F4A7D /* Info.plist in Resources */,
 				21397EE41C84876D001C3F05 /* Info.plist in Resources */,
 				21064FD41DFEDA77004B0830 /* MatchAlgorithm.txt in Resources */,
 				21397EDD1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements in Resources */,
@@ -711,14 +731,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		210C897E1A9F6C440003CC85 /* Resources */ = {
+		21A263921E4CA0D9004B075C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21DE32DC1D3BF847007669DF /* Resources */ = {
+		21A263A21E4CA251004B075C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -790,7 +810,6 @@
 				2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				212F25C31E363919002466E7 /* HTTPUtils.m in Sources */,
 				2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */,
-				215A87071E4B66F900597C4E /* RGButterflyTests.m in Sources */,
 				2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */,
 				2109A0E41DFDDD6F0076A095 /* PickerViewController.m in Sources */,
 				2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */,
@@ -807,22 +826,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		210C897C1A9F6C440003CC85 /* Sources */ = {
+		21A263901E4CA0D9004B075C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				215A87091E4B68C600597C4E /* RGButterflyTests.m in Sources */,
+				21A2639F1E4CA20D004B075C /* RGButterflyUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21DE32DA1D3BF847007669DF /* Sources */ = {
+		21A263A01E4CA251004B075C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A263B11E4CA2F5004B075C /* RGButterflyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21A2639A1E4CA0D9004B075C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
+			targetProxy = 21A263991E4CA0D9004B075C /* PBXContainerItemProxy */;
+		};
+		21A263AA1E4CA251004B075C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
+			targetProxy = 21A263A91E4CA251004B075C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		210C89881A9F6C440003CC85 /* Debug */ = {
@@ -996,68 +1029,71 @@
 			};
 			name = Release;
 		};
-		210C898E1A9F6C440003CC85 /* Debug */ = {
+		21A2639C1E4CA0D9004B075C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = PEWN4D59QB;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = RGButterflyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		210C898F1A9F6C440003CC85 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = PEWN4D59QB;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = RGButterflyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.StuartPineo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		21DE32E61D3BF847007669DF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PEWN4D59QB;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = RGButterflyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = RGButterfly;
-				PROVISIONING_PROFILE = "";
-				USES_XCTRUNNER = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RGButterfly;
 			};
 			name = Debug;
 		};
-		21DE32E71D3BF847007669DF /* Release */ = {
+		21A2639D1E4CA0D9004B075C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PEWN4D59QB;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = RGButterflyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.AcrylicsColorPickerUITests;
-				PRODUCT_NAME = RGButterfly;
-				PROVISIONING_PROFILE = "";
-				USES_XCTRUNNER = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = RGButterfly;
+			};
+			name = Release;
+		};
+		21A263AC1E4CA251004B075C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PEWN4D59QB;
+				INFOPLIST_FILE = RGButterflyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
+			};
+			name = Debug;
+		};
+		21A263AD1E4CA251004B075C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PEWN4D59QB;
+				INFOPLIST_FILE = RGButterflyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
 			};
 			name = Release;
 		};
@@ -1082,23 +1118,21 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		210C898D1A9F6C440003CC85 /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
+		21A2639B1E4CA0D9004B075C /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				210C898E1A9F6C440003CC85 /* Debug */,
-				210C898F1A9F6C440003CC85 /* Release */,
+				21A2639C1E4CA0D9004B075C /* Debug */,
+				21A2639D1E4CA0D9004B075C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		21DE32E51D3BF847007669DF /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */ = {
+		21A263AB1E4CA251004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21DE32E61D3BF847007669DF /* Debug */,
-				21DE32E71D3BF847007669DF /* Release */,
+				21A263AC1E4CA251004B075C /* Debug */,
+				21A263AD1E4CA251004B075C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
