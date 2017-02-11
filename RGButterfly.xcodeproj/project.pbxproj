@@ -93,21 +93,21 @@
 		2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1E1E3B95DC00812B19 /* GenericUtils.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
-		21A2639F1E4CA20D004B075C /* RGButterflyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */; };
-		21A263B11E4CA2F5004B075C /* RGButterflyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A263B01E4CA2F5004B075C /* RGButterflyTests.m */; };
+		21A197FD1E4F844400686E86 /* RGButterflyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A197FC1E4F844400686E86 /* RGButterflyUITests.swift */; };
+		21A263D41E4CB217004B075C /* RGButterflyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A263D31E4CB217004B075C /* RGButterflyTests.swift */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		21A263991E4CA0D9004B075C /* PBXContainerItemProxy */ = {
+		21A197F61E4F832E00686E86 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 210C89661A9F6C440003CC85;
 			remoteInfo = RGButterfly;
 		};
-		21A263A91E4CA251004B075C /* PBXContainerItemProxy */ = {
+		21A263CA1E4CB105004B075C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 210C895F1A9F6C440003CC85 /* Project object */;
 			proxyType = 1;
@@ -280,14 +280,17 @@
 		219B9E751CD78FD400973926 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
 		219C47791E22A93B00DADF0F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewController.h; path = Controllers/InitViewController.h; sourceTree = "<group>"; };
 		219C477A1E22A93B00DADF0F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitViewController.m; path = Controllers/InitViewController.m; sourceTree = "<group>"; };
-		21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21A263981E4CA0D9004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RGButterflyUITests.m; path = "../../ios-ui-testing/RGButterflyUITests.m"; sourceTree = "<group>"; };
-		21A263A41E4CA251004B075C /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21A263A81E4CA251004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21A263B01E4CA2F5004B075C /* RGButterflyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RGButterflyTests.m; path = "../../ios-ui-testing/RGButterflyTests.m"; sourceTree = "<group>"; };
+		21A197F11E4F832E00686E86 /* RGButterflyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A197F51E4F832E00686E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A197FB1E4F83DA00686E86 /* RGButterflyUITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RGButterflyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		21A197FC1E4F844400686E86 /* RGButterflyUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyUITests.swift; path = "../../ios-ui-testing/RGButterflyUITests.swift"; sourceTree = "<group>"; };
+		21A263C51E4CB105004B075C /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21A263C91E4CB105004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A263D21E4CB217004B075C /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		21A263D31E4CB217004B075C /* RGButterflyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyTests.swift; path = "../../ios-ui-testing/RGButterflyTests.swift"; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		21D344661E4F518300B92CF7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21E079DE1E46702E004B77C8 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -299,14 +302,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263911E4CA0D9004B075C /* Frameworks */ = {
+		21A197EE1E4F832E00686E86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263A11E4CA251004B075C /* Frameworks */ = {
+		21A263C21E4CB105004B075C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -546,9 +549,10 @@
 				2114BF381E47B694009F4A7D /* RGButterfly.entitlements */,
 				2108C5011C8209C600DD7B9E /* RGButterfly */,
 				21CC4FAB1C0114DE0018E088 /* Settings.bundle */,
-				21A263951E4CA0D9004B075C /* RGButterflyUITests */,
-				21A263A51E4CA251004B075C /* RGButterflyTests */,
+				21A263C61E4CB105004B075C /* RGButterflyTests */,
+				21A197F21E4F832E00686E86 /* RGButterflyUITests */,
 				210C89681A9F6C440003CC85 /* Products */,
+				21D344651E4F518300B92CF7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -556,8 +560,8 @@
 			isa = PBXGroup;
 			children = (
 				210C89671A9F6C440003CC85 /* RGButterfly.app */,
-				21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */,
-				21A263A41E4CA251004B075C /* RGButterflyTests.xctest */,
+				21A263C51E4CB105004B075C /* RGButterflyTests.xctest */,
+				21A197F11E4F832E00686E86 /* RGButterflyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -573,22 +577,32 @@
 			name = ExternalUtilities;
 			sourceTree = "<group>";
 		};
-		21A263951E4CA0D9004B075C /* RGButterflyUITests */ = {
+		21A197F21E4F832E00686E86 /* RGButterflyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				21A2639E1E4CA20D004B075C /* RGButterflyUITests.m */,
-				21A263981E4CA0D9004B075C /* Info.plist */,
+				21A197FC1E4F844400686E86 /* RGButterflyUITests.swift */,
+				21A197FB1E4F83DA00686E86 /* RGButterflyUITests-Bridging-Header.h */,
+				21A197F51E4F832E00686E86 /* Info.plist */,
 			);
 			path = RGButterflyUITests;
 			sourceTree = "<group>";
 		};
-		21A263A51E4CA251004B075C /* RGButterflyTests */ = {
+		21A263C61E4CB105004B075C /* RGButterflyTests */ = {
 			isa = PBXGroup;
 			children = (
-				21A263B01E4CA2F5004B075C /* RGButterflyTests.m */,
-				21A263A81E4CA251004B075C /* Info.plist */,
+				21A263D31E4CB217004B075C /* RGButterflyTests.swift */,
+				21A263C91E4CB105004B075C /* Info.plist */,
+				21A263D21E4CB217004B075C /* RGButterflyTests-Bridging-Header.h */,
 			);
 			path = RGButterflyTests;
+			sourceTree = "<group>";
+		};
+		21D344651E4F518300B92CF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21D344661E4F518300B92CF7 /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -611,40 +625,40 @@
 			productReference = 210C89671A9F6C440003CC85 /* RGButterfly.app */;
 			productType = "com.apple.product-type.application";
 		};
-		21A263931E4CA0D9004B075C /* RGButterflyUITests */ = {
+		21A197F01E4F832E00686E86 /* RGButterflyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21A2639B1E4CA0D9004B075C /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */;
+			buildConfigurationList = 21A197F81E4F832E00686E86 /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */;
 			buildPhases = (
-				21A263901E4CA0D9004B075C /* Sources */,
-				21A263911E4CA0D9004B075C /* Frameworks */,
-				21A263921E4CA0D9004B075C /* Resources */,
+				21A197ED1E4F832E00686E86 /* Sources */,
+				21A197EE1E4F832E00686E86 /* Frameworks */,
+				21A197EF1E4F832E00686E86 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				21A2639A1E4CA0D9004B075C /* PBXTargetDependency */,
+				21A197F71E4F832E00686E86 /* PBXTargetDependency */,
 			);
 			name = RGButterflyUITests;
 			productName = RGButterflyUITests;
-			productReference = 21A263941E4CA0D9004B075C /* RGButterflyUITests.xctest */;
+			productReference = 21A197F11E4F832E00686E86 /* RGButterflyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		21A263A31E4CA251004B075C /* RGButterflyTests */ = {
+		21A263C41E4CB105004B075C /* RGButterflyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 21A263AB1E4CA251004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */;
+			buildConfigurationList = 21A263CC1E4CB105004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */;
 			buildPhases = (
-				21A263A01E4CA251004B075C /* Sources */,
-				21A263A11E4CA251004B075C /* Frameworks */,
-				21A263A21E4CA251004B075C /* Resources */,
+				21A263C11E4CB105004B075C /* Sources */,
+				21A263C21E4CB105004B075C /* Frameworks */,
+				21A263C31E4CB105004B075C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				21A263AA1E4CA251004B075C /* PBXTargetDependency */,
+				21A263CB1E4CB105004B075C /* PBXTargetDependency */,
 			);
 			name = RGButterflyTests;
 			productName = RGButterflyTests;
-			productReference = 21A263A41E4CA251004B075C /* RGButterflyTests.xctest */;
+			productReference = 21A263C51E4CB105004B075C /* RGButterflyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -653,6 +667,7 @@
 		210C895F1A9F6C440003CC85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Stuart Pineo";
 				TargetAttributes = {
@@ -672,15 +687,17 @@
 							};
 						};
 					};
-					21A263931E4CA0D9004B075C = {
+					21A197F01E4F832E00686E86 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = PEWN4D59QB;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 210C89661A9F6C440003CC85;
 					};
-					21A263A31E4CA251004B075C = {
+					21A263C41E4CB105004B075C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = PEWN4D59QB;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 210C89661A9F6C440003CC85;
 					};
@@ -700,8 +717,8 @@
 			projectRoot = "";
 			targets = (
 				210C89661A9F6C440003CC85 /* RGButterfly */,
-				21A263931E4CA0D9004B075C /* RGButterflyUITests */,
-				21A263A31E4CA251004B075C /* RGButterflyTests */,
+				21A263C41E4CB105004B075C /* RGButterflyTests */,
+				21A197F01E4F832E00686E86 /* RGButterflyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -731,14 +748,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263921E4CA0D9004B075C /* Resources */ = {
+		21A197EF1E4F832E00686E86 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263A21E4CA251004B075C /* Resources */ = {
+		21A263C31E4CB105004B075C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -826,34 +843,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263901E4CA0D9004B075C /* Sources */ = {
+		21A197ED1E4F832E00686E86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A2639F1E4CA20D004B075C /* RGButterflyUITests.m in Sources */,
+				21A197FD1E4F844400686E86 /* RGButterflyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21A263A01E4CA251004B075C /* Sources */ = {
+		21A263C11E4CB105004B075C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A263B11E4CA2F5004B075C /* RGButterflyTests.m in Sources */,
+				21A263D41E4CB217004B075C /* RGButterflyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		21A2639A1E4CA0D9004B075C /* PBXTargetDependency */ = {
+		21A197F71E4F832E00686E86 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
-			targetProxy = 21A263991E4CA0D9004B075C /* PBXContainerItemProxy */;
+			targetProxy = 21A197F61E4F832E00686E86 /* PBXContainerItemProxy */;
 		};
-		21A263AA1E4CA251004B075C /* PBXTargetDependency */ = {
+		21A263CB1E4CB105004B075C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 210C89661A9F6C440003CC85 /* RGButterfly */;
-			targetProxy = 21A263A91E4CA251004B075C /* PBXContainerItemProxy */;
+			targetProxy = 21A263CA1E4CB105004B075C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -866,6 +883,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -927,6 +945,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -945,6 +964,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -983,6 +1003,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INFOPLIST_OUTPUT_FORMAT = "same-as-input";
@@ -1010,6 +1031,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "";
 				"HEADER_SEARCH_PATHS[arch=*]" = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
@@ -1029,10 +1051,11 @@
 			};
 			name = Release;
 		};
-		21A2639C1E4CA0D9004B075C /* Debug */ = {
+		21A197F91E4F832E00686E86 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1041,14 +1064,18 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = RGButterfly;
 			};
 			name = Debug;
 		};
-		21A2639D1E4CA0D9004B075C /* Release */ = {
+		21A197FA1E4F832E00686E86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1058,15 +1085,18 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = RGButterfly;
 			};
 			name = Release;
 		};
-		21A263AC1E4CA251004B075C /* Debug */ = {
+		21A263CD1E4CB105004B075C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1075,15 +1105,20 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "RGButterflyTests/RGButterflyTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
 			};
 			name = Debug;
 		};
-		21A263AD1E4CA251004B075C /* Release */ = {
+		21A263CE1E4CB105004B075C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1093,6 +1128,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.StuartPineo.RGButterflyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RGButterflyTests/RGButterflyTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RGButterfly.app/RGButterfly";
 			};
 			name = Release;
@@ -1118,21 +1156,22 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		21A2639B1E4CA0D9004B075C /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */ = {
+		21A197F81E4F832E00686E86 /* Build configuration list for PBXNativeTarget "RGButterflyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21A2639C1E4CA0D9004B075C /* Debug */,
-				21A2639D1E4CA0D9004B075C /* Release */,
+				21A197F91E4F832E00686E86 /* Debug */,
+				21A197FA1E4F832E00686E86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		21A263AB1E4CA251004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
+		21A263CC1E4CB105004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				21A263AC1E4CA251004B075C /* Debug */,
-				21A263AD1E4CA251004B075C /* Release */,
+				21A263CD1E4CB105004B075C /* Debug */,
+				21A263CE1E4CB105004B075C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
