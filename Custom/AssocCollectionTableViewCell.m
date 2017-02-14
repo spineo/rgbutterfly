@@ -10,13 +10,13 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 
-@interface AssocCollectionTableViewCell()
+@interface CustomCollectionTableViewCell()
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 
 @end
 
-@implementation AssocCollectionTableViewCell
+@implementation CustomCollectionTableViewCell
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
