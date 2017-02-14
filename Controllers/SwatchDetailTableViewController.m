@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
 #import "SwatchDetailTableViewController.h"
-#import "AssocCollectionTableViewCell.h"
+#import "CustomCollectionTableViewCell.h"
 #import "AssocTableViewController.h"
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
@@ -673,12 +673,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Associations (if any) as rows of collection views
     //
     } else {
-        AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+        CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         [custCell setBackgroundColor: DARK_BG_COLOR];
         
         if (! custCell) {
-            custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:indexPath.row];

@@ -16,7 +16,7 @@
 #import "MatchTableViewController.h"
 #import "ViewController.h"
 #import "BarButtonUtils.h"
-#import "AssocCollectionTableViewCell.h"
+#import "CustomCollectionTableViewCell.h"
 #import "MatchAlgorithms.h"
 #import "PaintSwatchesDiff.h"
 #import "AlertUtils.h"
@@ -1499,10 +1499,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == COLLECT_TABLEVIEW_SECTION) {
-        AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+        CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
-            custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         [custCell setXOffset:custCell.bounds.origin.x + DEF_TABLE_CELL_HEIGHT + DEF_FIELD_PADDING*2];
         [custCell setBackgroundColor:DARK_BG_COLOR];

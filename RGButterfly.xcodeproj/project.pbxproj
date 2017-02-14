@@ -15,7 +15,6 @@
 		21064FD61DFEDA77004B0830 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */; };
 		21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCF1DFEDA77004B0830 /* PigmentType.txt */; };
 		21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */; };
-		21064FDF1DFEDB03004B0830 /* AssocCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */; };
 		21064FE01DFEDB03004B0830 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */; };
 		21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */; };
 		21064FE41DFEDCAA004B0830 /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE31DFEDCAA004B0830 /* AssociationType+CoreDataClass.m */; };
@@ -86,6 +85,7 @@
 		21397EE41C84876D001C3F05 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE21C84876D001C3F05 /* Info.plist */; };
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
+		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
@@ -125,8 +125,6 @@
 		21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/PaintSwatchType.txt; sourceTree = "<group>"; };
 		21064FCF1DFEDA77004B0830 /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/PigmentType.txt; sourceTree = "<group>"; };
 		21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/SubjectiveColor.txt; sourceTree = "<group>"; };
-		21064FD91DFEDB03004B0830 /* AssocCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocCollectionTableViewCell.h; path = Custom/AssocCollectionTableViewCell.h; sourceTree = "<group>"; };
-		21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocCollectionTableViewCell.m; path = Custom/AssocCollectionTableViewCell.m; sourceTree = "<group>"; };
 		21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocDescTableViewCell.h; path = Custom/AssocDescTableViewCell.h; sourceTree = "<group>"; };
 		21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocDescTableViewCell.m; path = Custom/AssocDescTableViewCell.m; sourceTree = "<group>"; };
 		21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocTableViewCell.h; path = Custom/AssocTableViewCell.h; sourceTree = "<group>"; };
@@ -261,6 +259,8 @@
 		21397EE21C84876D001C3F05 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21397EE51C8487A1001C3F05 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCollectionTableViewCell.h; path = "../ios-custom-cells/CustomCollectionTableViewCell.h"; sourceTree = "<group>"; };
+		213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionTableViewCell.m; path = "../ios-custom-cells/CustomCollectionTableViewCell.m"; sourceTree = "<group>"; };
 		214430DC1CB19C830014AABD /* AcrylicsColorPicker v4.0.60.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.60.xcdatamodel"; sourceTree = "<group>"; };
 		215109301CB52E16005C799D /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
@@ -512,8 +512,8 @@
 		2108C5EB1C820DA400DD7B9E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				21064FD91DFEDB03004B0830 /* AssocCollectionTableViewCell.h */,
-				21064FDA1DFEDB03004B0830 /* AssocCollectionTableViewCell.m */,
+				213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */,
+				213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */,
 				21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */,
 				21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */,
 				21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */,
@@ -816,7 +816,6 @@
 				21064FFF1DFEDD0A004B0830 /* MatchAssocKeyword.m in Sources */,
 				210650031DFEDD0A004B0830 /* MixAssocSwatch.m in Sources */,
 				210650021DFEDD0A004B0830 /* MixAssocKeyword.m in Sources */,
-				21064FDF1DFEDB03004B0830 /* AssocCollectionTableViewCell.m in Sources */,
 				2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
 				2109A1311DFDE4910076A095 /* PaintBrand+CoreDataProperties.m in Sources */,
@@ -836,6 +835,7 @@
 				2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */,
 				219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */,
 				21064FFE1DFEDD0A004B0830 /* MatchAssociations.m in Sources */,
+				213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */,
 				2109A12D1DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */,
 				2109A0C71DFDDC460076A095 /* ViewController.m in Sources */,
@@ -1163,6 +1163,7 @@
 				21A197FA1E4F832E00686E86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		21A263CC1E4CB105004B075C /* Build configuration list for PBXNativeTarget "RGButterflyTests" */ = {
 			isa = XCConfigurationList;

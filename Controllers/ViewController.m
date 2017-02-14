@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "ButtonUtils.h"
 #import "SwatchDetailTableViewController.h"
-#import "AssocCollectionTableViewCell.h"
+#import "CustomCollectionTableViewCell.h"
 #import "AssocTableViewController.h"
 #import "SettingsTableViewController.h"
 #import "AlertUtils.h"
@@ -938,10 +938,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([_listingType isEqualToString:MIX_TYPE]) {
-        AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+        CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
-            custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         
         [custCell setBackgroundColor: DARK_BG_COLOR];
@@ -982,10 +982,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
         return custCell;
         
     } else if ([_listingType isEqualToString:MATCH_TYPE]) {
-            AssocCollectionTableViewCell *custCell = (AssocCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
+            CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
             
             if (! custCell) {
-                custCell = [[AssocCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+                custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
             }
             
             [custCell setBackgroundColor: DARK_BG_COLOR];
