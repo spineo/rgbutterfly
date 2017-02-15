@@ -970,7 +970,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             }
         }
         
-        [custCell setAssocName:mix_assoc_name];
+        [custCell setName:mix_assoc_name];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         
@@ -994,7 +994,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             
             NSString *match_assoc_name = [matchAssocObj name];
             
-            [custCell setAssocName:match_assoc_name];
+            [custCell setName:match_assoc_name];
             [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
             NSInteger index = custCell.collectionView.tag;

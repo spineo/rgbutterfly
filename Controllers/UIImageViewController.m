@@ -1536,7 +1536,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         //NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
         NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
         
-        [custCell setAssocName:match_algorithm_text];
+        [custCell setName:match_algorithm_text];
         
         NSInteger index = custCell.collectionView.tag;
         

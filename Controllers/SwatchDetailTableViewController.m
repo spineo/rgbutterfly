@@ -708,7 +708,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
         }
 
-        [custCell setAssocName:[[NSString alloc] initWithFormat:@"%@", mix_name]];
+        [custCell setName:[[NSString alloc] initWithFormat:@"%@", mix_name]];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         NSInteger index = custCell.collectionView.tag;
