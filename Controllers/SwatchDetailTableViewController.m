@@ -708,7 +708,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
         }
 
-        [custCell setName:[[NSString alloc] initWithFormat:@"%@", mix_name]];
+        NSString *mixName = [[NSString alloc] initWithFormat:@"%@", mix_name];
+        [custCell addLabel:[FieldUtils createLabel:mixName xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         NSInteger index = custCell.collectionView.tag;

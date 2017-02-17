@@ -17,7 +17,7 @@
 #import "AlertUtils.h"
 #import "GenericUtils.h"
 #import "HTTPUtils.h"
-
+#import "FieldUtils.h"
 
 #import "ManagedObjectUtils.h"
 #import "PaintSwatches.h"
@@ -969,8 +969,8 @@ int MIX_ASSOC_MIN_SIZE = 1;
                 mix_assoc_name = [[NSString alloc] initWithFormat:@"%@ and %@ Mix", ref.name, mix.name];
             }
         }
-        
-        [custCell setName:mix_assoc_name];
+
+        [custCell addLabel:[FieldUtils createLabel:mix_assoc_name xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
         
@@ -993,8 +993,7 @@ int MIX_ASSOC_MIN_SIZE = 1;
             MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:indexPath.row];
             
             NSString *match_assoc_name = [matchAssocObj name];
-            
-            [custCell setName:match_assoc_name];
+            [custCell addLabel:[FieldUtils createLabel:match_assoc_name xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
             [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
             NSInteger index = custCell.collectionView.tag;
