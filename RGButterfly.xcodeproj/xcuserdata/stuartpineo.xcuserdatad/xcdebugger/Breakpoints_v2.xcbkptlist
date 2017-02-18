@@ -6332,11 +6332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509031397.308421"
+            timestampString = "509117236.539563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "tearDown()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6348,11 +6348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509031397.308421"
+            timestampString = "509117236.539563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "testInitViewController()"
             landmarkType = "7">
             <Locations>
@@ -6396,11 +6396,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509033157.879473"
+            timestampString = "509117236.539563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "testUIImageViewController()"
             landmarkType = "7">
          </BreakpointContent>

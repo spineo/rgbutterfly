@@ -261,7 +261,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="Maj-ib-srW">
+                    <navigationItem key="navigationItem" title="Colors Association" id="Maj-ib-srW">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="k9c-gm-4aI">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -281,10 +281,10 @@
             </objects>
             <point key="canvasLocation" x="4098.3999999999996" y="1121.2893553223389"/>
         </scene>
-        <!--Add Mix Color-->
+        <!--Add Color Mix-->
         <scene sceneID="POy-4G-l1X">
             <objects>
-                <tableViewController title="Add Mix Color" id="QL5-37-ypT" customClass="AddMixTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddMixTableViewController" title="Add Color Mix" id="QL5-37-ypT" customClass="AddMixTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PnV-7x-vj5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -318,7 +318,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Add Mix" id="EYR-Qr-U6c">
+                    <navigationItem key="navigationItem" title="Add Color Mix" id="EYR-Qr-U6c">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="wbt-Su-bke">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -871,7 +871,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Stq-UR-tQY"/>
-        <segue reference="x4f-Hg-Dtd"/>
+        <segue reference="KOJ-iO-fdK"/>
         <segue reference="L2p-PG-tYf"/>
         <segue reference="ZPZ-Du-pkL"/>
     </inferredMetricsTieBreakers>
