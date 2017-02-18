@@ -239,6 +239,14 @@ extern int const RATIOS_PICKER_TAG;
 extern int const COVERAGE_FIELD_TAG;
 extern int const COVERAGE_PICKER_TAG;
 
+// Views Tags
+//
+extern int const VIEW_TAG;
+extern int const TABLEVIEW_TAG;
+extern int const TABLEVIEW_CELL_TAG;
+extern int const SCROLLVIEW_TAG;
+extern int const IMAGEVIEW_TAG;
+
 // Settings
 //
 extern int const SHAPE_BUTTON_TAG;

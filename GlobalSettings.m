@@ -222,6 +222,14 @@ int const RATIOS_PICKER_TAG    = 100;
 int const COVERAGE_FIELD_TAG   = 101;
 int const COVERAGE_PICKER_TAG  = 102;
 
+// Views Tags
+//
+int const VIEW_TAG             = 201;
+int const TABLEVIEW_TAG        = 202;
+int const TABLEVIEW_CELL_TAG   = 203;
+int const SCROLLVIEW_TAG       = 204;
+int const IMAGEVIEW_TAG        = 205;
+
 // Settings
 //
 int const SHAPE_BUTTON_TAG    = 111;
