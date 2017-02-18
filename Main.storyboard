@@ -775,7 +775,7 @@
         <!--About this App-->
         <scene sceneID="Xpe-CD-fZ6">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" title="About this App" id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="About this App" id="6rs-A3-XCv">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="frn-Qm-Jeu">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -792,7 +792,7 @@
         <!--Disclaimer-->
         <scene sceneID="F4T-3K-PxL">
             <objects>
-                <viewController storyboardIdentifier="DisclaimerViewController" id="u2b-ZP-TIC" customClass="DisclaimerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DisclaimerViewController" title="Disclaimer" id="u2b-ZP-TIC" customClass="DisclaimerViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Disclaimer" id="ieF-sc-5xX">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="cgf-RR-2dr">
                             <connections>
@@ -870,10 +870,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="L2p-PG-tYf"/>
+        <segue reference="9H9-9R-KDD"/>
+        <segue reference="aqc-zq-dwj"/>
         <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
