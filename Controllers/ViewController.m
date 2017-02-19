@@ -174,10 +174,10 @@ int MIX_ASSOC_MIN_SIZE = 1;
 
     // Images
     //
-    _searchImage    = [[UIImage imageNamed:SEARCH_IMAGE_NAME]           imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _downArrowImage = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME]       imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _upArrowImage   = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _emptySquareImage   = [[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _searchImage         = [[UIImage imageNamed:SEARCH_IMAGE_NAME]      imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _downArrowImage      = [[UIImage imageNamed:ARROW_DOWN_IMAGE_NAME]  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _upArrowImage        = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _emptySquareImage    = [[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _checkboxSquareImage = [[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     
@@ -264,11 +264,14 @@ int MIX_ASSOC_MIN_SIZE = 1;
                                                   style:UIBarButtonItemStylePlain
                                                   target:self
                                                   action:@selector(showPhotoOptions:)];
+    [_imageLibButton setTag:IMAGELIB_BTN_TAG];
     
     _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
                                                     style:UIBarButtonItemStylePlain
                                                     target:self
                                                     action:@selector(search)];
+    [_searchButton setTag:SEARCH_BTN_TAG];
+
     
     _allButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME]
                                                   style:UIBarButtonItemStylePlain

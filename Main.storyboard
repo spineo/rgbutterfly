@@ -46,7 +46,7 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem image="home" id="oxW-w8-0ZM">
+                        <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
@@ -720,7 +720,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
-                        <barButtonItem image="settings" id="Ib6-Wl-QMo">
+                        <barButtonItem tag="58" image="settings" id="Ib6-Wl-QMo">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </toolbarItems>
@@ -871,9 +871,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Omc-kQ-4iW"/>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="7OV-Go-gIV"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="x4f-Hg-Dtd"/>
+        <segue reference="L2p-PG-tYf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

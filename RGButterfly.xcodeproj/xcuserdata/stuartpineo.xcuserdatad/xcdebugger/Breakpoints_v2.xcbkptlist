@@ -5548,11 +5548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "509035192.964629"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1366"
-            endingLineNumber = "1366"
+            startingLineNumber = "1369"
+            endingLineNumber = "1369"
             landmarkName = "-pressCancel"
             landmarkType = "7">
          </BreakpointContent>
@@ -5596,11 +5596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "509035192.964629"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1119"
-            endingLineNumber = "1119"
+            startingLineNumber = "1122"
+            endingLineNumber = "1122"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5612,11 +5612,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "509035192.964629"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1119"
-            endingLineNumber = "1119"
+            startingLineNumber = "1122"
+            endingLineNumber = "1122"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5692,11 +5692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "507131567.395644"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5724,11 +5724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "509035192.964629"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1573"
-            endingLineNumber = "1573"
+            startingLineNumber = "1576"
+            endingLineNumber = "1576"
             landmarkName = "-registerContextDidSaveNotificationForManagedObjectContext:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5740,11 +5740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "509035192.964629"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1582"
-            endingLineNumber = "1582"
+            startingLineNumber = "1585"
+            endingLineNumber = "1585"
             landmarkName = "-mergeChanges:"
             landmarkType = "7">
          </BreakpointContent>
@@ -6300,11 +6300,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/ViewController.m"
-            timestampString = "507737441.310828"
+            timestampString = "509223497.337802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "-loadMixCollectionViewData"
             landmarkType = "7">
          </BreakpointContent>
@@ -6332,11 +6332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509124335.979898"
+            timestampString = "509223976.729636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "tearDown()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6348,11 +6348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509124335.979898"
+            timestampString = "509223976.729636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "testInitViewController()"
             landmarkType = "7">
             <Locations>
@@ -6392,15 +6392,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509124335.979898"
+            timestampString = "509224592.022852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "testUIImageViewController()"
             landmarkType = "7">
          </BreakpointContent>
