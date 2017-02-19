@@ -427,7 +427,7 @@
         <scene sceneID="IfU-Gf-ydV">
             <objects>
                 <tableViewController storyboardIdentifier="MatchTableViewController" title="Match View" id="kOh-IX-qcO" customClass="MatchTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IhL-8v-YZO">
+                    <tableView key="view" clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IhL-8v-YZO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -872,8 +872,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="Omc-kQ-4iW"/>
         <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="cln-aA-aih"/>
         <segue reference="Szt-18-Btg"/>
+        <segue reference="7OV-Go-gIV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

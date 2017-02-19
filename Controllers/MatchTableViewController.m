@@ -876,14 +876,12 @@ const int IMAGE_TAG  = 6;
     
     // Match algorithms
     //
-    //_maxMatchNum     = (int)[[[_tapArea tap_area_swatch] allObjects] count];
     _maManualOverride = [[_tapArea ma_manual_override] boolValue];
 
-    //_dbPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:_selPaintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
     if (_maManualOverride == TRUE) {
         _matchedSwatches = [_dbPaintSwatches mutableCopy];
         
-    } else {
+    } else if (_selPaintSwatch != nil) {
         _matchedSwatches = [[NSMutableArray alloc] initWithArray:[MatchAlgorithms sortByClosestMatch:_selPaintSwatch swatches:_dbPaintSwatches matchAlgorithm:_matchAlgIndex maxMatchNum:_maxMatchNum+1 context:self.context entity:_paintSwatchEntity]];
         [_matchedSwatches removeObjectAtIndex:0];
     }
