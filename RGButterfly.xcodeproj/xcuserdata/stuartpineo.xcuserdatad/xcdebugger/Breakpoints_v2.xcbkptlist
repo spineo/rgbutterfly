@@ -6332,11 +6332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509307488.352997"
+            timestampString = "509307933.331465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "setUp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6348,11 +6348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509307488.352997"
+            timestampString = "509307933.331465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "testInitViewController()"
             landmarkType = "7">
             <Locations>
@@ -6396,11 +6396,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "509307488.352997"
+            timestampString = "509307933.331465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "RGButterflyTests"
             landmarkType = "3">
          </BreakpointContent>
@@ -6664,7 +6664,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/MatchTableViewController.m"
@@ -6728,7 +6728,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Controllers/MatchTableViewController.m"
