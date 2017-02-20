@@ -26,10 +26,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,14 +49,14 @@
                         <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
+                        <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
                         <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="eSc-da-vKc"/>
+                        <barButtonItem tag="103" systemItem="flexibleSpace" id="eSc-da-vKc"/>
                         <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -143,8 +143,7 @@
                                 <segue destination="6Dy-2G-g4i" kind="unwind" identifier="unwindToVCSegue" unwindAction="unwindToViewController:" id="Eu3-ie-x2Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="MRg-Jy-ext"/>
-                        <barButtonItem systemItem="flexibleSpace" id="v06-VT-3JE"/>
+                        <barButtonItem tag="103" systemItem="flexibleSpace" id="MRg-Jy-ext"/>
                         <barButtonItem tag="71" enabled="NO" image="arrow fat left" id="l35-1Z-PGd">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -169,7 +168,7 @@
                                 <action selector="segueToMatchOrAssoc:" destination="6Nq-8K-N9m" id="mq7-T0-yVb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="Jgn-ng-npR"/>
+                        <barButtonItem tag="103" systemItem="flexibleSpace" id="Jgn-ng-npR"/>
                         <barButtonItem tag="74" enabled="NO" image="minus sign" id="jWd-qs-4rX">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -253,7 +252,7 @@
                                 <segue destination="jHz-zW-4v8" kind="unwind" identifier="unwindToVC" unwindAction="unwindToViewController:" id="aH0-rO-C2q"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="N3S-rM-GJZ"/>
+                        <barButtonItem tag="103" systemItem="flexibleSpace" id="N3S-rM-GJZ"/>
                         <barButtonItem tag="58" image="settings" id="L1b-Mq-W0G">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -310,7 +309,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="w5q-Z0-VEb"/>
+                        <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="w5q-Z0-VEb"/>
                         <barButtonItem tag="61" enabled="NO" title="Done" id="oM0-Lf-2nF">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -461,7 +460,7 @@
                                 <action selector="toggleRGB:" destination="kOh-IX-qcO" id="hZf-Hg-p0f"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="XTe-OD-4gI"/>
+                        <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="XTe-OD-4gI"/>
                         <barButtonItem tag="71" image="arrow fat left" id="ofc-Ji-BsY">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -480,14 +479,14 @@
                                 <action selector="incr:" destination="kOh-IX-qcO" id="DFP-HX-RRY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="bnl-v2-ffu"/>
+                        <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="bnl-v2-ffu"/>
                         <barButtonItem tag="74" enabled="NO" image="minus sign" id="aDY-YU-la5">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="removeTableRows:" destination="kOh-IX-qcO" id="ekt-bm-B6c"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
+                        <barButtonItem tag="104" width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
                         <barButtonItem tag="75" enabled="NO" image="plus sign-1" id="n1H-dj-YSh">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -540,9 +539,7 @@
                             <outlet property="delegate" destination="DNO-fJ-sUQ" id="S2P-Kf-d3t"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="pRj-hk-PbT"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Swatch Detail View" id="nY0-n4-QGf">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="hSo-RR-cfi">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -719,7 +716,7 @@
                                 <segue destination="XHb-bs-XCU" kind="unwind" unwindAction="unwindToViewController:" id="e5D-TQ-kEn"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
+                        <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
                         <barButtonItem tag="58" image="settings" id="Ib6-Wl-QMo">
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
@@ -870,10 +867,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="x4f-Hg-Dtd"/>
-        <segue reference="L2p-PG-tYf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

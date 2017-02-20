@@ -221,6 +221,8 @@ int const PIGMENT_BTN_TAG      = 99;
 int const RATIOS_PICKER_TAG    = 100;
 int const COVERAGE_FIELD_TAG   = 101;
 int const COVERAGE_PICKER_TAG  = 102;
+int const FLEXIBLE_SPACE_TAG   = 103;
+int const FIXED_SPACE_TAG      = 104;
 
 // Views Tags
 //

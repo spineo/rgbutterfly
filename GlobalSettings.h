@@ -238,6 +238,8 @@ extern int const PIGMENT_BTN_TAG;
 extern int const RATIOS_PICKER_TAG;
 extern int const COVERAGE_FIELD_TAG;
 extern int const COVERAGE_PICKER_TAG;
+extern int const FLEXIBLE_SPACE_TAG;
+extern int const FIXED_SPACE_TAG;
 
 // Views Tags
 //
