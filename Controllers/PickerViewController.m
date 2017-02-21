@@ -29,14 +29,14 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [_picker setDelegate: self];
-    [_picker setAllowsEditing: YES];
+    [_picker setDelegate:self];
+    [_picker setAllowsEditing:YES];
     
     
     // For the Camera mode, the settings will change for _autoRotate
     //
-    [self setAutoRotate: FALSE];
-    [self setPhotoSetUp: FALSE];
+    [self setAutoRotate:FALSE];
+    [self setPhotoSetUp:FALSE];
     
     [self.view setFrame: CGRectMake(_picker.view.bounds.origin.x, _picker.view.bounds.origin.y, _picker.view.bounds.size.width, _picker.view.bounds.size.height)];
     [self.view addSubview:_picker.view];
@@ -45,7 +45,7 @@
     //
     if (_imageAction == SELECT_PHOTO_ACTION) {
         
-        [self setAutoRotate: TRUE];
+        [self setAutoRotate:TRUE];
         
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPicker)
@@ -58,7 +58,7 @@
 
 - (void)refreshPicker {
     if ((_imageAction == TAKE_PHOTO_ACTION) && ! _photoSetUp) {
-        [self setPhotoSetUp: TRUE];
+        [self setPhotoSetUp:TRUE];
         [self takePhoto];
         
     } else if (_imageAction == SELECT_PHOTO_ACTION) {
@@ -82,7 +82,7 @@
 - (void)selectPhoto {
     [self.view setFrame:CGRectMake(_picker.view.bounds.origin.x, _picker.view.bounds.origin.y, _picker.view.bounds.size.width, _picker.view.bounds.size.height)];
     
-    [_picker setSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
+    [_picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     
     [self.navigationItem setTitle:@"Select Photo"];
 }
