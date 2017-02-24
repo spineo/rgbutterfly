@@ -398,7 +398,7 @@
         <!--Image View Navigation Controller-->
         <scene sceneID="WSQ-Sw-Bge">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="kb5-wH-h3N" customClass="UIImageViewNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavUIImageViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="kb5-wH-h3N" customClass="UIImageViewNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -424,7 +424,7 @@
         <!--Navigation Controller-->
         <scene sceneID="EXI-qA-9cT">
             <objects>
-                <navigationController storyboardIdentifier="Nav1" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="tpP-IS-lqc" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavAssocTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="tpP-IS-lqc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="2La-VL-UJi">
@@ -591,7 +591,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jiu-af-eJz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LrQ-R1-k2d" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavAddMixTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LrQ-R1-k2d" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="5PK-nJ-X9q">
@@ -615,7 +615,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Y94-PZ-YFD">
             <objects>
-                <navigationController storyboardIdentifier="Nav2" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LVy-Pe-LHL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavSwatchDetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LVy-Pe-LHL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -640,7 +640,7 @@
         <!--Navigation Controller-->
         <scene sceneID="j5B-pb-kY6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="RqV-KR-iiS" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavMatchTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="RqV-KR-iiS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -690,7 +690,7 @@
         <!--RGButterfly-->
         <scene sceneID="ZsW-4B-fd7">
             <objects>
-                <navigationController title="RGButterfly" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="PTY-d8-b92" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavViewController" title="RGButterfly" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="PTY-d8-b92" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -783,7 +783,7 @@
         <!--RGButterfly Settings-->
         <scene sceneID="hvV-Wo-a3z">
             <objects>
-                <navigationController title="RGButterfly Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavSettingsTableViewController" title="RGButterfly Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -840,7 +840,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Wie-Pz-YjX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -865,7 +865,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dxT-O4-cFy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="EIi-BM-RXv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavDisclaimerViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="EIi-BM-RXv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -903,9 +903,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="L2p-PG-tYf"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
