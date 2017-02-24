@@ -551,7 +551,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 }
 
 - (void)goBack {
-    [self performSegueWithIdentifier:@"unwindToAssoc" sender:self];
+    [self performSegueWithIdentifier:@"unwindToAssocFromAdd3" sender:self];
 }
 
 @end
