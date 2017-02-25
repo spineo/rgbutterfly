@@ -10,4 +10,6 @@
 
 @interface InitViewController : UIViewController
 
+@property (nonatomic) int updateStat;
+
 @end

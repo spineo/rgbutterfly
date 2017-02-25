@@ -21,7 +21,6 @@
 
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) int updateStat;
 
 // Activity Indicator
 //
@@ -34,6 +33,7 @@
 - (void)startSpinner {
     _spinner = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [_spinner setTag:INIT_SPINNER_TAG];
     
     [_spinner setCenter:self.view.center];
     [_spinner setHidesWhenStopped:YES];
@@ -78,7 +78,7 @@
     [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
     [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
-    [_updateLabel setTag:301];
+    [_updateLabel setTag:INIT_LABEL_TAG];
     
     [self.view addSubview:_updateLabel];
     
