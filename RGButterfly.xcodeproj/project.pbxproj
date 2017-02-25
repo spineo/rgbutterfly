@@ -336,10 +336,10 @@
 				21397EDC1C8486C0001C3F05 /* AcrylicsColorPicker.entitlements */,
 				21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */,
 				21397EDE1C8486ED001C3F05 /* Main.storyboard */,
-				21397EE01C84876D001C3F05 /* GlobalSettings.h */,
 				21397EE11C84876D001C3F05 /* GlobalSettings.m */,
 				21397EE51C8487A1001C3F05 /* Images.xcassets */,
 				21397EE71C8487C7001C3F05 /* Media.xcassets */,
+				21397EE01C84876D001C3F05 /* GlobalSettings.h */,
 				21397EE21C84876D001C3F05 /* Info.plist */,
 				2192F5601DF3185500AAFE01 /* README */,
 			);

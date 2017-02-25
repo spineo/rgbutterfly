@@ -262,7 +262,9 @@ extern int const CANCEL_BUTTON_TAG;
 
 // Init Controller
 //
-extern int const CONTINUE_BUTTON_TAG;
+extern int const INIT_LABEL_TAG;
+extern int const INIT_SPINNER_TAG;
+
 
 // Max Tag used as reference to ensure all table view elements
 // removed from superview (see MatchTableViewController for example)

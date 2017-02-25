@@ -18,8 +18,8 @@
 
 // NSUserDefaults
 //
+
 @property (nonatomic, strong) UILabel *updateLabel;
-@property (nonatomic, strong) UIButton *continueButton;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic) int updateStat;
 
@@ -78,6 +78,7 @@
     [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
     [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
+    [_updateLabel setTag:301];
     
     [self.view addSubview:_updateLabel];
     

@@ -245,9 +245,10 @@ int const CANCEL_BUTTON_TAG   = 116;
 
 // Init Controller
 //
-int const CONTINUE_BUTTON_TAG = 117;
+int const INIT_LABEL_TAG      = 301;
+int const INIT_SPINNER_TAG    = 302;
 
-int const MAX_TAG             = 120;
+int const MAX_TAG             = 1000;
 
 
 // Maximum Text field lengths (characters)
