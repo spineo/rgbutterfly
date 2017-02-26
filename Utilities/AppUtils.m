@@ -25,7 +25,6 @@
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSLog(@"***** Data Container Path=%@", destDBPath);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     
@@ -78,7 +77,6 @@
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSLog(@"********************* DEST DB PATH=%@", destDBPath);
     
     // Set the destination files for removal
     //

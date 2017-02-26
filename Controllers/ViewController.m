@@ -86,7 +86,6 @@
 
 // Minimum number of elements to display a mix association
 //
-//int MIX_ASSOC_RESTRICT_SIZE = 3;
 int MIX_ASSOC_MIN_SIZE = 1;
 
 
