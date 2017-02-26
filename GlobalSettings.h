@@ -42,9 +42,10 @@ extern NSString * const LOCAL_PATH;
 //
 extern int const FORCE_UPDATE_DB;
 
-// GitHub related
+// Jenkins related
 //
 extern NSString * const AUTHTOKEN_FILE;
+extern NSString * const DB_ROOT_URL;
 extern NSString * const DB_REST_URL;
 
 extern NSString * const DB_FILE;
