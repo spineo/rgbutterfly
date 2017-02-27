@@ -88,8 +88,7 @@
     //
     NSString* fileRoot = [[NSBundle mainBundle] pathForResource:entityName
                                                          ofType:@"txt"];
-    // Get rid of new line
-    //
+
     NSString* fileContents =
     [NSString stringWithContentsOfFile:fileRoot
                               encoding:NSUTF8StringEncoding error:nil];

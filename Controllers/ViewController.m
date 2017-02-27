@@ -341,14 +341,14 @@ int MIX_ASSOC_MIN_SIZE = 1;
     [self startSpinner];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self stopSpinner];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [self loadData];
     [self.view setBackgroundColor:DARK_BG_COLOR];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self stopSpinner];
 }
 
 - (void)loadData {
