@@ -5,7 +5,6 @@
 //  Created by Stuart Pineo on 1/23/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 

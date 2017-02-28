@@ -96,6 +96,7 @@
 		21A197FD1E4F844400686E86 /* RGButterflyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A197FC1E4F844400686E86 /* RGButterflyUITests.swift */; };
 		21A263D41E4CB217004B075C /* RGButterflyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A263D31E4CB217004B075C /* RGButterflyTests.swift */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
+		21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
 /* End PBXBuildFile section */
 
@@ -290,6 +291,8 @@
 		21A263D31E4CB217004B075C /* RGButterflyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyTests.swift; path = "../../ios-ui-testing/RGButterflyTests.swift"; sourceTree = "<group>"; };
 		21A69CD51C94B09A00B70810 /* AcrylicsColorPicker v4.0.57.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.57.xcdatamodel"; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = "../ios-utilities/CoreDataUtils.h"; sourceTree = "<group>"; };
+		21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = "../ios-utilities/CoreDataUtils.m"; sourceTree = "<group>"; };
 		21D344661E4F518300B92CF7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		21E079DE1E46702E004B77C8 /* Authtoken.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Authtoken.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -453,6 +456,8 @@
 		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */,
+				21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */,
 				2176DD1D1E3B95DC00812B19 /* GenericUtils.h */,
 				2176DD1E1E3B95DC00812B19 /* GenericUtils.m */,
 				2176DD171E3A387800812B19 /* BarButtonUtils.h */,
@@ -818,6 +823,7 @@
 				216044D31E3D3A9F007387DB /* MatchColors.m in Sources */,
 				21064FFF1DFEDD0A004B0830 /* MatchAssocKeyword.m in Sources */,
 				210650031DFEDD0A004B0830 /* MixAssocSwatch.m in Sources */,
+				21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */,
 				210650021DFEDD0A004B0830 /* MixAssocKeyword.m in Sources */,
 				2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
