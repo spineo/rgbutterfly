@@ -23,7 +23,7 @@
 #import "MixAssocSwatch.h"
 
 
-@interface AddMixTableViewController ()
+@interface AddMixTableViewController()
 
 @property (nonatomic) BOOL searchMatch;
 
