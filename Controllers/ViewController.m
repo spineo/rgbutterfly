@@ -86,7 +86,7 @@
 
 // Minimum number of elements to display a mix association
 //
-int MIX_ASSOC_MIN_SIZE = 1;
+int MIX_ASSOC_MIN_SIZE = 0;
 
 
 #pragma mark - Initialization and Load Methods
