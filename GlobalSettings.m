@@ -9,6 +9,7 @@
 #import "GlobalSettings.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
+#import "AppDelegate.h"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
@@ -26,6 +27,11 @@ NSString * const MD5SUM_EXT     = @"md5";
 NSString * const CURR_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
 NSString * const PREV_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
 int const MIGRATE_STORE         = 0;
+
+// Cleanup orphans
+//
+int const CLEANUP               = 0;
+
 
 // Disable Write-Ahead Logging (by default this is enabled)
 //
@@ -499,8 +505,18 @@ static NSDictionary *swatchTypes;
     
     [ManagedObjectUtils deleteDictionaryEntity:@"AssociationType"];
     [ManagedObjectUtils insertFromDataFile:@"AssociationType"];
-
     
+    // Perform cleanup
+    //
+    if (CLEANUP == 1) {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+
+        [ManagedObjectUtils deleteChildlessMixAssoc:context];
+        [ManagedObjectUtils deleteChildlessMatchAssoc:context];
+        [ManagedObjectUtils deleteOrphanPaintSwatches:context];
+    }
+
     // Update the version as needed
     //
     [ManagedObjectUtils updateVersions];

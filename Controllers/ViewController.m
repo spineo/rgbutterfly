@@ -352,11 +352,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)loadData {
-    // Perform cleanup
-    //
-    [ManagedObjectUtils deleteOrphanPaintSwatches:self.context];
-    [ManagedObjectUtils deleteChildlessMatchAssoc:self.context];
-    
     [_searchButton setAction:@selector(search)];
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
