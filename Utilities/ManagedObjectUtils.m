@@ -1099,6 +1099,26 @@
     }
 }
 
++ (void)deleteOrphanPaintSwatchKeywords:(NSManagedObjectContext *)context {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Keyword" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        for (Keyword *keyword in results) {
+            if ([keyword swatch_keyword] != nil) {
+                NSArray *assoc_swatches = [[keyword swatch_keyword] allObjects];
+                if ([assoc_swatches count] == 0) {
+                    [context deleteObject:keyword];
+                }
+            }
+        }
+    }
+}
+
 + (void)deleteChildlessMatchAssoc:(NSManagedObjectContext *)context {
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MatchAssociation" inManagedObjectContext:context];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

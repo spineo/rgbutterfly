@@ -83,6 +83,7 @@
 // Cleanup methods
 //
 + (void)deleteOrphanPaintSwatches:(NSManagedObjectContext *)context;
++ (void)deleteOrphanPaintSwatchKeywords:(NSManagedObjectContext *)context;
 + (void)deleteChildlessMatchAssoc:(NSManagedObjectContext *)context;
 + (void)deleteChildlessMixAssoc:(NSManagedObjectContext *)context;
 

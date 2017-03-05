@@ -6332,11 +6332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510156594.134456"
+            timestampString = "510437852.191153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "setUp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6348,11 +6348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510325274.243112"
+            timestampString = "510438675.600191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "testInitViewController_pollUpdate()"
             landmarkType = "7">
             <Locations>
@@ -6396,11 +6396,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510325274.243112"
+            timestampString = "510438675.600191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "testPickerViewController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6748,11 +6748,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510325274.243112"
+            timestampString = "510438675.600191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "RGButterflyTests"
             landmarkType = "3">
          </BreakpointContent>
@@ -6908,11 +6908,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510430869.915102"
+            timestampString = "510438675.600191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "RGButterflyTests"
             landmarkType = "3">
          </BreakpointContent>
@@ -6924,11 +6924,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510325274.243112"
+            timestampString = "510438675.600191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "655"
-            endingLineNumber = "655"
+            startingLineNumber = "668"
+            endingLineNumber = "668"
             landmarkName = "testAddMixTableViewController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6940,11 +6940,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510156594.134456"
+            timestampString = "510437852.191153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "testEntityCounts()"
             landmarkType = "7">
          </BreakpointContent>
@@ -6956,12 +6956,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ios-ui-testing/RGButterflyTests.swift"
-            timestampString = "510156594.134456"
+            timestampString = "510437852.191153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "testEntityCounts()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ios-ui-testing/RGButterflyTests.swift"
+            timestampString = "510437852.191153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "testEntityRelations()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../ios-ui-testing/RGButterflyTests.swift"
+            timestampString = "510437852.191153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "testEntityRelations()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

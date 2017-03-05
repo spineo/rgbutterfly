@@ -515,6 +515,7 @@ static NSDictionary *swatchTypes;
         [ManagedObjectUtils deleteChildlessMixAssoc:context];
         [ManagedObjectUtils deleteChildlessMatchAssoc:context];
         [ManagedObjectUtils deleteOrphanPaintSwatches:context];
+        [ManagedObjectUtils deleteOrphanPaintSwatchKeywords:context];
     }
 
     // Update the version as needed
