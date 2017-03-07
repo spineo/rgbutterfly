@@ -1074,7 +1074,6 @@
 #pragma mark - Cleanup methods
 
 + (void)deleteOrphanPaintSwatches:(NSManagedObjectContext *)context {
-    
     // Exclude match assoc types
     //
     PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
@@ -1094,6 +1093,23 @@
             NSArray *assoc_relations = [[paintSwatch mix_assoc_swatch] allObjects];
             if ([assoc_relations count] == 0) {
                 [context deleteObject:paintSwatch];
+            }
+        }
+    }
+}
+
++ (void)deleteOrphanMixAssocSwatches:(NSManagedObjectContext *)context {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssocSwatch" inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        for (MixAssocSwatch *assocSwatch in results) {
+            if ([assocSwatch mix_association] == nil) {
+                [context deleteObject:assocSwatch];
             }
         }
     }
