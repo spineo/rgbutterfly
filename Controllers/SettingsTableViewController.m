@@ -43,7 +43,6 @@
 
 @implementation SettingsTableViewController
 
-
 const int ABOUT_SECTION           = 0;
 const int ABOUT_ROW               = 0;
 const int DISCLAIMER_ROW          = 1;
@@ -605,8 +604,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     return headerStr;
 }
 
-- (CGFloat)tableView:(UITableView*)tableView
-heightForFooterInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
     return DEF_NIL_FOOTER;
 }
 

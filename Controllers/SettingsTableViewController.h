@@ -11,4 +11,6 @@
 
 @interface SettingsTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate>
 
+extern const int SETTINGS_MAX_SECTIONS;
+
 @end
