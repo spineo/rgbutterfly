@@ -97,6 +97,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     [_spinner setCenter:self.view.center];
     [_spinner setHidesWhenStopped:YES];
+    [_spinner setTag:INIT_SPINNER_TAG];
     [self.view addSubview:_spinner];
     [_spinner startAnimating];
     
@@ -108,6 +109,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
     [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
+    [_updateLabel setTag:INIT_LABEL_TAG];
     
     [self.view addSubview:_updateLabel];
 }
