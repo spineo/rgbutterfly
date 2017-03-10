@@ -39,11 +39,12 @@
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLettersDefaults, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
-@property (nonatomic, strong) NSArray *defaultsIndexTitles, *keywordsIndexTitles, *swatchKeywords, *subjColorNames;
+@property (nonatomic, strong) NSArray *defaultsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *defaultsNames, *keywordNames, *letters, *letterDefaults, *letterKeywords, *defaultsSwatches, *keywordSwatches, *subjColorData;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 @property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefOnly, showGenOnly;
+@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton;
 
 
 // Resize UISearchBar when rotated
@@ -56,7 +57,6 @@
 //
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UISearchBar *mainSearchBar;
-@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton;
 @property (nonatomic, strong) NSString *searchString;
 
 
@@ -83,6 +83,7 @@
 
 
 @implementation ViewController
+
 
 // Minimum number of elements to display a mix association
 //
@@ -138,7 +139,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
-    
+
     
     // Welcome alert
     //
