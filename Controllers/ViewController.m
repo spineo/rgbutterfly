@@ -35,7 +35,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 
 @property (nonatomic, strong) UILabel *mixTitleLabel;
-@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel, *listingType;
+@property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLettersDefaults, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
@@ -51,14 +51,12 @@
 //
 @property (nonatomic) CGRect navBarBounds;
 @property (nonatomic) CGFloat navBarWidth, navBarHeight;
-@property (nonatomic, strong) UIButton *cancelButton;
 
 // SearchBar related
 //
-@property (nonatomic, strong) UIView *titleView;
-@property (nonatomic, strong) UISearchBar *mainSearchBar;
 @property (nonatomic, strong) NSString *searchString;
-
+@property (nonatomic, strong) UISearchBar *mainSearchBar;
+@property (nonatomic, strong) UIButton *cancelButton;
 
 // NSManagedObject subclassing
 //
@@ -331,6 +329,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_mainSearchBar setBackgroundColor:CLEAR_COLOR];
     [_mainSearchBar setBarTintColor:CLEAR_COLOR];
     [_mainSearchBar setReturnKeyType:UIReturnKeyDone];
+    [_mainSearchBar setTag:SEARCH_BAR_TAG];
     [_mainSearchBar setDelegate:self];
     
     [_titleView addSubview:_mainSearchBar];

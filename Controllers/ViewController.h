@@ -20,7 +20,13 @@
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
 @property (nonatomic, strong) NSArray *subjColorNames, *keywordsIndexTitles;
-
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
+
+// Public to enable unit testing
+//
+@property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) NSString *listingType;
+
+- (void)loadData;
 
 @end
