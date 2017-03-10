@@ -19,6 +19,7 @@
 @property (nonatomic) int imageAction;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
+@property (nonatomic, strong) NSArray *subjColorNames, *keywordsIndexTitles;
 
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
 
