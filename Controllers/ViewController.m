@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic, strong) UIView *bgColorView;
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
-@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *sortedLettersDefaults, *sortedLetters, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
+@property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *defaultsIndexTitles, *swatchKeywords;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *defaultsNames, *keywordNames, *letters, *letterDefaults, *letterKeywords, *defaultsSwatches, *keywordSwatches, *subjColorData;
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
@@ -62,7 +62,6 @@
 //
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) MixAssociation *mixAssociation;
 @property (nonatomic, strong) MatchAssociations *matchAssociation;
 
