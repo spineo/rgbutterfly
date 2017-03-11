@@ -33,7 +33,7 @@
 
 @property (nonatomic, strong) UIAlertController *listingController, *photoSelectionController;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
-
+@property (nonatomic, strong) NSMutableArray *sortedLetters, *sortedLettersDefaults;
 @property (nonatomic, strong) UILabel *mixTitleLabel;
 @property (nonatomic, strong) NSString *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic, strong) UIView *bgColorView;
@@ -421,6 +421,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _sortedLettersDefaults = [NSMutableArray arrayWithArray:[letters allKeys]];
     [_sortedLettersDefaults sortUsingSelector:@selector(localizedStandardCompare:)];
     
+    // Keep track globally (for testing)
+    //
+    _sectionsCount = (int)[_sortedLettersDefaults count];
+    
     _letterDefaults = [[NSMutableDictionary alloc] init];
 
     _numSwatches = 0;
@@ -591,6 +595,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _sortedLetters = [NSMutableArray arrayWithArray:[_letters allKeys]];
     [_sortedLetters sortUsingSelector:@selector(localizedStandardCompare:)];
     
+    // Keep track globally (for testing)
+    //
+    _sectionsCount = (int)[_sortedLetters count];
+    
+    
     for (NSString *letter in _sortedLetters) {
         NSArray *sectionKeywords = [_letters objectForKey:letter];
         
@@ -635,6 +644,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     } else {
         [_colorTableView reloadData];
     }
+    
+    // Keep track globally (for testing)
+    //
+    _sectionsCount = (int)[_subjColorNames count] + 1;
 }
 
 - (void)updateColorsState:(BOOL)isCollapsed {
@@ -1484,6 +1497,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if (error != nil) {
         NSLog(@"Failed to initialize FetchedResultsController: %@\n%@", [error localizedDescription], [error userInfo]);
     }
+    
+    // Keep track globally (for testing)
+    //
+    _sectionsCount = (int)[[[self fetchedResultsController] sections] count];
+    
     
     [self.colorTableView reloadData];
 }
