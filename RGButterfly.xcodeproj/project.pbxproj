@@ -77,6 +77,16 @@
 		212F25C21E363919002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25BE1E363919002466E7 /* FileUtils.m */; };
 		212F25C31E363919002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25C01E363919002466E7 /* HTTPUtils.m */; };
 		2134D7251E74F65F0065E67F /* InitViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D7241E74F65F0065E67F /* InitViewControllerTests.swift */; };
+		2134D73F1E75764F0065E67F /* AboutViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D73A1E75764F0065E67F /* AboutViewControllerTests.swift */; };
+		2134D7401E75764F0065E67F /* AddMixTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D73B1E75764F0065E67F /* AddMixTableViewControllerTests.swift */; };
+		2134D7411E75764F0065E67F /* AssocTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D73C1E75764F0065E67F /* AssocTableViewControllerTests.swift */; };
+		2134D7421E75764F0065E67F /* DisclaimerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D73D1E75764F0065E67F /* DisclaimerViewControllerTests.swift */; };
+		2134D7431E75764F0065E67F /* ImageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D73E1E75764F0065E67F /* ImageViewControllerTests.swift */; };
+		2134D7471E7576630065E67F /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D7441E7576630065E67F /* MainViewControllerTests.swift */; };
+		2134D7481E7576630065E67F /* MatchTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D7451E7576630065E67F /* MatchTableViewControllerTests.swift */; };
+		2134D7491E7576630065E67F /* PickerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D7461E7576630065E67F /* PickerViewControllerTests.swift */; };
+		2134D74C1E7576740065E67F /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D74A1E7576740065E67F /* SettingsViewControllerTests.swift */; };
+		2134D74D1E7576740065E67F /* SwatchTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134D74B1E7576740065E67F /* SwatchTableViewControllerTests.swift */; };
 		21397E531C84813F001C3F05 /* AcrylicsColorPicker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21397E0D1C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodeld */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
@@ -251,6 +261,16 @@
 		212F25BF1E363919002466E7 /* HTTPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTPUtils.h; path = "../ios-utilities/HTTPUtils.h"; sourceTree = "<group>"; };
 		212F25C01E363919002466E7 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPUtils.m; path = "../ios-utilities/HTTPUtils.m"; sourceTree = "<group>"; };
 		2134D7241E74F65F0065E67F /* InitViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitViewControllerTests.swift; path = "../../rgbutterfly-tests/InitViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D73A1E75764F0065E67F /* AboutViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewControllerTests.swift; path = "../../rgbutterfly-tests/AboutViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D73B1E75764F0065E67F /* AddMixTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddMixTableViewControllerTests.swift; path = "../../rgbutterfly-tests/AddMixTableViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D73C1E75764F0065E67F /* AssocTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssocTableViewControllerTests.swift; path = "../../rgbutterfly-tests/AssocTableViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D73D1E75764F0065E67F /* DisclaimerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisclaimerViewControllerTests.swift; path = "../../rgbutterfly-tests/DisclaimerViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D73E1E75764F0065E67F /* ImageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewControllerTests.swift; path = "../../rgbutterfly-tests/ImageViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D7441E7576630065E67F /* MainViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewControllerTests.swift; path = "../../rgbutterfly-tests/MainViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D7451E7576630065E67F /* MatchTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MatchTableViewControllerTests.swift; path = "../../rgbutterfly-tests/MatchTableViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D7461E7576630065E67F /* PickerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerViewControllerTests.swift; path = "../../rgbutterfly-tests/PickerViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D74A1E7576740065E67F /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewControllerTests.swift; path = "../../rgbutterfly-tests/SettingsViewControllerTests.swift"; sourceTree = "<group>"; };
+		2134D74B1E7576740065E67F /* SwatchTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwatchTableViewControllerTests.swift; path = "../../rgbutterfly-tests/SwatchTableViewControllerTests.swift"; sourceTree = "<group>"; };
 		21397E511C84813E001C3F05 /* AcrylicsColorPicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcrylicsColorPicker.xcdatamodel; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -597,6 +617,16 @@
 		21A263C61E4CB105004B075C /* RGButterflyTests */ = {
 			isa = PBXGroup;
 			children = (
+				2134D74A1E7576740065E67F /* SettingsViewControllerTests.swift */,
+				2134D74B1E7576740065E67F /* SwatchTableViewControllerTests.swift */,
+				2134D7441E7576630065E67F /* MainViewControllerTests.swift */,
+				2134D7451E7576630065E67F /* MatchTableViewControllerTests.swift */,
+				2134D7461E7576630065E67F /* PickerViewControllerTests.swift */,
+				2134D73A1E75764F0065E67F /* AboutViewControllerTests.swift */,
+				2134D73B1E75764F0065E67F /* AddMixTableViewControllerTests.swift */,
+				2134D73C1E75764F0065E67F /* AssocTableViewControllerTests.swift */,
+				2134D73D1E75764F0065E67F /* DisclaimerViewControllerTests.swift */,
+				2134D73E1E75764F0065E67F /* ImageViewControllerTests.swift */,
 				2134D7241E74F65F0065E67F /* InitViewControllerTests.swift */,
 				215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */,
 				215A8BAA1E6C3C3E0052B28F /* RGButterflyTests.swift */,
@@ -867,8 +897,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2134D7401E75764F0065E67F /* AddMixTableViewControllerTests.swift in Sources */,
+				2134D7421E75764F0065E67F /* DisclaimerViewControllerTests.swift in Sources */,
+				2134D7481E7576630065E67F /* MatchTableViewControllerTests.swift in Sources */,
+				2134D74C1E7576740065E67F /* SettingsViewControllerTests.swift in Sources */,
 				2134D7251E74F65F0065E67F /* InitViewControllerTests.swift in Sources */,
+				2134D7411E75764F0065E67F /* AssocTableViewControllerTests.swift in Sources */,
+				2134D7431E75764F0065E67F /* ImageViewControllerTests.swift in Sources */,
+				2134D74D1E7576740065E67F /* SwatchTableViewControllerTests.swift in Sources */,
 				215A8BAB1E6C3C3E0052B28F /* RGButterflyTests.swift in Sources */,
+				2134D73F1E75764F0065E67F /* AboutViewControllerTests.swift in Sources */,
+				2134D7491E7576630065E67F /* PickerViewControllerTests.swift in Sources */,
+				2134D7471E7576630065E67F /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
