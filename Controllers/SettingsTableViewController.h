@@ -11,6 +11,8 @@
 
 @interface SettingsTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate>
 
+// Set for unit testing visibility
+//
 extern const int SETTINGS_MAX_SECTIONS;
 
 @end

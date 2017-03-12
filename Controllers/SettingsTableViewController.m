@@ -17,8 +17,8 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
 @property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
 @property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
 @property (nonatomic) CGFloat tapAreaSize;
