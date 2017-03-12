@@ -902,10 +902,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="KOJ-iO-fdK"/>
         <segue reference="Szt-18-Btg"/>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="7T5-Hk-Hx3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
