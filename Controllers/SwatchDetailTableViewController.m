@@ -106,7 +106,7 @@ int DETAIL_DESC_SECTION     = 9;
 int DETAIL_REF_SECTION      = 10;
 int DETAIL_ASSOC_SECTION    = 11;
 
-int DETAIL_MAX_SECTION      = 12;
+const int DETAIL_MAX_SECTION      = 12;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 

@@ -15,4 +15,6 @@
 @property (nonatomic, strong) PaintSwatches *paintSwatch, *refPaintSwatch, *mixPaintSwatch;
 @property (nonatomic, strong) NSMutableArray *mixAssocSwatches;
 
+extern const int DETAIL_MAX_SECTION;
+
 @end
