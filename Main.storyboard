@@ -10,7 +10,7 @@
         <!--RGButterfly-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" title="RGButterfly" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="RGButterfly" id="BYZ-38-t0r" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,10 +26,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -95,7 +95,7 @@
         <!--Image View Controller-->
         <scene sceneID="KBw-hp-cTX">
             <objects>
-                <viewController storyboardIdentifier="UIImageViewController" title="Image View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Nq-8K-N9m" customClass="UIImageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" title="Image View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Nq-8K-N9m" customClass="ImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UOB-h4-vFV"/>
                         <viewControllerLayoutGuide type="bottom" id="PUh-yJ-tf0"/>
@@ -398,7 +398,7 @@
         <!--Image View Navigation Controller-->
         <scene sceneID="WSQ-Sw-Bge">
             <objects>
-                <navigationController storyboardIdentifier="NavUIImageViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="kb5-wH-h3N" customClass="UIImageViewNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavImageViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="kb5-wH-h3N" customClass="ImageViewNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
@@ -902,10 +902,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="7T5-Hk-Hx3"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="9H9-9R-KDD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

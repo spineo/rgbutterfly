@@ -1,18 +1,18 @@
 //
-//  UIImageViewNavigationController.m
+//  ImageViewNavigationController.m
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 7/2/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
 
-#import "UIImageViewNavigationController.h"
+#import "ImageViewNavigationController.h"
 
-@interface UIImageViewNavigationController ()
+@interface ImageViewNavigationController ()
 
 @end
 
-@implementation UIImageViewNavigationController
+@implementation ImageViewNavigationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

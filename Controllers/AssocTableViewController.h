@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImageViewController.h"
+#import "ImageViewController.h"
 #import "MixAssociation.h"
 #import "GlobalSettings.h"
 #import "BarButtonUtils.h"

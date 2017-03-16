@@ -38,7 +38,7 @@
 		210650221DFEDDFF004B0830 /* PaintSwatchesDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 2106501E1DFEDDFF004B0830 /* PaintSwatchesDiff.m */; };
 		210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650201DFEDDFF004B0830 /* PaintSwatchSelection.m */; };
 		210650291DFEDFBB004B0830 /* MatchAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 210650281DFEDFBB004B0830 /* MatchAlgorithm.m */; };
-		2109A0C71DFDDC460076A095 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C61DFDDC460076A095 /* ViewController.m */; };
+		2109A0C71DFDDC460076A095 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C61DFDDC460076A095 /* MainViewController.m */; };
 		2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0C91DFDDD6F0076A095 /* AboutViewController.m */; };
 		2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */; };
 		2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0CF1DFDDD6F0076A095 /* AssocTableViewController.m */; };
@@ -47,8 +47,8 @@
 		2109A0E41DFDDD6F0076A095 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D51DFDDD6F0076A095 /* PickerViewController.m */; };
 		2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D71DFDDD6F0076A095 /* SettingsTableViewController.m */; };
 		2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0D91DFDDD6F0076A095 /* SwatchDetailTableViewController.m */; };
-		2109A0E71DFDDD6F0076A095 /* UIImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DB1DFDDD6F0076A095 /* UIImageViewController.m */; };
-		2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */; };
+		2109A0E71DFDDD6F0076A095 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DB1DFDDD6F0076A095 /* ImageViewController.m */; };
+		2109A0E81DFDDD6F0076A095 /* ImageViewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0DD1DFDDD6F0076A095 /* ImageViewNavigationController.m */; };
 		2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0EC1DFDE32C0076A095 /* AlertUtils.m */; };
 		2109A1041DFDE32C0076A095 /* AppColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0F01DFDE32C0076A095 /* AppColorUtils.m */; };
 		2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A0FA1DFDE32C0076A095 /* ManagedObjectUtils.m */; };
@@ -183,8 +183,8 @@
 		210650201DFEDDFF004B0830 /* PaintSwatchSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaintSwatchSelection.m; path = Other/PaintSwatchSelection.m; sourceTree = "<group>"; };
 		210650271DFEDFBB004B0830 /* MatchAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAlgorithm.h; path = ManagedObject/MatchAlgorithm.h; sourceTree = "<group>"; };
 		210650281DFEDFBB004B0830 /* MatchAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithm.m; path = ManagedObject/MatchAlgorithm.m; sourceTree = "<group>"; };
-		2109A0C51DFDDC460076A095 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Controllers/ViewController.h; sourceTree = "<group>"; };
-		2109A0C61DFDDC460076A095 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Controllers/ViewController.m; sourceTree = "<group>"; };
+		2109A0C51DFDDC460076A095 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
+		2109A0C61DFDDC460076A095 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
 		2109A0C81DFDDD6F0076A095 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Controllers/AboutViewController.h; sourceTree = "<group>"; };
 		2109A0C91DFDDD6F0076A095 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Controllers/AboutViewController.m; sourceTree = "<group>"; };
 		2109A0CA1DFDDD6F0076A095 /* AddMixTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMixTableViewController.h; path = Controllers/AddMixTableViewController.h; sourceTree = "<group>"; };
@@ -201,10 +201,10 @@
 		2109A0D71DFDDD6F0076A095 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = Controllers/SettingsTableViewController.m; sourceTree = "<group>"; };
 		2109A0D81DFDDD6F0076A095 /* SwatchDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwatchDetailTableViewController.h; path = Controllers/SwatchDetailTableViewController.h; sourceTree = "<group>"; };
 		2109A0D91DFDDD6F0076A095 /* SwatchDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwatchDetailTableViewController.m; path = Controllers/SwatchDetailTableViewController.m; sourceTree = "<group>"; };
-		2109A0DA1DFDDD6F0076A095 /* UIImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageViewController.h; path = Controllers/UIImageViewController.h; sourceTree = "<group>"; };
-		2109A0DB1DFDDD6F0076A095 /* UIImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewController.m; path = Controllers/UIImageViewController.m; sourceTree = "<group>"; };
-		2109A0DC1DFDDD6F0076A095 /* UIImageViewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageViewNavigationController.h; path = Controllers/UIImageViewNavigationController.h; sourceTree = "<group>"; };
-		2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageViewNavigationController.m; path = Controllers/UIImageViewNavigationController.m; sourceTree = "<group>"; };
+		2109A0DA1DFDDD6F0076A095 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageViewController.h; path = Controllers/ImageViewController.h; sourceTree = "<group>"; };
+		2109A0DB1DFDDD6F0076A095 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageViewController.m; path = Controllers/ImageViewController.m; sourceTree = "<group>"; };
+		2109A0DC1DFDDD6F0076A095 /* ImageViewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageViewNavigationController.h; path = Controllers/ImageViewNavigationController.h; sourceTree = "<group>"; };
+		2109A0DD1DFDDD6F0076A095 /* ImageViewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageViewNavigationController.m; path = Controllers/ImageViewNavigationController.m; sourceTree = "<group>"; };
 		2109A0EB1DFDE32C0076A095 /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertUtils.h; path = Utilities/AlertUtils.h; sourceTree = "<group>"; };
 		2109A0EC1DFDE32C0076A095 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertUtils.m; path = Utilities/AlertUtils.m; sourceTree = "<group>"; };
 		2109A0EF1DFDE32C0076A095 /* AppColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColorUtils.h; path = Utilities/AppColorUtils.h; sourceTree = "<group>"; };
@@ -392,12 +392,12 @@
 				2109A0D71DFDDD6F0076A095 /* SettingsTableViewController.m */,
 				2109A0D81DFDDD6F0076A095 /* SwatchDetailTableViewController.h */,
 				2109A0D91DFDDD6F0076A095 /* SwatchDetailTableViewController.m */,
-				2109A0DA1DFDDD6F0076A095 /* UIImageViewController.h */,
-				2109A0DB1DFDDD6F0076A095 /* UIImageViewController.m */,
-				2109A0DC1DFDDD6F0076A095 /* UIImageViewNavigationController.h */,
-				2109A0DD1DFDDD6F0076A095 /* UIImageViewNavigationController.m */,
-				2109A0C51DFDDC460076A095 /* ViewController.h */,
-				2109A0C61DFDDC460076A095 /* ViewController.m */,
+				2109A0DA1DFDDD6F0076A095 /* ImageViewController.h */,
+				2109A0DB1DFDDD6F0076A095 /* ImageViewController.m */,
+				2109A0DC1DFDDD6F0076A095 /* ImageViewNavigationController.h */,
+				2109A0DD1DFDDD6F0076A095 /* ImageViewNavigationController.m */,
+				2109A0C51DFDDC460076A095 /* MainViewController.h */,
+				2109A0C61DFDDC460076A095 /* MainViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -820,7 +820,7 @@
 				2109A1291DFDE4910076A095 /* AssociationType+CoreDataProperties.m in Sources */,
 				21064FE41DFEDCAA004B0830 /* AssociationType+CoreDataClass.m in Sources */,
 				2109A10C1DFDE32C0076A095 /* StringObjectUtils.m in Sources */,
-				2109A0E81DFDDD6F0076A095 /* UIImageViewNavigationController.m in Sources */,
+				2109A0E81DFDDD6F0076A095 /* ImageViewNavigationController.m in Sources */,
 				2109A0E31DFDDD6F0076A095 /* MatchTableViewController.m in Sources */,
 				21064FFD1DFEDD0A004B0830 /* Keyword.m in Sources */,
 				210650191DFEDD5A004B0830 /* TapAreaKeyword.m in Sources */,
@@ -861,7 +861,7 @@
 				2109A12B1DFDE4910076A095 /* CanvasCoverage+CoreDataProperties.m in Sources */,
 				2109A0DE1DFDDD6F0076A095 /* AboutViewController.m in Sources */,
 				2109A1311DFDE4910076A095 /* PaintBrand+CoreDataProperties.m in Sources */,
-				2109A0E71DFDDD6F0076A095 /* UIImageViewController.m in Sources */,
+				2109A0E71DFDDD6F0076A095 /* ImageViewController.m in Sources */,
 				212F25AB1E33FEE0002466E7 /* Reachability.m in Sources */,
 				2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */,
 				2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */,
@@ -880,7 +880,7 @@
 				213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */,
 				2109A12D1DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */,
-				2109A0C71DFDDC460076A095 /* ViewController.m in Sources */,
+				2109A0C71DFDDC460076A095 /* MainViewController.m in Sources */,
 				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

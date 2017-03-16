@@ -156,7 +156,7 @@ extern CGFloat const DEF_COLLECTVIEW_INSET;
 extern CGFloat const DEF_TOOLBAR_HEIGHT;
 extern CGFloat const DEF_TOOLBAR_WIDTH;
 
-// Match Num (i.e., UIImageViewController)
+// Match Num (i.e., ImageViewController)
 //
 extern int const DEF_MAX_MATCH;
 extern int const DEF_MATCH_NUM;

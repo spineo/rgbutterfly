@@ -7,7 +7,6 @@
 //
 
 #import "AboutViewController.h"
-
 #import "GlobalSettings.h"
 
 @interface AboutViewController ()

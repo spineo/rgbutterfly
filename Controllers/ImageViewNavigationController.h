@@ -1,5 +1,5 @@
 //
-//  UIImageViewNavigationController.h
+//  ImageViewNavigationController.h
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 7/2/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImageViewNavigationController : UINavigationController
+@interface ImageViewNavigationController : UINavigationController
 
 @end

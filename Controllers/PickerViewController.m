@@ -7,7 +7,7 @@
 //
 
 #import "PickerViewController.h"
-#import "UIImageViewController.h"
+#import "ImageViewController.h"
 #import "GlobalSettings.h"
 
 
@@ -93,7 +93,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ImageViewSegue"]) {
         UINavigationController *navigationViewController = [segue destinationViewController];
-        UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
+        ImageViewController *imageViewController = (ImageViewController *)([navigationViewController viewControllers][0]);
         
         [imageViewController setSelectedImage:_selectedImage];
         [imageViewController setNewImage:TRUE];

@@ -1,5 +1,5 @@
 //
-//  UIImageViewController.h
+//  ImageViewController.h
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 3/7/15.
@@ -16,7 +16,7 @@
 #import "MatchAssociations.h"
 
 
-@interface UIImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>
+@interface ImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIScrollView *imageScrollView;
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;

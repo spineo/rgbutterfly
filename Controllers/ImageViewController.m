@@ -1,11 +1,11 @@
 //
-//  UIImageViewController.m
+//  ImageViewController.m
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 3/7/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-#import "UIImageViewController.h"
+#import "ImageViewController.h"
 #import "SwatchDetailTableViewController.h"
 #import "GlobalSettings.h"
 #import "AppDelegate.h"
@@ -14,7 +14,7 @@
 #import "FieldUtils.h"
 #import "AssocTableViewController.h"
 #import "MatchTableViewController.h"
-#import "ViewController.h"
+#import "MainViewController.h"
 #import "BarButtonUtils.h"
 #import "CustomCollectionTableViewCell.h"
 #import "MatchAlgorithms.h"
@@ -33,7 +33,7 @@
 #import "Keyword.h"
 #import "TapAreaKeyword.h"
 
-@interface UIImageViewController ()
+@interface ImageViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIBarButtonItem *scrollViewUp, *scrollViewDown;
@@ -89,7 +89,7 @@
 
 @end
 
-@implementation UIImageViewController
+@implementation ImageViewController
 
 // Set up the tags
 //
@@ -537,7 +537,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
 
     // List of coordinates associated with tapped regions (i.e., GCPoint)
-    // Hide this controller if the source is the main ViewController (as 'match' is the only valid context)
+    // Hide this controller if the source is the MainViewController (as 'match' is the only valid context)
     //
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];

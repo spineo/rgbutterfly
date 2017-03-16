@@ -1,11 +1,11 @@
 //
-//  ViewController.m
+//  MainViewController.m
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 2/26/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-#import "ViewController.h"
+#import "MainViewController.h"
 #import "GlobalSettings.h"
 #import "PickerViewController.h"
 #import "AppDelegate.h"
@@ -29,7 +29,7 @@
 #import "TapArea.h"
 
 
-@interface ViewController()
+@interface MainViewController()
 
 @property (nonatomic, strong) UIAlertController *listingController, *photoSelectionController;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
@@ -79,7 +79,7 @@
 @end
 
 
-@implementation ViewController
+@implementation MainViewController
 
 
 // Minimum number of elements to display a mix association
@@ -1546,14 +1546,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [assocTableViewController setPaintSwatches:[self.mixColorArray objectAtIndex:_collectViewSelRow]];
         [assocTableViewController setMixAssociation:[_mixAssocObjs objectAtIndex:_collectViewSelRow]];
         [assocTableViewController setSaveFlag:TRUE];
-        [assocTableViewController setSourceViewName:@"ViewController"];
+        [assocTableViewController setSourceViewName:@"MainViewController"];
         
     // ImageSelectionSegue (applies to Match Collections only)
     //
     } else if ([[segue identifier] isEqualToString:@"ImageSelectionSegue"]) {
 
         UINavigationController *navigationViewController = [segue destinationViewController];
-        UIImageViewController *imageViewController = (UIImageViewController *)([navigationViewController viewControllers][0]);
+        ImageViewController *imageViewController = (ImageViewController *)([navigationViewController viewControllers][0]);
         
         [imageViewController setSelectedImage:_associationImage];
         [imageViewController setSourceViewContext:@"CollectionViewController"];

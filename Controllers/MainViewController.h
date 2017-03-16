@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 2/26/15.
@@ -8,13 +8,13 @@
 
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-#import "UIImageViewController.h"
+#import "ImageViewController.h"
 #import "GlobalSettings.h"
 #import "AppColorUtils.h"
 #import "ColorUtils.h"
 
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
+@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic) int imageAction, sectionsCount;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;

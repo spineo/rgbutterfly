@@ -1549,7 +1549,7 @@ const int ASSOC_SET_TAG        = 8;
 #pragma mark - Segue and Unwind Methods
 
 - (IBAction)goBack:(id)sender {
-    if ([_sourceViewName isEqualToString:@"SwatchDetail"] || [_sourceViewName isEqualToString:@"ViewController"]) {
+    if ([_sourceViewName isEqualToString:@"SwatchDetail"] || [_sourceViewName isEqualToString:@"MainViewController"]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self performSegueWithIdentifier:@"unwindToImageViewFromAssoc" sender:self];
