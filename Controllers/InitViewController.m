@@ -47,6 +47,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];

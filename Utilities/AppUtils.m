@@ -26,6 +26,7 @@
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSLog(@"********** PRE-UPDATE DATABASE PATH=%@ **********", destDBPath);
     
     
     // Attempt cd into data container directory
@@ -77,6 +78,7 @@
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSLog(@"********** PRE-UPDATE DATABASE PATH=%@ **********", destDBPath);
     
     // Set the destination files for removal
     //
