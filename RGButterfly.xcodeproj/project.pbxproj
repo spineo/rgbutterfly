@@ -15,8 +15,6 @@
 		21064FD61DFEDA77004B0830 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */; };
 		21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCF1DFEDA77004B0830 /* PigmentType.txt */; };
 		21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */; };
-		21064FE01DFEDB03004B0830 /* AssocDescTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */; };
-		21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */; };
 		21064FE41DFEDCAA004B0830 /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE31DFEDCAA004B0830 /* AssociationType+CoreDataClass.m */; };
 		21064FFB1DFEDD0A004B0830 /* BodyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE61DFEDD0A004B0830 /* BodyType.m */; };
 		21064FFC1DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE81DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m */; };
@@ -138,10 +136,6 @@
 		21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/PaintSwatchType.txt; sourceTree = "<group>"; };
 		21064FCF1DFEDA77004B0830 /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/PigmentType.txt; sourceTree = "<group>"; };
 		21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/SubjectiveColor.txt; sourceTree = "<group>"; };
-		21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocDescTableViewCell.h; path = Custom/AssocDescTableViewCell.h; sourceTree = "<group>"; };
-		21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocDescTableViewCell.m; path = Custom/AssocDescTableViewCell.m; sourceTree = "<group>"; };
-		21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssocTableViewCell.h; path = Custom/AssocTableViewCell.h; sourceTree = "<group>"; };
-		21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssocTableViewCell.m; path = Custom/AssocTableViewCell.m; sourceTree = "<group>"; };
 		21064FE21DFEDCAA004B0830 /* AssociationType+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssociationType+CoreDataClass.h"; path = "ManagedObject/AssociationType+CoreDataClass.h"; sourceTree = "<group>"; };
 		21064FE31DFEDCAA004B0830 /* AssociationType+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssociationType+CoreDataClass.m"; path = "ManagedObject/AssociationType+CoreDataClass.m"; sourceTree = "<group>"; };
 		21064FE51DFEDD0A004B0830 /* BodyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BodyType.h; path = ManagedObject/BodyType.h; sourceTree = "<group>"; };
@@ -544,10 +538,6 @@
 			children = (
 				213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */,
 				213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */,
-				21064FDB1DFEDB03004B0830 /* AssocDescTableViewCell.h */,
-				21064FDC1DFEDB03004B0830 /* AssocDescTableViewCell.m */,
-				21064FDD1DFEDB03004B0830 /* AssocTableViewCell.h */,
-				21064FDE1DFEDB03004B0830 /* AssocTableViewCell.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -849,7 +839,6 @@
 				210650181DFEDD5A004B0830 /* TapArea.m in Sources */,
 				2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */,
 				212F25C21E363919002466E7 /* FileUtils.m in Sources */,
-				21064FE11DFEDB03004B0830 /* AssocTableViewCell.m in Sources */,
 				2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */,
 				2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */,
 				210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */,
@@ -859,7 +848,6 @@
 				210650051DFEDD0A004B0830 /* PaintSwatches.m in Sources */,
 				210650151DFEDD5A004B0830 /* PigmentType.m in Sources */,
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
-				21064FE01DFEDB03004B0830 /* AssocDescTableViewCell.m in Sources */,
 				2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */,
 				21064FFC1DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m in Sources */,

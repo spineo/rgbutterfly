@@ -7,8 +7,6 @@
 //
 #import "AssocTableViewController.h"
 #import "AppDelegate.h"
-#import "AssocTableViewCell.h"
-#import "AssocDescTableViewCell.h"
 #import "AddMixTableViewController.h"
 #import "AppColorUtils.h"
 #import "ColorUtils.h"
@@ -145,10 +143,7 @@ const int ASSOC_SET_TAG        = 8;
     _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Association Description (max. %i chars) - ", MAX_DESC_LEN];
     
     _reuseCellIdentifier = @"AssocTableCell";
-    
-    [self.tableView registerClass:[AssocTableViewCell class] forCellReuseIdentifier:assocCellIdentifier];
-    [self.tableView registerClass:[AssocDescTableViewCell class] forCellReuseIdentifier:assocDescCellIdentifier];
-    
+
     
     // Header labels
     //
