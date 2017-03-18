@@ -1,6 +1,6 @@
 //
 //  MatchAssociations+CoreDataProperties.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 3/7/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

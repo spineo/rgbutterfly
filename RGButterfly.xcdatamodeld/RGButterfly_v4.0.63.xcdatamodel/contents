@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="AssociationType" representedClassName="AssociationType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="BodyType" representedClassName="BodyType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="CanvasCoverage" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Keyword" representedClassName="KeywordNames" syncable="YES">
+        <attribute name="name" attributeType="String" defaultValueString="Other" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="match_assoc_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MatchAssocKeyword" inverseName="keyword" inverseEntity="MatchAssocKeyword" syncable="YES"/>
+        <relationship name="mix_assoc_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MixAssocKeyword" inverseName="keyword" inverseEntity="MixAssocKeyword" syncable="YES"/>
+        <relationship name="swatch_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SwatchKeyword" inverseName="keyword" inverseEntity="SwatchKeyword" syncable="YES"/>
+        <relationship name="tap_area_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaKeyword" inverseName="keyword" inverseEntity="TapAreaKeyword" syncable="YES"/>
+    </entity>
+    <entity name="MatchAlgorithm" representedClassName="MatchAlgorithm" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="MatchAssociation" representedClassName="MatchAssociations" syncable="YES">
+        <attribute name="create_date" optional="YES" attributeType="Date" defaultDateTimeInterval="476293080" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image_url" attributeType="Transformable" syncable="YES"/>
+        <attribute name="last_update" optional="YES" attributeType="Date" defaultDateTimeInterval="476293080" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Undefined Name" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="match_assoc_keyword" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchAssocKeyword" inverseName="match_association" inverseEntity="MatchAssocKeyword" syncable="YES"/>
+        <relationship name="tap_area" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapArea" inverseName="match_association" inverseEntity="TapArea" syncable="YES"/>
+    </entity>
+    <entity name="MatchAssocKeyword" syncable="YES">
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="match_assoc_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="match_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchAssociation" inverseName="match_assoc_keyword" inverseEntity="MatchAssociation" syncable="YES"/>
+    </entity>
+    <entity name="MixAssociation" representedClassName="MixAssociation" syncable="YES">
+        <attribute name="assoc_type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="create_date" attributeType="Date" defaultDateTimeInterval="476293080" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="def_coverage_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image_url" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="is_hidden" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_readonly" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_shipped" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="last_update" attributeType="Date" defaultDateTimeInterval="476293080" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Undefined Name" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="mix_assoc_keyword" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MixAssocKeyword" inverseName="mix_association" inverseEntity="MixAssocKeyword" syncable="YES"/>
+        <relationship name="mix_assoc_swatch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MixAssocSwatch" inverseName="mix_association" inverseEntity="MixAssocSwatch" syncable="YES"/>
+    </entity>
+    <entity name="MixAssocKeyword" syncable="YES">
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="mix_assoc_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="mix_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MixAssociation" inverseName="mix_assoc_keyword" inverseEntity="MixAssociation" syncable="YES"/>
+    </entity>
+    <entity name="MixAssocSwatch" representedClassName="MixAssocSwatch" syncable="YES">
+        <attribute name="mix_order" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="paint_swatch_is_add" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="mix_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MixAssociation" inverseName="mix_assoc_swatch" inverseEntity="MixAssociation" syncable="YES"/>
+        <relationship name="paint_swatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaintSwatch" inverseName="mix_assoc_swatch" inverseEntity="PaintSwatch" syncable="YES"/>
+    </entity>
+    <entity name="PaintBrand" representedClassName="PaintBrand" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="PaintSwatch" representedClassName="PaintSwatches" syncable="YES">
+        <attribute name="abbr_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alpha" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blue" attributeType="String" syncable="YES"/>
+        <attribute name="body_type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="brightness" attributeType="String" syncable="YES"/>
+        <attribute name="coord_pt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverage_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="create_date" attributeType="Date" defaultDateTimeInterval="476115480" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="deg_hue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="360" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="green" attributeType="String" syncable="YES"/>
+        <attribute name="hue" attributeType="String" syncable="YES"/>
+        <attribute name="image_thumb" attributeType="Transformable" syncable="YES"/>
+        <attribute name="is_hidden" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_mix" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_readonly" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="is_shipped" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="last_update" attributeType="Date" defaultDateTimeInterval="476115480" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="mix_parts_ratio" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="mix_swatch_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="paint_brand_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="paint_brand_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pigment_type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="red" attributeType="String" syncable="YES"/>
+        <attribute name="ref_parts_ratio" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ref_swatch_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="saturation" attributeType="String" syncable="YES"/>
+        <attribute name="subj_color_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="mix_assoc_swatch" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MixAssocSwatch" inverseName="paint_swatch" inverseEntity="MixAssocSwatch" syncable="YES"/>
+        <relationship name="swatch_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SwatchKeyword" inverseName="paint_swatch" inverseEntity="SwatchKeyword" syncable="YES"/>
+        <relationship name="tap_area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TapArea" inverseName="tap_area_match" inverseEntity="TapArea" syncable="YES"/>
+        <relationship name="tap_area_swatch" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaSwatch" inverseName="paint_swatch" inverseEntity="TapAreaSwatch" syncable="YES"/>
+    </entity>
+    <entity name="PaintSwatchType" representedClassName="PaintSwatchType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="PigmentType" representedClassName="PigmentType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="SubjectiveColor" representedClassName="SubjectiveColor" syncable="YES">
+        <attribute name="hex_value" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="SwatchKeyword" representedClassName="SwatchKeyword" syncable="YES">
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="swatch_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="paint_swatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaintSwatch" inverseName="swatch_keyword" inverseEntity="PaintSwatch" syncable="YES"/>
+    </entity>
+    <entity name="TapArea" representedClassName="TapArea" syncable="YES">
+        <attribute name="coord_pt" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image_section" attributeType="Transformable" syncable="YES"/>
+        <attribute name="ma_manual_override" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="match_algorithm_id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Undefined Name" syncable="YES"/>
+        <attribute name="tap_order" attributeType="Integer 16" minValueString="1" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="match_association" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MatchAssociation" inverseName="tap_area" inverseEntity="MatchAssociation" syncable="YES"/>
+        <relationship name="tap_area_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaKeyword" inverseName="tap_area" inverseEntity="TapAreaKeyword" syncable="YES"/>
+        <relationship name="tap_area_match" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaintSwatch" inverseName="tap_area" inverseEntity="PaintSwatch" syncable="YES"/>
+        <relationship name="tap_area_swatch" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaSwatch" inverseName="tap_area" inverseEntity="TapAreaSwatch" syncable="YES"/>
+    </entity>
+    <entity name="TapAreaKeyword" representedClassName="TapAreaKeyword" syncable="YES">
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="keyword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="tap_area_keyword" inverseEntity="Keyword" syncable="YES"/>
+        <relationship name="tap_area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TapArea" inverseName="tap_area_keyword" inverseEntity="TapArea" syncable="YES"/>
+    </entity>
+    <entity name="TapAreaSwatch" representedClassName="TapAreaSwatch" syncable="YES">
+        <attribute name="match_order" attributeType="Integer 16" minValueString="1" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="version_tag" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="paint_swatch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PaintSwatch" inverseName="tap_area_swatch" inverseEntity="PaintSwatch" syncable="YES"/>
+        <relationship name="tap_area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TapArea" inverseName="tap_area_swatch" inverseEntity="TapArea" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AssociationType" positionX="18" positionY="341" width="128" height="73"/>
+        <element name="BodyType" positionX="16" positionY="135" width="128" height="75"/>
+        <element name="CanvasCoverage" positionX="18" positionY="429" width="128" height="75"/>
+        <element name="Keyword" positionX="-506" positionY="491" width="128" height="135"/>
+        <element name="MatchAlgorithm" positionX="18" positionY="-279" width="128" height="73"/>
+        <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="165"/>
+        <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="90"/>
+        <element name="MixAssociation" positionX="-686" positionY="143" width="128" height="240"/>
+        <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="90"/>
+        <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="120"/>
+        <element name="PaintBrand" positionX="18" positionY="36" width="128" height="73"/>
+        <element name="PaintSwatch" positionX="-128" positionY="-168" width="128" height="570"/>
+        <element name="PaintSwatchType" positionX="16" positionY="-180" width="128" height="73"/>
+        <element name="PigmentType" positionX="16" positionY="243" width="128" height="73"/>
+        <element name="SubjectiveColor" positionX="18" positionY="-79" width="128" height="88"/>
+        <element name="SwatchKeyword" positionX="-353" positionY="360" width="128" height="90"/>
+        <element name="TapArea" positionX="-585" positionY="-171" width="128" height="225"/>
+        <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="90"/>
+        <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="105"/>
+    </elements>
+</model>

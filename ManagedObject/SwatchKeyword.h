@@ -1,6 +1,6 @@
 //
 //  SwatchKeyword.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 1/18/16.
 //  Copyright (c) 2016 Stuart Pineo. All rights reserved.

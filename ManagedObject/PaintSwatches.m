@@ -1,6 +1,6 @@
 //
 //  PaintSwatches.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 1/25/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

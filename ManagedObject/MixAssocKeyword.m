@@ -1,6 +1,6 @@
 //
 //  MixAssocKeyword.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 4/3/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

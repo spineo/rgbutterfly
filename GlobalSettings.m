@@ -16,6 +16,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NSString * const APP_NAME       = @"AcrylicsColorPicker";
+//NSString * const APP_NAME       = @"RGButterfly";
 int const VERSION_TAG           = 1;
 
 // Key references the value stored in NSUserDefaults
@@ -24,8 +25,10 @@ NSString * const DB_VERSION_KEY = @"DB_VERSION";
 
 NSString * const MD5SUM_EXT     = @"md5";
 
-NSString * const CURR_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
+//NSString * const CURR_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
+NSString * const CURR_STORE     = @"RGButterfly_v4.0.63.sqlite";
 NSString * const PREV_STORE     = @"AcrylicsColorPicker v4.0.63.sqlite";
+//NSString * const PREV_STORE     = @"RGButterfly_v4.0.63.sqlite";
 int const MIGRATE_STORE         = 0;
 
 // Cleanup orphans
@@ -37,7 +40,8 @@ int const CLEANUP               = 0;
 //
 int const DISABLE_WAL           = 1;
 
-NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
+//NSString * const LOCAL_PATH = @"/Users/stuartpineo/AppDevelopment/AcrylicsColorPicker";
+NSString * const LOCAL_PATH = @"./";
 
 // Upgrade the database from the local path copy or GitHub
 //
@@ -47,12 +51,14 @@ int const FORCE_UPDATE_DB      = 0;
 //
 NSString * const AUTHTOKEN_FILE = @"Authtoken";
 NSString * const DB_ROOT_URL    = @"http://34.195.217.113:8080/";
-NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/databases/AcrylicsColorPicker";
+NSString * const DB_REST_URL    = @"http://34.195.217.113:8080/job/ArchiveLatestDBUpdate/ws/databases/RGButterfly";
 
 NSString * const DB_FILE        = @"AcrylicsColorPicker v4.0.63.sqlite";
+//NSString * const DB_FILE        = @"RGButterfly_v4.0.63.sqlite";
 NSString * const DB_CONT_TYPE   = @"application/x-sqlite3";
 
 NSString * const MD5_FILE       = @"AcrylicsColorPicker v4.0.63.md5";
+//NSString * const MD5_FILE       = @"RGButterfly_v4.0.63.md5";
 NSString * const MD5_CONT_TYPE  = @"text/plain";
 
 NSString * const VERSION_FILE   = @"version.txt";

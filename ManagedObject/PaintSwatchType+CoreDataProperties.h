@@ -1,6 +1,6 @@
 //
 //  PaintSwatchType+CoreDataProperties.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 2/27/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

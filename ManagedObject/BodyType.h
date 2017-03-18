@@ -1,6 +1,6 @@
 //
 //  BodyType.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 5/29/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
