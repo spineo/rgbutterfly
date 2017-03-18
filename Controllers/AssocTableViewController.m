@@ -1,6 +1,6 @@
 //
 //  AssocTableViewController.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 4/7/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.

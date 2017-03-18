@@ -1,6 +1,6 @@
 //
 //  ManagedObjectUtils.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 1/23/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  FieldUtils.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 7/3/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.

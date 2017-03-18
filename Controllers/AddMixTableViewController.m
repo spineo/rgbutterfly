@@ -1,6 +1,6 @@
 //
 //  AddMixTableTableViewController.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 6/9/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.

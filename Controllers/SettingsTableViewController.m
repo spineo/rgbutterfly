@@ -1,6 +1,6 @@
 //
 //  SettingsTableViewController.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 5/9/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  PickerUtils.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 6/20/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

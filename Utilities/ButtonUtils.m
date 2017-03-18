@@ -1,6 +1,6 @@
 //
 //  ButtonUtils.m
-//  PaintPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 1/26/17.
 //  Copyright © 2017 Stuart Pineo. All rights reserved.

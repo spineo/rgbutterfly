@@ -1,6 +1,6 @@
 //
 //  DisclaimerViewController.h
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 11/3/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.

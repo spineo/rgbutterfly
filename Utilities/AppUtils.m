@@ -1,6 +1,6 @@
 //
 //  AppUtils.m
-//  PaintPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 1/27/17.
 //  Copyright © 2017 Stuart Pineo. All rights reserved.
