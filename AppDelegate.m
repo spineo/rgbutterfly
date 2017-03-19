@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  AcrylicsColorPicker
+//  RGButterfly
 //
 //  Created by Stuart Pineo on 2/26/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
@@ -54,7 +54,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.StuartPineo.AcrylicsColorPicker" in the application's documents directory.
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.StuartPineo.RGButterfly" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

@@ -161,6 +161,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
     
+    // For this release at least ensure that these buttons don't show
+    //
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
+    [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
+    [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     
     // We also want to change this initial behaviour (see #B59) with the default MatchCount and AlgorithmId
     // not able to be changed in this controller. These defaults can be changed in the settings for unsaved
