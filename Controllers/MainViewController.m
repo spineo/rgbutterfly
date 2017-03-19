@@ -379,7 +379,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setEnabled:TRUE];
         [self loadFullColorsListing];
     }
-    [self stopSpinner];
 }
 
 - (void)loadFullColorsListing {
@@ -689,7 +688,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 #pragma mark - UITableView Methods
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerView setBackgroundColor:DARK_BG_COLOR];
     
@@ -890,7 +888,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     // Return the number of rows in the section.
     //
     NSInteger objCount;
@@ -947,7 +944,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if ([_listingType isEqualToString:MIX_TYPE]) {
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
@@ -1015,7 +1011,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
             return custCell;
         
     } else {
-        
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
         
         [cell.imageView setFrame:CGRectMake(DEF_FIELD_PADDING, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height)];
@@ -1125,8 +1120,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
     }
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row) {
         [self stopSpinner];
     }
 }
@@ -1147,10 +1142,18 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)updateTable:(NSString *)listingType {
+    NSString *prevListingType = _listingType;
     _listingType = listingType;
+    
     _searchString = nil;
     [_mainSearchBar setText:@""];
     [_searchButton setAction:@selector(search)];
+    
+    // Don't do anything else if listing hasn't changed
+    //
+    if ([_listingType isEqualToString:prevListingType]) {
+        return;
+    }
     
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
