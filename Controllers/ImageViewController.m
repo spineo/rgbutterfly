@@ -891,7 +891,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)addUpArrow {
     NSMutableArray *toolbarButtons = [self.toolbarItems mutableCopy];
-    [toolbarButtons addObject:_upArrowItem];
+    
+    // To the left of the Settings button
+    //
+    int targetIndex = (int)[toolbarButtons count] - 2;
+    [toolbarButtons insertObject:_upArrowItem atIndex:targetIndex];
     [self setToolbarItems:toolbarButtons animated:YES];
 }
 
