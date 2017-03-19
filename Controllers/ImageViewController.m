@@ -65,10 +65,12 @@
 @property (nonatomic, strong) NSDate *now;
 @property (nonatomic) CGFloat pressStartTime;
 
+// Datamodel related
+//
 @property (nonatomic, strong) PaintSwatches *swatchObj;
 @property (nonatomic, strong) TapArea *tapArea;
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
-
+@property (nonatomic) int matchAssocId;
 
 @property (nonatomic) BOOL saveFlag, imageInteractAlert, tapCollectAlert, isRGB, tapAreasChanged, matchNumChanged, dragAreaEnabled, firstTap;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
@@ -160,8 +162,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _matchAssocKwEntity   = [NSEntityDescription entityForName:@"MatchAssocKeyword" inManagedObjectContext:self.context];
     _mixAssocEntity       = [NSEntityDescription entityForName:@"MixAssociation"    inManagedObjectContext:self.context];
     _mixAssocSwatchEntity = [NSEntityDescription entityForName:@"MixAssocSwatch"    inManagedObjectContext:self.context];
-    
 
+    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
+    _matchAssocId = [[matchSwatchType order] intValue];
+    
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:VIEW_BTN_TAG];
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:HIDE_BUTTON_WIDTH];
     
@@ -2183,7 +2187,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Based on order
         //
-        [tapAreaRef setType_id:[NSNumber numberWithInt:3]];
+        [tapAreaRef setType_id:[NSNumber numberWithInt:_matchAssocId]];
         [tapAreaRef setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
         
         
