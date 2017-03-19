@@ -489,6 +489,8 @@
         [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
     }
     
+    [fetchRequest setPropertiesToFetch:[[NSArray alloc] initWithObjects:@"name", nil]];
+    
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [fetchRequest setSortDescriptors:@[ nameSort ]];
     

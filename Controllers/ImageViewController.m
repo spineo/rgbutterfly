@@ -699,20 +699,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (_matchAssociation == nil) {
         [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
         [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-        //[BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-        //[BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-        //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:DECR_BUTTON_WIDTH];
-        //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:SHOW_BUTTON_WIDTH];
     }
 }
 
 - (void)matchButtonsHide {
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
     [BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:DECR_TAP_BTN_TAG];
-    //[BarButtonUtils setButtonHide:self.toolbarItems refTag:INCR_TAP_BTN_TAG];
-    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
-    //[BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
 - (void)editButtonDisable {
@@ -749,7 +741,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 #pragma mark - General Purpose Methods
 
 - (void)resizeViews {
-
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     CGFloat width  = [[UIScreen mainScreen] bounds].size.width;
     
