@@ -74,7 +74,7 @@
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
-@property (nonatomic, strong) UIBarButtonItem *upArrowItem, *downArrowItem;
+@property (nonatomic, strong) UIBarButtonItem *matchButton, *assocButton, *upArrowItem, *downArrowItem;
 
 // NSUserDefaults
 //
@@ -90,6 +90,10 @@
 @end
 
 @implementation ImageViewController
+
+// Action Type Button Index (this button gets replaced in the Toolsbar list)
+//
+int ACTION_TYPE_INDEX = 3;
 
 // Set up the tags
 //
@@ -483,16 +487,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = MATCH_TYPE;
                                                 
-                                                UIBarButtonItem *matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_TYPE
+                                                _matchButton = [[UIBarButtonItem alloc] initWithTitle:MATCH_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectMatchAction)];
                                                 
-                                                [matchButton setTintColor:LIGHT_TEXT_COLOR];
-                                                [matchButton setTag:MATCH_BTN_TAG];
+                                                [_matchButton setTintColor:LIGHT_TEXT_COLOR];
+                                                [_matchButton setTag:MATCH_BTN_TAG];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:3 withObject:matchButton];
+                                                [items replaceObjectAtIndex:ACTION_TYPE_INDEX withObject:_matchButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -509,18 +513,18 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = ASSOC_TYPE;
 
-                                                UIBarButtonItem *assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_TYPE
+                                                _assocButton = [[UIBarButtonItem alloc] initWithTitle:ASSOC_TYPE
                                                                 style: UIBarButtonItemStylePlain
                                                                 target: self
                                                                 action: @selector(selectAssocAction)];
 
-                                                [assocButton setTintColor:LIGHT_TEXT_COLOR];
-                                                [assocButton setTag:ASSOC_BTN_TAG];
+                                                [_assocButton setTintColor:LIGHT_TEXT_COLOR];
+                                                [_assocButton setTag:ASSOC_BTN_TAG];
                                                 
                                                 [self removeUpArrow];
                                                 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:3 withObject:assocButton];
+                                                [items replaceObjectAtIndex:ACTION_TYPE_INDEX withObject:_assocButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -592,7 +596,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 };
-
 
 - (void)viewDidAppear:(BOOL)didAppear {
     
@@ -2495,11 +2498,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _paintSwatches  = sourceViewController.paintSwatches;
     _mixAssociation = sourceViewController.mixAssociation;
     _saveFlag       = sourceViewController.saveFlag;
-
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-    [items replaceObjectAtIndex:4 withObject:flexibleSpace];
-    [self setToolbarItems:items];
+    
+    [_assocButton setWidth:_assocButton.title.length];
     
     // Disable the view and algorithm buttons
     //
