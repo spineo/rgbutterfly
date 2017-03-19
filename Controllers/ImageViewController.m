@@ -492,7 +492,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 [matchButton setTag:MATCH_BTN_TAG];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:4 withObject:matchButton];
+                                                [items replaceObjectAtIndex:3 withObject:matchButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -514,13 +514,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                                 target: self
                                                                 action: @selector(selectAssocAction)];
 
-                                                [assocButton setTintColor: LIGHT_TEXT_COLOR];
+                                                [assocButton setTintColor:LIGHT_TEXT_COLOR];
                                                 [assocButton setTag:ASSOC_BTN_TAG];
                                                 
                                                 [self removeUpArrow];
                                                 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
-                                                [items replaceObjectAtIndex:4 withObject:assocButton];
+                                                [items replaceObjectAtIndex:3 withObject:assocButton];
                                                 [self setToolbarItems:items];
 
                                                 
@@ -2292,7 +2292,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)deleteTapAreaSwatches:(TapArea *)tapArea {
-
     NSArray *tapAreaSwatches = [[tapArea tap_area_swatch] allObjects];
     for (int i=0; i<[tapAreaSwatches count]; i++) {
         TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
@@ -2306,7 +2305,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)deleteTapAreaKeywords:(TapArea *)tapArea {
-    
     NSArray *tapAreaKeywords = [[tapArea tap_area_keyword] allObjects];
     for (int i=0; i<[tapAreaKeywords count]; i++) {
         TapAreaKeyword *tapAreaKeyword = [tapAreaKeywords objectAtIndex:i];
