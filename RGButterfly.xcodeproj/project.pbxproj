@@ -88,6 +88,7 @@
 		213457811E7F2CB500CB16E9 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457761E7F2CB500CB16E9 /* SettingsViewControllerTests.swift */; };
 		213457821E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457771E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift */; };
 		213457841E7FFF9E00CB16E9 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457831E7FFF9E00CB16E9 /* DataModelTests.swift */; };
+		213457871E8015FA00CB16E9 /* RGButterflyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457861E8015FA00CB16E9 /* RGButterflyUITests.swift */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
 		21397EDD1C8486C0001C3F05 /* RGButterfly.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 21397EDC1C8486C0001C3F05 /* RGButterfly.entitlements */; };
@@ -97,8 +98,7 @@
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
 		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
-		215A8BAB1E6C3C3E0052B28F /* RGButterflyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyTests.swift */; };
-		215A8BAE1E6C3C750052B28F /* RGButterflyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAD1E6C3C750052B28F /* RGButterflyUITests.swift */; };
+		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
@@ -273,6 +273,8 @@
 		213457761E7F2CB500CB16E9 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewControllerTests.swift; path = "../../rgbutterfly-tests/Controllers/SettingsViewControllerTests.swift"; sourceTree = "<group>"; };
 		213457771E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwatchTableViewControllerTests.swift; path = "../../rgbutterfly-tests/Controllers/SwatchTableViewControllerTests.swift"; sourceTree = "<group>"; };
 		213457831E7FFF9E00CB16E9 /* DataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataModelTests.swift; path = "../../rgbutterfly-tests/Model/DataModelTests.swift"; sourceTree = "<group>"; };
+		213457851E8015FA00CB16E9 /* RGButterflyUITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyUITests-Bridging-Header.h"; path = "../../rgbutterfly-tests/UITests/RGButterflyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		213457861E8015FA00CB16E9 /* RGButterflyUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyUITests.swift; path = "../../rgbutterfly-tests/UITests/RGButterflyUITests.swift"; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		21397E6A1C84833D001C3F05 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -285,10 +287,8 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCollectionTableViewCell.h; path = "../ios-custom-cells/CustomCollectionTableViewCell.h"; sourceTree = "<group>"; };
 		213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionTableViewCell.m; path = "../ios-custom-cells/CustomCollectionTableViewCell.m"; sourceTree = "<group>"; };
-		215A8BAA1E6C3C3E0052B28F /* RGButterflyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyTests.swift; path = "../../rgbutterfly-tests/RGButterflyTests.swift"; sourceTree = "<group>"; };
+		215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyBaseTests.swift; path = "../../rgbutterfly-tests/RGButterflyBaseTests.swift"; sourceTree = "<group>"; };
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		215A8BAD1E6C3C750052B28F /* RGButterflyUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyUITests.swift; path = "../../rgbutterfly-tests/RGButterflyUITests.swift"; sourceTree = "<group>"; };
-		215A8BAF1E6C3C800052B28F /* RGButterflyUITests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyUITests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
 		216044D21E3D3A9F007387DB /* MatchColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchColors.m; path = "../ios-algorithms/MatchColors.m"; sourceTree = "<group>"; };
 		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
@@ -605,8 +605,8 @@
 		21A197F21E4F832E00686E86 /* RGButterflyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				215A8BAF1E6C3C800052B28F /* RGButterflyUITests-Bridging-Header.h */,
-				215A8BAD1E6C3C750052B28F /* RGButterflyUITests.swift */,
+				213457851E8015FA00CB16E9 /* RGButterflyUITests-Bridging-Header.h */,
+				213457861E8015FA00CB16E9 /* RGButterflyUITests.swift */,
 				21A197F51E4F832E00686E86 /* Info.plist */,
 			);
 			path = RGButterflyUITests;
@@ -619,7 +619,7 @@
 				21C11FCD1E7D554500C02A06 /* Model */,
 				213216511E7C728B00744C62 /* README.md */,
 				215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */,
-				215A8BAA1E6C3C3E0052B28F /* RGButterflyTests.swift */,
+				215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */,
 				21A263C91E4CB105004B075C /* Info.plist */,
 			);
 			path = RGButterflyTests;
@@ -903,7 +903,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				215A8BAE1E6C3C750052B28F /* RGButterflyUITests.swift in Sources */,
+				213457871E8015FA00CB16E9 /* RGButterflyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +921,7 @@
 				2134577A1E7F2CB500CB16E9 /* AssocTableViewControllerTests.swift in Sources */,
 				213457841E7FFF9E00CB16E9 /* DataModelTests.swift in Sources */,
 				2134577C1E7F2CB500CB16E9 /* ImageViewControllerTests.swift in Sources */,
-				215A8BAB1E6C3C3E0052B28F /* RGButterflyTests.swift in Sources */,
+				215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */,
 				2134577D1E7F2CB500CB16E9 /* InitViewControllerTests.swift in Sources */,
 				213457781E7F2CB500CB16E9 /* AboutViewControllerTests.swift in Sources */,
 				2134577E1E7F2CB500CB16E9 /* MainViewControllerTests.swift in Sources */,
