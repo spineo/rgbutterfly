@@ -87,6 +87,7 @@
 		213457801E7F2CB500CB16E9 /* PickerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457751E7F2CB500CB16E9 /* PickerViewControllerTests.swift */; };
 		213457811E7F2CB500CB16E9 /* SettingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457761E7F2CB500CB16E9 /* SettingsViewControllerTests.swift */; };
 		213457821E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457771E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift */; };
+		213457841E7FFF9E00CB16E9 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213457831E7FFF9E00CB16E9 /* DataModelTests.swift */; };
 		21397E691C84832C001C3F05 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E681C84832C001C3F05 /* AppDelegate.m */; };
 		21397E6B1C84833D001C3F05 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21397E6A1C84833D001C3F05 /* main.m */; };
 		21397EDD1C8486C0001C3F05 /* RGButterfly.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 21397EDC1C8486C0001C3F05 /* RGButterfly.entitlements */; };
@@ -271,6 +272,7 @@
 		213457751E7F2CB500CB16E9 /* PickerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerViewControllerTests.swift; path = "../../rgbutterfly-tests/Controllers/PickerViewControllerTests.swift"; sourceTree = "<group>"; };
 		213457761E7F2CB500CB16E9 /* SettingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewControllerTests.swift; path = "../../rgbutterfly-tests/Controllers/SettingsViewControllerTests.swift"; sourceTree = "<group>"; };
 		213457771E7F2CB500CB16E9 /* SwatchTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwatchTableViewControllerTests.swift; path = "../../rgbutterfly-tests/Controllers/SwatchTableViewControllerTests.swift"; sourceTree = "<group>"; };
+		213457831E7FFF9E00CB16E9 /* DataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataModelTests.swift; path = "../../rgbutterfly-tests/Model/DataModelTests.swift"; sourceTree = "<group>"; };
 		21397E671C84832C001C3F05 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		21397E681C84832C001C3F05 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		21397E6A1C84833D001C3F05 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 		21C11FCD1E7D554500C02A06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				213457831E7FFF9E00CB16E9 /* DataModelTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				2134577B1E7F2CB500CB16E9 /* DisclaimerViewControllerTests.swift in Sources */,
 				213216521E7C728B00744C62 /* README.md in Sources */,
 				2134577A1E7F2CB500CB16E9 /* AssocTableViewControllerTests.swift in Sources */,
+				213457841E7FFF9E00CB16E9 /* DataModelTests.swift in Sources */,
 				2134577C1E7F2CB500CB16E9 /* ImageViewControllerTests.swift in Sources */,
 				215A8BAB1E6C3C3E0052B28F /* RGButterflyTests.swift in Sources */,
 				2134577D1E7F2CB500CB16E9 /* InitViewControllerTests.swift in Sources */,
