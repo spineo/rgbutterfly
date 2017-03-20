@@ -26,10 +26,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -902,10 +902,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="aqc-zq-dwj"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="9H9-9R-KDD"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
