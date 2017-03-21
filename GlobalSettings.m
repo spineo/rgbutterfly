@@ -292,7 +292,7 @@ NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 
 // Activity (i.e., spinner) label indicator
 //
-NSString * const SPINNER_LABEL_PROC  = @"Processing the request...";
+NSString * const SPINNER_LABEL_PROC  = @"Processing the Request...";
 NSString * const SPINNER_LABEL_LOAD  = @"Loading the View...";
 
 // Alerts related
@@ -507,7 +507,7 @@ static NSDictionary *swatchTypes;
     [ManagedObjectUtils deleteDictionaryEntity:@"AssociationType"];
     [ManagedObjectUtils insertFromDataFile:@"AssociationType"];
     
-    // Perform cleanup
+    // Perform cleanup (most of these should be already handled by the controllers)
     //
     if (CLEANUP == 1) {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

@@ -379,6 +379,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setEnabled:TRUE];
         [self loadFullColorsListing];
     }
+    [self stopSpinner];
 }
 
 - (void)loadFullColorsListing {
