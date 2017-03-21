@@ -188,8 +188,8 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     //
     _psReadOnlyText = @"swatches_read_only_text";
     
-    _psMakeReadOnlyLabel  = @"Paint Swatches set to Read-Only ";
-    _psMakeReadWriteLabel = @"Paint Swatches set to Read/Write";
+    _psMakeReadOnlyLabel  = @"Paint Swatches are Read-Only ";
+    _psMakeReadWriteLabel = @"Paint Swatches are Read/Write";
     
     if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
           [_userDefaults stringForKey:_psReadOnlyText])
@@ -227,8 +227,8 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     //
     _maReadOnlyText = @"assoc_read_only_text";
     
-    _maMakeReadOnlyLabel  = @"Mix Associations set to Read-Only ";
-    _maMakeReadWriteLabel = @"Mix Associations set to Read/Write";
+    _maMakeReadOnlyLabel  = @"Mix Associations are Read-Only ";
+    _maMakeReadWriteLabel = @"Mix Associations are Read/Write";
     
     _labelText = @"";
     if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
@@ -330,7 +330,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     // Match Num Widgets
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _matchSettingsLabel = [self createWidgetLabel:@"Change the Default Number of Tap Area matches"];
+    _matchSettingsLabel = [self createWidgetLabel:@"Change the Number of Tap Area Matches"];
     
     _matchNumStepper = [[UIStepper alloc] init];
     [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
@@ -420,7 +420,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     // Mix Ratios Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    _mixRatiosLabel = [self createWidgetLabel:@"Comma-separated mix ratios, separate line/group"];
+    _mixRatiosLabel = [self createWidgetLabel:@"Comma-separated mix ratios, new line per group"];
     
     _mixRatiosTextView = [FieldUtils createTextView:@"" tag:MIX_RATIOS_TAG];
     [_mixRatiosTextView setKeyboardType:UIKeyboardTypeDefault];
@@ -451,8 +451,8 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     //
     _alertsFilterText    = @"alerts_filter_text";
     
-    _alertsNoneLabel = @"Turn Off All Alerts";
-    _alertsShowLabel = @"Turn On All Alerts ";
+    _alertsNoneLabel = @"All Alerts are Turned On";
+    _alertsShowLabel = @"All Alerts are Turned Off";
     
     BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
     BOOL tapCollectAlert    = [_userDefaults boolForKey:TAP_COLLECT_KEY];
@@ -592,7 +592,7 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         headerStr = @"Match Number Settings";
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
-        headerStr = @"RGB/Paint Display";
+        headerStr = @"Paint/RGB Display";
         
     } else if (section == MIX_RATIOS_SETTINGS) {
         headerStr = @"Default Paint Mix Ratios";
@@ -1015,14 +1015,17 @@ const int SETTINGS_MAX_SECTIONS   = 8;
 
 - (BOOL)areValidRatios:(NSString *)ratiosText {
     
+    // Exit immediately if text is nil
+    //
     NSArray *groupList  = [ratiosText componentsSeparatedByString:@"\n"];
     NSCharacterSet *fullSetOfChars = [NSCharacterSet characterSetWithCharactersInString:@"0123456789,:"];
+
     for (NSString *group in groupList) {
         
-        // Check that no empty string were added
+        // Skip empty strings added
         //
         if ([group isEqualToString:@""]) {
-            return FALSE;
+            continue;
         }
         
         // Check that no invalid characters are being used
