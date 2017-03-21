@@ -990,13 +990,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     return YES;
 }
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Picker Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - UIPickerView methods
-
 
 // The number of columns of data
 //
@@ -1382,6 +1380,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else {
         [_paintSwatch setPaint_brand_name:nil];
     }
+    
+    // Generally these would be associated with this PaintSwatch
+    //
+    [ManagedObjectUtils deleteOrphanPaintSwatchKeywords:self.context];
 
     NSError *error = nil;
     if (![self.context save:&error]) {

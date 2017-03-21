@@ -520,6 +520,7 @@ static NSDictionary *swatchTypes;
         [ManagedObjectUtils deleteOrphanPaintSwatchKeywords:context];
     }
 
+
     // Update the version as needed
     //
     [ManagedObjectUtils updateVersions];
