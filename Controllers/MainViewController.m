@@ -161,7 +161,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorTableView setDataSource:self];
     
     _reuseCellIdentifier = @"InitTableCell";
-    
+
+
+    // This value can be configured in Settings
+    //
     _listingType = [_userDefaults valueForKey:LISTING_TYPE];
 
 
@@ -355,6 +358,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)loadData {
     [_searchButton setAction:@selector(search)];
+
     if ([_listingType isEqualToString:MIX_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
@@ -374,7 +378,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setImage:_downArrowImage];
         [_searchButton setAction:@selector(expandAllSections)];
         [self loadColorsData];
-        
     } else {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
@@ -489,6 +492,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)loadMatchCollectionViewData {
+    [self initPaintSwatchFetchedResultsController];
     _matchAssocObjs = [ManagedObjectUtils fetchMatchAssociations:self.context name:_searchString];
     _numMatchAssocs = (int)[_matchAssocObjs count];
     
