@@ -289,6 +289,7 @@ NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
 NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
+NSString * const LISTING_TYPE        = @"ListingType";
 
 // Activity (i.e., spinner) label indicator
 //
@@ -546,11 +547,17 @@ static NSDictionary *swatchTypes;
     if ([userDefaults objectForKey:APP_INTRO_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:APP_INTRO_KEY];
     }
+
     if ([userDefaults objectForKey:IMAGE_INTERACT_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:IMAGE_INTERACT_KEY];
     }
+
     if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
+    }
+    
+    if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
+        [userDefaults setValue:MIX_TYPE forKey:LISTING_TYPE];
     }
     
     [userDefaults synchronize];

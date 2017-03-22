@@ -303,6 +303,7 @@ extern NSString * const RGB_DISPLAY_KEY;
 extern NSString * const MIX_RATIOS_KEY;
 extern NSString * const MIX_ASSOC_COUNT_KEY;
 extern NSString * const ADD_BRANDS_KEY;
+extern NSString * const LISTING_TYPE;
 
 // Activity (i.e., spinner) label indicator
 //

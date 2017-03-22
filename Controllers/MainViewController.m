@@ -162,7 +162,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     _reuseCellIdentifier = @"InitTableCell";
     
-    _listingType        = MIX_TYPE;
+    _listingType = [_userDefaults valueForKey:LISTING_TYPE];
+
 
     // TableView defaults
     //
