@@ -20,6 +20,10 @@
         <relationship name="swatch_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SwatchKeyword" inverseName="keyword" inverseEntity="SwatchKeyword" syncable="YES"/>
         <relationship name="tap_area_keyword" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TapAreaKeyword" inverseName="keyword" inverseEntity="TapAreaKeyword" syncable="YES"/>
     </entity>
+    <entity name="ListingType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
     <entity name="MatchAlgorithm" representedClassName="MatchAlgorithm" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -154,7 +158,7 @@
         <element name="AssociationType" positionX="18" positionY="341" width="128" height="73"/>
         <element name="BodyType" positionX="16" positionY="135" width="128" height="75"/>
         <element name="CanvasCoverage" positionX="18" positionY="429" width="128" height="75"/>
-        <element name="Keyword" positionX="-506" positionY="491" width="128" height="135"/>
+        <element name="Keyword" positionX="-506" positionY="491" width="128" height="133"/>
         <element name="MatchAlgorithm" positionX="18" positionY="-279" width="128" height="73"/>
         <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="165"/>
         <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="90"/>
@@ -170,5 +174,6 @@
         <element name="TapArea" positionX="-585" positionY="-171" width="128" height="225"/>
         <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="90"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="105"/>
+        <element name="ListingType" positionX="-261" positionY="261" width="128" height="75"/>
     </elements>
 </model>

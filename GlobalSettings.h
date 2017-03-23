@@ -257,6 +257,8 @@ extern int const SHAPE_BUTTON_TAG;
 extern int const MATCH_NUM_TAG;
 extern int const ADD_BRANDS_TAG;
 extern int const MIX_RATIOS_TAG;
+extern int const LIST_TYPE_FIELD_TAG;
+extern int const LIST_TYPE_PICKER_TAG;
 
 // Add Mix
 //

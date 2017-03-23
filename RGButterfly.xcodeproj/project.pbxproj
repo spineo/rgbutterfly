@@ -75,6 +75,7 @@
 		212F25C21E363919002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25BE1E363919002466E7 /* FileUtils.m */; };
 		212F25C31E363919002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25C01E363919002466E7 /* HTTPUtils.m */; };
 		213216521E7C728B00744C62 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 213216511E7C728B00744C62 /* README.md */; };
+		213216561E83F42A00744C62 /* ListingType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213216551E83F42A00744C62 /* ListingType.txt */; };
 		2134576C1E7DFC7100CB16E9 /* RGButterfly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 213457671E7DFC7100CB16E9 /* RGButterfly.xcdatamodeld */; };
 		213457781E7F2CB500CB16E9 /* AboutViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134576D1E7F2CB500CB16E9 /* AboutViewControllerTests.swift */; };
 		213457791E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134576E1E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift */; };
@@ -257,6 +258,7 @@
 		212F25C01E363919002466E7 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPUtils.m; path = "../ios-utilities/HTTPUtils.m"; sourceTree = "<group>"; };
 		213216511E7C728B00744C62 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../../rgbutterfly-tests/README.md"; sourceTree = "<group>"; };
 		213216541E7C7AAF00744C62 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		213216551E83F42A00744C62 /* ListingType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ListingType.txt; path = Data/ListingType.txt; sourceTree = "<group>"; };
 		213457681E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		213457691E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		2134576A1E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */,
 				21064FCF1DFEDA77004B0830 /* PigmentType.txt */,
 				21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */,
+				213216551E83F42A00744C62 /* ListingType.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
+				213216561E83F42A00744C62 /* ListingType.txt in Resources */,
 				21064FD31DFEDA77004B0830 /* CanvasCoverage.txt in Resources */,
 				2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */,
 				21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */,

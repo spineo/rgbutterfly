@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface SettingsTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate>
+@interface SettingsTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate>
 
 // Set for unit testing visibility
 //

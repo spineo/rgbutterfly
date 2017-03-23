@@ -242,14 +242,16 @@ int const IMAGEVIEW_TAG        = 205;
 
 // Settings
 //
-int const SHAPE_BUTTON_TAG    = 111;
-int const MATCH_NUM_TAG       = 112;
-int const ADD_BRANDS_TAG      = 113;
-int const MIX_RATIOS_TAG      = 114;
+int const SHAPE_BUTTON_TAG     = 111;
+int const MATCH_NUM_TAG        = 112;
+int const ADD_BRANDS_TAG       = 113;
+int const MIX_RATIOS_TAG       = 114;
+int const LIST_TYPE_FIELD_TAG  = 115;
+int const LIST_TYPE_PICKER_TAG = 116;
 
 // Add Mix
 //
-int const CANCEL_BUTTON_TAG   = 116;
+int const CANCEL_BUTTON_TAG   = 121;
 
 // Init Controller
 //
@@ -266,13 +268,14 @@ int const MAX_KEYW_LEN  = 128;
 int const MAX_DESC_LEN  = 128;
 int const MAX_BRAND_LEN = 32;
 
-// View Types
+// View and Listing Types
 //
-NSString * const MATCH_TYPE     = @"Match";
-NSString * const ASSOC_TYPE     = @"Assoc";
-NSString * const MIX_TYPE       = @"Mix";
-NSString * const KEYWORDS_TYPE  = @"Keywords";
-NSString * const COLORS_TYPE    = @"Colors";
+NSString * const ASSOC_TYPE        = @"Assoc";
+NSString * const MATCH_TYPE        = @"Match";
+NSString * const MIX_TYPE          = @"Mix";
+NSString * const FULL_LISTING_TYPE = @"Single";
+NSString * const KEYWORDS_TYPE     = @"Keywords";
+NSString * const COLORS_TYPE       = @"Colors";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
@@ -394,10 +397,6 @@ NSString * const ARROW_DOWN_IMAGE_NAME  = @"arrow down.png";
 NSString * const EMPTY_SQ_IMAGE_NAME    = @"square.png";
 NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
-// Default listing type
-//
-NSString * const FULL_LISTING_TYPE     = @"Full Colors Listings";
-
 
 // "About" section text
 //
@@ -507,6 +506,9 @@ static NSDictionary *swatchTypes;
     
     [ManagedObjectUtils deleteDictionaryEntity:@"AssociationType"];
     [ManagedObjectUtils insertFromDataFile:@"AssociationType"];
+    
+    [ManagedObjectUtils deleteDictionaryEntity:@"ListingType"];
+    [ManagedObjectUtils insertFromDataFile:@"ListingType"];
     
     // Perform cleanup (most of these should be already handled by the controllers)
     //

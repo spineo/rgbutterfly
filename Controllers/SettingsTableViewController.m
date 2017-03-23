@@ -30,6 +30,13 @@
 @property (nonatomic, strong) UIAlertController *noSaveAlert;
 @property (nonatomic) int maxMatchNum;
 
+// ListingType (picker) properties
+//
+@property (nonatomic) int typesPickerSelRow;
+@property (nonatomic, strong) UITextField *listTypeName;
+@property (nonatomic, strong) NSArray *listTypeNames;
+@property (nonatomic, strong) UIPickerView *listTypesPicker;
+
 // NSUserDefaults
 //
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
@@ -74,7 +81,10 @@ const int MIX_RATIOS_ROWS         = 1;
 const int ALERTS_SETTINGS         = 7;
 const int ALERTS_ROWS             = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 8;
+const int LIST_TYPE_SETTINGS      = 8;
+const int LIST_TYPE_ROWS          = 1;
+
+const int SETTINGS_MAX_SECTIONS   = 9;
 
 
 - (void)viewDidLoad {
@@ -505,6 +515,21 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     [_noSaveAlert addAction:YesButton];
     
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Listing Type Selection
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    // Picker entities
+    //
+    id typeObj = [ManagedObjectUtils queryDictionaryName:@"ListingType" entityId:_typesPickerSelRow context:self.context];
+    NSString *typeName = [typeObj name];
+    _listTypeName  = [FieldUtils createTextField:typeName tag:LIST_TYPE_FIELD_TAG];
+    [_listTypeName setTextAlignment:NSTextAlignmentCenter];
+    [_listTypeName setDelegate:self];
+    _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
+    _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:0 action:@selector(listTypesSelection) textField:_listTypeName];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -551,6 +576,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         
     } else if (section == ALERTS_SETTINGS) {
         return ALERTS_ROWS;
+
+    } else if (section == LIST_TYPE_SETTINGS) {
+        return LIST_TYPE_ROWS;
     }
     return 0;
 }
@@ -599,6 +627,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         
     } else if (section == ALERTS_SETTINGS) {
         headerStr = @"Alerts Settings";
+
+    } else if (section == LIST_TYPE_SETTINGS) {
+        headerStr = @"Default List View";
     }
     
     return headerStr;
@@ -726,6 +757,9 @@ const int SETTINGS_MAX_SECTIONS   = 8;
     } else if (indexPath.section == ALERTS_SETTINGS) {
         [cell.contentView addSubview:_alertsFilterSwitch];
         [cell.contentView addSubview:_alertsFilterLabel];
+
+    } else if (indexPath.section == LIST_TYPE_SETTINGS) {
+         [cell.contentView addSubview:_listTypeName];
     }
     
     return cell;
@@ -775,6 +809,11 @@ const int SETTINGS_MAX_SECTIONS   = 8;
         }
         [textField setText:[[NSString alloc] initWithFormat:@"%i", _maxMatchNum]];
         [_matchNumStepper setValue:(double)_maxMatchNum];
+
+    // Picker listTypes text field
+    //
+    } else {
+        
     }
     [self saveEnable:TRUE];
 }
@@ -1054,6 +1093,97 @@ const int SETTINGS_MAX_SECTIONS   = 8;
 - (void)saveEnable:(BOOL)saveFlag {
     _editFlag = saveFlag;
     [self.navigationItem.rightBarButtonItem setEnabled:saveFlag];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Picker Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Picker Methods
+
+// The number of columns of data
+//
+- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// The number of rows of data
+//
+- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return (long)[_listTypeNames count];
+}
+
+// Row height
+//
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return DEF_PICKER_ROW_HEIGHT;
+}
+
+// The data to return for the row and component (column) that's being passed in
+//
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [_listTypeNames objectAtIndex:row];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *label = (UILabel*)view;
+    if (label == nil) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
+    }
+    
+    [label setText:[_listTypeNames objectAtIndex:row]];
+    [label setTextColor: LIGHT_TEXT_COLOR];
+    [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+    [label.layer setBorderWidth: DEF_BORDER_WIDTH];
+    
+    [label setTextAlignment:NSTextAlignmentCenter];
+    
+    return label;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSString *listType = [_listTypeNames objectAtIndex:row];
+    [_listTypeName setText:listType];
+    //[_paintSwatch setType_id:[NSNumber numberWithInteger:row]];
+    _typesPickerSelRow = (int)row;
+}
+
+- (void)listTypesSelection {
+    //int row = [[_paintSwatch type_id] intValue];
+    int row = 0;
+    [_listTypeName setText:[_listTypeNames objectAtIndex:row]];
+    [_listTypesPicker selectRow:row inComponent:0 animated:YES];
+    [_listTypeName resignFirstResponder];
+}
+
+// Generic Picker method
+//
+- (UIPickerView *)createPicker:(int)pickerTag selectRow:(int)selectRow action:(SEL)action textField:(UITextField *)textField {
+    UIPickerView *picker = [FieldUtils createPickerView:self.view.frame.size.width tag:pickerTag xOffset:DEF_X_OFFSET yOffset:DEF_TOOLBAR_HEIGHT];
+    [picker setDataSource:self];
+    [picker setDelegate:self];
+    
+    UIToolbar* pickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, DEF_TOOLBAR_HEIGHT)];
+    [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:action];
+    [doneButton setTintColor:LIGHT_TEXT_COLOR];
+    
+    [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
+    
+    UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
+    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView addSubview:pickerToolbar];
+    [pickerParentView addSubview:picker];
+    
+    [textField setInputView:pickerParentView];
+    
+    // Need to prevent text from clearing
+    
+    [picker selectRow:selectRow inComponent:0 animated:YES];
+    
+    return picker;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
