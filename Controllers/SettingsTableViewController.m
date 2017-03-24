@@ -528,9 +528,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     if ([_listType isEqualToString:@""] || _listType == nil) {
         _listType = MIX_TYPE;
     }
-    
-    //id typeObj = [ManagedObjectUtils queryDictionaryName:@"ListingType" entityId:_typesPickerSelRow context:self.context];
-    //NSString *typeName = [typeObj name];
+
+    // Query the order
+    //
+    id typeObj = [ManagedObjectUtils queryDictionaryByNameValue:@"ListingType" nameValue:_listType context:self.context];
+    _typesPickerSelRow = [[typeObj order] intValue];
     _listTypeName  = [FieldUtils createTextField:_listType tag:LIST_TYPE_FIELD_TAG];
     CGFloat viewWidth = self.tableView.bounds.size.width;
     CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
@@ -538,8 +540,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     [_listTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_listTypeName setTextAlignment:NSTextAlignmentCenter];
     [_listTypeName setDelegate:self];
+    
+    _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
 
-    _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:0 action:@selector(listTypesSelection) textField:_listTypeName];
+    _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -802,7 +806,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 #pragma mark - TextField/TextView Methods
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
     if (textField.tag == MATCH_NUM_TAG) {
         NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
         NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:textField.text];
@@ -825,7 +828,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Picker listTypes text field
     //
     } else {
-        
+        _listType = textField.text;
     }
     [self saveEnable:TRUE];
 }
@@ -1044,6 +1047,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
             [_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
             
+            // List type
+            //
+            [_userDefaults setValue:_listType forKey:LISTING_TYPE];
+            
             [_userDefaults synchronize];
             
             // Disable button?
@@ -1157,15 +1164,12 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSString *listType = [_listTypeNames objectAtIndex:row];
     [_listTypeName setText:listType];
-    //[_paintSwatch setType_id:[NSNumber numberWithInteger:row]];
     _typesPickerSelRow = (int)row;
 }
 
 - (void)listTypesSelection {
-    //int row = [[_paintSwatch type_id] intValue];
-    int row = 0;
-    [_listTypeName setText:[_listTypeNames objectAtIndex:row]];
-    [_listTypesPicker selectRow:row inComponent:0 animated:YES];
+    [_listTypeName setText:[_listTypeNames objectAtIndex:_typesPickerSelRow]];
+    [_listTypesPicker selectRow:_typesPickerSelRow inComponent:0 animated:YES];
     [_listTypeName resignFirstResponder];
 }
 
