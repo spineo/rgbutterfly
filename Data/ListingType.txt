@@ -1,5 +1,5 @@
-Mix
-Match
-Single
-Keywords
-Colors
+Color Associations
+Match Associations
+Individual Colors
+Keywords Listing
+Subjective Colors

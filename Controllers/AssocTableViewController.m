@@ -420,7 +420,7 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)recreateApplyButton {
     SEL selector;
-    if ([[_assocTypeName text] isEqualToString:MIX_TYPE]) {
+    if ([[_assocTypeName text] isEqualToString:MIX_TYPE_TEXT]) {
         _applyRenameText = @"Apply Renaming with Ratios";
         //[_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
         selector = @selector(showMixRatiosPicker);
@@ -1115,7 +1115,7 @@ const int ASSOC_SET_TAG        = 8;
 #pragma mark - Object Methods
 
 - (void)applyRenaming {
-    if ([[_assocTypeName text] isEqualToString:MIX_TYPE]) {
+    if ([[_assocTypeName text] isEqualToString:MIX_TYPE_TEXT]) {
         [self applyMixRenaming];
         
     } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {

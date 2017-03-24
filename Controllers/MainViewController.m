@@ -191,14 +191,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
-        [self updateTable:MIX_TYPE];
+        [self updateTable:MIX_LIST_TYPE];
     }];
     
     UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:MATCH_TYPE];
+        [self updateTable:MATCH_LIST_TYPE];
     }];
     
-    UIAlertAction* fullColorsAction   = [UIAlertAction actionWithTitle:FULL_LISTING_TYPE style:UIAlertActionStyleDefault
+    UIAlertAction* fullColorsAction   = [UIAlertAction actionWithTitle:@"Individual Colors" style:UIAlertActionStyleDefault
                                                                handler:^(UIAlertAction * action) {
                                                                    [self updateTable:FULL_LISTING_TYPE];
                                                                }];
@@ -359,12 +359,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)loadData {
     [_searchButton setAction:@selector(search)];
 
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMatchCollectionViewData];
@@ -733,13 +733,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [headerView addSubview:letterLabel];
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
-    } else if ([_listingType isEqualToString:MIX_TYPE]) {
+    } else if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Associations Listing (%i)", _numMixAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"Match Associations Listing (%i)", _numMatchAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:matchAssocsListing];
@@ -897,10 +897,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // Return the number of rows in the section.
     //
     NSInteger objCount;
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         objCount = [_mixAssocObjs count];
 
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         objCount = [_matchAssocObjs count];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
@@ -933,7 +933,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         int index = (int)indexPath.row;
         int ct = (int)[[self.mixColorArray objectAtIndex:index] count];
         if (ct < _minAssocSize) {
@@ -942,7 +942,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
         }
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     } else {
         return DEF_TABLE_CELL_HEIGHT;
@@ -950,7 +950,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
@@ -994,7 +994,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         
         return custCell;
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
             CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
             
             if (! custCell) {
@@ -1075,11 +1075,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         _selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"MainSwatchDetailSegue" sender:self];
         
-    } else    if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else    if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         //_selPaintSwatch = [_paintSwatches objectAtIndex:indexPath.row];
 
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
@@ -1161,12 +1161,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
         return;
     }
     
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMixCollectionViewData];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadMatchCollectionViewData];
@@ -1245,7 +1245,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int index = (int)collectionView.tag;
     
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         return [[self.mixColorArray objectAtIndex:index] count];
 
     // Match
@@ -1262,7 +1262,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     UIImage *swatchImage;
     
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
     
         PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
 
@@ -1297,7 +1297,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     [self setCollectViewSelRow:index];
     
-    if ([_listingType isEqualToString:MIX_TYPE]) {
+    if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         PaintSwatches *paintSwatch = [[self.mixColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         
         // Doesn't matter which one
@@ -1309,7 +1309,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         
         [self performSegueWithIdentifier:@"VCToAssocSegue" sender:self];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         PaintSwatches *paintSwatch = [[self.matchColorArray  objectAtIndex:index] objectAtIndex:indexPath.row];
         TapArea *tapArea = [paintSwatch tap_area];
         _matchAssociation = [tapArea match_association];
@@ -1350,7 +1350,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         [self loadFullColorsListing];
 
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
@@ -1367,7 +1367,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         [self loadFullColorsListing];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
@@ -1388,7 +1388,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
         [self loadFullColorsListing];
         
-    } else if ([_listingType isEqualToString:MATCH_TYPE]) {
+    } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {

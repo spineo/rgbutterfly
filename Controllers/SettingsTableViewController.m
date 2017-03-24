@@ -526,7 +526,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     _listType = [_userDefaults stringForKey:LISTING_TYPE];
     if ([_listType isEqualToString:@""] || _listType == nil) {
-        _listType = MIX_TYPE;
+        _listType = MIX_LIST_TYPE;
     }
 
     // Query the order

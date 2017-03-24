@@ -271,11 +271,14 @@ int const MAX_BRAND_LEN = 32;
 // View and Listing Types
 //
 NSString * const ASSOC_TYPE        = @"Assoc";
+NSString * const MIX_TYPE_TEXT     = @"Mix";
 NSString * const MATCH_TYPE        = @"Match";
-NSString * const MIX_TYPE          = @"Mix";
-NSString * const FULL_LISTING_TYPE = @"Single";
-NSString * const KEYWORDS_TYPE     = @"Keywords";
-NSString * const COLORS_TYPE       = @"Colors";
+
+NSString * const MIX_LIST_TYPE     = @"Color Associations";
+NSString * const MATCH_LIST_TYPE   = @"Match Associations";
+NSString * const FULL_LISTING_TYPE = @"Individual Colors";
+NSString * const KEYWORDS_TYPE     = @"Keywords Listing";
+NSString * const COLORS_TYPE       = @"Subjective Colors";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Keys
@@ -559,7 +562,7 @@ static NSDictionary *swatchTypes;
     }
     
     if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
-        [userDefaults setValue:MIX_TYPE forKey:LISTING_TYPE];
+        [userDefaults setValue:MIX_LIST_TYPE forKey:LISTING_TYPE];
     }
     
     [userDefaults synchronize];
