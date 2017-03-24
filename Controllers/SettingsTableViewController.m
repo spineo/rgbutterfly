@@ -34,6 +34,7 @@
 //
 @property (nonatomic) int typesPickerSelRow;
 @property (nonatomic, strong) UITextField *listTypeName;
+@property (nonatomic, strong) NSString *listType;
 @property (nonatomic, strong) NSArray *listTypeNames;
 @property (nonatomic, strong) UIPickerView *listTypesPicker;
 
@@ -521,12 +522,23 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     // Picker entities
     //
-    id typeObj = [ManagedObjectUtils queryDictionaryName:@"ListingType" entityId:_typesPickerSelRow context:self.context];
-    NSString *typeName = [typeObj name];
-    _listTypeName  = [FieldUtils createTextField:typeName tag:LIST_TYPE_FIELD_TAG];
+    // Set the default value for the textfield
+    //
+    _listType = [_userDefaults stringForKey:LISTING_TYPE];
+    if ([_listType isEqualToString:@""] || _listType == nil) {
+        _listType = MIX_TYPE;
+    }
+    
+    //id typeObj = [ManagedObjectUtils queryDictionaryName:@"ListingType" entityId:_typesPickerSelRow context:self.context];
+    //NSString *typeName = [typeObj name];
+    _listTypeName  = [FieldUtils createTextField:_listType tag:LIST_TYPE_FIELD_TAG];
+    CGFloat viewWidth = self.tableView.bounds.size.width;
+    CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+    CGFloat textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
+    [_listTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_listTypeName setTextAlignment:NSTextAlignmentCenter];
     [_listTypeName setDelegate:self];
-    _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
+
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:0 action:@selector(listTypesSelection) textField:_listTypeName];
     
     
@@ -759,7 +771,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         [cell.contentView addSubview:_alertsFilterLabel];
 
     } else if (indexPath.section == LIST_TYPE_SETTINGS) {
-         [cell.contentView addSubview:_listTypeName];
+        [cell.contentView addSubview:_listTypeName];
     }
     
     return cell;
