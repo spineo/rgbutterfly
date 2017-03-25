@@ -204,11 +204,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                                                }];
     
     UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Keywords Listing" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Keywords"];
+        [self updateTable:@"Keywords Listing"];
     }];
     
     UIAlertAction *listByColors = [UIAlertAction actionWithTitle:@"Subjective Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Colors"];
+        [self updateTable:@"Subjective Colors"];
     }];
     
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
