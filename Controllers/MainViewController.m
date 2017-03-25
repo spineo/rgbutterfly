@@ -186,29 +186,29 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // Listing Controller
     //
-    _listingController = [UIAlertController alertControllerWithTitle:@"Colors Listings"
+    _listingController = [UIAlertController alertControllerWithTitle:@"View Listing Types"
                                                                    message:@"Please select a listing type"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:@"Color Associations" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+    UIAlertAction *mixAssociations = [UIAlertAction actionWithTitle:MIX_LIST_TYPE style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
         [self updateTable:MIX_LIST_TYPE];
     }];
     
-    UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:@"Match Associations" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *matchAssociations = [UIAlertAction actionWithTitle:MATCH_LIST_TYPE style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self updateTable:MATCH_LIST_TYPE];
     }];
     
-    UIAlertAction* fullColorsAction   = [UIAlertAction actionWithTitle:@"Individual Colors" style:UIAlertActionStyleDefault
+    UIAlertAction* fullColorsAction   = [UIAlertAction actionWithTitle:FULL_LISTING_TYPE style:UIAlertActionStyleDefault
                                                                handler:^(UIAlertAction * action) {
                                                                    [self updateTable:FULL_LISTING_TYPE];
                                                                }];
     
-    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:@"Keywords Listing" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Keywords Listing"];
+    UIAlertAction *sortByKeywords = [UIAlertAction actionWithTitle:KEYWORDS_TYPE style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self updateTable:KEYWORDS_TYPE];
     }];
     
-    UIAlertAction *listByColors = [UIAlertAction actionWithTitle:@"Subjective Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self updateTable:@"Subjective Colors"];
+    UIAlertAction *listByColors = [UIAlertAction actionWithTitle:COLORS_TYPE style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self updateTable:COLORS_TYPE];
     }];
     
     UIAlertAction *alertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
@@ -715,7 +715,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         
         if (section == 0) {
-            NSString *keywordsListing = [[NSString alloc] initWithFormat:@"Keywords Listing (%i)", _numKeywords];
+            NSString *keywordsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", KEYWORDS_TYPE, _numKeywords];
             [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
             [headerView addSubview:headerLabel];
             [headerLabel setText:keywordsListing];
@@ -734,13 +734,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
-        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"Associations Listing (%i)", _numMixAssocs];
+        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", MIX_LIST_TYPE, _numMixAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
-        NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"Match Associations Listing (%i)", _numMatchAssocs];
+        NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", MATCH_LIST_TYPE, _numMatchAssocs];
         [headerView addSubview:headerLabel];
         [headerLabel setText:matchAssocsListing];
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
@@ -748,7 +748,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
 
         if (section == 0) {
-            [headerLabel setText:@"Subjective Colors Groupings"];
+            [headerLabel setText:[[NSString alloc] initWithFormat:@"%@ Groupings", COLORS_TYPE]];
             [headerLabel setTextAlignment: NSTextAlignmentCenter];
 
             [headerView addSubview:headerLabel];
