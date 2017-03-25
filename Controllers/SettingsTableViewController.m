@@ -1280,10 +1280,21 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 */
 
+// Two exit points covered
+// goBack (back arrow button) and
+// goHome (home button)
+//
 - (IBAction)goBack:(id)sender {
-    
-    // Leaving without saving?
-    //
+    [self exitAction];
+}
+
+- (IBAction)goHome:(id)sender {
+    [self exitAction];
+}
+
+// Check if a save is needed
+//
+- (void)exitAction {
     if (_editFlag == TRUE) {
         [self presentViewController:_noSaveAlert animated:YES completion:nil];
         
