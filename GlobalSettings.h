@@ -285,7 +285,7 @@ extern int const MAX_BRAND_LEN;
 // View Types
 //
 extern NSString * const MATCH_TYPE;
-extern NSString * const MIX_TYPE_TEXT;
+extern NSString * const MIX_TYPE;
 extern NSString * const ASSOC_TYPE;
 
 extern NSString * const MIX_LIST_TYPE;
