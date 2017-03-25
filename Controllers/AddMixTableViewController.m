@@ -74,6 +74,11 @@ int MAX_ADD_MIX_SECTIONS = 1;
 
 NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Initialization/Cleanup Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Initialization Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];

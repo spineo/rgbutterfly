@@ -87,10 +87,11 @@ const int ASSOC_SET_TAG        = 8;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Init methods
+// Initialization/Cleanup Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Init Methods
+#pragma mark - Initialization Methods
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -380,8 +381,10 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// General methods
+// General Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - General Methods
 
 - (void)setFrameSizes {
     
@@ -468,7 +471,7 @@ const int ASSOC_SET_TAG        = 8;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Tableview methods
+// Tableview Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - UITableView Methods
@@ -801,10 +804,10 @@ const int ASSOC_SET_TAG        = 8;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// TableView Delete and Insert
+// TableView Delete and Insert Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - TableView Delete and Insert
+#pragma mark - TableView Delete and Insert Methods
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -848,10 +851,10 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// TableView Move
+// TableView Move and Edit
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - TableView Move
+#pragma mark - TableView Move and Edit
 
 // Override to support rearranging the table view.
 //
@@ -882,14 +885,7 @@ const int ASSOC_SET_TAG        = 8;
     [_save setEnabled:TRUE];
     
     _mixAssocSwatches = (NSMutableArray *)[[[_mixAssociation mix_assoc_swatch] allObjects] sortedArrayUsingDescriptors:@[_orderSort]];
-
 }
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Edit Action
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Edit Action
 
 - (void)setEditing:(BOOL)flag animated:(BOOL)animated {
     [super setEditing:flag animated:animated];
@@ -944,7 +940,7 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UITextField Delegates
+// UITextField Delegates Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - UITextField Delegate Methods
@@ -1020,10 +1016,10 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Save and Delete Data
+// Save and Delete Data Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Save and Delete Data
+#pragma mark - Save and Delete Data Methods
 
 // Invoked directly and by unwind to segue
 //
@@ -1627,6 +1623,13 @@ const int ASSOC_SET_TAG        = 8;
     NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
     [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationFade];
 }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Navigation Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Navigation Methods
+
 
 - (IBAction)unwindToAssocFromDetail:(UIStoryboardSegue *)segue {
     
