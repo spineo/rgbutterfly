@@ -1391,13 +1391,13 @@ const int ASSOC_SET_TAG        = 8;
 
 // The number of columns of data
 //
-- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 // The number of rows of data
 //
-- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
 
     if (pickerView.tag == ASSOC_TYPE_TAG) {
         return (long)[_assocTypeNames count];

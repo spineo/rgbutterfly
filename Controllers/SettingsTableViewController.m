@@ -87,6 +87,11 @@ const int LIST_TYPE_ROWS          = 1;
 
 const int SETTINGS_MAX_SECTIONS   = 9;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Initialization Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Initialization Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -558,7 +563,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TableView Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return SETTINGS_MAX_SECTIONS;
@@ -849,10 +858,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Widget States and Save
+// Widget States and Save Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Widget States and Save
+#pragma mark - Widget States and Save Methods
 
 -(void)doneWithNumberPad {
     [_matchNumTextField resignFirstResponder];
@@ -1066,10 +1075,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Validation
+// Validation Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Validation
+#pragma mark - Validation Methods
 
 - (BOOL)areValidRatios:(NSString *)ratiosText {
     
@@ -1115,20 +1124,20 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Picker Methods
+// PickerView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Picker Methods
+#pragma mark - PickerView Methods
 
 // The number of columns of data
 //
-- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 // The number of rows of data
 //
-- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return (long)[_listTypeNames count];
 }
 
@@ -1203,10 +1212,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Generic Methods
+// Other Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Generic Methods
+#pragma mark - Other Methods
 
 - (UILabel *)createWidgetLabel:(NSString *)labelText {
 
@@ -1220,13 +1229,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     return widgetLabel;
 }
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Feedback (Email)
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Feedback (Email)
 
 - (void)showEmail {
 
@@ -1267,10 +1269,10 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Navigation
+// Navigation Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Navigation
+#pragma mark - Navigation Methods
 
 /*
 // In a storyboard-based application, you will often want to do a little preparation before navigation

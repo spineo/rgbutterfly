@@ -141,6 +141,9 @@ NSString *TAP_AREA_LIGHT_STROKE = @"white";
 //
 CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Initialization Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Initialization Methods
 
@@ -664,6 +667,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self setTapAreas];
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Scrolling and Action Selection Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Scrolling and Action Selection Methods
 
@@ -734,9 +740,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:MATCH_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
-// ******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // General Purpose Methods
-// ******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - General Purpose Methods
 
@@ -905,9 +911,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self setToolbarItems:toolbarButtons animated:YES];
 }
 
-// ******************************************************************************
-// Handle tap, pinch, and long press events
-// ******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// GestureRecognizer Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Gesture Recognizer Methods
 
@@ -1319,11 +1325,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     return retImage;
 }
 
-#pragma mark - AlertView and Containing Widgets Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// AlertView and Containing Widgets Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// ******************************************************************************
-// AlertView and Containing Methods
-// ******************************************************************************
+#pragma mark - AlertView and Containing Widgets Methods
 
 // Display alert view with textfields when clicking on the 'Edit' button (Match only)
 //
@@ -1340,9 +1346,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self presentViewController:_typeAlertController animated:YES completion:nil];
 }
 
-// ******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Image and Color Methods
-// ******************************************************************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Image and Color Methods
 
@@ -1473,7 +1479,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 // TableView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Table view data source
+#pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return MAX_TABLEVIEW_SECTIONS;
@@ -1677,12 +1683,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     return headerView;
 }
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// CollectionView Methods
+// CollectionView and ScrollView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - UICollectionView (and ScrollView) Methods
+#pragma mark - CollectionView and ScrollView Methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return MAX_COLLECTVIEW_SECTIONS;
@@ -1773,10 +1778,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Match Methods
+// Other Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Match Methods
+#pragma mark - Other Methods
 
 - (void)sortTapSection:(PaintSwatches *)refObj tapSection:(int)tapSection {
     
@@ -1857,12 +1862,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 //    
 //    return [tmpSwatches mutableCopy];
 //}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// General Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - General Methods
 
 -(NSString *)getTitle {
 

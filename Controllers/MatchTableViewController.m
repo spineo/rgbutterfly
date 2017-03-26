@@ -622,53 +622,6 @@ const int IMAGE_TAG  = 6;
     }
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// General Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - General Methods
-
-// flag is 1 after pressing the 'Edit' button
-//
-- (void)setEditing:(BOOL)flag animated:(BOOL)animated {
-    [super setEditing:flag animated:animated];
-    
-    _editFlag = flag;
-    
-    if (_editFlag == FALSE) {
-        if (_tappedCount > 0) {
-            [_save setEnabled:TRUE];
-        }
-        [self matchButtonsHide];
-        if ([_save isEnabled] == TRUE) {
-            [self presentViewController:_saveAlertController animated:YES completion:nil];
-        }
-    } else {
-        if (_maManualOverride == FALSE) {
-            [self matchButtonsShow];
-            
-        } else {
-            [self algButtonsHide];
-        }
-    }
-    
-    [self.tableView reloadData];
-}
-
-// Toggle between "Areas" and "Match
-// _editFlag used for the toggle even though no editing takes place
-//
-- (IBAction)toggleAction:(id)sender {
-    if ([_actionTitle isEqualToString:@"Areas"]) {
-        [self matchButtonsShow];
-        _editFlag = TRUE;
-
-    } else {
-        [self matchButtonsHide];
-        _editFlag = FALSE;
-    }
-}
-
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -726,10 +679,10 @@ const int IMAGE_TAG  = 6;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// UITextField Delegate Methods
+// TextField Delegate Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - UITextField Delegate Methods
+#pragma mark - TextField Delegate Methods
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
 //    if (textField.tag == COLTXT_TAG) {
@@ -786,22 +739,10 @@ const int IMAGE_TAG  = 6;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// PickerView Methods
+// Gesture Recognizer Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - PickerView Methods
-
-// The number of columns of data
-//
-- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// GestureRecognizer Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - GestureRecognizer Methods
+#pragma mark - Gesture Recognizer Methods
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
@@ -809,7 +750,7 @@ const int IMAGE_TAG  = 6;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// BarButton Actions
+// BarButton Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - BarButton Methods
@@ -1006,7 +947,52 @@ const int IMAGE_TAG  = 6;
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_ALG_BTN_TAG width:HIDE_BUTTON_WIDTH];
 }
 
-#pragma mark - General purpose methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// General Purpose Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - General Purpose Methods
+
+// flag is 1 after pressing the 'Edit' button
+//
+- (void)setEditing:(BOOL)flag animated:(BOOL)animated {
+    [super setEditing:flag animated:animated];
+    
+    _editFlag = flag;
+    
+    if (_editFlag == FALSE) {
+        if (_tappedCount > 0) {
+            [_save setEnabled:TRUE];
+        }
+        [self matchButtonsHide];
+        if ([_save isEnabled] == TRUE) {
+            [self presentViewController:_saveAlertController animated:YES completion:nil];
+        }
+    } else {
+        if (_maManualOverride == FALSE) {
+            [self matchButtonsShow];
+            
+        } else {
+            [self algButtonsHide];
+        }
+    }
+    
+    [self.tableView reloadData];
+}
+
+// Toggle between "Areas" and "Match
+// _editFlag used for the toggle even though no editing takes place
+//
+- (IBAction)toggleAction:(id)sender {
+    if ([_actionTitle isEqualToString:@"Areas"]) {
+        [self matchButtonsShow];
+        _editFlag = TRUE;
+        
+    } else {
+        [self matchButtonsHide];
+        _editFlag = FALSE;
+    }
+}
 
 - (void)resizeSelFieldAndDone:(CGFloat)doneWidth {
     _tableViewWidth     = self.tableView.bounds.size.width;
