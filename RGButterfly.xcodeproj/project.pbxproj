@@ -101,11 +101,13 @@
 		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
 		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
+		216FCF0F1E8A8C48003EB56A /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 216FCF0E1E8A8C48003EB56A /* WebViewController.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
 		2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1B1E3B934A00812B19 /* AppUtils.m */; };
 		2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1E1E3B95DC00812B19 /* GenericUtils.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
+		2194D8FC1E893BBB00960912 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2194D8FB1E893BBB00960912 /* CloudKit.framework */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */; };
@@ -293,6 +295,8 @@
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
 		216044D21E3D3A9F007387DB /* MatchColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchColors.m; path = "../ios-algorithms/MatchColors.m"; sourceTree = "<group>"; };
+		216FCF0D1E8A8C48003EB56A /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = Controllers/WebViewController.h; sourceTree = "<group>"; };
+		216FCF0E1E8A8C48003EB56A /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = Controllers/WebViewController.m; sourceTree = "<group>"; };
 		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
 		2176DD151E3A338800812B19 /* ButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonUtils.m; path = Utilities/ButtonUtils.m; sourceTree = "<group>"; };
 		2176DD171E3A387800812B19 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarButtonUtils.h; path = "../ios-utilities/BarButtonUtils.h"; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 		2176DD1D1E3B95DC00812B19 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericUtils.h; path = "../ios-utilities/GenericUtils.h"; sourceTree = "<group>"; };
 		2176DD1E1E3B95DC00812B19 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericUtils.m; path = "../ios-utilities/GenericUtils.m"; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		2194D8FB1E893BBB00960912 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		219C47791E22A93B00DADF0F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewController.h; path = Controllers/InitViewController.h; sourceTree = "<group>"; };
 		219C477A1E22A93B00DADF0F /* InitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitViewController.m; path = Controllers/InitViewController.m; sourceTree = "<group>"; };
 		21A197F11E4F832E00686E86 /* RGButterflyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2194D8FC1E893BBB00960912 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +377,8 @@
 		2108C5E61C820C5800DD7B9E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				216FCF0D1E8A8C48003EB56A /* WebViewController.h */,
+				216FCF0E1E8A8C48003EB56A /* WebViewController.m */,
 				219C47791E22A93B00DADF0F /* InitViewController.h */,
 				219C477A1E22A93B00DADF0F /* InitViewController.m */,
 				2109A0C81DFDDD6F0076A095 /* AboutViewController.h */,
@@ -657,6 +665,7 @@
 		21D344651E4F518300B92CF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2194D8FB1E893BBB00960912 /* CloudKit.framework */,
 				21D344661E4F518300B92CF7 /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -740,10 +749,10 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -899,6 +908,7 @@
 				2109A12D1DFDE4910076A095 /* MatchAlgorithm+CoreDataProperties.m in Sources */,
 				2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */,
 				2109A0C71DFDDC460076A095 /* MainViewController.m in Sources */,
+				216FCF0F1E8A8C48003EB56A /* WebViewController.m in Sources */,
 				21397EE31C84876D001C3F05 /* GlobalSettings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1077,6 +1087,7 @@
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = RGButterfly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PEWN4D59QB;
@@ -1106,6 +1117,7 @@
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = RGButterfly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PEWN4D59QB;
