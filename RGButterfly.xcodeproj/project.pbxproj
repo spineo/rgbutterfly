@@ -648,10 +648,10 @@
 			isa = PBXGroup;
 			children = (
 				2134576D1E7F2CB500CB16E9 /* AboutViewControllerTests.swift */,
-				2134576E1E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift */,
 				2134576F1E7F2CB500CB16E9 /* AssocTableViewControllerTests.swift */,
 				213457701E7F2CB500CB16E9 /* DisclaimerViewControllerTests.swift */,
 				213457711E7F2CB500CB16E9 /* ImageViewControllerTests.swift */,
+				2134576E1E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift */,
 				213457721E7F2CB500CB16E9 /* InitViewControllerTests.swift */,
 				213457731E7F2CB500CB16E9 /* MainViewControllerTests.swift */,
 				213457741E7F2CB500CB16E9 /* MatchTableViewControllerTests.swift */,

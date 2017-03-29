@@ -8,6 +8,7 @@
 
 #import "AboutViewController.h"
 #import "GlobalSettings.h"
+#import "FieldUtils.h"
 
 @interface AboutViewController ()
 
@@ -35,8 +36,24 @@
     [aboutTextView setEditable:FALSE];
     [aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
     
+    UILabel *openSafariLabel = [FieldUtils createLabel:@"Open Web Docs in Safari" xOffset:DEF_X_OFFSET yOffset:DEF_Y_OFFSET];
+    
     [self.view addSubview:aboutTextView];
+    [self.view addSubview:openSafariLabel];
 }
+
+- (IBAction)openSafari:(id)sender {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:DOCS_SITE];
+    
+    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [application openURL:url options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",DOCS_SITE,success);
+           }];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
