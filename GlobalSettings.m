@@ -58,6 +58,10 @@ NSString * const MD5_CONT_TYPE  = @"text/plain";
 NSString * const VERSION_FILE   = @"version.txt";
 NSString * const VER_CONT_TYPE  = @"text/plain";
 
+// Documentation Site
+//
+NSString * const DOCS_SITE     = @"https://spineo.github.io/RGButterflyDocs/";
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords

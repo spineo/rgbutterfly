@@ -57,6 +57,10 @@ extern NSString * const MD5_CONT_TYPE;
 extern NSString * const VERSION_FILE;
 extern NSString * const VER_CONT_TYPE;
 
+// Documentation Site
+//
+extern NSString * const DOCS_SITE;
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords

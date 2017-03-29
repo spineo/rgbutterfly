@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "GlobalSettings.h"
 
 @interface WebViewController ()
 
@@ -20,7 +21,7 @@
     
     [_webView setDelegate:self];
     
-    NSString *urlString = @"http://www.google.com/";
+    NSString *urlString = DOCS_SITE;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     [_webView loadRequest:urlRequest];
