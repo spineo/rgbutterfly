@@ -28,7 +28,11 @@
     
     UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
-    [aboutTextView setText:ABOUT_TEXT];
+    
+    NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
+    [aboutText addAttribute: NSLinkAttributeName value:DOCS_SITE range: NSMakeRange(232, 6)];
+    
+    [aboutTextView setAttributedText:aboutText];
     [aboutTextView setFont:LG_TEXT_FIELD_FONT];
     [aboutTextView setTextColor:LIGHT_TEXT_COLOR];
     [aboutTextView setBackgroundColor:DARK_BG_COLOR];

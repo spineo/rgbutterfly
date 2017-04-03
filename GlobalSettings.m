@@ -409,42 +409,14 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // "About" section text
 //
-NSString * const ABOUT_TEXT = @"\nThis app aims to help users find potential acrylic "
-"color paint matches associated with selected areas of a photo. It does this by applying a "
-"selected 'match' algorithm against a database of reference paints and paint mixes.\n\n"
-"The Reference Data:\n"
-"The Paint Swatch Database is comprised of about 2,500 paint references and mixes "
-"each of them created manually. For accuracy. 1 ml syringes were used to measure/dispense "
-"the paint and cotton swabs to mix them (for this version, only two-color "
-"mixes were created though app supports using a 'mix' as reference for a three-way or "
-"multi-color mix)\n\n"
-"The paint was applied on acid-free, triple-primed white canvas paper in generally thick layers "
-"or 'Thick' as described in the canvas coverage property. Paint coverage might also be defined "
-"as 'Thin' or 'Sparse' (usually as a result of using less paint and/or transparent or translucent  paints)\n\n"
-"As the paint swatches sheets were created they were photographed. For lighting consistency, "
-"this was done at the same time of day for each sheet and in a way that eliminated reflection "
-"as much as possible. Photographed swatches were then entered manually using the app 'mix "
-"association' feature and the individual properties of each swatch set appropriately.\n\n"
+NSString * const ABOUT_TEXT = @"\nThis app aims to help users find acrylic color "
+"paint matches associated with selected areas of a photo. It does this by applying a "
+"selected 'match' algorithm against a database of reference paints and paint mixes. "
+"Please visit the About page for more information about this App.\n\n";
 
-"The Match Methodology:\n"
-"The user may apply seven algorithms to find one or more potential matches. Each algorithm "
-"compares the tap area against the database of swatches to yield a difference (d). The "
-"smaller the d value the better the match. For those curious the algorithms, based on RGB and/or HSB color properties, are as follows:\n"
-"\nRGB only (default):\n"
-"d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2)\n"
-"\nHSB only:\n"
-"d = sqrt((h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2)\n"
-"\nRGB and Hue:\n"
-"d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2)\n"
-"\nRGB + HSB:\n"
-"d = sqrt((r2-r1)^2 + (g2-g1)^2 + (b2-b1)^2 + (h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2)\n"
-"\nWeighted RGB:\n"
-"d = ((r2-r1)*0.30)^2 + ((g2-g1)*0.59)^2 + ((b2-b1)*0.11)^2\n"
-"\nWeighted RGB + HSB:\n"
-"d = ((r2-r1)*0.30)^2 + ((g2-g1)*0.59)^2 + ((b2-b1)*0.11)^2 + (h2-h1)^2 + (s2-s1)^2 + (b2-b1)^2\n"
-"\nHue only:\n"
-"d = sqrt((h2-h1)^2)\n\n"
-"Why seven? I found that though some of these algorithms (in particular the RGB method) consistently produce the best results others might perform better at different RGB/HSB ranges.\n";
+// URL is place on the 'About' Text (might want to compute the offset/length programmatically)
+//
+NSString * const ABOUT_URL  = @"https://spineo.github.io/RGButterflyDocs/About.md";
 
 
 // "Disclaimer" section text

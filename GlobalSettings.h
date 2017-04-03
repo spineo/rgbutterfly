@@ -403,6 +403,7 @@ extern NSString * const FULL_LISTING_TYPE;
 // "About" section text
 //
 extern NSString * const ABOUT_TEXT;
+extern NSString * const ABOUT_URL;
 
 // "Disclaimer" section text
 //
