@@ -416,7 +416,8 @@ NSString * const ABOUT_TEXT = @"\nThis app aims to help users find acrylic color
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //
-NSString * const ABOUT_URL  = @"https://spineo.github.io/RGButterflyDocs/About.md";
+NSString * const ABOUT_URL  = @"https://spineo.github.io/RGButterflyDocs/About.html";
+
 
 
 // "Disclaimer" section text

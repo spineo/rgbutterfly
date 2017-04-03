@@ -30,7 +30,7 @@
     
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
-    [aboutText addAttribute: NSLinkAttributeName value:DOCS_SITE range: NSMakeRange(232, 6)];
+    [aboutText addAttribute: NSLinkAttributeName value:ABOUT_URL range: NSMakeRange(232, 6)];
     
     [aboutTextView setAttributedText:aboutText];
     [aboutTextView setFont:LG_TEXT_FIELD_FONT];
