@@ -492,6 +492,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define LARGE_BOLD_FONT     [UIFont boldSystemFontOfSize:14]
 #define ITALIC_FONT         [UIFont italicSystemFontOfSize:12]
 #define LARGE_ITALIC_FONT   [UIFont italicSystemFontOfSize:14]
+#define VLARGE_ITALIC_FONT  [UIFont italicSystemFontOfSize:16]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

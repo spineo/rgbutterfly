@@ -31,20 +31,24 @@
     
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
-    
+    int aboutTextLen = (int)aboutText.length;
+    //[aboutText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, aboutTextLen)];
+    //[aboutText addAttribute:NSFontAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, aboutTextLen)];
+
     // Link 1
     //
     NSRange urlMatch_1 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:ABOUT_PAT];
-    int url_loc_1 = (int)urlMatch_1.location;
-    int url_len_1 = (int)urlMatch_1.length;
-    [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range: NSMakeRange(url_loc_1, url_len_1)];
+    [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range:urlMatch_1];
+    [aboutText addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:urlMatch_1];
+    
+    //[aboutText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-BookOblique" size:14.0] range:urlMatch_1];
     
     // Link 2
     //
     NSRange urlMatch_2 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:DOCS_SITE_PAT];
-    int url_loc_2 = (int)urlMatch_2.location;
-    int url_len_2 = (int)urlMatch_2.length;
-    [aboutText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range: NSMakeRange(url_loc_2, url_len_2)];
+    [aboutText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch_2];
+    [aboutText addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:urlMatch_2];
+    
     
     [aboutTextView setAttributedText:aboutText];
     [aboutTextView setFont:VLG_TEXT_FIELD_FONT];
@@ -54,10 +58,7 @@
     [aboutTextView setEditable:FALSE];
     [aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
     
-    UILabel *openSafariLabel = [FieldUtils createLabel:@"Open Web Docs in Safari" xOffset:DEF_X_OFFSET yOffset:DEF_Y_OFFSET];
-    
     [self.view addSubview:aboutTextView];
-    [self.view addSubview:openSafariLabel];
 }
 
 - (void)didReceiveMemoryWarning {
