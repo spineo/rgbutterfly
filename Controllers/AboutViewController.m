@@ -9,6 +9,7 @@
 #import "AboutViewController.h"
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
+#import "StringObjectUtils.h"
 
 @interface AboutViewController ()
 
@@ -30,10 +31,23 @@
     
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
-    [aboutText addAttribute: NSLinkAttributeName value:ABOUT_URL range: NSMakeRange(232, 6)];
+    
+    // Link 1
+    //
+    NSRange urlMatch_1 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:ABOUT_PAT];
+    int url_loc_1 = (int)urlMatch_1.location;
+    int url_len_1 = (int)urlMatch_1.length;
+    [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range: NSMakeRange(url_loc_1, url_len_1)];
+    
+    // Link 2
+    //
+    NSRange urlMatch_2 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:DOCS_SITE_PAT];
+    int url_loc_2 = (int)urlMatch_2.location;
+    int url_len_2 = (int)urlMatch_2.length;
+    [aboutText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range: NSMakeRange(url_loc_2, url_len_2)];
     
     [aboutTextView setAttributedText:aboutText];
-    [aboutTextView setFont:LG_TEXT_FIELD_FONT];
+    [aboutTextView setFont:VLG_TEXT_FIELD_FONT];
     [aboutTextView setTextColor:LIGHT_TEXT_COLOR];
     [aboutTextView setBackgroundColor:DARK_BG_COLOR];
     [aboutTextView setScrollEnabled:TRUE];
@@ -45,19 +59,6 @@
     [self.view addSubview:aboutTextView];
     [self.view addSubview:openSafariLabel];
 }
-
-- (IBAction)openSafari:(id)sender {
-    UIApplication *application = [UIApplication sharedApplication];
-    NSURL *url = [NSURL URLWithString:DOCS_SITE];
-    
-    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-        [application openURL:url options:@{}
-           completionHandler:^(BOOL success) {
-               NSLog(@"Open %@: %d",DOCS_SITE,success);
-           }];
-    }
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

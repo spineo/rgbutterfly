@@ -26,10 +26,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
-                                        <rect key="frame" x="0.0" y="86" width="351" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="86" width="1000" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <frame key="frameInset" minY="-1" width="351" height="1"/>
+                                            <frame key="frameInset" minY="-1" width="1000" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -807,21 +807,7 @@
         <scene sceneID="Xpe-CD-fZ6">
             <objects>
                 <viewController storyboardIdentifier="AboutViewController" title="About this App" id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
-                    <toolbarItems>
-                        <barButtonItem title="Safari Docs" id="zjv-zW-3na">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="openSafari:" destination="LAd-NZ-GB6" id="kgt-DR-dgW"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="QWi-m3-wTS"/>
-                        <barButtonItem title="WebView Docs &gt;" id="jJz-eM-6AV">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="wtB-W6-E3k" kind="presentation" identifier="WebViewSegue" id="He8-p1-sHp"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="About this App" id="6rs-A3-XCv">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="frn-Qm-Jeu">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -834,42 +820,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22u-HA-7Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="748" y="659.82008995502258"/>
-        </scene>
-        <!--RGButterflyDocs-->
-        <scene sceneID="IJV-sW-6dn">
-            <objects>
-                <viewController storyboardIdentifier="WebViewController" id="eG0-yq-gl7" customClass="WebViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vrH-oz-PHT"/>
-                        <viewControllerLayoutGuide type="bottom" id="Z0X-R1-nSi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="124-2e-A07">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvE-xV-ZHg">
-                                <frame key="frameInset" minX="16" width="343" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="RGButterflyDocs" id="ud8-91-wlI">
-                        <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="lhj-ef-DGA">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="goBack:" destination="eG0-yq-gl7" id="dSW-1R-tl8"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="webView" destination="cvE-xV-ZHg" id="4gx-kv-5I7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VFU-o4-7Ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2240.8000000000002" y="662.51874062968523"/>
         </scene>
         <!--Disclaimer-->
         <scene sceneID="F4T-3K-PxL">
@@ -936,30 +886,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVH-bX-cHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7" y="1334"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MQa-9j-ar9">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="wtB-W6-E3k" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Pw0-rd-9Uh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="90V-zR-Q9R">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="eG0-yq-gl7" kind="relationship" relationship="rootViewController" id="Gdr-ss-zz8"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fLU-0J-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1505" y="663"/>
         </scene>
     </scenes>
     <resources>

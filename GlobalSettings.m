@@ -58,10 +58,6 @@ NSString * const MD5_CONT_TYPE  = @"text/plain";
 NSString * const VERSION_FILE   = @"version.txt";
 NSString * const VER_CONT_TYPE  = @"text/plain";
 
-// Documentation Site
-//
-NSString * const DOCS_SITE     = @"https://spineo.github.io/RGButterflyDocs/";
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords
@@ -407,16 +403,19 @@ NSString * const EMPTY_SQ_IMAGE_NAME    = @"square.png";
 NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 
-// "About" section text
+// "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_TEXT = @"\nThis app aims to help users find acrylic color "
-"paint matches associated with selected areas of a photo. It does this by applying a "
-"selected 'match' algorithm against a database of reference paints and paint mixes. "
-"Please visit the About page for more information about this App.\n\n";
+NSString * const ABOUT_TEXT = @"\nThis experimental App grew out of my interest in painting and aims to help users find Acrylics color paint matches associated with selected areas of a photo. It does this by applying a selected Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URLs for more information about this App.\n\n";
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //
-NSString * const ABOUT_URL  = @"https://spineo.github.io/RGButterflyDocs/About.html";
+NSString * const ABOUT_PAT = @"Reference Data and Match Methodology";
+NSString * const ABOUT_URL     = @"https://spineo.github.io/RGButterflyDocs/About.html";
+
+// Documentation Site
+//
+NSString * const DOCS_SITE_URL = @"https://spineo.github.io/RGButterflyDocs/";
+NSString * const DOCS_SITE_PAT = @"Web Documentation";
 
 
 
