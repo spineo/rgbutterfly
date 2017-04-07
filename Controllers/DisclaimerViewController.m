@@ -8,6 +8,7 @@
 
 #import "DisclaimerViewController.h"
 #import "GlobalSettings.h"
+#import "StringObjectUtils.h"
 
 @interface DisclaimerViewController ()
 
@@ -26,9 +27,19 @@
     
     UITextView *disclaimerTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
-    [disclaimerTextView setText:DISCLAIMER_TEXT];
-    [disclaimerTextView setFont:LG_TEXT_FIELD_FONT];
-    [disclaimerTextView setTextColor:LIGHT_TEXT_COLOR];
+    NSMutableAttributedString *disclaimerText = [[NSMutableAttributedString alloc] initWithString:DISCLAIMER_TEXT];
+    int disclaimerTextLen = (int)disclaimerText.length;
+    
+    [disclaimerText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, disclaimerTextLen)];
+    [disclaimerText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, disclaimerTextLen)];
+    
+    // Link
+    //
+    NSRange urlMatch = [StringObjectUtils matchString:DISCLAIMER_TEXT toRegex:DOCS_SITE_PAT];
+    [disclaimerText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch];
+    [disclaimerText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch];
+    
+    [disclaimerTextView setAttributedText:disclaimerText];
     [disclaimerTextView setBackgroundColor:DARK_BG_COLOR];
     [disclaimerTextView setScrollEnabled:TRUE];
     [disclaimerTextView setEditable:FALSE];

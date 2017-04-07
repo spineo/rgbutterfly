@@ -405,12 +405,12 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_TEXT = @"\nThis experimental App grew out of my interest in painting and aims to help users find Acrylics color paint matches associated with selected areas of a photo. It does this by applying a selected Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URLs for more information about this App.\n\n";
+NSString * const ABOUT_TEXT = @"\nThis experimental App grew out of my interest in painting and aims to help users find Acrylics color paint matches associated with selected areas of a photo. It does this by applying a selected Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URL for more information about this App.\n\n";
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //
 NSString * const ABOUT_PAT = @"Reference Data and Match Methodology";
-NSString * const ABOUT_URL     = @"https://spineo.github.io/RGButterflyDocs/About.html";
+NSString * const ABOUT_URL = @"https://spineo.github.io/RGButterflyDocs/About.html";
 
 // Documentation Site
 //
@@ -418,27 +418,15 @@ NSString * const DOCS_SITE_URL = @"https://spineo.github.io/RGButterflyDocs/";
 NSString * const DOCS_SITE_PAT = @"Web Documentation";
 
 
-
 // "Disclaimer" section text
 //
-NSString * const DISCLAIMER_TEXT = @"\nThis app attempts to find matching paint references "
-"and/or mixes associated with a user selected area in a photo. It does this by "
-"applying a user selected algorithm based on the RGB and/or HSB color properties. "
-"In many cases the heuristic misses the mark or is unable to find a "
-"suitable match against the database. My hope is to continue to improve that match "
-"rate with future releases as a result of both refinements in the algorithm and "
-"new paint references/mixes added to the database.\n\n"
-"The results produced by this app are just guideliness that could be useful to the novice "
-"artist. While I have attempted to capture, as carefully as possible, the real colors of "
-"the reference paints and mixes, inaccuracies resulting from the paint mixing process "
-"and/or photographic lighting are likely to exist (see 'The Reference Data' "
-"in the 'About this App' section)\n\n"
-"While most references are based on the Liquitex brand this does not mean I "
-"endorse that brand. Furthermore, no external entity has financed "
-"the development of this app. Reference colors or mixes linked "
-"to any brand may not accurately represent that brand due to potential shortcomings "
-"in the data capture methodologies.\n\n"
-"Finally, this app grew out of my passion for art and programming. Since I am not a professional artist, photographer, or expert in color theory I had to first research and then implement (much through trial and error) the methods and algorithms used for this app. My hope is that this is just the first version of what might become a work in progress. I would like to hear from you on how I might improve it!\n";
+NSString * const DISCLAIMER_TEXT = @"This App attempts to find matching paint references and/or mixes associated with user selected areas in a photo. It does this by applying algorithm(s) based on the RGB and/or HSB color properties. In many cases the heuristic misses the mark or is unable to find a suitable match against the database. My hope is to continue to improve that match accuracy with future releases as a result of both refinements in the algorithm and new paint references/mixes added to the database.\n\n\
+The results produced by this App are just guideliness that might be useful to the novice artist. While I have attempted to capture, as carefully as possible, the real colors of the reference paints and mixes, inaccuracies resulting from the paint mixing process and/or photographic lighting are likely to exist.\n\n\
+While most references are based on the Liquitex brand this does not mean that I endorse that brand (it just happens to be the brand I use the most). Furthermore, no external entity has financed the development of this App. Reference colors or mixes linked to any brand may not necessarily represent that brand due to potential shortcomings in the data capture methodologies.\n\n\
+The App currently focuses on heavy-body Acrylics (see photo below) since that is the type of media I am more familiar with but I am open to the possibility of expanding to other media.\n\n\
+Finally, this App is something that I have work on during my spare time and grew out of my passion for Software Engineering and Art. Since I am not a professional artist, photographer, or expert in color theory I had to first research and then implement (much through trial and error) the methods and algorithms used for this App. My hope is that this is just the first version of a work in progress.\n\n\
+Please visit the Web Documentation URL for more information about this App.\n\n";
+
 
 // Feedback (Email)
 //
