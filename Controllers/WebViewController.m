@@ -21,7 +21,7 @@
     
     [_webView setDelegate:self];
     
-    NSString *urlString = DOCS_SITE;
+    NSString *urlString = DOCS_SITE_URL;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     [_webView loadRequest:urlRequest];

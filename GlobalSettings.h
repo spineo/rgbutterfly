@@ -57,10 +57,6 @@ extern NSString * const MD5_CONT_TYPE;
 extern NSString * const VERSION_FILE;
 extern NSString * const VER_CONT_TYPE;
 
-// Documentation Site
-//
-extern NSString * const DOCS_SITE;
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Keywords
@@ -403,6 +399,13 @@ extern NSString * const FULL_LISTING_TYPE;
 // "About" section text
 //
 extern NSString * const ABOUT_TEXT;
+extern NSString * const ABOUT_PAT;
+extern NSString * const ABOUT_URL;
+
+// Documentation Site
+//
+extern NSString * const DOCS_SITE_URL;
+extern NSString * const DOCS_SITE_PAT;
 
 // "Disclaimer" section text
 //
@@ -489,6 +492,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define LARGE_BOLD_FONT     [UIFont boldSystemFontOfSize:14]
 #define ITALIC_FONT         [UIFont italicSystemFontOfSize:12]
 #define LARGE_ITALIC_FONT   [UIFont italicSystemFontOfSize:14]
+#define VLARGE_ITALIC_FONT  [UIFont italicSystemFontOfSize:16]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

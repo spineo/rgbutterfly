@@ -12,5 +12,6 @@
 @interface StringObjectUtils : NSObject
 
 + (void)setFieldPlaceholder:(UITextField *)textField text:(NSString *)text;
++ (NSRange)matchString:(NSString *)string toRegex:(NSString *)regex;
 
 @end
