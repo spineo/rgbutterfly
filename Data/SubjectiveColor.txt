@@ -15,7 +15,7 @@ Blue,          #0000FF
 Blue Violet,   #6600FF
 Violet,        #9900FF
 Red Violet,    #FF00FF
+Cream,         #FFFDD0
 White,         #FFFFFF
-Silver,        #C0C0C0
 Grey,          #D3D3D3
 Black,         #000000
