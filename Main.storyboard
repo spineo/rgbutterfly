@@ -887,7 +887,6 @@
             </objects>
             <point key="canvasLocation" x="7" y="1334"/>
         </scene>
-<<<<<<< HEAD
         <!--Navigation Controller-->
         <scene sceneID="MQa-9j-ar9">
             <objects>
@@ -909,8 +908,6 @@
             </objects>
             <point key="canvasLocation" x="1505" y="663"/>
         </scene>
-=======
->>>>>>> 1b35a3517ea54a96b283430fca23b25c705fa269
     </scenes>
     <resources>
         <image name="arrow" width="30" height="30"/>
