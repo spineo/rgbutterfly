@@ -322,7 +322,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // Adjust the layout when the orientation changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchBarSetFrames)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrames)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
     
@@ -341,12 +341,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_titleView addSubview:_mainSearchBar];
     [_titleView addSubview:_cancelButton];
     
-    [self searchBarSetFrames];
+    [self setFrames];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self startSpinner];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -713,7 +712,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
 
-    
     if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
         
@@ -749,7 +747,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [headerLabel setTextAlignment:NSTextAlignmentCenter];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
-
         if (section == 0) {
             [headerLabel setText:[[NSString alloc] initWithFormat:@"%@ Groupings", COLORS_TYPE]];
             [headerLabel setTextAlignment: NSTextAlignmentCenter];
@@ -769,6 +766,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             UIBarButtonItem *arrowUpButtonItem = [[UIBarButtonItem alloc] initWithImage:_upArrowImage style:UIBarButtonItemStylePlain target:self action:@selector(expandOrCollapseSection:)];
             
             UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_HDR_HGT)];
+            
             [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
             
             UIBarButtonItem *headerButtonLabel = [[UIBarButtonItem alloc] initWithTitle:[_subjColorNames objectAtIndex:index] style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -794,8 +792,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
             
             scrollViewToolbar.items = newItems;
             
-            [headerView addSubview:scrollViewToolbar];
-            
             if ([colorName isEqualToString:@"Black"]) {
                 [headerButtonLabel setTintColor:LIGHT_TEXT_COLOR];
                 [arrowButtonItem setTintColor:LIGHT_TEXT_COLOR];
@@ -804,10 +800,9 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 [headerButtonLabel setTintColor:backgroundColor];
                 [arrowButtonItem setTintColor:backgroundColor];
             };
-            
-            [scrollViewToolbar sizeToFit];
-
             [ColorUtils setGlaze:headerView];
+
+            [headerView addSubview:scrollViewToolbar];
         }
         
     } else {
@@ -1402,7 +1397,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_mainSearchBar setText:@""];
 }
 
-- (void)searchBarSetFrames {
+- (void)setFrames {
     CGSize navBarSize = self.view.bounds.size;
     [_titleView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarSize.width, navBarSize.height)];
     
@@ -1418,6 +1413,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
         xOffset = DEF_X_OFFSET;
     }
     [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
+    
+    // Ensure that table view gets re-displayed
+    //
+    [_colorTableView reloadData];
 }
 
 - (void)showAllColors {

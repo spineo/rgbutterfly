@@ -30,7 +30,7 @@ int const MIGRATE_STORE         = 0;
 
 // Cleanup orphans
 //
-int const CLEANUP               = 0;
+int const CLEANUP               = 1;
 
 
 // Disable Write-Ahead Logging (by default this is enabled)

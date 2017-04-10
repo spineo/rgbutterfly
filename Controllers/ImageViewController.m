@@ -1079,11 +1079,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_paintSwatches addObject:_swatchObj];
         
         if ([_viewType isEqualToString:MATCH_TYPE]) {
-//            if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) && _imageViewSize < IMAGE_VIEW) {
-//                [self matchButtonsShow];
-//            } else {
-//                [self matchButtonsHide];
-//            }
             [self matchButtonsShow];
             
         } else {
@@ -1101,12 +1096,22 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         //[_imageTableView setHidden:YES];
     
     } else {
-        _currTapSection--;
-        
+
         [_imageTableView setHidden:NO];
         [_imageScrollView setHidden:NO];
         
+        _currTapSection--;
         int index = _currTapSection - 1;
+        int swatchCount = (int)[_paintSwatches count];
+
+        // Ensure that empty element not retrieved
+        //
+        while (index >= swatchCount) {
+            _paintSwatchCount--;
+            _currTapSection--;
+            index = _currTapSection - 1;
+        }
+        
         _swatchObj = [_paintSwatches objectAtIndex:index];
     }
     
