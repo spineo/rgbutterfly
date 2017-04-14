@@ -144,8 +144,8 @@ const int IMAGE_TAG  = 6;
     
     // Offsets and Widths
     //
-    _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
-    _doneButtonWidth  = 1.0;
+    _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
+    _doneButtonWidth  = HIDE_BUTTON_WIDTH;
 
     
     // Set the placeholders
@@ -364,7 +364,7 @@ const int IMAGE_TAG  = 6;
             
             // Compute the ypt
             //
-            CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / 2;
+            CGFloat ypt = CGPointFromString(_selPaintSwatch.coord_pt).y - _imageViewHeight / DEF_Y_OFFSET_DIVIDER;
             ypt = (ypt < 0.0) ? 0.0 : ypt;
             
             CGFloat yAxisLimit = _referenceImage.size.height - _imageViewHeight;
@@ -997,7 +997,7 @@ const int IMAGE_TAG  = 6;
 - (void)resizeSelFieldAndDone:(CGFloat)doneWidth {
     _tableViewWidth     = self.tableView.bounds.size.width;
     _doneButtonWidth    = doneWidth;
-    _selTextFieldWidth  = _tableViewWidth - _imageViewWidth - _doneButtonWidth - (DEF_FIELD_PADDING * 2);
+    _selTextFieldWidth  = _tableViewWidth - _imageViewWidth - _doneButtonWidth - DEF_MD_FIELD_PADDING;
     _doneButtonXOffset  = _imageViewWidth + _selTextFieldWidth + DEF_FIELD_PADDING;
 }
 

@@ -233,7 +233,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     // Offsets and Widths
     //
-    _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
+    _textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
 
 
     // Attributes
@@ -398,7 +398,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     CGFloat viewWidth = self.tableView.bounds.size.width;
     CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
     
-    _colorTextFieldWidth = viewWidth - _imageViewWidth - (DEF_FIELD_PADDING * 2);
+    _colorTextFieldWidth = viewWidth - _imageViewWidth - DEF_MD_FIELD_PADDING;
 
     [_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _colorTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_swatchTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
@@ -526,7 +526,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             cell.imageView.clipsToBounds = YES;
             cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
             
-            CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - (DEF_FIELD_PADDING * 2);
+            CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - DEF_MD_FIELD_PADDING;
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
             [refName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, refNameWidth, DEF_SM_TEXTVIEW_HGT)];
             [refName setDelegate:self];
@@ -1061,7 +1061,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     UILabel *label = (UILabel*)view;
     if (label == nil) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET,DEF_Y_OFFSET,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
     }
     
     if (pickerView.tag == SWATCH_PICKER_TAG) {

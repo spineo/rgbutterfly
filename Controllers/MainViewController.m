@@ -102,7 +102,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [self.view addSubview:_spinner];
     [_spinner startAnimating];
     
-    CGFloat labelYOffset = (self.view.bounds.size.height / 2.0) - (DEF_LABEL_HEIGHT / 2.0);
+    CGFloat labelYOffset = (self.view.bounds.size.height / DEF_Y_OFFSET_DIVIDER) - (DEF_LABEL_HEIGHT / DEF_Y_OFFSET_DIVIDER);
     _updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, labelYOffset, self.view.bounds.size.width, DEF_LABEL_HEIGHT)];
     
     [_updateLabel setText:SPINNER_LABEL_LOAD];
@@ -1400,7 +1400,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     CGSize buttonSize  = _cancelButton.bounds.size;
     CGFloat xPoint     = navBarSize.width - buttonSize.width - DEF_MD_FIELD_PADDING;
-    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / 2;
+    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / DEF_Y_OFFSET_DIVIDER;
     [_cancelButton setFrame:CGRectMake(xPoint, yPoint, buttonSize.width, buttonSize.height)];
     
     CGFloat xOffset;

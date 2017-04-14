@@ -541,7 +541,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _listTypeName  = [FieldUtils createTextField:_listType tag:LIST_TYPE_FIELD_TAG];
     CGFloat viewWidth = self.tableView.bounds.size.width;
     CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
-    CGFloat textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
+    CGFloat textFieldYOffset = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     [_listTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
     [_listTypeName setTextAlignment:NSTextAlignmentCenter];
     [_listTypeName setDelegate:self];
@@ -1157,7 +1157,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     UILabel *label = (UILabel*)view;
     if (label == nil) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET,DEF_Y_OFFSET,self.view.bounds.size.width, DEF_PICKER_ROW_HEIGHT)];
     }
     
     [label setText:[_listTypeNames objectAtIndex:row]];
