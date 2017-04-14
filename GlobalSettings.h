@@ -42,6 +42,12 @@ extern NSString * const LOCAL_PATH;
 //
 extern int const FORCE_UPDATE_DB;
 
+// DB Update Statuses (referenced in the Init VC)
+//
+extern int const NO_UPDATE;
+extern int const FAILED_CHECK;
+extern int const DO_UPDATE;
+
 // Jenkins related
 //
 extern NSString * const AUTHTOKEN_FILE;

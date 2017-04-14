@@ -71,13 +71,13 @@
         [self continue];
     }
     
-    _updateStat = 0;
+    _updateStat = NO_UPDATE;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:TRUE];
     
-    CGFloat labelYOffset = (self.view.bounds.size.height / 2.0) - (DEF_LABEL_HEIGHT / 2.0);
+    CGFloat labelYOffset = (self.view.bounds.size.height / DEF_Y_OFFSET_DIVIDER) - (DEF_LABEL_HEIGHT / DEF_Y_OFFSET_DIVIDER);
     _updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, labelYOffset, self.view.bounds.size.width, DEF_LABEL_HEIGHT)];
     
     [_updateLabel setText:@""];
@@ -122,7 +122,7 @@
     
             NSString *updateMsg = @"A New Database Version was Detected";
             if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
-                _updateStat = 2;
+                _updateStat = DO_UPDATE;
                 updateMsg = @"A Force Update was Selected or new Deployment Detected";
                 
                 // Reset force update back to FALSE
@@ -136,7 +136,7 @@
             
             // New version detected
             //
-            if (_updateStat == 2) {
+            if (_updateStat == DO_UPDATE) {
                 UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
                 UIAlertAction* YesButton = [UIAlertAction
                                             actionWithTitle:@"Yes"
@@ -175,7 +175,7 @@
                 
             // Failed update preparation
             //
-            } else if (_updateStat == 1) {
+            } else if (_updateStat == FAILED_CHECK) {
                 UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:@"Failed Check for Updates"];
                 UIAlertAction* ok = [UIAlertAction
                                      actionWithTitle:@"OK"
@@ -191,7 +191,7 @@
         }
     }
     
-    if (_updateStat == 0) {
+    if (_updateStat == NO_UPDATE) {
         [_updateLabel setText:SPINNER_LABEL_LOAD];
         [self continue];
     }

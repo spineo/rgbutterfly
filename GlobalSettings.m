@@ -41,7 +41,14 @@ NSString * const LOCAL_PATH = @"./";
 
 // Upgrade the database from the local path copy or GitHub
 //
-int const FORCE_UPDATE_DB      = 0;
+int const FORCE_UPDATE_DB       = 0;
+
+// DB Update Statuses (referenced in the Init VC)
+//
+int const NO_UPDATE             = 0;
+int const FAILED_CHECK          = 1;
+int const DO_UPDATE             = 2;
+
 
 // Jenkins related
 //
