@@ -86,6 +86,9 @@ extern CGFloat const DEF_MIN_HEADER;
 //
 extern CGFloat const DEF_HGT_ALIGN_FACTOR;
 extern CGFloat const DEF_CORNER_RAD_FACTOR;
+extern CGFloat const DEF_X_OFFSET_DIVIDER;
+extern CGFloat const DEF_Y_OFFSET_DIVIDER;
+extern CGFloat const DEF_CIRCLE_OFFSET_DIV;
 
 // Used for embedded labels
 //

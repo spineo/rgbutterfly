@@ -87,6 +87,9 @@ CGFloat const DEF_MIN_HEADER        = 1.0;
 //
 CGFloat const DEF_HGT_ALIGN_FACTOR  = 2.0;
 CGFloat const DEF_CORNER_RAD_FACTOR = 2.0;
+CGFloat const DEF_X_OFFSET_DIVIDER  = 2.0;
+CGFloat const DEF_Y_OFFSET_DIVIDER  = 2.0;
+CGFloat const DEF_CIRCLE_OFFSET_DIV = 3.3;
 
 // Used for embedded labels
 //

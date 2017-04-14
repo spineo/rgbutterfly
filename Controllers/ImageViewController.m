@@ -93,7 +93,7 @@
 
 @implementation ImageViewController
 
-// Action Type Button Index (this button gets replaced in the Toolsbar list)
+// Action Type Button Index (this button gets replaced in the Toolbar list)
 //
 int ACTION_TYPE_INDEX = 3;
 
@@ -776,8 +776,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageScrollView setHidden:NO];
             [_imageTableView setHidden:NO];
             
-            [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height * 0.5)];
-            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height * 0.5, width, height * 0.5 - TABLEVIEW_BOTTOM_OFFSET)];
+            [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height / DEF_Y_OFFSET_DIVIDER)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height / DEF_Y_OFFSET_DIVIDER, width, (height / DEF_Y_OFFSET_DIVIDER)  - TABLEVIEW_BOTTOM_OFFSET)];
             
             [_imageScrollView setNeedsDisplay];
             [_imageView setNeedsDisplay];
@@ -795,7 +795,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageTableView setHidden:YES];
             
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+            [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
             
             [self matchButtonsHide];
             
@@ -814,7 +814,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_imageScrollView setHidden:NO];
         
         [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height)];
-        [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, 0.0, 0.0)];
+        [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
 
         [self matchButtonsHide];
         
@@ -1023,11 +1023,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
-        CGFloat xpt = pt.x - (_shapeLength / 2);
-        CGFloat ypt = pt.y - (_shapeLength / 2);
+        CGFloat xpt = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ypt = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
-        CGFloat xtpt= _touchPoint.x - (_shapeLength / 2);
-        CGFloat ytpt= _touchPoint.y - (_shapeLength / 2);
+        CGFloat xtpt= _touchPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ytpt= _touchPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
 
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             [self setTapAreaSeen:1];
@@ -1071,8 +1071,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         // Save the thumbnail image
         //
-        CGFloat xpt= _touchPoint.x - (_shapeLength / 2);
-        CGFloat ypt= _touchPoint.y - (_shapeLength / 2);
+        CGFloat xpt= _touchPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ypt= _touchPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
         [_swatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
         
@@ -1128,11 +1128,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
-        CGFloat xpt = pt.x - (_shapeLength / 2);
-        CGFloat ypt = pt.y - (_shapeLength / 2);
+        CGFloat xpt = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ypt = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
-        CGFloat xtpt= _dragStartPoint.x - (_shapeLength / 2);
-        CGFloat ytpt= _dragStartPoint.y - (_shapeLength / 2);
+        CGFloat xtpt= _dragStartPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ytpt= _dragStartPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             
@@ -1158,8 +1158,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             
             // Save the thumbnail image
             //
-            CGFloat xpt= _dragEndPoint.x - (_shapeLength / 2);
-            CGFloat ypt= _dragEndPoint.y - (_shapeLength / 2);
+            CGFloat xpt= _dragEndPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+            CGFloat ypt= _dragEndPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
             UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
             [newSwatchObj setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(imageThumb)]];
             
@@ -1194,11 +1194,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         
-        CGFloat xpt = pt.x - (_shapeLength / 2);
-        CGFloat ypt = pt.y - (_shapeLength / 2);
+        CGFloat xpt = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ypt = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
-        CGFloat xtpt= _dragEndPoint.x - (_shapeLength / 2);
-        CGFloat ytpt= _dragEndPoint.y - (_shapeLength / 2);
+        CGFloat xtpt= _dragEndPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ytpt= _dragEndPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
         
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
@@ -1265,11 +1265,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         CGFloat x, y;
         if ([_shapeGeom isEqualToString:_circleLabel]) {
-            x = pt.x - (_shapeLength / 3.3);
-            y = pt.y - (_shapeLength / 3.3);
+            x = pt.x - (_shapeLength / DEF_CIRCLE_OFFSET_DIV);
+            y = pt.y - (_shapeLength / DEF_CIRCLE_OFFSET_DIV);
         } else {
-            x = pt.x - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
-            y = pt.y - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
+            x = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER) + TAP_AREA_LABEL_INSET;
+            y = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER) + TAP_AREA_LABEL_INSET;
         }
         
         UIGraphicsBeginImageContext(image.size);
@@ -1305,11 +1305,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CGPoint pt = CGPointFromString(swatchObj.coord_pt);
         CGFloat x, y;
         if ([_shapeGeom isEqualToString:_circleLabel]) {
-            x = pt.x - (_shapeLength / 3.3);
-            y = pt.y - (_shapeLength / 3.3);
+            x = pt.x - (_shapeLength / DEF_CIRCLE_OFFSET_DIV);
+            y = pt.y - (_shapeLength / DEF_CIRCLE_OFFSET_DIV);
         } else {
-            x = pt.x - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
-            y = pt.y - (_shapeLength / 2) + TAP_AREA_LABEL_INSET;
+            x = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER) + TAP_AREA_LABEL_INSET;
+            y = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER) + TAP_AREA_LABEL_INSET;
         }
 
         UIGraphicsBeginImageContext(image.size);
@@ -1398,8 +1398,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         CGPoint pt = CGPointFromString([swatchObj coord_pt]);
         
-        CGFloat xpoint = pt.x - (_shapeLength / 2);
-        CGFloat ypoint = pt.y - (_shapeLength / 2);
+        CGFloat xpoint = pt.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+        CGFloat ypoint = pt.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
         // make shape 5 px from border
         //
@@ -1523,7 +1523,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (! custCell) {
             custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
-        [custCell setXOffset:custCell.bounds.origin.x + DEF_TABLE_CELL_HEIGHT + DEF_FIELD_PADDING*2];
+        [custCell setXOffset:custCell.bounds.origin.x + DEF_TABLE_CELL_HEIGHT + DEF_MD_FIELD_PADDING];
         [custCell setBackgroundColor:DARK_BG_COLOR];
         [custCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
@@ -1615,7 +1615,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell.imageView setFrame:CGRectMake(2, 15, cell.imageView.frame.size.width, cell.imageView.frame.size.height)];
+    [cell.imageView setFrame:CGRectMake(2.0, 15.0, cell.imageView.frame.size.width, cell.imageView.frame.size.height)];
 }
 
 // Use to switch between RGB and Paint

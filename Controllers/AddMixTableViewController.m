@@ -532,7 +532,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
     CGSize buttonSize  = _cancelButton.bounds.size;
     CGFloat xPoint     = navBarSize.width - buttonSize.width - DEF_MD_FIELD_PADDING;
-    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / 2;
+    CGFloat yPoint     = (navBarSize.height - buttonSize.height) / DEF_Y_OFFSET_DIVIDER;
     [_cancelButton setFrame:CGRectMake(xPoint, yPoint, buttonSize.width, buttonSize.height)];
     
     CGFloat xOffset;

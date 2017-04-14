@@ -192,7 +192,7 @@ const int ASSOC_SET_TAG        = 8;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
     _assocImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
     _assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
-    _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / 2;
+    _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     
     
     // Initialize the PaintSwatches array with default names (if values don't already exist)
@@ -200,7 +200,6 @@ const int ASSOC_SET_TAG        = 8;
     int objCount = (int)[_paintSwatches count];
 
     for (int i=0; i < objCount; i++) {
-        
         NSString *colorFormatLabel;
         int ref_parts_ratio = 0;
         int mix_parts_ratio = 0;
