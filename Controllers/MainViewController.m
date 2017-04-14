@@ -346,11 +346,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [self loadData];
     [self.view setBackgroundColor:DARK_BG_COLOR];
+    [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
