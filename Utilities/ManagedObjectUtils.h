@@ -30,6 +30,7 @@
 //
 + (void)insertSubjectiveColors;
 + (void)insertFromDataFile:(NSString *)entityName;
++ (void)bulkLoadGenericAssociation:(NSString *)fileName;
 + (void)insertTestPaintSwatches:(NSManagedObjectContext *)context;
 + (void)updateVersions;
 + (void)createEntityCSVFiles;

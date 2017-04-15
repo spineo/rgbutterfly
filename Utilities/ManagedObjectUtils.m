@@ -7,6 +7,7 @@
 //
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
+#import "PaintSwatchType.h"
 
 #import "GlobalSettings.h"
 #import "GenericUtils.h"
@@ -122,6 +123,95 @@
     }
     
     NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Insert for '%@' successful", entityName);
+    }
+}
+
+// Call this method from GlobalSettings: Bulk load Generic association if non-existent
+//
+//@dynamic create_date;
+//@dynamic coverage_id;
+//@dynamic desc;
+//@dynamic image_url;
+//@dynamic last_update;
+//@dynamic mix_assoc_swatch;
+//@dynamic mix_assoc_keyword;
+
++ (void)bulkLoadGenericAssociation:(NSString *)fileName {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    // Create the Mix Association first
+    //
+    NSString *entityName = @"MixAssociation";
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    
+    id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    
+    // Composite Name
+    //
+    NSString *name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
+    [managedObject setName:name];
+    
+    // Look up the Assoc Type id
+    //
+    PaintSwatchType *genSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
+    [managedObject setAssoc_type_id:[genSwatchType order]];
+    
+    // Version tag
+    //
+    [managedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+    
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
+    } else {
+        NSLog(@"Insert for '%@' successful", entityName);
+    }
+    
+    // Read the data text files
+    //
+    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:fileName
+                                                         ofType:@"txt"];
+    
+    NSString* fileContents =
+    [NSString stringWithContentsOfFile:fileRoot
+                              encoding:NSUTF8StringEncoding error:nil];
+    
+    // First, separate by new line
+    //
+    NSArray* allLines =
+    [fileContents componentsSeparatedByCharactersInSet:
+     [NSCharacterSet newlineCharacterSet]];
+    
+    // Order is used for the color wheel (starting at zero)
+    //
+    int order = 0;
+    for (NSString *line in allLines) {
+        // Strip newlines and split by delimiters
+        //
+        NSString *compsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@","]];
+        
+        if ([comps count] == 1) {
+            NSString *name = [comps objectAtIndex:0];
+            
+            if (! [name isEqualToString:@""]) {
+                id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+                [managedObject setName:name];
+                [managedObject setOrder:[NSNumber numberWithInt:order]];
+                
+                order++;
+            }
+        }
+    }
+    
+    error = nil;
     if (![context save:&error]) {
         NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
     } else {

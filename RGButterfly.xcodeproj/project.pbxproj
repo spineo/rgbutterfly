@@ -99,6 +99,7 @@
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
 		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
+		213E9BAB1EA2CDE800C3682D /* Generics in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BAA1EA2CDE800C3682D /* Generics */; };
 		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
@@ -290,6 +291,7 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCollectionTableViewCell.h; path = "../ios-custom-cells/CustomCollectionTableViewCell.h"; sourceTree = "<group>"; };
 		213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionTableViewCell.m; path = "../ios-custom-cells/CustomCollectionTableViewCell.m"; sourceTree = "<group>"; };
+		213E9BAA1EA2CDE800C3682D /* Generics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Generics; path = Data/Generics; sourceTree = "<group>"; };
 		215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyBaseTests.swift; path = "../../rgbutterfly-tests/RGButterflyBaseTests.swift"; sourceTree = "<group>"; };
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 		2108C5E91C820D0000DD7B9E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				213E9BAA1EA2CDE800C3682D /* Generics */,
 				21064FC91DFEDA77004B0830 /* AssociationType.txt */,
 				21064FCA1DFEDA77004B0830 /* BodyType.txt */,
 				21064FCB1DFEDA77004B0830 /* CanvasCoverage.txt */,
@@ -792,6 +795,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213E9BAB1EA2CDE800C3682D /* Generics in Resources */,
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
 				213216561E83F42A00744C62 /* ListingType.txt in Resources */,
 				21064FD31DFEDA77004B0830 /* CanvasCoverage.txt in Resources */,
