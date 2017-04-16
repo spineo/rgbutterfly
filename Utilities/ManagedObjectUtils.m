@@ -11,6 +11,7 @@
 
 #import "GlobalSettings.h"
 #import "GenericUtils.h"
+#import "AppColorUtils.h"
 
 
 @implementation ManagedObjectUtils
@@ -142,27 +143,27 @@
     NSString *entityName = @"MixAssociation";
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     
-    id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    id assocManagedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     
     // Composite Name
     //
     NSString *assoc_name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
-    [managedObject setName:assoc_name];
+    [assocManagedObject setName:assoc_name];
     
     // Look up the Assoc Type id
     //
     PaintSwatchType *genSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
-    [managedObject setAssoc_type_id:[genSwatchType order]];
+    [assocManagedObject setAssoc_type_id:[genSwatchType order]];
     
     // Version tag
     //
-    [managedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+    [assocManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     
     // Dates
     //
     NSDate *currDate = [NSDate date];
-    [managedObject setCreate_date:currDate];
-    [managedObject setLast_update:currDate];
+    [assocManagedObject setCreate_date:currDate];
+    [assocManagedObject setLast_update:currDate];
 
     
     // Read the data text file and create the PaintSwatch
@@ -182,23 +183,24 @@
     
     NSString *PSEntityName = @"PaintSwatches";
     NSEntityDescription *PSEntity = [NSEntityDescription entityForName:PSEntityName inManagedObjectContext:context];
+    
+    NSString *assocSwatchEntityName = @"MixAssocSwatch";
+    NSEntityDescription *assocSwatchEntity = [NSEntityDescription entityForName:assocSwatchEntityName inManagedObjectContext:context];
 
-//    @dynamic alpha;
-//    @dynamic body_type_id;
 //    @dynamic brightness;
 //    @dynamic deg_hue;
 //    @dynamic hue;
-//    @dynamic image_thumb;
-//    @dynamic is_mix;
-//    @dynamic mix_swatch_id;
-//    @dynamic pigment_type_id;
-//    @dynamic ref_swatch_id;
 //    @dynamic saturation;
-//    @dynamic subj_color_id;
 //    @dynamic mix_assoc_swatch;
 //    @dynamic subjective_color;
     
-    int line_num = 0;
+//    @dynamic paint_swatch_is_add;
+//    @dynamic version_tag;
+//    @dynamic mix_association;
+//    @dynamic paint_swatch;
+    
+    int line_num  = 0;
+    int mix_order = 0;
     for (NSString *line in allLines) {
         
         line_num++;
@@ -210,12 +212,17 @@
         NSString *compsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@"\t"]];
         
-        if ([comps count] == 2) {
-            NSString *gen_name = [comps objectAtIndex:0];
-            NSString *rgb      = [comps objectAtIndex:1];
-            NSString *hex      = [comps objectAtIndex:2];
+        if ([comps count] == 3) {
+            NSString *gen_name   = [comps objectAtIndex:0];
+            NSString *rgb        = [comps objectAtIndex:1];
+            NSString *hex        = [comps objectAtIndex:2];
+            NSString *subj_color = [comps objectAtIndex:3];
             
-            NSArray *rgbComps  = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@";"]];
+            // Look up the Subjective Color id
+            //
+            SubjectiveColor *subjColor = [self queryDictionaryByNameValue:@"SubjectiveColor" nameValue:subj_color context:context];
+            
+            NSArray *rgbComps    = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@";"]];
             
             if (! [gen_name isEqualToString:@""]) {
                 id PSManagedObject = [[NSManagedObject alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];
@@ -230,11 +237,18 @@
                 [PSManagedObject setCreate_date:currDate];
                 [PSManagedObject setLast_update:currDate];
                 
-                // RGB and Alpha
+                // Convert RGB (Alpha should default to 1.0)
                 //
-                [PSManagedObject setRed:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:0]]];
-                [PSManagedObject setGreen:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:1]]];
-                [PSManagedObject setBlue:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:2]]];
+                NSString *red   = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:0] floatValue] / 255.0f];
+                NSString *green = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:1] floatValue] / 255.0f];
+                NSString *blue  = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:2] floatValue] / 255.0f];
+                NSString *alpha = @"1.0";
+                
+                [PSManagedObject setRed:red];
+                [PSManagedObject setGreen:green];
+                [PSManagedObject setBlue:blue];
+                
+                [PSManagedObject setImage_thumb:[AppColorUtils renderRGBFromValues:red green:green blue:blue alpha:alpha cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT]];
                 
                 // Add Hex to the Description
                 //
@@ -244,7 +258,22 @@
                 //
                 [PSManagedObject setType_id:[genSwatchType order]];
                 
+                // Set the subj_color_id
+                //
+                [PSManagedObject setSubj_color_id:[subjColor order]];
                 
+                
+                // MixAssocSwatch
+                //
+                id assocSwatchManagedObject = [[NSManagedObject alloc] initWithEntity:assocSwatchEntity insertIntoManagedObjectContext:context];
+                
+                [assocSwatchManagedObject setOrder:[NSNumber numberWithInt:mix_order]];
+                
+                // Version tag
+                //
+                [assocSwatchManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+                
+                mix_order++;
             }
         }
     }

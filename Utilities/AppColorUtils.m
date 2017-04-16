@@ -46,6 +46,13 @@
     return [ColorUtils imageWithColor:[self colorFromSwatch:swatchObj] objWidth:width objHeight:height];
 }
 
++ (UIImage *)renderRGBFromValues:(NSString *)red green:(NSString *)green blue:(NSString *)blue alpha:(NSString *)alpha cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
+
+    UIColor *rgbColor = [UIColor colorWithRed:([red floatValue]/255.0) green:([green floatValue]/255.0) blue:([blue floatValue]/255.0) alpha:[alpha floatValue]];
+
+    return [ColorUtils imageWithColor:rgbColor objWidth:width objHeight:height];
+}
+
 + (UIColor *)colorFromSwatch:(PaintSwatches *)swatchObj {
     return [UIColor colorWithRed:([swatchObj.red floatValue]/255.0) green:([swatchObj.green floatValue]/255.0) blue:([swatchObj.blue floatValue]/255.0) alpha:[swatchObj.alpha floatValue]];
 }
@@ -53,7 +60,7 @@
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     CGSize size = CGSizeMake(width, height);
     
-    UIImage *resizedImage   = [ColorUtils resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
+    UIImage *resizedImage = [ColorUtils resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
     
     return resizedImage;
 }

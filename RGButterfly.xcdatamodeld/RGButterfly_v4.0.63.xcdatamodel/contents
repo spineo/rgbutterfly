@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D30" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AssociationType" representedClassName="AssociationType" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -76,7 +76,7 @@
     </entity>
     <entity name="PaintSwatch" representedClassName="PaintSwatches" syncable="YES">
         <attribute name="abbr_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="alpha" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alpha" optional="YES" attributeType="String" defaultValueString="1.0" syncable="YES"/>
         <attribute name="blue" attributeType="String" syncable="YES"/>
         <attribute name="body_type_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="brightness" attributeType="String" syncable="YES"/>
@@ -159,6 +159,7 @@
         <element name="BodyType" positionX="16" positionY="135" width="128" height="75"/>
         <element name="CanvasCoverage" positionX="18" positionY="429" width="128" height="75"/>
         <element name="Keyword" positionX="-506" positionY="491" width="128" height="133"/>
+        <element name="ListingType" positionX="-261" positionY="261" width="128" height="75"/>
         <element name="MatchAlgorithm" positionX="18" positionY="-279" width="128" height="73"/>
         <element name="MatchAssociation" positionX="-801" positionY="-25" width="128" height="165"/>
         <element name="MatchAssocKeyword" positionX="-819" positionY="353" width="128" height="90"/>
@@ -166,7 +167,7 @@
         <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="90"/>
         <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="120"/>
         <element name="PaintBrand" positionX="18" positionY="36" width="128" height="73"/>
-        <element name="PaintSwatch" positionX="-128" positionY="-168" width="128" height="570"/>
+        <element name="PaintSwatch" positionX="-128" positionY="-168" width="128" height="568"/>
         <element name="PaintSwatchType" positionX="16" positionY="-180" width="128" height="73"/>
         <element name="PigmentType" positionX="16" positionY="243" width="128" height="73"/>
         <element name="SubjectiveColor" positionX="18" positionY="-79" width="128" height="88"/>
@@ -174,6 +175,5 @@
         <element name="TapArea" positionX="-585" positionY="-171" width="128" height="225"/>
         <element name="TapAreaKeyword" positionX="-533" positionY="362" width="128" height="90"/>
         <element name="TapAreaSwatch" positionX="-362" positionY="17" width="128" height="105"/>
-        <element name="ListingType" positionX="-261" positionY="261" width="128" height="75"/>
     </elements>
 </model>

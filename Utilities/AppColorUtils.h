@@ -16,6 +16,7 @@
 + (NSString *)colorCategoryFromHue:(PaintSwatches *)swatchObj;
 + (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage *)renderRGB:(PaintSwatches *)swatchObj cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
++ (UIImage *)renderRGBFromValues:(NSString *)red green:(NSString *)green blue:(NSString *)blue alpha:(NSString *)alpha cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIColor *)colorFromSwatch:(PaintSwatches *)swatchObj;
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage*)drawRGBLabel:(UIImage*)image rgbValue:(PaintSwatches *)paintSwatch location:(NSString *)location;
