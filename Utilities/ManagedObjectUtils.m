@@ -132,14 +132,6 @@
 
 // Call this method from GlobalSettings: Bulk load Generic association if non-existent
 //
-//@dynamic create_date;
-//@dynamic coverage_id;
-//@dynamic desc;
-//@dynamic image_url;
-//@dynamic last_update;
-//@dynamic mix_assoc_swatch;
-//@dynamic mix_assoc_keyword;
-
 + (void)bulkLoadGenericAssociation:(NSString *)fileName {
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -154,8 +146,8 @@
     
     // Composite Name
     //
-    NSString *name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
-    [managedObject setName:name];
+    NSString *assoc_name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
+    [managedObject setName:assoc_name];
     
     // Look up the Assoc Type id
     //
@@ -166,15 +158,14 @@
     //
     [managedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     
+    // Dates
+    //
+    NSDate *currDate = [NSDate date];
+    [managedObject setCreate_date:currDate];
+    [managedObject setLast_update:currDate];
+
     
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
-    } else {
-        NSLog(@"Insert for '%@' successful", entityName);
-    }
-    
-    // Read the data text files
+    // Read the data text file and create the PaintSwatch
     //
     NSString* fileRoot = [[NSBundle mainBundle] pathForResource:fileName
                                                          ofType:@"txt"];
@@ -189,33 +180,80 @@
     [fileContents componentsSeparatedByCharactersInSet:
      [NSCharacterSet newlineCharacterSet]];
     
-    // Order is used for the color wheel (starting at zero)
-    //
-    int order = 0;
+    NSString *PSEntityName = @"PaintSwatches";
+    NSEntityDescription *PSEntity = [NSEntityDescription entityForName:PSEntityName inManagedObjectContext:context];
+
+//    @dynamic alpha;
+//    @dynamic body_type_id;
+//    @dynamic brightness;
+//    @dynamic deg_hue;
+//    @dynamic hue;
+//    @dynamic image_thumb;
+//    @dynamic is_mix;
+//    @dynamic mix_swatch_id;
+//    @dynamic pigment_type_id;
+//    @dynamic ref_swatch_id;
+//    @dynamic saturation;
+//    @dynamic subj_color_id;
+//    @dynamic mix_assoc_swatch;
+//    @dynamic subjective_color;
+    
+    int line_num = 0;
     for (NSString *line in allLines) {
-        // Strip newlines and split by delimiters
+        
+        line_num++;
+        if (line_num == 1)
+            continue;
+
+        // Strip newlines and split by tab delimiters
         //
         NSString *compsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@","]];
+        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@"\t"]];
         
-        if ([comps count] == 1) {
-            NSString *name = [comps objectAtIndex:0];
+        if ([comps count] == 2) {
+            NSString *gen_name = [comps objectAtIndex:0];
+            NSString *rgb      = [comps objectAtIndex:1];
+            NSString *hex      = [comps objectAtIndex:2];
             
-            if (! [name isEqualToString:@""]) {
-                id managedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-                [managedObject setName:name];
-                [managedObject setOrder:[NSNumber numberWithInt:order]];
+            NSArray *rgbComps  = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@";"]];
+            
+            if (! [gen_name isEqualToString:@""]) {
+                id PSManagedObject = [[NSManagedObject alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];
+                [PSManagedObject setName:gen_name];
                 
-                order++;
+                // Version tag
+                //
+                [PSManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+                
+                // Dates
+                //
+                [PSManagedObject setCreate_date:currDate];
+                [PSManagedObject setLast_update:currDate];
+                
+                // RGB and Alpha
+                //
+                [PSManagedObject setRed:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:0]]];
+                [PSManagedObject setGreen:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:1]]];
+                [PSManagedObject setBlue:[NSString stringWithFormat:@"%@", [rgbComps objectAtIndex:2]]];
+                
+                // Add Hex to the Description
+                //
+                [PSManagedObject setDesc:hex];
+                
+                // Set the type_id
+                //
+                [PSManagedObject setType_id:[genSwatchType order]];
+                
+                
             }
         }
     }
     
-    error = nil;
+    NSError *error = nil;
     if (![context save:&error]) {
-        NSLog(@"Error inserting into '%@': %@\n%@", entityName, [error localizedDescription], [error userInfo]);
+        NSLog(@"Error inserting into '%@' and associated PaintSwatches: %@\n%@", entityName, [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Insert for '%@' successful", entityName);
+        NSLog(@"Insert for '%@' and associated PaintSwatches successful", entityName);
     }
 }
 
