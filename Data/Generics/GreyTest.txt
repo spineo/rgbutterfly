@@ -1,4 +1,4 @@
-Color Name	RGB Dec	RGB Hex Subj Color
-Grey	84;84;84	545454  Grey
-Grey, Silver 192;192;192	C0C0C0  Grey
-grey	190;190;190	BEBEBE  Grey
+Color Name;RGB Dec;RGB Hex;Subj Color
+Grey;84-84-84;545454;Grey
+Grey, Silver;192-192-192;C0C0C0;Grey
+grey;190-190-190;BEBEBE;Grey

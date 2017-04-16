@@ -489,6 +489,12 @@ static NSDictionary *swatchTypes;
     [ManagedObjectUtils deleteDictionaryEntity:@"ListingType"];
     [ManagedObjectUtils insertFromDataFile:@"ListingType"];
     
+    
+    // Load Generic Associations
+    //
+    [ManagedObjectUtils bulkLoadGenericAssociation:@"GreyTest"];
+    
+    
     // Perform cleanup (most of these should be already handled by the controllers)
     //
     if (CLEANUP == 1) {

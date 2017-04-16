@@ -1255,8 +1255,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 -(UIImage*)drawText:(UIImage*)image index:(int)i {
     
     UIImage *retImage = image;
-    
-        
         int count = i + 1;
         NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
         

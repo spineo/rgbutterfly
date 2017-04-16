@@ -143,27 +143,33 @@
     NSString *entityName = @"MixAssociation";
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     
-    id assocManagedObject = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    MixAssociation *mixAssoc = [[MixAssociation alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     
     // Composite Name
     //
-    NSString *assoc_name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
-    [assocManagedObject setName:assoc_name];
+    NSString *assoc_name = [[NSString alloc] initWithFormat:@"AAAGeneric%@", fileName];
+    [mixAssoc setName:assoc_name];
+    
+    NSMutableDictionary *paintSwatchTypes  = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:context];
+    
+    NSNumber *refTypeId = [paintSwatchTypes valueForKey:@"Reference"];
+    NSNumber *mixTypeId = [paintSwatchTypes valueForKey:@"MixAssoc"];
+    NSNumber *genTypeId = [paintSwatchTypes valueForKey:@"Generic"];
     
     // Look up the Assoc Type id
     //
-    PaintSwatchType *genSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
-    [assocManagedObject setAssoc_type_id:[genSwatchType order]];
+    //PaintSwatchType *genSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
+    [mixAssoc setAssoc_type_id:genTypeId];
     
     // Version tag
     //
-    [assocManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+    [mixAssoc setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
     
     // Dates
     //
     NSDate *currDate = [NSDate date];
-    [assocManagedObject setCreate_date:currDate];
-    [assocManagedObject setLast_update:currDate];
+    [mixAssoc setCreate_date:currDate];
+    [mixAssoc setLast_update:currDate];
 
     
     // Read the data text file and create the PaintSwatch
@@ -181,38 +187,29 @@
     [fileContents componentsSeparatedByCharactersInSet:
      [NSCharacterSet newlineCharacterSet]];
     
-    NSString *PSEntityName = @"PaintSwatches";
+    NSString *PSEntityName = @"PaintSwatch";
     NSEntityDescription *PSEntity = [NSEntityDescription entityForName:PSEntityName inManagedObjectContext:context];
     
     NSString *assocSwatchEntityName = @"MixAssocSwatch";
     NSEntityDescription *assocSwatchEntity = [NSEntityDescription entityForName:assocSwatchEntityName inManagedObjectContext:context];
-
-//    @dynamic brightness;
-//    @dynamic deg_hue;
-//    @dynamic hue;
-//    @dynamic saturation;
-//    @dynamic mix_assoc_swatch;
-//    @dynamic subjective_color;
-    
-//    @dynamic paint_swatch_is_add;
-//    @dynamic version_tag;
-//    @dynamic mix_association;
-//    @dynamic paint_swatch;
     
     int line_num  = 0;
-    int mix_order = 0;
+    int mix_order = 1;
+    
+    CGFloat hue, sat, bri, alpha;
+    
     for (NSString *line in allLines) {
-        
         line_num++;
         if (line_num == 1)
             continue;
-
+        
         // Strip newlines and split by tab delimiters
         //
         NSString *compsString = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@"\t"]];
+
+        NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@";"]];
         
-        if ([comps count] == 3) {
+        if ([comps count] == 4) {
             NSString *gen_name   = [comps objectAtIndex:0];
             NSString *rgb        = [comps objectAtIndex:1];
             NSString *hex        = [comps objectAtIndex:2];
@@ -222,67 +219,101 @@
             //
             SubjectiveColor *subjColor = [self queryDictionaryByNameValue:@"SubjectiveColor" nameValue:subj_color context:context];
             
-            NSArray *rgbComps    = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@";"]];
+            NSArray *rgbComps    = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@"-"]];
             
             if (! [gen_name isEqualToString:@""]) {
-                id PSManagedObject = [[NSManagedObject alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];
-                [PSManagedObject setName:gen_name];
+                PaintSwatches *paintSwatch = [[PaintSwatches alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];
+                [paintSwatch setName:gen_name];
                 
                 // Version tag
                 //
-                [PSManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+                [paintSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
                 
                 // Dates
                 //
-                [PSManagedObject setCreate_date:currDate];
-                [PSManagedObject setLast_update:currDate];
+                [paintSwatch setCreate_date:currDate];
+                [paintSwatch setLast_update:currDate];
                 
                 // Convert RGB (Alpha should default to 1.0)
                 //
-                NSString *red   = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:0] floatValue] / 255.0f];
-                NSString *green = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:1] floatValue] / 255.0f];
-                NSString *blue  = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:2] floatValue] / 255.0f];
-                NSString *alpha = @"1.0";
+                NSString *red   = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:0] floatValue]];
+                NSString *green = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:1] floatValue]];
+                NSString *blue  = [NSString stringWithFormat:@"%f", [[rgbComps objectAtIndex:2] floatValue]];
+                NSString *alphaStr = @"1.0";
                 
-                [PSManagedObject setRed:red];
-                [PSManagedObject setGreen:green];
-                [PSManagedObject setBlue:blue];
+                [paintSwatch setRed:red];
+                [paintSwatch setGreen:green];
+                [paintSwatch setBlue:blue];
+                [paintSwatch setAlpha:alphaStr];
                 
-                [PSManagedObject setImage_thumb:[AppColorUtils renderRGBFromValues:red green:green blue:blue alpha:alpha cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT]];
+                UIImage *image_thumb = [AppColorUtils renderRGBFromValues:red green:green blue:blue alpha:alphaStr cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+                [paintSwatch setImage_thumb:[NSData dataWithData:UIImagePNGRepresentation(image_thumb)]];
                 
+                UIColor *rgbColor = [AppColorUtils colorFromSwatch:paintSwatch];
+                
+                [rgbColor getHue:&hue saturation:&sat brightness:&bri alpha:&alpha];
+                
+                [paintSwatch setHue:[NSString stringWithFormat:@"%f", hue]];
+                [paintSwatch setSaturation:[NSString stringWithFormat:@"%f", sat]];
+                [paintSwatch setBrightness:[NSString stringWithFormat:@"%f", bri]];
+                [paintSwatch setAlpha:[NSString stringWithFormat:@"%f", alpha]];
+                [paintSwatch setDeg_hue:[NSNumber numberWithFloat:hue * 360]];
+                
+
                 // Add Hex to the Description
                 //
-                [PSManagedObject setDesc:hex];
+                [paintSwatch setDesc:hex];
+
                 
                 // Set the type_id
                 //
-                [PSManagedObject setType_id:[genSwatchType order]];
+                //[paintSwatch setType_id:genTypeId];
                 
                 // Set the subj_color_id
                 //
-                [PSManagedObject setSubj_color_id:[subjColor order]];
+                [paintSwatch setSubj_color_id:[subjColor order]];
                 
+                if (mix_order <= 2) {
+                    [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
+                    [paintSwatch setType_id:refTypeId];
+                } else {
+                    [paintSwatch setIs_mix:[NSNumber numberWithBool:TRUE]];
+                    [paintSwatch setType_id:mixTypeId];
+                }
                 
                 // MixAssocSwatch
                 //
-                id assocSwatchManagedObject = [[NSManagedObject alloc] initWithEntity:assocSwatchEntity insertIntoManagedObjectContext:context];
+                MixAssocSwatch *mixAssocSwatch = [[MixAssocSwatch alloc] initWithEntity:assocSwatchEntity insertIntoManagedObjectContext:context];
                 
-                [assocSwatchManagedObject setOrder:[NSNumber numberWithInt:mix_order]];
+                [mixAssocSwatch setMix_order:[NSNumber numberWithInt:mix_order]];
                 
                 // Version tag
                 //
-                [assocSwatchManagedObject setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+                [mixAssocSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+                
+                // Link it to the MixAssociation, MixAssocSwatch, and PaintSwatch
+                //
+                [mixAssocSwatch setMix_association:mixAssoc];
+                [mixAssocSwatch setPaint_swatch:(PaintSwatch *)paintSwatch];
+                
+                [mixAssoc addMix_assoc_swatchObject:mixAssocSwatch];
+                [paintSwatch addMix_assoc_swatchObject:mixAssocSwatch];
                 
                 mix_order++;
             }
         }
     }
     
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Error inserting into '%@' and associated PaintSwatches: %@\n%@", entityName, [error localizedDescription], [error userInfo]);
-    } else {
-        NSLog(@"Insert for '%@' and associated PaintSwatches successful", entityName);
+    // Save only if anything was created
+    //
+    if (line_num > 0) {
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Error inserting into MixAssocation, MixAssocSwatch, and associated PaintSwatches: %@\n%@", [error localizedDescription], [error userInfo]);
+        } else {
+            NSLog(@"Insert for MixAssociation, MixAssocSwatch, and associated PaintSwatches successful");
+        }
     }
 }
 
