@@ -9,8 +9,8 @@ SlateGray1;198-226-255;C6E2FF;Grey
 SlateGray2;185-211-238;B9D3EE;Grey
 SlateGray3;159-182-205;9FB6CD;Grey
 SlateGray4;108-123-139;6C7B8B;Grey
-black;;0-0-0;000000;000;Grey
-grey0;0-0-0;000000;000;Grey
+black;0-0-0;000000;Grey
+grey0;0-0-0;000000;Grey
 grey1;3-3-3;030303;Grey
 grey2;5-5-5;050505;Grey
 grey3;8-8-8;080808;Grey

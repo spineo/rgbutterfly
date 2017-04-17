@@ -7,6 +7,7 @@
 //
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
+#import "AssociationType+CoreDataProperties.h"
 #import "PaintSwatchType.h"
 
 #import "GlobalSettings.h"
@@ -147,19 +148,20 @@
     
     // Composite Name
     //
-    NSString *assoc_name = [[NSString alloc] initWithFormat:@"AAAGeneric%@", fileName];
+    NSString *assoc_name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
     [mixAssoc setName:assoc_name];
+
     
-    NSMutableDictionary *paintSwatchTypes  = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:context];
-    
-    NSNumber *refTypeId = [paintSwatchTypes valueForKey:@"Reference"];
-    NSNumber *mixTypeId = [paintSwatchTypes valueForKey:@"MixAssoc"];
-    NSNumber *genTypeId = [paintSwatchTypes valueForKey:@"Generic"];
-    
-    // Look up the Assoc Type id
+    // Look up the AssocType id
     //
-    //PaintSwatchType *genSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
-    [mixAssoc setAssoc_type_id:genTypeId];
+    AssociationType *assocType = [self queryDictionaryByNameValue:@"AssociationType" nameValue:@"Generic" context:context];
+    [mixAssoc setAssoc_type_id:[assocType order]];
+    
+
+    // Look up the PaintSwatchType id
+    //
+    PaintSwatchType *paintSwatchType = [self queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
+
     
     // Version tag
     //
@@ -214,7 +216,7 @@
             NSString *rgb        = [comps objectAtIndex:1];
             NSString *hex        = [comps objectAtIndex:2];
             NSString *subj_color = [comps objectAtIndex:3];
-            
+
             // Look up the Subjective Color id
             //
             SubjectiveColor *subjColor = [self queryDictionaryByNameValue:@"SubjectiveColor" nameValue:subj_color context:context];
@@ -267,19 +269,12 @@
                 
                 // Set the type_id
                 //
-                //[paintSwatch setType_id:genTypeId];
+                [paintSwatch setType_id:[paintSwatchType order]];
                 
                 // Set the subj_color_id
                 //
                 [paintSwatch setSubj_color_id:[subjColor order]];
-                
-                if (mix_order <= 2) {
-                    [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
-                    [paintSwatch setType_id:refTypeId];
-                } else {
-                    [paintSwatch setIs_mix:[NSNumber numberWithBool:TRUE]];
-                    [paintSwatch setType_id:mixTypeId];
-                }
+
                 
                 // MixAssocSwatch
                 //
