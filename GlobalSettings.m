@@ -489,18 +489,19 @@ static NSDictionary *swatchTypes;
     [ManagedObjectUtils deleteDictionaryEntity:@"ListingType"];
     [ManagedObjectUtils insertFromDataFile:@"ListingType"];
     
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
-    // Load Generic Associations
+    // Load Generic Associations (read the directory)
     //
-    [ManagedObjectUtils bulkLoadGenericAssociation:@"GreyTest"];
-    
+    if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:@"GenericGrey"]) {
+        [ManagedObjectUtils bulkLoadGenericAssociation:@"Grey"];
+    }
+
     
     // Perform cleanup (most of these should be already handled by the controllers)
     //
     if (CLEANUP == 1) {
-        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-
         [ManagedObjectUtils deleteChildlessMixAssoc:context];
         [ManagedObjectUtils deleteChildlessMatchAssoc:context];
         [ManagedObjectUtils deleteOrphanMixAssocSwatches:context];

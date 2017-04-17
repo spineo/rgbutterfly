@@ -67,6 +67,10 @@
 + (NSMutableArray *)queryMixAssocBySwatch:(NSManagedObjectID *)swatch_id context:(NSManagedObjectContext *)context;
 + (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex matchAssociation:(MatchAssociations *)matchAssociation context:(NSManagedObjectContext *)context;
 
+// Existence check methods
+//
++ (BOOL)instanceExists:(NSManagedObjectContext *)context entityName:(NSString *)entityName name:(NSString *)name;
+
 // Update methods
 //
 + (void)setEntityReadOnly:(NSString *)entityName isReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context;

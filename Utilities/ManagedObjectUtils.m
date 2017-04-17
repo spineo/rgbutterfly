@@ -225,7 +225,9 @@
             
             if (! [gen_name isEqualToString:@""]) {
                 PaintSwatches *paintSwatch = [[PaintSwatches alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];
-                [paintSwatch setName:gen_name];
+                
+                NSString *disp_name = [[NSString alloc] initWithFormat:@"%@ (Generic)", gen_name];
+                [paintSwatch setName:disp_name];
                 
                 // Version tag
                 //
@@ -264,12 +266,13 @@
 
                 // Add Hex to the Description
                 //
-                [paintSwatch setDesc:hex];
+                [paintSwatch setDesc:[[NSString alloc] initWithFormat:@"Hex Color Code: #%@", hex]];
 
                 
                 // Set the type_id
                 //
                 [paintSwatch setType_id:[paintSwatchType order]];
+
                 
                 // Set the subj_color_id
                 //
@@ -1076,6 +1079,30 @@
     }
     
     return [tmpSwatches mutableCopy];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Existence check methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Existence check methods
+
++ (BOOL)instanceExists:(NSManagedObjectContext *)context entityName:(NSString *)entityName name:(NSString *)name {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name == %@", name]];
+    
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
 }
 
 
