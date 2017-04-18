@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21064FD11DFEDA77004B0830 /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FC91DFEDA77004B0830 /* AssociationType.txt */; };
-		21064FD21DFEDA77004B0830 /* BodyType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCA1DFEDA77004B0830 /* BodyType.txt */; };
-		21064FD31DFEDA77004B0830 /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCB1DFEDA77004B0830 /* CanvasCoverage.txt */; };
-		21064FD41DFEDA77004B0830 /* MatchAlgorithm.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCC1DFEDA77004B0830 /* MatchAlgorithm.txt */; };
-		21064FD51DFEDA77004B0830 /* PaintBrand.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCD1DFEDA77004B0830 /* PaintBrand.txt */; };
-		21064FD61DFEDA77004B0830 /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */; };
-		21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FCF1DFEDA77004B0830 /* PigmentType.txt */; };
-		21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */; };
 		21064FE41DFEDCAA004B0830 /* AssociationType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE31DFEDCAA004B0830 /* AssociationType+CoreDataClass.m */; };
 		21064FFB1DFEDD0A004B0830 /* BodyType.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE61DFEDD0A004B0830 /* BodyType.m */; };
 		21064FFC1DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 21064FE81DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m */; };
@@ -75,7 +67,6 @@
 		212F25C21E363919002466E7 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25BE1E363919002466E7 /* FileUtils.m */; };
 		212F25C31E363919002466E7 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25C01E363919002466E7 /* HTTPUtils.m */; };
 		213216521E7C728B00744C62 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 213216511E7C728B00744C62 /* README.md */; };
-		213216561E83F42A00744C62 /* ListingType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213216551E83F42A00744C62 /* ListingType.txt */; };
 		2134576C1E7DFC7100CB16E9 /* RGButterfly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 213457671E7DFC7100CB16E9 /* RGButterfly.xcdatamodeld */; };
 		213457781E7F2CB500CB16E9 /* AboutViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134576D1E7F2CB500CB16E9 /* AboutViewControllerTests.swift */; };
 		213457791E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134576E1E7F2CB500CB16E9 /* AddMixTableViewControllerTests.swift */; };
@@ -101,6 +92,16 @@
 		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
 		213E9BAE1EA3F52700C3682D /* Grey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BAD1EA3F52700C3682D /* Grey.txt */; };
 		213E9BB01EA3F52E00C3682D /* GreyTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BAF1EA3F52E00C3682D /* GreyTest.txt */; };
+		213E9BB21EA5A88700C3682D /* Blue.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB11EA5A88700C3682D /* Blue.txt */; };
+		213E9BBD1EA5A93000C3682D /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB41EA5A93000C3682D /* AssociationType.txt */; };
+		213E9BBE1EA5A93000C3682D /* BodyType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB51EA5A93000C3682D /* BodyType.txt */; };
+		213E9BBF1EA5A93000C3682D /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB61EA5A93000C3682D /* CanvasCoverage.txt */; };
+		213E9BC01EA5A93000C3682D /* ListingType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB71EA5A93000C3682D /* ListingType.txt */; };
+		213E9BC11EA5A93000C3682D /* MatchAlgorithm.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB81EA5A93000C3682D /* MatchAlgorithm.txt */; };
+		213E9BC21EA5A93000C3682D /* PaintBrand.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB91EA5A93000C3682D /* PaintBrand.txt */; };
+		213E9BC31EA5A93000C3682D /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBA1EA5A93000C3682D /* PaintSwatchType.txt */; };
+		213E9BC41EA5A93000C3682D /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBB1EA5A93000C3682D /* PigmentType.txt */; };
+		213E9BC51EA5A93000C3682D /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBC1EA5A93000C3682D /* SubjectiveColor.txt */; };
 		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
@@ -133,14 +134,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21064FC91DFEDA77004B0830 /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AssociationType.txt; path = Data/AssociationType.txt; sourceTree = "<group>"; };
-		21064FCA1DFEDA77004B0830 /* BodyType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BodyType.txt; path = Data/BodyType.txt; sourceTree = "<group>"; };
-		21064FCB1DFEDA77004B0830 /* CanvasCoverage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CanvasCoverage.txt; path = Data/CanvasCoverage.txt; sourceTree = "<group>"; };
-		21064FCC1DFEDA77004B0830 /* MatchAlgorithm.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchAlgorithm.txt; path = Data/MatchAlgorithm.txt; sourceTree = "<group>"; };
-		21064FCD1DFEDA77004B0830 /* PaintBrand.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintBrand.txt; path = Data/PaintBrand.txt; sourceTree = "<group>"; };
-		21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/PaintSwatchType.txt; sourceTree = "<group>"; };
-		21064FCF1DFEDA77004B0830 /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/PigmentType.txt; sourceTree = "<group>"; };
-		21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/SubjectiveColor.txt; sourceTree = "<group>"; };
 		21064FE21DFEDCAA004B0830 /* AssociationType+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssociationType+CoreDataClass.h"; path = "ManagedObject/AssociationType+CoreDataClass.h"; sourceTree = "<group>"; };
 		21064FE31DFEDCAA004B0830 /* AssociationType+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssociationType+CoreDataClass.m"; path = "ManagedObject/AssociationType+CoreDataClass.m"; sourceTree = "<group>"; };
 		21064FE51DFEDD0A004B0830 /* BodyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BodyType.h; path = ManagedObject/BodyType.h; sourceTree = "<group>"; };
@@ -261,7 +254,6 @@
 		212F25C01E363919002466E7 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTTPUtils.m; path = "../ios-utilities/HTTPUtils.m"; sourceTree = "<group>"; };
 		213216511E7C728B00744C62 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../../rgbutterfly-tests/README.md"; sourceTree = "<group>"; };
 		213216541E7C7AAF00744C62 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		213216551E83F42A00744C62 /* ListingType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ListingType.txt; path = Data/ListingType.txt; sourceTree = "<group>"; };
 		213457681E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.59.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.59.xcdatamodel"; sourceTree = "<group>"; };
 		213457691E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.61.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.61.xcdatamodel"; sourceTree = "<group>"; };
 		2134576A1E7DFC7100CB16E9 /* AcrylicsColorPicker v4.0.63.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AcrylicsColorPicker v4.0.63.xcdatamodel"; sourceTree = "<group>"; };
@@ -294,6 +286,16 @@
 		213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionTableViewCell.m; path = "../ios-custom-cells/CustomCollectionTableViewCell.m"; sourceTree = "<group>"; };
 		213E9BAD1EA3F52700C3682D /* Grey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Grey.txt; path = Data/Generics/Grey.txt; sourceTree = "<group>"; };
 		213E9BAF1EA3F52E00C3682D /* GreyTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GreyTest.txt; path = Data/Generics/GreyTest.txt; sourceTree = "<group>"; };
+		213E9BB11EA5A88700C3682D /* Blue.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Blue.txt; path = Data/Generics/Blue.txt; sourceTree = "<group>"; };
+		213E9BB41EA5A93000C3682D /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AssociationType.txt; path = Data/Dictionary/AssociationType.txt; sourceTree = "<group>"; };
+		213E9BB51EA5A93000C3682D /* BodyType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BodyType.txt; path = Data/Dictionary/BodyType.txt; sourceTree = "<group>"; };
+		213E9BB61EA5A93000C3682D /* CanvasCoverage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CanvasCoverage.txt; path = Data/Dictionary/CanvasCoverage.txt; sourceTree = "<group>"; };
+		213E9BB71EA5A93000C3682D /* ListingType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ListingType.txt; path = Data/Dictionary/ListingType.txt; sourceTree = "<group>"; };
+		213E9BB81EA5A93000C3682D /* MatchAlgorithm.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchAlgorithm.txt; path = Data/Dictionary/MatchAlgorithm.txt; sourceTree = "<group>"; };
+		213E9BB91EA5A93000C3682D /* PaintBrand.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintBrand.txt; path = Data/Dictionary/PaintBrand.txt; sourceTree = "<group>"; };
+		213E9BBA1EA5A93000C3682D /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/Dictionary/PaintSwatchType.txt; sourceTree = "<group>"; };
+		213E9BBB1EA5A93000C3682D /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/Dictionary/PigmentType.txt; sourceTree = "<group>"; };
+		213E9BBC1EA5A93000C3682D /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/Dictionary/SubjectiveColor.txt; sourceTree = "<group>"; };
 		215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyBaseTests.swift; path = "../../rgbutterfly-tests/RGButterflyBaseTests.swift"; sourceTree = "<group>"; };
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
@@ -517,16 +519,8 @@
 		2108C5E91C820D0000DD7B9E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				213E9BB31EA5A8BE00C3682D /* Dictionary */,
 				213E9BAC1EA3F51400C3682D /* Generics */,
-				21064FC91DFEDA77004B0830 /* AssociationType.txt */,
-				21064FCA1DFEDA77004B0830 /* BodyType.txt */,
-				21064FCB1DFEDA77004B0830 /* CanvasCoverage.txt */,
-				21064FCC1DFEDA77004B0830 /* MatchAlgorithm.txt */,
-				21064FCD1DFEDA77004B0830 /* PaintBrand.txt */,
-				21064FCE1DFEDA77004B0830 /* PaintSwatchType.txt */,
-				21064FCF1DFEDA77004B0830 /* PigmentType.txt */,
-				21064FD01DFEDA77004B0830 /* SubjectiveColor.txt */,
-				213216551E83F42A00744C62 /* ListingType.txt */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -616,10 +610,27 @@
 		213E9BAC1EA3F51400C3682D /* Generics */ = {
 			isa = PBXGroup;
 			children = (
+				213E9BB11EA5A88700C3682D /* Blue.txt */,
 				213E9BAD1EA3F52700C3682D /* Grey.txt */,
 				213E9BAF1EA3F52E00C3682D /* GreyTest.txt */,
 			);
 			name = Generics;
+			sourceTree = "<group>";
+		};
+		213E9BB31EA5A8BE00C3682D /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				213E9BB41EA5A93000C3682D /* AssociationType.txt */,
+				213E9BB51EA5A93000C3682D /* BodyType.txt */,
+				213E9BB61EA5A93000C3682D /* CanvasCoverage.txt */,
+				213E9BB71EA5A93000C3682D /* ListingType.txt */,
+				213E9BB81EA5A93000C3682D /* MatchAlgorithm.txt */,
+				213E9BB91EA5A93000C3682D /* PaintBrand.txt */,
+				213E9BBA1EA5A93000C3682D /* PaintSwatchType.txt */,
+				213E9BBB1EA5A93000C3682D /* PigmentType.txt */,
+				213E9BBC1EA5A93000C3682D /* SubjectiveColor.txt */,
+			);
+			name = Dictionary;
 			sourceTree = "<group>";
 		};
 		21A197F21E4F832E00686E86 /* RGButterflyUITests */ = {
@@ -806,26 +817,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213E9BC31EA5A93000C3682D /* PaintSwatchType.txt in Resources */,
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
-				213216561E83F42A00744C62 /* ListingType.txt in Resources */,
-				21064FD31DFEDA77004B0830 /* CanvasCoverage.txt in Resources */,
+				213E9BBD1EA5A93000C3682D /* AssociationType.txt in Resources */,
+				213E9BC41EA5A93000C3682D /* PigmentType.txt in Resources */,
 				2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */,
 				213E9BB01EA3F52E00C3682D /* GreyTest.txt in Resources */,
+				213E9BB21EA5A88700C3682D /* Blue.txt in Resources */,
 				213E9BAE1EA3F52700C3682D /* Grey.txt in Resources */,
-				21064FD71DFEDA77004B0830 /* PigmentType.txt in Resources */,
-				21064FD81DFEDA77004B0830 /* SubjectiveColor.txt in Resources */,
-				21064FD61DFEDA77004B0830 /* PaintSwatchType.txt in Resources */,
-				21064FD51DFEDA77004B0830 /* PaintBrand.txt in Resources */,
-				21064FD21DFEDA77004B0830 /* BodyType.txt in Resources */,
 				2192F5611DF3185500AAFE01 /* README in Resources */,
-				21064FD11DFEDA77004B0830 /* AssociationType.txt in Resources */,
+				213E9BC21EA5A93000C3682D /* PaintBrand.txt in Resources */,
 				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
+				213E9BBF1EA5A93000C3682D /* CanvasCoverage.txt in Resources */,
+				213E9BC01EA5A93000C3682D /* ListingType.txt in Resources */,
 				21397EE41C84876D001C3F05 /* Info.plist in Resources */,
-				21064FD41DFEDA77004B0830 /* MatchAlgorithm.txt in Resources */,
 				21397EDD1C8486C0001C3F05 /* RGButterfly.entitlements in Resources */,
+				213E9BBE1EA5A93000C3682D /* BodyType.txt in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
 				21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */,
+				213E9BC51EA5A93000C3682D /* SubjectiveColor.txt in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
+				213E9BC11EA5A93000C3682D /* MatchAlgorithm.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

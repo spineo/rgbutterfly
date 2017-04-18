@@ -221,7 +221,7 @@
             //
             SubjectiveColor *subjColor = [self queryDictionaryByNameValue:@"SubjectiveColor" nameValue:subj_color context:context];
             
-            NSArray *rgbComps    = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@"-"]];
+            NSArray *rgbComps    = [GenericUtils trimStrings:[rgb componentsSeparatedByString:@"."]];
             
             if (! [gen_name isEqualToString:@""]) {
                 PaintSwatches *paintSwatch = [[PaintSwatches alloc] initWithEntity:PSEntity insertIntoManagedObjectContext:context];

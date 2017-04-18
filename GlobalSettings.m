@@ -497,6 +497,10 @@ static NSDictionary *swatchTypes;
     if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:@"GenericGrey"]) {
         [ManagedObjectUtils bulkLoadGenericAssociation:@"Grey"];
     }
+    
+    if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:@"GenericBlue"]) {
+        [ManagedObjectUtils bulkLoadGenericAssociation:@"Blue"];
+    }
 
     
     // Perform cleanup (most of these should be already handled by the controllers)
