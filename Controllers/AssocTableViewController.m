@@ -20,6 +20,7 @@
 #import "PaintSwatches.h"
 #import "MixAssocSwatch.h"
 #import "MixAssociation.h"
+#import "AssociationType+CoreDataProperties.h"
 
 
 @interface AssocTableViewController ()
@@ -194,58 +195,65 @@ const int ASSOC_SET_TAG        = 8;
     _assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
     _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     
-    
-    // Initialize the PaintSwatches array with default names (if values don't already exist)
+    // Look up the AssocType id
     //
-    int objCount = (int)[_paintSwatches count];
-
-    for (int i=0; i < objCount; i++) {
-        NSString *colorFormatLabel;
-        int ref_parts_ratio = 0;
-        int mix_parts_ratio = 0;
-
-        if (i == 0) {
-
-            colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
-            
-            if ([colorFormatLabel length] == 0) {
-                colorFormatLabel = [[NSString alloc] initWithString:_refColorLabel];
-            } else {
-                _refColorLabel   = colorFormatLabel;
-            }
-            
-            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-            [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
-            
-            
-        } else if (i == 1) {
-
-            colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
-            if ([colorFormatLabel length] == 0) {
-                colorFormatLabel = [[NSString alloc] initWithString:_mixColorLabel];
-            } else {
-                _mixColorLabel = colorFormatLabel;
-            }
-
-            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
-            [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
-            
-        } else {
-            ref_parts_ratio = [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue];
-            mix_parts_ratio = [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue];
+    AssociationType *assocType = [ManagedObjectUtils queryDictionaryByNameValue:@"AssociationType" nameValue:@"Generic" context:self.context];
+    int genTypeId = [[assocType order] intValue];
     
-            colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
-            if ([colorFormatLabel length] == 0) {
-                colorFormatLabel = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", _refColorLabel, _mixColorLabel, ref_parts_ratio, mix_parts_ratio];
-            }
+    
+    // Initialize the PaintSwatches array with default names (if values don't already exist or not Generics)
+    //
+    if (_assocTypePickerSelRow != genTypeId) {
+        int objCount = (int)[_paintSwatches count];
 
-            [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
-            [[_paintSwatches objectAtIndex:i] setType_id:_mixTypeId];
-        }
-        [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:ref_parts_ratio]];
-        [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:mix_parts_ratio]];
-        [[_paintSwatches objectAtIndex:i] setName:colorFormatLabel];
+        for (int i=0; i < objCount; i++) {
+            NSString *colorFormatLabel;
+            int ref_parts_ratio = 0;
+            int mix_parts_ratio = 0;
+
+            if (i == 0) {
+
+                colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
+                
+                if ([colorFormatLabel length] == 0) {
+                    colorFormatLabel = [[NSString alloc] initWithString:_refColorLabel];
+                } else {
+                    _refColorLabel   = colorFormatLabel;
+                }
+                
+                [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
+                [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
+                
+                
+            } else if (i == 1) {
+
+                colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
+                if ([colorFormatLabel length] == 0) {
+                    colorFormatLabel = [[NSString alloc] initWithString:_mixColorLabel];
+                } else {
+                    _mixColorLabel = colorFormatLabel;
+                }
+
+                [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:NO]];
+                [[_paintSwatches objectAtIndex:i] setType_id:_refTypeId];
+                
+            } else {
+                ref_parts_ratio = [[[_paintSwatches objectAtIndex:i] ref_parts_ratio] intValue];
+                mix_parts_ratio = [[[_paintSwatches objectAtIndex:i] mix_parts_ratio] intValue];
         
+                colorFormatLabel = [[_paintSwatches objectAtIndex:i] name];
+                if ([colorFormatLabel length] == 0) {
+                    colorFormatLabel = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i", _refColorLabel, _mixColorLabel, ref_parts_ratio, mix_parts_ratio];
+                }
+
+                [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
+                [[_paintSwatches objectAtIndex:i] setType_id:_mixTypeId];
+            }
+            [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:ref_parts_ratio]];
+            [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:mix_parts_ratio]];
+            [[_paintSwatches objectAtIndex:i] setName:colorFormatLabel];
+            
+        }
     }
     
     // Assoc Types Picker
