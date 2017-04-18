@@ -381,6 +381,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         [self loadFullColorsListing];
+        _listingType = FULL_LISTING_TYPE;
     }
     [self stopSpinner];
 }
@@ -821,7 +822,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 genListing = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
     
             } else {
-                allListing = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, _numSwatches];
+                int swatchCount;
+                if ([_searchString isEqualToString:@""] || _searchString == nil) {
+                    swatchCount = (int)[_paintSwatches count];
+                } else {
+                    swatchCount = _numSwatches;
+                }
+                allListing = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, swatchCount];
             }
             [_allLabel setTitle:allListing];
             [_refLabel setTitle:refListing];
