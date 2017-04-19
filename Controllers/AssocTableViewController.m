@@ -58,8 +58,8 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
-@property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
-@property (nonatomic, strong) NSNumber *refTypeId, *mixTypeId, *genTypeId;
+@property (nonatomic, strong) NSMutableDictionary *assocTypes, *paintSwatchTypes;
+@property (nonatomic, strong) NSNumber *unknownTypeId, *mixTypeId, *refTypeId, *mixAssocTypeId, *genericTypeId;
 @property (nonatomic, strong) UIPickerView *assocTypePicker, *coveragePicker;
 
 @end
@@ -109,13 +109,19 @@ const int ASSOC_SET_TAG        = 8;
     _keywordEntity         = [NSEntityDescription entityForName:@"Keyword"           inManagedObjectContext:self.context];
     _mixAssocKeywordEntity = [NSEntityDescription entityForName:@"MixAssocKeyword"   inManagedObjectContext:self.context];
     
+    // Retrieve the AssociationType dictionary
+    //
+    _assocTypes = [ManagedObjectUtils fetchDictByNames:@"AssociationType" context:self.context];
+    _unknownTypeId  = [_assocTypes valueForKey:@"Unknown"];
+    _mixTypeId      = [_assocTypes valueForKey:@"Mix"];
+    
     // Retrieve the PaintSwatchType dictionary
     //
     _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
-    _refTypeId = [_paintSwatchTypes valueForKey:@"Reference"];
-    _mixTypeId = [_paintSwatchTypes valueForKey:@"MixAssoc"];
-    _genTypeId = [_paintSwatchTypes valueForKey:@"Generic"];
-
+    _refTypeId      = [_paintSwatchTypes valueForKey:@"Reference"];
+    _mixAssocTypeId = [_paintSwatchTypes valueForKey:@"MixAssoc"];
+    _genericTypeId  = [_paintSwatchTypes valueForKey:@"Generic"];
+    
 
     // Set the name and desc values
     //
@@ -195,15 +201,10 @@ const int ASSOC_SET_TAG        = 8;
     _assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
     _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     
-    // Look up the AssocType id
-    //
-    AssociationType *assocType = [ManagedObjectUtils queryDictionaryByNameValue:@"AssociationType" nameValue:@"Generic" context:self.context];
-    int genTypeId = [[assocType order] intValue];
     
-    
-    // Initialize the PaintSwatches array with default names (if values don't already exist or not Generics)
+    // Initialize the PaintSwatches array with default names if 'Unknown' (coming from Image VC) or pre-defined as 'Mix'
     //
-    if (_assocTypePickerSelRow != genTypeId) {
+    if (_assocTypePickerSelRow == [_unknownTypeId intValue] || _assocTypePickerSelRow ==  [_mixTypeId intValue]) {
         [self initPaintSwatches];
     }
     
@@ -1111,7 +1112,7 @@ const int ASSOC_SET_TAG        = 8;
             }
             
             [[_paintSwatches objectAtIndex:i] setIs_mix:[NSNumber numberWithBool:YES]];
-            [[_paintSwatches objectAtIndex:i] setType_id:_mixTypeId];
+            [[_paintSwatches objectAtIndex:i] setType_id:_mixAssocTypeId];
         }
         [[_paintSwatches objectAtIndex:i] setRef_parts_ratio:[NSNumber numberWithInt:ref_parts_ratio]];
         [[_paintSwatches objectAtIndex:i] setMix_parts_ratio:[NSNumber numberWithInt:mix_parts_ratio]];
@@ -1189,7 +1190,7 @@ const int ASSOC_SET_TAG        = 8;
 
             swatchName = [[NSString alloc] initWithFormat:@"%@ + %@ %i:%i%@", refName_1, refName_2, ratio_1, ratio_2, coverageName];
 
-            swatchId = _mixTypeId;
+            swatchId = _mixAssocTypeId;
             
             [paintSwatch setCoverage_id:[NSNumber numberWithInt:_coveragePickerSelRow]];
         }
@@ -1230,7 +1231,7 @@ const int ASSOC_SET_TAG        = 8;
         }
     
         [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
-        [paintSwatch setType_id:_genTypeId];
+        [paintSwatch setType_id:_genericTypeId];
     }
     
     // Rename the Generic Association
@@ -1246,6 +1247,25 @@ const int ASSOC_SET_TAG        = 8;
     PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
     
     _mixAssocName = [[NSString alloc] initWithFormat:@"%@ (%@)", [paintSwatch name], [_assocTypeName text]];
+    
+    // Make sure that all the PaintSwatches type ids are associated with 'Reference' by default
+    //
+    int swatch_ct = (int)[_mixAssocSwatches count];
+    for (int i=0; i<swatch_ct; i++) {
+        
+        MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+        PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+        
+        // Skip any Paint Swatch that is an add
+        //
+        BOOL paintSwatchIsAdd = [[mixAssocSwatch paint_swatch_is_add] boolValue];
+        if (paintSwatchIsAdd == TRUE) {
+            continue;
+        }
+        
+        [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
+        [paintSwatch setType_id:_refTypeId];
+    }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
