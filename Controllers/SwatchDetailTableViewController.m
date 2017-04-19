@@ -416,11 +416,16 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 #pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    // Show all sections (i.e., Individual Listing to Detail context)
+    //
     if (NUM_TABLEVIEW_ROWS > 0) {
         return DETAIL_MAX_SECTION;
 
+    // Skip the References and Assoc Listing (i.e., Assoc Listing to Detail context)
+    //
     } else {
-        return DETAIL_MAX_SECTION - 3;
+        return DETAIL_MAX_SECTION - 2;
     }
 }
 

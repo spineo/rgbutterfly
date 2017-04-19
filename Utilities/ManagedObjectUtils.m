@@ -135,7 +135,7 @@
 // Call this method from GlobalSettings: Bulk load Generic association if non-existent
 //
 + (void)bulkLoadGenericAssociation:(NSString *)fileName {
-    
+
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
