@@ -218,15 +218,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    // Load the paint swatches
-    //
-    //_dbPaintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    
-    _dbPaintSwatches = [ManagedObjectUtils filterMatchPaintSwatches:self.context covFilter:FALSE genFilter:FALSE];
-    _dbSwatchesCount = (int)[_dbPaintSwatches count];
-    _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
-
 
     _defTableViewSize    = _imageTableView.bounds.size;
 
@@ -604,6 +595,15 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 };
+
+- (void)viewWillAppear:(BOOL)willAppear {
+
+    // Load the paint swatches
+    //
+    _dbPaintSwatches = [ManagedObjectUtils filterMatchPaintSwatches:self.context covFilter:FALSE genFilter:FALSE];
+    _dbSwatchesCount = (int)[_dbPaintSwatches count];
+    _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
+}
 
 - (void)viewDidAppear:(BOOL)didAppear {
     
