@@ -656,32 +656,48 @@
     //
     // Filter out match association swatches
     //
-    PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
-    int match_assoc_id = [[paintSwatchType order] intValue];
-
-    NSMutableString *predicateString = [[NSMutableString alloc] initWithFormat:@"type_id != %i", match_assoc_id];
+    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
+    int match_assoc_id = [[matchSwatchType order] intValue];
     
-    if (covFilter == TRUE) {
-        CanvasCoverage *coverageType = [ManagedObjectUtils queryDictionaryByNameValue:@"CanvasCoverage" nameValue:@"Thick" context:context];
-        int thick_cov_id = [[coverageType order] intValue];
-        predicateString = [[NSMutableString alloc] initWithFormat:@"%@ and coverage_id == %i", predicateString, thick_cov_id];
-    }
+    CanvasCoverage *coverageType = [ManagedObjectUtils queryDictionaryByNameValue:@"CanvasCoverage" nameValue:@"Thick" context:context];
+    int thick_cov_id = [[coverageType order] intValue];
     
-    if (genFilter == TRUE) {
-        PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
-        int generic_id = [[paintSwatchType order] intValue];
-        predicateString = [[NSMutableString alloc] initWithFormat:@"%@ and type_id != %i", predicateString, generic_id];
-    }
-
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K", predicateString]];
+    PaintSwatchType *genSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
+    int generic_id = [[genSwatchType order] intValue];
     
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
     [fetchRequest setSortDescriptors:@[nameSort]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     
-    if ([results count] > 0) {
-        return (NSMutableArray *)results;
+    NSMutableArray *filteredResults = [[NSMutableArray alloc] init];
+    
+    for (PaintSwatches *paintSwatch in results) {
+        
+        // Get the ids
+        //
+        int type_id = [[paintSwatch type_id] intValue];
+        int coverage_id = [[paintSwatch coverage_id] intValue];
+
+        // Generic filter
+        //
+        if (genFilter == TRUE && type_id == generic_id) {
+            continue;
+        }
+        
+        // Coverage filter
+        //
+        if (covFilter == TRUE && coverage_id != thick_cov_id && type_id != generic_id) {
+            continue;
+        }
+
+        [filteredResults addObject:paintSwatch];
+    }
+    
+    if ([filteredResults count] > 0) {
+        return filteredResults;
     } else {
         return nil;
     }
