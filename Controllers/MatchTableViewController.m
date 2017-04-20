@@ -91,13 +91,14 @@ const int IMAGE_TAG  = 6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
+
     
     // Initialize the PaintSwatch entity
     //

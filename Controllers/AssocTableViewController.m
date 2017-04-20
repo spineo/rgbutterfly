@@ -111,7 +111,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Retrieve the AssociationType dictionary
     //
-    _assocTypes = [ManagedObjectUtils fetchDictByNames:@"AssociationType" context:self.context];
+    _assocTypes     = [ManagedObjectUtils fetchDictByNames:@"AssociationType" context:self.context];
     _unknownTypeId  = [_assocTypes valueForKey:@"Unknown"];
     _mixTypeId      = [_assocTypes valueForKey:@"Mix"];
     

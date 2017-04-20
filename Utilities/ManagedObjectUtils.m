@@ -9,6 +9,7 @@
 #import "ManagedObjectUtils.h"
 #import "AssociationType+CoreDataProperties.h"
 #import "PaintSwatchType.h"
+#import "CanvasCoverage+CoreDataProperties.h"
 
 #import "GlobalSettings.h"
 #import "GenericUtils.h"
@@ -626,10 +627,56 @@
     //
     PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
     int match_assoc_id = [[paintSwatchType order] intValue];
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
     
     [fetchRequest setSortDescriptors:@[nameSort]];
 
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return (NSMutableArray *)results;
+    } else {
+        return nil;
+    }
+}
+
++ (NSMutableArray *)filterMatchPaintSwatches:(NSManagedObjectContext *)context covFilter:(BOOL)covFilter genFilter:(BOOL)genFilter {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
+    [fetchRequest setEntity:entity];
+    
+    // Sort paint swatches
+    //
+    NSSortDescriptor *nameSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    
+    // Skip match assoc types
+    //
+    // Filter out match association swatches
+    //
+    PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
+    int match_assoc_id = [[paintSwatchType order] intValue];
+
+    NSMutableString *predicateString = [[NSMutableString alloc] initWithFormat:@"type_id != %i", match_assoc_id];
+    
+    if (covFilter == TRUE) {
+        CanvasCoverage *coverageType = [ManagedObjectUtils queryDictionaryByNameValue:@"CanvasCoverage" nameValue:@"Thick" context:context];
+        int thick_cov_id = [[coverageType order] intValue];
+        predicateString = [[NSMutableString alloc] initWithFormat:@"%@ and coverage_id == %i", predicateString, thick_cov_id];
+    }
+    
+    if (genFilter == TRUE) {
+        PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:context];
+        int generic_id = [[paintSwatchType order] intValue];
+        predicateString = [[NSMutableString alloc] initWithFormat:@"%@ and type_id != %i", predicateString, generic_id];
+    }
+
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K", predicateString]];
+    
+    [fetchRequest setSortDescriptors:@[nameSort]];
+    
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
     
@@ -648,7 +695,7 @@
     
     if (name != nil) {
         NSString *regexName = [[NSString alloc] initWithFormat:@"%@*", name];
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
     }
     
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -672,7 +719,7 @@
     
     if (name != nil) {
         NSString *regexName = [[NSString alloc] initWithFormat:@"%@*", name];
-        [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name like[c] %@", regexName]];
     }
     
     [fetchRequest setPropertiesToFetch:[[NSArray alloc] initWithObjects:@"name", nil]];
@@ -796,7 +843,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssocSwatch" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"mix_association == %@", mix_assoc_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"mix_association == %@", mix_assoc_id]];
     
     NSSortDescriptor *orderSort = [[NSSortDescriptor alloc] initWithKey:@"mix_order" ascending:YES];
     [fetchRequest setSortDescriptors:@[ orderSort ]];
@@ -817,7 +864,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TapArea" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"match_association == %@", match_assoc_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"match_association == %@", match_assoc_id]];
     
     NSSortDescriptor *orderSort = [[NSSortDescriptor alloc] initWithKey:@"tap_order" ascending:YES];
     [fetchRequest setSortDescriptors:@[ orderSort ]];
@@ -840,7 +887,7 @@
     
     [fetch setEntity:entity];
     
-    [fetch setPredicate: [NSPredicate predicateWithFormat:@"name == %@", colorName]];
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"name == %@", colorName]];
     
     NSError *error      = nil;
     NSArray *results    = [context executeFetchRequest:fetch error:&error];
@@ -860,7 +907,7 @@
     
     [fetch setEntity:entity];
     
-    [fetch setPredicate: [NSPredicate predicateWithFormat:@"order == %@", order]];
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"order == %@", order]];
     
     NSError *error      = nil;
     NSArray *results    = [context executeFetchRequest:fetch error:&error];
@@ -880,7 +927,7 @@
     
     [fetch setEntity:entity];
     
-    [fetch setPredicate: [NSPredicate predicateWithFormat:@"name == %@", swatchName]];
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"name == %@", swatchName]];
     
     NSError *error      = nil;
     NSArray *results    = [context executeFetchRequest:fetch error:&error];
@@ -910,7 +957,7 @@
     PaintSwatchType *paintSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:context];
     int match_assoc_id = [[paintSwatchType order] intValue];
     
-    [fetch setPredicate: [NSPredicate predicateWithFormat:@"subj_color_id == %i and type_id != %i", subj_color_id, match_assoc_id]];
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"subj_color_id == %i and type_id != %i", subj_color_id, match_assoc_id]];
     
     [fetch setSortDescriptors:@[nameSort]];
     
@@ -930,7 +977,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Keyword" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name == [c] %@", keyword]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name == [c] %@", keyword]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -949,7 +996,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"objectID == %i", mix_assoc_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"objectID == %i", mix_assoc_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -993,7 +1040,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"keyword == %@ and %K == %@", keyword_id, relationName, obj_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"keyword == %@ and %K == %@", keyword_id, relationName, obj_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -1012,7 +1059,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"%K == %@", relationName, obj_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", relationName, obj_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -1032,7 +1079,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"order == %i", entityId]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"order == %i", entityId]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -1050,7 +1097,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name == %@", nameValue]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name == %@", nameValue]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -1093,7 +1140,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name == %@", name]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"name == %@", name]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
@@ -1295,7 +1342,7 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type_id != %i", match_assoc_id]];
     
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:fetchRequest error:&error];
