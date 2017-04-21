@@ -467,8 +467,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     _alertsFilterText    = @"alerts_filter_text";
     
-    _alertsNoneLabel = @"All Alerts are Turned On";
-    _alertsShowLabel = @"All Alerts are Turned Off";
+    _alertsNoneLabel = @"All Informational Alerts are Turned On";
+    _alertsShowLabel = @"All Informational Alerts are Turned Off";
     
     BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
     BOOL tapCollectAlert    = [_userDefaults boolForKey:TAP_COLLECT_KEY];
