@@ -600,7 +600,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Load the paint swatches
     //
-    _dbPaintSwatches = [ManagedObjectUtils filterMatchPaintSwatches:self.context covFilter:FALSE genFilter:FALSE];
+    _dbPaintSwatches = [ManagedObjectUtils filterMatchPaintSwatches:self.context userDefaults:_userDefaults];
     _dbSwatchesCount = (int)[_dbPaintSwatches count];
     _maxRowLimit = (_dbSwatchesCount > _maxMatchNum) ? _maxMatchNum : _dbSwatchesCount;
 }

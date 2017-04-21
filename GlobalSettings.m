@@ -303,6 +303,8 @@ NSString * const MIX_ASSOC_RO_KEY    = @"AssocReadOnly";
 NSString * const TAP_AREA_SIZE_KEY   = @"TapAreaSize";
 NSString * const SHAPE_GEOMETRY_KEY  = @"ShapeGeometry";
 NSString * const MATCH_NUM_KEY       = @"MatchNum";
+NSString * const GEN_FILTER_KEY      = @"GenericsFilterKey";
+NSString * const COV_FILTER_KEY      = @"CoverageFilterKey";
 NSString * const RGB_DISPLAY_KEY     = @"RgbDisplay";
 NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
@@ -532,6 +534,16 @@ static NSDictionary *swatchTypes;
     //
     if ([userDefaults objectForKey:RGB_DISPLAY_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:RGB_DISPLAY_KEY];
+    }
+    
+    // Initialize the Match Swatch Filters Keys to FALSE if not set
+    //
+    if ([userDefaults objectForKey:GEN_FILTER_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:GEN_FILTER_KEY];
+    }
+    
+    if ([userDefaults objectForKey:COV_FILTER_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:COV_FILTER_KEY];
     }
     
     // Alerts (on by default)

@@ -14,6 +14,7 @@
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
 
+
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
@@ -21,6 +22,14 @@
 @property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
 @property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
 @property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
+
+// Match Swatch Filters (Generic and Coverage that is not 'Thick')
+//
+@property (nonatomic, strong) NSString *genFilterText, *covFilterText, *genFilterOffText, *covFilterOffText, *genFilterOnText, *covFilterOnText;
+@property (nonatomic) BOOL genFilterFlag, covFilterFlag;
+@property (nonatomic, strong) UISwitch *genFilterSwitch, *covFilterSwitch;
+@property (nonatomic, strong) UILabel *genFilterLabel, *covFilterLabel;
+
 @property (nonatomic) CGFloat tapAreaSize;
 @property (nonatomic, strong) UIImageView *tapImageView;
 @property (nonatomic, strong) UIStepper *tapAreaStepper, *matchNumStepper;
@@ -70,8 +79,11 @@ const int READ_ONLY_SETTINGS_ROWS = 2;
 const int TAP_AREA_SETTINGS       = 3;
 const int TAP_AREA_ROWS           = 1;
 
-const int MATCH_NUM_SETTINGS      = 4;
-const int MATCH_NUM_ROWS          = 1;
+const int MATCH_FILTERS           = 4;
+const int MATCH_NUM_ROW           = 0;
+const int GEN_FILTER_ROW          = 1;
+const int COV_FILTER_ROW          = 2;
+const int MATCH_FILTERS_ROWS      = 3;
 
 const int RGB_DISPLAY_SETTINGS    = 5;
 const int RGB_DISPLAY_ROWS        = 1;
@@ -343,7 +355,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Match Num Widgets
+    // Match Num Filters
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     _matchSettingsLabel = [self createWidgetLabel:@"Change the Number of Tap Area Matches"];
@@ -380,6 +392,43 @@ const int SETTINGS_MAX_SECTIONS   = 9;
                             doneButton];
     [numberToolbar sizeToFit];
     [_matchNumTextField setInputAccessoryView:numberToolbar];
+    
+ 
+    
+    
+//    _dbForceUpdateText = @"db_force_update_text";
+//    
+//    _dbForceUpdateOnText  = @"Update Even if Versions are Unchanged ";
+//    _dbForceUpdateOffText = @"Do Not Perform a Force Database Update";
+//    
+//    if(! ([_userDefaults boolForKey:DB_FORCE_UPDATE_KEY] && [_userDefaults stringForKey:_dbForceUpdateText])) {
+//        _dbForceUpdateFlag = FALSE;
+//        _labelText = _dbForceUpdateOffText;
+//        
+//        [_userDefaults setBool:_dbForceUpdateFlag forKey:DB_FORCE_UPDATE_KEY];
+//        [_userDefaults setValue:_labelText forKey:_dbForceUpdateText];
+//        
+//    } else {
+//        _dbForceUpdateFlag = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
+//        _labelText = [_userDefaults stringForKey:_dbForceUpdateText];
+//    }
+//    
+//    // Create the label and switch, set the last state or default values
+//    //
+//    _dbForceUpdateSwitch = [[UISwitch alloc] init];
+//    _widgetHeight = _dbForceUpdateSwitch.bounds.size.height;
+//    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+//    [_dbForceUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+//    [_dbForceUpdateSwitch setOn:_dbForceUpdateFlag];
+//    
+//    // Add the switch target
+//    //
+//    [_dbForceUpdateSwitch addTarget:self action:@selector(setDbForceUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
+//    
+//    _dbForceUpdateLabel   = [self createWidgetLabel:_labelText];
+    
+    
+    
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -590,8 +639,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     } else if (section == TAP_AREA_SETTINGS) {
         return TAP_AREA_ROWS;
         
-    } else if (section == MATCH_NUM_SETTINGS) {
-        return MATCH_NUM_ROWS;
+    } else if (section == MATCH_FILTERS) {
+        return MATCH_FILTERS_ROWS;
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
         return RGB_DISPLAY_ROWS;
@@ -615,7 +664,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
         return DEF_XLG_TBL_CELL_HGT;
         
-    } else if ((indexPath.section == TAP_AREA_SETTINGS) ||  (indexPath.section == MATCH_NUM_SETTINGS)) {
+    } else if ((indexPath.section == TAP_AREA_SETTINGS) ||  (indexPath.section == MATCH_FILTERS)) {
         return DEF_VLG_TBL_CELL_HGT;
         
     } else {
@@ -641,8 +690,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     } else if (section == TAP_AREA_SETTINGS) {
         headerStr = @"Tap Area Settings";
         
-    } else if (section == MATCH_NUM_SETTINGS) {
-        headerStr = @"Match Number Settings";
+    } else if (section == MATCH_FILTERS) {
+        headerStr = @"Match Number Filters";
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
         headerStr = @"Paint/RGB Display";
@@ -754,7 +803,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         [cell.contentView addSubview:_tapStepperLabel];
         
         
-    } else if (indexPath.section == MATCH_NUM_SETTINGS) {
+    } else if (indexPath.section == MATCH_FILTERS) {
         [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
         [cell.contentView addSubview:_matchSettingsLabel];
         
@@ -765,6 +814,15 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
         [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _matchNumStepper.bounds.size.height)];
         [cell.contentView addSubview:_matchNumTextField];
+        
+//        if (indexPath.row == POLL_DB_UPDATE_ROW) {
+//            [cell.contentView addSubview:_dbPollUpdateSwitch];
+//            [cell.contentView addSubview:_dbPollUpdateLabel];
+//            
+//        } else if ((indexPath.row == FORCE_DB_UPDATE_ROW) && (_dbPollUpdateFlag == TRUE)) {
+//            [cell.contentView addSubview:_dbForceUpdateSwitch];
+//            [cell.contentView addSubview:_dbForceUpdateLabel];
+//        }
         
     } else if (indexPath.section == RGB_DISPLAY_SETTINGS) {
         [cell.contentView addSubview:_rgbDisplayButton];
@@ -952,6 +1010,14 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     }
     [_shapeButton setTitle:_shapeTitle forState:UIControlStateNormal];
     [self saveEnable:TRUE];
+}
+
+- (void)setGenFilterSwitchState:(id)sender {
+    
+}
+
+- (void)setCovFilterSwitchState:(id)sender {
+    
 }
 
 - (void)matchNumStepperPressed {

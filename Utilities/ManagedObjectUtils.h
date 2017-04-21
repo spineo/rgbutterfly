@@ -41,7 +41,7 @@
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context;
 + (NSArray *)fetchKeywords:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchPaintSwatches:(NSManagedObjectContext *)context;
-+ (NSMutableArray *)filterMatchPaintSwatches:(NSManagedObjectContext *)context covFilter:(BOOL)covFilter genFilter:(BOOL)genFilter;
++ (NSMutableArray *)filterMatchPaintSwatches:(NSManagedObjectContext *)context userDefaults:(NSUserDefaults *)userDefaults;
 + (NSMutableArray *)fetchMixAssociations:(NSManagedObjectContext *)context name:(NSString *)name;
 + (NSMutableArray *)fetchMatchAssociations:(NSManagedObjectContext *)context name:(NSString *)name;
 + (NSMutableDictionary *)fetchSubjectiveColors:(NSManagedObjectContext *)context;

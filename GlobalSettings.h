@@ -314,6 +314,8 @@ extern NSString * const MIX_ASSOC_RO_KEY;
 extern NSString * const TAP_AREA_SIZE_KEY;
 extern NSString * const SHAPE_GEOMETRY_KEY;
 extern NSString * const MATCH_NUM_KEY;
+extern NSString * const GEN_FILTER_KEY;
+extern NSString * const COV_FILTER_KEY;
 extern NSString * const RGB_DISPLAY_KEY;
 extern NSString * const MIX_RATIOS_KEY;
 extern NSString * const MIX_ASSOC_COUNT_KEY;

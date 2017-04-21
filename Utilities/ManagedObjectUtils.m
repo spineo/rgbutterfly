@@ -641,7 +641,7 @@
     }
 }
 
-+ (NSMutableArray *)filterMatchPaintSwatches:(NSManagedObjectContext *)context covFilter:(BOOL)covFilter genFilter:(BOOL)genFilter {
++ (NSMutableArray *)filterMatchPaintSwatches:(NSManagedObjectContext *)context userDefaults:(NSUserDefaults *)userDefaults {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
@@ -683,12 +683,14 @@
 
         // Generic filter
         //
+        BOOL genFilter = [userDefaults objectForKey:GEN_FILTER_KEY];
         if (genFilter == TRUE && type_id == generic_id) {
             continue;
         }
         
         // Coverage filter
         //
+        BOOL covFilter = [userDefaults objectForKey:COV_FILTER_KEY];
         if (covFilter == TRUE && coverage_id != thick_cov_id && type_id != generic_id) {
             continue;
         }
