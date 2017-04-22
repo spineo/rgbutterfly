@@ -393,44 +393,74 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     [numberToolbar sizeToFit];
     [_matchNumTextField setInputAccessoryView:numberToolbar];
     
- 
     
+    // Generics Filter Switch
+    //
+    _genFilterText = @"gen_filter_text";
     
-//    _dbForceUpdateText = @"db_force_update_text";
-//    
-//    _dbForceUpdateOnText  = @"Update Even if Versions are Unchanged ";
-//    _dbForceUpdateOffText = @"Do Not Perform a Force Database Update";
-//    
-//    if(! ([_userDefaults boolForKey:DB_FORCE_UPDATE_KEY] && [_userDefaults stringForKey:_dbForceUpdateText])) {
-//        _dbForceUpdateFlag = FALSE;
-//        _labelText = _dbForceUpdateOffText;
-//        
-//        [_userDefaults setBool:_dbForceUpdateFlag forKey:DB_FORCE_UPDATE_KEY];
-//        [_userDefaults setValue:_labelText forKey:_dbForceUpdateText];
-//        
-//    } else {
-//        _dbForceUpdateFlag = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
-//        _labelText = [_userDefaults stringForKey:_dbForceUpdateText];
-//    }
-//    
-//    // Create the label and switch, set the last state or default values
-//    //
-//    _dbForceUpdateSwitch = [[UISwitch alloc] init];
-//    _widgetHeight = _dbForceUpdateSwitch.bounds.size.height;
-//    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
-//    [_dbForceUpdateSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
-//    [_dbForceUpdateSwitch setOn:_dbForceUpdateFlag];
-//    
-//    // Add the switch target
-//    //
-//    [_dbForceUpdateSwitch addTarget:self action:@selector(setDbForceUpdateSwitchState:) forControlEvents:UIControlEventValueChanged];
-//    
-//    _dbForceUpdateLabel   = [self createWidgetLabel:_labelText];
+    _genFilterOffText = @"Generics Swatches Not Filtered ";
+    _genFilterOnText  = @"Generics Swatches Are Filtered";
     
+    if ([_userDefaults boolForKey:GEN_FILTER_KEY] == FALSE) {
+        _genFilterFlag = FALSE;
+        _labelText = _genFilterOffText;
+        
+        [_userDefaults setBool:_genFilterFlag forKey:GEN_FILTER_KEY];
+        [_userDefaults setValue:_labelText forKey:_genFilterText];
+        
+    } else {
+        _genFilterFlag = [_userDefaults boolForKey:GEN_FILTER_KEY];
+        _labelText = [_userDefaults stringForKey:_genFilterText];
+    }
     
+    // Create the label and switch, set the last state or default values
+    //
+    _genFilterSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _genFilterSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_genFilterSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_genFilterSwitch setOn:_genFilterFlag];
     
+    // Add the switch target
+    //
+    [_genFilterSwitch addTarget:self action:@selector(setGenFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _genFilterLabel   = [self createWidgetLabel:_labelText];
 
+
+    // Coverage Filter Switch
+    //
+    _covFilterText = @"cov_filter_text";
     
+    _covFilterOffText = @"Non-Thick Swatches Not Filtered ";
+    _covFilterOnText  = @"Non-Thick Swatches Are Filtered";
+    
+    if ([_userDefaults boolForKey:COV_FILTER_KEY] == FALSE) {
+        _covFilterFlag = FALSE;
+        _labelText = _covFilterOffText;
+        
+        [_userDefaults setBool:_covFilterFlag forKey:COV_FILTER_KEY];
+        [_userDefaults setValue:_labelText forKey:_covFilterText];
+        
+    } else {
+        _covFilterFlag = [_userDefaults boolForKey:COV_FILTER_KEY];
+        _labelText = [_userDefaults stringForKey:_covFilterText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _covFilterSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _covFilterSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_covFilterSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_covFilterSwitch setOn:_covFilterFlag];
+    
+    // Add the switch target
+    //
+    [_covFilterSwitch addTarget:self action:@selector(setCovFilterSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _covFilterLabel   = [self createWidgetLabel:_labelText];
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // RGB Display Row
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -664,7 +694,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     } else if (indexPath.section == MIX_RATIOS_SETTINGS) {
         return DEF_XLG_TBL_CELL_HGT;
         
-    } else if ((indexPath.section == TAP_AREA_SETTINGS) ||  (indexPath.section == MATCH_FILTERS)) {
+    } else if ((indexPath.section == TAP_AREA_SETTINGS) ||
+               (indexPath.section == MATCH_FILTERS && indexPath.row == MATCH_NUM_ROW)) {
         return DEF_VLG_TBL_CELL_HGT;
         
     } else {
@@ -804,25 +835,27 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
         
     } else if (indexPath.section == MATCH_FILTERS) {
-        [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
-        [cell.contentView addSubview:_matchSettingsLabel];
         
-        CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING;
-        [_matchNumStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
-        [cell.contentView addSubview:_matchNumStepper];
+        if (indexPath.row == MATCH_NUM_ROW) {
+            [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
+            [cell.contentView addSubview:_matchSettingsLabel];
+            
+            CGFloat yOffset = _matchSettingsLabel.bounds.size.height + DEF_MD_FIELD_PADDING;
+            [_matchNumStepper setFrame:CGRectMake(DEF_TABLE_X_OFFSET, yOffset, DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT)];
+            [cell.contentView addSubview:_matchNumStepper];
+            
+            CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
+            [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _matchNumStepper.bounds.size.height)];
+            [cell.contentView addSubview:_matchNumTextField];
         
-        CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _matchNumStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
-        [_matchNumTextField setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _matchNumStepper.bounds.size.height)];
-        [cell.contentView addSubview:_matchNumTextField];
-        
-//        if (indexPath.row == POLL_DB_UPDATE_ROW) {
-//            [cell.contentView addSubview:_dbPollUpdateSwitch];
-//            [cell.contentView addSubview:_dbPollUpdateLabel];
-//            
-//        } else if ((indexPath.row == FORCE_DB_UPDATE_ROW) && (_dbPollUpdateFlag == TRUE)) {
-//            [cell.contentView addSubview:_dbForceUpdateSwitch];
-//            [cell.contentView addSubview:_dbForceUpdateLabel];
-//        }
+        } else if (indexPath.row == GEN_FILTER_ROW) {
+            [cell.contentView addSubview:_genFilterSwitch];
+            [cell.contentView addSubview:_genFilterLabel];
+            
+        } else if (indexPath.row == COV_FILTER_ROW) {
+            [cell.contentView addSubview:_covFilterSwitch];
+            [cell.contentView addSubview:_covFilterLabel];
+        }
         
     } else if (indexPath.section == RGB_DISPLAY_SETTINGS) {
         [cell.contentView addSubview:_rgbDisplayButton];
@@ -1013,11 +1046,29 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 - (void)setGenFilterSwitchState:(id)sender {
+    _genFilterFlag = [sender isOn];
     
+    if (_genFilterFlag == TRUE) {
+        _genFilterLabel = [self createWidgetLabel:_genFilterOnText];
+        
+    } else {
+        _genFilterLabel = [self createWidgetLabel:_genFilterOffText];
+    }
+    [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)setCovFilterSwitchState:(id)sender {
+    _covFilterFlag = [sender isOn];
     
+    if (_covFilterFlag == TRUE) {
+        _covFilterLabel = [self createWidgetLabel:_covFilterOnText];
+        
+    } else {
+        _covFilterLabel = [self createWidgetLabel:_covFilterOffText];
+    }
+    [self saveEnable:TRUE];
+    [self.tableView reloadData];
 }
 
 - (void)matchNumStepperPressed {
@@ -1104,9 +1155,15 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             [_userDefaults setFloat:_tapAreaSize forKey:TAP_AREA_SIZE_KEY];
             [_userDefaults setValue:_shapeGeom forKey:SHAPE_GEOMETRY_KEY];
             
-            // Match Num Stepper Settings
+            // Match Filters
             //
             [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
+
+            [_userDefaults setBool:_genFilterFlag forKey:GEN_FILTER_KEY];
+            [_userDefaults setValue:[_genFilterLabel text] forKey:_genFilterText];
+            
+            [_userDefaults setBool:_covFilterFlag forKey:COV_FILTER_KEY];
+            [_userDefaults setValue:[_covFilterLabel text] forKey:_covFilterText];
             
             // isRGB settings
             //

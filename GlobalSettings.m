@@ -538,9 +538,9 @@ static NSDictionary *swatchTypes;
     
     // Initialize the Match Swatch Filters Keys to FALSE if not set
     //
-    if ([userDefaults objectForKey:GEN_FILTER_KEY] == nil) {
+   if ([userDefaults objectForKey:GEN_FILTER_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:GEN_FILTER_KEY];
-    }
+   }
     
     if ([userDefaults objectForKey:COV_FILTER_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:COV_FILTER_KEY];

@@ -683,14 +683,14 @@
 
         // Generic filter
         //
-        BOOL genFilter = [userDefaults objectForKey:GEN_FILTER_KEY];
+        BOOL genFilter = [userDefaults boolForKey:GEN_FILTER_KEY];
         if (genFilter == TRUE && type_id == generic_id) {
             continue;
         }
         
         // Coverage filter
         //
-        BOOL covFilter = [userDefaults objectForKey:COV_FILTER_KEY];
+        BOOL covFilter = [userDefaults boolForKey:COV_FILTER_KEY];
         if (covFilter == TRUE && coverage_id != thick_cov_id && type_id != generic_id) {
             continue;
         }
