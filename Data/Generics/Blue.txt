@@ -1,4 +1,4 @@
-Color Name;R.G.B Dec;RGB Hex;CSS Hex;Subj. Color;Blue
+Color Name;RGB Dec;RGB Hex;Subj. Color
 AliceBlue;240.248.255;F0F8FF;Blue
 BlueViolet;138.43.226;8A2BE2;Blue
 Cadet Blue;95.159.159;5F9F9F;Blue

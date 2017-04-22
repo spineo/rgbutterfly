@@ -1,0 +1,42 @@
+Color Name;RGB Dec;RGB Hex;Subj. Color
+RosyBrown;188.143.143;BC8F8F;Brown
+RosyBrown1;255.193.193;FFC1C1;Brown
+RosyBrown2;238.180.180;EEB4B4;Brown
+RosyBrown3;205.155.155;CD9B9B;Brown
+RosyBrown4;139.105.105;8B6969;Brown
+SaddleBrown;139.69.19;8B4513;Brown
+SandyBrown;244.164.96;F4A460;Brown
+beige;245.245.220;F5F5DC;Brown
+brown;165.42.42;A52A2A;Brown
+brown;166.42.42;A62A2A;Brown
+brown1;255.64.64;FF4040;Brown
+brown2;238.59.59;EE3B3B;Brown
+brown3;205.51.51;CD3333;Brown
+brown4;139.35.35;8B2323;Brown
+dark brown;92.64.51;5C4033;Brown
+burlywood;222.184.135;DEB887;Brown
+burlywood1;255.211.155;FFD39B;Brown
+burlywood2;238.197.145;EEC591;Brown
+burlywood3;205.170.125;CDAA7D;Brown
+burlywood4;139.115.85;8B7355;Brown
+bakers chocolate;92.51.23;5C3317;Brown
+chocolate;210.105.30;D2691E;Brown
+chocolate1;255.127.36;FF7F24;Brown
+chocolate2;238.118.33;EE7621;Brown
+chocolate3;205.102.29;CD661D;Brown
+chocolate4;139.69.19;8B4513;Brown
+peru;205.133.63;CD853F;Brown
+tan;210.180.140;D2B48C;Brown
+tan1;255.165.79;FFA54F;Brown
+tan2;238.154.73;EE9A49;Brown
+tan3;205.133.63;CD853F;Brown
+tan4;139.90.43;8B5A2B;Brown
+Dark Tan;151.105.79;97694F;Brown
+Dark Wood;133.94.66;855E42;Brown
+Light Wood;133.99.99;856363;Brown
+Medium Wood;166.128.100;A68064;Brown
+New Tan;235.199.158;EBC79E;Brown
+Semi-Sweet Chocolate;107.66.38;6B4226;Brown
+Sienna;142.107.35;8E6B23;Brown
+Tan;219.147.112;DB9370;Brown
+Very Dark Brown;92.64.51;5C4033;Brown
