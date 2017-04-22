@@ -1,49 +1,49 @@
 Color Name;RGB Dec;RGB Hex;Subj. Color
-BlanchedAlmond;255.235.205;FFEBCD;Yellow
-DarkGoldenrod;184.134.11;B8860B;Yellow
-DarkGoldenrod1;255.185.15;FFB90F;Yellow
-DarkGoldenrod2;238.173.14;EEAD0E;Yellow
-DarkGoldenrod3;205.149.12;CD950C;Yellow
-DarkGoldenrod4;139.101.8;8B6508;Yellow
-LemonChiffon;255.250.205;FFFACD;Yellow
-LemonChiffon1;255.250.205;FFFACD;Yellow
-LemonChiffon2;238.233.191;EEE9BF;Yellow
-LemonChiffon3;205.201.165;CDC9A5;Yellow
-LemonChiffon4;139.137.112;8B8970;Yellow
+BlanchedAlmond;255.235.205;FFEBCD;Cream
+DarkGoldenrod;184.134.11;B8860B;Yellow Orange
+DarkGoldenrod1;255.185.15;FFB90F;Yellow Orange
+DarkGoldenrod2;238.173.14;EEAD0E;Yellow Orange
+DarkGoldenrod3;205.149.12;CD950C;Yellow Orange
+DarkGoldenrod4;139.101.8;8B6508;Brown
+LemonChiffon;255.250.205;FFFACD;Cream
+LemonChiffon1;255.250.205;FFFACD;Cream
+LemonChiffon2;238.233.191;EEE9BF;Cream
+LemonChiffon3;205.201.165;CDC9A5;Cream
+LemonChiffon4;139.137.112;8B8970;Grey
 LightGoldenrod;238.221.130;EEDD82;Yellow
 LightGoldenrod1;255.236.139;FFEC8B;Yellow
 LightGoldenrod2;238.220.130;EEDC82;Yellow
 LightGoldenrod3;205.190.112;CDBE70;Yellow
 LightGoldenrod4;139.129.76;8B814C;Yellow
-LightGoldenrodYellow;250.250.210;FAFAD2;Yellow
-LightYellow;255.255.224;FFFFE0;Yellow
-LightYellow1;255.255.224;FFFFE0;Yellow
-LightYellow2;238.238.209;EEEED1;Yellow
-LightYellow3;205.205.180;CDCDB4;Yellow
-LightYellow4;139.139.122;8B8B7A;Yellow
+LightGoldenrodYellow;250.250.210;FAFAD2;Cream
+LightYellow;255.255.224;FFFFE0;Cream
+LightYellow1;255.255.224;FFFFE0;Cream
+LightYellow2;238.238.209;EEEED1;Cream
+LightYellow3;205.205.180;CDCDB4;Cream
+LightYellow4;139.139.122;8B8B7A;Grey
 PaleGoldenrod;238.232.170;EEE8AA;Yellow
-PapayaWhip;255.239.213;FFEFD5;Yellow
-cornsilk;255.248.220;FFF8DC;Yellow
-cornsilk1;255.248.220;FFF8DC;Yellow
-cornsilk2;238.232.205;EEE8CD;Yellow
-cornsilk3;205.200.177;CDC8B1;Yellow
-cornsilk4;139.136.120;8B8878;Yellow
-goldenrod;218.165.32;DAA520;Yellow
-goldenrod1;255.193.37;FFC125;Yellow
-goldenrod2;238.180.34;EEB422;Yellow
-goldenrod3;205.155.29;CD9B1D;Yellow
-goldenrod4;139.105.20;8B6914;Yellow
-moccasin;255.228.181;FFE4B5;Yellow
+PapayaWhip;255.239.213;FFEFD5;Cream
+cornsilk;255.248.220;FFF8DC;Cream
+cornsilk1;255.248.220;FFF8DC;Cream
+cornsilk2;238.232.205;EEE8CD;Cream
+cornsilk3;205.200.177;CDC8B1;Cream
+cornsilk4;139.136.120;8B8878;Grey
+goldenrod;218.165.32;DAA520;Yellow Orange
+goldenrod1;255.193.37;FFC125;Yellow Orange
+goldenrod2;238.180.34;EEB422;Yellow Orange
+goldenrod3;205.155.29;CD9B1D;Yellow Orange
+goldenrod4;139.105.20;8B6914;Yellow Orange
+moccasin;255.228.181;FFE4B5;Cream
 yellow;255.255.0;FFFF00;Yellow
 yellow1;255.255.0;FFFF00;Yellow
 yellow2;238.238.0;EEEE00;Yellow
-yellow3;205.205.0;CDCD00;Yellow
-yellow4;139.139.0;8B8B00;Yellow
-gold;255.215.0;FFD700;Yellow
-gold1;255.215.0;FFD700;Yellow
-gold2;238.201.0;EEC900;Yellow
-gold3;205.173.0;CDAD00;Yellow
-gold4;139.117.0;8B7500;Yellow
+yellow3;205.205.0;CDCD00;Yellow Green
+yellow4;139.139.0;8B8B00;Yellow Green
+gold;255.215.0;FFD700;Gold
+gold1;255.215.0;FFD700;Gold
+gold2;238.201.0;EEC900;Gold
+gold3;205.173.0;CDAD00;Gold
+gold4;139.117.0;8B7500;Gold
 Goldenrod;219.219.112;DBDB70;Yellow
-Medium Goldenrod;234.234.174;EAEAAE;Yellow
-Yellow Green;153.204.50;99CC32;Yellow
+Medium Goldenrod;234.234.174;EAEAAE;Cream
+Yellow Green;153.204.50;99CC32;Yellow Green

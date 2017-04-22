@@ -1,15 +1,15 @@
 Color Name;Credits;RGB Dec;RGB Hex;Subj. Color
-copper;184.115.51;B87333;Other
-cool copper;217.135.25;D98719;Other
-Green Copper;133.99.99;856363;Other
-brass;181.166.66;B5A642;Other
-bronze;140.120.83;8C7853;Other
-bronze II;166.125.61;A67D3D;Other
-bright gold;217.217.25;D9D919;Other
-Old Gold;207.181.59;CFB53B;Other
-CSS Gold;204.153.0;CC9900;Other
-gold;205.127.50;CD7F32;Other
-silver;230.232.250;E6E8FA;Other
-Silver, Grey;192.192.192;C0C0C0;Other
-Light Steel Blue;84.84.84;545454;Other
-Steel Blue;35.107.142;236B8E;Other
+copper;184.115.51;B87333;Copper
+cool copper;217.135.25;D98719;Copper
+Green Copper;133.99.99;856363;Brown
+brass;181.166.66;B5A642;Yellow Green
+bronze;140.120.83;8C7853;Brown
+bronze II;166.125.61;A67D3D;Brown
+bright gold;217.217.25;D9D919;Yellow
+Old Gold;207.181.59;CFB53B;Gold
+CSS Gold;204.153.0;CC9900;Yellow Orange
+gold;205.127.50;CD7F32;Yellow Orange
+silver;230.232.250;E6E8FA;White
+Silver, Grey;192.192.192;C0C0C0;Grey
+Light Steel Blue;84.84.84;545454;Grey
+Steel Blue;35.107.142;236B8E;Blue

@@ -5,66 +5,66 @@ DarkOrchid2;178.58.238;B23AEE;Violet
 DarkOrchid3;154.50.205;9A32CD;Violet
 DarkOrchid4;104.34.139;68228B;Violet
 DarkViolet;148.0.211;9400D3;Violet
-LavenderBlush;255.240.245;FFF0F5;Violet
-LavenderBlush1;255.240.245;FFF0F5;Violet
-LavenderBlush2;238.224.229;EEE0E5;Violet
-LavenderBlush3;205.193.197;CDC1C5;Violet
-LavenderBlush4;139.131.134;8B8386;Violet
-MediumOrchid;186.85.211;BA55D3;Violet
-MediumOrchid1;224.102.255;E066FF;Violet
-MediumOrchid2;209.95.238;D15FEE;Violet
-MediumOrchid3;180.82.205;B452CD;Violet
-MediumOrchid4;122.55.139;7A378B;Violet
+LavenderBlush;255.240.245;FFF0F5;Pink
+LavenderBlush1;255.240.245;FFF0F5;Pink
+LavenderBlush2;238.224.229;EEE0E5;Pink
+LavenderBlush3;205.193.197;CDC1C5;Pink
+LavenderBlush4;139.131.134;8B8386;Brown
+MediumOrchid;186.85.211;BA55D3;Red Violet
+MediumOrchid1;224.102.255;E066FF;Red Violet
+MediumOrchid2;209.95.238;D15FEE;Red Violet
+MediumOrchid3;180.82.205;B452CD;Red Violet
+MediumOrchid4;122.55.139;7A378B;Red Violet
 MediumPurple;147.112.219;9370DB;Violet
 Medium Orchid;147.112.219;9370DB;Violet
 MediumPurple1;171.130.255;AB82FF;Violet
-Dark Orchid;153.50.205;9932CD;Violet
+Dark Orchid;153.50.205;9932CD;Red Violet
 MediumPurple2;159.121.238;9F79EE;Violet
 MediumPurple3;137.104.205;8968CD;Violet
 MediumPurple4;93.71.139;5D478B;Violet
-lavender;230.230.250;E6E6FA;Violet
-magenta;255.0.255;FF00FF;Violet
-fuchsia;255.0.255;FF00FF;Violet
-magenta1;255.0.255;FF00FF;Violet
-magenta2;238.0.238;EE00EE;Violet
-magenta3;205.0.205;CD00CD;Violet
+lavender;230.230.250;E6E6FA;Pink
+magenta;255.0.255;FF00FF;Red Violet
+fuchsia;255.0.255;FF00FF;Red Violet
+magenta1;255.0.255;FF00FF;Red Violet
+magenta2;238.0.238;EE00EE;Red Violet
+magenta3;205.0.205;CD00CD;Red Violet
 magenta4;139.0.139;8B008B;Violet
-maroon;176.48.96;B03060;Violet
-maroon1;255.52.179;FF34B3;Violet
-maroon2;238.48.167;EE30A7;Violet
-maroon3;205.41.144;CD2990;Violet
-maroon4;139.28.98;8B1C62;Violet
-orchid;218.112.214;DA70D6;Violet
-Orchid;219.112.219;DB70DB;Violet
-orchid1;255.131.250;FF83FA;Violet
-orchid2;238.122.233;EE7AE9;Violet
-orchid3;205.105.201;CD69C9;Violet
-orchid4;139.71.137;8B4789;Violet
-plum;221.160.221;DDA0DD;Violet
-plum1;255.187.255;FFBBFF;Violet
-plum2;238.174.238;EEAEEE;Violet
-plum3;205.150.205;CD96CD;Violet
-plum4;139.102.139;8B668B;Violet
-plum4-2;153.102.204;9966CC;Violet
+maroon;176.48.96;B03060;Red Violet
+maroon1;255.52.179;FF34B3;Red Violet
+maroon2;238.48.167;EE30A7;Red Violet
+maroon3;205.41.144;CD2990;Red Violet
+maroon4;139.28.98;8B1C62;Red Violet
+orchid;218.112.214;DA70D6;Red Violet
+Orchid;219.112.219;DB70DB;Red Violet
+orchid1;255.131.250;FF83FA;Red Violet
+orchid2;238.122.233;EE7AE9;Red Violet
+orchid3;205.105.201;CD69C9;Red Violet
+orchid4;139.71.137;8B4789;Red Violet
+plum;221.160.221;DDA0DD;Red Violet
+plum1;255.187.255;FFBBFF;Red Violet
+plum2;238.174.238;EEAEEE;Red Violet
+plum3;205.150.205;CD96CD;Red Violet
+plum4;139.102.139;8B668B;Red Violet
+plum4-2;153.102.204;9966CC;Red Violet
 purple;160.32.240;A020F0;Violet
-purple;128.0.128;800080;Violet
+purple-2;128.0.128;800080;Red Violet
 purple1;155.48.255;9B30FF;Violet
 purple2;145.44.238;912CEE;Violet
 purple3;125.38.205;7D26CD;Violet
 purple4;85.26.139;551A8B;Violet
-thistle;216.191.216;D8BFD8;Violet
-thistle1;255.225.255;FFE1FF;Violet
-thistle2;238.210.238;EED2EE;Violet
-thistle3;205.181.205;CDB5CD;Violet
-thistle4;139.123.139;8B7B8B;Violet
-violet;238.130.238;EE82EE;Violet
-violet blue;159.95.159;9F5F9F;Violet
-Dark Purple;135.31.120;871F78;Violet
-Maroon;128.0.0;800000;Violet
-Medium Violet Red;219.112.147;DB7093;Violet
-Neon Pink;255.110.199;FF6EC7;Violet
-Plum;234.173.234;EAADEA;Violet
-Thistle;216.191.216;D8BFD8;Violet
-Turquoise;173.234.234;ADEAEA;Violet
-Violet;79.47.79;4F2F4F;Violet
-Violet Red;204.50.153;CC3299;Violet
+thistle;216.191.216;D8BFD8;Pink
+thistle1;255.225.255;FFE1FF;Pink
+thistle2;238.210.238;EED2EE;Pink
+thistle3;205.181.205;CDB5CD;Pink
+thistle4;139.123.139;8B7B8B;Grey
+violet;238.130.238;EE82EE;Red Violet
+violet blue;159.95.159;9F5F9F;Red Violet
+Dark Purple;135.31.120;871F78;Red Violet
+Maroon;128.0.0;800000;Red
+Medium Violet Red;219.112.147;DB7093;Red Violet
+Neon Pink;255.110.199;FF6EC7;Red Violet
+Plum;234.173.234;EAADEA;Red Violet
+Thistle;216.191.216;D8BFD8;Grey
+Turquoise;173.234.234;ADEAEA;Blue Green
+Violet;79.47.79;4F2F4F;Red Violet
+Violet Red;204.50.153;CC3299;Red Violet
