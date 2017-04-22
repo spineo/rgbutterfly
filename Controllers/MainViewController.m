@@ -31,7 +31,7 @@
 
 @interface MainViewController()
 
-@property (nonatomic, strong) UIAlertController *listingController, *photoSelectionController;
+@property (nonatomic, strong) UIAlertController *listingController, *photoSelectionController, *colorsFilterController;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *sortedLetters, *sortedLettersDefaults;
 @property (nonatomic, strong) UILabel *mixTitleLabel;
@@ -44,7 +44,7 @@
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 @property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefOnly, showGenOnly;
-@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton;
+@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton, *colorsFilterButton;
 
 
 // Resize UISearchBar when rotated
@@ -248,9 +248,46 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_photoSelectionController addAction:selLibraryAction];
     [_photoSelectionController addAction:selTakePhotoAction];
     [_photoSelectionController addAction:selCancel];
+
     
+    // Colors controller
+    //
+    _colorsFilterController = [UIAlertController alertControllerWithTitle:@"Colors Filter"
+                                                             message:@"Please select a filter type"
+                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show Paint References/Mixes" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+        [self showAllColors];
+    }];
+    
+    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"Show Paints and Generics" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self showAllColors];
+    }];
+    
+    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * action) {
+                                                                   [self filterByReference];
+                                                               }];
+    
+    UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Show Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByGenerics];
+    }];
+    
+    UIAlertAction *colorsAlertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_listingController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_colorsFilterController addAction:refAndMix];
+    [_colorsFilterController addAction:allColors];
+    [_colorsFilterController addAction:refOnly];
+    [_colorsFilterController addAction:genOnly];
+    [_colorsFilterController addAction:colorsAlertCancel];
+    
+    _colorsFilterButton  = [[UIBarButtonItem alloc] initWithTitle:@"Colors Filter: References/Mixes" style:UIBarButtonItemStylePlain target:self action:@selector(showColorsFilters)];
+
+
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
-    
+
     
     // Filters
     //
@@ -812,14 +849,16 @@ int MIX_ASSOC_MIN_SIZE = 0;
             UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
-            NSString *allListing = @"All";
-            NSString *refListing = @"Ref.";
-            NSString *genListing = @"Gen.";
+            NSString *allListing = @"All Colors";
+            NSString *refListing = @"Ref. Only";
+            NSString *genListing = @"Gen. Only";
+            
+            NSString *colorsFilter;
             if (_showRefOnly == TRUE) {
-                refListing = [[NSString alloc] initWithFormat:@"%@ (%i)", refListing, _numSwatches];
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", refListing, _numSwatches];
                 
             } else if (_showGenOnly == TRUE) {
-                genListing = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
     
             } else {
                 int swatchCount;
@@ -828,15 +867,18 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 } else {
                     swatchCount = _numSwatches;
                 }
-                allListing = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, swatchCount];
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, swatchCount];
             }
             [_allLabel setTitle:allListing];
             [_refLabel setTitle:refListing];
             [_genLabel setTitle:genListing];
             
+            [_colorsFilterButton setTitle:[[NSString alloc] initWithFormat:@"Colors Filter: %@", colorsFilter]];
+            
             UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-            [filterToolbar setItems: @[_allButton,_allLabel, flexibleSpace, _refButton, _refLabel, flexibleSpace, _genButton,_genLabel, flexibleSpace]];
+
+            [filterToolbar setItems: @[flexibleSpace, _colorsFilterButton, flexibleSpace]];
     
             CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
     
@@ -1146,6 +1188,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (IBAction)showListingOptions:(id)sender {
     [self presentViewController:_listingController animated:YES completion:nil];
+}
+
+- (void)showColorsFilters {
+    [self presentViewController:_colorsFilterController animated:YES completion:nil];
 }
 
 - (void)updateTable:(NSString *)listingType {
