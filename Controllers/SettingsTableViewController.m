@@ -722,7 +722,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         headerStr = @"Tap Area Settings";
         
     } else if (section == MATCH_FILTERS) {
-        headerStr = @"Match Number Filters";
+        headerStr = @"Match Filters";
         
     } else if (section == RGB_DISPLAY_SETTINGS) {
         headerStr = @"Paint/RGB Display";
