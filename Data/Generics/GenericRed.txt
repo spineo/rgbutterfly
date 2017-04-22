@@ -1,74 +1,74 @@
 Color Name;RGB Dec;RGB Hex;Subj. Color
-DeepPink;255.20.147;FF1493;Red
-DeepPink1;255.20.147;FF1493;Red
-DeepPink2;238.18.137;EE1289;Red
-DeepPink3;205.16.118;CD1076;Red
-DeepPink4;139.10.80;8B0A50;Red
-HotPink;255.105.180;FF69B4;Red
-HotPink1;255.110.180;FF6EB4;Red
-HotPink2;238.106.167;EE6AA7;Red
-HotPink3;205.96.144;CD6090;Red
-HotPink4;139.58.98;8B3A62;Red
+DeepPink;255.20.147;FF1493;Red Violet
+DeepPink1;255.20.147;FF1493;Red Violet
+DeepPink2;238.18.137;EE1289;Red Violet
+DeepPink3;205.16.118;CD1076;Red Violet
+DeepPink4;139.10.80;8B0A50;Red Violet
+HotPink;255.105.180;FF69B4;Red Violet
+HotPink1;255.110.180;FF6EB4;Red Violet
+HotPink2;238.106.167;EE6AA7;Red Violet
+HotPink3;205.96.144;CD6090;Red Violet
+HotPink4;139.58.98;8B3A62;Red Violet
 IndianRed;205.92.92;CD5C5C;Red
 IndianRed1;255.106.106;FF6A6A;Red
 IndianRed2;238.99.99;EE6363;Red
 IndianRed3;205.85.85;CD5555;Red
 IndianRed4;139.58.58;8B3A3A;Red
-LightPink;255.182.193;FFB6C1;Red
-LightPink1;255.174.185;FFAEB9;Red
-LightPink2;238.162.173;EEA2AD;Red
-LightPink3;205.140.149;CD8C95;Red
-LightPink4;139.95.101;8B5F65;Red
-MediumVioletRed;199.21.133;C71585;Red
-MistyRose;255.228.225;FFE4E1;Red
-MistyRose1;255.228.225;FFE4E1;Red
-MistyRose2;238.213.210;EED5D2;Red
-MistyRose3;205.183.181;CDB7B5;Red
-MistyRose4;139.125.123;8B7D7B;Red
-OrangeRed;255.69.0;FF4500;Red
-OrangeRed1;255.69.0;FF4500;Red
-OrangeRed2;238.64.0;EE4000;Red
-OrangeRed3;205.55.0;CD3700;Red
-OrangeRed4;139.37.0;8B2500;Red
-PaleVioletRed;219.112.147;DB7093;Red
-PaleVioletRed1;255.130.171;FF82AB;Red
-PaleVioletRed2;238.121.159;EE799F;Red
-PaleVioletRed3;205.104.137;CD6889;Red
-PaleVioletRed4;139.71.93;8B475D;Red
-VioletRed;208.32.144;D02090;Red
-VioletRed1;255.62.150;FF3E96;Red
-VioletRed2;238.58.140;EE3A8C;Red
-VioletRed3;205.50.120;CD3278;Red
-VioletRed4;139.34.82;8B2252;Red
+LightPink;255.182.193;FFB6C1;Pink
+LightPink1;255.174.185;FFAEB9;Pink
+LightPink2;238.162.173;EEA2AD;Pink
+LightPink3;205.140.149;CD8C95;Pink
+LightPink4;139.95.101;8B5F65;Pink
+MediumVioletRed;199.21.133;C71585;Red Violet
+MistyRose;255.228.225;FFE4E1;Pink
+MistyRose1;255.228.225;FFE4E1;Pink
+MistyRose2;238.213.210;EED5D2;Pink
+MistyRose3;205.183.181;CDB7B5;Pink
+MistyRose4;139.125.123;8B7D7B;Grey
+OrangeRed;255.69.0;FF4500;Red Orange
+OrangeRed1;255.69.0;FF4500;Red Orange
+OrangeRed2;238.64.0;EE4000;Red Orange
+OrangeRed3;205.55.0;CD3700;Red Orange
+OrangeRed4;139.37.0;8B2500;Red Orange
+PaleVioletRed;219.112.147;DB7093;Red Violet
+PaleVioletRed1;255.130.171;FF82AB;Red Violet
+PaleVioletRed2;238.121.159;EE799F;Red Violet
+PaleVioletRed3;205.104.137;CD6889;Red Violet
+PaleVioletRed4;139.71.93;8B475D;Red Violet
+VioletRed;208.32.144;D02090;Red Violet
+VioletRed1;255.62.150;FF3E96;Red Violet
+VioletRed2;238.58.140;EE3A8C;Red Violet
+VioletRed3;205.50.120;CD3278;Red Violet
+VioletRed4;139.34.82;8B2252;Red Violet
 firebrick;178.34.34;B22222;Red
-firebrick1;255.48.48;FF3030;Red
-firebrick2;238.44.44;EE2C2C;Red
-firebrick3;205.38.38;CD2626;Red
+firebrick1;255.48.48;FF3030;Red Orange
+firebrick2;238.44.44;EE2C2C;Red Orange
+firebrick3;205.38.38;CD2626;Red Orange
 firebrick4;139.26.26;8B1A1A;Red
-pink;255.192.203;FFC0CB;Red
-pink1;255.181.197;FFB5C5;Red
-pink2;238.169.184;EEA9B8;Red
-pink3;205.145.158;CD919E;Red
-pink4;139.99.108;8B636C;Red
-Flesh;245.204.176;F5CCB0;Red
-Feldspar;209.146.117;D19275;Red
+pink;255.192.203;FFC0CB;Pink
+pink1;255.181.197;FFB5C5;Pink
+pink2;238.169.184;EEA9B8;Pink
+pink3;205.145.158;CD919E;Pink
+pink4;139.99.108;8B636C;Pink
+Flesh;245.204.176;F5CCB0;Cream
+Feldspar;209.146.117;D19275;Brown
 Feldspar-2;204.51.51;CC3333;Red
 red;255.0.0;FF0000;Red
 red1;255.0.0;FF0000;Red
 red2;238.0.0;EE0000;Red
 red3;205.0.0;CD0000;Red
 red4;139.0.0;8B0000;Red
-tomato;255.99.71;FF6347;Red
-tomato1;255.99.71;FF6347;Red
-tomato2;238.92.66;EE5C42;Red
-tomato3;205.79.57;CD4F39;Red
-tomato4;139.54.38;8B3626;Red
-Dusty Rose;133.99.99;856363;Red
+tomato;255.99.71;FF6347;Red Orange
+tomato1;255.99.71;FF6347;Red Orange
+tomato2;238.92.66;EE5C42;Red Orange
+tomato3;205.79.57;CD4F39;Red Orange
+tomato4;139.54.38;8B3626;Red Orange
+Dusty Rose;133.99.99;856363;Brown
 Firebrick;142.35.35;8E2323;Red
-Indian Red;245.204.176;F5CCB0;Red
+Indian Red;245.204.176;F5CCB0;Cream
 Pink;188.143.143;BC8F8F;Red
 Salmon;111.66.66;6F4242;Red
 Scarlet;140.23.23;8C1717;Red
-Spicy Pink;255.28.174;FF1CAE;Red
-Free Speech Magenta;227.91.216;E35BD8;Red
+Spicy Pink;255.28.174;FF1CAE;Red Violet
+Free Speech Magenta;227.91.216;E35BD8;Red Violet
 Free Speech Red;192.0.0;C00000;Red

@@ -1,18 +1,18 @@
 Color Name;RGB Dec;RGB Hex;Subj. Color
-RosyBrown;188.143.143;BC8F8F;Brown
-RosyBrown1;255.193.193;FFC1C1;Brown
-RosyBrown2;238.180.180;EEB4B4;Brown
-RosyBrown3;205.155.155;CD9B9B;Brown
-RosyBrown4;139.105.105;8B6969;Brown
+RosyBrown;188.143.143;BC8F8F;Pink
+RosyBrown1;255.193.193;FFC1C1;Pink
+RosyBrown2;238.180.180;EEB4B4;Pink
+RosyBrown3;205.155.155;CD9B9B;Pink
+RosyBrown4;139.105.105;8B6969;Pink
 SaddleBrown;139.69.19;8B4513;Brown
 SandyBrown;244.164.96;F4A460;Brown
-beige;245.245.220;F5F5DC;Brown
-brown;165.42.42;A52A2A;Brown
-brown;166.42.42;A62A2A;Brown
-brown1;255.64.64;FF4040;Brown
-brown2;238.59.59;EE3B3B;Brown
-brown3;205.51.51;CD3333;Brown
-brown4;139.35.35;8B2323;Brown
+beige;245.245.220;F5F5DC;Cream
+brown;165.42.42;A52A2A;Red
+brown;166.42.42;A62A2A;Red
+brown1;255.64.64;FF4040;Red
+brown2;238.59.59;EE3B3B;Red
+brown3;205.51.51;CD3333;Red
+brown4;139.35.35;8B2323;Red
 dark brown;92.64.51;5C4033;Brown
 burlywood;222.184.135;DEB887;Brown
 burlywood1;255.211.155;FFD39B;Brown
@@ -21,8 +21,8 @@ burlywood3;205.170.125;CDAA7D;Brown
 burlywood4;139.115.85;8B7355;Brown
 bakers chocolate;92.51.23;5C3317;Brown
 chocolate;210.105.30;D2691E;Brown
-chocolate1;255.127.36;FF7F24;Brown
-chocolate2;238.118.33;EE7621;Brown
+chocolate1;255.127.36;FF7F24;Orange
+chocolate2;238.118.33;EE7621;Orange
 chocolate3;205.102.29;CD661D;Brown
 chocolate4;139.69.19;8B4513;Brown
 peru;205.133.63;CD853F;Brown
@@ -35,7 +35,7 @@ Dark Tan;151.105.79;97694F;Brown
 Dark Wood;133.94.66;855E42;Brown
 Light Wood;133.99.99;856363;Brown
 Medium Wood;166.128.100;A68064;Brown
-New Tan;235.199.158;EBC79E;Brown
+New Tan;235.199.158;EBC79E;Cream
 Semi-Sweet Chocolate;107.66.38;6B4226;Brown
 Sienna;142.107.35;8E6B23;Brown
 Tan;219.147.112;DB9370;Brown

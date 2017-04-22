@@ -4,9 +4,9 @@ DarkGreen;0.100.0;006400;Green
 dark green copper;74.118.110;4A766E;Green
 DarkKhaki;189.183.107;BDB76B;Green
 DarkOliveGreen;85.107.47;556B2F;Green
-DarkOliveGreen1;202.255.112;CAFF70;Green
-DarkOliveGreen2;188.238.104;BCEE68;Green
-DarkOliveGreen3;162.205.90;A2CD5A;Green
+DarkOliveGreen1;202.255.112;CAFF70;Yellow Green
+DarkOliveGreen2;188.238.104;BCEE68;Yellow Green
+DarkOliveGreen3;162.205.90;A2CD5A;Yellow Green
 DarkOliveGreen4;110.139.61;6E8B3D;Green
 olive;128.128.0;808000;Green
 DarkSeaGreen;143.188.143;8FBC8F;Green
@@ -15,8 +15,8 @@ DarkSeaGreen2;180.238.180;B4EEB4;Green
 DarkSeaGreen3;155.205.155;9BCD9B;Green
 DarkSeaGreen4;105.139.105;698B69;Green
 ForestGreen;34.139.34;228B22;Green
-GreenYellow;173.255.47;ADFF2F;Green
-LawnGreen;124.252.0;7CFC00;Green
+GreenYellow;173.255.47;ADFF2F;Yellow Green
+LawnGreen;124.252.0;7CFC00;Yellow Green
 LightSeaGreen;32.178.170;20B2AA;Green
 LimeGreen;50.205.50;32CD32;Green
 MediumSeaGreen;60.179.113;3CB371;Green
@@ -33,9 +33,9 @@ PaleGreen2;144.238.144;90EE90;Green
 PaleGreen3;124.205.124;7CCD7C;Green
 PaleGreen4;84.139.84;548B54;Green
 SeaGreen, SeaGreen4;46.139.87;2E8B57;Green
-SeaGreen1;84.255.159;54FF9F;Green
-SeaGreen2;78.238.148;4EEE94;Green
-SeaGreen3;67.205.128;43CD80;Green
+SeaGreen1;84.255.159;54FF9F;Blue Green
+SeaGreen2;78.238.148;4EEE94;Blue Green
+SeaGreen3;67.205.128;43CD80;Blue Green
 SpringGreen;0.255.127;00FF7F;Green
 SpringGreen1;0.255.127;00FF7F;Green
 SpringGreen2;0.238.118;00EE76;Green
@@ -54,16 +54,13 @@ green1;0.255.0;00FF00;0f0;Green
 green2;0.238.0;00EE00;0e0;Green
 green3;0.205.0;00CD00;Green
 green4;0.139.0;008B00;Green
-khaki;240.230.140;F0E68C;Green
-khaki1;255.246.143;FFF68F;Green
-khaki2;238.230.133;EEE685;Green
-khaki3;205.198.115;CDC673;Green
+khaki;240.230.140;F0E68C;Cream
+khaki1;255.246.143;FFF68F;Cream
+khaki2;238.230.133;EEE685;Cream
+khaki3;205.198.115;CDC673;Cream
 khaki4;139.134.78;8B864E;Green
 Dark Olive Green;79.79.47;4F4F2F;Green
-Green Yellow [sic];209.146.117;D19275;Green
-Hunter Green [sic];142.35.35;8E2323;Green
-Forest Green, Khaki, Medium Aquamarine;35.142.35;238E23;Green
-Medium Forest Green;219.219.112;DBDB70;Green
+Medium Forest Green;219.219.112;DBDB70;Yellow Green
 Medium Sea Green;66.111.66;426F42;Green
 Medium Spring Green;127.255.0;7FFF00;Green
 Pale Green;143.188.143;8FBC8F;Green
