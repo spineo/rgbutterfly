@@ -90,8 +90,6 @@
 		21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE51C8487A1001C3F05 /* Images.xcassets */; };
 		21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21397EE71C8487C7001C3F05 /* Media.xcassets */; };
 		213C93C61E5350A800CB780F /* CustomCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */; };
-		213E9BAE1EA3F52700C3682D /* Grey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BAD1EA3F52700C3682D /* Grey.txt */; };
-		213E9BB21EA5A88700C3682D /* Blue.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB11EA5A88700C3682D /* Blue.txt */; };
 		213E9BBD1EA5A93000C3682D /* AssociationType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB41EA5A93000C3682D /* AssociationType.txt */; };
 		213E9BBE1EA5A93000C3682D /* BodyType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB51EA5A93000C3682D /* BodyType.txt */; };
 		213E9BBF1EA5A93000C3682D /* CanvasCoverage.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BB61EA5A93000C3682D /* CanvasCoverage.txt */; };
@@ -101,14 +99,16 @@
 		213E9BC31EA5A93000C3682D /* PaintSwatchType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBA1EA5A93000C3682D /* PaintSwatchType.txt */; };
 		213E9BC41EA5A93000C3682D /* PigmentType.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBB1EA5A93000C3682D /* PigmentType.txt */; };
 		213E9BC51EA5A93000C3682D /* SubjectiveColor.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BBC1EA5A93000C3682D /* SubjectiveColor.txt */; };
-		213E9BCE1EAB758700C3682D /* Brown.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BC61EAB758700C3682D /* Brown.txt */; };
-		213E9BCF1EAB758700C3682D /* Green.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BC71EAB758700C3682D /* Green.txt */; };
-		213E9BD01EAB758700C3682D /* Metallic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BC81EAB758700C3682D /* Metallic.txt */; };
-		213E9BD11EAB758700C3682D /* Orange.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BC91EAB758700C3682D /* Orange.txt */; };
-		213E9BD21EAB758700C3682D /* Red.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BCA1EAB758700C3682D /* Red.txt */; };
-		213E9BD31EAB758700C3682D /* Violet.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BCB1EAB758700C3682D /* Violet.txt */; };
-		213E9BD41EAB758700C3682D /* White.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BCC1EAB758700C3682D /* White.txt */; };
-		213E9BD51EAB758700C3682D /* Yellow.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BCD1EAB758700C3682D /* Yellow.txt */; };
+		213E9BE01EAB8D5F00C3682D /* GenericBlue.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BD61EAB8D5F00C3682D /* GenericBlue.txt */; };
+		213E9BE11EAB8D5F00C3682D /* GenericBrown.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BD71EAB8D5F00C3682D /* GenericBrown.txt */; };
+		213E9BE21EAB8D5F00C3682D /* GenericGreen.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BD81EAB8D5F00C3682D /* GenericGreen.txt */; };
+		213E9BE31EAB8D5F00C3682D /* GenericGrey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BD91EAB8D5F00C3682D /* GenericGrey.txt */; };
+		213E9BE41EAB8D5F00C3682D /* GenericMetallic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDA1EAB8D5F00C3682D /* GenericMetallic.txt */; };
+		213E9BE51EAB8D5F00C3682D /* GenericOrange.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDB1EAB8D5F00C3682D /* GenericOrange.txt */; };
+		213E9BE61EAB8D5F00C3682D /* GenericRed.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDC1EAB8D5F00C3682D /* GenericRed.txt */; };
+		213E9BE71EAB8D5F00C3682D /* GenericViolet.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDD1EAB8D5F00C3682D /* GenericViolet.txt */; };
+		213E9BE81EAB8D5F00C3682D /* GenericWhite.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDE1EAB8D5F00C3682D /* GenericWhite.txt */; };
+		213E9BE91EAB8D5F00C3682D /* GenericYellow.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDF1EAB8D5F00C3682D /* GenericYellow.txt */; };
 		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
@@ -291,8 +291,6 @@
 		21397EE71C8487C7001C3F05 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		213C93C41E5350A800CB780F /* CustomCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCollectionTableViewCell.h; path = "../ios-custom-cells/CustomCollectionTableViewCell.h"; sourceTree = "<group>"; };
 		213C93C51E5350A800CB780F /* CustomCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionTableViewCell.m; path = "../ios-custom-cells/CustomCollectionTableViewCell.m"; sourceTree = "<group>"; };
-		213E9BAD1EA3F52700C3682D /* Grey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Grey.txt; path = Data/Generics/Grey.txt; sourceTree = "<group>"; };
-		213E9BB11EA5A88700C3682D /* Blue.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Blue.txt; path = Data/Generics/Blue.txt; sourceTree = "<group>"; };
 		213E9BB41EA5A93000C3682D /* AssociationType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AssociationType.txt; path = Data/Dictionary/AssociationType.txt; sourceTree = "<group>"; };
 		213E9BB51EA5A93000C3682D /* BodyType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BodyType.txt; path = Data/Dictionary/BodyType.txt; sourceTree = "<group>"; };
 		213E9BB61EA5A93000C3682D /* CanvasCoverage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CanvasCoverage.txt; path = Data/Dictionary/CanvasCoverage.txt; sourceTree = "<group>"; };
@@ -302,14 +300,16 @@
 		213E9BBA1EA5A93000C3682D /* PaintSwatchType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PaintSwatchType.txt; path = Data/Dictionary/PaintSwatchType.txt; sourceTree = "<group>"; };
 		213E9BBB1EA5A93000C3682D /* PigmentType.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PigmentType.txt; path = Data/Dictionary/PigmentType.txt; sourceTree = "<group>"; };
 		213E9BBC1EA5A93000C3682D /* SubjectiveColor.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SubjectiveColor.txt; path = Data/Dictionary/SubjectiveColor.txt; sourceTree = "<group>"; };
-		213E9BC61EAB758700C3682D /* Brown.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Brown.txt; path = Data/Generics/Brown.txt; sourceTree = "<group>"; };
-		213E9BC71EAB758700C3682D /* Green.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Green.txt; path = Data/Generics/Green.txt; sourceTree = "<group>"; };
-		213E9BC81EAB758700C3682D /* Metallic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Metallic.txt; path = Data/Generics/Metallic.txt; sourceTree = "<group>"; };
-		213E9BC91EAB758700C3682D /* Orange.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Orange.txt; path = Data/Generics/Orange.txt; sourceTree = "<group>"; };
-		213E9BCA1EAB758700C3682D /* Red.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Red.txt; path = Data/Generics/Red.txt; sourceTree = "<group>"; };
-		213E9BCB1EAB758700C3682D /* Violet.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Violet.txt; path = Data/Generics/Violet.txt; sourceTree = "<group>"; };
-		213E9BCC1EAB758700C3682D /* White.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = White.txt; path = Data/Generics/White.txt; sourceTree = "<group>"; };
-		213E9BCD1EAB758700C3682D /* Yellow.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Yellow.txt; path = Data/Generics/Yellow.txt; sourceTree = "<group>"; };
+		213E9BD61EAB8D5F00C3682D /* GenericBlue.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericBlue.txt; path = Data/Generics/GenericBlue.txt; sourceTree = "<group>"; };
+		213E9BD71EAB8D5F00C3682D /* GenericBrown.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericBrown.txt; path = Data/Generics/GenericBrown.txt; sourceTree = "<group>"; };
+		213E9BD81EAB8D5F00C3682D /* GenericGreen.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericGreen.txt; path = Data/Generics/GenericGreen.txt; sourceTree = "<group>"; };
+		213E9BD91EAB8D5F00C3682D /* GenericGrey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericGrey.txt; path = Data/Generics/GenericGrey.txt; sourceTree = "<group>"; };
+		213E9BDA1EAB8D5F00C3682D /* GenericMetallic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericMetallic.txt; path = Data/Generics/GenericMetallic.txt; sourceTree = "<group>"; };
+		213E9BDB1EAB8D5F00C3682D /* GenericOrange.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericOrange.txt; path = Data/Generics/GenericOrange.txt; sourceTree = "<group>"; };
+		213E9BDC1EAB8D5F00C3682D /* GenericRed.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericRed.txt; path = Data/Generics/GenericRed.txt; sourceTree = "<group>"; };
+		213E9BDD1EAB8D5F00C3682D /* GenericViolet.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericViolet.txt; path = Data/Generics/GenericViolet.txt; sourceTree = "<group>"; };
+		213E9BDE1EAB8D5F00C3682D /* GenericWhite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericWhite.txt; path = Data/Generics/GenericWhite.txt; sourceTree = "<group>"; };
+		213E9BDF1EAB8D5F00C3682D /* GenericYellow.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericYellow.txt; path = Data/Generics/GenericYellow.txt; sourceTree = "<group>"; };
 		215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyBaseTests.swift; path = "../../rgbutterfly-tests/RGButterflyBaseTests.swift"; sourceTree = "<group>"; };
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
@@ -624,16 +624,16 @@
 		213E9BAC1EA3F51400C3682D /* Generics */ = {
 			isa = PBXGroup;
 			children = (
-				213E9BC61EAB758700C3682D /* Brown.txt */,
-				213E9BC71EAB758700C3682D /* Green.txt */,
-				213E9BC81EAB758700C3682D /* Metallic.txt */,
-				213E9BC91EAB758700C3682D /* Orange.txt */,
-				213E9BCA1EAB758700C3682D /* Red.txt */,
-				213E9BCB1EAB758700C3682D /* Violet.txt */,
-				213E9BCC1EAB758700C3682D /* White.txt */,
-				213E9BCD1EAB758700C3682D /* Yellow.txt */,
-				213E9BB11EA5A88700C3682D /* Blue.txt */,
-				213E9BAD1EA3F52700C3682D /* Grey.txt */,
+				213E9BD61EAB8D5F00C3682D /* GenericBlue.txt */,
+				213E9BD71EAB8D5F00C3682D /* GenericBrown.txt */,
+				213E9BD81EAB8D5F00C3682D /* GenericGreen.txt */,
+				213E9BD91EAB8D5F00C3682D /* GenericGrey.txt */,
+				213E9BDA1EAB8D5F00C3682D /* GenericMetallic.txt */,
+				213E9BDB1EAB8D5F00C3682D /* GenericOrange.txt */,
+				213E9BDC1EAB8D5F00C3682D /* GenericRed.txt */,
+				213E9BDD1EAB8D5F00C3682D /* GenericViolet.txt */,
+				213E9BDE1EAB8D5F00C3682D /* GenericWhite.txt */,
+				213E9BDF1EAB8D5F00C3682D /* GenericYellow.txt */,
 			);
 			name = Generics;
 			sourceTree = "<group>";
@@ -838,34 +838,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213E9BE51EAB8D5F00C3682D /* GenericOrange.txt in Resources */,
 				213E9BC31EA5A93000C3682D /* PaintSwatchType.txt in Resources */,
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
+				213E9BE81EAB8D5F00C3682D /* GenericWhite.txt in Resources */,
 				213E9BBD1EA5A93000C3682D /* AssociationType.txt in Resources */,
+				213E9BE11EAB8D5F00C3682D /* GenericBrown.txt in Resources */,
 				213E9BC41EA5A93000C3682D /* PigmentType.txt in Resources */,
-				213E9BD11EAB758700C3682D /* Orange.txt in Resources */,
 				2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */,
-				213E9BB21EA5A88700C3682D /* Blue.txt in Resources */,
-				213E9BAE1EA3F52700C3682D /* Grey.txt in Resources */,
-				213E9BD01EAB758700C3682D /* Metallic.txt in Resources */,
-				213E9BD31EAB758700C3682D /* Violet.txt in Resources */,
+				213E9BE21EAB8D5F00C3682D /* GenericGreen.txt in Resources */,
+				213E9BE41EAB8D5F00C3682D /* GenericMetallic.txt in Resources */,
 				2192F5611DF3185500AAFE01 /* README in Resources */,
-				213E9BCF1EAB758700C3682D /* Green.txt in Resources */,
 				213E9BC21EA5A93000C3682D /* PaintBrand.txt in Resources */,
 				21397EDF1C8486ED001C3F05 /* Main.storyboard in Resources */,
 				213E9BBF1EA5A93000C3682D /* CanvasCoverage.txt in Resources */,
 				213E9BC01EA5A93000C3682D /* ListingType.txt in Resources */,
-				213E9BD51EAB758700C3682D /* Yellow.txt in Resources */,
 				21397EE41C84876D001C3F05 /* Info.plist in Resources */,
+				213E9BE91EAB8D5F00C3682D /* GenericYellow.txt in Resources */,
 				21397EDD1C8486C0001C3F05 /* RGButterfly.entitlements in Resources */,
-				213E9BD41EAB758700C3682D /* White.txt in Resources */,
-				213E9BD21EAB758700C3682D /* Red.txt in Resources */,
 				213E9BBE1EA5A93000C3682D /* BodyType.txt in Resources */,
-				213E9BCE1EAB758700C3682D /* Brown.txt in Resources */,
+				213E9BE31EAB8D5F00C3682D /* GenericGrey.txt in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
 				21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */,
 				213E9BC51EA5A93000C3682D /* SubjectiveColor.txt in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
+				213E9BE61EAB8D5F00C3682D /* GenericRed.txt in Resources */,
+				213E9BE01EAB8D5F00C3682D /* GenericBlue.txt in Resources */,
 				213E9BC11EA5A93000C3682D /* MatchAlgorithm.txt in Resources */,
+				213E9BE71EAB8D5F00C3682D /* GenericViolet.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

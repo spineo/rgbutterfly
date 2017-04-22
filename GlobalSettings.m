@@ -496,12 +496,26 @@ static NSDictionary *swatchTypes;
     
     // Load Generic Associations (read the directory)
     //
-    if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:@"GenericGrey"]) {
-        [ManagedObjectUtils bulkLoadGenericAssociation:@"Grey"];
-    }
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^Generic.*.txt$"
+        options:NSRegularExpressionCaseInsensitive error:nil];
     
-    if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:@"GenericBlue"]) {
-        [ManagedObjectUtils bulkLoadGenericAssociation:@"Blue"];
+    NSString *path = [[NSBundle mainBundle] resourcePath];
+
+    
+    NSDirectoryEnumerator *filesEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
+    
+    NSString *file;
+    while (file = [filesEnumerator nextObject]) {
+        NSUInteger match = [regex numberOfMatchesInString:file
+                                                  options:0
+                                                    range:NSMakeRange(0, [file length])];
+        
+        if (match) {
+            NSString *assocName = [[file lastPathComponent] stringByDeletingPathExtension];
+            if (! [ManagedObjectUtils instanceExists:context entityName:@"MixAssociation" name:assocName]) {
+                    [ManagedObjectUtils bulkLoadGenericAssociation:assocName];
+            }
+        }
     }
 
     
