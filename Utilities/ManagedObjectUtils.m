@@ -211,7 +211,7 @@
         NSMutableArray *comps = [GenericUtils trimStrings:[compsString componentsSeparatedByString:@";"]];
         
         if ([comps count] == 4) {
-            NSString *gen_name   = [comps objectAtIndex:0];
+            NSString *gen_name   = [[comps objectAtIndex:0] capitalizedString];
             NSString *rgb        = [comps objectAtIndex:1];
             NSString *hex        = [comps objectAtIndex:2];
             NSString *subj_color = [comps objectAtIndex:3];
