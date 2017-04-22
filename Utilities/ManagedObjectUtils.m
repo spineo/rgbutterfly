@@ -149,10 +149,8 @@
     
     // Composite Name
     //
-    NSString *assoc_name = [[NSString alloc] initWithFormat:@"Generic%@", fileName];
-    [mixAssoc setName:assoc_name];
+    [mixAssoc setName:fileName];
 
-    
     // Look up the AssocType id
     //
     AssociationType *assocType = [self queryDictionaryByNameValue:@"AssociationType" nameValue:@"Generic" context:context];
