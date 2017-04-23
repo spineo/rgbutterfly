@@ -287,7 +287,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorsFilterButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                 LIGHT_TEXT_COLOR, NSForegroundColorAttributeName, TABLE_HEADER_FONT, NSFontAttributeName, nil] forState:UIControlStateNormal];
 
-
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
 
     
@@ -895,6 +894,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [filterToolbar.layer setCornerRadius:DEF_LG_CORNER_RADIUS];
             [filterToolbar.layer setBorderWidth: DEF_BORDER_WIDTH];
             [filterToolbar.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+            
+            CAGradientLayer *gradient = [CAGradientLayer layer];
+            gradient.frame            = filterToolbar.bounds;
+            gradient.colors           = [NSArray arrayWithObjects:(id)[DARK_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
+            [filterToolbar.layer insertSublayer:gradient atIndex:0];
     
             [headerView addSubview:filterToolbar];
             [headerView addSubview:paddingView];
