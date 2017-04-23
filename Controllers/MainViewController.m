@@ -44,6 +44,7 @@
 @property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, mixTypeId, refAndMixTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 @property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefAndMix, showRefOnly, showGenOnly;
+@property (nonatomic, strong) UIToolbar* filterToolbar;
 @property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton, *colorsFilterButton;
 
 
@@ -845,10 +846,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         
         if (section == 0) {
-            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
+            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_VLG_TBL_CELL_HGT)];
             
-            UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, DEF_Y_OFFSET, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
-            [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
+            _filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, DEF_Y_OFFSET, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
+            [_filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"All Colors";
             NSString *refAndMix  = @"Refs/Mixes";
@@ -882,25 +883,23 @@ int MIX_ASSOC_MIN_SIZE = 0;
             
             UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-
-            [filterToolbar setItems: @[flexibleSpace, _colorsFilterButton, flexibleSpace]];
+            [_filterToolbar setItems: @[flexibleSpace, _colorsFilterButton, flexibleSpace]];
     
-            CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
+            CGFloat filterToolbarHgt  = _filterToolbar.bounds.size.height;
     
             UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, filterToolbarHgt, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT - filterToolbarHgt)];
-            
 
-            [filterToolbar.layer setMasksToBounds:YES];
-            [filterToolbar.layer setCornerRadius:DEF_LG_CORNER_RADIUS];
-            [filterToolbar.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [filterToolbar.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+            [_filterToolbar.layer setMasksToBounds:YES];
+            [_filterToolbar.layer setCornerRadius:DEF_LG_CORNER_RADIUS];
+            [_filterToolbar.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [_filterToolbar.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
             
             CAGradientLayer *gradient = [CAGradientLayer layer];
-            gradient.frame            = filterToolbar.bounds;
+            gradient.frame            = _filterToolbar.bounds;
             gradient.colors           = [NSArray arrayWithObjects:(id)[DARK_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
-            [filterToolbar.layer insertSublayer:gradient atIndex:0];
-    
-            [headerView addSubview:filterToolbar];
+            [_filterToolbar.layer insertSublayer:gradient atIndex:0];
+            
+            [headerView addSubview:_filterToolbar];
             [headerView addSubview:paddingView];
 
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
@@ -926,7 +925,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         return DEF_LG_TABLE_CELL_HGT;
         
     } else if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
-            return DEF_LG_TABLE_CELL_HGT;
+        return DEF_LG_TABLE_CELL_HGT;
 
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         return DEF_LG_TABLE_HDR_HGT;

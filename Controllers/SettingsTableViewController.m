@@ -345,6 +345,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _shapeButton = [ButtonUtils create3DButton:_shapeTitle tag:SHAPE_BUTTON_TAG];
     [_shapeButton addTarget:self action:@selector(changeShape) forControlEvents:UIControlEventTouchUpInside];
     
+    
     // Label displaying the value in the stepper
     //
     int size = (int)_tapAreaSize;
@@ -823,7 +824,19 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
         CGFloat shapeXOffset = DEF_TABLE_X_OFFSET + _tapAreaStepper.bounds.size.width + DEF_LG_FIELD_PADDING;
         [_shapeButton setFrame:CGRectMake(shapeXOffset, yOffset, DEF_BUTTON_WIDTH, _tapAreaStepper.bounds.size.height)];
-        [_shapeButton setBackgroundColor:LIGHT_BG_COLOR];
+        [_shapeButton setBackgroundColor:CLEAR_COLOR];
+        [_shapeButton setTitleColor:LIGHT_TEXT_COLOR forState:UIControlStateNormal];
+        
+        [_shapeButton.layer setMasksToBounds:YES];
+        [_shapeButton.layer setCornerRadius:DEF_LG_CORNER_RADIUS];
+        [_shapeButton.layer setBorderWidth:DEF_BORDER_WIDTH];
+        [_shapeButton.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame            = _shapeButton.bounds;
+        gradient.colors           = [NSArray arrayWithObjects:(id)[DARK_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
+        [_shapeButton.layer insertSublayer:gradient atIndex:0];
+        
         [cell.contentView addSubview:_shapeButton];
         
         CGFloat imageViewXOffset = shapeXOffset + _shapeButton.bounds.size.width + DEF_LG_FIELD_PADDING;
