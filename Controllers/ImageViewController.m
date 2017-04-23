@@ -594,6 +594,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Notification center
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    
+    // Create the Dark 3D Gradient
+    //
+    [BarButtonUtils createDark3DGradient:self.toolbarItems refTag:VIEW_BTN_TAG];
 };
 
 - (void)viewWillAppear:(BOOL)willAppear {

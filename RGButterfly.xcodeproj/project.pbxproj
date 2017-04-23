@@ -109,10 +109,10 @@
 		213E9BE71EAB8D5F00C3682D /* GenericViolet.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDD1EAB8D5F00C3682D /* GenericViolet.txt */; };
 		213E9BE81EAB8D5F00C3682D /* GenericWhite.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDE1EAB8D5F00C3682D /* GenericWhite.txt */; };
 		213E9BE91EAB8D5F00C3682D /* GenericYellow.txt in Resources */ = {isa = PBXBuildFile; fileRef = 213E9BDF1EAB8D5F00C3682D /* GenericYellow.txt */; };
+		213E9BEB1EAD4F5E00C3682D /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 213E9BEA1EAD4F5E00C3682D /* BarButtonUtils.m */; };
 		215A8BAB1E6C3C3E0052B28F /* RGButterflyBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */; };
 		216044D31E3D3A9F007387DB /* MatchColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 216044D21E3D3A9F007387DB /* MatchColors.m */; };
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
-		2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD181E3A387800812B19 /* BarButtonUtils.m */; };
 		2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1B1E3B934A00812B19 /* AppUtils.m */; };
 		2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1E1E3B95DC00812B19 /* GenericUtils.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
@@ -310,6 +310,7 @@
 		213E9BDD1EAB8D5F00C3682D /* GenericViolet.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericViolet.txt; path = Data/Generics/GenericViolet.txt; sourceTree = "<group>"; };
 		213E9BDE1EAB8D5F00C3682D /* GenericWhite.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericWhite.txt; path = Data/Generics/GenericWhite.txt; sourceTree = "<group>"; };
 		213E9BDF1EAB8D5F00C3682D /* GenericYellow.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GenericYellow.txt; path = Data/Generics/GenericYellow.txt; sourceTree = "<group>"; };
+		213E9BEA1EAD4F5E00C3682D /* BarButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarButtonUtils.m; path = "../ios-utilities/BarButtonUtils.m"; sourceTree = "<group>"; };
 		215A8BAA1E6C3C3E0052B28F /* RGButterflyBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RGButterflyBaseTests.swift; path = "../../rgbutterfly-tests/RGButterflyBaseTests.swift"; sourceTree = "<group>"; };
 		215A8BAC1E6C3C4F0052B28F /* RGButterflyTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RGButterflyTests-Bridging-Header.h"; path = "../../rgbutterfly-tests/RGButterflyTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		216044D11E3D3A9F007387DB /* MatchColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchColors.h; path = "../ios-algorithms/MatchColors.h"; sourceTree = "<group>"; };
@@ -317,7 +318,6 @@
 		2176DD141E3A338800812B19 /* ButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ButtonUtils.h; path = Utilities/ButtonUtils.h; sourceTree = "<group>"; };
 		2176DD151E3A338800812B19 /* ButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ButtonUtils.m; path = Utilities/ButtonUtils.m; sourceTree = "<group>"; };
 		2176DD171E3A387800812B19 /* BarButtonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BarButtonUtils.h; path = "../ios-utilities/BarButtonUtils.h"; sourceTree = "<group>"; };
-		2176DD181E3A387800812B19 /* BarButtonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BarButtonUtils.m; path = "../ios-utilities/BarButtonUtils.m"; sourceTree = "<group>"; };
 		2176DD1A1E3B934A00812B19 /* AppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppUtils.h; path = Utilities/AppUtils.h; sourceTree = "<group>"; };
 		2176DD1B1E3B934A00812B19 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUtils.m; path = Utilities/AppUtils.m; sourceTree = "<group>"; };
 		2176DD1D1E3B95DC00812B19 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericUtils.h; path = "../ios-utilities/GenericUtils.h"; sourceTree = "<group>"; };
@@ -498,12 +498,12 @@
 		2108C5E81C820CCA00DD7B9E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				213E9BEA1EAD4F5E00C3682D /* BarButtonUtils.m */,
 				21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */,
 				21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */,
 				2176DD1D1E3B95DC00812B19 /* GenericUtils.h */,
 				2176DD1E1E3B95DC00812B19 /* GenericUtils.m */,
 				2176DD171E3A387800812B19 /* BarButtonUtils.h */,
-				2176DD181E3A387800812B19 /* BarButtonUtils.m */,
 				212F25BB1E363919002466E7 /* ColorUtils.h */,
 				212F25BC1E363919002466E7 /* ColorUtils.m */,
 				212F25BD1E363919002466E7 /* FileUtils.h */,
@@ -945,11 +945,11 @@
 				2109A0E51DFDDD6F0076A095 /* SettingsTableViewController.m in Sources */,
 				2109A1321DFDE4910076A095 /* PaintSwatches+CoreDataProperties.m in Sources */,
 				212F25C31E363919002466E7 /* HTTPUtils.m in Sources */,
+				213E9BEB1EAD4F5E00C3682D /* BarButtonUtils.m in Sources */,
 				2109A1091DFDE32C0076A095 /* ManagedObjectUtils.m in Sources */,
 				2109A1021DFDE32C0076A095 /* AlertUtils.m in Sources */,
 				2109A0E41DFDDD6F0076A095 /* PickerViewController.m in Sources */,
 				2109A10B1DFDE32C0076A095 /* PickerUtils.m in Sources */,
-				2176DD191E3A387800812B19 /* BarButtonUtils.m in Sources */,
 				212F25B71E354964002466E7 /* FieldUtils.m in Sources */,
 				210650161DFEDD5A004B0830 /* SubjectiveColor.m in Sources */,
 				2109A0E61DFDDD6F0076A095 /* SwatchDetailTableViewController.m in Sources */,
