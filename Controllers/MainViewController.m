@@ -284,6 +284,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     _colorsFilterButton  = [[UIBarButtonItem alloc] initWithTitle:@"Colors Filter: References/Mixes" style:UIBarButtonItemStylePlain target:self action:@selector(showColorsFilters)];
     [_colorsFilterButton setTintColor:LIGHT_BORDER_COLOR];
+    [_colorsFilterButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                LIGHT_TEXT_COLOR, NSForegroundColorAttributeName, TABLE_HEADER_FONT, NSFontAttributeName, nil] forState:UIControlStateNormal];
 
 
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
@@ -850,7 +852,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"All Colors";
-            NSString *refAndMix  = @"Ref. and Mix";
+            NSString *refAndMix  = @"Refs/Mixes";
             NSString *refListing = @"References";
             NSString *genListing = @"Generics";
             
