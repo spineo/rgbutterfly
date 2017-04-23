@@ -131,6 +131,7 @@ CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
 CGFloat const DEF_VLG_FIELD_PADDING = 20.0;
 
 CGFloat const DEF_CORNER_RADIUS     = 5.0;
+CGFloat const DEF_LG_CORNER_RADIUS  = 15.0;
 CGFloat const DEF_BORDER_WIDTH      = 1.0;
 CGFloat const BORDER_WIDTH_NONE     = 0.0;
 CGFloat const CORNER_RADIUS_NONE    = 0.0;

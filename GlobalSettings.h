@@ -128,6 +128,7 @@ extern CGFloat const DEF_LG_FIELD_PADDING;
 extern CGFloat const DEF_VLG_FIELD_PADDING;
 
 extern CGFloat const DEF_CORNER_RADIUS;
+extern CGFloat const DEF_LG_CORNER_RADIUS;
 extern CGFloat const DEF_BORDER_WIDTH;
 extern CGFloat const BORDER_WIDTH_NONE;
 extern CGFloat const CORNER_RADIUS_NONE;

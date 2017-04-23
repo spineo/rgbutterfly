@@ -283,6 +283,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorsFilterController addAction:colorsAlertCancel];
     
     _colorsFilterButton  = [[UIBarButtonItem alloc] initWithTitle:@"Colors Filter: References/Mixes" style:UIBarButtonItemStylePlain target:self action:@selector(showColorsFilters)];
+    [_colorsFilterButton setTintColor:LIGHT_BORDER_COLOR];
 
 
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
@@ -845,13 +846,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
         if (section == 0) {
             [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
             
-            UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
+            UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, DEF_Y_OFFSET, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"All Colors";
             NSString *refAndMix  = @"Ref. and Mix";
-            NSString *refListing = @"Ref. Only";
-            NSString *genListing = @"Gen. Only";
+            NSString *refListing = @"References";
+            NSString *genListing = @"Generics";
             
             NSString *colorsFilter;
             if (_showRefOnly == TRUE) {
@@ -886,6 +887,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
             CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
     
             UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, filterToolbarHgt, tableView.bounds.size.width, DEF_TABLE_CELL_HEIGHT - filterToolbarHgt)];
+            
+
+            [filterToolbar.layer setMasksToBounds:YES];
+            [filterToolbar.layer setCornerRadius:DEF_LG_CORNER_RADIUS];
+            [filterToolbar.layer setBorderWidth: DEF_BORDER_WIDTH];
+            [filterToolbar.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
             [headerView addSubview:filterToolbar];
             [headerView addSubview:paddingView];
