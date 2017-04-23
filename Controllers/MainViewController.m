@@ -40,10 +40,10 @@
 @property (nonatomic, strong) UIImage *colorRenderingImage, *associationImage, *searchImage, *downArrowImage, *upArrowImage, *emptySquareImage, *checkboxSquareImage;
 @property (nonatomic, strong) NSMutableArray *mixAssocObjs, *mixColorArray, *matchColorArray, *matchAssocObjs, *subjColorsArray, *subjColorsArrayState;
 @property (nonatomic, strong) NSArray *defaultsIndexTitles, *swatchKeywords;
-@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary, *defaultsNames, *keywordNames, *letters, *letterDefaults, *letterKeywords, *defaultsSwatches, *keywordSwatches, *subjColorData;
-@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
+@property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes, *contentOffsetDictionary, *defaultsNames, *keywordNames, *letters, *letterDefaults, *letterKeywords, *defaultsSwatches, *keywordSwatches, *subjColorData;
+@property (nonatomic) int num_tableview_rows, collectViewSelRow, matchAssocId, refTypeId, mixTypeId, refAndMixTypeId, genTypeId, numSwatches, numMixAssocs, numKeywords, numMatchAssocs, numSubjColors, selSubjColorSection;
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
-@property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefOnly, showGenOnly;
+@property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefAndMix, showRefOnly, showGenOnly;
 @property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton, *colorsFilterButton;
 
 
@@ -256,18 +256,17 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                                              message:@"Please select a filter type"
                                                       preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show Paint References/Mixes" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
+    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self showAllColors];
     }];
     
-    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"Show Paints and Generics" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self showAllColors];
+    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByRefAndMix];
     }];
     
-    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault
-                                                               handler:^(UIAlertAction * action) {
-                                                                   [self filterByReference];
-                                                               }];
+    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByReference];
+    }];
     
     UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Show Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self filterByGenerics];
@@ -291,14 +290,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // Filters
     //
-    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
-    _matchAssocId = [[matchSwatchType order] intValue];
-    
-    PaintSwatchType *refSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Reference" context:self.context];
-    _refTypeId = [[refSwatchType order] intValue];
-    
-    PaintSwatchType *genSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:self.context];
-    _genTypeId = [[genSwatchType order] intValue];
+    // Retrieve the PaintSwatchType dictionary
+    //
+    _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
+    _matchAssocId    = [[_paintSwatchTypes valueForKey:@"MatchAssoc"] intValue];
+    _refTypeId       = [[_paintSwatchTypes valueForKey:@"Reference"] intValue];
+    _mixTypeId       = [[_paintSwatchTypes valueForKey:@"MixAssoc"] intValue];
+    _refAndMixTypeId = [[_paintSwatchTypes valueForKey:@"Ref & Mix"] intValue];
+    _genTypeId       = [[_paintSwatchTypes valueForKey:@"Generic"] intValue];
 
     
     // SearchBar related
@@ -349,9 +348,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                        TABLE_HEADER_FONT, NSFontAttributeName, nil]
                              forState:UIControlStateNormal];
 
-    _showAll     = TRUE;
-    _showRefOnly = FALSE;
-    _showGenOnly = FALSE;
+    _showAll       = TRUE;
+    _showRefAndMix = FALSE;
+    _showRefOnly   = FALSE;
+    _showGenOnly   = FALSE;
     
     self.navigationItem.rightBarButtonItem = _searchButton;
 
@@ -458,7 +458,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
         curr_letter = firstLetter;
     }
 
-    
     _sortedLettersDefaults = [NSMutableArray arrayWithArray:[letters allKeys]];
     [_sortedLettersDefaults sortUsingSelector:@selector(localizedStandardCompare:)];
     
@@ -850,12 +849,16 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"All Colors";
+            NSString *refAndMix  = @"Ref. and Mix";
             NSString *refListing = @"Ref. Only";
             NSString *genListing = @"Gen. Only";
             
             NSString *colorsFilter;
             if (_showRefOnly == TRUE) {
                 colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", refListing, _numSwatches];
+
+            } else if (_showRefAndMix) {
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", refAndMix, _numSwatches];
                 
             } else if (_showGenOnly == TRUE) {
                 colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
@@ -1470,34 +1473,37 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)showAllColors {
-    _showAll     = TRUE;
-    _showRefOnly = FALSE;
-    _showGenOnly = FALSE;
-    [_allButton setImage:_checkboxSquareImage];
-    [_refButton setImage:_emptySquareImage];
-    [_genButton setImage:_emptySquareImage];
+    _showAll       = TRUE;
+    _showRefAndMix = FALSE;
+    _showRefOnly   = FALSE;
+    _showGenOnly   = FALSE;
     
     [self loadFullColorsListing];
 }
 
+- (void)filterByRefAndMix {
+    _showAll       = FALSE;
+    _showRefAndMix = TRUE;
+    _showRefOnly   = FALSE;
+    _showGenOnly   = FALSE;
+
+    [self loadFullColorsListing];
+}
+
 - (void)filterByReference {
-    _showRefOnly = TRUE;
-    _showAll     = FALSE;
-    _showGenOnly = FALSE;
-    [_refButton setImage:_checkboxSquareImage];
-    [_allButton setImage:_emptySquareImage];
-    [_genButton setImage:_emptySquareImage];
+    _showAll       = FALSE;
+    _showRefAndMix = FALSE;
+    _showRefOnly   = TRUE;
+    _showGenOnly   = FALSE;
 
     [self loadFullColorsListing];
 }
 
 - (void)filterByGenerics {
-    _showGenOnly = TRUE;
-    _showAll     = FALSE;
-    _showRefOnly = FALSE;
-    [_genButton setImage:_checkboxSquareImage];
-    [_allButton setImage:_emptySquareImage];
-    [_refButton setImage:_emptySquareImage];
+    _showAll       = FALSE;
+    _showRefAndMix = FALSE;
+    _showRefOnly   = FALSE;
+    _showGenOnly   = TRUE;
     
     [self loadFullColorsListing];
 }
@@ -1524,10 +1530,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
     //
     if ((_searchString == nil) || [_searchString isEqualToString:@""]) {
         if (_showRefOnly == TRUE) {
-            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _refTypeId]];
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i or type_id == %i", _refTypeId, _refAndMixTypeId]];
         
         } else if (_showGenOnly == TRUE) {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i", _genTypeId]];
+            
+        } else if (_showRefAndMix == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i or type_id == %i or type_id == %i", _refTypeId, _mixTypeId, _refAndMixTypeId]];
             
         } else {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i", _matchAssocId]];
@@ -1535,10 +1544,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
     } else {
         NSString *regexSearchString = [[NSString alloc] initWithFormat:@"%@*", _searchString];
         if (_showRefOnly == TRUE) {
-            [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name like[c] %@", _refTypeId, regexSearchString]];
+            [request setPredicate: [NSPredicate predicateWithFormat:@"(type_id == %i or type_id == %i) and name like[c] %@", _refTypeId, _refAndMixTypeId, regexSearchString]];
             
         } else if (_showGenOnly == TRUE) {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id == %i and name like[c] %@", _genTypeId, regexSearchString]];
+            
+        } else if (_showRefAndMix == TRUE) {
+            [request setPredicate: [NSPredicate predicateWithFormat:@"(type_id == %i or type_id == %i or type_id == %i) and name like[c] %@", _refTypeId, _mixTypeId, _refAndMixTypeId, regexSearchString]];
             
         } else {
             [request setPredicate: [NSPredicate predicateWithFormat:@"type_id != %i and name like[c] %@", _matchAssocId, regexSearchString]];
