@@ -594,6 +594,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Notification center
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    
+     //self.toolbarItems = [BarButtonUtils convertToDark3DButton:self.toolbarItems refTag:VIEW_BTN_TAG];
 };
 
 - (void)viewWillAppear:(BOOL)willAppear {
