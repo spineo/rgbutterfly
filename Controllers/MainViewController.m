@@ -291,8 +291,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
 
     
-    // Filters
-    //
     // Retrieve the PaintSwatchType dictionary
     //
     _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
@@ -1498,7 +1496,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _showRefAndMix = TRUE;
     _showRefOnly   = FALSE;
     _showGenOnly   = FALSE;
-
+    
     [self loadFullColorsListing];
 }
 

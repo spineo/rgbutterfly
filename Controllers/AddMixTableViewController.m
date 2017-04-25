@@ -28,8 +28,9 @@
 @property (nonatomic) BOOL searchMatch;
 
 @property (nonatomic, strong) NSMutableArray *allPaintSwatches, *paintSwatchList;
+@property (nonatomic, strong) NSMutableDictionary *paintSwatchTypes;
 
-@property (nonatomic) int addSwatchCount, numSwatches, matchAssocId, refTypeId, genTypeId;
+@property (nonatomic) int addSwatchCount, numSwatches, matchAssocId, refTypeId, mixTypeId, refAndMixTypeId, genTypeId, unkTypeId;
 @property (nonatomic, strong) NSString *searchString, *domColorLabel, *mixColorLabel, *addColorLabel;
 @property (nonatomic) CGFloat defCellHeight;
 @property (nonatomic, strong) UIView *bgColorView;
@@ -62,8 +63,8 @@
 
 // Filtering related
 //
-@property (nonatomic) BOOL showAll, showRefOnly, showGenOnly;
-@property (nonatomic, strong) UIBarButtonItem *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton;
+@property (nonatomic) BOOL showRefOnly, showRefAndMix;
+@property (nonatomic, strong) UIBarButtonItem *refLabel, *refAndMixLabel, *refButton, *refAndMixButton;
 
 @end
 
@@ -95,56 +96,45 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
     // Filters
     //
-    PaintSwatchType *matchSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"MatchAssoc" context:self.context];
-    _matchAssocId = [[matchSwatchType order] intValue];
-    
-    PaintSwatchType *refSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Reference" context:self.context];
-    _refTypeId = [[refSwatchType order] intValue];
-    
-    PaintSwatchType *genSwatchType = [ManagedObjectUtils queryDictionaryByNameValue:@"PaintSwatchType" nameValue:@"Generic" context:self.context];
-    _genTypeId = [[genSwatchType order] intValue];
+    // Retrieve the PaintSwatchType dictionary
+    //
+    _paintSwatchTypes = [ManagedObjectUtils fetchDictByNames:@"PaintSwatchType" context:self.context];
+    _matchAssocId     = [[_paintSwatchTypes valueForKey:@"MatchAssoc"] intValue];
+    _refTypeId        = [[_paintSwatchTypes valueForKey:@"Reference"] intValue];
+    _mixTypeId        = [[_paintSwatchTypes valueForKey:@"MixAssoc"] intValue];
+    _refAndMixTypeId  = [[_paintSwatchTypes valueForKey:@"Ref & Mix"] intValue];
+    _genTypeId        = [[_paintSwatchTypes valueForKey:@"Generic"] intValue];
+    _unkTypeId        = [[_paintSwatchTypes valueForKey:@"Unknown"] intValue];
     
     
     // Buttons
     //
-
     _refButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME]
                                                   style:UIBarButtonItemStylePlain
                                                  target:self
                                                  action:@selector(filterByReference)];
     
-    _genButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
+    _refAndMixButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
                                                   style:UIBarButtonItemStylePlain
                                                  target:self
-                                                 action:@selector(filterByGenerics)];
-    
-    _allButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]
-                                                  style:UIBarButtonItemStylePlain
-                                                 target:self
-                                                 action:@selector(showAllColors)];
+                                                 action:@selector(filterByRefAndMix)];
     
     
-    _refLabel = [[UIBarButtonItem alloc] initWithTitle:@"Reference" style:UIBarButtonItemStylePlain target:nil action:nil];
+    _refLabel = [[UIBarButtonItem alloc] initWithTitle:@"References" style:UIBarButtonItemStylePlain target:nil action:nil];
     [_refLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                        LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
                                        TABLE_HEADER_FONT, NSFontAttributeName, nil]
                              forState:UIControlStateNormal];
+
     
-    _genLabel = [[UIBarButtonItem alloc] initWithTitle:@"Generics" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [_genLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    _refAndMixLabel = [[UIBarButtonItem alloc] initWithTitle:@"Refs/Mixes" style:UIBarButtonItemStylePlain target:nil action:nil];
+    [_refAndMixLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                        LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
                                        TABLE_HEADER_FONT, NSFontAttributeName, nil]
                              forState:UIControlStateNormal];
     
-    _allLabel = [[UIBarButtonItem alloc] initWithTitle:@"All" style:UIBarButtonItemStylePlain target:nil action:nil];
-    [_allLabel setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                       LIGHT_TEXT_COLOR, NSForegroundColorAttributeName,
-                                       TABLE_HEADER_FONT, NSFontAttributeName, nil]
-                             forState:UIControlStateNormal];
-    
-    _showRefOnly = TRUE;
-    _showGenOnly = FALSE;
-    _showAll     = FALSE;
+    _showRefOnly   = TRUE;
+    _showRefAndMix = FALSE;
 
     
     // Uncomment the following line to preserve selection between presentations.
@@ -223,25 +213,20 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     UIToolbar* filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
     [filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
-    NSString *allListing = @"All";
-    NSString *refListing = @"Ref.";
-    NSString *genListing = @"Gen.";
+    NSString *refListing       = @"References";
+    NSString *refAndMixListing = @"Refs/Mixes";
     if (_showRefOnly == TRUE) {
         refListing = [[NSString alloc] initWithFormat:@"%@ (%i)", refListing, _numSwatches];
-        
-    } else if (_showGenOnly == TRUE) {
-        genListing = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
-        
+
     } else {
-        allListing = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, _numSwatches];
+        refAndMixListing = [[NSString alloc] initWithFormat:@"%@ (%i)", refAndMixListing, _numSwatches];
     }
-    [_allLabel setTitle:allListing];
     [_refLabel setTitle:refListing];
-    [_genLabel setTitle:genListing];
+    [_refAndMixLabel setTitle:refAndMixListing];
     
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [filterToolbar setItems: @[flexibleSpace, _refButton,_refLabel, flexibleSpace, _genButton, _genLabel, flexibleSpace, _allButton,_allLabel, flexibleSpace]];
+    [filterToolbar setItems: @[flexibleSpace, _refButton,_refLabel, flexibleSpace, _refAndMixButton, _refAndMixLabel, flexibleSpace]];
     
     CGFloat filterToolbarHgt  = filterToolbar.bounds.size.height;
     
@@ -433,35 +418,21 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 
 #pragma mark - Table Reload Methods
 
-- (void)showAllColors {
-    _showAll     = TRUE;
-    _showRefOnly = FALSE;
-    _showGenOnly = FALSE;
-    [_allButton setImage:_checkboxSquareImage];
-    [_refButton setImage:_emptySquareImage];
-    [_genButton setImage:_emptySquareImage];
-    
-    [self loadTable];
-}
-
 - (void)filterByReference {
-    _showRefOnly = TRUE;
-    _showAll     = FALSE;
-    _showGenOnly = FALSE;
+    _showRefOnly   = TRUE;
+    _showRefAndMix = FALSE;
     [_refButton setImage:_checkboxSquareImage];
-    [_allButton setImage:_emptySquareImage];
-    [_genButton setImage:_emptySquareImage];
+    [_refAndMixButton setImage:_emptySquareImage];
     
     [self loadTable];
 }
 
-- (void)filterByGenerics {
-    _showGenOnly = TRUE;
-    _showAll     = FALSE;
-    _showRefOnly = FALSE;
-    [_genButton setImage:_checkboxSquareImage];
-    [_allButton setImage:_emptySquareImage];
+- (void)filterByRefAndMix {
+    _showRefOnly   = FALSE;
+    _showRefAndMix = TRUE;
+
     [_refButton setImage:_emptySquareImage];
+    [_refAndMixButton setImage:_checkboxSquareImage];
     
     [self loadTable];
 }
@@ -488,15 +459,14 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
         //
         int type_id     = [[paintSwatch type_id] intValue];
         
-        // Skip match types
+        // Skip Match, Generic, and Unknown types
         //
-        if (type_id == _matchAssocId) {
+        if ((type_id == _matchAssocId) || (type_id == _genTypeId) || (type_id == _unkTypeId)) {
             continue;
         }
         
         if (![selectedSwatchNames valueForKey:name]) {
-            if ((_showRefOnly == TRUE && type_id != _refTypeId) ||
-                (_showGenOnly == TRUE && type_id != _genTypeId)) {
+            if ((_showRefOnly == TRUE) && ! ((type_id == _refTypeId) || (type_id == _refAndMixTypeId))) {
                 continue;
             }
         }
