@@ -594,8 +594,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Notification center
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-    
-     //self.toolbarItems = [BarButtonUtils convertToDark3DButton:self.toolbarItems refTag:VIEW_BTN_TAG];
 };
 
 - (void)viewWillAppear:(BOOL)willAppear {
@@ -728,6 +726,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self editButtonEnable];
     [BarButtonUtils setButtonShow:self.toolbarItems refTag:VIEW_BTN_TAG];
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:DEF_BUTTON_WIDTH];
+    //self.toolbarItems = [BarButtonUtils convertToDark3DButton:self.toolbarItems title:@"View" width:DEF_BUTTON_WIDTH refTag:VIEW_BTN_TAG];
 }
 
 - (void)viewButtonHide {
