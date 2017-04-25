@@ -257,11 +257,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                                              message:@"Please select a filter type"
                                                       preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"None: Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self showAllColors];
     }];
     
-    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self filterByRefAndMix];
     }];
     
@@ -277,8 +277,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_listingController dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [_colorsFilterController addAction:refAndMix];
     [_colorsFilterController addAction:allColors];
+    [_colorsFilterController addAction:refAndMix];
     [_colorsFilterController addAction:refOnly];
     [_colorsFilterController addAction:genOnly];
     [_colorsFilterController addAction:colorsAlertCancel];
@@ -851,7 +851,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             _filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, DEF_Y_OFFSET, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
             [_filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
-            NSString *allListing = @"All Colors";
+            NSString *allListing = @"None";
             NSString *refAndMix  = @"Refs/Mixes";
             NSString *refListing = @"References";
             NSString *genListing = @"Generics";
@@ -873,13 +873,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 } else {
                     swatchCount = _numSwatches;
                 }
-                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", allListing, swatchCount];
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i Colors)", allListing, swatchCount];
             }
             [_allLabel setTitle:allListing];
             [_refLabel setTitle:refListing];
             [_genLabel setTitle:genListing];
             
-            [_colorsFilterButton setTitle:[[NSString alloc] initWithFormat:@"Colors Filter: %@", colorsFilter]];
+            [_colorsFilterButton setTitle:[[NSString alloc] initWithFormat:@"Filter: %@", colorsFilter]];
             
             UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
