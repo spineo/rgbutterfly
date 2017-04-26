@@ -85,4 +85,24 @@
     return button;
 }
 
+// Create 3D Button with Dark Cradient
+//
++ (UIButton *)set3DGradient:(UIButton *)button {
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [button.layer setMasksToBounds:YES];
+    [button.layer setCornerRadius:15.0];
+    [button.layer setBorderWidth:1.0];
+    [button.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame            = button.bounds;
+    gradient.colors           = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor grayColor] CGColor], nil];
+    [button.layer insertSublayer:gradient atIndex:0];
+        
+    return button;
+}
+
+
 @end

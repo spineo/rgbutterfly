@@ -19,4 +19,6 @@
 
 + (UIButton *)create3DButton:(NSString *)title tag:(int)tag;
 
++ (UIButton *)set3DGradient:(UIButton *)button;
+
 @end

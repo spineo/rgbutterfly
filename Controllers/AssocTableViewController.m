@@ -359,25 +359,24 @@ const int ASSOC_SET_TAG        = 8;
     NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _assocTypeText, [_assocTypeName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _assocTypeButton = [ButtonUtils create3DButton:buttonText tag:ASSOC_TYPE_TAG frame:colorButtonFrame];
+    
+    [_assocTypeButton setFrame:colorButtonFrame];
+
+    _assocTypeButton = [ButtonUtils set3DGradient:_assocTypeButton];
     [_assocTypeButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_assocTypeButton setTintColor:DARK_TEXT_COLOR];
-    [_assocTypeButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_assocTypeButton addTarget:self action:@selector(showAssocTypePicker) forControlEvents:UIControlEventTouchUpInside];
-    
-    //[_assocTypeButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)recreateSetCanvasButton {
     NSString *buttonText = [[NSString alloc] initWithFormat:@"%@: %@", _setRenameText, [_coverageName text]];
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _setButton = [ButtonUtils create3DButton:buttonText tag:ASSOC_SET_TAG frame:colorButtonFrame];
+    
+    _setButton = [ButtonUtils set3DGradient:_setButton];
     [_setButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_setButton setTintColor:DARK_TEXT_COLOR];
-    [_setButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_setButton addTarget:self action:@selector(showCoveragePicker) forControlEvents:UIControlEventTouchUpInside];
-    //[_setButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)recreateApplyButton {
@@ -400,9 +399,9 @@ const int ASSOC_SET_TAG        = 8;
     
     CGRect colorButtonFrame = CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT);
     _applyButton = [ButtonUtils create3DButton:_applyRenameText tag:ASSOC_APPLY_TAG frame:colorButtonFrame];
+    
+    _applyButton = [ButtonUtils set3DGradient:_applyButton];
     [_applyButton.titleLabel setFont:TABLE_CELL_FONT];
-    [_applyButton setTintColor:DARK_TEXT_COLOR];
-    [_applyButton setBackgroundColor:WIDGET_GREEN_COLOR];
     
     [_applyButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
 }
@@ -548,7 +547,6 @@ const int ASSOC_SET_TAG        = 8;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier forIndexPath:indexPath];
     
     // Global defaults
@@ -606,6 +604,8 @@ const int ASSOC_SET_TAG        = 8;
             ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) || (_isReadOnly == TRUE)
         ) {
             [refName setEnabled:FALSE];
+    
+            
             [refName setBackgroundColor:GRAY_BG_COLOR];
         }
         
