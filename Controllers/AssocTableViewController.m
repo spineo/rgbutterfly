@@ -59,7 +59,7 @@
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
 @property (nonatomic, strong) NSMutableDictionary *assocTypes, *paintSwatchTypes;
-@property (nonatomic, strong) NSNumber *unknownTypeId, *mixTypeId, *refTypeId, *mixAssocTypeId, *genericTypeId;
+@property (nonatomic, strong) NSNumber *otherTypeId, *mixTypeId, *refTypeId, *mixAssocTypeId, *genericTypeId;
 @property (nonatomic, strong) UIPickerView *assocTypePicker, *coveragePicker;
 
 @end
@@ -111,9 +111,9 @@ const int ASSOC_SET_TAG        = 8;
     
     // Retrieve the AssociationType dictionary
     //
-    _assocTypes     = [ManagedObjectUtils fetchDictByNames:@"AssociationType" context:self.context];
-    _unknownTypeId  = [_assocTypes valueForKey:@"Unknown"];
-    _mixTypeId      = [_assocTypes valueForKey:@"Mix"];
+    _assocTypes   = [ManagedObjectUtils fetchDictByNames:@"AssociationType" context:self.context];
+    _otherTypeId  = [_assocTypes valueForKey:@"Other"];
+    _mixTypeId    = [_assocTypes valueForKey:@"Mix"];
     
     // Retrieve the PaintSwatchType dictionary
     //
@@ -202,9 +202,9 @@ const int ASSOC_SET_TAG        = 8;
     _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     
     
-    // Initialize the PaintSwatches array with default names if 'Unknown' (coming from Image VC) or pre-defined as 'Mix'
+    // Initialize the PaintSwatches array with default names if 'Other' (coming from Image VC) or pre-defined as 'Mix'
     //
-    if (_assocTypePickerSelRow == [_unknownTypeId intValue] || _assocTypePickerSelRow ==  [_mixTypeId intValue]) {
+    if (_assocTypePickerSelRow == [_otherTypeId intValue] || _assocTypePickerSelRow ==  [_mixTypeId intValue]) {
         [self initPaintSwatches];
     }
     
@@ -523,7 +523,7 @@ const int ASSOC_SET_TAG        = 8;
     ) {
         return 0;
         
-    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Unknown"]) {
+    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Other"]) {
         return 0;
     
     } else if (((section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Generic"]) {

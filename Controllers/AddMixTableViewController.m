@@ -104,7 +104,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     _mixTypeId        = [[_paintSwatchTypes valueForKey:@"MixAssoc"] intValue];
     _refAndMixTypeId  = [[_paintSwatchTypes valueForKey:@"Ref & Mix"] intValue];
     _genTypeId        = [[_paintSwatchTypes valueForKey:@"Generic"] intValue];
-    _unkTypeId        = [[_paintSwatchTypes valueForKey:@"Unknown"] intValue];
+    _unkTypeId        = [[_paintSwatchTypes valueForKey:@"Other"] intValue];
     
     
     // Buttons
@@ -459,7 +459,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
         //
         int type_id     = [[paintSwatch type_id] intValue];
         
-        // Skip Match, Generic, and Unknown types
+        // Skip 'Match', 'Generic', and 'Other' types
         //
         if ((type_id == _matchAssocId) || (type_id == _genTypeId) || (type_id == _unkTypeId)) {
             continue;

@@ -1,4 +1,4 @@
-Unknown
+Other
 Mix
 Coverage
 Generic
