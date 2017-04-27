@@ -978,13 +978,45 @@
     [fetch setSortDescriptors:@[nameSort]];
     
     NSError *error      = nil;
-    NSArray *results    = [context executeFetchRequest:fetch error:&error];
+    NSArray *results    = [self sortColors:[context executeFetchRequest:fetch error:&error]];
     
     if ([results count] == 0) {
         return nil;
     } else {
         return results;
     }
+}
+
+
++ (NSArray *)sortColors:(NSArray *)colors {
+
+    return [colors sortedArrayUsingComparator:^NSComparisonResult(PaintSwatches* ps1, PaintSwatches* ps2) {
+        
+            UIColor *col1 = [AppColorUtils colorFromSwatch:ps1];
+            CGFloat hue, saturation, brightness, alpha;
+            [col1 getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+        
+            UIColor *col2 = [AppColorUtils colorFromSwatch:ps2];
+            CGFloat hue2, saturation2, brightness2, alpha2;
+            [col2 getHue:&hue2 saturation:&saturation2 brightness:&brightness2 alpha:&alpha2];
+        
+            if (hue < hue2)
+                return NSOrderedAscending;
+            else if (hue > hue2)
+                return NSOrderedDescending;
+            
+            if (saturation < saturation2)
+                return NSOrderedAscending;
+            else if (saturation > saturation2)
+                return NSOrderedDescending;
+            
+            if (brightness < brightness2)
+                return NSOrderedAscending;
+            else if (brightness > brightness2)
+                return NSOrderedDescending;
+            
+            return NSOrderedSame;
+        }];
 }
 
 + (Keyword *)queryKeyword:(NSString *)keyword context:(NSManagedObjectContext *)context {

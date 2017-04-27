@@ -668,8 +668,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)loadColorsData {
     _subjColorsArray      = [[NSMutableArray alloc] init];
     
-    for (int i=0; i<=_numSubjColors; i++) {
-        NSArray *psArray = [ManagedObjectUtils queryPaintSwatchesBySubjColorId:i context:self.context];
+    for (int colorId=0; colorId<=_numSubjColors; colorId++) {
+        NSArray *psArray = [ManagedObjectUtils queryPaintSwatchesBySubjColorId:colorId context:self.context];
         
         NSMutableArray *paintSwatches = [NSMutableArray arrayWithCapacity:[psArray count]];
         for (PaintSwatches *ps in psArray) {
