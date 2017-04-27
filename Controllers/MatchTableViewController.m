@@ -207,7 +207,6 @@ const int IMAGE_TAG  = 6;
 
     // isRGB forced to true (with option to change if not thick coverage)
     //
-    //_isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
     _isRGB = TRUE;
     [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
     
@@ -217,12 +216,6 @@ const int IMAGE_TAG  = 6;
     if (covFilter == FALSE) {
         [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:RGB_BTN_TAG isEnabled:FALSE];
     }
-    
-    //if (_isRGB == TRUE) {
-    //    [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
-    //} else {
-    //    [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
-    //}
 
     // Reset some widths and offset per rotation
     //
