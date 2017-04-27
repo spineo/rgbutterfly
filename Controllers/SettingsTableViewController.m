@@ -846,9 +846,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         [_tapStepperLabel setFrame:CGRectMake(imageViewXOffset, yOffset, _tapAreaSize, _tapAreaSize)];
         [cell.contentView addSubview:_tapStepperLabel];
         
-        
     } else if (indexPath.section == MATCH_FILTERS) {
-        
         if (indexPath.row == MATCH_NUM_ROW) {
             [_matchSettingsLabel setFrame:CGRectMake(DEF_TABLE_X_OFFSET, DEF_FIELD_PADDING, tableViewWidth, DEF_LABEL_HEIGHT)];
             [cell.contentView addSubview:_matchSettingsLabel];

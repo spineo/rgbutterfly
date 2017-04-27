@@ -205,15 +205,24 @@ const int IMAGE_TAG  = 6;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    // RGB settings?
+    // isRGB forced to true (with option to change if not thick coverage)
     //
-    _isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
+    //_isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
+    _isRGB = TRUE;
+    [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
     
-    if (_isRGB == TRUE) {
-        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
-    } else {
-        [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
+    // Disable RGB toggle if anything less than 'Thick' rendered
+    //
+    BOOL covFilter = [[NSUserDefaults standardUserDefaults] boolForKey:COV_FILTER_KEY];
+    if (covFilter == FALSE) {
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:RGB_BTN_TAG isEnabled:FALSE];
     }
+    
+    //if (_isRGB == TRUE) {
+    //    [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:RGB_IMAGE_NAME];
+    //} else {
+    //    [BarButtonUtils setButtonImage:self.toolbarItems refTag:RGB_BTN_TAG imageName:PALETTE_IMAGE_NAME];
+    //}
 
     // Reset some widths and offset per rotation
     //
