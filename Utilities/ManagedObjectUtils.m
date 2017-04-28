@@ -975,10 +975,12 @@
     
     [fetch setPredicate:[NSPredicate predicateWithFormat:@"subj_color_id == %i and type_id != %i", subj_color_id, match_assoc_id]];
     
-    [fetch setSortDescriptors:@[nameSort]];
+    //[fetch setSortDescriptors:@[nameSort]];
     
+    SubjectiveColor *subjColor = [self querySubjectiveColorByOrder:[NSNumber numberWithInt:subj_color_id] context:context];
+
     NSError *error      = nil;
-    NSArray *results    = [self sortColors:[context executeFetchRequest:fetch error:&error]];
+    NSArray *results    = [self sortColors:[context executeFetchRequest:fetch error:&error] color:[subjColor name]];
     
     if ([results count] == 0) {
         return nil;
@@ -987,8 +989,7 @@
     }
 }
 
-
-+ (NSArray *)sortColors:(NSArray *)colors {
++ (NSArray *)sortColors:(NSArray *)colors color:(NSString *)subjColor {
 
     return [colors sortedArrayUsingComparator:^NSComparisonResult(PaintSwatches* ps1, PaintSwatches* ps2) {
         
@@ -996,24 +997,52 @@
             CGFloat hue, saturation, brightness, alpha;
             [col1 getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
         
+            CGFloat red1   = [ps1.red floatValue];
+            CGFloat green1 = [ps1.green floatValue];
+            CGFloat blue1  = [ps1.blue floatValue];
+        
             UIColor *col2 = [AppColorUtils colorFromSwatch:ps2];
             CGFloat hue2, saturation2, brightness2, alpha2;
             [col2 getHue:&hue2 saturation:&saturation2 brightness:&brightness2 alpha:&alpha2];
         
-            if (hue < hue2)
+            CGFloat red2   = [ps2.red floatValue];
+            CGFloat green2 = [ps2.green floatValue];
+            CGFloat blue2  = [ps2.blue floatValue];
+        
+        if ([subjColor containsString:@"Red"]) {
+            if (red1 < red2)
                 return NSOrderedAscending;
-            else if (hue > hue2)
+            else if (red1 > red2)
                 return NSOrderedDescending;
             
-            if (saturation < saturation2)
+        } else if ([subjColor containsString:@"Green"]) {
+            if (green1 < green2)
                 return NSOrderedAscending;
-            else if (saturation > saturation2)
+            else if (green1 > green2)
                 return NSOrderedDescending;
             
-            if (brightness < brightness2)
+        } else if ([subjColor containsString:@"Blue"] ||
+                   [subjColor isEqualToString:@"Violet"]) {
+            if (blue1 < blue2)
                 return NSOrderedAscending;
-            else if (brightness > brightness2)
+            else if (blue1 > blue2)
                 return NSOrderedDescending;
+        }
+
+//            if (hue < hue2)
+//                return NSOrderedAscending;
+//            else if (hue > hue2)
+//                return NSOrderedDescending;
+            
+//            if (saturation < saturation2)
+//                return NSOrderedAscending;
+//            else if (saturation > saturation2)
+//                return NSOrderedDescending;
+            
+//            if (brightness < brightness2)
+//                return NSOrderedAscending;
+//            else if (brightness > brightness2)
+//                return NSOrderedDescending;
             
             return NSOrderedSame;
         }];
