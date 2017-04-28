@@ -1114,7 +1114,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             int index = (int)indexPath.section - 1;
             PaintSwatches *ps = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
             
-            [cell.imageView setImage:[AppColorUtils renderSwatch:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+            [cell.imageView setImage:[AppColorUtils renderRGB:ps cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
             [cell.textLabel setText:[ps valueForKeyPath:@"name"]];
             
         } else {
