@@ -629,13 +629,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
 
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {

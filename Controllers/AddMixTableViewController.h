@@ -12,5 +12,4 @@
 
 @property NSMutableArray *addPaintSwatches, *mixAssocSwatches;
 
-
 @end

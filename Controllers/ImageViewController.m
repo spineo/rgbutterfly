@@ -179,11 +179,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:DECR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:INCR_TAP_BTN_TAG width:HIDE_BUTTON_WIDTH];
     
-    // We also want to change this initial behaviour (see #B59) with the default MatchCount and AlgorithmId
-    // not able to be changed in this controller. These defaults can be changed in the settings for unsaved
-    // MatchAssociations and in the Match TVC for individual tap areas
-    
-    
     // Keep track of the PaintSwatches count
     //
     _paintSwatchCount = 0;
@@ -1552,7 +1547,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                 _matchNumChanged = TRUE;
         }
 
-        //NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], swatch_ct];
         NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
     
         [custCell addLabel:[FieldUtils createLabel:match_algorithm_text xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
@@ -1648,26 +1642,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width,DEF_SM_TBL_HDR_HEIGHT)];
     
     if (section == HEADER_TABLEVIEW_SECTION) {
-
-//        [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-//         UIViewAutoresizingFlexibleLeftMargin |
-//         UIViewAutoresizingFlexibleRightMargin];
-
-
-//        [_scrollViewUp setEnabled:FALSE];
-//        [_scrollViewDown setEnabled:TRUE];
-//        
         NSString *headerTitle = @"";
         if (_currTapSection > 0) {
             headerTitle = HDR_TABLEVIEW_TITLE;
-//            [_scrollViewUp setEnabled:TRUE];
         }
-//        
-//        if ((_imageViewSize == TABLE_VIEW) || (_currTapSection == 0)) {
-//            [_scrollViewUp setEnabled:FALSE];
-//        } else {
-//            [_scrollViewUp setEnabled:TRUE];
-//        }
         
         UIToolbar* scrollViewToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
         [scrollViewToolbar setBarStyle:UIBarStyleBlackTranslucent];
@@ -2069,10 +2047,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             
         } else {
             NSLog(@"Association and relations delete successful");
-            
-//            // Update the title
-//            //
-//            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
+
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
@@ -2426,17 +2401,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (_mixAssociation == nil || _tapAreasChanged == TRUE) {
             [self saveMixAssoc];
         }
-            
-        //} else {
-            UINavigationController *navigationViewController = [segue destinationViewController];
-            AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
-            
-            [assocTableViewController setPaintSwatches:_paintSwatches];
-            [assocTableViewController setMixAssociation:_mixAssociation];
-            [assocTableViewController setSaveFlag:_saveFlag];
-        //}
-
         
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
+        
+        [assocTableViewController setPaintSwatches:_paintSwatches];
+        [assocTableViewController setMixAssociation:_mixAssociation];
+        [assocTableViewController setSaveFlag:_saveFlag];
+
     } else if ([[segue identifier] isEqualToString:@"MatchTableViewSegue"]) {
         
         // Save the MatchAssociation first
@@ -2464,15 +2436,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         TapArea *tapArea = [[ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context] objectAtIndex:tapIndex];
         [matchTableViewController setTapArea:tapArea];
         [matchTableViewController setMatchAlgIndex:[[tapArea match_algorithm_id] intValue]];
-        
-//        BOOL maManualOverride = [[tapArea ma_manual_override] boolValue];
-//        if (maManualOverride == TRUE) {
-//            [matchTableViewController setDbPaintSwatches:[ManagedObjectUtils getManualOverrideSwatches:paintSwatch tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context]];
-//        } else {
-            [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
-//        }
-//        [matchTableViewController setMaManualOverride:maManualOverride];
-        
+
+        [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
         [matchTableViewController setMatchAssociation:_matchAssociation];
 
 

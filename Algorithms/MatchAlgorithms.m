@@ -87,21 +87,6 @@
         
         float diffValue = [self callMatcher:matchObj algIndex:matchAlgIndex];
         
-//        NSString *algorithmName = [[NSString alloc] initWithFormat:@"colorDiffAlgorithm%i:compObj:", matchAlgIndex];
-//        SEL selector = NSSelectorFromString(algorithmName);
-//        
-//        NSMethodSignature *signature = [MatchAlgorithms methodSignatureForSelector:selector];
-//        
-//        if ([MatchAlgorithms respondsToSelector:selector]) {
-//            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-//            
-//            [invocation setSelector:selector];
-//            [invocation setTarget:[MatchAlgorithms class]];
-//            [invocation setArgument:&refObj atIndex:2];
-//            [invocation setArgument:&compObj atIndex:3];
-//            [invocation invoke];
-//        }
-        
         PaintSwatchesDiff *diffObj  = [[PaintSwatchesDiff alloc] init];
         diffObj.name = compObj.name;
         diffObj.diff = diffValue;

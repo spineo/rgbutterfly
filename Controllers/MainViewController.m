@@ -483,14 +483,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)loadMixCollectionViewData {
     [self initPaintSwatchFetchedResultsController];
-//    _minAssocSize = MIX_ASSOC_RESTRICT_SIZE;
-    
-    // Check the PaintSwatch filter (all or ref only?)
-    //
-//    _mixAssocUnfilter = [_userDefaults boolForKey:MIX_ASSOC_COUNT_KEY];
-//    if (_mixAssocUnfilter == TRUE) {
-        _minAssocSize = MIX_ASSOC_MIN_SIZE;
-//    }
+
+    _minAssocSize = MIX_ASSOC_MIN_SIZE;
     
     _mixAssocObjs = [ManagedObjectUtils fetchMixAssociations:self.context name:_searchString];
     int num_mix_assocs = (int)[_mixAssocObjs count];

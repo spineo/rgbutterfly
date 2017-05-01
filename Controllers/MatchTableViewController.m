@@ -687,15 +687,6 @@ const int IMAGE_TAG  = 6;
 
 #pragma mark - TextField Delegate Methods
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    if (textField.tag == COLTXT_TAG) {
-//        [_doneColorButton setHidden:FALSE];
-//
-//    } else if (textField.tag == TYPTXT_TAG) {
-//        [_doneTypeButton setHidden:FALSE];
-//    };
-}
-
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     textField.text = [GenericUtils trimString:textField.text];
     
