@@ -135,13 +135,15 @@
     
     // Backup the current database file
     //
-    error = nil;
-    [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
-    if (error == nil) {
-        NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
-    } else {
-        NSLog(@"ERROR: %@\n", [error localizedDescription]);
-        return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
+    if ([fileManager fileExistsAtPath:destDBFile]){
+        error = nil;
+        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
+        if (error == nil) {
+            NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
+        } else {
+            NSLog(@"ERROR: %@\n", [error localizedDescription]);
+            return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
+        }
     }
     
     // Download the latest database to a '-tmp' suffix file
