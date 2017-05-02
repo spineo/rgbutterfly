@@ -759,10 +759,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
         if (section == 0) {
             NSString *keywordsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", KEYWORDS_TYPE, _numKeywords];
             [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_LG_TABLE_CELL_HGT)];
+            //[headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
             [headerView addSubview:headerLabel];
             [headerLabel setText:keywordsListing];
             [headerLabel setTextAlignment:NSTextAlignmentCenter];
-            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+            //[letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+            //[letterLabel setFrame:CGRectMake(DEF_X_OFFSET, yOffset, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+            
         }
         
         [letterLabel setBackgroundColor:DARK_BG_COLOR];
@@ -845,14 +848,22 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
             [headerView addSubview:scrollViewToolbar];
         }
-        
+     
+    // Individual Colors Listing
+    //
     } else {
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         
         if (section == 0) {
-            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_VLG_TBL_CELL_HGT)];
+            yOffset      = 0.0;
             
-            _filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, DEF_Y_OFFSET, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
+            if (_isLandscape == TRUE) {
+                yOffset = DEF_SM_TABLE_CELL_HGT;
+            }
+            
+            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
+            
+            _filterToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(DEF_LG_FIELD_PADDING, yOffset, tableView.bounds.size.width - DEF_VLG_FIELD_PADDING * 2, DEF_SM_TABLE_CELL_HGT)];
             [_filterToolbar setBarStyle:UIBarStyleBlackTranslucent];
     
             NSString *allListing = @"None";
@@ -906,7 +917,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [headerView addSubview:_filterToolbar];
             [headerView addSubview:paddingView];
 
-            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_TABLE_HDR_HEIGHT, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, yOffset + DEF_SM_TABLE_CELL_HGT, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         }
     
         [letterLabel setBackgroundColor:DARK_BG_COLOR];
@@ -933,18 +944,15 @@ int MIX_ASSOC_MIN_SIZE = 0;
     } else if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
         headerHeight = DEF_LG_TABLE_CELL_HGT;
         
+    } else if ([_listingType isEqualToString:COLORS_TYPE]) {
+        headerHeight = DEF_LG_TABLE_HDR_HGT;
+
     } else {
-
-        if ([_listingType isEqualToString:COLORS_TYPE]) {
-            headerHeight = DEF_LG_TABLE_HDR_HGT;
-
-        } else {
-            headerHeight = DEF_SM_TABLE_CELL_HGT;
-        }
+        headerHeight = DEF_SM_TABLE_CELL_HGT;
+    }
     
-        if (_isLandscape == TRUE && section == 0) {
-            headerHeight = headerHeight * 2;
-        }
+    if (_isLandscape == TRUE && section == 0) {
+        headerHeight = headerHeight + DEF_SM_TABLE_CELL_HGT;
     }
 
     return headerHeight;
