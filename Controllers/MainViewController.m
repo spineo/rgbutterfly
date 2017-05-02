@@ -77,6 +77,10 @@
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) UILabel *updateLabel;
 
+// Orientation
+//
+@property (nonatomic) BOOL isLandscape;
+
 @end
 
 
@@ -124,7 +128,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
@@ -133,9 +137,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.context = [self.appDelegate managedObjectContext];
-    
-    //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
-    //[ColorUtils setToolbarGlaze:self.navigationController.toolbar];
+
     
     // Initialization
     //
@@ -385,6 +387,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.view setBackgroundColor:DARK_BG_COLOR];
+    
     [self loadData];
 }
 
@@ -725,14 +728,23 @@ int MIX_ASSOC_MIN_SIZE = 0;
 #pragma mark - TableView Methods
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    
+    CGFloat headerHeight = DEF_TABLE_HDR_HEIGHT;
+    CGFloat yOffset      = 0.0;
+    
+    if (_isLandscape == TRUE) {
+        yOffset = headerHeight;
+        headerHeight = headerHeight * 2;
+    }
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
     [headerView setBackgroundColor:DARK_BG_COLOR];
     
     [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
-     UIViewAutoresizingFlexibleLeftMargin |
-     UIViewAutoresizingFlexibleRightMargin];
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    UIViewAutoresizingFlexibleLeftMargin |
+    UIViewAutoresizingFlexibleRightMargin];
+
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, yOffset, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerLabel setBackgroundColor:DARK_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
@@ -913,18 +925,29 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    CGFloat headerHeight;
+    
     if ([_listingType isEqualToString:KEYWORDS_TYPE] && (section == 0)) {
-        return DEF_LG_TABLE_CELL_HGT;
-        
+        headerHeight = DEF_LG_TABLE_CELL_HGT;
+
     } else if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
-        return DEF_LG_TABLE_CELL_HGT;
-
-    } else if ([_listingType isEqualToString:COLORS_TYPE]) {
-        return DEF_LG_TABLE_HDR_HGT;
-
+        headerHeight = DEF_LG_TABLE_CELL_HGT;
+        
     } else {
-        return DEF_SM_TABLE_CELL_HGT;
+
+        if ([_listingType isEqualToString:COLORS_TYPE]) {
+            headerHeight = DEF_LG_TABLE_HDR_HGT;
+
+        } else {
+            headerHeight = DEF_SM_TABLE_CELL_HGT;
+        }
+    
+        if (_isLandscape == TRUE && section == 0) {
+            headerHeight = headerHeight * 2;
+        }
     }
+
+    return headerHeight;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -1466,8 +1489,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     CGFloat xOffset;
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
         xOffset = DEF_NAVBAR_X_OFFSET;
+        _isLandscape = FALSE;
     } else {
         xOffset = DEF_X_OFFSET;
+        _isLandscape = TRUE;
     }
     [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
     

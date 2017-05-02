@@ -329,7 +329,6 @@ const int ASSOC_SET_TAG        = 8;
     [self recreateSetCanvasButton];
     [self recreateApplyButton];
     [self.tableView reloadData];
-    //[self setFrameSizes];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -376,17 +375,14 @@ const int ASSOC_SET_TAG        = 8;
     SEL selector;
     if ([[_assocTypeName text] isEqualToString:MIX_TYPE]) {
         _applyRenameText = @"Apply Renaming with Ratios";
-        //[_applyButton addTarget:self action:@selector(showMixRatiosPicker) forControlEvents:UIControlEventTouchUpInside];
         selector = @selector(showMixRatiosPicker);
         
     } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
         _applyRenameText = @"Apply Generic Properties";
-        //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
         selector = @selector(applyRenaming);
         
     } else if ([[_assocTypeName text] isEqualToString:@"Coverage"]) {
         _applyRenameText = @"Apply Coverage Renaming";
-        //[_applyButton addTarget:self action:@selector(applyRenaming) forControlEvents:UIControlEventTouchUpInside];
         selector = @selector(applyRenaming);
     }
     
