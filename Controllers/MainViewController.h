@@ -19,7 +19,7 @@
 @property (nonatomic) int imageAction, sectionsCount;
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
-@property (nonatomic, strong) NSArray *subjColorNames, *keywordsIndexTitles;
+@property (nonatomic, strong) NSArray *subjColorNames, *keywordsIndexTitles, *landKwIndexTitles;
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
 
 // Public to enable unit testing

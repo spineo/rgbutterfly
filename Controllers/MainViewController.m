@@ -291,6 +291,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 LIGHT_TEXT_COLOR, NSForegroundColorAttributeName, TABLE_HEADER_FONT, NSFontAttributeName, nil] forState:UIControlStateNormal];
 
     _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
+    
+    _landKwIndexTitles = @[@"A", @"C", @"E", @"G", @"I", @"K", @"M", @"O", @"Q", @"S", @"U", @"W", @"Y", @"Z"];
 
     
     // Retrieve the PaintSwatchType dictionary
@@ -1190,10 +1192,18 @@ int MIX_ASSOC_MIN_SIZE = 0;
 //
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
-        return _keywordsIndexTitles;
+        if (_isLandscape == TRUE) {
+            return _landKwIndexTitles;
+        } else {
+            return _keywordsIndexTitles;
+        }
         
     } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
-        return _keywordsIndexTitles;
+        if (_isLandscape == TRUE) {
+            return _landKwIndexTitles;
+        } else {
+            return _keywordsIndexTitles;
+        }
     
     } else {
         return nil;
