@@ -48,6 +48,10 @@ extern int const NO_UPDATE;
 extern int const FAILED_CHECK;
 extern int const DO_UPDATE;
 
+// Small screen threshold (i.e., < iPhone 6)
+//
+extern CGFloat const SMALL_SCREEN_THRESHOLD;
+
 // Jenkins related
 //
 extern NSString * const AUTHTOKEN_FILE;

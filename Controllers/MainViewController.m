@@ -290,9 +290,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorsFilterButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                 LIGHT_TEXT_COLOR, NSForegroundColorAttributeName, TABLE_HEADER_FONT, NSFontAttributeName, nil] forState:UIControlStateNormal];
 
-    _keywordsIndexTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
+    _portraitKeywordsIndex  = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
     
-    _landKwIndexTitles = @[@"A", @"C", @"E", @"G", @"I", @"K", @"M", @"O", @"Q", @"S", @"U", @"W", @"Y", @"Z"];
+    _landscapeKeywordsIndex = @[@"A", @"B", @"D", @"E", @"G", @"H", @"J", @"K", @"M", @"N", @"P", @"Q", @"S", @"T", @"V", @"W", @"Y", @"Z"];
+    
+    _smallKeywordsIndex  = @[@"A", @"B", @"D", @"E", @"G", @"H", @"J", @"L", @"M", @"N", @"P",@"R", @"S", @"T", @"W", @"Z"];
 
     
     // Retrieve the PaintSwatchType dictionary
@@ -1191,18 +1193,19 @@ int MIX_ASSOC_MIN_SIZE = 0;
 // Keywords index
 //
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
+    
+    if ([_listingType isEqualToString:KEYWORDS_TYPE] || [_listingType isEqualToString:FULL_LISTING_TYPE]) {
+
         if (_isLandscape == TRUE) {
-            return _landKwIndexTitles;
+            // Anything smaller than an iPhone 6
+            //
+            if ([[ UIScreen mainScreen ] bounds ].size.height < SMALL_SCREEN_THRESHOLD) {
+                return _smallKeywordsIndex;
+            } else {
+                return _landscapeKeywordsIndex;
+            }
         } else {
-            return _keywordsIndexTitles;
-        }
-        
-    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
-        if (_isLandscape == TRUE) {
-            return _landKwIndexTitles;
-        } else {
-            return _keywordsIndexTitles;
+            return _portraitKeywordsIndex;
         }
     
     } else {

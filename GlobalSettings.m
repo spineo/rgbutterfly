@@ -49,6 +49,9 @@ int const NO_UPDATE             = 0;
 int const FAILED_CHECK          = 1;
 int const DO_UPDATE             = 2;
 
+// Small screen threshold (i.e., < iPhone 6)
+//
+CGFloat const SMALL_SCREEN_THRESHOLD = 375.0;
 
 // Jenkins related
 //
