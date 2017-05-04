@@ -57,6 +57,12 @@
     [self.view addSubview:aboutTextView];
 }
 
+// Share the App documentation
+//
+- (IBAction)share:(id)sender {
+    [self presentViewController:_shareController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

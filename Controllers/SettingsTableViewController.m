@@ -13,6 +13,8 @@
 #import "AppDelegate.h"
 #import "ManagedObjectUtils.h"
 #import "GenericUtils.h"
+#import "AboutViewController.h"
+#import "DisclaimerViewController.h"
 
 
 @interface SettingsTableViewController ()
@@ -1432,13 +1434,30 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
 #pragma mark - Navigation Methods
 
-/*
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    UINavigationController *navigationViewController = [segue destinationViewController];
+
+    // About Segue
+    //
+    if ([[segue identifier] isEqualToString:@"AboutSegue"]) {
+        
+        AboutViewController *aboutViewController = (AboutViewController *)([navigationViewController viewControllers][0]);
+        
+        [aboutViewController setShareController:_shareController];
+    
+    // Disclaimer Segue
+    //
+    } else {
+        DisclaimerViewController *disclaimerViewController = (DisclaimerViewController *)([navigationViewController viewControllers][0]);
+        
+        [disclaimerViewController setShareController:_shareController];
+    }
 }
-*/
+
 
 // Two exit points covered
 // goBack (back arrow button) and

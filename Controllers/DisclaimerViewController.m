@@ -48,6 +48,12 @@
     [self.view addSubview:disclaimerTextView];
 }
 
+// Share Documentation
+//
+- (IBAction)share:(id)sender {
+     [self presentViewController:_shareController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

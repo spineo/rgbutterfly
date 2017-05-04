@@ -10,4 +10,8 @@
 
 @interface AboutViewController : UIViewController
 
+// Share Documentation
+//
+@property (nonatomic, strong) UIActivityViewController *shareController;
+
 @end
