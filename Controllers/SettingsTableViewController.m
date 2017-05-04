@@ -634,24 +634,21 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
     
-    // Share
+    // Share to social media and other venues
     //
-    NSString *text = @"Find Paint Swatches associated with Areas in a Photo";
-    NSURL *url = [NSURL URLWithString:@"http://rgbutterfly.com"];
-    UIImage *image = [UIImage imageNamed:@"butterfly-background-title-2"];
+    NSURL *docsUrl         = [NSURL URLWithString:DOCS_SITE_URL];
+    UIImage *docsImage     = [UIImage imageNamed:DOCS_IMAGE];
     
     _shareController =
     [[UIActivityViewController alloc]
-     initWithActivityItems:@[text, url, image]
+     initWithActivityItems:@[DOCS_SYNOPSIS, docsUrl, docsImage]
      applicationActivities:nil];
 
     _shareController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
-                                               UIActivityTypeMessage,
                                                UIActivityTypePrint,
                                                UIActivityTypeCopyToPasteboard,
                                                UIActivityTypeAssignToContact,
                                                UIActivityTypeSaveToCameraRoll,
-                                               UIActivityTypeAddToReadingList,
                                                UIActivityTypePostToFlickr,
                                                UIActivityTypePostToVimeo,
                                                UIActivityTypePostToTencentWeibo,
@@ -1422,6 +1419,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+// Share documentation on Social Media and other venues
+//
 - (IBAction)share:(id)sender {
     [self presentViewController:_shareController animated:YES completion:nil];
 }

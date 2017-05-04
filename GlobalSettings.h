@@ -421,6 +421,8 @@ extern NSString * const ABOUT_URL;
 
 // Documentation Site
 //
+extern NSString * const DOCS_IMAGE;
+extern NSString * const DOCS_SYNOPSIS;
 extern NSString * const DOCS_SITE_URL;
 extern NSString * const DOCS_SITE_PAT;
 

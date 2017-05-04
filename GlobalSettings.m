@@ -429,9 +429,11 @@ NSString * const ABOUT_TEXT = @"\nThis experimental App grew out of my interest 
 NSString * const ABOUT_PAT = @"Reference Data and Match Methodology";
 NSString * const ABOUT_URL = @"https://spineo.github.io/RGButterflyDocs/About.html";
 
-// Documentation Site
+// Documentation Site/Share
 //
-NSString * const DOCS_SITE_URL = @"https://spineo.github.io/RGButterflyDocs/";
+NSString * const DOCS_IMAGE    = @"docs-image.png";
+NSString * const DOCS_SYNOPSIS = @"iPhone App to Find Paint Swatches Associated with Areas in a Photo";
+NSString * const DOCS_SITE_URL = @"http://rgbutterfly.com/";
 NSString * const DOCS_SITE_PAT = @"Web Documentation";
 
 
