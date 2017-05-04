@@ -223,6 +223,7 @@ extern int const SAVE_BTN_TAG;
 extern int const VIEW_BTN_TAG;
 extern int const DONE_BTN_TAG;
 extern int const HOME_BTN_TAG;
+extern int const SHARE_BTN_TAG;
 
 extern int const DECR_ALG_BTN_TAG;
 extern int const MATCH_BTN_TAG;

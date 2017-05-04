@@ -47,6 +47,10 @@
 @property (nonatomic, strong) NSArray *listTypeNames;
 @property (nonatomic, strong) UIPickerView *listTypesPicker;
 
+// Share
+//
+@property (nonatomic, strong) UIActivityViewController *shareController;
+
 // NSUserDefaults
 //
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
@@ -629,6 +633,29 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
 
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
+    
+    // Share
+    //
+    NSString *text = @"Find Paint Swatches associated with Areas in a Photo";
+    NSURL *url = [NSURL URLWithString:@"http://rgbutterfly.com"];
+    UIImage *image = [UIImage imageNamed:@"butterfly-background-title-2"];
+    
+    _shareController =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text, url, image]
+     applicationActivities:nil];
+
+    _shareController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                               UIActivityTypeMessage,
+                                               UIActivityTypePrint,
+                                               UIActivityTypeCopyToPasteboard,
+                                               UIActivityTypeAssignToContact,
+                                               UIActivityTypeSaveToCameraRoll,
+                                               UIActivityTypeAddToReadingList,
+                                               UIActivityTypePostToFlickr,
+                                               UIActivityTypePostToVimeo,
+                                               UIActivityTypePostToTencentWeibo,
+                                               UIActivityTypeAirDrop];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -1394,6 +1421,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (IBAction)share:(id)sender {
+    [self presentViewController:_shareController animated:YES completion:nil];
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods

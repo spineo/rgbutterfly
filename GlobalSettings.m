@@ -212,6 +212,7 @@ int const SAVE_BTN_TAG         = 59;
 int const VIEW_BTN_TAG         = 60;
 int const DONE_BTN_TAG         = 61;
 int const HOME_BTN_TAG         = 62;
+int const SHARE_BTN_TAG        = 63;
 
 int const DECR_ALG_BTN_TAG     = 71;
 int const MATCH_BTN_TAG        = 72;
