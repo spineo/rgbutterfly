@@ -162,7 +162,7 @@ const int ASSOC_SET_TAG        = 8;
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
-    _addColorLabel     = @"Add Ref/Mix/Generic to Association";
+    _addColorLabel     = @"Add Refs/Mixes to Association";
     
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
