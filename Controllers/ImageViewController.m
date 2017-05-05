@@ -381,7 +381,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Match Update Edit button Alert Controller
     //
     _updateAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
-                                                      message:@"Enter/Update Match Name, Keyword(s), and/or Description:"
+                                                      message:@"Enter/Update Match Name, Keyword(s), and/or Comments:"
                                                preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *updateAlertController_ = _updateAlertController;
     
@@ -421,7 +421,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if ((_matchAssociation != nil) && !([[_matchAssociation desc] isEqualToString:@""] || ([_matchAssociation desc] == nil))) {
             [matchDescTextField setText:[_matchAssociation desc]];
         } else {
-            [matchDescTextField setPlaceholder: NSLocalizedString(@"Match description.", nil)];
+            [matchDescTextField setPlaceholder: NSLocalizedString(@"Match Comments.", nil)];
         }
         [matchDescTextField setTag:MATCH_DESC_TAG];
         [matchDescTextField setClearButtonMode: UITextFieldViewModeWhileEditing];

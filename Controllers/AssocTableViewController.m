@@ -148,7 +148,7 @@ const int ASSOC_SET_TAG        = 8;
     
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Association Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Semicolon-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Association Description (max. %i chars) - ", MAX_DESC_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Association Comments (max. %i chars) - ", MAX_DESC_LEN];
     
     _reuseCellIdentifier = @"AssocTableCell";
 
@@ -158,7 +158,7 @@ const int ASSOC_SET_TAG        = 8;
     _colorsHeader      = @"Association Colors";
     _nameHeader        = @"Association Name";
     _keywHeader        = @"Association Keywords";
-    _descHeader        = @"Association Description";
+    _descHeader        = @"Association Comments";
     
     _refColorLabel     = @"Dominant";
     _mixColorLabel     = @"Mixing";
@@ -706,7 +706,7 @@ const int ASSOC_SET_TAG        = 8;
     //
     } else {
         
-        // Create the description text field
+        // Create the comments/description text field
         //
         UITextField *refName  = [FieldUtils createTextField:_mixAssocDesc tag:ASSOC_DESC_TAG];
         [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];

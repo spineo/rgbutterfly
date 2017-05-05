@@ -39,7 +39,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *descHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName;
 
 // Subjective color related
 //
@@ -196,7 +196,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _pigmentTypeHeader    = @"Pigment Type";
     _canvasCoverageHeader = @"Canvas Coverage";
     _keywHeader           = @"Keywords";
-    _descHeader           = @"Description";
+    _commentsHeader       = @"Comments";
     _refsHeader           = @"Reference Colors";
     _mixAssocHeader       = @"Mix Associations";
     _matchAssocHeader     = @"Match Associations";
@@ -206,7 +206,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     //
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = @" - Semicolon-sep. keywords, comma-sep. comps - ";
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Description (max. %i chars) - ", MAX_DESC_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Comments (max. %i chars) - ", MAX_DESC_LEN];
     _otherPlaceholder = [[NSString alloc] initWithFormat:@" - Other Paint Brand (max. of %i chars) - ", MAX_BRAND_LEN];
 
     
@@ -627,11 +627,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
 
-        // Description field
+        // Description/Comments field
         //
         } else if (indexPath.section == DETAIL_DESC_SECTION) {
         
-            // Create the description text field
+            // Create the description/comments text field
             //
             UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
             [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
@@ -812,7 +812,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _keywHeader;
         
     } else if (section == DETAIL_DESC_SECTION) {
-        headerStr = _descHeader;
+        headerStr = _commentsHeader;
         
     } else if (section == DETAIL_REF_SECTION) {
         headerStr = _refsHeader;

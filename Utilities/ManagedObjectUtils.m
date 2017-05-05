@@ -263,7 +263,7 @@
                 [paintSwatch setDeg_hue:[NSNumber numberWithFloat:hue * 360]];
                 
 
-                // Add Hex to the Description
+                // Add Hex to the Comments
                 //
                 [paintSwatch setDesc:[[NSString alloc] initWithFormat:@"Hex Color Code: #%@", hex]];
 

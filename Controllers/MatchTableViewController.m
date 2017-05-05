@@ -123,7 +123,7 @@ const int IMAGE_TAG  = 6;
     _matchesHeader = @"Matches";
     _nameHeader    = @"Tap Area Name";
     _keywHeader    = @"Tap Area Keywords";
-    _descHeader    = @"Tap Area Description";
+    _descHeader    = @"Tap Area Comments";
 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -153,7 +153,7 @@ const int IMAGE_TAG  = 6;
     //
     _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Name (max. of %i chars) - ", MAX_NAME_LEN];
     _keywPlaceholder  = [[NSString alloc] initWithFormat:@" - Semicolon-sep. keywords (max. %i chars) - ", MAX_KEYW_LEN];
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Description (max. %i chars) - ", MAX_DESC_LEN];
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Tap Area Comments (max. %i chars) - ", MAX_DESC_LEN];
     
     _dbSwatchesCount  = (int)[_dbPaintSwatches count];
 
@@ -509,10 +509,10 @@ const int IMAGE_TAG  = 6;
         [cell setAccessoryType: UITableViewCellAccessoryNone];
         
     
-    // Set up the description field
+    // Set up the description/comments field
     //
     } else if (indexPath.section == DESC_SECTION) {
-        // Create the description text field
+        // Create the description/comments text field
         //
         UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
         [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
