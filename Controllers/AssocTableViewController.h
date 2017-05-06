@@ -29,6 +29,4 @@
 //
 @property (nonatomic, strong) UITextField *mixName;
 
-- (void)saveData;
-
 @end
