@@ -1598,6 +1598,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                     _scrollViewUp,
                                     _scrollViewDown,
+                                    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                     ];
         
         
@@ -1657,6 +1658,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                     _scrollViewUp,
                                     _scrollViewDown,
+                                    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                     ];
 
         [headerView addSubview:scrollViewToolbar];
