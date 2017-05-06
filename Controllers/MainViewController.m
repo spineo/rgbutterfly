@@ -394,6 +394,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self startSpinner];
+    
     [self.view setBackgroundColor:DARK_BG_COLOR];
     
     // Check if this value has changed in Settings
@@ -404,7 +406,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
         _defListingType = _modListingType;
     }
     
+    //[self loadData];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
     [self loadData];
+    //[self.view setBackgroundColor:DARK_BG_COLOR];
+    [self stopSpinner];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
