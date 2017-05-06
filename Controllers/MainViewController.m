@@ -81,6 +81,10 @@
 //
 @property (nonatomic) BOOL isLandscape;
 
+// Default/modified listing type
+//
+@property (nonatomic, strong) NSString *defListingType, *modListingType;
+
 @end
 
 
@@ -142,6 +146,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // Initialization
     //
     _userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // This value can be changed in Settings
+    //
+    _listingType    = [_userDefaults valueForKey:LISTING_TYPE];
+    _defListingType = _listingType;
 
     
     // Welcome alert
@@ -167,11 +176,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorTableView setDataSource:self];
     
     _reuseCellIdentifier = @"InitTableCell";
-
-
-    // This value can be configured in Settings
-    //
-    _listingType = [_userDefaults valueForKey:LISTING_TYPE];
 
 
     // TableView defaults
@@ -391,6 +395,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.view setBackgroundColor:DARK_BG_COLOR];
+    
+    // Check if this value has changed in Settings
+    //
+    _modListingType = [_userDefaults valueForKey:LISTING_TYPE];
+    if (![_modListingType isEqualToString:_defListingType]) {
+        _listingType    = _modListingType;
+        _defListingType = _modListingType;
+    }
     
     [self loadData];
 }

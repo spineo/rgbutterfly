@@ -635,7 +635,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
 
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
+
     
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Share
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Share to social media and other venues
     //
     NSURL *docsUrl         = [NSURL URLWithString:DOCS_SITE_URL];
