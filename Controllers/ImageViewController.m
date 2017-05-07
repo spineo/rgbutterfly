@@ -488,6 +488,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 
                                                 [_matchButton setTintColor:LIGHT_TEXT_COLOR];
                                                 [_matchButton setTag:MATCH_BTN_TAG];
+                                                [_matchButton setWidth:_matchButton.title.length];
 
                                                 NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolbarItems];
                                                 [items replaceObjectAtIndex:ACTION_TYPE_INDEX withObject:_matchButton];
@@ -514,6 +515,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
                                                 [_assocButton setTintColor:LIGHT_TEXT_COLOR];
                                                 [_assocButton setTag:ASSOC_BTN_TAG];
+                                                [_assocButton setWidth:_assocButton.title.length];
                                                 
                                                 [self removeUpArrow];
                                                 
@@ -721,7 +723,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self editButtonEnable];
     [BarButtonUtils setButtonShow:self.toolbarItems refTag:VIEW_BTN_TAG];
     [BarButtonUtils setButtonWidth:self.toolbarItems refTag:VIEW_BTN_TAG width:DEF_BUTTON_WIDTH];
-    //self.toolbarItems = [BarButtonUtils convertToDark3DButton:self.toolbarItems title:@"View" width:DEF_BUTTON_WIDTH refTag:VIEW_BTN_TAG];
 }
 
 - (void)viewButtonHide {
