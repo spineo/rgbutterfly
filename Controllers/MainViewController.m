@@ -130,6 +130,22 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [self.view willRemoveSubview:_updateLabel];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+        [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+             UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+             if (orientation == 1) {
+                 _isLandscape = FALSE;
+             } else {
+                 _isLandscape = TRUE;
+             }
+             [self setFrames];
+
+        } completion:nil];
+         // completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {}];
+        
+        [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -370,10 +386,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // Adjust the layout when the orientation changes
     //
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrames)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrames)
+//                                                 name:UIDeviceOrientationDidChangeNotification
+//                                               object:[UIDevice currentDevice]];
     
     _titleView = [[UIView alloc] init];
     
@@ -411,8 +427,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    //[self loadData];
-    //[self.view setBackgroundColor:DARK_BG_COLOR];
     [self stopSpinner];
 }
 
@@ -1533,12 +1547,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_cancelButton setFrame:CGRectMake(xPoint, yPoint, buttonSize.width, buttonSize.height)];
     
     CGFloat xOffset;
-    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown) {
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait) {
         xOffset = DEF_NAVBAR_X_OFFSET;
-        _isLandscape = FALSE;
+        //_isLandscape = FALSE;
     } else {
         xOffset = DEF_X_OFFSET;
-        _isLandscape = TRUE;
+        //_isLandscape = TRUE;
     }
     [_mainSearchBar setFrame:CGRectMake(xOffset, yPoint, xPoint - DEF_NAVBAR_X_OFFSET, buttonSize.height)];
     
