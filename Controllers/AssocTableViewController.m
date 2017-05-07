@@ -59,7 +59,7 @@
 @property (nonatomic, strong) NSEntityDescription *mixAssocEntity, *mixAssocSwatchEntity, *keywordEntity, *mixAssocKeywordEntity;
 @property (nonatomic, strong) NSSortDescriptor *orderSort;
 @property (nonatomic, strong) NSMutableDictionary *assocTypes, *paintSwatchTypes;
-@property (nonatomic, strong) NSNumber *otherTypeId, *mixTypeId, *refTypeId, *mixAssocTypeId, *genericTypeId;
+@property (nonatomic, strong) NSNumber *otherTypeId, *mixTypeId, *refTypeId, *mixAssocTypeId, *genericTypeId, *genPaintTypeId;
 @property (nonatomic, strong) UIPickerView *assocTypePicker, *coveragePicker;
 
 @end
@@ -121,6 +121,7 @@ const int ASSOC_SET_TAG        = 8;
     _refTypeId      = [_paintSwatchTypes valueForKey:@"Reference"];
     _mixAssocTypeId = [_paintSwatchTypes valueForKey:@"MixAssoc"];
     _genericTypeId  = [_paintSwatchTypes valueForKey:@"Generic"];
+    _genPaintTypeId = [_paintSwatchTypes valueForKey:@"GenericPaint"];
     
 
     // Set the name and desc values
@@ -377,7 +378,7 @@ const int ASSOC_SET_TAG        = 8;
         _applyRenameText = @"Apply Renaming with Ratios";
         selector = @selector(showMixRatiosPicker);
         
-    } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
+    } else if ([[_assocTypeName text] containsString:@"Generic"]) {
         _applyRenameText = @"Apply Generic Properties";
         selector = @selector(applyRenaming);
         
@@ -515,7 +516,7 @@ const int ASSOC_SET_TAG        = 8;
     } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Other"]) {
         return 0;
     
-    } else if (((section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Generic"]) {
+    } else if (((section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] containsString:@"Generic"]) {
         return 0;
 
     } else if (section == ASSOC_COLORS_SECTION) {
@@ -1108,11 +1109,15 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (void)applyRenaming {
-    if ([[_assocTypeName text] isEqualToString:MIX_TYPE]) {
+    NSString *assocTypeName = [_assocTypeName text];
+    if ([assocTypeName isEqualToString:MIX_TYPE]) {
         [self applyMixRenaming];
         
-    } else if ([[_assocTypeName text] isEqualToString:@"Generic"]) {
-        [self applyGenericRenaming];
+    } else if ([assocTypeName isEqualToString:@"Generic"]) {
+        [self applyGenericRenaming:_genericTypeId];
+        
+    } else if ([assocTypeName isEqualToString:@"GenericPaint"]) {
+        [self applyGenericRenaming:_genPaintTypeId];
 
     } else {
         [self applyCoverageRenaming];
@@ -1202,7 +1207,7 @@ const int ASSOC_SET_TAG        = 8;
     _mixAssocName = [[NSString alloc] initWithFormat:@"%@ + %@%@", refName_1, refName_2, coverageName];
 }
 
-- (void)applyGenericRenaming {
+- (void)applyGenericRenaming:(NSNumber *)typeId {
     
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
@@ -1218,7 +1223,7 @@ const int ASSOC_SET_TAG        = 8;
         }
     
         [paintSwatch setIs_mix:[NSNumber numberWithBool:FALSE]];
-        [paintSwatch setType_id:_genericTypeId];
+        [paintSwatch setType_id:typeId];
     }
     
     // Rename the Generic Association

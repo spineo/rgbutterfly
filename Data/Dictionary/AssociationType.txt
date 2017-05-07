@@ -2,3 +2,4 @@ Other
 Mix
 Coverage
 Generic
+GenericPaint

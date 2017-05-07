@@ -405,8 +405,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     //
     _genFilterText = @"gen_filter_text";
     
-    _genFilterOffText = @"Generics Swatches Not Filtered ";
-    _genFilterOnText  = @"Generics Swatches Are Filtered";
+    _genFilterOffText = @"Generic Swatches Not Filtered ";
+    _genFilterOnText  = @"Generic Swatches Are Filtered";
     
     if ([_userDefaults boolForKey:GEN_FILTER_KEY] == FALSE) {
         _genFilterFlag = FALSE;
