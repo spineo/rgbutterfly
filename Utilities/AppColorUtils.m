@@ -8,6 +8,7 @@
 
 #import "AppColorUtils.h"
 #import "GlobalSettings.h"
+#import "ManagedObjectUtils.h"
 
 @implementation AppColorUtils
 
@@ -30,11 +31,18 @@
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+ (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
++ (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height context:(NSManagedObjectContext *)context {
     BOOL isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
     
+    int type_id = [[swatchObj type_id] intValue];
+    
+    NSString *typeName = [[ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:type_id context:context] name];
+    
     UIImage *swatchImage;
-    if (isRGB == FALSE) {
+    
+    // 'GenericPaint' types are always rendered using RGB values
+    //
+    if (isRGB == FALSE && ![typeName isEqualToString:@"GenericPaint"]) {
         swatchImage = [self renderPaint:swatchObj.image_thumb cellWidth:width cellHeight:height];
     } else {
         swatchImage = [self renderRGB:swatchObj cellWidth:width cellHeight:height];

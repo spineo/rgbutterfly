@@ -529,7 +529,17 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
-            cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            
+            int type_id = [[_paintSwatch type_id] intValue];
+            NSString *typeName = [[ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:type_id context:self.context] name];
+            
+            // Render 'GenericPaint' with RGB values
+            //
+            if ([typeName isEqualToString:@"GenericPaint"]) {
+                cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            } else {
+                cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            }
             
             CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - DEF_MD_FIELD_PADDING;
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
@@ -665,13 +675,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if (indexPath.row == 0) {
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
                 [cell.textLabel setText:[_refPaintSwatch name]];
 
             } else {
                 // Detail Mix Section
                 //
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
                 [cell.textLabel setText:[_mixPaintSwatch name]];
             }
         }
