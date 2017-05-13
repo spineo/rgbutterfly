@@ -424,6 +424,7 @@ extern NSString * const ABOUT_URL;
 extern NSString * const DOCS_IMAGE;
 extern NSString * const DOCS_SYNOPSIS;
 extern NSString * const DOCS_SITE_URL;
+extern NSString * const MAIN_SITE_URL;
 extern NSString * const DOCS_SITE_PAT;
 
 // "Disclaimer" section text

@@ -642,12 +642,12 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Share to social media and other venues
     //
-    NSURL *docsUrl         = [NSURL URLWithString:DOCS_SITE_URL];
-    UIImage *docsImage     = [UIImage imageNamed:DOCS_IMAGE];
+    NSURL *mainUrl         = [NSURL URLWithString:MAIN_SITE_URL];
+    UIImage *mainImage     = [UIImage imageNamed:DOCS_IMAGE];
     
     _shareController =
     [[UIActivityViewController alloc]
-     initWithActivityItems:@[DOCS_SYNOPSIS, docsUrl, docsImage]
+     initWithActivityItems:@[DOCS_SYNOPSIS, mainUrl, mainImage]
      applicationActivities:nil];
 
     _shareController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
