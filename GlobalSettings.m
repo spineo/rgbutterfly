@@ -422,7 +422,7 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_TEXT = @"\nThis App grew out of my interest in painting. Its main purpose is to suggest Acrylics color paint matches associated with selected areas of a photo. It does this by applying a Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URL for more information about this App. You can also share that documentation by using the top-right button.\n\n";
+NSString * const ABOUT_TEXT = @"\nThis App grew out of my interest in painting. Its main purpose is to suggest Acrylics color paints associated with selected areas of a photo. It does this by applying a Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URL for more information about this App. You can also share that documentation by using the top-right button.\n\n";
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //
@@ -432,6 +432,7 @@ NSString * const ABOUT_URL = @"https://spineo.github.io/RGButterflyDocs/About.ht
 // Documentation Site/Share
 //
 NSString * const DOCS_IMAGE    = @"docs-image.png";
+NSString * const MAIN_IMAGE    = @"main-image.png";
 NSString * const DOCS_SYNOPSIS = @"The iPhone App to Suggest Matching Paint Colors";
 NSString * const DOCS_SITE_URL = @"https://spineo.github.io/RGButterflyDocs/";
 NSString * const MAIN_SITE_URL = @"http://rgbutterfly.com/";

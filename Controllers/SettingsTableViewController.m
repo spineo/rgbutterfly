@@ -643,7 +643,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     // Share to social media and other venues
     //
     NSURL *mainUrl         = [NSURL URLWithString:MAIN_SITE_URL];
-    UIImage *mainImage     = [UIImage imageNamed:DOCS_IMAGE];
+    UIImage *mainImage     = [UIImage imageNamed:MAIN_IMAGE];
     
     _shareController =
     [[UIActivityViewController alloc]
