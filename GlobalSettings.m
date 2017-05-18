@@ -432,7 +432,7 @@ NSString * const ABOUT_URL = @"https://spineo.github.io/RGButterflyDocs/About.ht
 // Documentation Site/Share
 //
 NSString * const DOCS_IMAGE    = @"docs-image.png";
-NSString * const DOCS_SYNOPSIS = @"iPhone App to Find Paint Swatches Associated with Areas in a Photo";
+NSString * const DOCS_SYNOPSIS = @"The iPhone App to Suggest Matching Paint Colors";
 NSString * const DOCS_SITE_URL = @"https://spineo.github.io/RGButterflyDocs/";
 NSString * const MAIN_SITE_URL = @"http://rgbutterfly.com/";
 NSString * const DOCS_SITE_PAT = @"Web Documentation";
