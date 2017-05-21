@@ -131,7 +131,6 @@ const int ASSOC_SET_TAG        = 8;
     _coveragePickerSelRow  = [[_mixAssociation def_coverage_id] intValue];
     _assocTypePickerSelRow = [[_mixAssociation assoc_type_id] intValue];
     
-    
     // Keywords
     //
     NSSet *mixAssocKeywords = [_mixAssociation mix_assoc_keyword];

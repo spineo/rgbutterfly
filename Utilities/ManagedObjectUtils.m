@@ -1328,6 +1328,25 @@
     }
 }
 
+// One-time cleanup (re-purpose as needed)
+//
++ (void)setMixAssocTypeId:(NSManagedObjectContext *)context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    NSArray *results = [context executeFetchRequest:fetch error:NULL];
+    
+    for (MixAssociation *mixAssoc in results) {
+        if ([mixAssoc assoc_type_id] == NULL) {
+            [mixAssoc setAssoc_type_id:[NSNumber numberWithInt:1]];
+        }
+    }
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Delete methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

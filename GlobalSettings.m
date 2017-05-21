@@ -499,9 +499,14 @@ static NSDictionary *swatchTypes;
     
     [ManagedObjectUtils deleteDictionaryEntity:@"ListingType"];
     [ManagedObjectUtils insertFromDataFile:@"ListingType"];
+
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
+    // one-time cleanup
+    //
+    //[ManagedObjectUtils setMixAssocTypeId:context];
     
     // Load Generic Associations (read the directory)
     //

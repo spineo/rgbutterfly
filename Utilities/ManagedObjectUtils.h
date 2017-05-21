@@ -75,6 +75,7 @@
 // Update methods
 //
 + (void)setEntityReadOnly:(NSString *)entityName isReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context;
++ (void)setMixAssocTypeId:(NSManagedObjectContext *)context;
 
 // Delete methods
 //

@@ -645,10 +645,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     NSURL *mainUrl         = [NSURL URLWithString:MAIN_SITE_URL];
     UIImage *mainImage     = [UIImage imageNamed:MAIN_IMAGE];
     
-    _shareController =
-    [[UIActivityViewController alloc]
-     initWithActivityItems:@[DOCS_SYNOPSIS, mainUrl, mainImage]
-     applicationActivities:nil];
+    _shareController = [[UIActivityViewController alloc] initWithActivityItems:@[DOCS_SYNOPSIS, mainUrl, mainImage] applicationActivities:nil];
 
     _shareController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
                                                UIActivityTypePrint,
