@@ -641,14 +641,17 @@ const int ASSOC_SET_TAG        = 8;
         
     } else if (indexPath.section == ASSOC_COVER_SECTION) {
         
+        NSString *coverageText = [[NSString alloc] initWithFormat:@"Canvas Coverage: %@", [_coverageNames objectAtIndex:_coveragePickerSelRow]];
+        
         if (_editFlag == TRUE) {
+            [_setButton setTitle:coverageText forState:UIControlStateNormal];
             [cell.contentView addSubview:_setButton];
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         } else {
             [cell setBackgroundColor:DARK_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell.textLabel setFont:TABLE_HEADER_FONT];
-            [cell.textLabel setText:[[NSString alloc] initWithFormat:@"Canvas Coverage: %@", [_coverageNames objectAtIndex:_coveragePickerSelRow]]];
+            [cell.textLabel setText:coverageText];
         }
         
     } else if (indexPath.section == ASSOC_APPLY_SECTION) {
@@ -702,7 +705,7 @@ const int ASSOC_SET_TAG        = 8;
         }
         [cell setAccessoryType: UITableViewCellAccessoryNone];
 
-    // Desc section
+    // Comments section
     //
     } else {
         
@@ -911,10 +914,10 @@ const int ASSOC_SET_TAG        = 8;
         if ((textField.tag == ASSOC_NAME_TAG) && (! [textField.text isEqualToString:@""])) {
             _mixAssocName = textField.text;
             
-        } else if ((textField.tag == ASSOC_KEYW_TAG) && (! [textField.text isEqualToString:@""])) {
+        } else if (textField.tag == ASSOC_KEYW_TAG) {
             _mixAssocKeyw = textField.text;
             
-        } else if ((textField.tag == ASSOC_DESC_TAG) && (! [textField.text isEqualToString:@""])) {
+        } else if (textField.tag == ASSOC_DESC_TAG) {
             _mixAssocDesc = textField.text;
             
         } else {

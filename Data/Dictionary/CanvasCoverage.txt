@@ -3,3 +3,4 @@ Thick
 Medium
 Thin
 Sparse
+Multiple
