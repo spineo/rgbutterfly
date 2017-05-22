@@ -1328,8 +1328,12 @@
     }
 }
 
-// One-time cleanup (re-purpose as needed)
-//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// One-time cleanup  methods(re-purpose as needed)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - One-time cleanup methods
+
 + (void)setMixAssocTypeId:(NSManagedObjectContext *)context {
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MixAssociation" inManagedObjectContext:context];
@@ -1343,6 +1347,24 @@
     for (MixAssociation *mixAssoc in results) {
         if ([mixAssoc assoc_type_id] == NULL) {
             [mixAssoc setAssoc_type_id:[NSNumber numberWithInt:1]];
+        }
+    }
+}
+
++ (void)setSwatchCoverageId:(NSManagedObjectContext *)context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    NSArray *results = [context executeFetchRequest:fetch error:NULL];
+    
+    for (PaintSwatches *swatch in results) {
+        int type_id = [[swatch type_id] intValue];
+        if ([swatch coverage_id] == NULL && (type_id == 1 || type_id == 2 || type_id == 5)) {
+            [swatch setCoverage_id:[NSNumber numberWithInt:1]];
         }
     }
 }

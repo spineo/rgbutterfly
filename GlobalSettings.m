@@ -504,9 +504,10 @@ static NSDictionary *swatchTypes;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
-    // one-time cleanup
+    // One-time cleanup
     //
     //[ManagedObjectUtils setMixAssocTypeId:context];
+    //[ManagedObjectUtils setSwatchCoverageId:context];
     
     // Load Generic Associations (read the directory)
     //

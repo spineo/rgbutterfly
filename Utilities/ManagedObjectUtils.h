@@ -76,6 +76,7 @@
 //
 + (void)setEntityReadOnly:(NSString *)entityName isReadOnly:(BOOL)is_readonly context:(NSManagedObjectContext *)context;
 + (void)setMixAssocTypeId:(NSManagedObjectContext *)context;
++ (void)setSwatchCoverageId:(NSManagedObjectContext *)context;
 
 // Delete methods
 //
