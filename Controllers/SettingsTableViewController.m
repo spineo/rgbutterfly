@@ -15,6 +15,7 @@
 #import "GenericUtils.h"
 #import "AboutViewController.h"
 #import "DisclaimerViewController.h"
+#include "TargetConditionals.h"
 
 
 @interface SettingsTableViewController ()
@@ -924,7 +925,12 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         // Feedback Section
         //
         } else {
-            [self showEmail];
+            if (TARGET_OS_SIMULATOR) {
+                UIAlertController *emailSendAlert = [AlertUtils createOkAlert:@"Provide Feedback Alert" message:@"This functionality is not enabled when running on simulators"];
+                [self presentViewController:emailSendAlert animated:YES completion:nil];
+            } else {
+                [self showEmail];
+            }
         }
     }
 }
@@ -1385,7 +1391,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 }
 
 - (void)showEmail {
-
     NSString *subject = SUBJECT;
     NSString *body    = BODY;
     NSArray *recipent = [NSArray arrayWithObject:RECIPIENT];
