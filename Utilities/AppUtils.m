@@ -216,72 +216,69 @@
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (1) Remove existing file and get the md5 file
     //
-//    if ([FileUtils fileRemove:MD5_FILE fileManager:fileManager] == FALSE) {
-//        NSLog(@"ERROR UDB2: Failed to remove file '%@'", MD5_FILE);
-//    }
+    if ([FileUtils fileRemove:MD5_FILE fileManager:fileManager] == FALSE) {
+        NSLog(@"ERROR UDB2: Failed to remove file '%@'", MD5_FILE);
+    }
     
-    NSString *bundleDBFile   = [[NSBundle mainBundle] pathForResource:CURR_STORE ofType:nil];
-    if (bundleDBFile != NULL) {
+    // Get the MD5 file from Bundle
+    //
+    NSString *bundleMD5File   = [[NSBundle mainBundle] pathForResource:MD5_FILE ofType:nil];
+    if (bundleMD5File != NULL) {
         error = nil;
-        [fileManager copyItemAtPath:bundleDBFile toPath:destDBFile error:&error];
+        [fileManager copyItemAtPath:bundleMD5File toPath:MD5_FILE error:&error];
         if (error == nil) {
-            NSLog(@"Successfully copied file '%@' to '%@'", bundleDBFile, destDBFile);
+            NSLog(@"Successfully copied file '%@' to '%@'", bundleMD5File, MD5_FILE);
         } else {
             NSLog(@"ERROR: %@\n", [error localizedDescription]);
-            return [@"ERROR UDB11: File copy error for file " stringByAppendingFormat:@" '%@' to '%@'", bundleDBFile, destDBFile];
+            return [@"ERROR UDB11: File copy error for file " stringByAppendingFormat:@" '%@' to '%@'", bundleMD5File, MD5_FILE];
         }
     }
     
-    
-    //NSString *bundleMD5File  = [[NSBundle mainBundle] pathForResource:MD5_FILE   ofType:nil];
-    //NSString *bundleVersFile = [[NSBundle mainBundle] pathForResource:VERS_FILE  ofType:nil];
-
-
-//    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, MD5_FILE] contentType:MD5_CONT_TYPE fileName:MD5_FILE authToken:authToken] == FALSE) {
-//        return [@"ERROR UDB3: Failed to HTTP GET file" stringByAppendingFormat:@" '%@'", MD5_FILE];
-//    }
-    
     // Perform the check once the updated database is downloaded
     //
-//    NSString *currMd5sum = [FileUtils lineFromFile:MD5_FILE];
-//    if (currMd5sum == nil) {
-//        return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", MD5_FILE];
-//    }
-    
+    NSString *currMd5sum = [FileUtils lineFromFile:MD5_FILE];
+    if (currMd5sum == nil) {
+        return [@"ERROR UDB4: Failed to read file" stringByAppendingFormat:@" '%@'", MD5_FILE];
+    }
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // (2) Upgrade the sqlite database
     //
     // Remove the -old and -tmp suffix files
     //
-//    [FileUtils fileRemove:destDBOldFile fileManager:fileManager];
-//    [FileUtils fileRemove:destDBTmpFile fileManager:fileManager];
+    [FileUtils fileRemove:destDBOldFile fileManager:fileManager];
+    [FileUtils fileRemove:destDBTmpFile fileManager:fileManager];
     
     
     // Backup the current database file
     //
-//    if ([fileManager fileExistsAtPath:destDBFile]){
-//        error = nil;
-//        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
-//        if (error == nil) {
-//            NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
-//        } else {
-//            NSLog(@"ERROR: %@\n", [error localizedDescription]);
-//            return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
-//        }
-//    }
+    if ([fileManager fileExistsAtPath:destDBFile]){
+        error = nil;
+        [fileManager copyItemAtPath:destDBFile toPath:destDBOldFile error:&error];
+        if (error == nil) {
+            NSLog(@"Successfully renamed file '%@' to '%@'", destDBFile, destDBOldFile);
+        } else {
+            NSLog(@"ERROR: %@\n", [error localizedDescription]);
+            return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBOldFile];
+        }
+    }
     
-    // Download the latest database to a '-tmp' suffix file
+    // Get the MD5 file from Bundle
     //
-//    if ([HTTPUtils HTTPGet:[NSString stringWithFormat:@"%@/%@", DB_REST_URL, DB_FILE] contentType:DB_CONT_TYPE fileName:destDBTmpFile authToken:authToken] == FALSE) {
-//        return [@"ERROR UDB3: Failed to HTTP GET file " stringByAppendingFormat:@" '%@' to '%@'", destDBFile, destDBTmpFile];
-//    }
+    NSString *bundleDBFile   = [[NSBundle mainBundle] pathForResource:CURR_STORE ofType:nil];
+    error = nil;
+    [fileManager copyItemAtPath:bundleDBFile toPath:destDBTmpFile error:&error];
+    if (error == nil) {
+        NSLog(@"Successfully copied file '%@' to '%@'", bundleDBFile, destDBTmpFile);
+    } else {
+        NSLog(@"ERROR: %@\n", [error localizedDescription]);
+        return [@"ERROR UDB11: File copy error for file " stringByAppendingFormat:@" '%@' to '%@'", bundleDBFile, destDBTmpFile];
+    }
     
     // Verify the MD5 value and, if equal, perform the update (else, leave in place the current snapshot)
     //
     NSString *md5sum = [FileUtils md5Hash:destDBTmpFile fileManager:fileManager];
-//    if ([currMd5sum isEqualToString:md5sum]) {
-    if (0) {
+    if ([currMd5sum isEqualToString:md5sum]) {
         [FileUtils fileRemove:destDBShmFile fileManager:fileManager];
         [FileUtils fileRemove:destDBWalFile fileManager:fileManager];
         [FileUtils fileRemove:destDBFile fileManager:fileManager];
@@ -292,7 +289,8 @@
             // Update the version number in NSUserDefaults
             //
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            NSString *versionNumber = [FileUtils lineFromFile:VERSION_FILE];
+            NSString *bundleVersFile = [[NSBundle mainBundle] pathForResource:VERSION_FILE ofType:nil];
+            NSString *versionNumber = [FileUtils lineFromFile:bundleVersFile];
             if (versionNumber != nil) {
                 [userDefaults setValue:versionNumber forKey:DB_VERSION_KEY];
                 [userDefaults synchronize];
@@ -305,8 +303,7 @@
         }
         
     } else {
-        //return @"Update Failed on md5 (keeping current snapshot, please try again)";
-        return @"";
+        return @"Update Failed on md5 (keeping current snapshot, please try again)";
     }
 }
 
