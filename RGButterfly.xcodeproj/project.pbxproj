@@ -60,6 +60,9 @@
 		2109A1361DFDE4910076A095 /* TapArea+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1281DFDE4910076A095 /* TapArea+CoreDataProperties.m */; };
 		2109A1391DFED84F0076A095 /* MatchAlgorithms.m in Sources */ = {isa = PBXBuildFile; fileRef = 2109A1381DFED84F0076A095 /* MatchAlgorithms.m */; };
 		2114BF571E4B5BFB009F4A7D /* Root.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2114BF561E4B5BFB009F4A7D /* Root.plist */; };
+		2120CCA41ED9A25500AD79F8 /* RGButterfly_v4.0.63.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2120CCA31ED9A25500AD79F8 /* RGButterfly_v4.0.63.sqlite */; };
+		2120CCA61ED9A26900AD79F8 /* RGButterfly_v4.0.63.md5 in Resources */ = {isa = PBXBuildFile; fileRef = 2120CCA51ED9A26900AD79F8 /* RGButterfly_v4.0.63.md5 */; };
+		2120CCA81ED9A27800AD79F8 /* version.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2120CCA71ED9A27800AD79F8 /* version.txt */; };
 		212F25AB1E33FEE0002466E7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AA1E33FEE0002466E7 /* Reachability.m */; };
 		212F25AE1E33FF13002466E7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25AD1E33FF13002466E7 /* NSData+Base64.m */; };
 		212F25B71E354964002466E7 /* FieldUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 212F25B61E354964002466E7 /* FieldUtils.m */; };
@@ -247,6 +250,9 @@
 		2109A1381DFED84F0076A095 /* MatchAlgorithms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAlgorithms.m; path = Algorithms/MatchAlgorithms.m; sourceTree = "<group>"; };
 		210C89671A9F6C440003CC85 /* RGButterfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGButterfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2114BF561E4B5BFB009F4A7D /* Root.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Root.plist; path = Settings.bundle/Root.plist; sourceTree = "<group>"; };
+		2120CCA31ED9A25500AD79F8 /* RGButterfly_v4.0.63.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = RGButterfly_v4.0.63.sqlite; path = ../databases/RGButterfly/RGButterfly_v4.0.63.sqlite; sourceTree = "<group>"; };
+		2120CCA51ED9A26900AD79F8 /* RGButterfly_v4.0.63.md5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RGButterfly_v4.0.63.md5; path = ../databases/RGButterfly/RGButterfly_v4.0.63.md5; sourceTree = "<group>"; };
+		2120CCA71ED9A27800AD79F8 /* version.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = version.txt; path = ../databases/RGButterfly/version.txt; sourceTree = "<group>"; };
 		212F25A91E33FEE0002466E7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../ios-external-utilities/Reachability/Reachability.h"; sourceTree = "<group>"; };
 		212F25AA1E33FEE0002466E7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../ios-external-utilities/Reachability/Reachability.m"; sourceTree = "<group>"; };
 		212F25AC1E33FF13002466E7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "../ios-external-utilities/NSData+Base64/NSData+Base64.h"; sourceTree = "<group>"; };
@@ -533,6 +539,7 @@
 		2108C5E91C820D0000DD7B9E /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2120CCA21ED9A17500AD79F8 /* Database */,
 				213E9BB31EA5A8BE00C3682D /* Dictionary */,
 				213E9BAC1EA3F51400C3682D /* Generics */,
 			);
@@ -600,6 +607,16 @@
 				21A197F11E4F832E00686E86 /* RGButterflyUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2120CCA21ED9A17500AD79F8 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				2120CCA71ED9A27800AD79F8 /* version.txt */,
+				2120CCA51ED9A26900AD79F8 /* RGButterfly_v4.0.63.md5 */,
+				2120CCA31ED9A25500AD79F8 /* RGButterfly_v4.0.63.sqlite */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 		213216531E7C7A7C00744C62 /* SupportingFiles */ = {
@@ -844,6 +861,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2120CCA41ED9A25500AD79F8 /* RGButterfly_v4.0.63.sqlite in Resources */,
 				213E9BE51EAB8D5F00C3682D /* GenericOrange.txt in Resources */,
 				213E9BC31EA5A93000C3682D /* PaintSwatchType.txt in Resources */,
 				21397EE61C8487A1001C3F05 /* Images.xcassets in Resources */,
@@ -866,11 +884,13 @@
 				213E9BE31EAB8D5F00C3682D /* GenericGrey.txt in Resources */,
 				21397EE81C8487C7001C3F05 /* Media.xcassets in Resources */,
 				21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */,
+				2120CCA61ED9A26900AD79F8 /* RGButterfly_v4.0.63.md5 in Resources */,
 				213E9BC51EA5A93000C3682D /* SubjectiveColor.txt in Resources */,
 				21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */,
 				213E9BE61EAB8D5F00C3682D /* GenericRed.txt in Resources */,
 				213E9BE01EAB8D5F00C3682D /* GenericBlue.txt in Resources */,
 				213E9BC11EA5A93000C3682D /* MatchAlgorithm.txt in Resources */,
+				2120CCA81ED9A27800AD79F8 /* version.txt in Resources */,
 				213E9BE71EAB8D5F00C3682D /* GenericViolet.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

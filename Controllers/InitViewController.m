@@ -67,7 +67,7 @@
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
     BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
-    if ((pollUpdate == FALSE) && existsPollUpdateKey) {
+    if ((pollUpdate == FALSE) && existsPollUpdateKey && ! USE_BUNDLE_DB) {
         [self continue];
     }
     
@@ -91,109 +91,123 @@
     
     [self startSpinner];
     
-    // Look at what is currently in Settings
-    //
-    BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
-    BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
-    // Update the database?
+    // Case 1: Release (starting with clean slate, this can be done without user prompt)
     //
-    if (pollUpdate == TRUE || !existsPollUpdateKey) {
+    if (USE_BUNDLE_DB) {
+        NSString *errStr = [AppUtils updateDBFromBundle];
         
-        // Check if there is a network connection
-        //
-        if ([HTTPUtils networkIsReachable] == FALSE) {
-            UIAlertController *alert = [AlertUtils createBlankAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action) {
-                                     [_updateLabel setText:SPINNER_LABEL_LOAD];
-                                     
-                                     [self continue];
-                                 }];
-            [alert addAction:ok];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-            
-        } else {
-            BOOL dbForceUpdate          = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
-            BOOL existsDbForceUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_FORCE_UPDATE_KEY];
+        [_updateLabel setText:SPINNER_LABEL_LOAD];
+        [self continue];
     
-            NSString *updateMsg = @"A New Database Version was Detected";
-            if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
-                _updateStat = DO_UPDATE;
-                updateMsg = @"A Force Update was Selected or new Deployment Detected";
-                
-                // Reset force update back to FALSE
-                //
-                [_userDefaults setBool:FALSE forKey:DB_FORCE_UPDATE_KEY];
-                [_userDefaults synchronize];
-                
-            } else {
-                _updateStat = [AppUtils checkForDBUpdate];
-            }
+    // Case 2: REST API Updates
+    //
+    } else {
+    
+        // Look at what is currently in Settings
+        //
+        BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+        BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
+        
+        // Update the database?
+        //
+        if (pollUpdate == TRUE || !existsPollUpdateKey) {
             
-            // New version detected
+            // Check if there is a network connection
             //
-            if (_updateStat == DO_UPDATE) {
-                UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
-                UIAlertAction* YesButton = [UIAlertAction
-                                            actionWithTitle:@"Yes"
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * action) {
-                                                NSString *errStr = [AppUtils updateDB];
-                            
-                                                UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:errStr];
-                                                UIAlertAction* ok = [UIAlertAction
-                                                                           actionWithTitle:@"OK"
-                                                                           style:UIAlertActionStyleDefault
-                                                                           handler:^(UIAlertAction * action) {
-                                                                               [_updateLabel setText:SPINNER_LABEL_LOAD];
-                                                                               [self continue];
-                                                                           }];
-                                                [alert addAction:ok];
-                                                
-                                                [self presentViewController:alert animated:YES completion:nil];
-                                            }];
-                
-                UIAlertAction* NoButton = [UIAlertAction
-                                           actionWithTitle:@"No"
-                                           style:UIAlertActionStyleDefault
-                                           handler:^(UIAlertAction * action) {
-                                               [_updateLabel setText:SPINNER_LABEL_LOAD];
-                                               [self continue];
-                                           }];
-                
-                [updateConfirm addAction:NoButton];
-                [updateConfirm addAction:YesButton];
-                
-                [self presentViewController:updateConfirm animated:YES completion:^{
-                    [_updateLabel setText:SPINNER_LABEL_PROC];
-                }];
-
-                
-            // Failed update preparation
-            //
-            } else if (_updateStat == FAILED_CHECK) {
-                UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:@"Failed Check for Updates"];
+            if ([HTTPUtils networkIsReachable] == FALSE) {
+                UIAlertController *alert = [AlertUtils createBlankAlert:@"No Network Connectivity Detected" message:@"This is needed for the database version check. Please verify your device settings"];
                 UIAlertAction* ok = [UIAlertAction
                                      actionWithTitle:@"OK"
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
                                          [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                         
                                          [self continue];
                                      }];
                 [alert addAction:ok];
                 
                 [self presentViewController:alert animated:YES completion:nil];
+                
+            } else {
+                BOOL dbForceUpdate          = [_userDefaults boolForKey:DB_FORCE_UPDATE_KEY];
+                BOOL existsDbForceUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_FORCE_UPDATE_KEY];
+        
+                NSString *updateMsg = @"A New Database Version was Detected";
+                if (dbForceUpdate == TRUE || !existsDbForceUpdateKey) {
+                    _updateStat = DO_UPDATE;
+                    updateMsg = @"A Force Update was Selected or new Deployment Detected";
+                    
+                    // Reset force update back to FALSE
+                    //
+                    [_userDefaults setBool:FALSE forKey:DB_FORCE_UPDATE_KEY];
+                    [_userDefaults synchronize];
+                    
+                } else {
+                    _updateStat = [AppUtils checkForDBUpdate];
+                }
+                
+                // New version detected
+                //
+                if (_updateStat == DO_UPDATE) {
+                    UIAlertController *updateConfirm = [AlertUtils createBlankAlert:updateMsg message:@"Continue with the Database Update?"];
+                    UIAlertAction* YesButton = [UIAlertAction
+                                                actionWithTitle:@"Yes"
+                                                style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * action) {
+                                                    NSString *errStr = [AppUtils updateDBFromRemote];
+                                
+                                                    UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:errStr];
+                                                    UIAlertAction* ok = [UIAlertAction
+                                                                               actionWithTitle:@"OK"
+                                                                               style:UIAlertActionStyleDefault
+                                                                               handler:^(UIAlertAction * action) {
+                                                                                   [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                                                                   [self continue];
+                                                                               }];
+                                                    [alert addAction:ok];
+                                                    
+                                                    [self presentViewController:alert animated:YES completion:nil];
+                                                }];
+                    
+                    UIAlertAction* NoButton = [UIAlertAction
+                                               actionWithTitle:@"No"
+                                               style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                                   [self continue];
+                                               }];
+                    
+                    [updateConfirm addAction:NoButton];
+                    [updateConfirm addAction:YesButton];
+                    
+                    [self presentViewController:updateConfirm animated:YES completion:^{
+                        [_updateLabel setText:SPINNER_LABEL_PROC];
+                    }];
+
+                    
+                // Failed update preparation
+                //
+                } else if (_updateStat == FAILED_CHECK) {
+                    UIAlertController *alert = [AlertUtils createBlankAlert:@"Update Status" message:@"Failed Check for Updates"];
+                    UIAlertAction* ok = [UIAlertAction
+                                         actionWithTitle:@"OK"
+                                         style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction * action) {
+                                             [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                             [self continue];
+                                         }];
+                    [alert addAction:ok];
+                    
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
             }
         }
-    }
-    
-    if (_updateStat == NO_UPDATE) {
-        [_updateLabel setText:SPINNER_LABEL_LOAD];
-        [self continue];
+        
+        if (_updateStat == NO_UPDATE) {
+            [_updateLabel setText:SPINNER_LABEL_LOAD];
+            [self continue];
+        }
     }
 }
 
