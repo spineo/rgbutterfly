@@ -21,7 +21,6 @@
 
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) BOOL dbRestoreFlag;
 
 // Activity Indicator
 //
@@ -62,14 +61,13 @@
     // Initialization
     //
     _userDefaults  = [NSUserDefaults standardUserDefaults];
-    _dbRestoreFlag = [_userDefaults objectForKey:DB_RESTORE_KEY];
     
     // Look at what is currently in Settings
     //
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
     BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
-    if ((pollUpdate == FALSE) && existsPollUpdateKey && (_dbRestoreFlag == FALSE)) {
+    if ((pollUpdate == FALSE) && existsPollUpdateKey && ([_userDefaults objectForKey:DB_RESTORE_KEY] == FALSE)) {
         [self continue];
     }
     
@@ -96,7 +94,7 @@
     
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
-    if (_dbRestoreFlag == nil) {
+    if ([_userDefaults objectForKey:DB_RESTORE_KEY] == nil) {
         NSString *errStr = [AppUtils initDBFromBundle];
         
         UIAlertController *alert = [AlertUtils createBlankAlert:@"Initialization Status" message:errStr];
