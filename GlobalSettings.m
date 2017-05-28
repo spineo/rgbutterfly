@@ -11,13 +11,6 @@
 #import "GenericUtils.h"
 #import "AppDelegate.h"
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ************************ IMPORTANT RELEASE SETTINGS ***********************************
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Normally, the REST API provides the updates
-//
-int const USE_BUNDLE_DB         = 0;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
@@ -311,6 +304,7 @@ NSString * const COLORS_TYPE       = @"Subjective Colors";
 //
 NSString * const DB_POLL_UPDATE_KEY  = @"DBPollUpdate";
 NSString * const DB_FORCE_UPDATE_KEY = @"DBForceUpdate";
+NSString * const DB_RESTORE_KEY      = @"DBRestore";
 NSString * const PAINT_SWATCH_RO_KEY = @"SwatchesReadOnly";
 NSString * const MIX_ASSOC_RO_KEY    = @"AssocReadOnly";
 NSString * const TAP_AREA_SIZE_KEY   = @"TapAreaSize";
@@ -566,8 +560,14 @@ static NSDictionary *swatchTypes;
     // NSUserDefaults intialization
     //
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    // DB Restore Settings
+    //
+    if ([userDefaults objectForKey:DB_RESTORE_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:DB_RESTORE_KEY];
+    }
     
-    // isRGB settings (false by default)
+    // isRGB Settings (false by default)
     //
     if ([userDefaults objectForKey:RGB_DISPLAY_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:RGB_DISPLAY_KEY];

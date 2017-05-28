@@ -11,13 +11,6 @@
 
 @interface GlobalSettings : NSObject
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// ************************ IMPORTANT RELEASE SETTINGS ***********************************
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Normally, the REST API provides the updates
-//
-extern int const USE_BUNDLE_DB;
     
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
@@ -321,6 +314,7 @@ extern NSString * const COLORS_TYPE;
 
 extern NSString * const DB_POLL_UPDATE_KEY;
 extern NSString * const DB_FORCE_UPDATE_KEY;
+extern NSString * const DB_RESTORE_KEY;
 extern NSString * const PAINT_SWATCH_RO_KEY;
 extern NSString * const MIX_ASSOC_RO_KEY;
 extern NSString * const TAP_AREA_SIZE_KEY;

@@ -21,10 +21,10 @@
 @interface SettingsTableViewController ()
 
 @property (nonatomic) CGFloat widgetHeight, widgetYOffset;
-@property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch;
-@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
-@property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
-@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
+@property (nonatomic, strong) UISwitch *dbPollUpdateSwitch, *dbForceUpdateSwitch, *dbRestoreSwitch, *psReadOnlySwitch, *maReadOnlySwitch, *alertsFilterSwitch;
+@property (nonatomic, strong) UILabel *aboutLabel, *disclaimerLabel, *feedbackLabel, *dbPollUpdateLabel, *dbForceUpdateLabel, *dbRestoreLabel, *psReadOnlyLabel, *maReadOnlyLabel, *tapSettingsLabel, *tapStepperLabel, *matchSettingsLabel, *matchStepperLabel, *rgbDisplayLabel, *mixRatiosLabel, *alertsFilterLabel;
+@property (nonatomic) BOOL editFlag, dbPollUpdateFlag, dbForceUpdateFlag, dbRestoreFlag, swatchesReadOnly, assocsReadOnly, rgbDisplayFlag, alertsShow;
+@property (nonatomic, strong) NSString *reuseCellIdentifier, *labelText, *dbPollUpdateText, *dbPollUpdateOnText, *dbPollUpdateOffText, *dbForceUpdateText, *dbForceUpdateOnText, *dbForceUpdateOffText, *dbRestoreText, *dbRestoreOnText, *dbRestoreOffText, *psReadOnlyText, *psMakeReadOnlyLabel, *psMakeReadWriteLabel, *maReadOnlyText, *maMakeReadOnlyLabel, *maMakeReadWriteLabel, *shapeGeom, *shapeTitle, *rgbDisplayTrueText, *rgbDisplayText, *rgbDisplayFalseText, *rgbDisplayImage, *rgbDisplayTrueImage, *rgbDisplayFalseImage, *mixRatiosText, *alertsFilterText, *alertsNoneLabel, *alertsShowLabel;
 
 // Match Swatch Filters (Generic and Coverage that is not 'Thick')
 //
@@ -77,34 +77,37 @@ const int DB_UPDATE_SETTINGS      = 1;
 const int POLL_DB_UPDATE_ROW      = 0;
 const int FORCE_DB_UPDATE_ROW     = 1;
 const int DB_UPDATE_SETTINGS_ROWS = 2;
+    
+const int DB_RESTORE_SETTINGS     = 2;
+const int DB_RESTORE_ROWS         = 1;
 
-const int READ_ONLY_SETTINGS      = 2;
+const int READ_ONLY_SETTINGS      = 3;
 const int PSWATCH_READ_ONLY_ROW   = 0;
 const int MIXASSOC_READ_ONLY_ROW  = 1;
 const int READ_ONLY_SETTINGS_ROWS = 2;
 
-const int TAP_AREA_SETTINGS       = 3;
+const int TAP_AREA_SETTINGS       = 4;
 const int TAP_AREA_ROWS           = 1;
 
-const int MATCH_FILTERS           = 4;
+const int MATCH_FILTERS           = 5;
 const int MATCH_NUM_ROW           = 0;
 const int GEN_FILTER_ROW          = 1;
 const int COV_FILTER_ROW          = 2;
 const int MATCH_FILTERS_ROWS      = 3;
 
-const int RGB_DISPLAY_SETTINGS    = 5;
+const int RGB_DISPLAY_SETTINGS    = 6;
 const int RGB_DISPLAY_ROWS        = 1;
 
-const int MIX_RATIOS_SETTINGS     = 6;
+const int MIX_RATIOS_SETTINGS     = 7;
 const int MIX_RATIOS_ROWS         = 1;
 
-const int ALERTS_SETTINGS         = 7;
+const int ALERTS_SETTINGS         = 8;
 const int ALERTS_ROWS             = 1;
 
-const int LIST_TYPE_SETTINGS      = 8;
+const int LIST_TYPE_SETTINGS      = 9;
 const int LIST_TYPE_ROWS          = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 9;
+const int SETTINGS_MAX_SECTIONS   = 10;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -215,7 +218,43 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     _dbForceUpdateLabel   = [self createWidgetLabel:_labelText];
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // DB Restore Rows
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Check for the default values
+    //
+    _dbRestoreText = @"db_restore_text";
     
+    _dbRestoreOffText = @"Keep the Current Database Snapshot";
+    _dbRestoreOnText  = @"Restore to the Original Database";
+    
+    if ([_userDefaults boolForKey:DB_RESTORE_KEY] == FALSE) {
+        _dbRestoreFlag = FALSE;
+        _labelText = _dbRestoreOffText;
+        
+        [_userDefaults setBool:_dbRestoreFlag forKey:DB_RESTORE_KEY];
+        [_userDefaults setValue:_labelText forKey:_dbRestoreText];
+        
+    } else {
+        _dbRestoreFlag = [_userDefaults boolForKey:DB_RESTORE_KEY];
+        _labelText = [_userDefaults stringForKey:_dbRestoreText];
+    }
+    
+    // Create the label and switch, set the last state or default values
+    //
+    _dbRestoreSwitch = [[UISwitch alloc] init];
+    _widgetHeight = _dbRestoreSwitch.bounds.size.height;
+    _widgetYOffset = (DEF_LG_TABLE_CELL_HGT - _widgetHeight) / DEF_HGT_ALIGN_FACTOR;
+    [_dbRestoreSwitch setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _widgetYOffset, DEF_BUTTON_WIDTH, _widgetHeight)];
+    [_dbRestoreSwitch setOn:_dbRestoreFlag];
+    
+    // Add the switch target
+    //
+    [_dbRestoreSwitch addTarget:self action:@selector(setDbRestoreSwitchState:) forControlEvents:UIControlEventValueChanged];
+    
+    _dbRestoreLabel   = [self createWidgetLabel:_labelText];
+
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Swatches Read-Only Rows
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -684,6 +723,9 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         } else {
             return 1;
         }
+    
+    } else if (section == DB_RESTORE_SETTINGS) {
+        return DB_RESTORE_ROWS;
         
     } else if (section == READ_ONLY_SETTINGS) {
         return READ_ONLY_SETTINGS_ROWS;
@@ -736,6 +778,9 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
     } else if (section == DB_UPDATE_SETTINGS) {
         headerStr = @"Database Update Settings";
+        
+    } else if (section == DB_RESTORE_SETTINGS) {
+        headerStr = @"Database Restore Settings";
 
     } else if (section == READ_ONLY_SETTINGS) {
         headerStr = @"Read-Only Settings";
@@ -823,7 +868,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             [cell.contentView addSubview:_dbForceUpdateSwitch];
             [cell.contentView addSubview:_dbForceUpdateLabel];
         }
-        
+
+    } else if (indexPath.section == DB_RESTORE_SETTINGS) {
+            [cell.contentView addSubview:_dbRestoreSwitch];
+            [cell.contentView addSubview:_dbRestoreLabel];
+
     } else if (indexPath.section == READ_ONLY_SETTINGS) {
     
         if (indexPath.row == PSWATCH_READ_ONLY_ROW) {
@@ -925,6 +974,8 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         // Feedback Section
         //
         } else {
+            // This functionality not run on simulators
+            //
             if (TARGET_OS_SIMULATOR) {
                 UIAlertController *emailSendAlert = [AlertUtils createOkAlert:@"Provide Feedback Alert" message:@"This functionality is not enabled when running on simulators"];
                 [self presentViewController:emailSendAlert animated:YES completion:nil];
@@ -1020,6 +1071,20 @@ const int SETTINGS_MAX_SECTIONS   = 9;
         
     } else {
         _dbForceUpdateLabel = [self createWidgetLabel:_dbForceUpdateOffText];
+    }
+    [self saveEnable:TRUE];
+    [self.tableView reloadData];
+}
+
+    
+- (void)setDbRestoreSwitchState:(id)sender {
+    _dbRestoreFlag = [sender isOn];
+    
+    if (_dbRestoreFlag == TRUE) {
+        _dbRestoreLabel = [self createWidgetLabel:_dbRestoreOnText];
+        
+    } else {
+        _dbRestoreLabel = [self createWidgetLabel:_dbRestoreOffText];
     }
     [self saveEnable:TRUE];
     [self.tableView reloadData];
@@ -1179,6 +1244,12 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             [_userDefaults setBool:_dbForceUpdateFlag forKey:DB_FORCE_UPDATE_KEY];
             [_userDefaults setValue:[_dbForceUpdateLabel text] forKey:_dbForceUpdateText];
             
+            // DB Restore Settings
+            //
+            [_userDefaults setBool:_dbRestoreFlag forKey:DB_RESTORE_KEY];
+            [_userDefaults setValue:[_dbRestoreLabel text] forKey:_dbRestoreText];
+            
+
             // Read-Only Settings
             //
             [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];

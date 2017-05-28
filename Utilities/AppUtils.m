@@ -185,11 +185,10 @@
     
 // Update the database from the Local BUNDLE (return string is the user status message)
 //
-+ (NSString *)updateDBFromBundle {
++ (NSString *)initDBFromBundle {
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSLog(@"********** PRE-UPDATE DATABASE PATH=%@ **********", destDBPath);
     
     // Set the destination files for removal
     //
@@ -199,7 +198,7 @@
     NSString *destDBShmFile = [destDBFile stringByAppendingString:@"-shm"];
     NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
     
-    NSString *successUpdMsg = @"Update was Successful!";
+    NSString *successInitMsg = @"Database Initialization was Successful!";
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -296,7 +295,7 @@
                 [userDefaults synchronize];
             }
             
-            return successUpdMsg;
+            return successInitMsg;
             
         } else {
             return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];

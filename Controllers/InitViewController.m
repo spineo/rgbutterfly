@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic) BOOL dbRestoreFlag;
 
 // Activity Indicator
 //
@@ -60,14 +61,15 @@
     
     // Initialization
     //
-    _userDefaults = [NSUserDefaults standardUserDefaults];
+    _userDefaults  = [NSUserDefaults standardUserDefaults];
+    _dbRestoreFlag = [_userDefaults objectForKey:DB_RESTORE_KEY];
     
     // Look at what is currently in Settings
     //
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
     BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
-    if ((pollUpdate == FALSE) && existsPollUpdateKey && ! USE_BUNDLE_DB) {
+    if ((pollUpdate == FALSE) && existsPollUpdateKey && (_dbRestoreFlag == FALSE)) {
         [self continue];
     }
     
@@ -92,13 +94,23 @@
     [self startSpinner];
     
     
-    // Case 1: Release (starting with clean slate, this can be done without user prompt)
+    // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
-    if (USE_BUNDLE_DB) {
-        NSString *errStr = [AppUtils updateDBFromBundle];
+    if (_dbRestoreFlag == nil) {
+        NSString *errStr = [AppUtils initDBFromBundle];
         
-        [_updateLabel setText:SPINNER_LABEL_LOAD];
-        [self continue];
+        UIAlertController *alert = [AlertUtils createBlankAlert:@"Initialization Status" message:errStr];
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {
+                                 [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                 [self continue];
+                             }];
+        [alert addAction:ok];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+
     
     // Case 2: REST API Updates
     //
