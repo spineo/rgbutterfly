@@ -155,9 +155,11 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     _dbPollUpdateOnText  = @"Perform Check for Database Update";
     _dbPollUpdateOffText = @"Do Not Check for Database Update ";
     
-    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] == TRUE || ![[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY]) {
-        _dbPollUpdateFlag = TRUE;
-        _labelText = _dbPollUpdateOnText;
+    // Default is 'Off'
+    //
+    if([_userDefaults boolForKey:DB_POLL_UPDATE_KEY] == FALSE || ![[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY]) {
+        _dbPollUpdateFlag = FALSE;
+        _labelText = _dbPollUpdateOffText;
         
         [_userDefaults setBool:_dbPollUpdateFlag forKey:DB_POLL_UPDATE_KEY];
         [_userDefaults setValue:_labelText forKey:_dbPollUpdateText];
@@ -268,8 +270,8 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
           [_userDefaults stringForKey:_psReadOnlyText])
        ) {
-        _swatchesReadOnly = FALSE;
-        _labelText = _psMakeReadWriteLabel;
+        _swatchesReadOnly = TRUE;
+        _labelText = _psMakeReadOnlyLabel;
         
         [_userDefaults setBool:_swatchesReadOnly forKey:PAINT_SWATCH_RO_KEY];
         [_userDefaults setValue:_labelText forKey:_psReadOnlyText];
@@ -308,8 +310,8 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
           [_userDefaults stringForKey:_maReadOnlyText])
        ) {
-        _assocsReadOnly = FALSE;
-        _labelText = _maMakeReadWriteLabel;
+        _assocsReadOnly = TRUE;
+        _labelText = _maMakeReadOnlyLabel;
         
         [_userDefaults setBool:_assocsReadOnly forKey:MIX_ASSOC_RO_KEY];
         [_userDefaults setValue:_labelText forKey:_maReadOnlyText];
@@ -448,9 +450,9 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     _genFilterOffText = @"Generic Swatches Not Filtered ";
     _genFilterOnText  = @"Generic Swatches Are Filtered";
     
-    if ([_userDefaults boolForKey:GEN_FILTER_KEY] == FALSE) {
-        _genFilterFlag = FALSE;
-        _labelText = _genFilterOffText;
+    if ([_userDefaults boolForKey:GEN_FILTER_KEY] == TRUE) {
+        _genFilterFlag = TRUE;
+        _labelText = _genFilterOnText;
         
         [_userDefaults setBool:_genFilterFlag forKey:GEN_FILTER_KEY];
         [_userDefaults setValue:_labelText forKey:_genFilterText];

@@ -909,28 +909,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVH-bX-cHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7" y="1334"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MQa-9j-ar9">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="wtB-W6-E3k" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Pw0-rd-9Uh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="90V-zR-Q9R">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fLU-0J-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1505" y="663"/>
+            <point key="canvasLocation" x="-35" y="1477"/>
         </scene>
     </scenes>
     <resources>
@@ -949,9 +928,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aqc-zq-dwj"/>
-        <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
         <segue reference="9H9-9R-KDD"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="ZPZ-Du-pkL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

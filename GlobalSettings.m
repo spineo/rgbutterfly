@@ -358,12 +358,12 @@ const int TAP_STEPPER_INC = 4;
 const int MATCH_STEPPER_MIN = 5;
 const int MATCH_STEPPER_MAX = 100;
 const int MATCH_STEPPER_INC = 5;
-const int MATCH_STEPPER_DEF = 10;
+const int MATCH_STEPPER_DEF = 20;
 
 // Max Match Num (i.e., ImageViewController)
 //
 int const DEF_MAX_MATCH  = 100;
-int const DEF_MATCH_NUM  = 10;
+int const DEF_MATCH_NUM  = 20;
 int const DEF_MIN_MATCH  = 5;
 int const DEF_STEP_MATCH = 5;
 
@@ -560,11 +560,29 @@ static NSDictionary *swatchTypes;
     // NSUserDefaults intialization
     //
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-
+    
+    // DB Poll Update
+    //
+    if ([userDefaults objectForKey:DB_POLL_UPDATE_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:DB_POLL_UPDATE_KEY];
+    }
+    
     // DB Restore Settings
     //
     if ([userDefaults objectForKey:DB_RESTORE_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:DB_RESTORE_KEY];
+    }
+    
+    // Paint Swatches/Mix Associations Read-Only by default
+    //
+    if ([userDefaults objectForKey:PAINT_SWATCH_RO_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:PAINT_SWATCH_RO_KEY];
+        [ManagedObjectUtils setEntityReadOnly:@"PaintSwatch" isReadOnly:TRUE context:context];
+    }
+    
+    if ([userDefaults objectForKey:MIX_ASSOC_RO_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:MIX_ASSOC_RO_KEY];
+        [ManagedObjectUtils setEntityReadOnly:@"MixAssociation" isReadOnly:TRUE context:context];
     }
     
     // isRGB Settings (false by default)
@@ -573,10 +591,10 @@ static NSDictionary *swatchTypes;
         [userDefaults setBool:FALSE forKey:RGB_DISPLAY_KEY];
     }
     
-    // Initialize the Match Swatch Filters Keys to FALSE if not set
+    // Initialize the Match Swatch Filters Keys to TRUE/FALSE if not set
     //
    if ([userDefaults objectForKey:GEN_FILTER_KEY] == nil) {
-        [userDefaults setBool:FALSE forKey:GEN_FILTER_KEY];
+        [userDefaults setBool:TRUE forKey:GEN_FILTER_KEY];
    }
     
     if ([userDefaults objectForKey:COV_FILTER_KEY] == nil) {

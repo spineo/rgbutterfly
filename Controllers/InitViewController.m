@@ -62,6 +62,7 @@
     //
     _userDefaults  = [NSUserDefaults standardUserDefaults];
     
+    
     // Look at what is currently in Settings
     //
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
