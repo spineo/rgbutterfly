@@ -1084,6 +1084,8 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     
     if (_dbRestoreFlag == TRUE) {
         _dbRestoreLabel = [self createWidgetLabel:_dbRestoreOnText];
+        UIAlertController *restoreAlert = [AlertUtils createOkAlert:@"Database Restore Alert" message:@"Caution: You will lose any data added if you revert to the original snapshot (changes will take effect after turning off/on phone)"];
+        [self presentViewController:restoreAlert animated:YES completion:nil];
         
     } else {
         _dbRestoreLabel = [self createWidgetLabel:_dbRestoreOffText];

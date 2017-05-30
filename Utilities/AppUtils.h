@@ -13,6 +13,6 @@
 + (int)checkForDBUpdate;
 
 + (NSString *)updateDBFromRemote;
-+ (NSString *)initDBFromBundle;
+    + (NSString *)initDBFromBundle:(NSString *)type;
 
 @end

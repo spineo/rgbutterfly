@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic) BOOL dbRestoreFlag;
 
 // Activity Indicator
 //
@@ -66,9 +67,10 @@
     // Look at what is currently in Settings
     //
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
+    _dbRestoreFlag           = [_userDefaults boolForKey:DB_RESTORE_KEY];
     BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
-    if ((pollUpdate == FALSE) && existsPollUpdateKey && ([_userDefaults objectForKey:DB_RESTORE_KEY] == FALSE)) {
+    if ((pollUpdate == FALSE) && existsPollUpdateKey && (_dbRestoreFlag == FALSE)) {
         [self continue];
     }
     
@@ -96,7 +98,7 @@
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
     if ([_userDefaults objectForKey:DB_RESTORE_KEY] == nil) {
-        NSString *errStr = [AppUtils initDBFromBundle];
+        NSString *errStr = [AppUtils initDBFromBundle:@"Initialization"];
         
         UIAlertController *alert = [AlertUtils createBlankAlert:@"Initialization Status" message:errStr];
         UIAlertAction* ok = [UIAlertAction
@@ -110,8 +112,50 @@
         
         [self presentViewController:alert animated:YES completion:nil];
 
-    
-    // Case 2: REST API Updates
+    // Case 2: User-triggered restore original database
+    //
+    } else if (_dbRestoreFlag == TRUE) {
+
+        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"Database Restore Alert" message:@"Caution: You will lose any data added if you revert to the original snapshot. Do you wish to continue?"];
+        UIAlertAction* YesButton = [UIAlertAction
+                                    actionWithTitle:@"Yes"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        NSString *errStr = [AppUtils initDBFromBundle:@"Restore"];
+                                        
+                                        UIAlertController *alert = [AlertUtils createBlankAlert:@"Restore Status" message:errStr];
+                                        UIAlertAction* ok = [UIAlertAction
+                                                             actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                                                 [self continue];
+                                                             }];
+                                        [alert addAction:ok];
+                                        
+                                        [self presentViewController:alert animated:YES completion:nil];
+                                    }];
+        
+        UIAlertAction* NoButton = [UIAlertAction
+                                   actionWithTitle:@"No"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                       [self continue];
+                                   }];
+        
+        [updateConfirm addAction:NoButton];
+        [updateConfirm addAction:YesButton];
+        
+        [self presentViewController:updateConfirm animated:YES completion:^{
+            [_updateLabel setText:SPINNER_LABEL_PROC];
+        }];
+        
+        // Revert back to FALSE default
+        //
+        [_userDefaults setBool:FALSE forKey:DB_RESTORE_KEY];
+
+    // Case 3: REST API Updates
     //
     } else {
     

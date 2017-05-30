@@ -185,7 +185,8 @@
     
 // Update the database from the Local BUNDLE (return string is the user status message)
 //
-+ (NSString *)initDBFromBundle {
++ (NSString *)initDBFromBundle:(NSString *)type {
+
     // Find the destination path
     //
     NSString *destDBPath  = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -198,7 +199,7 @@
     NSString *destDBShmFile = [destDBFile stringByAppendingString:@"-shm"];
     NSString *destDBWalFile = [destDBFile stringByAppendingString:@"-wal"];
     
-    NSString *successInitMsg = @"Database Initialization was Successful!";
+    NSString *successMsg = [[NSString alloc] initWithFormat:@"Database %@ was Successful!", type];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -295,7 +296,7 @@
                 [userDefaults synchronize];
             }
             
-            return successInitMsg;
+            return successMsg;
             
         } else {
             return [@"ERROR UDB5: File rename error for file " stringByAppendingFormat:@" '%@' to '%@'", destDBTmpFile, destDBFile];
