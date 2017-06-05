@@ -11,14 +11,19 @@
 
 @interface GlobalSettings : NSObject
 
-    
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************ IMPORTANT RELEASE SETTINGS ***********************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+extern int const VERSION_TAG;
+extern int const ALL_FEATURES;
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // App Version and Core data/Store
 //
 extern NSString * const APP_NAME;
-extern int const VERSION_TAG;
 
 // This value goes in the version.txt
 //

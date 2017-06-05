@@ -182,9 +182,6 @@ const int ASSOC_SET_TAG        = 8;
     if ([_sourceViewName isEqualToString:@"SwatchDetail"]) {
         [self.editButtonItem setEnabled:FALSE];
     }
-    
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
 
 
     // Offsets and Widths
@@ -307,6 +304,15 @@ const int ASSOC_SET_TAG        = 8;
     
     [_deleteAlertController addAction:cancel];
     [_deleteAlertController addAction:ok];
+    
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.navigationItem.rightBarButtonItem setTintColor:LIGHT_TEXT_COLOR];
+    
+    // All Features?
+    //
+    if (ALL_FEATURES == 0)
+      [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -846,7 +852,6 @@ const int ASSOC_SET_TAG        = 8;
     [_applyButton setEnabled:TRUE];
 
     if (_editFlag == FALSE) {
-        //[self homeButtonShow];
         [self presentViewController:_saveAlertController animated:YES completion:nil];
         
     } else {;

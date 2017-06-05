@@ -314,6 +314,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
+
+    // All Features?
+    //
+    if (ALL_FEATURES == 0)
+        [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
+    
+    
     [self makeTextFieldsNonEditable];
     
     // Swatch Detail Edit Button Alert Controller

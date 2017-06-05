@@ -11,13 +11,19 @@
 #import "GenericUtils.h"
 #import "AppDelegate.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ************************ IMPORTANT RELEASE SETTINGS ***********************************
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+int const VERSION_TAG           = 1;
+int const ALL_FEATURES          = 0;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // ************************ IMPORTANT UPGRADE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NSString * const APP_NAME       = @"RGButterfly";
-int const VERSION_TAG           = 1;
+
 
 // Key references the value stored in NSUserDefaults
 //
@@ -616,7 +622,7 @@ static NSDictionary *swatchTypes;
     }
     
     if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
-        [userDefaults setValue:MIX_LIST_TYPE forKey:LISTING_TYPE];
+        [userDefaults setValue:MATCH_LIST_TYPE forKey:LISTING_TYPE];
     }
     
     [userDefaults synchronize];

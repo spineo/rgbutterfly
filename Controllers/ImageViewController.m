@@ -516,6 +516,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                 [_assocButton setTintColor:LIGHT_TEXT_COLOR];
                                                 [_assocButton setTag:ASSOC_BTN_TAG];
                                                 [_assocButton setWidth:_assocButton.title.length];
+
                                                 
                                                 [self removeUpArrow];
                                                 
@@ -591,6 +592,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Notification center
     //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resizeViews) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    
+    // All Features?
+    //
+    if (ALL_FEATURES == 0)
+        [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
 };
 
 - (void)viewWillAppear:(BOOL)willAppear {
@@ -1341,7 +1347,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self presentViewController:_assocEditAlertController animated:YES completion:nil];
     }
 }
-
 
 - (IBAction)showTypeOptions:(id)sender {
     [self presentViewController:_typeAlertController animated:YES completion:nil];
