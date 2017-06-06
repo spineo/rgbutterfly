@@ -1969,7 +1969,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        _assocName = [[NSString alloc] initWithFormat:@"Association %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
+        _assocName = [[NSString alloc] initWithFormat:@"+Association %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
     }
     
     [_mixAssociation setName:_assocName];
@@ -2110,7 +2110,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        _assocName = [[NSString alloc] initWithFormat:@"MatchAssoc %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
+        _assocName = [[NSString alloc] initWithFormat:@"+MatchAssoc %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
         ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
     }
 
