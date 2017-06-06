@@ -194,9 +194,13 @@ const int ASSOC_SET_TAG        = 8;
     _imageViewYOffset     = DEF_Y_OFFSET;
     _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
-    _assocImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
-    _assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
-    _textFieldYOffset      = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
+    
+    //_assocImageViewWidth  = DEF_TABLE_CELL_HEIGHT;
+    //_assocImageViewHeight = DEF_TABLE_CELL_HEIGHT;
+    _assocImageViewWidth  = DEF_VLG_TBL_CELL_HGT;
+    _assocImageViewHeight = DEF_VLG_TBL_CELL_HGT;
+    
+    _textFieldYOffset     = (DEF_TABLE_CELL_HEIGHT - DEF_TEXTFIELD_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
     
     
     // Initialize the PaintSwatches array with default names if 'Other' (coming from Image VC) or pre-defined as 'Mix'
@@ -535,6 +539,8 @@ const int ASSOC_SET_TAG        = 8;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (((indexPath.section == ASSOC_ADD_SECTION) || (indexPath.section == ASSOC_APPLY_SECTION)) && (_editFlag == FALSE)) {
         return DEF_NIL_HEIGHT;
+    } else if (indexPath.section == ASSOC_COLORS_SECTION) {
+        return DEF_VLG_TBL_CELL_HGT;
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -546,10 +552,11 @@ const int ASSOC_SET_TAG        = 8;
     
     // Global defaults
     //
-    [cell setBackgroundColor: DARK_BG_COLOR];
-    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-    [tableView setSeparatorStyle: UITableViewCellSeparatorStyleSingleLine];
-    [tableView setSeparatorColor: GRAY_BG_COLOR];
+    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [tableView setSeparatorColor:GRAY_BG_COLOR];
 
     cell.imageView.image = nil;
     
@@ -559,7 +566,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Remove the tags
     //
-    int max_tag = (int)[_mixAssocSwatches count] + ASSOC_COLORS_TAG;
+    int max_tag = (int)[_mixAssocSwatches count] + ASSOC_MAX_SECTION;
     for (int tag=1; tag<=max_tag; tag++) {
         [[cell.contentView viewWithTag:tag] removeFromSuperview];
     }
@@ -570,8 +577,7 @@ const int ASSOC_SET_TAG        = 8;
 
     
     if (indexPath.section == ASSOC_COLORS_SECTION) {
-        //MixAssocSwatch *mixAssocSwatch = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:ASSOC_COLORS_SECTION]];
-        
+
         MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:indexPath.row];
         
         PaintSwatches *paintSwatch     = (PaintSwatches *)[mixAssocSwatch paint_swatch];
@@ -587,19 +593,21 @@ const int ASSOC_SET_TAG        = 8;
         [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
         [cell.imageView setContentMode: UIViewContentModeScaleAspectFit];
         [cell.imageView setClipsToBounds: YES];
-        [cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _imageViewWidth, _imageViewHeight)];
+        //[cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _imageViewWidth, _imageViewHeight)];
+        [cell.imageView setFrame:CGRectMake(_imageViewXOffset, _imageViewYOffset, _assocImageViewWidth, _assocImageViewHeight)];
 
         
-        int tag_num = (int)indexPath.row + ASSOC_COLORS_TAG;
-        UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
+        int tag_num = (int)indexPath.row + ASSOC_MAX_SECTION;
+        //UITextField *refName  = [FieldUtils createTextField:name tag:tag_num];
+        UITextView *refName  = [FieldUtils createTextView:name tag:tag_num];
         
         // Disable editing if the paint swatch is an "add" or any of the other flags set
         //
         if (
             ([[mixAssocSwatch paint_swatch_is_add] boolValue] == TRUE) || (_isReadOnly == TRUE)
         ) {
-            [refName setEnabled:FALSE];
-    
+            //[refName setEnabled:FALSE];
+            [refName setEditable:NO];
             
             [refName setBackgroundColor:GRAY_BG_COLOR];
         }
@@ -607,7 +615,8 @@ const int ASSOC_SET_TAG        = 8;
         CGFloat xpos  = _assocImageViewWidth + DEF_CELL_EDIT_DISPL;
         CGFloat width = cell.contentView.bounds.size.width - xpos;
         
-        [refName setFrame:CGRectMake(xpos, _textFieldYOffset, width, DEF_TEXTFIELD_HEIGHT)];
+        //[refName setFrame:CGRectMake(xpos, _textFieldYOffset, width, DEF_TEXTFIELD_HEIGHT)];
+        [refName setFrame:CGRectMake(xpos, 0.0, width, cell.contentView.bounds.size.height)];
         [refName setDelegate:self];
         [cell.contentView addSubview:refName];
         
@@ -616,7 +625,7 @@ const int ASSOC_SET_TAG        = 8;
 
         } else {
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            [FieldUtils makeTextFieldNonEditable:refName content:name border:FALSE];
+            [FieldUtils makeTextViewNonEditable:refName content:name border:FALSE];
         }
  
     } else if (indexPath.section == ASSOC_ADD_SECTION) {
@@ -927,7 +936,7 @@ const int ASSOC_SET_TAG        = 8;
             
         } else {
             for (int i=0; i<[_mixAssocSwatches count]; i++) {
-                int color_tag = i + ASSOC_COLORS_TAG;
+                int color_tag = i + ASSOC_MAX_SECTION;
                 if (textField.tag == color_tag) {
                     MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
                     PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
@@ -967,6 +976,48 @@ const int ASSOC_SET_TAG        = 8;
     } else {
         return YES;
     }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TextView Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - TextView Methods
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    textView.text = [GenericUtils trimString:textView.text];
+    
+    _textReturn  = TRUE;
+    
+    for (int i=0; i<[_mixAssocSwatches count]; i++) {
+        int color_tag = i + ASSOC_MAX_SECTION;
+        if (textView.tag == color_tag) {
+            MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];
+            PaintSwatches *paintSwatch = (PaintSwatches *)[mixAssocSwatch paint_swatch];
+            [paintSwatch setName:textView.text];
+        }
+    }
+    [_applyButton setEnabled:TRUE];
+    [_save setEnabled:TRUE];
+}
+
+-(BOOL)textViewShouldReturn:(UITextView *)textView {
+    [textView resignFirstResponder];
+    return YES;
+}
+
+// Disable the return button for newlines (resignFirstResponder instead_
+//
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1149,7 +1200,7 @@ const int ASSOC_SET_TAG        = 8;
 
     int swatch_ct = (int)[_mixAssocSwatches count];
     for (int i=0; i<swatch_ct; i++) {
-        int color_tag = i + ASSOC_COLORS_TAG;
+        int color_tag = i + ASSOC_MAX_SECTION;
         UITextField *textField = (UITextField *)[self.view viewWithTag:color_tag];
         
         MixAssocSwatch *mixAssocSwatch = [_mixAssocSwatches objectAtIndex:i];

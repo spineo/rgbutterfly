@@ -267,9 +267,10 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     _psMakeReadOnlyLabel  = @"Paint Swatches are Read-Only ";
     _psMakeReadWriteLabel = @"Paint Swatches are Read/Write";
     
-    if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
-          [_userDefaults stringForKey:_psReadOnlyText])
-       ) {
+    if ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] == TRUE) {
+    //if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
+    //      [_userDefaults stringForKey:_psReadOnlyText])
+    //   ) {
         _swatchesReadOnly = TRUE;
         _labelText = _psMakeReadOnlyLabel;
         
@@ -307,9 +308,10 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     _maMakeReadWriteLabel = @"Mix Associations are Read/Write";
     
     _labelText = @"";
-    if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
-          [_userDefaults stringForKey:_maReadOnlyText])
-       ) {
+    if ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] == TRUE) {
+    //if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
+    //      [_userDefaults stringForKey:_maReadOnlyText])
+    //   ) {
         _assocsReadOnly = TRUE;
         _labelText = _maMakeReadOnlyLabel;
         
