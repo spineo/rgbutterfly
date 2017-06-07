@@ -30,10 +30,10 @@
     UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
-    int aboutTextLen = (int)aboutText.length;
+    int textLen = (int)aboutText.length;
     
-    [aboutText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, aboutTextLen)];
-    [aboutText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, aboutTextLen)];
+    [aboutText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, textLen)];
+    [aboutText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
 
     // Link 1
     //
@@ -41,13 +41,23 @@
     [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range:urlMatch_1];
     [aboutText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch_1];
 
-    
     // Link 2
     //
     NSRange urlMatch_2 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:DOCS_SITE_PAT];
     [aboutText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch_2];
     [aboutText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch_2];
     
+    // Append the release features text
+    //
+    NSMutableAttributedString *aboutReleaseFeatures = [[NSMutableAttributedString alloc] initWithString:ABOUT_RELEASE_FEATURES];
+    textLen = (int)aboutReleaseFeatures.length;
+    
+    [aboutReleaseFeatures addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:NSMakeRange(0, 4)];
+    [aboutReleaseFeatures addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, textLen)];
+    [aboutReleaseFeatures addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
+    
+    [aboutText appendAttributedString:aboutReleaseFeatures];
+
     [aboutTextView setAttributedText:aboutText];
     [aboutTextView setBackgroundColor:DARK_BG_COLOR];
     [aboutTextView setScrollEnabled:TRUE];

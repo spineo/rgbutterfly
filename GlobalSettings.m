@@ -432,9 +432,10 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_LIMITED_FEATURES = @"";
-
 NSString * const ABOUT_TEXT = @"\nThis App grew out of my interest in painting. Its main purpose is to suggest Acrylics color paints associated with selected areas of a photo. It does this by applying a Match Algorithm against a database of reference paints and paint mixes.\n\nPlease visit the Reference Data and Match Methodology or Web Documentation URL for more information about this App. You can also share the App URL by using the top-right button.\n\n";
+
+NSString * const ABOUT_RELEASE_FEATURES = @"Note: The current release comes with part of the edit functionality disabled. In particular, the creation/modification of associations as detailed in the 'Paints Data Capture' section of the Web Documentation.\n\n";
+
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //

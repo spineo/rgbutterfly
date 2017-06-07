@@ -422,6 +422,7 @@ extern NSString * const FULL_LISTING_TYPE;
 // "About" section text
 //
 extern NSString * const ABOUT_TEXT;
+extern NSString * const ABOUT_RELEASE_FEATURES;
 extern NSString * const ABOUT_PAT;
 extern NSString * const ABOUT_URL;
 
