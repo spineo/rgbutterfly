@@ -296,6 +296,9 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     
     _psReadOnlyLabel   = [self createWidgetLabel:_labelText];
     
+    if (ALL_FEATURES == 0)
+        [_psReadOnlySwitch setEnabled:FALSE];
+    
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // MixAssociation Read-Only Row
@@ -336,6 +339,9 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     [_maReadOnlySwitch addTarget:self action:@selector(setMASwitchState:) forControlEvents:UIControlEventValueChanged];
     
     _maReadOnlyLabel   = [self createWidgetLabel:_labelText];
+    
+    if (ALL_FEATURES == 0)
+        [_maReadOnlySwitch setEnabled:FALSE];
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Tap Area Widgets
@@ -589,6 +595,9 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     if (! [_mixRatiosText isEqualToString:@""] && (_mixRatiosText != nil)) {
         [_mixRatiosTextView setText:_mixRatiosText];
     }
+    
+    if (ALL_FEATURES == 0)
+        [_mixRatiosTextView setEditable:FALSE];
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Alerts Filter Settings
