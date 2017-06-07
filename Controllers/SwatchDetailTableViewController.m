@@ -490,7 +490,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         return DEF_NIL_CELL;
         
     } else if (indexPath.section == DETAIL_NAME_SECTION) {
-        return DEF_MD_TABLE_CELL_HGT;
+        // return DEF_MD_TABLE_CELL_HGT;
+        return DEF_VLG_TBL_CELL_HGT;
         
     } else if (indexPath.section == DETAIL_KEYW_SECTION) {
         return DEF_LG_TABLE_CELL_HGT;
@@ -542,15 +543,17 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             
             // Render 'GenericPaint' with RGB values
             //
+            CGFloat imageViewWidth   = DEF_VLG_TBL_CELL_HGT;
+            CGFloat textFieldYOffset = (imageViewWidth - DEF_TEXTVIEW_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
             if ([typeName isEqualToString:@"GenericPaint"]) {
-                cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+                cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:imageViewWidth cellHeight:imageViewWidth];
             } else {
-                cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+                cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:imageViewWidth cellHeight:imageViewWidth];
             }
             
-            CGFloat refNameWidth = self.tableView.bounds.size.width - _imageViewWidth - DEF_MD_FIELD_PADDING;
+            CGFloat refNameWidth = self.tableView.bounds.size.width - imageViewWidth - DEF_SM_TABLE_CELL_HGT;
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
-            [refName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, refNameWidth, DEF_SM_TEXTVIEW_HGT)];
+            [refName setFrame:CGRectMake(imageViewWidth + DEF_XLG_FIELD_PADDING, textFieldYOffset, refNameWidth, DEF_TEXTVIEW_HEIGHT)];
             [refName setDelegate:self];
 
             [cell.contentView addSubview:refName];
@@ -577,7 +580,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
-            cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TEXTFIELD_HEIGHT];
+            cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_MD_TABLE_CELL_HGT cellHeight:DEF_TEXTFIELD_HEIGHT];
 
             [cell.contentView addSubview:_subjColorName];
 

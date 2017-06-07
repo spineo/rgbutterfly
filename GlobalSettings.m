@@ -15,7 +15,7 @@
 // ************************ IMPORTANT RELEASE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int const ALL_FEATURES          = 0;
+int const ALL_FEATURES          = 1;
 int const VERSION_TAG           = 1;
 
 
@@ -140,6 +140,7 @@ CGFloat const DEF_FIELD_PADDING     = 5.0;
 CGFloat const DEF_MD_FIELD_PADDING  = 10.0;
 CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
 CGFloat const DEF_VLG_FIELD_PADDING = 20.0;
+CGFloat const DEF_XLG_FIELD_PADDING = 25.0;
 
 CGFloat const DEF_CORNER_RADIUS     = 5.0;
 CGFloat const DEF_LG_CORNER_RADIUS  = 15.0;
