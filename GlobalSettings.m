@@ -15,7 +15,7 @@
 // ************************ IMPORTANT RELEASE SETTINGS ***********************************
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-int const ALL_FEATURES          = 1;
+int const ALL_FEATURES          = 0;
 int const VERSION_TAG           = 1;
 
 

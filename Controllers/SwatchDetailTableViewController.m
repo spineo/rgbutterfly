@@ -317,8 +317,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     // All Features?
     //
-    if (ALL_FEATURES == 0)
-        [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
+    //if (ALL_FEATURES == 0)
+    //    [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
     
     
     [self makeTextFieldsNonEditable];
@@ -563,7 +563,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                     [refName setText:_namePlaceholder];
                 }
                 
-                if (_isReadOnly == TRUE) {
+                if (_isReadOnly == TRUE || ALL_FEATURES == 0) {
                     [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:TRUE];
                 }
                 
@@ -589,12 +589,18 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         //
         } else if (indexPath.section == DETAIL_TYPES_SECTION) {
             [cell.contentView addSubview:_swatchTypeName];
+            if (ALL_FEATURES == 0) {
+                [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:[_swatchTypeName text] border:TRUE];
+            }
             
         // Paint Brand field
         //
         } else if (indexPath.section == DETAIL_BRAND_SECTION) {
             if (indexPath.row == 0) {
                 [cell.contentView addSubview:_paintBrandName];
+                if (ALL_FEATURES == 0) {
+                    [FieldUtils makeTextFieldNonEditable:_paintBrandName content:[_paintBrandName text] border:TRUE];
+                }
                 
             } else {
 
@@ -618,16 +624,25 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         //
         } else if (indexPath.section == DETAIL_BODY_SECTION) {
             [cell.contentView addSubview:_bodyTypeName];
+            if (ALL_FEATURES == 0) {
+                [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:[_bodyTypeName text] border:TRUE];
+            }
             
         // Pigment type field
         //
         } else if (indexPath.section == DETAIL_PIGMENT_SECTION) {
             [cell.contentView addSubview:_pigmentTypeName];
+            if (ALL_FEATURES == 0) {
+                [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:[_pigmentTypeName text] border:TRUE];
+            }
             
         // Canvas Coverage field
         //
         } else if (indexPath.section == DETAIL_COVERAGE_SECTION) {
             [cell.contentView addSubview:_coverageName];
+            if (ALL_FEATURES == 0) {
+                [FieldUtils makeTextFieldNonEditable:_coverageName content:[_coverageName text] border:TRUE];
+            }
         
         // Keywords field
         //
@@ -647,7 +662,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
 
-        // Description/Comments field
+        // Comments/Description field
         //
         } else if (indexPath.section == DETAIL_DESC_SECTION) {
         
