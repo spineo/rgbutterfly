@@ -24,6 +24,7 @@
 
 #import "SwatchKeyword.h"
 #import "Keyword.h"
+#import "ColorViewController.h"
 
 
 @interface SwatchDetailTableViewController ()
@@ -373,6 +374,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     [_save setEnabled:FALSE];
     
+    // Initialize a tap gesture recognizer to segue into a Color View
+    //
+    _tapRecognizer = [[UITapGestureRecognizer alloc]
+                      initWithTarget:self action:@selector(respondToTap:)];
+    [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
+    
     // Adjust the layout with rotational changes
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -532,9 +539,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         // Name, and reference type
         //
         if (indexPath.section == DETAIL_NAME_SECTION) {
-            [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-            [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+            [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+            [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
             
@@ -550,6 +557,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             } else {
                 cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:imageViewWidth cellHeight:imageViewWidth];
             }
+            
+            [cell.imageView addGestureRecognizer:_tapRecognizer];
+            [cell.imageView setUserInteractionEnabled:YES];
             
             CGFloat refNameWidth = self.tableView.bounds.size.width - imageViewWidth - DEF_SM_TABLE_CELL_HGT;
             UITextView *refName  = [FieldUtils createTextView:_nameEntered tag:NAME_FIELD_TAG];
@@ -1340,6 +1350,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     return true;
 }
 
+- (void)respondToTap:(id)sender {
+    [self performSegueWithIdentifier:@"ColorViewSegue" sender:self];
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation and Other Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1352,17 +1366,21 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     //
+    UINavigationController *navigationViewController = [segue destinationViewController];
     if ([[segue identifier] isEqualToString:@"DetailToAssocSegue"]) {
-        UINavigationController *navigationViewController = [segue destinationViewController];
         AssocTableViewController *assocTableViewController = (AssocTableViewController *)([navigationViewController viewControllers][0]);
         
         [assocTableViewController setPaintSwatches:self.colorArray[_collectViewSelRow]];
         [assocTableViewController setMixAssociation:[[_mixAssocSwatches objectAtIndex:_collectViewSelRow] mix_association]];
         [assocTableViewController setSaveFlag:TRUE];
         [assocTableViewController setSourceViewName:@"SwatchDetail"];
+        
+    } else if ([[segue identifier] isEqualToString:@"ColorViewSegue"]) {
+        ColorViewController *colorViewController = (ColorViewController *)([navigationViewController viewControllers][0]);
+        
+        [colorViewController setPaintSwatch:_paintSwatch];
 
     } else {
-        UINavigationController *navigationViewController = [segue destinationViewController];
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
         
         [swatchDetailTableViewController setPaintSwatch:_selPaintSwatch];

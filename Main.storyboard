@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1qb-fF-uAW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1qb-fF-uAW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,10 +132,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="204" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yk1-Ym-ytt">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="204" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yk1-Ym-ytt">
                                 <rect key="frame" x="16" y="78" width="360" height="286"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" tag="205" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-jk-Bwe">
+                                    <imageView userInteractionEnabled="NO" tag="205" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-jk-Bwe">
                                         <rect key="frame" x="8" y="10" width="340" height="266.00000000000011"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
@@ -587,11 +587,31 @@
                     <connections>
                         <segue destination="tpP-IS-lqc" kind="presentation" identifier="DetailToAssocSegue" id="Stq-UR-tQY"/>
                         <segue destination="LVy-Pe-LHL" kind="presentation" identifier="DetailToRefSegue" id="KOJ-iO-fdK"/>
+                        <segue destination="Fjs-SV-2Bh" kind="presentation" identifier="ColorViewSegue" id="dCQ-vP-Vi0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HR0-As-h4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4668" y="-39"/>
+        </scene>
+        <!--Color View-->
+        <scene sceneID="LUF-Xs-uJA">
+            <objects>
+                <viewController title="Color View" id="1LA-s1-Yoe" customClass="ColorViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Color View" id="kmm-dJ-BA6">
+                        <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="la9-ka-cnf">
+                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="goBack:" destination="1LA-s1-Yoe" id="wOo-N5-Lba"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hWA-LO-d10" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6210" y="-39"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jiu-af-eJz">
@@ -911,6 +931,31 @@
             </objects>
             <point key="canvasLocation" x="-35" y="1477"/>
         </scene>
+        <!--Color View-->
+        <scene sceneID="xCb-MU-zfI">
+            <objects>
+                <navigationController title="Color View" automaticallyAdjustsScrollViewInsets="NO" id="Fjs-SV-2Bh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="WBI-l5-JgH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="b2s-fj-nZ3">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="1LA-s1-Yoe" kind="relationship" relationship="rootViewController" id="hrH-tS-Hzf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVy-VE-e90" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5434" y="-39"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow" width="30" height="30"/>
@@ -927,10 +972,10 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aqc-zq-dwj"/>
-        <segue reference="9H9-9R-KDD"/>
-        <segue reference="hK8-5n-amq"/>
         <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="KOJ-iO-fdK"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

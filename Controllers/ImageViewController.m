@@ -2455,7 +2455,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
         [swatchDetailTableViewController setPaintSwatch:[_paintSwatches objectAtIndex:0]];
 
-
     // Settings or Other Segue (for now, no action)
     //
     } else {

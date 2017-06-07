@@ -118,6 +118,7 @@
 		2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD151E3A338800812B19 /* ButtonUtils.m */; };
 		2176DD1C1E3B934A00812B19 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1B1E3B934A00812B19 /* AppUtils.m */; };
 		2176DD1F1E3B95DC00812B19 /* GenericUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2176DD1E1E3B95DC00812B19 /* GenericUtils.m */; };
+		2187D8AA1EE78335004C9386 /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2187D8A91EE78335004C9386 /* ColorViewController.m */; };
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		2194D8FC1E893BBB00960912 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2194D8FB1E893BBB00960912 /* CloudKit.framework */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
@@ -328,6 +329,8 @@
 		2176DD1B1E3B934A00812B19 /* AppUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppUtils.m; path = Utilities/AppUtils.m; sourceTree = "<group>"; };
 		2176DD1D1E3B95DC00812B19 /* GenericUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericUtils.h; path = "../ios-utilities/GenericUtils.h"; sourceTree = "<group>"; };
 		2176DD1E1E3B95DC00812B19 /* GenericUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericUtils.m; path = "../ios-utilities/GenericUtils.m"; sourceTree = "<group>"; };
+		2187D8A81EE78335004C9386 /* ColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
+		2187D8A91EE78335004C9386 /* ColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
 		2192F5601DF3185500AAFE01 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		2194D8FB1E893BBB00960912 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		219C47791E22A93B00DADF0F /* InitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewController.h; path = Controllers/InitViewController.h; sourceTree = "<group>"; };
@@ -424,6 +427,8 @@
 				2109A0DD1DFDDD6F0076A095 /* ImageViewNavigationController.m */,
 				2109A0C51DFDDC460076A095 /* MainViewController.h */,
 				2109A0C61DFDDC460076A095 /* MainViewController.m */,
+				2187D8A81EE78335004C9386 /* ColorViewController.h */,
+				2187D8A91EE78335004C9386 /* ColorViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -957,6 +962,7 @@
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,
 				210650221DFEDDFF004B0830 /* PaintSwatchesDiff.m in Sources */,
+				2187D8AA1EE78335004C9386 /* ColorViewController.m in Sources */,
 				216044D31E3D3A9F007387DB /* MatchColors.m in Sources */,
 				21064FFF1DFEDD0A004B0830 /* MatchAssocKeyword.m in Sources */,
 				210650031DFEDD0A004B0830 /* MixAssocSwatch.m in Sources */,
