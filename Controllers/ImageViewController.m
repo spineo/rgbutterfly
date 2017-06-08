@@ -286,10 +286,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Long press recognizer (commented out, use button instead)
     //
-    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
-    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
-    [_imageView addGestureRecognizer:_longPressRecognizer];
+//    _longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+//    [_longPressRecognizer setMinimumPressDuration:MIN_PRESS_DUR];
+//    [_longPressRecognizer setAllowableMovement:ALLOWABLE_MOVE];
+//    [_imageView addGestureRecognizer:_longPressRecognizer];
     
     // Pan gesture recognizer
     //
