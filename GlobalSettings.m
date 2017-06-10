@@ -282,10 +282,10 @@ int const CANCEL_BUTTON_TAG   = 121;
 int const INIT_LABEL_TAG      = 301;
 int const INIT_SPINNER_TAG    = 302;
 int const SUGGEST_BTN_TAG     = 311;
-int const EXPLORE_1_BTN_TAG   = 312;
+int const EXPLORE_BTN_TAG     = 312;
 int const TAKE_PHOTO_BTN_TAG  = 313;
 int const MY_PHOTOS_BTN_TAG   = 314;
-int const EXPLORE_2_BTN_TAG   = 315;
+int const SUGGEST_LABEL_TAG   = 321;
 
 
 int const MAX_TAG             = 1000;

@@ -704,11 +704,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="313" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPy-xO-bdb">
-                                <rect key="frame" x="50" y="128" width="274" height="30"/>
+                                <rect key="frame" x="177" y="136" width="137" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="OmA-SV-EHs"/>
+                                    <constraint firstAttribute="height" constant="24" id="N2a-Lr-ENk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Take Photo">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -716,9 +716,51 @@
                                     <action selector="takePhoto:" destination="1qb-fF-uAW" eventType="touchUpInside" id="xL3-JG-YoU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="311" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-I7-NDv">
+                                <rect key="frame" x="68" y="127" width="126" height="107"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="enL-4e-npG"/>
+                                </constraints>
+                                <state key="normal" title="Suggest Paints" image="jgpineo_fish"/>
+                                <connections>
+                                    <action selector="suggestPaints:" destination="1qb-fF-uAW" eventType="touchUpInside" id="YtW-SU-FVl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="312" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCr-zu-eTB">
+                                <rect key="frame" x="185" y="399" width="121" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="103" id="2hK-DE-HTZ"/>
+                                </constraints>
+                                <state key="normal" title="Explore Collections" image="jgpineo_collection"/>
+                                <connections>
+                                    <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="8Qf-oB-HfT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore Collections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9k-b5-WI6">
+                                <rect key="frame" x="188" y="500" width="114" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="xm0-GW-yPK"/>
+                                    <constraint firstAttribute="width" constant="114" id="yj8-78-E0l"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="315" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Artistic Paints " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFp-Nc-FlS">
+                                <rect key="frame" x="63" y="235" width="137" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="t2F-YT-KOL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" tag="314" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-cY-ta5">
-                                <rect key="frame" x="50" y="309" width="274" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <rect key="frame" x="177" y="198" width="139" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="54a-b8-1CM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="My Photos">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -726,54 +768,29 @@
                                     <action selector="myPhotos:" destination="1qb-fF-uAW" eventType="touchUpInside" id="SeG-2j-1T5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="315" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC0-Ge-PN0">
-                                <rect key="frame" x="50" y="515" width="274" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Explore Paints">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="TkL-uk-cXf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="311" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-I7-NDv">
-                                <rect key="frame" x="16" y="221" width="343" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Suggest Paints"/>
-                                <connections>
-                                    <action selector="suggestPaints:" destination="1qb-fF-uAW" eventType="touchUpInside" id="hY0-8l-HfZ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="312" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCr-zu-eTB">
-                                <rect key="frame" x="48" y="409" width="274" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Explore Paints"/>
-                                <connections>
-                                    <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="8Qf-oB-HfT"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="34" id="0M0-du-Ba5"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="leading" secondItem="DC0-Ge-PN0" secondAttribute="leading" id="0v4-NE-oIu"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="centerX" secondItem="kPE-I7-NDv" secondAttribute="centerX" id="37P-8q-laj"/>
-                            <constraint firstItem="JCr-zu-eTB" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="32" id="45Z-es-Yfr"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="centerY" secondItem="zJ8-YI-wFE" secondAttribute="centerY" id="8zx-5E-Sxk"/>
-                            <constraint firstItem="kPE-I7-NDv" firstAttribute="top" secondItem="aPy-xO-bdb" secondAttribute="bottom" constant="63" id="BPG-QE-Iu9"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="01Z-cY-ta5" secondAttribute="leading" id="DJv-85-2Uf"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="top" secondItem="kPE-I7-NDv" secondAttribute="bottom" constant="58" id="DZJ-fV-hKc"/>
-                            <constraint firstItem="kPE-I7-NDv" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" id="IjQ-Yi-rVP"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="trailing" secondItem="01Z-cY-ta5" secondAttribute="trailing" id="RBh-qp-ele"/>
-                            <constraint firstItem="DC0-Ge-PN0" firstAttribute="top" secondItem="JCr-zu-eTB" secondAttribute="bottom" constant="58" id="TDV-QF-DHY"/>
-                            <constraint firstItem="JCr-zu-eTB" firstAttribute="top" secondItem="01Z-cY-ta5" secondAttribute="bottom" constant="52" id="UFH-Nj-3nR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="JCr-zu-eTB" secondAttribute="trailing" constant="37" id="Upz-tX-95i"/>
-                            <constraint firstItem="kPE-I7-NDv" firstAttribute="trailing" secondItem="zJ8-YI-wFE" secondAttribute="trailingMargin" id="bNO-dW-ZO2"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="trailing" secondItem="DC0-Ge-PN0" secondAttribute="trailing" id="dNo-Hl-Qr4"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="108" id="uhA-h4-wkE"/>
+                            <constraint firstItem="NFp-Nc-FlS" firstAttribute="top" secondItem="kPE-I7-NDv" secondAttribute="bottom" constant="1" id="0ir-iX-vdq"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="52" id="3fc-Do-WGl"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="01Z-cY-ta5" secondAttribute="leading" id="6fv-LD-fbV"/>
+                            <constraint firstItem="NFp-Nc-FlS" firstAttribute="top" secondItem="01Z-cY-ta5" secondAttribute="bottom" constant="15" id="7Pb-5v-ejP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="z9k-b5-WI6" secondAttribute="trailing" constant="57" id="9gZ-c4-NiK"/>
+                            <constraint firstItem="Ez4-u8-EWc" firstAttribute="top" secondItem="JCr-zu-eTB" secondAttribute="bottom" constant="165" id="AlM-hf-baf"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="centerX" secondItem="NFp-Nc-FlS" secondAttribute="centerX" id="FLX-PT-1F0"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="107" id="ONt-hj-736"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JCr-zu-eTB" secondAttribute="trailing" constant="53" id="PyX-Ln-uEe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="01Z-cY-ta5" secondAttribute="trailing" constant="43" id="QES-I7-6qr"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="top" secondItem="aPy-xO-bdb" secondAttribute="bottom" constant="38" id="WOh-yU-Jhs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aPy-xO-bdb" secondAttribute="trailing" constant="45" id="g2S-ii-g8P"/>
+                            <constraint firstItem="NFp-Nc-FlS" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="47" id="ka0-V2-xet"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="centerX" secondItem="JCr-zu-eTB" secondAttribute="centerX" id="lye-UW-FuF"/>
+                            <constraint firstItem="Ez4-u8-EWc" firstAttribute="top" secondItem="z9k-b5-WI6" secondAttribute="bottom" constant="146" id="qWU-Q9-0eu"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="116" id="scF-J7-C4j"/>
+                            <constraint firstItem="JCr-zu-eTB" firstAttribute="centerX" secondItem="z9k-b5-WI6" secondAttribute="centerX" id="xT3-zv-IQ4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ohC-U4-rE0"/>
@@ -784,7 +801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZf-nX-bJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="405.60000000000002" y="-970.16491754122944"/>
+            <point key="canvasLocation" x="186.40000000000001" y="-996.25187406296857"/>
         </scene>
         <!--RGButterfly Settings-->
         <scene sceneID="tiQ-WC-TVX">
@@ -1035,6 +1052,8 @@
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
+        <image name="jgpineo_collection" width="500" height="413"/>
+        <image name="jgpineo_fish" width="2048" height="1536"/>
         <image name="minus sign" width="20" height="20"/>
         <image name="photo 2" width="22" height="18"/>
         <image name="plus sign-1" width="20" height="20"/>
