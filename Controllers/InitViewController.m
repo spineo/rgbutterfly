@@ -26,6 +26,10 @@
 //
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 
+// Buttons
+//
+@property (nonatomic, strong) UIButton *suggestButton, *exploreButton_1, *takePhotoButton, *myPhotosButton, *exploreButton_2;
+
 @end
 
 @implementation InitViewController
@@ -53,6 +57,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Get button handles
+    //
+    _suggestButton = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
+    _takePhotoButton = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
+    _myPhotosButton = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
+    _exploreButton_1 = (UIButton *)[self.view viewWithTag:EXPLORE_1_BTN_TAG];
+    _exploreButton_2 = (UIButton *)[self.view viewWithTag:EXPLORE_2_BTN_TAG];
     
     // Set the background image
     //
@@ -84,6 +96,14 @@
     // Remove subviews
     //
     [_updateLabel removeFromSuperview];
+    
+    // Change buttons visibility
+    //
+    [_takePhotoButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+    [_suggestButton setTitleColor:LIGHT_YELLOW_COLOR forState:UIControlStateNormal];
+    [_myPhotosButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+    [_exploreButton_1 setTitleColor:LIGHT_YELLOW_COLOR forState:UIControlStateNormal];
+    [_exploreButton_2 setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -294,6 +314,29 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Navigation Methods
+
+- (IBAction)suggestPaints:(id)sender {
+
+    float interval = 0.05;
+    float j = 0.0;
+    for (float i=1.0; i>=0.0; i=i-interval) {
+        [_suggestButton setAlpha:i];
+        [_exploreButton_1 setAlpha:i];
+        
+        j=j+interval;
+        [_takePhotoButton setAlpha:j];
+        [_myPhotosButton setAlpha:j];
+        [_exploreButton_2 setAlpha:j];
+        
+        [NSThread sleepForTimeInterval:0.03];
+    }
+    [_takePhotoButton setTitleColor:LIGHT_YELLOW_COLOR forState:UIControlStateNormal];
+    [_suggestButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+    [_myPhotosButton setTitleColor:LIGHT_YELLOW_COLOR forState:UIControlStateNormal];
+    [_exploreButton_1 setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+    [_exploreButton_2 setTitleColor:LIGHT_YELLOW_COLOR forState:UIControlStateNormal];
+}
+
 
 - (IBAction)takePhoto:(id)sender {
 

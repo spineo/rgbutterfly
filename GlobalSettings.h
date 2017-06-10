@@ -288,6 +288,11 @@ extern int const CANCEL_BUTTON_TAG;
 //
 extern int const INIT_LABEL_TAG;
 extern int const INIT_SPINNER_TAG;
+extern int const SUGGEST_BTN_TAG;
+extern int const EXPLORE_1_BTN_TAG;
+extern int const TAKE_PHOTO_BTN_TAG;
+extern int const MY_PHOTOS_BTN_TAG;
+extern int const EXPLORE_2_BTN_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements

@@ -703,31 +703,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPy-xO-bdb">
+                            <button opaque="NO" tag="313" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPy-xO-bdb">
                                 <rect key="frame" x="50" y="128" width="274" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="MrM-ih-nHq"/>
+                                    <constraint firstAttribute="height" constant="30" id="OmA-SV-EHs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Take Photo"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="takePhoto:" destination="1qb-fF-uAW" eventType="touchUpInside" id="xL3-JG-YoU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-cY-ta5">
+                            <button opaque="NO" tag="314" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-cY-ta5">
                                 <rect key="frame" x="50" y="309" width="274" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="My Photos"/>
+                                <state key="normal" title="My Photos">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="myPhotos:" destination="1qb-fF-uAW" eventType="touchUpInside" id="SeG-2j-1T5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC0-Ge-PN0">
+                            <button opaque="NO" tag="315" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC0-Ge-PN0">
                                 <rect key="frame" x="50" y="515" width="274" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Explore"/>
+                                <state key="normal" title="Explore Paints">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="TkL-uk-cXf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="311" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-I7-NDv">
+                                <rect key="frame" x="16" y="221" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Suggest Paints"/>
+                                <connections>
+                                    <action selector="suggestPaints:" destination="1qb-fF-uAW" eventType="touchUpInside" id="hY0-8l-HfZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="312" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCr-zu-eTB">
+                                <rect key="frame" x="48" y="409" width="274" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Explore Paints"/>
+                                <connections>
+                                    <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="8Qf-oB-HfT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -736,15 +758,22 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="34" id="7iQ-Mm-K0c"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="01Z-cY-ta5" secondAttribute="leading" id="8My-Sp-vFK"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="centerY" secondItem="zJ8-YI-wFE" secondAttribute="centerY" id="QDp-GA-3y9"/>
-                            <constraint firstItem="Ez4-u8-EWc" firstAttribute="top" secondItem="DC0-Ge-PN0" secondAttribute="bottom" constant="104" id="QVH-Ca-VMJ"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="trailing" secondItem="DC0-Ge-PN0" secondAttribute="trailing" id="RZ0-Hy-l2h"/>
-                            <constraint firstItem="01Z-cY-ta5" firstAttribute="leading" secondItem="DC0-Ge-PN0" secondAttribute="leading" id="XTl-fZ-rst"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="108" id="Zny-5y-KFv"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="trailing" secondItem="01Z-cY-ta5" secondAttribute="trailing" id="dT4-AQ-9ha"/>
-                            <constraint firstItem="aPy-xO-bdb" firstAttribute="centerX" secondItem="zJ8-YI-wFE" secondAttribute="centerX" id="fw3-46-WFR"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="34" id="0M0-du-Ba5"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="leading" secondItem="DC0-Ge-PN0" secondAttribute="leading" id="0v4-NE-oIu"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="centerX" secondItem="kPE-I7-NDv" secondAttribute="centerX" id="37P-8q-laj"/>
+                            <constraint firstItem="JCr-zu-eTB" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="32" id="45Z-es-Yfr"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="centerY" secondItem="zJ8-YI-wFE" secondAttribute="centerY" id="8zx-5E-Sxk"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="top" secondItem="aPy-xO-bdb" secondAttribute="bottom" constant="63" id="BPG-QE-Iu9"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="01Z-cY-ta5" secondAttribute="leading" id="DJv-85-2Uf"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="top" secondItem="kPE-I7-NDv" secondAttribute="bottom" constant="58" id="DZJ-fV-hKc"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" id="IjQ-Yi-rVP"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="trailing" secondItem="01Z-cY-ta5" secondAttribute="trailing" id="RBh-qp-ele"/>
+                            <constraint firstItem="DC0-Ge-PN0" firstAttribute="top" secondItem="JCr-zu-eTB" secondAttribute="bottom" constant="58" id="TDV-QF-DHY"/>
+                            <constraint firstItem="JCr-zu-eTB" firstAttribute="top" secondItem="01Z-cY-ta5" secondAttribute="bottom" constant="52" id="UFH-Nj-3nR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JCr-zu-eTB" secondAttribute="trailing" constant="37" id="Upz-tX-95i"/>
+                            <constraint firstItem="kPE-I7-NDv" firstAttribute="trailing" secondItem="zJ8-YI-wFE" secondAttribute="trailingMargin" id="bNO-dW-ZO2"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="trailing" secondItem="DC0-Ge-PN0" secondAttribute="trailing" id="dNo-Hl-Qr4"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="108" id="uhA-h4-wkE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ohC-U4-rE0"/>
@@ -755,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZf-nX-bJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="407" y="-970"/>
+            <point key="canvasLocation" x="405.60000000000002" y="-970.16491754122944"/>
         </scene>
         <!--RGButterfly Settings-->
         <scene sceneID="tiQ-WC-TVX">
