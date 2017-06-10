@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
 @property (nonatomic, strong) IBOutlet UITableView *colorTableView;
+@property (nonatomic) BOOL viewHasLoaded;
 
 // Public to enable unit testing
 //

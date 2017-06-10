@@ -58,7 +58,10 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
-                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="Lh5-QH-3LD" kind="unwind" unwindAction="unwindToInitViewController:" id="LM4-uX-IZk"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
                         <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
@@ -94,8 +97,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="Lh5-QH-3LD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="935.20000000000005" y="-972.86356821589209"/>
+            <point key="canvasLocation" x="2148" y="-978.26086956521749"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="KBw-hp-cTX">
@@ -160,7 +164,7 @@
                         <barButtonItem tag="62" image="home" id="SXH-ap-PzU">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="6Dy-2G-g4i" kind="unwind" identifier="unwindToVCSegue" unwindAction="unwindToViewController:" id="Eu3-ie-x2Y"/>
+                                <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindToInitViewController:" id="eYv-Qj-GPs"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="MRg-Jy-ext"/>
@@ -236,7 +240,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNT-qs-PzS" sceneMemberID="firstResponder"/>
                 <exit id="6Dy-2G-g4i" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3099.5" y="-958.5"/>
+            <point key="canvasLocation" x="4976.8000000000002" y="-959.37031484257875"/>
         </scene>
         <!--Assoc Table View Controller-->
         <scene sceneID="lM6-9C-2nd">
@@ -424,7 +428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PiU-6f-IfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2240.8000000000002" y="-970.16491754122944"/>
+            <point key="canvasLocation" x="4119.1999999999998" y="-970.16491754122944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EXI-qA-9cT">
@@ -542,7 +546,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jm7-Yw-ngo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5mr-LJ-zgd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4524" y="-958.4707646176912"/>
+            <point key="canvasLocation" x="6402.3999999999996" y="-958.4707646176912"/>
         </scene>
         <!--Swatch Detail View-->
         <scene sceneID="hkB-SO-5S3">
@@ -685,7 +689,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aV-LG-egR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3812" y="-958.4707646176912"/>
+            <point key="canvasLocation" x="5690.3999999999996" y="-958.4707646176912"/>
         </scene>
         <!--Init View Controller-->
         <scene sceneID="Z6W-gP-Xyy">
@@ -698,45 +702,60 @@
                     <view key="view" contentMode="scaleToFill" id="zJ8-YI-wFE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPy-xO-bdb">
+                                <rect key="frame" x="50" y="128" width="274" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MrM-ih-nHq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="1qb-fF-uAW" eventType="touchUpInside" id="xL3-JG-YoU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01Z-cY-ta5">
+                                <rect key="frame" x="50" y="309" width="274" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="My Photos"/>
+                                <connections>
+                                    <action selector="myPhotos:" destination="1qb-fF-uAW" eventType="touchUpInside" id="SeG-2j-1T5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DC0-Ge-PN0">
+                                <rect key="frame" x="50" y="515" width="274" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Explore"/>
+                                <connections>
+                                    <action selector="explore:" destination="1qb-fF-uAW" eventType="touchUpInside" id="TkL-uk-cXf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
+                        <constraints>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="zJ8-YI-wFE" secondAttribute="leadingMargin" constant="34" id="7iQ-Mm-K0c"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="leading" secondItem="01Z-cY-ta5" secondAttribute="leading" id="8My-Sp-vFK"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="centerY" secondItem="zJ8-YI-wFE" secondAttribute="centerY" id="QDp-GA-3y9"/>
+                            <constraint firstItem="Ez4-u8-EWc" firstAttribute="top" secondItem="DC0-Ge-PN0" secondAttribute="bottom" constant="104" id="QVH-Ca-VMJ"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="trailing" secondItem="DC0-Ge-PN0" secondAttribute="trailing" id="RZ0-Hy-l2h"/>
+                            <constraint firstItem="01Z-cY-ta5" firstAttribute="leading" secondItem="DC0-Ge-PN0" secondAttribute="leading" id="XTl-fZ-rst"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="top" secondItem="vLf-CC-DZG" secondAttribute="bottom" constant="108" id="Zny-5y-KFv"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="trailing" secondItem="01Z-cY-ta5" secondAttribute="trailing" id="dT4-AQ-9ha"/>
+                            <constraint firstItem="aPy-xO-bdb" firstAttribute="centerX" secondItem="zJ8-YI-wFE" secondAttribute="centerX" id="fw3-46-WFR"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ohC-U4-rE0"/>
                     <connections>
-                        <segue destination="PTY-d8-b92" kind="presentation" identifier="InitViewControllerSegue" animates="NO" modalTransitionStyle="crossDissolve" id="bF7-eh-oUP"/>
+                        <segue destination="3gJ-jJ-xoT" kind="presentation" identifier="InitViewControllerSegue" id="9ia-sc-QgB"/>
+                        <segue destination="Ph7-MU-Z6c" kind="presentation" identifier="InitToImagePickerSegue" id="TM9-cr-8aw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZf-nX-bJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-868" y="-985.45727136431788"/>
-        </scene>
-        <!--RGButterfly-->
-        <scene sceneID="ZsW-4B-fd7">
-            <objects>
-                <navigationController storyboardIdentifier="NavViewController" title="RGButterfly" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="PTY-d8-b92" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Ftb-HM-vsM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="sHs-jP-9qD">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Anw-OF-l8p"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A95-Mb-MOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-68" y="-978"/>
+            <point key="canvasLocation" x="407" y="-970"/>
         </scene>
         <!--RGButterfly Settings-->
         <scene sceneID="tiQ-WC-TVX">
@@ -956,6 +975,31 @@
             </objects>
             <point key="canvasLocation" x="5434" y="-39"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pow-ZO-JlI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="3gJ-jJ-xoT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="AR1-61-M8h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="b9Q-v4-zBM">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ozd-5e-9j6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yRb-PY-nRs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1208.8" y="-978.26086956521749"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow" width="30" height="30"/>
@@ -972,10 +1016,11 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TM9-cr-8aw"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="cln-aA-aih"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

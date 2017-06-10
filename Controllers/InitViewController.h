@@ -10,6 +10,6 @@
 
 @interface InitViewController : UIViewController
 
-@property (nonatomic) int updateStat;
+@property (nonatomic) int updateStat, imageAction;
 
 @end

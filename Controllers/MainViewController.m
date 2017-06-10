@@ -422,7 +422,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         _listingType    = _modListingType;
         _defListingType = _modListingType;
     }
-    
+
     [self loadData];
 }
 

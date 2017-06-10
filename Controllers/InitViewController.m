@@ -13,15 +13,14 @@
 #import "AppUtils.h"
 #import "BarButtonUtils.h"
 #import "ColorUtils.h"
+#import "PickerViewController.h"
+#import "MainViewController.h"
 
 @interface InitViewController ()
 
-// NSUserDefaults
-//
-
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) BOOL dbRestoreFlag;
+@property (nonatomic) BOOL dbRestoreFlag, mainViewHasLoaded;
 
 // Activity Indicator
 //
@@ -57,7 +56,7 @@
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
+    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
     
     // Initialization
     //
@@ -75,10 +74,24 @@
     }
     
     _updateStat = NO_UPDATE;
+    
+    _mainViewHasLoaded = FALSE;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:TRUE];
+    
+    // Remove subviews
+    //
+    [_updateLabel removeFromSuperview];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:TRUE];
+    [super viewDidAppear:TRUE];
+    
+    // Remove subviews
+    //
+    //[_updateLabel removeFromSuperview];
     
     CGFloat labelYOffset = (self.view.bounds.size.height / DEF_Y_OFFSET_DIVIDER) - (DEF_LABEL_HEIGHT / DEF_Y_OFFSET_DIVIDER);
     _updateLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, labelYOffset, self.view.bounds.size.width, DEF_LABEL_HEIGHT)];
@@ -90,9 +103,8 @@
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
     [_updateLabel setTag:INIT_LABEL_TAG];
     
-    [self.view addSubview:_updateLabel];
-    
-    [self startSpinner];
+    //[self.view addSubview:_updateLabel];
+    //[self startSpinner];
     
     
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
@@ -278,13 +290,61 @@
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Button Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Navigation Methods
+
+- (IBAction)takePhoto:(id)sender {
+
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self presentViewController:[AlertUtils createOkAlert:@"Error" message:@"Device has no camera"] animated:YES completion:nil];
+        
+    } else {
+        [self setImageAction:TAKE_PHOTO_ACTION];
+        
+        NSLog(@"Image picker segue");
+        [self performSegueWithIdentifier:@"InitToImagePickerSegue" sender:self];
+    }
+}
+
+- (IBAction)myPhotos:(id)sender {
+
+    [self setImageAction:SELECT_PHOTO_ACTION];
+    [self performSegueWithIdentifier:@"InitToImagePickerSegue" sender:self];
+}
+
+- (IBAction)explore:(id)sender {
+    //[self.view addSubview:_updateLabel];
+    //[self startSpinner];
+    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Navigation Methods
 
+- (IBAction)unwindToInitViewController:(UIStoryboardSegue *)segue {
+    _mainViewHasLoaded = TRUE;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"InitToImagePickerSegue"]) {
+        PickerViewController *pickerViewController = (PickerViewController *)[segue destinationViewController];
+        [pickerViewController setImageAction:_imageAction];
+    } else {
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
+        [mainViewController setViewHasLoaded:_mainViewHasLoaded];
+    }
+}
+
+
+
 - (void)continue {
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    //[self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
 }
 
 
