@@ -424,7 +424,7 @@ NSString * const DEF_IMAGE_NAME = @"Reference Image";
 // Image Names
 //
 NSString * const BACKGROUND_IMAGE_TITLE = @"butterfly-background-title-2.png";
-NSString * const BACKGROUND_IMAGE       = @"butterfly-background-2.png";
+NSString * const BACKGROUND_IMAGE       = @"jgpineo_background.jpg";
 NSString * const IMAGE_LIB_NAME         = @"photo 2.png";
 NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
 NSString * const RGB_IMAGE_NAME         = @"rgb.png";

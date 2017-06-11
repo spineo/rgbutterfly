@@ -28,7 +28,7 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *suggestButton, *exploreButton, *takePhotoButton, *myPhotosButton;
+@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton;
 @property (nonatomic, strong) UILabel *suggestLabel;
 
 @end
@@ -61,15 +61,16 @@
     
     // Get button handles
     //
-    _suggestButton   = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
+    _matchButton   = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
     _takePhotoButton = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
     _myPhotosButton  = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
     _exploreButton   = (UIButton *)[self.view viewWithTag:EXPLORE_BTN_TAG];
+
     _suggestLabel    = (UILabel *)[self.view viewWithTag:SUGGEST_LABEL_TAG];
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:@"jgpineo_background.jpg" view:self.view];
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
     
     // Initialization
     //
@@ -100,7 +101,7 @@
     
     // Change buttons visibility
     //
-    [_suggestButton setAlpha:1.0];
+    [_matchButton setAlpha:1.0];
     [_suggestLabel setAlpha:1.0];
     [_takePhotoButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
     [_myPhotosButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
@@ -316,7 +317,7 @@
 #pragma mark - Navigation Methods
 
 - (IBAction)suggestPaints:(id)sender {
-    [_suggestButton setAlpha:0.5];
+    [_matchButton setAlpha:0.5];
     [_suggestLabel setAlpha:0.0];
     [_takePhotoButton setTitleColor:LIGHT_TEXT_COLOR forState:UIControlStateNormal];
     [_myPhotosButton setTitleColor:LIGHT_TEXT_COLOR forState:UIControlStateNormal];
