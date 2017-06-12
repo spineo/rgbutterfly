@@ -296,6 +296,7 @@ int const VISIT_LABEL_TAG     = 323;
 int const TOPICS_LABEL_TAG    = 324;
 int const COLLECT_LABEL_TAG   = 325;
 int const LIST_LABEL_TAG      = 326;
+int const EXPLORE_LABEL_TAG   = 327;
 
 
 int const MAX_TAG             = 1000;

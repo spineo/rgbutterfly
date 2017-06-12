@@ -303,6 +303,7 @@ extern int const VISIT_LABEL_TAG;
 extern int const TOPICS_LABEL_TAG;
 extern int const COLLECT_LABEL_TAG;
 extern int const LIST_LABEL_TAG;
+extern int const EXPLORE_LABEL_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements

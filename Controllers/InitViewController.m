@@ -41,22 +41,6 @@
 
 #pragma mark - Intialization/Cleanup Methods
 
-- (void)startSpinner {
-    _spinner = [[UIActivityIndicatorView alloc]
-                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [_spinner setTag:INIT_SPINNER_TAG];
-    
-    [_spinner setCenter:self.view.center];
-    [_spinner setHidesWhenStopped:YES];
-    [self.view addSubview:_spinner];
-    [_spinner startAnimating];
-}
-
-- (void)stopSpinner {
-    [_spinner stopAnimating];
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -64,19 +48,26 @@
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
     
-    // Get button handles
+    // Match Colors
     //
     _matchButton     = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
     _matchLabel      = (UILabel *)[self.view viewWithTag:MATCH_LABEL_TAG];
     _takePhotoButton = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
-    _takePhotoLabel  = (UILabel *)[self.view viewWithTag:MATCH_LABEL_TAG];
+    _takePhotoLabel  = (UILabel *)[self.view viewWithTag:TAKE_LABEL_TAG];
     _myPhotosButton  = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
     _myPhotosLabel   = (UILabel *)[self.view viewWithTag:VISIT_LABEL_TAG];
     
+    // Explore Colors
+    //
     _exploreButton   = (UIButton *)[self.view viewWithTag:EXPLORE_BTN_TAG];
+    _exploreLabel    = (UILabel *)[self.view viewWithTag:EXPLORE_LABEL_TAG];
+    _topicsButton    = (UIButton *)[self.view viewWithTag:TOPICS_BTN_TAG];
+    _topicsLabel     = (UILabel *)[self.view viewWithTag:TOPICS_LABEL_TAG];
+    _collectButton   = (UIButton *)[self.view viewWithTag:COLLECT_BTN_TAG];
+    _collectLabel    = (UILabel *)[self.view viewWithTag:COLLECT_LABEL_TAG];
+    _listButton      = (UIButton *)[self.view viewWithTag:LIST_BTN_TAG];
+    _listLabel       = (UILabel *)[self.view viewWithTag:LIST_LABEL_TAG];
 
-
-    
     
     // Initialization
     //
@@ -105,13 +96,14 @@
     //
     [_updateLabel removeFromSuperview];
     
-    // Change buttons visibility
+
+    // Match Colors
     //
-    [_matchButton setAlpha:1.0];
-    [_matchLabel setAlpha:1.0];
-    [_takePhotoButton setAlpha:0.0];
-    [_myPhotosButton setAlpha:0.0];
-    //[_myPhotosButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+    [self initMatchColors];
+    
+    // Explore Colors
+    //
+    [self initExploreColors];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -165,19 +157,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)startSpinner {
+    _spinner = [[UIActivityIndicatorView alloc]
+                initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [_spinner setTag:INIT_SPINNER_TAG];
+    
+    [_spinner setCenter:self.view.center];
+    [_spinner setHidesWhenStopped:YES];
+    [self.view addSubview:_spinner];
+    [_spinner startAnimating];
+}
+
+- (void)stopSpinner {
+    [_spinner stopAnimating];
+}
+
+- (void)initMatchColors {
+    // Change  buttons visibility
+    //
+    [_matchButton setAlpha:1.0];
+    [_matchLabel setAlpha:1.0];
+    //[_takePhotoButton setAlpha:0.0];
+    [_takePhotoButton setHidden:TRUE];
+    [_takePhotoLabel setAlpha:0.0];
+    [_myPhotosButton setAlpha:0.0];
+    [_myPhotosLabel setAlpha:0.0];
+    //[_myPhotosButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
+}
+
+- (void)initExploreColors {
+    // Change buttons visibility
+    //
+    [_exploreButton setAlpha:1.0];
+    [_exploreLabel setAlpha:1.0];
+    [_topicsButton setAlpha:0.0];
+    [_topicsLabel setAlpha:0.0];
+    [_collectButton setAlpha:0.0];
+    [_collectLabel setAlpha:0.0];
+    [_listButton setAlpha:0.0];
+    [_listLabel setAlpha:0.0];
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Button Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Navigation Methods
 
-- (IBAction)suggestPaints:(id)sender {
+- (IBAction)matchColors:(id)sender {
     [_matchButton setAlpha:0.0];
     [_matchLabel setAlpha:0.0];
-    [_takePhotoButton setAlpha:1.0];
+    //[_takePhotoButton setAlpha:1.0];
+    [_takePhotoButton setHidden:FALSE];
+    [_takePhotoLabel setAlpha:1.0];
     [_myPhotosButton setAlpha:1.0];
-}
+    [_myPhotosLabel setAlpha:1.0];
 
+    [self initExploreColors];
+}
 
 - (IBAction)takePhoto:(id)sender {
 
@@ -197,11 +234,23 @@
     [self performSegueWithIdentifier:@"InitToImagePickerSegue" sender:self];
 }
 
-- (IBAction)explore:(id)sender {
+- (IBAction)exploreColors:(id)sender {
     //[self.view addSubview:_updateLabel];
     //[self startSpinner];
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    //[self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    [_exploreButton setAlpha:0.0];
+    [_exploreLabel setAlpha:0.0];
+    [_topicsButton setAlpha:1.0];
+    [_topicsLabel setAlpha:1.0];
+    [_collectButton setAlpha:1.0];
+    [_collectLabel setAlpha:1.0];
+    [_listButton setAlpha:1.0];
+    [_listLabel setAlpha:1.0];
+    
+    [self initMatchColors];
 }
+
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods
