@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InitViewController : UIViewController
+@interface InitViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (nonatomic) int updateStat, imageAction;
 

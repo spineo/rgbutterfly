@@ -36,6 +36,10 @@
 //
 @property (nonatomic, strong) NSString *collectionType;
 
+// Re-initialize the buttons
+//
+@property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
+
 @end
 
 @implementation InitViewController
@@ -93,6 +97,13 @@
     _mainViewHasLoaded = FALSE;
     
     self.view.autoresizesSubviews = NO;
+    
+    // Re-initialize the buttons
+    //
+    _tapRecognizer = [[UITapGestureRecognizer alloc]
+                      initWithTarget:self.view action:@selector(respondToTap)];
+    [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
+    //[_tapRecognizer setDelegate:self];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -275,6 +286,16 @@
 
 - (void)stopSpinner {
     [_spinner stopAnimating];
+}
+
+- (void)respondToTap {
+    // Match Colors
+    //
+    [self initMatchColors];
+
+    // Explore Colors
+    //
+    [self initExploreColors];
 }
 
 - (void)initMatchColors {
