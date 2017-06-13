@@ -32,6 +32,10 @@
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel;
 @property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset;
 
+// Collection types
+//
+@property (nonatomic, strong) NSString *collectionType;
+
 @end
 
 @implementation InitViewController
@@ -78,7 +82,6 @@
     // Look at what is currently in Settings
     //
     BOOL pollUpdate          = [_userDefaults boolForKey:DB_POLL_UPDATE_KEY];
-    _dbRestoreFlag           = [_userDefaults boolForKey:DB_RESTORE_KEY];
     BOOL existsPollUpdateKey = [[[_userDefaults dictionaryRepresentation] allKeys] containsObject:DB_POLL_UPDATE_KEY];
     
     if ((pollUpdate == FALSE) && existsPollUpdateKey && (_dbRestoreFlag == FALSE)) {
@@ -107,6 +110,7 @@
     //
     _yOffset = (_viewHeight * 0.33) - (_width / 2.0);
     _xOffset = _xCenter - (_width * 1.33);
+
     [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _takePhotoLabel = [self resetLabel:_takePhotoLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
     
@@ -133,7 +137,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:TRUE];
+    
+    // Check for DB restore
+    //
+    _dbRestoreFlag           = [_userDefaults boolForKey:DB_RESTORE_KEY];
 
+    
     // Remove subviews
     //
     [_updateLabel removeFromSuperview];
@@ -184,6 +193,49 @@
         [alert addAction:ok];
         
         [self presentViewController:alert animated:YES completion:nil];
+    
+    // Case 2: User-triggered restore original database
+    //
+    } else if (_dbRestoreFlag == TRUE) {
+
+        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"Database Restore Alert" message:@"Caution: You will lose any data added if you revert to the original snapshot. Do you wish to continue?"];
+        UIAlertAction* YesButton = [UIAlertAction
+                                    actionWithTitle:@"Yes"
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        NSString *errStr = [AppUtils initDBFromBundle:@"Restore"];
+                                        
+                                        UIAlertController *alert = [AlertUtils createBlankAlert:@"Restore Status" message:errStr];
+                                        UIAlertAction* ok = [UIAlertAction
+                                                             actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                                                 [self continue];
+                                                             }];
+                                        [alert addAction:ok];
+                                        
+                                        [self presentViewController:alert animated:YES completion:nil];
+                                    }];
+        
+        UIAlertAction* NoButton = [UIAlertAction
+                                   actionWithTitle:@"No"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                       [self continue];
+                                   }];
+        
+        [updateConfirm addAction:NoButton];
+        [updateConfirm addAction:YesButton];
+        
+        [self presentViewController:updateConfirm animated:YES completion:^{
+            [_updateLabel setText:SPINNER_LABEL_PROC];
+        }];
+        
+        // Revert back to FALSE default
+        //
+        [_userDefaults setBool:FALSE forKey:DB_RESTORE_KEY];
     }
 }
 
@@ -320,6 +372,20 @@
     [self initMatchColors];
 }
 
+- (IBAction)exploreTopics:(id)sender {
+    _collectionType = KEYWORDS_TYPE;
+    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+}
+
+- (IBAction)exploreCollections:(id)sender {
+    _collectionType = MIX_LIST_TYPE;
+    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+}
+
+- (IBAction)exploreLists:(id)sender {
+    _collectionType = FULL_LISTING_TYPE;
+    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -333,6 +399,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Camera/Photo Library
+    //
     if ([[segue identifier] isEqualToString:@"InitToImagePickerSegue"]) {
         PickerViewController *pickerViewController = (PickerViewController *)[segue destinationViewController];
         [pickerViewController setImageAction:_imageAction];
@@ -340,6 +408,7 @@
         UINavigationController *navigationViewController = [segue destinationViewController];
         MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
         [mainViewController setViewHasLoaded:_mainViewHasLoaded];
+        [mainViewController setListingType:_collectionType];
     }
 }
 

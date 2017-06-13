@@ -151,7 +151,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
+    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
     
     // NSManagedObject subclassing
     //
@@ -165,8 +165,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // This value can be changed in Settings
     //
-    _listingType    = [_userDefaults valueForKey:LISTING_TYPE];
-    _defListingType = _listingType;
+    //_listingType    = [_userDefaults valueForKey:LISTING_TYPE];
+    //_defListingType = _listingType;
 
     
     // Welcome alert
@@ -417,11 +417,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // Check if this value has changed in Settings
     //
-    _modListingType = [_userDefaults valueForKey:LISTING_TYPE];
-    if (![_modListingType isEqualToString:_defListingType]) {
-        _listingType    = _modListingType;
-        _defListingType = _modListingType;
-    }
+//    _modListingType = [_userDefaults valueForKey:LISTING_TYPE];
+//    if (![_modListingType isEqualToString:_defListingType]) {
+//        _listingType    = _modListingType;
+//        _defListingType = _modListingType;
+//    }
 
     [self loadData];
 }
