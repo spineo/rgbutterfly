@@ -30,6 +30,7 @@
 //
 @property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel;
+@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset;
 
 @end
 
@@ -87,11 +88,52 @@
     _updateStat = NO_UPDATE;
     
     _mainViewHasLoaded = FALSE;
+    
+    self.view.autoresizesSubviews = NO;
+}
+
+- (void)viewDidLayoutSubviews {
+
+    // Compute the view width
+    //
+    _viewWidth  = self.view.bounds.size.width;
+    _viewHeight = self.view.bounds.size.height;
+    
+    _width  = DEF_BUTTON_WIDTH;
+    _height = DEF_BUTTON_WIDTH;
+    _xCenter = _viewWidth / 2.0;
+    
+    // Match Colors
+    //
+    _yOffset = (_viewHeight * 0.33) - (_width / 2.0);
+    _xOffset = _xCenter - (_width * 1.33);
+    [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _takePhotoLabel = [self resetLabel:_takePhotoLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + (_width * 0.33);
+    [_myPhotosButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _myPhotosLabel = [self resetLabel:_myPhotosLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    
+    // Explore Colors
+    //
+    _yOffset = (_viewHeight * 0.67) - (_width / 2.0);
+    _xOffset = _xCenter - (_width * 2.0);
+    [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter - (_width * 0.5);
+    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + _width;
+    [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:TRUE];
-    
+
     // Remove subviews
     //
     [_updateLabel removeFromSuperview];
@@ -126,7 +168,6 @@
     //[self.view addSubview:_updateLabel];
     //[self startSpinner];
     
-    
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
     if ([_userDefaults objectForKey:DB_RESTORE_KEY] == nil) {
@@ -150,7 +191,6 @@
     [super viewWillDisappear:animated];
     [self stopSpinner];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -177,8 +217,7 @@
     //
     [_matchButton setAlpha:1.0];
     [_matchLabel setAlpha:1.0];
-    //[_takePhotoButton setAlpha:0.0];
-    [_takePhotoButton setHidden:TRUE];
+    [_takePhotoButton setAlpha:0.0];
     [_takePhotoLabel setAlpha:0.0];
     [_myPhotosButton setAlpha:0.0];
     [_myPhotosLabel setAlpha:0.0];
@@ -199,16 +238,48 @@
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Orientation Handling Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Orientation Handling Methods
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Label Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Label Methods
+
+- (UILabel *)resetLabel:(UILabel *)label xOffset:(CGFloat)xOffset yOffset:(CGFloat)yOffset width:(CGFloat)width {
+    [label sizeToFit];
+    CGFloat labelWidth   = label.bounds.size.width;
+    CGFloat labelXOffset = xOffset + (width - labelWidth) / 2.0;
+    
+    [label setFrame:CGRectMake(labelXOffset, yOffset + DEF_FIELD_PADDING, label.bounds.size.width, label.bounds.size.height)];
+    
+    return label;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Button Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Navigation Methods
+#pragma mark - Button Methods
 
 - (IBAction)matchColors:(id)sender {
     [_matchButton setAlpha:0.0];
     [_matchLabel setAlpha:0.0];
-    //[_takePhotoButton setAlpha:1.0];
-    [_takePhotoButton setHidden:FALSE];
+    
+
+    [_takePhotoButton setAlpha:1.0];
+    
     [_takePhotoLabel setAlpha:1.0];
     [_myPhotosButton setAlpha:1.0];
     [_myPhotosLabel setAlpha:1.0];
@@ -217,7 +288,6 @@
 }
 
 - (IBAction)takePhoto:(id)sender {
-
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self presentViewController:[AlertUtils createOkAlert:@"Error" message:@"Device has no camera"] animated:YES completion:nil];
         
@@ -272,8 +342,6 @@
         [mainViewController setViewHasLoaded:_mainViewHasLoaded];
     }
 }
-
-
 
 - (void)continue {
     //[self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
