@@ -30,7 +30,7 @@
 //
 @property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel;
-@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset;
+@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
 // Collection types
 //
@@ -108,9 +108,15 @@
     
     // Match Colors
     //
-    _yOffset = (_viewHeight * 0.33) - (_width / 2.0);
-    _xOffset = _xCenter - (_width * 1.33);
+    _yOffset = _viewHeight * 0.20;
+    [_matchButton sizeToFit];
+    _buttonWidth  = _matchButton.bounds.size.width;
+    _buttonHeight = _matchButton.bounds.size.height;
+    _xOffset     = _xCenter - (_buttonWidth / 2.0);
+    [_matchButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    _matchLabel = [self resetLabel:_matchLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
 
+    _xOffset = _xCenter - (_width * 1.33);
     [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _takePhotoLabel = [self resetLabel:_takePhotoLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
     
@@ -121,7 +127,14 @@
     
     // Explore Colors
     //
-    _yOffset = (_viewHeight * 0.67) - (_width / 2.0);
+    _yOffset = _viewHeight * 0.50;
+    [_exploreButton sizeToFit];
+    _buttonWidth  = _exploreButton.bounds.size.width;
+    _buttonHeight = _exploreButton.bounds.size.height;
+    _xOffset     = _xCenter - (_buttonWidth / 2.0);
+    [_exploreButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
+    
     _xOffset = _xCenter - (_width * 2.0);
     [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
