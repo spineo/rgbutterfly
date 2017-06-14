@@ -699,7 +699,7 @@
                         <viewControllerLayoutGuide type="top" id="vLf-CC-DZG"/>
                         <viewControllerLayoutGuide type="bottom" id="Ez4-u8-EWc"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zJ8-YI-wFE">
+                    <view key="view" hidden="YES" contentMode="scaleToFill" id="zJ8-YI-wFE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -724,7 +724,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="311" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-I7-NDv">
-                                <rect key="frame" x="56" y="133" width="263" height="34"/>
+                                <rect key="frame" x="56" y="135" width="263" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -852,7 +852,7 @@
                                 <rect key="frame" x="147" y="439" width="80" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Related Colors">
+                                    <fragment content="Related Collections">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -1166,11 +1166,11 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="TM9-cr-8aw"/>
+        <segue reference="aqc-zq-dwj"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -142,7 +142,8 @@ CGFloat const DEF_LG_FIELD_PADDING  = 15.0;
 CGFloat const DEF_VLG_FIELD_PADDING = 20.0;
 CGFloat const DEF_XLG_FIELD_PADDING = 25.0;
 
-CGFloat const DEF_CORNER_RADIUS     = 5.0;
+//CGFloat const DEF_CORNER_RADIUS     = 5.0;
+CGFloat const DEF_CORNER_RADIUS     = 2.0;
 CGFloat const DEF_LG_CORNER_RADIUS  = 15.0;
 CGFloat const DEF_BORDER_WIDTH      = 1.0;
 CGFloat const BORDER_WIDTH_NONE     = 0.0;
@@ -437,6 +438,7 @@ NSString * const DEF_IMAGE_NAME = @"Reference Image";
 NSString * const BACKGROUND_IMAGE_TITLE = @"butterfly-background-title-2.png";
 //NSString * const BACKGROUND_IMAGE       = @"jgpineo_background.jpg";
 NSString * const BACKGROUND_IMAGE       = @"jgpineo_background_fade.jpg";
+//NSString * const BACKGROUND_IMAGE       = @"jgpineo_background_mono.jpg";
 NSString * const IMAGE_LIB_NAME         = @"photo 2.png";
 NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
 NSString * const RGB_IMAGE_NAME         = @"rgb.png";

@@ -495,6 +495,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define DARK_GRAY_BG_COLOR [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:1.0]
 #define DARK_BG_COLOR      [UIColor blackColor]
 
+
 // Colors (across the board)
 //
 #define CLEAR_COLOR        [UIColor clearColor]
@@ -502,6 +503,12 @@ extern float const DEF_BORDER_THRESHOLD;
 #define WIDGET_GREEN_COLOR [UIColor colorWithRed:83.0/255.0  green:215.0/255.0 blue:105.0/255.0 alpha:1.0]
 #define WIDGET_RED_COLOR   [UIColor colorWithRed:252.0/255.0 green:61.0/255.0  blue:57.0/255.0 alpha:1.0]
 
+
+// New Colors/Defaults
+//
+#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:23.0/255.0 green:46.0/255.0 blue:90.0/255.0 alpha:1.0]
+#define DEFAULT_BG_COLOR   [UIColor blackColor]
+#define DEFAULT_TEXT_COLOR [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:146.0/255.0 alpha:1.0]
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UIFont related

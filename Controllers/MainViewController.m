@@ -85,6 +85,7 @@
 //
 @property (nonatomic, strong) NSString *defListingType, *modListingType;
 
+
 @end
 
 
@@ -144,14 +145,15 @@ int MIX_ASSOC_MIN_SIZE = 0;
          // completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {}];
         
         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // Set the background image
     //
-    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE_TITLE view:self.view];
+    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.colorTableView];
+    [self.colorTableView setBackgroundColor:DEFAULT_BG_COLOR];
     
     // NSManagedObject subclassing
     //
@@ -413,7 +415,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [super viewWillAppear:animated];
     [self startSpinner];
     
-    [self.view setBackgroundColor:DARK_BG_COLOR];
+    [self.view setBackgroundColor:DEFAULT_BG_COLOR];
     
     // Check if this value has changed in Settings
     //
@@ -777,14 +779,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
     }
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
-    [headerView setBackgroundColor:DARK_BG_COLOR];
+    [headerView setBackgroundColor:DEFAULT_BG_COLOR];
     
     [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
     UIViewAutoresizingFlexibleLeftMargin |
     UIViewAutoresizingFlexibleRightMargin];
 
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, yOffset, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerLabel setBackgroundColor:DARK_BG_COLOR];
+    [headerLabel setBackgroundColor:DEFAULT_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
     
@@ -814,7 +816,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, headerHeight - DEF_SM_TABLE_CELL_HGT, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         }
         
-        [letterLabel setBackgroundColor:DARK_BG_COLOR];
+        [letterLabel setBackgroundColor:DEFAULT_BG_COLOR];
         [letterLabel setTextColor:LIGHT_TEXT_COLOR];
         [letterLabel setFont:TABLE_HEADER_FONT];
         
@@ -957,7 +959,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             
             CAGradientLayer *gradient = [CAGradientLayer layer];
             gradient.frame            = _filterToolbar.bounds;
-            gradient.colors           = [NSArray arrayWithObjects:(id)[DARK_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
+            gradient.colors           = [NSArray arrayWithObjects:(id)[DEFAULT_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
             [_filterToolbar.layer insertSublayer:gradient atIndex:0];
             
             [headerView addSubview:_filterToolbar];
@@ -966,7 +968,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, yOffset + DEF_SM_TABLE_CELL_HGT, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
         }
     
-        [letterLabel setBackgroundColor:DARK_BG_COLOR];
+        [letterLabel setBackgroundColor:DEFAULT_BG_COLOR];
         [letterLabel setTextColor:LIGHT_TEXT_COLOR];
         [letterLabel setFont:TABLE_HEADER_FONT];
         
@@ -1066,7 +1068,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         } else {
             return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
         }
-        
+
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
     } else {
@@ -1082,7 +1084,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
         
-        [custCell setBackgroundColor: DARK_BG_COLOR];
+        [custCell setBackgroundColor:DEFAULT_BG_COLOR];
         
         MixAssociation *mixAssocObj = [_mixAssocObjs objectAtIndex:indexPath.row];
         
@@ -1126,7 +1128,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
             }
             
-            [custCell setBackgroundColor: DARK_BG_COLOR];
+            [custCell setBackgroundColor:DEFAULT_BG_COLOR];
             
             MatchAssociations *matchAssocObj = [_matchAssocObjs objectAtIndex:indexPath.row];
             
@@ -1154,7 +1156,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [cell.textLabel setFont:TABLE_CELL_FONT];
-        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setBackgroundColor:DEFAULT_BG_COLOR];
         [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         

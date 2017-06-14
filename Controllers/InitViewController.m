@@ -106,7 +106,7 @@
     [self.view addGestureRecognizer:_tapRecognizer];
 }
 
-- (void)viewDidLayoutSubviews {
+- (void)viewWillLayoutSubviews {
 
     // Compute the view width
     //
@@ -157,6 +157,8 @@
     _xOffset = _xCenter + _width;
     [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    self.view.hidden = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
