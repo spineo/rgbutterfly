@@ -101,9 +101,9 @@
     // Re-initialize the buttons
     //
     _tapRecognizer = [[UITapGestureRecognizer alloc]
-                      initWithTarget:self.view action:@selector(respondToTap)];
+                      initWithTarget:self action:@selector(respondToTap)];
     [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
-    //[_tapRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:_tapRecognizer];
 }
 
 - (void)viewDidLayoutSubviews {
