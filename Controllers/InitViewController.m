@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) UILabel *updateLabel;
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) BOOL dbRestoreFlag, mainViewHasLoaded;
+@property (nonatomic) BOOL dbRestoreFlag, photoContext, mainViewHasLoaded;
 
 // Activity Indicator
 //
@@ -98,6 +98,7 @@
     
     _updateStat = NO_UPDATE;
     
+    _photoContext      = FALSE;
     _mainViewHasLoaded = FALSE;
     
     self.view.autoresizesSubviews = NO;
@@ -193,7 +194,9 @@
 
     // Match Colors
     //
-    [self initMatchColors];
+    if (_photoContext == FALSE) {
+        [self initMatchColors];
+    }
     
     // Explore Colors
     //
@@ -328,7 +331,6 @@
     [_takePhotoLabel setAlpha:0.0];
     [_myPhotosButton setAlpha:0.0];
     [_myPhotosLabel setAlpha:0.0];
-    //[_myPhotosButton setTitleColor:CLEAR_COLOR forState:UIControlStateNormal];
 }
 
 - (void)initExploreColors {
@@ -464,6 +466,9 @@
 
 #pragma mark - Navigation Methods
 
+- (IBAction)unwindFromPhotoToInitViewController:(UIStoryboardSegue *)segue {
+}
+
 - (IBAction)unwindToInitViewController:(UIStoryboardSegue *)segue {
     _mainViewHasLoaded = TRUE;
 }
@@ -474,6 +479,7 @@
     if ([[segue identifier] isEqualToString:@"InitToImagePickerSegue"]) {
         PickerViewController *pickerViewController = (PickerViewController *)[segue destinationViewController];
         [pickerViewController setImageAction:_imageAction];
+        _photoContext = TRUE;
     } else {
         [self.view addSubview:_updateLabel];
         [self startSpinner];

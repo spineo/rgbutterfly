@@ -164,7 +164,7 @@
                         <barButtonItem tag="62" image="home" id="SXH-ap-PzU">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindToInitViewController:" id="eYv-Qj-GPs"/>
+                                <segue destination="6Dy-2G-g4i" kind="unwind" unwindAction="unwindFromPhotoToInitViewController:" id="F6t-oW-J1u"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="MRg-Jy-ext"/>
@@ -1216,11 +1216,11 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9H9-9R-KDD"/>
-        <segue reference="TM9-cr-8aw"/>
-        <segue reference="aqc-zq-dwj"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
+        <segue reference="7bF-uJ-b3u"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="cln-aA-aih"/>
+        <segue reference="Szt-18-Btg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
