@@ -30,7 +30,7 @@
 //
 @property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
-@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
+@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
 // Collection types
 //
@@ -142,14 +142,15 @@
     
     // Explore Colors
     //
-    _yOffset = _viewHeight * 0.50;
+    _exploreYOffset = _viewHeight * 0.55;
     [_exploreButton sizeToFit];
     _buttonWidth  = _exploreButton.bounds.size.width;
     _buttonHeight = _exploreButton.bounds.size.height;
     _xOffset     = _xCenter - (_buttonWidth / 2.0);
-    [_exploreButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
-    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
+    [_exploreButton setFrame:CGRectMake(_xOffset, _exploreYOffset, _buttonWidth, _buttonHeight)];
+    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_exploreYOffset+_buttonHeight width:_buttonWidth];
     
+    _yOffset = _viewHeight * 0.45;
     _xOffset = _xCenter - (_width * 2.0);
     [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
@@ -164,7 +165,7 @@
     
     // Bottom buttons
     //
-    _yOffset = _viewHeight * 0.70;
+    _yOffset = _viewHeight * 0.67;
     
     _xOffset = _xCenter - (_width * 1.33);
     [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
@@ -196,7 +197,9 @@
     
     // Explore Colors
     //
-    [self initExploreColors];
+    if (_mainViewHasLoaded == FALSE) {
+        [self initExploreColors];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,7 +214,7 @@
     
     [_updateLabel setText:@""];
     [_updateLabel setFont:VLG_TEXT_FIELD_FONT];
-    [_updateLabel setTextColor:LIGHT_TEXT_COLOR];
+    [_updateLabel setTextColor:INITVC_TEXT_COLOR];
     [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
     [_updateLabel setTag:INIT_LABEL_TAG];
@@ -413,9 +416,6 @@
 }
 
 - (IBAction)exploreColors:(id)sender {
-    //[self.view addSubview:_updateLabel];
-    //[self startSpinner];
-    //[self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
     [_exploreButton setAlpha:0.0];
     [_exploreLabel setAlpha:0.0];
     [_topicsButton setAlpha:1.0];
@@ -475,6 +475,9 @@
         PickerViewController *pickerViewController = (PickerViewController *)[segue destinationViewController];
         [pickerViewController setImageAction:_imageAction];
     } else {
+        [self.view addSubview:_updateLabel];
+        [self startSpinner];
+        
         UINavigationController *navigationViewController = [segue destinationViewController];
         MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
         [mainViewController setViewHasLoaded:_mainViewHasLoaded];
