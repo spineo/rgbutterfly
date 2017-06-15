@@ -60,7 +60,7 @@
                         <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="Lh5-QH-3LD" kind="unwind" unwindAction="unwindToInitViewController:" id="LM4-uX-IZk"/>
+                                <action selector="goBack:" destination="BYZ-38-t0r" id="cUV-Do-I8l"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
@@ -79,10 +79,10 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="RGButterfly" id="Ade-hS-Xh0">
-                        <barButtonItem key="leftBarButtonItem" tag="51" image="photo 2" id="Jc1-jH-kAa">
+                        <barButtonItem key="leftBarButtonItem" tag="51" image="arrow" id="Jc1-jH-kAa">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="showPhotoOptions:" destination="BYZ-38-t0r" id="ffp-1r-sCF"/>
+                                <action selector="goBack:" destination="BYZ-38-t0r" id="wRp-FZ-Cqt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -97,7 +97,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="Lh5-QH-3LD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2148" y="-978.26086956521749"/>
         </scene>
@@ -1207,7 +1206,6 @@
         <image name="jgpineo_topics" width="824" height="624"/>
         <image name="jgpineo_visit_photos" width="1374" height="1208"/>
         <image name="minus sign" width="20" height="20"/>
-        <image name="photo 2" width="22" height="18"/>
         <image name="plus sign-1" width="20" height="20"/>
         <image name="rgb" width="30" height="30"/>
         <image name="search" width="32" height="32"/>
@@ -1218,9 +1216,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="7bF-uJ-b3u"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="cln-aA-aih"/>
-        <segue reference="Szt-18-Btg"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="hK8-5n-amq"/>
+        <segue reference="9H9-9R-KDD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

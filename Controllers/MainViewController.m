@@ -1691,7 +1691,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Reload, Segue, and Unwind Methods
+// Reload, Segue, Unwind, and goBack Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Reload, Segue, and Unwind Methods
@@ -1746,6 +1746,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (IBAction)unwindToViewController:(UIStoryboardSegue *)segue {
     [self.context rollback];
+}
+
+
+- (IBAction)goBack:(id)sender {
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 - (void) registerContextDidSaveNotificationForManagedObjectContext:(NSManagedObjectContext*) moc {

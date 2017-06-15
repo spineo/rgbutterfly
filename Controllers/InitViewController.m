@@ -470,7 +470,6 @@
 }
 
 - (IBAction)unwindToInitViewController:(UIStoryboardSegue *)segue {
-    _mainViewHasLoaded = TRUE;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -486,8 +485,8 @@
         
         UINavigationController *navigationViewController = [segue destinationViewController];
         MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
-        [mainViewController setViewHasLoaded:_mainViewHasLoaded];
         [mainViewController setListingType:_collectionType];
+        _mainViewHasLoaded = TRUE;
     }
 }
 
