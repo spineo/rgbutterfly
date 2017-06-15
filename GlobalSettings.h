@@ -296,6 +296,8 @@ extern int const MY_PHOTOS_BTN_TAG;
 extern int const TOPICS_BTN_TAG;
 extern int const COLLECT_BTN_TAG;
 extern int const LIST_BTN_TAG;
+extern int const MATCHED_BTN_TAG;
+extern int const GROUPS_BTN_TAG;
 
 extern int const MATCH_LABEL_TAG;
 extern int const TAKE_LABEL_TAG;
@@ -304,6 +306,8 @@ extern int const TOPICS_LABEL_TAG;
 extern int const COLLECT_LABEL_TAG;
 extern int const LIST_LABEL_TAG;
 extern int const EXPLORE_LABEL_TAG;
+extern int const MATCHED_LABEL_TAG;
+extern int const GROUPS_LABEL_TAG;
 
 
 // Max Tag used as reference to ensure all table view elements

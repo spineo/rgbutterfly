@@ -290,6 +290,8 @@ int const MY_PHOTOS_BTN_TAG   = 314;
 int const TOPICS_BTN_TAG      = 315;
 int const COLLECT_BTN_TAG     = 316;
 int const LIST_BTN_TAG        = 317;
+int const MATCHED_BTN_TAG     = 318;
+int const GROUPS_BTN_TAG      = 319;
 
 int const MATCH_LABEL_TAG     = 321;
 int const TAKE_LABEL_TAG      = 322;
@@ -298,7 +300,8 @@ int const TOPICS_LABEL_TAG    = 324;
 int const COLLECT_LABEL_TAG   = 325;
 int const LIST_LABEL_TAG      = 326;
 int const EXPLORE_LABEL_TAG   = 327;
-
+int const MATCHED_LABEL_TAG   = 328;
+int const GROUPS_LABEL_TAG    = 329;
 
 int const MAX_TAG             = 1000;
 

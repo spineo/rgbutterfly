@@ -28,8 +28,8 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton;
-@property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel;
+@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton;
+@property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
 @property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
 // Collection types
@@ -76,6 +76,10 @@
     _collectLabel    = (UILabel *)[self.view viewWithTag:COLLECT_LABEL_TAG];
     _listButton      = (UIButton *)[self.view viewWithTag:LIST_BTN_TAG];
     _listLabel       = (UILabel *)[self.view viewWithTag:LIST_LABEL_TAG];
+    _matchedButton   = (UIButton *)[self.view viewWithTag:MATCHED_BTN_TAG];
+    _matchedLabel    = (UILabel *)[self.view viewWithTag:MATCHED_LABEL_TAG];
+    _groupsButton   = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
+    _groupsLabel    = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
 
     
     // Initialization
@@ -151,12 +155,24 @@
     _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
     
     _xOffset = _xCenter - (_width * 0.5);
-    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    [_matchedButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _matchedLabel = [self resetLabel:_matchedLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
     
     _xOffset = _xCenter + _width;
     [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    // Bottom buttons
+    //
+    _yOffset = _viewHeight * 0.70;
+    
+    _xOffset = _xCenter - (_width * 1.33);
+    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + (_width * 0.33);
+    [_groupsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _groupsLabel = [self resetLabel:_groupsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
     
     self.view.hidden = NO;
 }
@@ -323,6 +339,10 @@
     [_collectLabel setAlpha:0.0];
     [_listButton setAlpha:0.0];
     [_listLabel setAlpha:0.0];
+    [_matchedButton setAlpha:0.0];
+    [_matchedLabel setAlpha:0.0];
+    [_groupsButton setAlpha:0.0];
+    [_groupsLabel setAlpha:0.0];
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -404,25 +424,39 @@
     [_collectLabel setAlpha:1.0];
     [_listButton setAlpha:1.0];
     [_listLabel setAlpha:1.0];
+    [_matchedButton setAlpha:1.0];
+    [_matchedLabel setAlpha:1.0];
+    [_groupsButton setAlpha:1.0];
+    [_groupsLabel setAlpha:1.0];
     
     [self initMatchColors];
 }
 
 - (IBAction)exploreTopics:(id)sender {
-    _collectionType = KEYWORDS_TYPE;
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    [self performSegue:KEYWORDS_TYPE];
 }
 
 - (IBAction)exploreCollections:(id)sender {
-    _collectionType = MIX_LIST_TYPE;
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    [self performSegue:MIX_LIST_TYPE];
 }
 
 - (IBAction)exploreLists:(id)sender {
-    _collectionType = FULL_LISTING_TYPE;
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    [self performSegue:FULL_LISTING_TYPE];
+    
 }
 
+- (IBAction)myMatchedColors:(id)sender {
+    [self performSegue:MATCH_LIST_TYPE];
+}
+
+- (IBAction)groupByColors:(id)sender {
+    [self performSegue:COLORS_TYPE];
+}
+
+- (void)performSegue:(NSString *)listType {
+    _collectionType = listType;
+    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods
