@@ -1513,7 +1513,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             return DEF_TABLE_CELL_HEIGHT;
         }
     } else {
-        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        // 80px
+        //return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        return DEF_VLG_TBL_CELL_HGT;
     }
 }
 
@@ -1524,7 +1526,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (! custCell) {
             custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
         }
-        [custCell setXOffset:custCell.bounds.origin.x + DEF_TABLE_CELL_HEIGHT + DEF_MD_FIELD_PADDING];
+        [custCell setXOffset:custCell.bounds.origin.x + DEF_LG_TABLE_CELL_HGT + DEF_MD_FIELD_PADDING];
         [custCell setBackgroundColor:DARK_BG_COLOR];
         [custCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
@@ -1553,9 +1555,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                 _matchNumChanged = TRUE;
         }
 
-        NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
+        //NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
     
-        [custCell addLabel:[FieldUtils createLabel:match_algorithm_text xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
+        //[custCell addLabel:[FieldUtils createLabel:match_algorithm_text xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
         
         NSInteger index = custCell.collectionView.tag;
         
@@ -1565,9 +1567,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         UIImage *image;
         if (_isRGB == TRUE) {
-            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
         } else {
-            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
         }
         
         custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET];
@@ -1702,9 +1704,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     UIImage *swatchImage;
     if (_isRGB == TRUE) {
-        swatchImage = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        swatchImage = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
     } else {
-        swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_TABLE_CELL_HEIGHT cellHeight:DEF_TABLE_CELL_HEIGHT];
+        swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
@@ -1715,7 +1717,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     [swatchImageView setContentMode: UIViewContentModeScaleAspectFit];
     [swatchImageView setClipsToBounds: YES];
-    [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_TABLE_CELL_HEIGHT, DEF_TABLE_CELL_HEIGHT)];
+    [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_LG_TABLE_CELL_HGT, DEF_LG_TABLE_CELL_HGT)];
     
     cell.backgroundView = swatchImageView;
     
