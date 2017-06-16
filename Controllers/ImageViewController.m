@@ -1500,22 +1500,25 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (_currTapSection == 0) {
-        [tableView setSeparatorColor:DARK_BORDER_COLOR];
-    } else {
-        [tableView setSeparatorColor:LIGHT_BORDER_COLOR];
-    }
+//    if (_currTapSection == 0) {
+//        [tableView setSeparatorColor:DARK_BORDER_COLOR];
+//    } else {
+//        [tableView setSeparatorColor:LIGHT_BORDER_COLOR];
+//    }
+    [tableView setSeparatorColor:DARK_BORDER_COLOR];
 
     if (indexPath.section == HEADER_TABLEVIEW_SECTION) {
         if (_currTapSection == 0) {
             return DEF_NIL_CELL;
         } else {
-            return DEF_TABLE_CELL_HEIGHT;
+            //return DEF_TABLE_CELL_HEIGHT;
+            return DEF_FIELD_PADDING;
         }
     } else {
         // 80px
         //return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
-        return DEF_VLG_TBL_CELL_HGT;
+        //return DEF_VLG_TBL_CELL_HGT;
+        return 76.0;
     }
 }
 
@@ -1574,7 +1577,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET];
 
-        
         // Tag the first reference image
         //
         [custCell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
@@ -1639,16 +1641,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 // Header sections
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return DEF_NIL_HEADER;
-    } else {
-        return DEF_NIL_HEADER;
-    }
+    return DEF_NIL_HEADER;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width,DEF_SM_TBL_HDR_HEIGHT)];
+
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_SM_TBL_HDR_HEIGHT)];
     
     if (section == HEADER_TABLEVIEW_SECTION) {
         NSString *headerTitle = @"";

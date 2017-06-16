@@ -622,7 +622,7 @@ static NSDictionary *swatchTypes;
     // isRGB Settings (false by default)
     //
     if ([userDefaults objectForKey:RGB_DISPLAY_KEY] == nil) {
-        [userDefaults setBool:FALSE forKey:RGB_DISPLAY_KEY];
+        [userDefaults setBool:TRUE forKey:RGB_DISPLAY_KEY];
     }
     
     // Initialize the Match Swatch Filters Keys to TRUE/FALSE if not set

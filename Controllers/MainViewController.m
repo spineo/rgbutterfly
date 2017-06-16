@@ -1109,7 +1109,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 mix_assoc_name = [[NSString alloc] initWithFormat:@"%@ and %@ Mix", ref.name, mix.name];
             }
         }
-
         [custCell addLabel:[FieldUtils createLabel:mix_assoc_name xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
