@@ -89,6 +89,7 @@ extern CGFloat const DEF_NIL_HEADER;
 extern CGFloat const DEF_NIL_FOOTER;
 extern CGFloat const DEF_NIL_WIDTH;
 extern CGFloat const DEF_NIL_HEIGHT;
+extern CGFloat const DEF_NIL_INSET;
 extern CGFloat const DEF_NIL_CONSTRAINT;
 extern CGFloat const DEF_NIL_CORNER_RADIUS;
 
@@ -110,6 +111,12 @@ extern CGFloat const DEF_RECT_INSET;
 extern CGFloat const DEF_X_COORD;
 extern CGFloat const DEF_Y_COORD;
 extern CGFloat const DEF_BOTTOM_OFFSET;
+
+// Custom cell
+//
+extern CGFloat const DEF_CELL_HEIGHT;
+extern CGFloat const DEF_FIELD_INSET;
+extern CGFloat const DEF_CELL_PADDING;
 
 // UI Label
 //
@@ -167,8 +174,6 @@ extern CGFloat const DEF_CELL_EDIT_DISPL;
 extern CGFloat const DEF_PICKER_ROW_HEIGHT;
 extern CGFloat const DEF_PICKER_HEIGHT;
 extern CGFloat const DEF_PICKER_WIDTH;
-
-extern CGFloat const DEF_COLLECTVIEW_INSET;
 
 // UIToolbar
 //

@@ -488,7 +488,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == DETAIL_ASSOC_SECTION) {
-        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
         
     } else if ((indexPath.section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
         return DEF_NIL_CELL;
@@ -731,7 +731,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [custCell setBackgroundColor: DARK_BG_COLOR];
         
         if (! custCell) {
-            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
         }
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:indexPath.row];

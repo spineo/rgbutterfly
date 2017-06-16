@@ -1515,10 +1515,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             return DEF_FIELD_PADDING;
         }
     } else {
-        // 80px
-        //return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
-        //return DEF_VLG_TBL_CELL_HGT;
-        return 76.0;
+        return DEF_CELL_HEIGHT + DEF_FIELD_PADDING;
     }
 }
 
@@ -1527,7 +1524,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
-            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_NIL_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
         }
         [custCell setXOffset:custCell.bounds.origin.x + DEF_LG_TABLE_CELL_HGT + DEF_MD_FIELD_PADDING];
         [custCell setBackgroundColor:DARK_BG_COLOR];

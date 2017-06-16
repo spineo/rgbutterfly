@@ -1066,11 +1066,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
         if (ct < _minAssocSize) {
             return DEF_NIL_HEADER;
         } else {
-            return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+            return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
         }
 
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
-        return DEF_MD_TABLE_CELL_HGT + DEF_FIELD_PADDING + DEF_COLLECTVIEW_INSET;
+        return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
     } else {
         return DEF_TABLE_CELL_HEIGHT;
     }
@@ -1081,7 +1081,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
-            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
         }
         
         [custCell setBackgroundColor:DEFAULT_BG_COLOR];
@@ -1124,7 +1124,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
             
             if (! custCell) {
-                custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier];
+                custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
             }
             
             [custCell setBackgroundColor:DEFAULT_BG_COLOR];

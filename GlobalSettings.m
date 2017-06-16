@@ -94,6 +94,7 @@ CGFloat const DEF_NIL_HEADER        = 0.0;
 CGFloat const DEF_NIL_FOOTER        = 1.0;
 CGFloat const DEF_NIL_WIDTH         = 0.0;
 CGFloat const DEF_NIL_HEIGHT        = 0.0;
+CGFloat const DEF_NIL_INSET         = 0.0;
 CGFloat const DEF_NIL_CONSTRAINT    = 0.0;
 CGFloat const DEF_NIL_CORNER_RADIUS = 0.0;
 
@@ -116,6 +117,11 @@ CGFloat const DEF_X_COORD           = 1.0;
 CGFloat const DEF_Y_COORD           = 1.0;
 CGFloat const DEF_BOTTOM_OFFSET     = 6.0;
 
+// Custom cell
+//
+CGFloat const DEF_CELL_HEIGHT       = 72.0;
+CGFloat const DEF_FIELD_INSET       = 25.0;
+CGFloat const DEF_CELL_PADDING      = 5.0;
 
 // UI Label
 //
@@ -176,8 +182,6 @@ CGFloat const DEF_CELL_EDIT_DISPL   = 22.0;
 CGFloat const DEF_PICKER_ROW_HEIGHT = 50.0;
 CGFloat const DEF_PICKER_HEIGHT     = 250.0;
 CGFloat const DEF_PICKER_WIDTH      = 320.0;
-
-CGFloat const DEF_COLLECTVIEW_INSET = 20.0;
 
 // UIToolbar
 //
