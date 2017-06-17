@@ -1073,7 +1073,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
     } else {
-        return DEF_TABLE_CELL_HEIGHT;
+        return DEF_CELL_HEIGHT;
     }
 }
 
@@ -1158,6 +1158,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [cell.textLabel setFont:TABLE_CELL_FONT];
         [cell setBackgroundColor:DEFAULT_BG_COLOR];
         [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+        [cell.textLabel setNumberOfLines:0];
+        [cell.textLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
