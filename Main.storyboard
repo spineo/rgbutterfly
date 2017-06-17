@@ -136,10 +136,10 @@
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="204" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yk1-Ym-ytt">
-                                <rect key="frame" x="16" y="78" width="360" height="286"/>
+                                <rect key="frame" x="0.0" y="78" width="360" height="286"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" tag="205" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-jk-Bwe">
-                                        <rect key="frame" x="8" y="10" width="340" height="266.00000000000011"/>
+                                        <rect key="frame" x="0.0" y="10" width="340" height="266"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
@@ -147,7 +147,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="5BL-jk-Bwe" firstAttribute="top" secondItem="yk1-Ym-ytt" secondAttribute="top" constant="10.813725490221486" id="aRt-0Q-JEn"/>
+                                    <constraint firstItem="5BL-jk-Bwe" firstAttribute="top" secondItem="yk1-Ym-ytt" secondAttribute="top" constant="1" id="aRt-0Q-JEn"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -155,9 +155,6 @@
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
-                        <constraints>
-                            <constraint firstItem="5BL-jk-Bwe" firstAttribute="leading" secondItem="M4F-fF-nRm" secondAttribute="leadingMargin" constant="9.656862745021499" id="QzZ-uz-Ref"/>
-                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem tag="62" image="home" id="SXH-ap-PzU">
@@ -1214,11 +1211,11 @@
         <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cln-aA-aih"/>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="7bF-uJ-b3u"/>
-        <segue reference="aqc-zq-dwj"/>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="9H9-9R-KDD"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="Omc-kQ-4iW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
