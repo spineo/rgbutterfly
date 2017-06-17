@@ -199,8 +199,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // TableView defaults
     //
     _imageViewXOffset   = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
-    _imageViewWidth     = DEF_TABLE_CELL_HEIGHT;
-    _imageViewHeight    = DEF_TABLE_CELL_HEIGHT;
+    _imageViewWidth     = DEF_CELL_HEIGHT;
+    _imageViewHeight    = DEF_CELL_HEIGHT;
     
 
     // Images
@@ -1060,6 +1060,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    [tableView setSeparatorColor:CLEAR_COLOR];
     if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         int index = (int)indexPath.row;
         int ct = (int)[[self.mixColorArray objectAtIndex:index] count];

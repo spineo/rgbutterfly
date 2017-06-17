@@ -1500,18 +1500,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-//    if (_currTapSection == 0) {
-//        [tableView setSeparatorColor:DARK_BORDER_COLOR];
-//    } else {
-//        [tableView setSeparatorColor:LIGHT_BORDER_COLOR];
-//    }
-    [tableView setSeparatorColor:DARK_BORDER_COLOR];
+    [tableView setSeparatorColor:CLEAR_COLOR];
 
     if (indexPath.section == HEADER_TABLEVIEW_SECTION) {
         if (_currTapSection == 0) {
             return DEF_NIL_CELL;
         } else {
-            //return DEF_TABLE_CELL_HEIGHT;
             return DEF_FIELD_PADDING;
         }
     } else {

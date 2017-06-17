@@ -28,7 +28,7 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton;
+@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *buttonReference;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
 @property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
@@ -78,13 +78,13 @@
     _listLabel       = (UILabel *)[self.view viewWithTag:LIST_LABEL_TAG];
     _matchedButton   = (UIButton *)[self.view viewWithTag:MATCHED_BTN_TAG];
     _matchedLabel    = (UILabel *)[self.view viewWithTag:MATCHED_LABEL_TAG];
-    _groupsButton   = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
-    _groupsLabel    = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
+    _groupsButton    = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
+    _groupsLabel     = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
 
     
     // Initialization
     //
-    _userDefaults  = [NSUserDefaults standardUserDefaults];
+    _userDefaults   = [NSUserDefaults standardUserDefaults];
     
     
     // Look at what is currently in Settings
@@ -302,7 +302,7 @@
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [_spinner setTag:INIT_SPINNER_TAG];
     
-    [_spinner setCenter:self.view.center];
+        
     [_spinner setHidesWhenStopped:YES];
     [self.view addSubview:_spinner];
     [_spinner startAnimating];
@@ -436,23 +436,27 @@
 
 - (IBAction)exploreTopics:(id)sender {
     [self performSegue:KEYWORDS_TYPE];
+    [_spinner setCenter:_topicsButton.center];
 }
 
 - (IBAction)exploreCollections:(id)sender {
     [self performSegue:MIX_LIST_TYPE];
+    [_spinner setCenter:_collectButton.center];
 }
 
 - (IBAction)exploreLists:(id)sender {
     [self performSegue:FULL_LISTING_TYPE];
-    
+    [_spinner setCenter:_listButton.center];
 }
 
 - (IBAction)myMatchedColors:(id)sender {
     [self performSegue:MATCH_LIST_TYPE];
+    [_spinner setCenter:_matchedButton.center];
 }
 
 - (IBAction)groupByColors:(id)sender {
     [self performSegue:COLORS_TYPE];
+    [_spinner setCenter:_groupsButton.center];
 }
 
 - (void)performSegue:(NSString *)listType {
