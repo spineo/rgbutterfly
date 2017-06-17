@@ -437,7 +437,7 @@ NSString * const NO_MIX_NAME    = @"No Mix Name";
 
 // Image Related
 //
-NSString * const DEF_IMAGE_NAME = @"Reference Image";
+NSString * const DEF_IMAGE_NAME = @"My Color Matches";
 
 
 // Image Names

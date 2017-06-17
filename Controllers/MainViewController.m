@@ -142,7 +142,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
              [self setFrames];
 
         } completion:nil];
-         // completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {}];
         
         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
