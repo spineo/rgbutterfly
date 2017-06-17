@@ -584,7 +584,7 @@ const int ASSOC_SET_TAG        = 8;
         
         NSString *name = [paintSwatch name];
 
-        cell.imageView.image = [AppColorUtils renderSwatch:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight context:self.context];
+        cell.imageView.image = [AppColorUtils renderSwatch:paintSwatch cellWidth:_assocImageViewWidth cellHeight:_assocImageViewHeight context:self.context isRGB:nil];
         
         // Tag the first reference image
         //

@@ -535,7 +535,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
         }
         
-        
         // Name, and reference type
         //
         if (indexPath.section == DETAIL_NAME_SECTION) {
@@ -544,19 +543,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
-            
-            int type_id = [[_paintSwatch type_id] intValue];
-            NSString *typeName = [[ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:type_id context:self.context] name];
-            
-            // Render 'GenericPaint' with RGB values
-            //
+
             CGFloat imageViewWidth   = DEF_VLG_TBL_CELL_HGT;
             CGFloat textFieldYOffset = (imageViewWidth - DEF_TEXTVIEW_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
-            if ([typeName isEqualToString:@"GenericPaint"]) {
-                cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:imageViewWidth cellHeight:imageViewWidth];
-            } else {
-                cell.imageView.image = [AppColorUtils renderPaint:[_paintSwatch image_thumb] cellWidth:imageViewWidth cellHeight:imageViewWidth];
-            }
+            
+            cell.imageView.image = [AppColorUtils renderSwatch:_paintSwatch cellWidth:imageViewWidth cellHeight:imageViewWidth context:self.context isRGB:0];
             
             [cell.imageView addGestureRecognizer:_tapRecognizer];
             [cell.imageView setUserInteractionEnabled:YES];
@@ -710,13 +701,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
             if (indexPath.row == 0) {
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
                 [cell.textLabel setText:[_refPaintSwatch name]];
 
             } else {
                 // Detail Mix Section
                 //
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
                 [cell.textLabel setText:[_mixPaintSwatch name]];
             }
         }
@@ -1289,7 +1280,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     PaintSwatches *paintSwatch = [[self.colorArray objectAtIndex:index] objectAtIndex:indexPath.row];
     
-    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[AppColorUtils renderPaint:[paintSwatch image_thumb] cellWidth:_imageViewWidth cellHeight:_imageViewHeight]];
+    UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:[AppColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight context:self.context isRGB:nil]];
     
     [swatchImageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
     [swatchImageView.layer setBorderWidth: DEF_BORDER_WIDTH];

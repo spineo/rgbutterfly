@@ -264,7 +264,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
     [cell.imageView setClipsToBounds:YES];
 
-    cell.imageView.image = [AppColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context];
+    cell.imageView.image = [AppColorUtils renderSwatch:[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil];
     
     cell.accessoryType   = UITableViewCellSeparatorStyleNone;
 

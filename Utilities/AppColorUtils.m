@@ -31,18 +31,24 @@
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-+ (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height context:(NSManagedObjectContext *)context {
-    BOOL isRGB = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
++ (UIImage *)renderSwatch:(PaintSwatches *)swatchObj  cellWidth:(CGFloat)width cellHeight:(CGFloat)height context:(NSManagedObjectContext *)context isRGB:(NSNumber *)isRGB {
     
-    int type_id = [[swatchObj type_id] intValue];
+    BOOL isRGBSetting;
+    if (isRGB == nil) {
+        isRGBSetting = [[NSUserDefaults standardUserDefaults] boolForKey:RGB_DISPLAY_KEY];
+        isRGB = [NSNumber numberWithBool:isRGBSetting];
+        
+    } else {
+        isRGBSetting = [isRGB boolValue];
+    }
     
-    NSString *typeName = [[ManagedObjectUtils queryDictionaryName:@"PaintSwatchType" entityId:type_id context:context] name];
+    int coverage_id = [[swatchObj coverage_id] intValue];
     
+    NSString *coverageName = [[ManagedObjectUtils queryDictionaryName:@"CanvasCoverage" entityId:coverage_id context:context] name];
+
     UIImage *swatchImage;
-    
-    // 'GenericPaint' types are always rendered using RGB values
-    //
-    if (isRGB == FALSE && ![typeName isEqualToString:@"GenericPaint"]) {
+
+    if (isRGBSetting == FALSE && ([coverageName isEqualToString:@"Thick"] || [coverageName isEqualToString:@"Medium"])) {
         swatchImage = [self renderPaint:swatchObj.image_thumb cellWidth:width cellHeight:height];
     } else {
         swatchImage = [self renderRGB:swatchObj cellWidth:width cellHeight:height];
@@ -66,6 +72,14 @@
 }
 
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
+    CGSize size = CGSizeMake(width, height);
+    
+    UIImage *resizedImage = [ColorUtils resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];
+    
+    return resizedImage;
+}
+
++ (UIImage *)renderPaintFromSwatch:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     CGSize size = CGSizeMake(width, height);
     
     UIImage *resizedImage = [ColorUtils resizeImage:[UIImage imageWithData:image_thumb] imageSize:size];

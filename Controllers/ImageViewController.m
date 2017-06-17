@@ -1520,7 +1520,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (! custCell) {
             custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_NIL_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
         }
-        [custCell setXOffset:custCell.bounds.origin.x + DEF_LG_TABLE_CELL_HGT + DEF_MD_FIELD_PADDING];
+        [custCell setXOffset:custCell.bounds.origin.x + DEF_CELL_HEIGHT + DEF_FIELD_PADDING];
         [custCell setBackgroundColor:DARK_BG_COLOR];
         [custCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
@@ -1561,9 +1561,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         UIImage *image;
         if (_isRGB == TRUE) {
-            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
+            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
         } else {
-            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
+            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
         }
         
         custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET];
@@ -1693,9 +1693,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     UIImage *swatchImage;
     if (_isRGB == TRUE) {
-        swatchImage = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
+        swatchImage = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
     } else {
-        swatchImage = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_LG_TABLE_CELL_HGT cellHeight:DEF_LG_TABLE_CELL_HGT];
+        swatchImage = [AppColorUtils renderSwatch:paintSwatch cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT context:self.context isRGB:0];
     }
     
     UIImageView *swatchImageView = [[UIImageView alloc] initWithImage:swatchImage];
@@ -1706,7 +1706,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     [swatchImageView setContentMode: UIViewContentModeScaleAspectFit];
     [swatchImageView setClipsToBounds: YES];
-    [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_LG_TABLE_CELL_HGT, DEF_LG_TABLE_CELL_HGT)];
+    [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_CELL_HEIGHT, DEF_CELL_HEIGHT)];
     
     cell.backgroundView = swatchImageView;
     

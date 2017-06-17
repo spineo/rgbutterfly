@@ -1174,7 +1174,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         
             } else {
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-                [cell.imageView setImage:[AppColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
+                [cell.imageView setImage:[AppColorUtils renderSwatch:obj cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
                 [cell.textLabel setText:[(PaintSwatches *)obj name]];
                 cell.userInteractionEnabled = YES;
             }
@@ -1192,7 +1192,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             PaintSwatches *swatch = [[_letterDefaults objectForKey:sectionTitle] objectAtIndex:indexPath.row];
             
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            [cell.imageView setImage:[AppColorUtils renderSwatch:swatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context]];
+            [cell.imageView setImage:[AppColorUtils renderSwatch:swatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
             [cell.textLabel setText:[swatch name]];
             cell.userInteractionEnabled = YES;
         }
@@ -1405,8 +1405,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
         PaintSwatches *paintSwatch = [[self.mixColorArray objectAtIndex:index] objectAtIndex:indexPath.row];
 
-        swatchImage = [AppColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight context:self.context];
-
+        swatchImage = [AppColorUtils renderSwatch:paintSwatch cellWidth:_imageViewWidth cellHeight:_imageViewHeight context:self.context isRGB:nil];
 
     // Match
     //
