@@ -10,6 +10,7 @@
 #import "GlobalSettings.h"
 #import "FieldUtils.h"
 #import "StringObjectUtils.h"
+#import "ColorUtils.h"
 
 @interface AboutViewController ()
 
@@ -25,7 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    [self.view setBackgroundColor:DARK_BLUE_BG_COLOR];
     
     UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
@@ -59,7 +61,7 @@
     [aboutText appendAttributedString:aboutReleaseFeatures];
 
     [aboutTextView setAttributedText:aboutText];
-    [aboutTextView setBackgroundColor:DARK_BG_COLOR];
+    [aboutTextView setBackgroundColor:CLEAR_COLOR];
     [aboutTextView setScrollEnabled:TRUE];
     [aboutTextView setEditable:FALSE];
     [aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];

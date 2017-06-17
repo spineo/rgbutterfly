@@ -515,7 +515,7 @@ extern float const DEF_BORDER_THRESHOLD;
 
 // New Colors/Defaults
 //
-#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:23.0/255.0 green:46.0/255.0 blue:90.0/255.0 alpha:1.0]
+#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
 #define DEFAULT_BG_COLOR   [UIColor blackColor]
 #define INITVC_TEXT_COLOR  [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:146.0/255.0 alpha:1.0]
 

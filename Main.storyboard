@@ -64,13 +64,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
-                        <barButtonItem tag="54" image="text list-1" id="ESY-Bx-jsW">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="showListingOptions:" destination="BYZ-38-t0r" id="tI1-W2-Anx"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem tag="103" systemItem="flexibleSpace" id="eSc-da-vKc"/>
                         <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -272,7 +265,7 @@
                         <barButtonItem tag="62" image="home" id="nrS-1o-Hbi">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="jHz-zW-4v8" kind="unwind" identifier="unwindToVC" unwindAction="unwindToViewController:" id="aH0-rO-C2q"/>
+                                <segue destination="jHz-zW-4v8" kind="unwind" unwindAction="unwindToInitViewController:" id="xA7-c1-5mA"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="N3S-rM-GJZ"/>
@@ -1207,14 +1200,13 @@
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
         <image name="share" width="16" height="22"/>
-        <image name="text list-1" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="TM9-cr-8aw"/>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="7bF-uJ-b3u"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

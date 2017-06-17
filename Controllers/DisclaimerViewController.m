@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:DARK_BLUE_BG_COLOR];
+    
     UITextView *disclaimerTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     NSMutableAttributedString *disclaimerText = [[NSMutableAttributedString alloc] initWithString:DISCLAIMER_TEXT];
@@ -40,7 +42,7 @@
     [disclaimerText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch];
     
     [disclaimerTextView setAttributedText:disclaimerText];
-    [disclaimerTextView setBackgroundColor:DARK_BG_COLOR];
+    [disclaimerTextView setBackgroundColor:CLEAR_COLOR];
     [disclaimerTextView setScrollEnabled:TRUE];
     [disclaimerTextView setEditable:FALSE];
     [disclaimerTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];

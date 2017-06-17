@@ -442,25 +442,38 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
+        
         [self loadMixCollectionViewData];
         
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
+        
+        [self setTitle:@"My Matched Colors"];
+        
         [self loadMatchCollectionViewData];
         
     } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
+        
+        [self setTitle:@"Topics"];
+        
         [self loadKeywordData];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         [_searchButton setImage:_downArrowImage];
         [_searchButton setAction:@selector(expandAllSections)];
+        
+        [self setTitle:@"Colors Groups"];
+        
         [self loadColorsData];
     } else {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
+        
+        [self setTitle:@"All Colors"];
+        
         [self loadFullColorsListing];
         _listingType = FULL_LISTING_TYPE;
     }
@@ -561,6 +574,9 @@ int MIX_ASSOC_MIN_SIZE = 0;
     self.mixColorArray = [NSMutableArray arrayWithArray:mixAssociationIds];
     
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
+    
+    NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"Color Collections", _numMixAssocs];
+    [self setTitle:title];
     
     [_colorTableView reloadData];
 }
@@ -699,6 +715,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     _numKeywords = (int)[sortedKeywords count];
     
+    // Update the view controller title
+    //
+    NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"Topics", _numKeywords];
+    [self setTitle:title];
+    
     [_colorTableView reloadData];
 }
 
@@ -796,24 +817,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
         headerHeight = DEF_SM_TABLE_CELL_HGT;
         UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
-        
-        if (section == 0) {
-            yOffset      = 0.0;;
-            headerHeight = DEF_LG_TABLE_CELL_HGT;
-            if (_isLandscape == TRUE) {
-                yOffset = DEF_SM_TABLE_CELL_HGT;
-                headerHeight = headerHeight + yOffset;
-            }
-    
-            NSString *keywordsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", KEYWORDS_TYPE, _numKeywords];
-            [headerView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
-            
-
-            [headerView addSubview:headerLabel];
-            [headerLabel setText:keywordsListing];
-            [headerLabel setTextAlignment:NSTextAlignmentCenter];
-            [letterLabel setFrame:CGRectMake(DEF_X_OFFSET, headerHeight - DEF_SM_TABLE_CELL_HGT, tableView.bounds.size.width, DEF_SM_TABLE_CELL_HGT)];
-        }
         
         [letterLabel setBackgroundColor:DEFAULT_BG_COLOR];
         [letterLabel setTextColor:LIGHT_TEXT_COLOR];
@@ -984,8 +987,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat headerHeight;
-    
-    if (([_listingType isEqualToString:KEYWORDS_TYPE] || [_listingType isEqualToString:FULL_LISTING_TYPE]) && (section == 0)) {
+
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
         headerHeight = DEF_LG_TABLE_CELL_HGT;
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {

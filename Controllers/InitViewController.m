@@ -56,6 +56,7 @@
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+
     
     // Match Colors
     //
@@ -301,7 +302,6 @@
     _spinner = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [_spinner setTag:INIT_SPINNER_TAG];
-    
         
     [_spinner setHidesWhenStopped:YES];
     [self.view addSubview:_spinner];
@@ -389,10 +389,7 @@
 - (IBAction)matchColors:(id)sender {
     [_matchButton setAlpha:0.0];
     [_matchLabel setAlpha:0.0];
-    
-
     [_takePhotoButton setAlpha:1.0];
-    
     [_takePhotoLabel setAlpha:1.0];
     [_myPhotosButton setAlpha:1.0];
     [_myPhotosLabel setAlpha:1.0];
