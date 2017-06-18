@@ -171,9 +171,13 @@ const int ASSOC_SET_TAG        = 8;
 
     
     _mixTitleLabel = [[UILabel alloc] init];
-    _mixTitleLabel.text = [_mixAssociation name];
-    [_mixTitleLabel setBackgroundColor: CLEAR_COLOR];
-    [_mixTitleLabel setTextColor: LIGHT_TEXT_COLOR];
+    //_mixTitleLabel.text = [_mixAssociation name];
+    _mixTitleLabel.text = @"Color Collection";
+    [_mixTitleLabel setBackgroundColor:CLEAR_COLOR];
+    [_mixTitleLabel setTextColor:LIGHT_TEXT_COLOR];
+    [_mixTitleLabel setNumberOfLines:0];
+    [_mixTitleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    
     [_mixTitleLabel sizeToFit];
     self.navigationItem.titleView = _mixTitleLabel;
     
