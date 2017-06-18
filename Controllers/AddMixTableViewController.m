@@ -84,6 +84,10 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -191,14 +195,14 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerView setBackgroundColor:DARK_BG_COLOR];
+    [headerView setBackgroundColor:DEF_BG_COLOR];
     
     [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerLabel setBackgroundColor:DARK_BG_COLOR];
+    [headerLabel setBackgroundColor:DEF_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
     
@@ -277,7 +281,7 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
     [cell.textLabel setText:[[[_paintSwatchList objectAtIndex:indexPath.row] paintSwatch] name]];
     [cell.textLabel setFont:TABLE_CELL_FONT];
     
-    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setBackgroundColor:DEF_BG_COLOR];
     [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

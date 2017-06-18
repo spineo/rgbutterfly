@@ -103,7 +103,7 @@
         rect = CGRectMake(DEF_X_COORD, yLocation, image.size.width, image.size.height);
     }
     
-    NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:LG_TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
+    NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:LG_TAP_AREA_FONT, NSBackgroundColorAttributeName:DEF_BG_COLOR};
     
     [rgbValue drawInRect:CGRectInset(rect, DEF_RECT_INSET, DEF_RECT_INSET) withAttributes:attr];
     

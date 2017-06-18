@@ -15,7 +15,7 @@
     UILabel *label = [[UILabel alloc] init];
     
     [label setText:name];
-    [label setBackgroundColor:DARK_TEXT_COLOR];
+    [label setBackgroundColor:DEF_BG_COLOR];
     [label setTextColor:LIGHT_TEXT_COLOR];
     [label setTextAlignment:NSTextAlignmentLeft];
     [label setFont:ITALIC_FONT];
@@ -42,21 +42,21 @@
 + (UILabel *)createSmallLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
     
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
-    [label setFont: SMALL_FONT];
+    [label setFont:SMALL_FONT];
     
     return label;
 }
 
 + (UILabel *)createLargeLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
-    [label setFont: LARGE_BOLD_FONT];
+    [label setFont:LARGE_BOLD_FONT];
     
     return label;
 }
 
 + (UITextField *)createTextField:(NSString *)name tag:(NSInteger)tag {
     UITextField *textField = [[UITextField alloc] init];
-    [textField setBackgroundColor: LIGHT_BG_COLOR];
+    [textField setBackgroundColor:LIGHT_BG_COLOR];
     [textField setTextColor: DARK_TEXT_COLOR];
     [textField.layer setCornerRadius: DEF_CORNER_RADIUS];
     [textField.layer setBorderWidth: DEF_BORDER_WIDTH];
@@ -95,7 +95,7 @@
 
 + (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, DEF_PICKER_HEIGHT)];
-    [pickerView setBackgroundColor: DARK_BG_COLOR];
+    [pickerView setBackgroundColor: DEF_BG_COLOR];
     [pickerView setShowsSelectionIndicator:YES];
     [pickerView setTag:tag];
     
@@ -104,7 +104,7 @@
 
 + (UIPickerView *)createPickerView:(CGFloat)width tag:(NSInteger)tag xOffset:(CGFloat)x yOffset:(CGFloat)y {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(x, y, width, DEF_PICKER_HEIGHT)];
-    [pickerView setBackgroundColor: DARK_BG_COLOR];
+    [pickerView setBackgroundColor: DEF_BG_COLOR];
     [pickerView setShowsSelectionIndicator:YES];
     [pickerView setTag:tag];
     
@@ -118,7 +118,7 @@
     
     [refName setFont:TEXT_FIELD_FONT];
     [refName setTextColor:LIGHT_TEXT_COLOR];
-    [refName setBackgroundColor:DARK_BG_COLOR];
+    [refName setBackgroundColor:DEF_BG_COLOR];
     
     if (border == TRUE) {
         [refName.layer setBorderWidth: DEF_BORDER_WIDTH];
@@ -147,7 +147,7 @@
     
     [refName setFont:TEXT_FIELD_FONT];
     [refName setTextColor:LIGHT_TEXT_COLOR];
-    [refName setBackgroundColor:DARK_BG_COLOR];
+    [refName setBackgroundColor:DEF_BG_COLOR];
     
     if (border == TRUE) {
         [refName.layer setBorderWidth: DEF_BORDER_WIDTH];

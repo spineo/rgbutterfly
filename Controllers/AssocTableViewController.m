@@ -96,6 +96,10 @@ const int ASSOC_SET_TAG        = 8;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
 
     //[ColorUtils setGlaze:self.navigationController.navigationBar];
 
@@ -167,7 +171,7 @@ const int ASSOC_SET_TAG        = 8;
     _editFlag       = FALSE;
     _mainColorFlag  = FALSE;
     _bgColorView    = [[UIView alloc] init];
-    [_bgColorView setBackgroundColor: DARK_BG_COLOR];
+    [_bgColorView setBackgroundColor:DEF_BG_COLOR];
 
     
     _mixTitleLabel = [[UILabel alloc] init];
@@ -475,13 +479,13 @@ const int ASSOC_SET_TAG        = 8;
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     // Background color
     //
-    [view setTintColor: DARK_TEXT_COLOR];
+    [view setTintColor:DEF_BG_COLOR];
     
     // Text Color
     //
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
-    [header.contentView setBackgroundColor:DARK_BG_COLOR];
+    [header.contentView setBackgroundColor:DEF_BG_COLOR];
     [header.textLabel setFont:TABLE_HEADER_FONT];
 }
 
@@ -556,7 +560,7 @@ const int ASSOC_SET_TAG        = 8;
     
     // Global defaults
     //
-    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setBackgroundColor:DEF_BG_COLOR];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -637,7 +641,7 @@ const int ASSOC_SET_TAG        = 8;
         cell.accessoryType       = UITableViewCellAccessoryNone;
         cell.imageView.image = nil;
         
-        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setBackgroundColor:DEF_BG_COLOR];
         [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
         [cell.textLabel setFont:TABLE_CELL_FONT];
         
@@ -652,7 +656,7 @@ const int ASSOC_SET_TAG        = 8;
             [cell.contentView addSubview:_assocTypeButton];
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         } else {
-            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell setBackgroundColor:DEF_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell.textLabel setFont:TABLE_HEADER_FONT];
             [cell.textLabel setText:assocTypeText];
@@ -667,7 +671,7 @@ const int ASSOC_SET_TAG        = 8;
             [cell.contentView addSubview:_setButton];
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         } else {
-            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell setBackgroundColor:DEF_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell.textLabel setFont:TABLE_HEADER_FONT];
             [cell.textLabel setText:coverageText];
@@ -678,7 +682,7 @@ const int ASSOC_SET_TAG        = 8;
         cell.imageView.image = nil;
         [cell.contentView addSubview:_applyButton];
         
-        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setBackgroundColor:DEF_BG_COLOR];
         [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
         [cell.textLabel setFont:TABLE_CELL_FONT];
         
@@ -1372,7 +1376,7 @@ const int ASSOC_SET_TAG        = 8;
         [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
         
         UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, mixRatiosPicker.bounds.size.width, mixRatiosPicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-        [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+        [pickerParentView setBackgroundColor:DEF_BG_COLOR];
         [pickerParentView addSubview:pickerToolbar];
         [pickerParentView addSubview:mixRatiosPicker];
         
@@ -1417,7 +1421,7 @@ const int ASSOC_SET_TAG        = 8;
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _assocTypePicker.bounds.size.width, _assocTypePicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:_assocTypePicker];
     
@@ -1453,7 +1457,7 @@ const int ASSOC_SET_TAG        = 8;
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _coveragePicker.bounds.size.width, _coveragePicker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:_coveragePicker];
     
@@ -1591,7 +1595,7 @@ const int ASSOC_SET_TAG        = 8;
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:picker];
     

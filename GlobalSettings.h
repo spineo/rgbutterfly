@@ -431,6 +431,7 @@ extern NSString * const NO_MIX_NAME;
 //
 extern NSString * const BACKGROUND_IMAGE_TITLE;
 extern NSString * const BACKGROUND_IMAGE;
+extern NSString * const BACKGROUND_IMAGE_2;
 extern NSString * const DEF_IMAGE_NAME;
 extern NSString * const IMAGE_LIB_NAME;
 extern NSString * const PALETTE_IMAGE_NAME;
@@ -504,7 +505,6 @@ extern float const DEF_BORDER_THRESHOLD;
 #define LIGHT_BG_COLOR     [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
 #define GRAY_BG_COLOR      [UIColor grayColor]
 #define DARK_GRAY_BG_COLOR [UIColor colorWithRed:33.0/255.0 green:33.0/255.0 blue:33.0/255.0 alpha:1.0]
-#define DARK_BG_COLOR      [UIColor blackColor]
 
 
 // Colors (across the board)
@@ -518,7 +518,9 @@ extern float const DEF_BORDER_THRESHOLD;
 // New Colors/Defaults
 //
 #define DARK_BLUE_BG_COLOR [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
-#define DEFAULT_BG_COLOR   [UIColor blackColor]
+//#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:21.0/255.0 green:44.0/255.0 blue:87.0/255.0 alpha:1.0]
+
+#define DEF_BG_COLOR [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
 #define INITVC_TEXT_COLOR  [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:146.0/255.0 alpha:1.0]
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

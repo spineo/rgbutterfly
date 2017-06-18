@@ -132,7 +132,7 @@
     // Disclosure button
     //
     _yOffset = _viewHeight * 0.08;
-    _xOffset = _viewWidth * 0.84;
+    _xOffset = _viewWidth * 0.83;
     _buttonWidth  = _disclosureButton.bounds.size.width;
     _buttonHeight = _disclosureButton.bounds.size.height;
     [_disclosureButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];

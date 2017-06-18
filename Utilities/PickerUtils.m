@@ -14,7 +14,7 @@
 
 + (UIPickerView *)createPickerView:(NSInteger)tag  xOffset:(CGFloat)x yOffset:(CGFloat)y {
     UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_PICKER_WIDTH, DEF_PICKER_HEIGHT)];
-    [pickerView setBackgroundColor: DARK_BG_COLOR];
+    [pickerView setBackgroundColor:DEF_BG_COLOR];
     [pickerView setShowsSelectionIndicator:YES];
     [pickerView setTag:tag];
     
@@ -50,7 +50,7 @@
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_PICKER_WIDTH, DEF_PICKER_HEIGHT + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:picker];
     

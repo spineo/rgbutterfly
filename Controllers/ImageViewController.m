@@ -150,6 +150,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -1279,7 +1283,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
         CGRect rect = CGRectMake(x, y, image.size.width, image.size.height);
         
-        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
+        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DEF_BG_COLOR};
         
         [countStr drawInRect:CGRectInset(rect, TAP_AREA_LABEL_INSET, TAP_AREA_LABEL_INSET) withAttributes:attr];
         
@@ -1319,7 +1323,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [retImage drawInRect:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, image.size.width, image.size.height)];
         CGRect rect = CGRectMake(x, y, image.size.width, image.size.height);
 
-        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DARK_BG_COLOR};
+        NSDictionary *attr = @{NSForegroundColorAttributeName:LIGHT_TEXT_COLOR, NSFontAttributeName:TAP_AREA_FONT, NSBackgroundColorAttributeName:DEF_BG_COLOR};
 
         [countStr drawInRect:CGRectInset(rect, TAP_AREA_LABEL_INSET, TAP_AREA_LABEL_INSET) withAttributes:attr];
     
@@ -1518,10 +1522,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
         if (! custCell) {
-            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_NIL_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_NIL_INSET padding:DEF_CELL_PADDING backgroundColor:DEF_BG_COLOR];
         }
         [custCell setXOffset:custCell.bounds.origin.x + DEF_CELL_HEIGHT + DEF_FIELD_PADDING];
-        [custCell setBackgroundColor:DARK_BG_COLOR];
+        [custCell setBackgroundColor:DEF_BG_COLOR];
         [custCell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [custCell setCollectionViewDataSourceDelegate:self index:indexPath.row];
         
@@ -1582,7 +1586,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else {
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:_reuseCellIdentifier];
         
-        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setBackgroundColor:DEF_BG_COLOR];
         
         NSString *headerTitle = @"";
         if (_currTapSection > 0) {

@@ -52,7 +52,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     [button setTitle: title forState:UIControlStateNormal];
-    [button setTintColor:DARK_TEXT_COLOR];
+    [button setTintColor:DEF_BG_COLOR];
     [button setBackgroundColor:GRAY_BG_COLOR];
     [button setTag: tag];
     

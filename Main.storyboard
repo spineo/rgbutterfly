@@ -923,7 +923,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="331" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-ul-th9">
-                                <rect key="frame" x="326" y="21" width="22" height="22"/>
+                                <rect key="frame" x="326" y="21" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="question-2-init">
                                     <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -934,7 +934,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="332" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ2-X9-HsM">
-                                <rect key="frame" x="309" y="581" width="40" height="40"/>
+                                <rect key="frame" x="309" y="581" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="settings-2-init">
                                     <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1071,6 +1071,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="22u-HA-7Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1095,19 +1096,22 @@
         <!--Navigation Controller-->
         <scene sceneID="Wie-Pz-YjX">
             <objects>
-                <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="FoQ-BG-cJK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="FoQ-BG-cJK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.10101187229156494" green="0.16480720043182373" blue="0.27462124824523926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="A45-Y4-FDm">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="A45-Y4-FDm">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="LAd-NZ-GB6" kind="relationship" relationship="rootViewController" id="fBW-aD-h57"/>

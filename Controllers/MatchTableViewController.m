@@ -91,6 +91,10 @@ const int IMAGE_TAG  = 6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
 
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 
@@ -304,14 +308,14 @@ const int IMAGE_TAG  = 6;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerView setBackgroundColor:DARK_BG_COLOR];
+    [headerView setBackgroundColor:DEF_BG_COLOR];
     
     [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
-    [headerLabel setBackgroundColor:DARK_BG_COLOR];
+    [headerLabel setBackgroundColor:DEF_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
     
@@ -445,7 +449,7 @@ const int IMAGE_TAG  = 6;
     
     // Global defaults
     //
-    [cell setBackgroundColor:DARK_BG_COLOR];
+    [cell setBackgroundColor:DEF_BG_COLOR];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (_scrollFlag == TRUE) {

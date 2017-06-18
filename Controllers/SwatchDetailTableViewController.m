@@ -156,6 +156,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
 
     [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 
@@ -515,7 +519,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
         // Global defaults
         //
-        [cell setBackgroundColor:DARK_BG_COLOR];
+        [cell setBackgroundColor:DEF_BG_COLOR];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         [tableView setSeparatorColor:GRAY_BG_COLOR];
@@ -696,7 +700,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [cell.textLabel setFont:TABLE_CELL_FONT];
-            [cell setBackgroundColor:DARK_BG_COLOR];
+            [cell setBackgroundColor:DEF_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             
@@ -719,10 +723,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else {
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
-        [custCell setBackgroundColor: DARK_BG_COLOR];
+        [custCell setBackgroundColor: DEF_BG_COLOR];
         
         if (! custCell) {
-            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DARK_BG_COLOR];
+            custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DEF_BG_COLOR];
         }
         
         MixAssocSwatch *mixAssocSwatchObj = [_mixAssocSwatches objectAtIndex:indexPath.row];
@@ -804,7 +808,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 {
     // Background color
     //
-    [view setTintColor: DARK_TEXT_COLOR];
+    [view setTintColor:DEF_BG_COLOR];
     
     // Text Color
     //
@@ -1198,7 +1202,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:picker];
     

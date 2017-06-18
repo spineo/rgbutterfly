@@ -27,7 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.view setBackgroundColor:DARK_BLUE_BG_COLOR];
+    // Set the background image
+    //
+    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
     
     UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
