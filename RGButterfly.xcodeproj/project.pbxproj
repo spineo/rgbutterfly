@@ -405,8 +405,8 @@
 			children = (
 				219C47791E22A93B00DADF0F /* InitViewController.h */,
 				219C477A1E22A93B00DADF0F /* InitViewController.m */,
-				2109A0C81DFDDD6F0076A095 /* AboutViewController.h */,
 				2109A0C91DFDDD6F0076A095 /* AboutViewController.m */,
+				2109A0C81DFDDD6F0076A095 /* AboutViewController.h */,
 				2109A0CA1DFDDD6F0076A095 /* AddMixTableViewController.h */,
 				2109A0CB1DFDDD6F0076A095 /* AddMixTableViewController.m */,
 				2109A0CE1DFDDD6F0076A095 /* AssocTableViewController.h */,

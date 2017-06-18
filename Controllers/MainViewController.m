@@ -574,7 +574,9 @@ int MIX_ASSOC_MIN_SIZE = 0;
     self.mixColorArray = [NSMutableArray arrayWithArray:mixAssociationIds];
     
     _paintSwatches = [ManagedObjectUtils fetchPaintSwatches:self.context];
-    
+
+    // Update the view controller title
+    //
     NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"Color Collections", _numMixAssocs];
     [self setTitle:title];
     
@@ -605,6 +607,11 @@ int MIX_ASSOC_MIN_SIZE = 0;
     }
     
     self.matchColorArray = [NSMutableArray arrayWithArray:matchAssociationIds];
+    
+    // Update the view controller title
+    //
+    NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"My Matches", _numMatchAssocs];
+    [self setTitle:title];
     
     [_colorTableView reloadData];    
 }
@@ -829,22 +836,21 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [letterLabel setText:[_sortedLetters objectAtIndex:section]];
         
     } else if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
-        NSString *mixAssocsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", MIX_LIST_TYPE, _numMixAssocs];
+        NSString *mixAssocsListing = @"";
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
-        [headerLabel setTextAlignment:NSTextAlignmentCenter];
+        [headerLabel setBackgroundColor:CLEAR_COLOR];
         
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
-        NSString *matchAssocsListing = [[NSString alloc] initWithFormat:@"%@ (%i)", MATCH_LIST_TYPE, _numMatchAssocs];
+        NSString *matchAssocsListing = @"";
         [headerView addSubview:headerLabel];
         [headerLabel setText:matchAssocsListing];
-        [headerLabel setTextAlignment:NSTextAlignmentCenter];
+        [headerLabel setBackgroundColor:CLEAR_COLOR];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         if (section == 0) {
-            [headerLabel setText:[[NSString alloc] initWithFormat:@"%@ Groupings", COLORS_TYPE]];
-            [headerLabel setTextAlignment: NSTextAlignmentCenter];
-
+            [headerLabel setText:@""];
+            [headerLabel setBackgroundColor:CLEAR_COLOR];
             [headerView addSubview:headerLabel];
 
         } else {
@@ -990,6 +996,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (section == 0)) {
         headerHeight = DEF_LG_TABLE_CELL_HGT;
+        
+    } else if ((
+        [_listingType isEqualToString:MIX_LIST_TYPE] ||
+        [_listingType isEqualToString:MATCH_LIST_TYPE] ||
+        [_listingType isEqualToString:COLORS_TYPE]) && (section == 0)) {
+        headerHeight = DEF_NIL_HEADER;
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         headerHeight = DEF_LG_TABLE_HDR_HGT;
@@ -1184,7 +1196,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
             }
             
         } else if ([_listingType isEqualToString:COLORS_TYPE]) {
-            
             int index = (int)indexPath.section - 1;
             PaintSwatches *ps = [[_subjColorsArray objectAtIndex:index] objectAtIndex:indexPath.row];
             
