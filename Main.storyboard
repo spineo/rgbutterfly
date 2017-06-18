@@ -922,10 +922,10 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="331" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-ul-th9">
+                            <button opaque="NO" tag="331" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-ul-th9">
                                 <rect key="frame" x="326" y="21" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <state key="normal" image="question-2-init">
                                     <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -936,7 +936,7 @@
                             <button opaque="NO" tag="332" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ2-X9-HsM">
                                 <rect key="frame" x="309" y="581" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="settings-2">
+                                <state key="normal" image="settings-2-init">
                                     <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -1206,10 +1206,11 @@
         <image name="jgpineo_visit_photos" width="1374" height="1208"/>
         <image name="minus sign" width="20" height="20"/>
         <image name="plus sign-1" width="20" height="20"/>
+        <image name="question-2-init" width="32" height="32"/>
         <image name="rgb" width="30" height="30"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
-        <image name="settings-2" width="32" height="32"/>
+        <image name="settings-2-init" width="32" height="32"/>
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
