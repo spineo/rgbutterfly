@@ -193,8 +193,8 @@
     
     // Settings button
     //
-    _yOffset = _viewHeight * 0.88;
-    _xOffset = _viewWidth * 0.84;
+    _yOffset = _viewHeight * 0.86;
+    _xOffset = _viewWidth * 0.80;
     _buttonWidth  = _settingsButton.bounds.size.width;
     _buttonHeight = _settingsButton.bounds.size.height;
     [_settingsButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];

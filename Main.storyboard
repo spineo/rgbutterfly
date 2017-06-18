@@ -933,10 +933,10 @@
                                     <segue destination="Hl2-Fv-ZhM" kind="presentation" identifier="InitToAboutSegue" id="clT-9D-BBI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="332" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ2-X9-HsM">
-                                <rect key="frame" x="326" y="592" width="22" height="22"/>
+                            <button opaque="NO" tag="332" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ2-X9-HsM">
+                                <rect key="frame" x="309" y="581" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <state key="normal" image="settings-2">
                                     <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -1209,6 +1209,7 @@
         <image name="rgb" width="30" height="30"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
+        <image name="settings-2" width="32" height="32"/>
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
