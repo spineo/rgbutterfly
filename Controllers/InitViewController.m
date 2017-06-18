@@ -28,7 +28,7 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *buttonReference;
+@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *disclosureButton, *settingsButton;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
 @property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
@@ -60,27 +60,33 @@
     
     // Match Colors
     //
-    _matchButton     = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
-    _matchLabel      = (UILabel *)[self.view viewWithTag:MATCH_LABEL_TAG];
-    _takePhotoButton = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
-    _takePhotoLabel  = (UILabel *)[self.view viewWithTag:TAKE_LABEL_TAG];
-    _myPhotosButton  = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
-    _myPhotosLabel   = (UILabel *)[self.view viewWithTag:VISIT_LABEL_TAG];
+    _matchButton      = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
+    _matchLabel       = (UILabel *)[self.view viewWithTag:MATCH_LABEL_TAG];
+    _takePhotoButton  = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
+    _takePhotoLabel   = (UILabel *)[self.view viewWithTag:TAKE_LABEL_TAG];
+    _myPhotosButton   = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
+    _myPhotosLabel    = (UILabel *)[self.view viewWithTag:VISIT_LABEL_TAG];
     
     // Explore Colors
     //
-    _exploreButton   = (UIButton *)[self.view viewWithTag:EXPLORE_BTN_TAG];
-    _exploreLabel    = (UILabel *)[self.view viewWithTag:EXPLORE_LABEL_TAG];
-    _topicsButton    = (UIButton *)[self.view viewWithTag:TOPICS_BTN_TAG];
-    _topicsLabel     = (UILabel *)[self.view viewWithTag:TOPICS_LABEL_TAG];
-    _collectButton   = (UIButton *)[self.view viewWithTag:COLLECT_BTN_TAG];
-    _collectLabel    = (UILabel *)[self.view viewWithTag:COLLECT_LABEL_TAG];
-    _listButton      = (UIButton *)[self.view viewWithTag:LIST_BTN_TAG];
-    _listLabel       = (UILabel *)[self.view viewWithTag:LIST_LABEL_TAG];
-    _matchedButton   = (UIButton *)[self.view viewWithTag:MATCHED_BTN_TAG];
-    _matchedLabel    = (UILabel *)[self.view viewWithTag:MATCHED_LABEL_TAG];
-    _groupsButton    = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
-    _groupsLabel     = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
+    _exploreButton    = (UIButton *)[self.view viewWithTag:EXPLORE_BTN_TAG];
+    _exploreLabel     = (UILabel *)[self.view viewWithTag:EXPLORE_LABEL_TAG];
+    _topicsButton     = (UIButton *)[self.view viewWithTag:TOPICS_BTN_TAG];
+    _topicsLabel      = (UILabel *)[self.view viewWithTag:TOPICS_LABEL_TAG];
+    _collectButton    = (UIButton *)[self.view viewWithTag:COLLECT_BTN_TAG];
+    _collectLabel     = (UILabel *)[self.view viewWithTag:COLLECT_LABEL_TAG];
+    _listButton       = (UIButton *)[self.view viewWithTag:LIST_BTN_TAG];
+    _listLabel        = (UILabel *)[self.view viewWithTag:LIST_LABEL_TAG];
+    _matchedButton    = (UIButton *)[self.view viewWithTag:MATCHED_BTN_TAG];
+    _matchedLabel     = (UILabel *)[self.view viewWithTag:MATCHED_LABEL_TAG];
+    _groupsButton     = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
+    _groupsLabel      = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
+    
+    // Disclosure/Settings
+    //
+    _disclosureButton = (UIButton *)[self.view viewWithTag:DISCLOSURE_BTN_TAG];
+    _settingsButton   = (UIButton *)[self.view viewWithTag:SETTINGS2_BTN_TAG];
+    
 
     
     // Initialization
@@ -122,6 +128,14 @@
     _width  = DEF_BUTTON_WIDTH;
     _height = DEF_BUTTON_WIDTH;
     _xCenter = _viewWidth / 2.0;
+    
+    // Disclosure button
+    //
+    _yOffset = _viewHeight * 0.08;
+    _xOffset = _viewWidth * 0.84;
+    _buttonWidth  = _disclosureButton.bounds.size.width;
+    _buttonHeight = _disclosureButton.bounds.size.height;
+    [_disclosureButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
     
     // Match Colors
     //
@@ -176,6 +190,14 @@
     _xOffset = _xCenter + (_width * 0.33);
     [_groupsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
     _groupsLabel = [self resetLabel:_groupsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    // Settings button
+    //
+    _yOffset = _viewHeight * 0.88;
+    _xOffset = _viewWidth * 0.84;
+    _buttonWidth  = _settingsButton.bounds.size.width;
+    _buttonHeight = _settingsButton.bounds.size.height;
+    [_settingsButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
     
     self.view.hidden = NO;
 }
@@ -458,8 +480,17 @@
 
 - (void)performSegue:(NSString *)listType {
     _collectionType = listType;
-    [self performSegueWithIdentifier:@"InitViewControllerSegue" sender:self];
+    [self performSegueWithIdentifier:@"InitToMainSegue" sender:self];
 }
+
+- (IBAction)about:(id)sender {
+        [self performSegueWithIdentifier:@"InitToAboutSegue" sender:self];
+}
+
+- (IBAction)settings:(id)sender {
+        [self performSegueWithIdentifier:@"InitToSettingsSegue" sender:self];
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods
@@ -480,7 +511,8 @@
         PickerViewController *pickerViewController = (PickerViewController *)[segue destinationViewController];
         [pickerViewController setImageAction:_imageAction];
         _photoContext = TRUE;
-    } else {
+        
+    } else if ([[segue identifier] isEqualToString:@"InitToMainSegue"]) {
         [self.view addSubview:_updateLabel];
         [self startSpinner];
         

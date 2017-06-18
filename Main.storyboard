@@ -922,6 +922,28 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="331" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItN-ul-th9">
+                                <rect key="frame" x="326" y="21" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="about:" destination="1qb-fF-uAW" eventType="touchUpInside" id="sCN-zW-YPr"/>
+                                    <segue destination="Hl2-Fv-ZhM" kind="presentation" identifier="InitToAboutSegue" id="clT-9D-BBI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="332" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQ2-X9-HsM">
+                                <rect key="frame" x="326" y="592" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="settings:" destination="1qb-fF-uAW" eventType="touchUpInside" id="jKT-Qy-gar"/>
+                                    <segue destination="Asd-Pb-qDH" kind="presentation" identifier="InitToSettingsSegue" id="xj5-pH-aLq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.96710610389999996" green="0.99478161330000003" blue="0.88627481460000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -931,7 +953,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ohC-U4-rE0"/>
                     <connections>
-                        <segue destination="3gJ-jJ-xoT" kind="presentation" identifier="InitViewControllerSegue" id="9ia-sc-QgB"/>
+                        <segue destination="3gJ-jJ-xoT" kind="presentation" identifier="InitToMainSegue" id="9ia-sc-QgB"/>
                         <segue destination="Ph7-MU-Z6c" kind="presentation" identifier="InitToImagePickerSegue" id="TM9-cr-8aw"/>
                     </connections>
                 </viewController>
@@ -1010,7 +1032,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQj-pA-LKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="726" y="-145"/>
+            <point key="canvasLocation" x="879" y="-154"/>
         </scene>
         <!--RGButterfly Settings-->
         <scene sceneID="hvV-Wo-a3z">
@@ -1034,7 +1056,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d1-jk-xeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25" y="-154"/>
+            <point key="canvasLocation" x="199" y="-138"/>
         </scene>
         <!--About this App-->
         <scene sceneID="Xpe-CD-fZ6">
@@ -1046,12 +1068,6 @@
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="goBack:" destination="LAd-NZ-GB6" id="VRn-9a-Nd7"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="63" image="share" id="cIx-Ci-WY1">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="share:" destination="LAd-NZ-GB6" id="gcZ-VT-gau"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1068,12 +1084,6 @@
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="cgf-RR-2dr">
                             <connections>
                                 <action selector="goBack:" destination="u2b-ZP-TIC" id="Quu-cR-SFz"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="63" image="share" id="CrU-ao-hrm">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="share:" destination="u2b-ZP-TIC" id="aFq-Ek-q8X"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1203,10 +1213,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aqc-zq-dwj"/>
+        <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
+        <segue reference="xj5-pH-aLq"/>
         <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="hK8-5n-amq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
