@@ -245,7 +245,7 @@
     
     [_updateLabel setText:@""];
     [_updateLabel setFont:VLG_TEXT_FIELD_FONT];
-    [_updateLabel setTextColor:INITVC_TEXT_COLOR];
+    [_updateLabel setTextColor:DEF_TEXT_COLOR];
     [_updateLabel setBackgroundColor:CLEAR_COLOR];
     [_updateLabel setTextAlignment:NSTextAlignmentCenter];
     [_updateLabel setTag:INIT_LABEL_TAG];

@@ -33,28 +33,26 @@
     
     // Set the default font
     //
-    [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
+    [self setFontFamily:DEF_ATTRIBUTED_FONT forView:self.view andSubViews:YES];
 
     
-    UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
+    UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_MD_FIELD_PADDING, DEF_Y_OFFSET, self.view.bounds.size.width - DEF_MD_FIELD_PADDING, self.view.bounds.size.height)];
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
     int textLen = (int)aboutText.length;
     
-    [aboutText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, textLen)];
+    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, textLen)];
     [aboutText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
 
     // Link 1
     //
     NSRange urlMatch_1 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:ABOUT_PAT];
     [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range:urlMatch_1];
-    [aboutText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch_1];
 
     // Link 2
     //
     NSRange urlMatch_2 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:DOCS_SITE_PAT];
     [aboutText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch_2];
-    [aboutText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch_2];
     
     // Append the release features text
     //
@@ -62,7 +60,7 @@
     textLen = (int)aboutReleaseFeatures.length;
     
     [aboutReleaseFeatures addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:NSMakeRange(0, 4)];
-    [aboutReleaseFeatures addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, textLen)];
+    [aboutReleaseFeatures addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, textLen)];
     [aboutReleaseFeatures addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
     
     [aboutText appendAttributedString:aboutReleaseFeatures];
@@ -92,6 +90,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #pragma mark - Font Methods
+
 - (void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
 {
     if ([view isKindOfClass:[UILabel class]])
@@ -107,6 +106,20 @@
             [self setFontFamily:fontFamily forView:sview andSubViews:YES];
         }
     }
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Orientation Handling Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Orientation Handling Methods
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 
 

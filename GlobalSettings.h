@@ -379,6 +379,11 @@ extern NSString * const APP_INTRO_INSTRUCTIONS;
 extern NSString * const INTERACT_INSTRUCTIONS;
 extern NSString * const TAP_COLLECT_INSTRUCTIONS;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Customization
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+extern NSString * const DEF_ATTRIBUTED_FONT;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // NSUserDefaults Values
@@ -519,8 +524,9 @@ extern float const DEF_BORDER_THRESHOLD;
 //
 //#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:21.0/255.0 green:44.0/255.0 blue:87.0/255.0 alpha:1.0]
 
-#define DEF_BG_COLOR [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
-#define INITVC_TEXT_COLOR  [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:146.0/255.0 alpha:1.0]
+#define DEF_BG_COLOR      [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
+#define DEF_TEXT_COLOR    [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:146.0/255.0 alpha:1.0]
+#define DEF_LIGHT_TEXT_COLOR [UIColor colorWithRed:255.0/255.0 green:250.0/255.0 blue:218.0/255.0 alpha:1.0]
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // UIFont related
@@ -556,6 +562,14 @@ extern float const DEF_BORDER_THRESHOLD;
 #define ITALIC_FONT         [UIFont italicSystemFontOfSize:12]
 #define LARGE_ITALIC_FONT   [UIFont italicSystemFontOfSize:14]
 #define VLARGE_ITALIC_FONT  [UIFont italicSystemFontOfSize:16]
+
+// App-Wide Defaults
+//
+#define DEF_TITLE_FONT      [UIFont fontWithName:@"Baskerville-Italic" size:24.0]
+#define DEF_LG_ITALIC_FONT  [UIFont fontWithName:@"Baskerville-Italic" size:22.0]
+#define DEF_LG_VIEW_FONT    [UIFont systemFontOfSize:16]
+#define DEF_TBL_HEADER_FONT [UIFont systemFontOfSize:14]
+#define DEF_LABEL_FONT      [UIFont systemFontOfSize:12]
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

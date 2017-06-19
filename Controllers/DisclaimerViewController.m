@@ -31,19 +31,18 @@
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
     
     
-    UITextView *disclaimerTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
+    UITextView *disclaimerTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_MD_FIELD_PADDING, DEF_Y_OFFSET, self.view.bounds.size.width - DEF_MD_FIELD_PADDING, self.view.bounds.size.height)];
     
     NSMutableAttributedString *disclaimerText = [[NSMutableAttributedString alloc] initWithString:DISCLAIMER_TEXT];
     int disclaimerTextLen = (int)disclaimerText.length;
     
-    [disclaimerText addAttribute:NSFontAttributeName value:VLG_TEXT_FIELD_FONT range:NSMakeRange(0, disclaimerTextLen)];
+    [disclaimerText addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, disclaimerTextLen)];
     [disclaimerText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, disclaimerTextLen)];
     
     // Link
     //
     NSRange urlMatch = [StringObjectUtils matchString:DISCLAIMER_TEXT toRegex:DOCS_SITE_PAT];
     [disclaimerText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch];
-    [disclaimerText addAttribute:NSFontAttributeName value:VLARGE_ITALIC_FONT range:urlMatch];
     
     [disclaimerTextView setAttributedText:disclaimerText];
     [disclaimerTextView setBackgroundColor:CLEAR_COLOR];
@@ -64,6 +63,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Orientation Handling Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Orientation Handling Methods
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation Methods

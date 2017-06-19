@@ -105,10 +105,12 @@ const int MIX_RATIOS_ROWS         = 1;
 const int ALERTS_SETTINGS         = 8;
 const int ALERTS_ROWS             = 1;
 
+// Ignore this section
+//
 const int LIST_TYPE_SETTINGS      = 9;
 const int LIST_TYPE_ROWS          = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 10;
+const int SETTINGS_MAX_SECTIONS   = 9;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -141,13 +143,13 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     _aboutLabel = [FieldUtils createLabel:@"About this App" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
-    [_aboutLabel setFont:LG_TABLE_CELL_FONT];
+    [_aboutLabel setFont:DEF_TBL_HEADER_FONT];
     
     _disclaimerLabel = [FieldUtils createLabel:@"Disclaimer" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
-    [_disclaimerLabel setFont:LG_TABLE_CELL_FONT];
+    [_disclaimerLabel setFont:DEF_TBL_HEADER_FONT];
     
     _feedbackLabel = [FieldUtils createLabel:@"Provide Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
-    [_feedbackLabel setFont:LG_TABLE_CELL_FONT];
+    [_feedbackLabel setFont:DEF_TBL_HEADER_FONT];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -423,7 +425,7 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     _matchSettingsLabel = [self createWidgetLabel:@"Change the Number of Tap Area Matches"];
     
     _matchNumStepper = [[UIStepper alloc] init];
-    [_matchNumStepper setTintColor: LIGHT_TEXT_COLOR];
+    [_matchNumStepper setTintColor:LIGHT_TEXT_COLOR];
     [_matchNumStepper addTarget:self action:@selector(matchNumStepperPressed) forControlEvents:UIControlEventValueChanged];
     
     _maxMatchNum = (int)[_userDefaults integerForKey:MATCH_NUM_KEY];
@@ -736,17 +738,21 @@ const int SETTINGS_MAX_SECTIONS   = 10;
         return ABOUT_ROWS;
         
     } else if (section == DB_UPDATE_SETTINGS) {
-        if (_dbPollUpdateFlag == TRUE) {
-            return DB_UPDATE_SETTINGS_ROWS;
-        } else {
-            return 1;
+        if (ALL_FEATURES == 1) {
+            if (_dbPollUpdateFlag == TRUE) {
+                return DB_UPDATE_SETTINGS_ROWS;
+            } else {
+                return 1;
+            }
         }
     
     } else if (section == DB_RESTORE_SETTINGS) {
         return DB_RESTORE_ROWS;
         
     } else if (section == READ_ONLY_SETTINGS) {
-        return READ_ONLY_SETTINGS_ROWS;
+        if (ALL_FEATURES == 1) {
+            return READ_ONLY_SETTINGS_ROWS;
+        }
         
     } else if (section == TAP_AREA_SETTINGS) {
         return TAP_AREA_ROWS;
@@ -758,13 +764,13 @@ const int SETTINGS_MAX_SECTIONS   = 10;
         return RGB_DISPLAY_ROWS;
         
     } else if (section == MIX_RATIOS_SETTINGS) {
-        return MIX_RATIOS_ROWS;
+        if (ALL_FEATURES == 1) {
+            return MIX_RATIOS_ROWS;
+        }
         
     } else if (section == ALERTS_SETTINGS) {
         return ALERTS_ROWS;
 
-    } else if (section == LIST_TYPE_SETTINGS) {
-        return LIST_TYPE_ROWS;
     }
     return 0;
 }
@@ -786,7 +792,14 @@ const int SETTINGS_MAX_SECTIONS   = 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return DEF_TABLE_HDR_HEIGHT;
+        if ((ALL_FEATURES == 0) &&
+        ((section == DB_UPDATE_SETTINGS) ||
+         (section == READ_ONLY_SETTINGS) ||
+         (section == MIX_RATIOS_SETTINGS))) {
+            return DEF_MIN_HEADER;
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -794,13 +807,13 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     if (section == ABOUT_SECTION) {
         headerStr = @"About & Feedback";
         
-    } else if (section == DB_UPDATE_SETTINGS) {
+    } else if ((section == DB_UPDATE_SETTINGS) && (ALL_FEATURES == 1)) {
         headerStr = @"Database Update Settings";
         
     } else if (section == DB_RESTORE_SETTINGS) {
         headerStr = @"Database Restore Settings";
 
-    } else if (section == READ_ONLY_SETTINGS) {
+    } else if ((section == READ_ONLY_SETTINGS) && (ALL_FEATURES == 1)) {
         headerStr = @"Read-Only Settings";
         
     } else if (section == TAP_AREA_SETTINGS) {
@@ -812,14 +825,11 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     } else if (section == RGB_DISPLAY_SETTINGS) {
         headerStr = @"Paint/RGB Display";
         
-    } else if (section == MIX_RATIOS_SETTINGS) {
+    } else if ((section == MIX_RATIOS_SETTINGS) && (ALL_FEATURES == 1)) {
         headerStr = @"Default Paint Mix Ratios";
         
     } else if (section == ALERTS_SETTINGS) {
         headerStr = @"Alerts Settings";
-
-    } else if (section == LIST_TYPE_SETTINGS) {
-        headerStr = @"Default List View";
     }
     
     return headerStr;
@@ -849,7 +859,7 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
 
-    [cell.textLabel setFont:TABLE_CELL_FONT];
+    [cell.textLabel setFont:DEF_TBL_HEADER_FONT];
     [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
     [cell.imageView setImage:nil];
     [cell.textLabel setText:@""];
@@ -1412,9 +1422,9 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     }
     
     [label setText:[_listTypeNames objectAtIndex:row]];
-    [label setTextColor: LIGHT_TEXT_COLOR];
-    [label.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-    [label.layer setBorderWidth: DEF_BORDER_WIDTH];
+    [label setTextColor:LIGHT_TEXT_COLOR];
+    [label.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+    [label.layer setBorderWidth:DEF_BORDER_WIDTH];
     
     [label setTextAlignment:NSTextAlignmentCenter];
     
@@ -1476,7 +1486,7 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;
     [widgetLabel  setFrame:CGRectMake(DEF_BUTTON_WIDTH + DEF_TABLE_X_OFFSET, labelYOffset, labelWidth, labelHeight)];
     
-    [widgetLabel setFont:TEXT_LABEL_FONT];
+    [widgetLabel setFont:TABLE_CELL_FONT];
 
     return widgetLabel;
 }

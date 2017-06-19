@@ -14,11 +14,13 @@
 + (UILabel *)createLabel:(NSString *)name {
     UILabel *label = [[UILabel alloc] init];
     
-    [label setText:name];
+    NSAttributedString *attrName = [[NSAttributedString alloc] initWithString:name];
+    [label setAttributedText:attrName];
+    
     [label setBackgroundColor:DEF_BG_COLOR];
     [label setTextColor:LIGHT_TEXT_COLOR];
     [label setTextAlignment:NSTextAlignmentLeft];
-    [label setFont:ITALIC_FONT];
+    [label setFont:DEF_LABEL_FONT];
     
     return label;
 }
@@ -40,7 +42,6 @@
 }
 
 + (UILabel *)createSmallLabel:(NSString *)name xOffset:(CGFloat)x yOffset:(CGFloat)y {
-    
     UILabel *label = [self createLabel:name xOffset:x yOffset:y];
     [label setFont:SMALL_FONT];
     
