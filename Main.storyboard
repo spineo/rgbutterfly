@@ -22,22 +22,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="0.0" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ikM-89-GOK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="0.0" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ikM-89-GOK">
                                 <rect key="frame" x="16" y="0.0" width="351" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
                                         <rect key="frame" x="0.0" y="22" width="351" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZn-s5-6bi" id="pIE-zb-cIj">
-                                            <rect key="frame" x="0.0" y="-1" width="351" height="1"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="351" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
@@ -45,7 +45,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
@@ -58,14 +58,14 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="goBack:" destination="BYZ-38-t0r" id="cUV-Do-I8l"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
                         <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="hK8-5n-amq"/>
                             </connections>
@@ -73,7 +73,7 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="RGButterfly" id="Ade-hS-Xh0">
                         <barButtonItem key="leftBarButtonItem" tag="51" image="arrow" id="Jc1-jH-kAa">
-                            <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="goBack:" destination="BYZ-38-t0r" id="wRp-FZ-Cqt"/>
                             </connections>
@@ -241,7 +241,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssocTableCell" id="w7V-o5-CwR">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -250,7 +250,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -263,22 +264,22 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem tag="62" image="home" id="nrS-1o-Hbi">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="jHz-zW-4v8" kind="unwind" unwindAction="unwindToInitViewController:" id="xA7-c1-5mA"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="N3S-rM-GJZ"/>
                         <barButtonItem tag="58" image="settings" id="L1b-Mq-W0G">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="Asd-Pb-qDH" kind="presentation" identifier="SettingsSegue" id="L2p-PG-tYf"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Colors Association" id="Maj-ib-srW">
+                    <navigationItem key="navigationItem" title="Colors Collection" id="Maj-ib-srW">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="k9c-gm-4aI">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="goBack:" destination="6pV-zD-nhf" id="I0p-WM-Amc"/>
                             </connections>
@@ -305,8 +306,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="sectionIndexColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="sectionIndexBackgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddMixTableCell" id="DtR-tp-PMp">
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
@@ -330,7 +331,7 @@
                     <toolbarItems>
                         <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="w5q-Z0-VEb"/>
                         <barButtonItem tag="61" enabled="NO" title="Done" id="oM0-Lf-2nF">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="BSv-Zk-y6q" kind="unwind" identifier="unwindToAssocFromAdd2" unwindAction="unwindToAssocFromAdd:" id="6iF-sx-CPG"/>
                             </connections>
@@ -338,13 +339,13 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Add Color Mix" id="EYR-Qr-U6c">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="wbt-Su-bke">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="BSv-Zk-y6q" kind="unwind" identifier="unwindToAssocFromAdd3" unwindAction="unwindToAssocFromAdd:" id="waF-Sc-oGg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="53" image="search" id="nwv-Dh-3dg">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="searchMix:" destination="QL5-37-ypT" id="nEQ-Ur-3NB"/>
                             </connections>
@@ -371,7 +372,7 @@
                     <view key="view" contentMode="scaleToFill" id="V0x-kn-bKy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
@@ -379,7 +380,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="KgQ-hS-K0u">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="QK4-r3-Vdw">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="dismissPicker:" destination="Ph7-MU-Z6c" id="2hm-IN-bRT"/>
                             </connections>
@@ -400,10 +401,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Wpw-aM-NEc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Wpw-aM-NEc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="FBo-zj-csB">
@@ -424,10 +429,14 @@
                 <navigationController storyboardIdentifier="NavAssocTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="tpP-IS-lqc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="2La-VL-UJi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="2La-VL-UJi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="lb6-O2-V00">
@@ -536,16 +545,17 @@
             </objects>
             <point key="canvasLocation" x="6402.3999999999996" y="-958.4707646176912"/>
         </scene>
-        <!--Swatch Detail View-->
+        <!--Color Detail-->
         <scene sceneID="hkB-SO-5S3">
             <objects>
-                <tableViewController storyboardIdentifier="SwatchDetailTableViewController" title="Swatch Detail View" id="DNO-fJ-sUQ" customClass="SwatchDetailTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OS4-UC-Uio">
+                <tableViewController storyboardIdentifier="SwatchDetailTableViewController" title="Color Detail" id="DNO-fJ-sUQ" customClass="SwatchDetailTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OS4-UC-Uio">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwatchDetailCell" id="JEb-Gc-Acv">
                                 <rect key="frame" x="0.0" y="22" width="375" height="44"/>
@@ -553,8 +563,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JEb-Gc-Acv" id="FZV-FJ-EKm">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -566,7 +577,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Swatch Detail View" id="nY0-n4-QGf">
+                    <navigationItem key="navigationItem" title="Color Detail" id="nY0-n4-QGf">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="hSo-RR-cfi">
                             <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -611,10 +622,14 @@
                 <navigationController storyboardIdentifier="NavAddMixTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LrQ-R1-k2d" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="5PK-nJ-X9q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="5PK-nJ-X9q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="Rts-ut-Htf">
@@ -636,10 +651,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="cJX-J3-cUN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="cJX-J3-cUN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="Hgy-F5-3eI">
@@ -661,10 +680,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="gqj-K9-5aj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="gqj-K9-5aj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="9Yt-Q3-L0s">
@@ -813,10 +836,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="324" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PV-Aw-FTy">
-                                <rect key="frame" x="44" y="445" width="66" height="55"/>
+                                <rect key="frame" x="29" y="445" width="81" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="List by Topics">
+                                    <fragment content="My Topics List">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -895,10 +918,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="329" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dww-FA-ZyI">
-                                <rect key="frame" x="194" y="576" width="66" height="55"/>
+                                <rect key="frame" x="194" y="576" width="76" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Group by Colors">
+                                    <fragment content="My Color Groups">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -961,10 +984,10 @@
             </objects>
             <point key="canvasLocation" x="28" y="-1107.7961019490256"/>
         </scene>
-        <!--RGButterfly Settings-->
+        <!--Settings-->
         <scene sceneID="tiQ-WC-TVX">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsTableViewController" title="RGButterfly Settings" id="z8z-Q4-bZ9" customClass="SettingsTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" title="Settings" id="z8z-Q4-bZ9" customClass="SettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sta-Ty-Jb3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1011,7 +1034,7 @@
                             <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="RGButterfly Settings" id="UFN-Ih-VPD">
+                    <navigationItem key="navigationItem" title="Settings" id="UFN-Ih-VPD">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="NKU-jd-I4P">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -1034,16 +1057,21 @@
             </objects>
             <point key="canvasLocation" x="879" y="-154"/>
         </scene>
-        <!--RGButterfly Settings-->
+        <!--Settings-->
         <scene sceneID="hvV-Wo-a3z">
             <objects>
-                <navigationController storyboardIdentifier="NavSettingsTableViewController" title="RGButterfly Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavSettingsTableViewController" title="Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="tb4-x3-Jid">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="tb4-x3-Jid">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-SemiBoldItalic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="76C-rU-XBs">
@@ -1058,10 +1086,10 @@
             </objects>
             <point key="canvasLocation" x="199" y="-138"/>
         </scene>
-        <!--About this App-->
+        <!--About-->
         <scene sceneID="Xpe-CD-fZ6">
             <objects>
-                <viewController storyboardIdentifier="AboutViewController" title="About this App" id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutViewController" title="About" id="LAd-NZ-GB6" customClass="AboutViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="About this App" id="6rs-A3-XCv">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="frn-Qm-Jeu">
@@ -1098,20 +1126,20 @@
             <objects>
                 <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="FoQ-BG-cJK">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="FoQ-BG-cJK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.10101187229156494" green="0.16480720043182373" blue="0.27462124824523926" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="A45-Y4-FDm">
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="A45-Y4-FDm">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="LAd-NZ-GB6" kind="relationship" relationship="rootViewController" id="fBW-aD-h57"/>
@@ -1128,10 +1156,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="CGl-5w-MNw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="CGl-5w-MNw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="KJv-WI-xO4">
@@ -1153,9 +1185,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="WBI-l5-JgH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="WBI-l5-JgH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="14"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="b2s-fj-nZ3">
@@ -1178,9 +1215,14 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="AR1-61-M8h">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="AR1-61-M8h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="b9Q-v4-zBM">
@@ -1218,12 +1260,12 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aqc-zq-dwj"/>
+        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="xj5-pH-aLq"/>
         <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
-        <segue reference="xj5-pH-aLq"/>
-        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

@@ -728,7 +728,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // Update the view controller title
     //
-    NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"Topics", _numKeywords];
+    NSString *title = [[NSString alloc] initWithFormat:@"%@ (%i)", @"My Topics", _numKeywords];
     [self setTitle:title];
     
     [_colorTableView reloadData];
@@ -1622,6 +1622,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [self.navigationItem setLeftBarButtonItem:_imageLibButton];
     [self.navigationItem setRightBarButtonItem:_searchButton];
 }
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // FetchedResultsController Methods

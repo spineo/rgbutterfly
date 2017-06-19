@@ -843,8 +843,8 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     //
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [tableView setSeparatorColor:GRAY_BG_COLOR];
-    [cell.contentView setBackgroundColor:DARK_BLUE_BG_COLOR];
-    [cell setBackgroundColor:DARK_BLUE_BG_COLOR];
+    [cell.contentView setBackgroundColor:DEF_BG_COLOR];
+    [cell setBackgroundColor:DEF_BG_COLOR];
 
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
@@ -922,7 +922,7 @@ const int SETTINGS_MAX_SECTIONS   = 10;
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
         gradient.frame            = _shapeButton.bounds;
-        gradient.colors           = [NSArray arrayWithObjects:(id)[DARK_BLUE_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
+        gradient.colors           = [NSArray arrayWithObjects:(id)[DEF_BG_COLOR CGColor], (id)[GRAY_BG_COLOR CGColor], nil];
         [_shapeButton.layer insertSublayer:gradient atIndex:0];
         
         [cell.contentView addSubview:_shapeButton];
@@ -1449,7 +1449,7 @@ const int SETTINGS_MAX_SECTIONS   = 10;
     [pickerToolbar setItems: @[[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], doneButton]];
     
     UIView *pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, picker.bounds.size.width, picker.bounds.size.height + DEF_TOOLBAR_HEIGHT)];
-    [pickerParentView setBackgroundColor:DARK_BLUE_BG_COLOR];
+    [pickerParentView setBackgroundColor:DEF_BG_COLOR];
     [pickerParentView addSubview:pickerToolbar];
     [pickerParentView addSubview:picker];
     

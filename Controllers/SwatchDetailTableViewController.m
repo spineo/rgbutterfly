@@ -161,7 +161,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
 
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
+    //[self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 
     // TableView defaults
     //
@@ -192,33 +192,33 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Table View Headers
     //
-    _nameHeader           = @"Paint Swatch and Name";
-    _subjColorHeader      = @"Subjective Color";
+    _nameHeader           = @"Color Thumbnail and Name";
+    _subjColorHeader      = @"My Color Group";
     _propsHeader          = @"Properties";
-    _swatchTypeHeader     = @"Swatch Type";
+    _swatchTypeHeader     = @"Color Type";
     _paintBrandHeader     = @"Paint Brand";
     _bodyTypeHeader       = @"Body Type";
     _pigmentTypeHeader    = @"Pigment Type";
     _canvasCoverageHeader = @"Canvas Coverage";
-    _keywHeader           = @"Keywords";
+    _keywHeader           = @"My Topics";
     _commentsHeader       = @"Comments";
-    _refsHeader           = @"Reference Colors";
-    _mixAssocHeader       = @"Mix Associations";
-    _matchAssocHeader     = @"Match Associations";
+    _refsHeader           = @"Reference Mix Colors";
+    _mixAssocHeader       = @"Color Collections";
+    _matchAssocHeader     = @"My Matches";
 
     
     // Set the placeholders
     //
-    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Name (max. of %i chars) - ", MAX_NAME_LEN];
-    _keywPlaceholder  = @" - Semicolon-sep. keywords, comma-sep. comps - ";
-    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Swatch Comments (max. %i chars) - ", MAX_DESC_LEN];
+    _namePlaceholder  = [[NSString alloc] initWithFormat:@" - Color Name (max. of %i chars) - ", MAX_NAME_LEN];
+    _keywPlaceholder  = @" - Semicolon-sep. topics, comma-sep. comps - ";
+    _descPlaceholder  = [[NSString alloc] initWithFormat:@" - Comments (max. %i chars) - ", MAX_DESC_LEN];
     _otherPlaceholder = [[NSString alloc] initWithFormat:@" - Other Paint Brand (max. of %i chars) - ", MAX_BRAND_LEN];
 
     
     // A few defaults
     //
-    _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
-    _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
+    _imageViewWidth       = DEF_CELL_HEIGHT;
+    _imageViewHeight      = DEF_CELL_HEIGHT;
     _typesPickerSelRow    = type_id         ? type_id         : 0;
     _colorPickerSelRow    = subj_color_id   ? subj_color_id   : 0;
     _brandPickerSelRow    = brand_id        ? brand_id        : 0;
@@ -330,7 +330,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Swatch Detail Edit Button Alert Controller
     //
-    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Swatch Detail Edit"
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Color Detail Edit"
                                                                message:@"Please select operation"
                                                         preferredStyle:UIAlertControllerStyleAlert];
     
@@ -341,13 +341,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                                        [self saveData];
                                    }];
     
-    _delete = [UIAlertAction actionWithTitle:@"Delete Swatch" style:UIAlertActionStyleDefault
+    _delete = [UIAlertAction actionWithTitle:@"Delete Color" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        [self deleteData];
                                                        
                                                    }];
     
-    UIAlertAction *hide = [UIAlertAction actionWithTitle:@"Hide Swatch" style:UIAlertActionStyleDefault
+    UIAlertAction *hide = [UIAlertAction actionWithTitle:@"Hide Color" style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
                                          [self hideSwatch];
                                      }];
@@ -501,7 +501,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         return DEF_NIL_CELL;
         
     } else if (indexPath.section == DETAIL_NAME_SECTION) {
-        // return DEF_MD_TABLE_CELL_HGT;
         return DEF_VLG_TBL_CELL_HGT;
         
     } else if (indexPath.section == DETAIL_KEYW_SECTION) {
@@ -514,6 +513,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    //[tableView setSeparatorColor:GRAY_BG_COLOR];
+    
     if (indexPath.section < DETAIL_ASSOC_SECTION) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DETAIL_REUSE_CELL_IDENTIFIER forIndexPath:indexPath];
         
@@ -521,10 +523,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         //
         [cell setBackgroundColor:DEF_BG_COLOR];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-        [tableView setSeparatorColor:GRAY_BG_COLOR];
         [cell.imageView setImage:nil];
         [cell.textLabel setText:@""];
+        [cell.contentView setBackgroundColor:DEF_BG_COLOR];
+        [cell setBackgroundColor:DEF_BG_COLOR];
 
 
         // Set the widget frame sizes
@@ -548,7 +550,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
             cell.imageView.clipsToBounds = YES;
 
-            CGFloat imageViewWidth   = DEF_VLG_TBL_CELL_HGT;
+            CGFloat imageViewWidth   = DEF_CELL_HEIGHT;
             CGFloat textFieldYOffset = (imageViewWidth - DEF_TEXTVIEW_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
             
             cell.imageView.image = [AppColorUtils renderSwatch:_paintSwatch cellWidth:imageViewWidth cellHeight:imageViewWidth context:self.context isRGB:0];
@@ -569,11 +571,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                 }
                 
                 if (_isReadOnly == TRUE || ALL_FEATURES == 0) {
-                    [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:TRUE];
+                    [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:FALSE];
                 }
                 
             } else {
-                [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:TRUE];
+                [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:FALSE];
+                [refName setBackgroundColor:CLEAR_COLOR];
+                //[refName setTintColor:CLEAR_COLOR];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         
@@ -595,7 +599,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         } else if (indexPath.section == DETAIL_TYPES_SECTION) {
             [cell.contentView addSubview:_swatchTypeName];
             if (ALL_FEATURES == 0) {
-                [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:[_swatchTypeName text] border:TRUE];
+                [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:[_swatchTypeName text] border:FALSE];
             }
             
         // Paint Brand field
@@ -604,7 +608,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             if (indexPath.row == 0) {
                 [cell.contentView addSubview:_paintBrandName];
                 if (ALL_FEATURES == 0) {
-                    [FieldUtils makeTextFieldNonEditable:_paintBrandName content:[_paintBrandName text] border:TRUE];
+                    [FieldUtils makeTextFieldNonEditable:_paintBrandName content:[_paintBrandName text] border:FALSE];
                 }
                 
             } else {
@@ -620,7 +624,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                     }
                     
                 } else {
-                    [FieldUtils makeTextFieldNonEditable:otherNameField content:_otherName border:TRUE];
+                    [FieldUtils makeTextFieldNonEditable:otherNameField content:_otherName border:FALSE];
                 }
                 [cell setAccessoryType: UITableViewCellAccessoryNone];
             }
@@ -630,7 +634,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         } else if (indexPath.section == DETAIL_BODY_SECTION) {
             [cell.contentView addSubview:_bodyTypeName];
             if (ALL_FEATURES == 0) {
-                [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:[_bodyTypeName text] border:TRUE];
+                [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:[_bodyTypeName text] border:FALSE];
             }
             
         // Pigment type field
@@ -638,7 +642,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         } else if (indexPath.section == DETAIL_PIGMENT_SECTION) {
             [cell.contentView addSubview:_pigmentTypeName];
             if (ALL_FEATURES == 0) {
-                [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:[_pigmentTypeName text] border:TRUE];
+                [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:[_pigmentTypeName text] border:FALSE];
             }
             
         // Canvas Coverage field
@@ -646,7 +650,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         } else if (indexPath.section == DETAIL_COVERAGE_SECTION) {
             [cell.contentView addSubview:_coverageName];
             if (ALL_FEATURES == 0) {
-                [FieldUtils makeTextFieldNonEditable:_coverageName content:[_coverageName text] border:TRUE];
+                [FieldUtils makeTextFieldNonEditable:_coverageName content:[_coverageName text] border:FALSE];
             }
         
         // Keywords field
@@ -663,7 +667,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                 }
                 
             } else {
-                [FieldUtils makeTextViewNonEditable:refName content:_keywEntered border:TRUE];
+                [FieldUtils makeTextViewNonEditable:refName content:_keywEntered border:FALSE];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
 
@@ -684,7 +688,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                 }
                 
             } else {
-                [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:TRUE];
+                [FieldUtils makeTextFieldNonEditable:refName content:_descEntered border:FALSE];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         
@@ -723,7 +727,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else {
         CustomCollectionTableViewCell *custCell = (CustomCollectionTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CollectionViewCellIdentifier];
         
-        [custCell setBackgroundColor: DEF_BG_COLOR];
+        [custCell setBackgroundColor:DEF_BG_COLOR];
         
         if (! custCell) {
             custCell = [[CustomCollectionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CollectionViewCellIdentifier cellHeight:DEF_CELL_HEIGHT collectViewInset:DEF_FIELD_INSET padding:DEF_CELL_PADDING backgroundColor:DEF_BG_COLOR];
@@ -776,7 +780,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
-        return 0;
+        return DEF_NIL_HEADER;
 
     } else if ((
          (section == DETAIL_BRAND_SECTION)   ||
@@ -798,6 +802,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     } else if ((section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
         return DEF_NIL_HEADER;
+        
+    // For now, hide this
+    //
+    } else if (section == DETAIL_PROPS_SECTION) {
+        return DEF_NIL_HEADER;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -808,7 +817,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 {
     // Background color
     //
-    [view setTintColor:DEF_BG_COLOR];
+    [view setTintColor:CLEAR_COLOR];
+    [view setBackgroundColor:CLEAR_COLOR];
     
     // Text Color
     //
@@ -977,11 +987,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (textField.tag == DESC_FIELD_TAG && textField.text.length >= MAX_DESC_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_DESC_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert:MAX_DESC_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else if (textField.tag == OTHER_FIELD_TAG && textField.text.length >= MAX_BRAND_LEN && range.length == 0) {
-        UIAlertController *myAlert = [AlertUtils sizeLimitAlert: MAX_BRAND_LEN];
+        UIAlertController *myAlert = [AlertUtils sizeLimitAlert:MAX_BRAND_LEN];
         [self presentViewController:myAlert animated:YES completion:nil];
         return NO;
     } else {
@@ -1445,10 +1455,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
         
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Swatch Detail save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Color Detail Save" message:@"Error saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
     } else {
-        NSLog(@"Swatch Detail save successful");
+        NSLog(@"Color Detail Save Successful");
         
         [_save setEnabled:FALSE];
     }
@@ -1468,7 +1478,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     if (![self.context save:&error]) {
         NSLog(@"Error deleting context: %@\n%@", [error localizedDescription], [error userInfo]);
     } else {
-        NSLog(@"Swatch Detail delete successful");
+        NSLog(@"Color Delete Successful");
         
         [super dismissViewControllerAnimated:YES completion:NULL];
     }
@@ -1509,12 +1519,12 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (void)makeTextFieldsNonEditable {
-    [FieldUtils makeTextFieldNonEditable:_subjColorName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_paintBrandName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:@"" border:TRUE];
-    [FieldUtils makeTextFieldNonEditable:_coverageName content:@"" border:TRUE];
+    [FieldUtils makeTextFieldNonEditable:_subjColorName content:@"" border:FALSE];
+    [FieldUtils makeTextFieldNonEditable:_swatchTypeName content:@"" border:FALSE];
+    [FieldUtils makeTextFieldNonEditable:_paintBrandName content:@"" border:FALSE];
+    [FieldUtils makeTextFieldNonEditable:_bodyTypeName content:@"" border:FALSE];
+    [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:@"" border:FALSE];
+    [FieldUtils makeTextFieldNonEditable:_coverageName content:@"" border:FALSE];
 }
 
 @end

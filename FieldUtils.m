@@ -124,6 +124,9 @@
         [refName.layer setBorderWidth: DEF_BORDER_WIDTH];
         [refName.layer setCornerRadius: DEF_CORNER_RADIUS];
         [refName.layer setBorderColor:[GRAY_BORDER_COLOR CGColor]];
+
+    } else {
+        [refName.layer setBorderWidth:DEF_NIL_WIDTH];
     }
     [refName setEnabled:FALSE];
 }
@@ -150,9 +153,12 @@
     [refName setBackgroundColor:DEF_BG_COLOR];
     
     if (border == TRUE) {
-        [refName.layer setBorderWidth: DEF_BORDER_WIDTH];
-        [refName.layer setCornerRadius: DEF_CORNER_RADIUS];
+        [refName.layer setBorderWidth:DEF_BORDER_WIDTH];
+        [refName.layer setCornerRadius:DEF_CORNER_RADIUS];
         [refName.layer setBorderColor:[GRAY_BORDER_COLOR CGColor]];
+        
+    } else {
+        [refName.layer setBorderWidth:DEF_NIL_WIDTH];
     }
     [refName setEditable:FALSE];
 }

@@ -31,6 +31,11 @@
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
     
+    // Set the default font
+    //
+    [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
+
+    
     UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, self.view.bounds.size.width, self.view.bounds.size.height)];
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
@@ -80,6 +85,28 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Font Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Font Methods
+- (void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
+{
+    if ([view isKindOfClass:[UILabel class]])
+    {
+        UILabel *lbl = (UILabel *)view;
+        [lbl setFont:[UIFont fontWithName:fontFamily size:[[lbl font] pointSize]]];
+    }
+    
+    if (isSubViews)
+    {
+        for (UIView *sview in view.subviews)
+        {
+            [self setFontFamily:fontFamily forView:sview andSubViews:YES];
+        }
+    }
 }
 
 

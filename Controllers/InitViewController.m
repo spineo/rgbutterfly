@@ -56,6 +56,11 @@
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    
+    
+    // Set the default font
+    //
+    [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
 
     
     // Match Colors
@@ -489,6 +494,28 @@
 
 - (IBAction)settings:(id)sender {
         [self performSegueWithIdentifier:@"InitToSettingsSegue" sender:self];
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Font Methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#pragma mark - Font Methods
+- (void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
+{
+    if ([view isKindOfClass:[UILabel class]])
+    {
+        UILabel *lbl = (UILabel *)view;
+        [lbl setFont:[UIFont fontWithName:fontFamily size:[[lbl font] pointSize]]];
+    }
+    
+    if (isSubViews)
+    {
+        for (UIView *sview in view.subviews)
+        {
+            [self setFontFamily:fontFamily forView:sview andSubViews:YES];
+        }
+    }
 }
 
 
