@@ -249,21 +249,26 @@ const int IMAGE_TAG  = 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ((
-         ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
-         ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
-         ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
-         ) && (_editFlag == FALSE)) {
+    if ((section != MATCH_SECTION) && (ALL_FEATURES == 0)) {
         return 0;
-    
-    } else if (section == EMPTY_SECTION) {
-        return 0;
-
-    } else if (section != MATCH_SECTION) {
-        return 1;
 
     } else {
-        return [_matchedSwatches count] - 1;
+        if ((
+             ((section == NAME_SECTION)  && [_nameEntered  isEqualToString:@""]) ||
+             ((section == KEYW_SECTION)  && [_keywEntered  isEqualToString:@""]) ||
+             ((section == DESC_SECTION)  && [_descEntered  isEqualToString:@""])
+             ) && (_editFlag == FALSE)) {
+            return 0;
+        
+        } else if (section == EMPTY_SECTION) {
+            return 0;
+
+        } else if (section != MATCH_SECTION) {
+            return 1;
+
+        } else {
+            return [_matchedSwatches count] - 1;
+        }
     }
 }
 
@@ -271,37 +276,42 @@ const int IMAGE_TAG  = 6;
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (section == NAME_SECTION) {
-        if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-
-    } else if (section == KEYW_SECTION) {
-        if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-
-    } else if (section == DESC_SECTION) {
-        if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-    } else if (section == DIV_SECTION) {
+    if ((section != MATCH_SECTION) && (ALL_FEATURES == 0)) {
         return DEF_NIL_HEADER;
-        
-    } else if (section == MATCH_SECTION) {
-        return _matchSectionHeight;
-        
-    } else if (section == EMPTY_SECTION) {
-        return self.tableView.bounds.size.height - _matchSectionHeight - ((DEF_TABLE_HDR_HEIGHT + DEF_TABLE_CELL_HEIGHT) * 3);
-        
+
     } else {
-        return DEF_TABLE_HDR_HEIGHT;
+        if (section == NAME_SECTION) {
+            if ((_editFlag == FALSE) && [_nameEntered isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+
+        } else if (section == KEYW_SECTION) {
+            if ((_editFlag == FALSE) && [_keywEntered isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+
+        } else if (section == DESC_SECTION) {
+            if ((_editFlag == FALSE) && [_descEntered isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+        } else if (section == DIV_SECTION) {
+            return DEF_NIL_HEADER;
+            
+        } else if (section == MATCH_SECTION) {
+            return _matchSectionHeight;
+            
+        } else if (section == EMPTY_SECTION) {
+            return self.tableView.bounds.size.height - _matchSectionHeight - ((DEF_TABLE_HDR_HEIGHT + DEF_TABLE_CELL_HEIGHT) * 3);
+            
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
     }
 }
 
