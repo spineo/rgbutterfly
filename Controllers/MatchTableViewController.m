@@ -138,7 +138,7 @@ const int IMAGE_TAG  = 6;
     _imageViewYOffset     = DEF_Y_OFFSET;
     _imageViewWidth       = DEF_VLG_TBL_CELL_HGT;
     _imageViewHeight      = DEF_VLG_TBL_CELL_HGT;
-    _matchSectionHeight   = DEF_TABLE_HDR_HEIGHT + _imageViewHeight + DEF_FIELD_PADDING;
+    _matchSectionHeight   = _imageViewHeight;
     
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -314,7 +314,7 @@ const int IMAGE_TAG  = 6;
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + 1.0, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerLabel setBackgroundColor:DEF_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
@@ -359,7 +359,7 @@ const int IMAGE_TAG  = 6;
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
-            [refImageView setFrame:CGRectMake(_imageViewXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, _imageViewWidth, _imageViewHeight)];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset + 1.0, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
             
             // Compute the xpt
             //
@@ -389,7 +389,7 @@ const int IMAGE_TAG  = 6;
             [croppedImageView setContentMode: UIViewContentModeScaleAspectFit];
             [croppedImageView setClipsToBounds: YES];
             
-            [croppedImageView setFrame:CGRectMake(croppedImageXOffset, DEF_TABLE_HDR_HEIGHT + 2.0, croppedImageWidth, _imageViewHeight)];
+            [croppedImageView setFrame:CGRectMake(croppedImageXOffset, DEF_Y_OFFSET, croppedImageWidth, _imageViewHeight)];
             [croppedImageView setTag:IMAGE_TAG];
             
             [headerView addSubview:refImageView];
@@ -418,13 +418,13 @@ const int IMAGE_TAG  = 6;
             
             // Align this border with the cell match
             //
-            [refImageView setFrame:CGRectMake(_imageViewXOffset + DEF_X_COORD, DEF_TABLE_HDR_HEIGHT + DEF_FIELD_PADDING, imageViewWidth, _imageViewHeight)];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset + DEF_X_COORD, DEF_Y_OFFSET, imageViewWidth, _imageViewHeight)];
             
             [headerView addSubview:refImageView];
         }
     }
     [headerLabel setText:headerStr];
-    [headerView addSubview:headerLabel];
+    //[headerView addSubview:headerLabel];
     
     return headerView;
 }
