@@ -459,7 +459,7 @@ const int IMAGE_TAG  = 6;
     
     // Global defaults
     //
-    [cell setBackgroundColor:DEF_BG_COLOR];
+    [cell setBackgroundColor:DEF_DARK_COLOR];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if (_scrollFlag == TRUE) {

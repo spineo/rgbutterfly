@@ -448,7 +448,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
         return 0;
 
@@ -825,6 +824,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
     [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
     [header.textLabel setFont:TABLE_HEADER_FONT];
+    //[header.textLabel setTextAlignment:NSTextAlignmentCenter];
     
     if (section == DETAIL_PROPS_SECTION) {
         [header.textLabel setFont:ITALIC_FONT];
