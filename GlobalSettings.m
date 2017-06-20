@@ -468,15 +468,17 @@ NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
 
 // "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_TEXT = @"\nThe main purpose of this App is to suggest matching paint colors for areas of a photo. Please visit the RGButterfly website for more information about this App.\n\nTo get started, click on either the 'Match Colors' or 'Explore Colors' titles on the main view.\n\n";
+NSString * const ABOUT_TEXT = @"\nThe main purpose of this App is to suggest matching paint colors for areas of a photo. Please visit the RGButterfly website for more information about this App.\n\nTo get started, click on either the Match Colors or Explore Colors titles on the main view.\n\n";
 
 NSString * const ABOUT_RELEASE_FEATURES = @"Note: This initial release comes with a number of features and much of the editing functionality disabled. This was done to hopefully make the App a tad more user friendly!\n\n";
 
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)
 //
-NSString * const ABOUT_PAT = @"RGButterfly";
-NSString * const ABOUT_URL = @"http://rgbutterfly.com/";
+NSString * const ABOUT_PAT   = @"RGButterfly";
+NSString * const ABOUT_URL   = @"http://rgbutterfly.com/";
+NSString * const MATCH_PAT   = @"Match Colors";
+NSString * const EXPLORE_PAT = @"Explore Colors";
 
 // Documentation Site/Share
 //
@@ -490,11 +492,11 @@ NSString * const DOCS_SITE_PAT = @"RGButterfly";
 
 // "Disclaimer" section text
 //
-NSString * const DISCLAIMER_TEXT = @"This App suggests matching colors associated with areas in a photo. It does this by applying a default algorithm based on the RGB and  HSB color properties.\n\n\
+NSString * const DISCLAIMER_TEXT = @"This App suggests matching colors associated with areas in a photo. It does this by applying a default algorithm based on the RGB and HSB color properties.\n\n\
 The results produced by this App are just guideliness. While I have attempted to capture, as carefully and consistently as possible, the paints true colors, inaccuracies and inconsistencies resulting from the paint mixing and photographic process are inevitable.\n\n\
-Most references are based on the Liquitex Heavy-Body Acrylics brand since that is the brand that I personally use the most. Rendered colors associated with this or any other brand may not accurately represent the intended colors due to shortcomings in the data capture methods thus I highly recommend test-applying the actual reference paints or mixes before using them.\n\n\
-Finally, this App is something that I worked on during my spare time and grew out of my passion for Software Engineering and Art. Since I am not a professional artist, photographer, or expert in color theory please be patient as I learn more about these domains and hopefully implement some good improvements for future releases!\n\n\
-Please visit the RGButterfly site  for more information about this App.\n\n";
+Most references are based on the Liquitex Heavy-Body Acrylics brand since that is the brand I use the most. Rendered colors associated with this or any other brand may not accurately represent the intended colors due to shortcomings in the data capture methods thus I highly recommend test-applying the actual reference paints or mixes before using them.\n\n\
+Finally, this App is a project that grew out of my passion for Software Engineering and Artistic Painting. Since I am not a professional Artist, Photographer, or expert in Color Theory please be patient as I learn more about these domains and hopefully implement some good improvements for upcoming releases!\n\n\
+Please visit the RGButterfly site for more information about this App.\n\n";
 
 
 // Feedback (Email)

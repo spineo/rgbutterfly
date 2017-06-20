@@ -144,12 +144,15 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     _aboutLabel = [FieldUtils createLabel:@"About this App" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_aboutLabel setFont:DEF_TBL_HEADER_FONT];
+    [_aboutLabel setBackgroundColor:CLEAR_COLOR];
     
     _disclaimerLabel = [FieldUtils createLabel:@"Disclaimer" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_disclaimerLabel setFont:DEF_TBL_HEADER_FONT];
+    [_disclaimerLabel setBackgroundColor:CLEAR_COLOR];
     
     _feedbackLabel = [FieldUtils createLabel:@"Provide Feedback" xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:self.tableView.bounds.size.width height:DEF_VLG_TABLE_HDR_HGT];
     [_feedbackLabel setFont:DEF_TBL_HEADER_FONT];
+    [_feedbackLabel setBackgroundColor:CLEAR_COLOR];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1481,6 +1484,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 - (UILabel *)createWidgetLabel:(NSString *)labelText {
 
     UILabel *widgetLabel = [FieldUtils createLabel:labelText xOffset:DEF_LG_BUTTON_WIDTH yOffset:DEF_Y_OFFSET];
+    [widgetLabel setBackgroundColor:CLEAR_COLOR];
     CGFloat labelWidth   = widgetLabel.bounds.size.width + DEF_MD_FIELD_PADDING;
     CGFloat labelHeight  = widgetLabel.bounds.size.height;
     CGFloat labelYOffset = (DEF_LG_TABLE_CELL_HGT - labelHeight) / DEF_HGT_ALIGN_FACTOR;

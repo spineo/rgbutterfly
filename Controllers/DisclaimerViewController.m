@@ -36,13 +36,14 @@
     NSMutableAttributedString *disclaimerText = [[NSMutableAttributedString alloc] initWithString:DISCLAIMER_TEXT];
     int disclaimerTextLen = (int)disclaimerText.length;
     
-    [disclaimerText addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, disclaimerTextLen)];
+    [disclaimerText addAttribute:NSFontAttributeName value:DEF_LG_VIEW_FONT range:NSMakeRange(0, disclaimerTextLen)];
     [disclaimerText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, disclaimerTextLen)];
     
     // Link
     //
     NSRange urlMatch = [StringObjectUtils matchString:DISCLAIMER_TEXT toRegex:DOCS_SITE_PAT];
     [disclaimerText addAttribute:NSLinkAttributeName value:DOCS_SITE_URL range:urlMatch];
+    [disclaimerText addAttribute:NSFontAttributeName value:DEF_LG_IVIEW_FONT range:urlMatch];
     
     [disclaimerTextView setAttributedText:disclaimerText];
     [disclaimerTextView setBackgroundColor:CLEAR_COLOR];

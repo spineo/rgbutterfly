@@ -471,9 +471,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Navigation Item Title
     //
-    [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:DEF_IMAGE_NAME];
-    [[self.navigationItem.titleView.subviews objectAtIndex:0] setColor:LIGHT_YELLOW_COLOR];
-    
+    [self setNavTitle:DEF_IMAGE_NAME];
+
     
     // Type Alert Controller
     //
@@ -667,7 +666,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Update the title
     //
     if (assocName != nil && ! [assocName isEqualToString:@""]) {
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:assocName];
+        [self setNavTitle:_assocName];
     }
     
     // Make any changes to tap areas in Settings VC effective immediately
@@ -971,11 +970,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (_dragAreaEnabled == FALSE) {
             [_imageView addGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = TRUE;
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:@"Drag Enabled"];
+            [self setNavTitle:@"Drag Enabled"];
         } else {
             [_imageView removeGestureRecognizer:_panGestureRecognizer];
             _dragAreaEnabled = FALSE;
-            [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:[self getTitle]];
+            [self setNavTitle:[self getTitle]];
         }
     }
 }
@@ -996,7 +995,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         _dragEndPoint = touchPoint;
 
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:@""];
+        [self setNavTitle:@""];
         [self setViewBackgroundColor:_dragEndPoint view:self.navigationItem.titleView];
  
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
@@ -1005,7 +1004,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [self dragShape];
         
         [_imageView removeGestureRecognizer:_panGestureRecognizer];
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:[self getTitle]];
+        [self setNavTitle:[self getTitle]];
         [self.navigationItem.titleView setBackgroundColor:CLEAR_COLOR];
     }
     
@@ -1861,6 +1860,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     return titleText;
 }
 
+- (void)setNavTitle:(NSString *)title {
+    NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
+       NSFontAttributeName:DEF_MD_ITALIC_FONT}];
+    [[self.navigationItem.titleView.subviews objectAtIndex:0] setAttributedText:attrTitle];
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // BarButton Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2024,7 +2029,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Update the title
         //
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
+        [self setNavTitle:_assocName];
+        
         
         // Disable the Match/Assoc toggle (no reason to switch back)
         //
@@ -2236,7 +2242,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         // Update the title
         //
-        [[self.navigationItem.titleView.subviews objectAtIndex:0] setText:_assocName];
+        [self setNavTitle:_assocName];
         
         // Disable the Match/Assoc toggle (no reason to switch back)
         //

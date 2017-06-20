@@ -41,13 +41,23 @@
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
     int textLen = (int)aboutText.length;
     
-    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, textLen)];
+    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_VIEW_FONT range:NSMakeRange(0, textLen)];
     [aboutText addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
 
     // Link 1
     //
     NSRange urlMatch_1 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:ABOUT_PAT];
     [aboutText addAttribute:NSLinkAttributeName value:ABOUT_URL range:urlMatch_1];
+    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_IVIEW_FONT range:urlMatch_1];
+    
+    NSRange italic_1 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:MATCH_PAT];
+    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_IVIEW_FONT range:italic_1];
+    [aboutText addAttribute:NSForegroundColorAttributeName value:DEF_TEXT_COLOR range:italic_1];
+    
+    NSRange italic_2 = [StringObjectUtils matchString:ABOUT_TEXT toRegex:EXPLORE_PAT];
+    [aboutText addAttribute:NSFontAttributeName value:DEF_LG_IVIEW_FONT range:italic_2];
+    [aboutText addAttribute:NSForegroundColorAttributeName value:DEF_TEXT_COLOR range:italic_2];
+    
 
     // Link 2
     //
@@ -60,8 +70,9 @@
     textLen = (int)aboutReleaseFeatures.length;
     
     [aboutReleaseFeatures addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:NSMakeRange(0, 4)];
-    [aboutReleaseFeatures addAttribute:NSFontAttributeName value:DEF_LG_ITALIC_FONT range:NSMakeRange(0, textLen)];
+    [aboutReleaseFeatures addAttribute:NSFontAttributeName value:DEF_LG_VIEW_FONT range:NSMakeRange(0, textLen)];
     [aboutReleaseFeatures addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
+    
     
     [aboutText appendAttributedString:aboutReleaseFeatures];
 

@@ -24,10 +24,10 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="0.0" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ikM-89-GOK">
                                 <rect key="frame" x="16" y="0.0" width="351" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="separatorColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="sectionIndexBackgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InitTableCell" rowHeight="0.0" id="yZn-s5-6bi">
                                         <rect key="frame" x="0.0" y="22" width="351" height="0.0"/>
@@ -37,7 +37,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
@@ -45,7 +45,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
@@ -406,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -434,7 +434,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -627,7 +627,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -656,7 +656,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -685,7 +685,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -743,7 +743,7 @@
                                             <attributes>
                                                 <color key="NSBackgroundColor" red="0.97825423129298517" green="0.99763500690460205" blue="0.52742372032415175" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <color key="NSColor" red="0.99478161330000003" green="0.9518232643739174" blue="0.70800691459789278" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <font key="NSFont" size="28" name="Baskerville-SemiBoldItalic"/>
+                                                <font key="NSFont" size="30" name="Baskerville-Italic"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -760,7 +760,7 @@
                                         <fragment content="Explore Colors">
                                             <attributes>
                                                 <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <font key="NSFont" size="28" name="Baskerville-SemiBoldItalic"/>
+                                                <font key="NSFont" size="30" name="Baskerville-Italic"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -887,7 +887,7 @@
                                 <rect key="frame" x="257" y="439" width="69" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="List all Colors">
+                                    <fragment content="List All Colors">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -1031,7 +1031,7 @@
                         </barButtonItem>
                         <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="Rni-sE-Gh1"/>
                         <barButtonItem tag="58" image="settings" id="Ib6-Wl-QMo">
-                            <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Settings" id="UFN-Ih-VPD">
@@ -1069,7 +1069,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -1132,7 +1132,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -1161,7 +1161,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -1220,7 +1220,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="24"/>
+                            <fontDescription key="fontDescription" name="Baskerville-Italic" family="Baskerville" pointSize="22"/>
                             <color key="textColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
@@ -1260,11 +1260,11 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="xj5-pH-aLq"/>
+        <segue reference="aqc-zq-dwj"/>
         <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
+        <segue reference="xj5-pH-aLq"/>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

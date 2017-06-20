@@ -17,7 +17,7 @@
     NSAttributedString *attrName = [[NSAttributedString alloc] initWithString:name];
     [label setAttributedText:attrName];
     
-    [label setBackgroundColor:DEF_BG_COLOR];
+    [label setBackgroundColor:DEF_DARK_COLOR];
     [label setTextColor:LIGHT_TEXT_COLOR];
     [label setTextAlignment:NSTextAlignmentLeft];
     [label setFont:DEF_LABEL_FONT];

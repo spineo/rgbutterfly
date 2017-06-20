@@ -100,6 +100,7 @@ const int ASSOC_SET_TAG        = 8;
     // Set the background image
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    
 
     //[ColorUtils setGlaze:self.navigationController.navigationBar];
 
@@ -174,17 +175,6 @@ const int ASSOC_SET_TAG        = 8;
     [_bgColorView setBackgroundColor:DEF_BG_COLOR];
 
     
-    _mixTitleLabel = [[UILabel alloc] init];
-    //_mixTitleLabel.text = [_mixAssociation name];
-    _mixTitleLabel.text = @"Color Collection";
-    [_mixTitleLabel setBackgroundColor:CLEAR_COLOR];
-    [_mixTitleLabel setTextColor:LIGHT_TEXT_COLOR];
-    [_mixTitleLabel setNumberOfLines:0];
-    [_mixTitleLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    
-    [_mixTitleLabel sizeToFit];
-    self.navigationItem.titleView = _mixTitleLabel;
-    
     // If coming from the Swatch Detail we don't want to edit (just need the information in this context)
     //
     if ([_sourceViewName isEqualToString:@"SwatchDetail"]) {
@@ -234,6 +224,18 @@ const int ASSOC_SET_TAG        = 8;
     [_coverageName setTextAlignment:NSTextAlignmentCenter];
     [_coverageName setDelegate:self];
     _coverageNames  = [ManagedObjectUtils fetchDictNames:@"CanvasCoverage" context:self.context];
+    
+    _mixTitleLabel = [[UILabel alloc] init];
+    //_mixTitleLabel.text = [_mixAssociation name];
+    _mixTitleLabel.text = [[NSString alloc] initWithFormat:@"%@ Type Collection", assocTypeName];
+    [_mixTitleLabel setBackgroundColor:CLEAR_COLOR];
+    [_mixTitleLabel setTextColor:DEF_TEXT_COLOR];
+    [_mixTitleLabel setFont:DEF_MD_ITALIC_FONT];
+    [_mixTitleLabel setNumberOfLines:0];
+    [_mixTitleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    
+    [_mixTitleLabel sizeToFit];
+    self.navigationItem.titleView = _mixTitleLabel;
 
 
     // Adjust the layout when the orientation changes
@@ -434,6 +436,12 @@ const int ASSOC_SET_TAG        = 8;
     }
 }
 
+- (void)setNavTitle:(NSString *)title {
+    NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
+                                                                                                  NSFontAttributeName:DEF_MD_ITALIC_FONT}];
+    [[self.navigationItem.titleView.subviews objectAtIndex:0] setAttributedText:attrTitle];
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Tableview Methods
@@ -442,36 +450,40 @@ const int ASSOC_SET_TAG        = 8;
 #pragma mark - UITableView Methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if ((section != ASSOC_COLORS_SECTION) && (ALL_FEATURES == 0)) {
+        return DEF_MIN_HEADER;
     
-    if (section == ASSOC_NAME_SECTION) {
-        if ((_editFlag == FALSE) && [_mixAssocName isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-    
-    } else if (section == ASSOC_KEYW_SECTION) {
-        if ((_editFlag == FALSE) && [_mixAssocKeyw isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-        
-    } else if (section == ASSOC_DESC_SECTION) {
-        if ((_editFlag == FALSE) && [_mixAssocDesc isEqualToString:@""]) {
-            return DEF_NIL_HEADER;
-        } else {
-            return DEF_TABLE_HDR_HEIGHT;
-        }
-
-    } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_TYPE_SECTION) || (section == ASSOC_COVER_SECTION) || (section == ASSOC_APPLY_SECTION)) {
-        return DEF_NIL_HEADER;
-        
-//    } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
-//        return DEF_NIL_HEADER;
-        
     } else {
-        return DEF_TABLE_HDR_HEIGHT;
+        if (section == ASSOC_NAME_SECTION) {
+            if ((_editFlag == FALSE) && [_mixAssocName isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+        
+        } else if (section == ASSOC_KEYW_SECTION) {
+            if ((_editFlag == FALSE) && [_mixAssocKeyw isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+            
+        } else if (section == ASSOC_DESC_SECTION) {
+            if ((_editFlag == FALSE) && [_mixAssocDesc isEqualToString:@""]) {
+                return DEF_NIL_HEADER;
+            } else {
+                return DEF_TABLE_HDR_HEIGHT;
+            }
+
+        } else if ((section == ASSOC_ADD_SECTION) || (section == ASSOC_TYPE_SECTION) || (section == ASSOC_COVER_SECTION) || (section == ASSOC_APPLY_SECTION)) {
+            return DEF_NIL_HEADER;
+            
+    //    } else if ((section == ASSOC_COVER_SECTION) && (_editFlag == TRUE)) {
+    //        return DEF_NIL_HEADER;
+            
+        } else {
+            return DEF_TABLE_HDR_HEIGHT;
+        }
     }
 }
 
@@ -484,25 +496,31 @@ const int ASSOC_SET_TAG        = 8;
     // Text Color
     //
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
+    [header.textLabel setTextColor:DEF_TEXT_COLOR];
     [header.contentView setBackgroundColor:DEF_BG_COLOR];
-    [header.textLabel setFont:TABLE_HEADER_FONT];
+    [header.textLabel setFont:DEF_SM_ITALIC_FONT];
+    [header.textLabel setTextAlignment:NSTextAlignmentCenter];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *headerStr;
     
-    if (section == ASSOC_NAME_SECTION) {
-        headerStr = _nameHeader;
+    if ((section != ASSOC_COLORS_SECTION) && (ALL_FEATURES == 0)) {
+        headerStr = @"";
         
-    } else if (section == ASSOC_KEYW_SECTION) {
-        headerStr = _keywHeader;
-        
-    } else if (section == ASSOC_DESC_SECTION) {
-        headerStr = _descHeader;
-        
-    } else if (section == ASSOC_COLORS_SECTION) {
-        headerStr = _colorsHeader;
+    } else {
+        if (section == ASSOC_NAME_SECTION) {
+            headerStr = _nameHeader;
+            
+        } else if (section == ASSOC_KEYW_SECTION) {
+            headerStr = _keywHeader;
+            
+        } else if (section == ASSOC_DESC_SECTION) {
+            headerStr = _descHeader;
+            
+        } else if (section == ASSOC_COLORS_SECTION) {
+            headerStr = [_mixAssociation name];
+        }
     }
     
     return headerStr;
@@ -515,32 +533,38 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    // Return the number of rows in the section.
-    //
-    if ((
-         ((section == ASSOC_NAME_SECTION)  && [_mixAssocName  isEqualToString:@""]) ||
-         ((section == ASSOC_KEYW_SECTION)  && [_mixAssocKeyw  isEqualToString:@""]) ||
-         ((section == ASSOC_DESC_SECTION)  && [_mixAssocDesc  isEqualToString:@""]))
-         && (_editFlag == FALSE)) {
-        return 0;
-        
-    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_ADD_SECTION)) &&
-        ((_editFlag == FALSE) || (_isReadOnly == TRUE))
-    ) {
-        return 0;
-        
-    } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Other"]) {
-        return 0;
     
-    } else if (((section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] containsString:@"Generic"]) {
+    if ((section != ASSOC_COLORS_SECTION) && (ALL_FEATURES == 0)) {
         return 0;
-
-    } else if (section == ASSOC_COLORS_SECTION) {
-        return [_mixAssocSwatches count];
         
     } else {
-        return 1;
+
+        // Return the number of rows in the section.
+        //
+        if ((
+             ((section == ASSOC_NAME_SECTION)  && [_mixAssocName  isEqualToString:@""]) ||
+             ((section == ASSOC_KEYW_SECTION)  && [_mixAssocKeyw  isEqualToString:@""]) ||
+             ((section == ASSOC_DESC_SECTION)  && [_mixAssocDesc  isEqualToString:@""]))
+             && (_editFlag == FALSE)) {
+            return 0;
+            
+        } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_ADD_SECTION)) &&
+            ((_editFlag == FALSE) || (_isReadOnly == TRUE))
+        ) {
+            return 0;
+            
+        } else if (((section == ASSOC_APPLY_SECTION) || (section == ASSOC_COVER_SECTION)) && [[_assocTypeName text] isEqualToString:@"Other"]) {
+            return 0;
+        
+        } else if ((section == ASSOC_COVER_SECTION) && [[_assocTypeName text] containsString:@"Generic"]) {
+            return 0;
+
+        } else if (section == ASSOC_COLORS_SECTION) {
+            return [_mixAssocSwatches count];
+            
+        } else {
+            return 1;
+        }
     }
 }
 
