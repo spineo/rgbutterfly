@@ -575,6 +575,7 @@ extern float const DEF_BORDER_THRESHOLD;
 #define DEF_LG_VIEW_FONT    [UIFont systemFontOfSize:16]
 #define DEF_LG_IVIEW_FONT   [UIFont italicSystemFontOfSize:16]
 #define DEF_TBL_HEADER_FONT [UIFont systemFontOfSize:14]
+#define DEF_SM_TBL_HDR_FONT [UIFont systemFontOfSize:12]
 #define DEF_LABEL_FONT      [UIFont systemFontOfSize:12]
 
 
