@@ -96,18 +96,18 @@ int NUM_TABLEVIEW_ROWS = 0;
 //
 int DETAIL_NAME_SECTION     = 0;
 int DETAIL_COLOR_SECTION    = 1;
-int DETAIL_PROPS_SECTION    = 2;
-int DETAIL_TYPES_SECTION    = 3;
-int DETAIL_BRAND_SECTION    = 4;
-int DETAIL_PIGMENT_SECTION  = 5;
-int DETAIL_BODY_SECTION     = 6;
-int DETAIL_COVERAGE_SECTION = 7;
-int DETAIL_KEYW_SECTION     = 8;
-int DETAIL_DESC_SECTION     = 9;
-int DETAIL_REF_SECTION      = 10;
-int DETAIL_ASSOC_SECTION    = 11;
+//int DETAIL_PROPS_SECTION    = 2;
+int DETAIL_TYPES_SECTION    = 2;
+int DETAIL_BRAND_SECTION    = 3;
+int DETAIL_PIGMENT_SECTION  = 4;
+int DETAIL_BODY_SECTION     = 5;
+int DETAIL_COVERAGE_SECTION = 6;
+int DETAIL_KEYW_SECTION     = 7;
+int DETAIL_DESC_SECTION     = 8;
+int DETAIL_REF_SECTION      = 9;
+int DETAIL_ASSOC_SECTION    = 10;
 
-const int DETAIL_MAX_SECTION      = 12;
+const int DETAIL_MAX_SECTION      = 11;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
@@ -203,7 +203,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _keywHeader           = @"My Topics";
     _commentsHeader       = @"Comments";
     _refsHeader           = @"Reference Mix Colors";
-    _mixAssocHeader       = @"Color Collections";
+    _mixAssocHeader       = @"Related Color Collections";
     _matchAssocHeader     = @"My Matches";
 
     
@@ -448,37 +448,39 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
-        return 0;
-
-    } else if ((
-         (section == DETAIL_BRAND_SECTION)   ||
-         (section == DETAIL_BODY_SECTION)    ||
-         (section == DETAIL_PIGMENT_SECTION)
-        ) && (![[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Reference"])) {
-        return 0;
+//    if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
+//        return 0;
+//
+//    } else if ((
+//         (section == DETAIL_BRAND_SECTION)   ||
+//         (section == DETAIL_BODY_SECTION)    ||
+//         (section == DETAIL_PIGMENT_SECTION)
+//        ) && (![[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Reference"])) {
+//        return 0;
         
-    } else if ((section == DETAIL_COVERAGE_SECTION)
-            && ([[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Generic"])) {
-        return 0;
+//    } else if ((section == DETAIL_COVERAGE_SECTION)
+//            && ([[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Generic"])) {
+//        return 0;
 
-    } else if ((section == DETAIL_BRAND_SECTION) &&
-               ([[_paintBrandNames objectAtIndex:_brandPickerSelRow] isEqualToString:@"Other"]) &&
-               ((_editFlag == TRUE) || ![_otherName isEqualToString:@""])) {
-        return 2;
+//    } else if ((section == DETAIL_BRAND_SECTION) &&
+//               ([[_paintBrandNames objectAtIndex:_brandPickerSelRow] isEqualToString:@"Other"]) &&
+//               ((_editFlag == TRUE) || ![_otherName isEqualToString:@""])) {
+//        return 2;
 
-    } else if (section <= DETAIL_DESC_SECTION) {
-        if ((
-             ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
-             ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
-             ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
-             ) && (_editFlag == FALSE)) {
-            return 0;
-        } else {
-            return 1;
-        }
+//    } else if (section <= DETAIL_DESC_SECTION) {
+//        if ((
+//             ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
+//             ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
+//             ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
+//             ) && (_editFlag == FALSE)) {
+//            return 0;
+//        } else {
+//            return 1;
+//        }
 
-    } else if (section == DETAIL_ASSOC_SECTION) {
+//    } else
+        
+    if (section == DETAIL_ASSOC_SECTION) {
         return NUM_TABLEVIEW_ROWS;
         
     } else if ((section == DETAIL_REF_SECTION) && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
@@ -496,8 +498,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else if ((indexPath.section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
         return DEF_NIL_CELL;
         
-    } else if (indexPath.section == DETAIL_PROPS_SECTION) {
-        return DEF_NIL_CELL;
+//    } else if (indexPath.section == DETAIL_PROPS_SECTION) {
+//        return DEF_NIL_CELL;
         
     } else if (indexPath.section == DETAIL_NAME_SECTION) {
         return DEF_VLG_TBL_CELL_HGT;
@@ -802,8 +804,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     // For now, hide this
     //
-    } else if (section == DETAIL_PROPS_SECTION) {
-        return DEF_NIL_HEADER;
+//    } else if (section == DETAIL_PROPS_SECTION) {
+//        return DEF_NIL_HEADER;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -815,43 +817,45 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Background color
     //
     [view setTintColor:CLEAR_COLOR];
-    [view setBackgroundColor:CLEAR_COLOR];
+
     
     // Text Color and Size
     //
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
-    [header.textLabel setFont:DEF_SM_TBL_HDR_FONT];
     
-    if (section == DETAIL_PROPS_SECTION) {
-        [header.textLabel setFont:ITALIC_FONT];
-    }
+    [header.textLabel setTextColor:LIGHT_TEXT_COLOR];
+    [header.textLabel setFont:DEF_TBL_HEADER_FONT];
+    
+//    if (section == DETAIL_PROPS_SECTION) {
+//        [header.textLabel setFont:ITALIC_FONT];
+//    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+
     NSString *headerStr;
     if (section == DETAIL_NAME_SECTION) {
         headerStr = _nameHeader;
-        
     } else if (section == DETAIL_COLOR_SECTION) {
-        NSString *colorName = [AppColorUtils colorCategoryFromHue:_paintSwatch];
-        headerStr = [[NSString alloc] initWithFormat:@"%@ (Hue: %@)", _subjColorHeader, colorName];
+        //NSString *colorName = [AppColorUtils colorCategoryFromHue:_paintSwatch];
+        headerStr = _subjColorHeader;
+        //headerStr = [[NSString alloc] initWithFormat:@"%@ (Hue: %@)", _subjColorHeader, colorName];
         
-    } else if (section == DETAIL_PROPS_SECTION) {
-        headerStr = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i HSB=%.02f,%.02f,%.02f", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], [[_paintSwatch hue] floatValue], [[_paintSwatch saturation] floatValue], [[_paintSwatch brightness] floatValue]];
+//    } else if (section == DETAIL_PROPS_SECTION) {
+//        headerStr = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i HSB=%.02f,%.02f,%.02f", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], [[_paintSwatch hue] floatValue], [[_paintSwatch saturation] floatValue], [[_paintSwatch brightness] floatValue]];
         
     } else if (section == DETAIL_TYPES_SECTION) {
         headerStr = _swatchTypeHeader;
         
     } else if (section == DETAIL_BRAND_SECTION) {
         headerStr = _paintBrandHeader;
-
+        
     } else if (section == DETAIL_BODY_SECTION) {
         headerStr = _bodyTypeHeader;
-
+        
     } else if (section == DETAIL_PIGMENT_SECTION) {
         headerStr = _pigmentTypeHeader;
-
+        
     } else if (section == DETAIL_COVERAGE_SECTION) {
         headerStr = _canvasCoverageHeader;
         
@@ -867,6 +871,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else {
         headerStr = _mixAssocHeader;
     }
+
 
     return [headerStr uppercaseString];
 }
