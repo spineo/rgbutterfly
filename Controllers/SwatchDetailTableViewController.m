@@ -40,7 +40,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName;
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName;
 
 // Subjective color related
 //
@@ -76,6 +76,10 @@
 //
 @property (nonatomic, strong) PaintSwatches *selPaintSwatch;
 
+// NSUserDefaults
+//
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+
 @end
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -96,18 +100,18 @@ int NUM_TABLEVIEW_ROWS = 0;
 //
 int DETAIL_NAME_SECTION     = 0;
 int DETAIL_COLOR_SECTION    = 1;
-//int DETAIL_PROPS_SECTION    = 2;
-int DETAIL_TYPES_SECTION    = 2;
-int DETAIL_BRAND_SECTION    = 3;
-int DETAIL_PIGMENT_SECTION  = 4;
-int DETAIL_BODY_SECTION     = 5;
-int DETAIL_COVERAGE_SECTION = 6;
-int DETAIL_KEYW_SECTION     = 7;
-int DETAIL_DESC_SECTION     = 8;
-int DETAIL_REF_SECTION      = 9;
-int DETAIL_ASSOC_SECTION    = 10;
+int DETAIL_PROPS_SECTION    = 2;
+int DETAIL_TYPES_SECTION    = 3;
+int DETAIL_BRAND_SECTION    = 4;
+int DETAIL_PIGMENT_SECTION  = 5;
+int DETAIL_BODY_SECTION     = 6;
+int DETAIL_COVERAGE_SECTION = 7;
+int DETAIL_KEYW_SECTION     = 8;
+int DETAIL_DESC_SECTION     = 9;
+int DETAIL_REF_SECTION      = 10;
+int DETAIL_ASSOC_SECTION    = 11;
 
-const int DETAIL_MAX_SECTION      = 11;
+const int DETAIL_MAX_SECTION      = 12;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
@@ -163,6 +167,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
     //[self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 
+
     // TableView defaults
     //
     _imageViewXOffset  = DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING;
@@ -184,26 +189,31 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Default edit behaviour
     //
     _editFlag  = FALSE;
+
     
     // Other flags
     //
     _isShipped = [[_paintSwatch is_shipped] boolValue];
 
     
+    // NSUserDefaults
+    //
+    _userDefaults = [NSUserDefaults standardUserDefaults];
+    
     // Table View Headers
     //
-    _nameHeader           = @"Color Thumbnail and Name";
+    _defNameHeader        = @"Thumbnail and Color Name";
     _subjColorHeader      = @"My Color Group";
-    _propsHeader          = @"Properties";
-    _swatchTypeHeader     = @"Color Type";
+    _propsHeader          = @"Hue-Based Category";
+    _swatchTypeHeader     = @"Association Type";
     _paintBrandHeader     = @"Paint Brand";
     _bodyTypeHeader       = @"Body Type";
     _pigmentTypeHeader    = @"Pigment Type";
-    _canvasCoverageHeader = @"Canvas Coverage";
+    _canvasCoverageHeader = @"Canvas Coverage Thickness";
     _keywHeader           = @"My Topics";
     _commentsHeader       = @"Comments";
-    _refsHeader           = @"Reference Mix Colors";
-    _mixAssocHeader       = @"Related Color Collections";
+    _refsHeader           = @"Reference Colors (Mixes Only)";
+    _mixAssocHeader       = @"Collections Containing this Color";
     _matchAssocHeader     = @"My Matches";
 
     
@@ -392,6 +402,15 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
                                                object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    if([_userDefaults boolForKey:TAP_NOTE_KEY] == FALSE) {
+        _nameHeader = @"Thumbnail (Tap to Expand) and Name";
+    } else {
+        _nameHeader = _defNameHeader;
+    }
+    [self.tableView reloadData];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     _isReadOnly = FALSE;
 
@@ -448,43 +467,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if ((section == DETAIL_BRAND_SECTION) && (_isShipped == TRUE)) {
-//        return 0;
-//
-//    } else if ((
-//         (section == DETAIL_BRAND_SECTION)   ||
-//         (section == DETAIL_BODY_SECTION)    ||
-//         (section == DETAIL_PIGMENT_SECTION)
-//        ) && (![[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Reference"])) {
-//        return 0;
-        
-//    } else if ((section == DETAIL_COVERAGE_SECTION)
-//            && ([[_swatchTypeNames objectAtIndex:_typesPickerSelRow] isEqualToString:@"Generic"])) {
-//        return 0;
-
-//    } else if ((section == DETAIL_BRAND_SECTION) &&
-//               ([[_paintBrandNames objectAtIndex:_brandPickerSelRow] isEqualToString:@"Other"]) &&
-//               ((_editFlag == TRUE) || ![_otherName isEqualToString:@""])) {
-//        return 2;
-
-//    } else if (section <= DETAIL_DESC_SECTION) {
-//        if ((
-//             ((section == DETAIL_NAME_SECTION)  && [_nameEntered isEqualToString:@""]) ||
-//             ((section == DETAIL_KEYW_SECTION)  && [_keywEntered isEqualToString:@""]) ||
-//             ((section == DETAIL_DESC_SECTION)  && [_descEntered isEqualToString:@""])
-//             ) && (_editFlag == FALSE)) {
-//            return 0;
-//        } else {
-//            return 1;
-//        }
-
-//    } else
-        
     if (section == DETAIL_ASSOC_SECTION) {
         return NUM_TABLEVIEW_ROWS;
         
     } else if ((section == DETAIL_REF_SECTION) && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
-        return 2;
+            return 2;
 
     } else {
         return 1;
@@ -494,12 +481,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == DETAIL_ASSOC_SECTION) {
         return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
-        
-    } else if ((indexPath.section == DETAIL_REF_SECTION) && ((_refPaintSwatch == nil) || (_mixPaintSwatch == nil))) {
-        return DEF_NIL_CELL;
-        
-//    } else if (indexPath.section == DETAIL_PROPS_SECTION) {
-//        return DEF_NIL_CELL;
         
     } else if (indexPath.section == DETAIL_NAME_SECTION) {
         return DEF_VLG_TBL_CELL_HGT;
@@ -804,8 +785,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         
     // For now, hide this
     //
-//    } else if (section == DETAIL_PROPS_SECTION) {
-//        return DEF_NIL_HEADER;
+    } else if (section == DETAIL_PROPS_SECTION) {
+        return DEF_NIL_HEADER;
 
     } else {
         return DEF_TABLE_HDR_HEIGHT;
@@ -841,7 +822,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         headerStr = _subjColorHeader;
         //headerStr = [[NSString alloc] initWithFormat:@"%@ (Hue: %@)", _subjColorHeader, colorName];
         
-//    } else if (section == DETAIL_PROPS_SECTION) {
+    } else if (section == DETAIL_PROPS_SECTION) {
+        headerStr = _propsHeader;
 //        headerStr = [[NSString alloc] initWithFormat:@"RGB=%i,%i,%i HSB=%.02f,%.02f,%.02f", [[_paintSwatch red] intValue], [[_paintSwatch green] intValue], [[_paintSwatch blue] intValue], [[_paintSwatch hue] floatValue], [[_paintSwatch saturation] floatValue], [[_paintSwatch brightness] floatValue]];
         
     } else if (section == DETAIL_TYPES_SECTION) {
@@ -884,7 +866,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         } else {
             _selPaintSwatch = _mixPaintSwatch;
         }
-
         [self performSegueWithIdentifier:@"DetailToRefSegue" sender:self];
     }
     
@@ -1386,6 +1367,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         ColorViewController *colorViewController = (ColorViewController *)([navigationViewController viewControllers][0]);
         
         [colorViewController setPaintSwatch:_paintSwatch];
+        
+        // User should now be aware of this behavior so don't show any longer
+        //
+        _nameHeader = _defNameHeader;
+        [_userDefaults setBool:TRUE forKey:TAP_NOTE_KEY];
 
     } else {
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);

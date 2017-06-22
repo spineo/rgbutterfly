@@ -499,7 +499,7 @@
                                 <action selector="decr:" destination="kOh-IX-qcO" id="7ul-z8-dtA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="72" enabled="NO" title="Areas" id="9k2-Mz-UD8">
+                        <barButtonItem tag="72" title="Areas" id="9k2-Mz-UD8">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="toggleAction:" destination="kOh-IX-qcO" id="cxk-QG-fBd"/>
@@ -1260,12 +1260,12 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="xj5-pH-aLq"/>
+        <segue reference="7OV-Go-gIV"/>
+        <segue reference="ZPZ-Du-pkL"/>
         <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
-        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="xj5-pH-aLq"/>
+        <segue reference="Stq-UR-tQY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

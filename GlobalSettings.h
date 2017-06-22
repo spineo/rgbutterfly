@@ -379,6 +379,10 @@ extern NSString * const APP_INTRO_INSTRUCTIONS;
 extern NSString * const INTERACT_INSTRUCTIONS;
 extern NSString * const TAP_COLLECT_INSTRUCTIONS;
 
+// Tap Note Key
+//
+extern NSString *const TAP_NOTE_KEY;
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

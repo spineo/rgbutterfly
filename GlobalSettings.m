@@ -353,6 +353,7 @@ NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 NSString * const LISTING_TYPE        = @"ListingType";
+NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Activity (i.e., spinner) label indicator
 //
@@ -665,6 +666,12 @@ static NSDictionary *swatchTypes;
     
     if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
         [userDefaults setValue:MATCH_LIST_TYPE forKey:LISTING_TYPE];
+    }
+    
+    // Color Detail Tap Area note
+    //
+    if ([userDefaults objectForKey:TAP_NOTE_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:TAP_NOTE_KEY];
     }
     
     [userDefaults synchronize];
