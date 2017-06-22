@@ -212,7 +212,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _canvasCoverageHeader = @"Canvas Coverage Thickness";
     _keywHeader           = @"My Topics";
     _commentsHeader       = @"Comments";
-    _refsHeader           = @"Reference Colors (Mixes Only)";
+    _refsHeader           = @"Reference Colors (Mix Types Only)";
     _mixAssocHeader       = @"Collections Containing this Color";
     _matchAssocHeader     = @"My Matches";
 
@@ -433,16 +433,18 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Text view widths
     //
     CGFloat viewWidth = self.tableView.bounds.size.width;
-    CGFloat fullTextFieldWidth = viewWidth - DEF_TABLE_X_OFFSET - DEF_FIELD_PADDING;
+    CGFloat fullTextFieldWidth = viewWidth - DEF_MD_FIELD_PADDING;
+    CGFloat xOffset = DEF_FIELD_PADDING;
     
-    _colorTextFieldWidth = viewWidth - _imageViewWidth - DEF_MD_FIELD_PADDING;
+    //_colorTextFieldWidth = viewWidth - _imageViewWidth - DEF_MD_FIELD_PADDING;
 
-    [_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _colorTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_swatchTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_paintBrandName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_bodyTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_pigmentTypeName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
-    [_coverageName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    //[_subjColorName setFrame:CGRectMake(_imageViewWidth, _textFieldYOffset, _colorTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_subjColorName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_swatchTypeName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_paintBrandName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_bodyTypeName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_pigmentTypeName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
+    [_coverageName setFrame:CGRectMake(xOffset, _textFieldYOffset, fullTextFieldWidth, DEF_TEXTFIELD_HEIGHT)];
 }
 
 
@@ -508,7 +510,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         [cell.imageView setImage:nil];
         [cell.textLabel setText:@""];
         [cell.contentView setBackgroundColor:DEF_BG_COLOR];
-        [cell setBackgroundColor:DEF_BG_COLOR];
 
 
         // Set the widget frame sizes
@@ -559,23 +560,28 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             } else {
                 [FieldUtils makeTextViewNonEditable:refName content:_nameEntered border:FALSE];
                 [refName setBackgroundColor:CLEAR_COLOR];
-                //[refName setTintColor:CLEAR_COLOR];
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         
         // Subjective color field
         //
         } else if (indexPath.section == DETAIL_COLOR_SECTION) {
-            [cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
-            [cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
-            [cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
-            cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
-            cell.imageView.clipsToBounds = YES;
-            cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_MD_TABLE_CELL_HGT cellHeight:DEF_TEXTFIELD_HEIGHT];
+            //[cell.imageView.layer setBorderColor: [LIGHT_BORDER_COLOR CGColor]];
+            //[cell.imageView.layer setBorderWidth: DEF_BORDER_WIDTH];
+            //[cell.imageView.layer setCornerRadius: DEF_CORNER_RADIUS];
+            //cell.imageView.contentMode   = UIViewContentModeScaleAspectFill;
+            //cell.imageView.clipsToBounds = YES;
+            //cell.imageView.image = [AppColorUtils renderRGB:_paintSwatch cellWidth:DEF_MD_TABLE_CELL_HGT cellHeight:DEF_TEXTFIELD_HEIGHT];
 
             [cell.contentView addSubview:_subjColorName];
-
-        
+            
+        } else if (indexPath.section == DETAIL_PROPS_SECTION) {
+            NSString *colorName = [AppColorUtils colorCategoryFromHue:_paintSwatch];
+            [cell.textLabel setText:colorName];
+            [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
+            [cell.textLabel setFont:DEF_LABEL_FONT];
+            [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+    
         // Swatch type field
         //
         } else if (indexPath.section == DETAIL_TYPES_SECTION) {
@@ -639,7 +645,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         //
         } else if (indexPath.section == DETAIL_KEYW_SECTION) {
             UITextView *refName  = [FieldUtils createTextView:_keywEntered tag:KEYW_FIELD_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTVIEW_HEIGHT)];
+            CGFloat yOffset = (DEF_LG_TABLE_CELL_HGT - DEF_TEXTVIEW_HEIGHT) / DEF_Y_OFFSET_DIVIDER;
+            [refName setFrame:CGRectMake(DEF_FIELD_PADDING, yOffset, self.tableView.bounds.size.width - DEF_MD_FIELD_PADDING, DEF_TEXTVIEW_HEIGHT)];
             [refName setDelegate:self];
             [cell.contentView addSubview:refName];
             
@@ -660,7 +667,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             // Create the description/comments text field
             //
             UITextField *refName  = [FieldUtils createTextField:_descEntered tag:DESC_FIELD_TAG];
-            [refName setFrame:CGRectMake(DEF_TABLE_X_OFFSET, _textFieldYOffset, (self.tableView.bounds.size.width - DEF_TABLE_X_OFFSET) - DEF_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
+            [refName setFrame:CGRectMake(DEF_FIELD_PADDING, _textFieldYOffset, self.tableView.bounds.size.width - DEF_MD_FIELD_PADDING, DEF_TEXTFIELD_HEIGHT)];
             [refName setDelegate:self];
             [cell.contentView addSubview:refName];
             
@@ -674,31 +681,41 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
             }
             [cell setAccessoryType: UITableViewCellAccessoryNone];
         
-        } else if ((indexPath.section == DETAIL_REF_SECTION) && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
-
-            [cell.imageView setFrame:CGRectMake(DEF_FIELD_PADDING, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height)];
-            [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
-            [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
-            [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
-            
-            [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
-            [cell.imageView setClipsToBounds:YES];
-            
-            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            [cell.textLabel setFont:TABLE_CELL_FONT];
+        } else if (indexPath.section == DETAIL_REF_SECTION) {
             [cell setBackgroundColor:DEF_BG_COLOR];
             [cell.textLabel setTextColor:LIGHT_TEXT_COLOR];
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            if (indexPath.row == 0) {
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
-                [cell.textLabel setText:[_refPaintSwatch name]];
 
+            if ((_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
+                [cell.imageView setFrame:CGRectMake(DEF_FIELD_PADDING, DEF_Y_OFFSET, cell.bounds.size.height, cell.bounds.size.height)];
+                [cell.imageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
+                [cell.imageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+                [cell.imageView.layer setCornerRadius:DEF_CORNER_RADIUS];
+                
+                [cell.imageView setContentMode:UIViewContentModeScaleAspectFill];
+                [cell.imageView setClipsToBounds:YES];
+                
+                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+                [cell.textLabel setFont:TABLE_CELL_FONT];
+                
+                if (indexPath.row == 0) {
+                    [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
+                    [cell.textLabel setText:[_refPaintSwatch name]];
+
+                } else {
+                    // Detail Mix Section
+                    //
+                    [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
+                    [cell.textLabel setText:[_mixPaintSwatch name]];
+                }
             } else {
-                // Detail Mix Section
-                //
-                [cell.imageView setImage:[AppColorUtils renderSwatch:_mixPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
-                [cell.textLabel setText:[_mixPaintSwatch name]];
+                [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
+                [cell.textLabel setFont:DEF_LABEL_FONT];
+                if ([[_swatchTypeName text] isEqualToString:@"MixAssoc"]) {
+                    [cell.textLabel setText:@"Not Shown in this Context"];
+                } else {
+                    [cell.textLabel setText:@"Not Applicable"];
+                }
             }
         }
         
@@ -860,7 +877,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == DETAIL_REF_SECTION) {
+    if ((indexPath.section == DETAIL_REF_SECTION)
+        && (_refPaintSwatch != nil) && (_mixPaintSwatch != nil)) {
         if (indexPath.row == 0) {
             _selPaintSwatch = _refPaintSwatch;
         } else {

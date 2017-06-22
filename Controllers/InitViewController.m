@@ -97,6 +97,21 @@
     // Initialization
     //
     _userDefaults   = [NSUserDefaults standardUserDefaults];
+
+    
+    // Check for DB restore
+    //
+    _dbRestoreFlag           = [_userDefaults boolForKey:DB_RESTORE_KEY];
+    
+    
+    self.view.autoresizesSubviews = NO;
+    
+    // Re-initialize the buttons
+    //
+    _tapRecognizer = [[UITapGestureRecognizer alloc]
+                      initWithTarget:self action:@selector(respondToTap)];
+    [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
+    [self.view addGestureRecognizer:_tapRecognizer];
     
     
     // Look at what is currently in Settings
@@ -113,14 +128,7 @@
     _photoContext      = FALSE;
     _mainViewHasLoaded = FALSE;
     
-    self.view.autoresizesSubviews = NO;
-    
-    // Re-initialize the buttons
-    //
-    _tapRecognizer = [[UITapGestureRecognizer alloc]
-                      initWithTarget:self action:@selector(respondToTap)];
-    [_tapRecognizer setNumberOfTapsRequired:DEF_NUM_TAPS];
-    [self.view addGestureRecognizer:_tapRecognizer];
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -210,10 +218,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:TRUE];
     
-    // Check for DB restore
-    //
-    _dbRestoreFlag           = [_userDefaults boolForKey:DB_RESTORE_KEY];
-
     
     // Remove subviews
     //
@@ -312,6 +316,7 @@
         // Revert back to FALSE default
         //
         [_userDefaults setBool:FALSE forKey:DB_RESTORE_KEY];
+        _dbRestoreFlag = FALSE;
     }
 }
 
