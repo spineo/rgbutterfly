@@ -35,7 +35,7 @@
 
 @interface ImageViewController ()
 
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *titleLabel, *tapNoteLabel;
 @property (nonatomic, strong) UIBarButtonItem *scrollViewUp, *scrollViewDown;
 
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
@@ -154,6 +154,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
     
+    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -219,6 +220,24 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
 
     _defTableViewSize    = _imageTableView.bounds.size;
+    
+    // Create the tap note label
+    //
+    CGFloat xCenter    = self.view.bounds.size.width / DEF_X_OFFSET_DIVIDER;
+    
+    _tapNoteLabel = [FieldUtils createLabel:@"Tap on any Area of the Photo!"];
+    [_tapNoteLabel setFont:DEF_LG_VIEW_FONT];
+    [_tapNoteLabel setTextColor:LIGHT_TEXT_COLOR];
+    [_tapNoteLabel sizeToFit];
+    
+    CGFloat xOffset = xCenter - (_tapNoteLabel.bounds.size.width / DEF_X_OFFSET_DIVIDER);
+    CGFloat yOffset = self.view.bounds.size.height * 0.65;
+    
+    [_tapNoteLabel setFrame:CGRectMake(xOffset, yOffset, _tapNoteLabel.bounds.size.width, _tapNoteLabel.bounds.size.height)];
+    [self.view addSubview:_tapNoteLabel];
+    
+    [_tapNoteLabel setHidden:TRUE];
+    
 
     // Used in sortByClosestMatch
     //
@@ -469,11 +488,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_assocSave setEnabled:FALSE];
 
     
-    // Navigation Item Title
-    //
-    [self setNavTitle:DEF_IMAGE_NAME];
-
-    
     // Type Alert Controller
     //
     _typeAlertController = [UIAlertController alertControllerWithTitle:@"Action Types"
@@ -639,17 +653,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     [self resizeViews];
 
-    _titleLabel = [FieldUtils createLabel:DEF_IMAGE_NAME];
-    [_titleLabel setTextAlignment: NSTextAlignmentCenter];
-    [_titleLabel setFont:TITLE_VIEW_FONT];
-    [_titleLabel setBackgroundColor:[UIColor clearColor]];
-    [_titleLabel sizeToFit];
-    
-    // Title View containing the Label (i.e., association name)
+   
+    // Re-set with the correct font
     //
-    _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _titleLabel.bounds.size.width, _titleLabel.bounds.size.height)];
-    [_titleView addSubview:_titleLabel];
-    self.navigationItem.titleView = _titleView;
+    [self setNavTitle:DEF_IMAGE_NAME];
+
 
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         [self setTapAreas];
@@ -1863,7 +1871,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)setNavTitle:(NSString *)title {
     NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
        NSFontAttributeName:DEF_MD_ITALIC_FONT}];
-    [[self.navigationItem.titleView.subviews objectAtIndex:0] setAttributedText:attrTitle];
+
+    _titleLabel = [FieldUtils createLabel:title];
+    [_titleLabel setAttributedText:attrTitle];
+    [_titleLabel sizeToFit];
+    [_titleLabel setTextAlignment: NSTextAlignmentCenter];
+    [_titleLabel setBackgroundColor:CLEAR_COLOR];
+    
+    _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _titleLabel.bounds.size.width, _titleLabel.bounds.size.height)];
+    [_titleView addSubview:_titleLabel];
+    self.navigationItem.titleView = _titleView;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
