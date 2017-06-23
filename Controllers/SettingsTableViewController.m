@@ -240,7 +240,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _dbRestoreOffText = @"Keep the Current Database Snapshot";
     _dbRestoreOnText  = @"Restore to the Original Database";
     
-    if ([_userDefaults boolForKey:DB_RESTORE_KEY] == FALSE) {
+    if ([_userDefaults boolForKey:DB_RESTORE_KEY] == FALSE || ![_userDefaults stringForKey:_dbRestoreText]) {
         _dbRestoreFlag = FALSE;
         _labelText = _dbRestoreOffText;
         
@@ -277,10 +277,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _psMakeReadOnlyLabel  = @"Paint Swatches are Read-Only ";
     _psMakeReadWriteLabel = @"Paint Swatches are Read/Write";
     
-    if ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] == TRUE) {
-    //if(! ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] &&
-    //      [_userDefaults stringForKey:_psReadOnlyText])
-    //   ) {
+    if ([_userDefaults boolForKey:PAINT_SWATCH_RO_KEY] == TRUE || ![_userDefaults stringForKey:_psReadOnlyText]) {
         _swatchesReadOnly = TRUE;
         _labelText = _psMakeReadOnlyLabel;
         
@@ -321,10 +318,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _maMakeReadWriteLabel = @"Mix Associations are Read/Write";
     
     _labelText = @"";
-    if ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] == TRUE) {
-    //if(! ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] &&
-    //      [_userDefaults stringForKey:_maReadOnlyText])
-    //   ) {
+    if ([_userDefaults boolForKey:MIX_ASSOC_RO_KEY] == TRUE || ![_userDefaults stringForKey:_maReadOnlyText]) {
         _assocsReadOnly = TRUE;
         _labelText = _maMakeReadOnlyLabel;
         
@@ -468,7 +462,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _genFilterOffText = @"Generic Swatches Not Filtered ";
     _genFilterOnText  = @"Generic Swatches Are Filtered";
     
-    if ([_userDefaults boolForKey:GEN_FILTER_KEY] == TRUE) {
+    if ([_userDefaults boolForKey:GEN_FILTER_KEY] == TRUE || ![_userDefaults stringForKey:_genFilterText]) {
         _genFilterFlag = TRUE;
         _labelText = _genFilterOnText;
         
@@ -502,7 +496,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _covFilterOffText = @"Non-Thick Swatches Not Filtered ";
     _covFilterOnText  = @"Non-Thick Swatches Are Filtered";
     
-    if ([_userDefaults boolForKey:COV_FILTER_KEY] == FALSE) {
+    if ([_userDefaults boolForKey:COV_FILTER_KEY] == FALSE || ![_userDefaults stringForKey:_covFilterText]) {
         _covFilterFlag = FALSE;
         _labelText = _covFilterOffText;
         

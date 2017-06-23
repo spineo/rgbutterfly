@@ -130,7 +130,7 @@ CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 
 // Tap Area
 //
-CGFloat const DEF_TAP_AREA_SIZE     = 30.0;
+CGFloat const DEF_TAP_AREA_SIZE     = 40.0;
 
 // UI TextField/TextView
 //
@@ -388,25 +388,25 @@ NSString * const SHAPE_RECT_VALUE    = @"Rect";
 
 // Tap Area Length
 //
-const int TAP_AREA_LENGTH = 32;
+const int TAP_AREA_LENGTH = 40;
 
 // Tap Area Stepper
 //
-const int TAP_STEPPER_MIN = 20;
-const int TAP_STEPPER_MAX = 44;
+const int TAP_STEPPER_MIN = 32;
+const int TAP_STEPPER_MAX = 48;
 const int TAP_STEPPER_INC = 4;
 
 // Match Num Stepper
 //
 const int MATCH_STEPPER_MIN = 5;
-const int MATCH_STEPPER_MAX = 100;
+const int MATCH_STEPPER_MAX = 80;
 const int MATCH_STEPPER_INC = 5;
-const int MATCH_STEPPER_DEF = 30;
+const int MATCH_STEPPER_DEF = 20;
 
 // Max Match Num (i.e., ImageViewController)
 //
-int const DEF_MAX_MATCH  = 100;
-int const DEF_MATCH_NUM  = 30;
+int const DEF_MAX_MATCH  = 80;
+int const DEF_MATCH_NUM  = 20;
 int const DEF_MIN_MATCH  = 5;
 int const DEF_STEP_MATCH = 5;
 
