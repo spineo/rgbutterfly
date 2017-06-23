@@ -51,7 +51,7 @@
 
 @property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit, imageViewSize;
 
-@property (nonatomic) CGFloat headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold;
+@property (nonatomic) CGFloat headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold, mainViewWidth, backButtonWidth, editButtonWidth;
 
 @property (nonatomic) CGSize defTableViewSize;
 
@@ -221,10 +221,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     _defTableViewSize    = _imageTableView.bounds.size;
     
+    // Get widget widths
+    //
+    _mainViewWidth     = self.view.bounds.size.width;
+    CGFloat xCenter    = _mainViewWidth / DEF_X_OFFSET_DIVIDER;
+
+    
     // Create the tap note label
     //
-    CGFloat xCenter    = self.view.bounds.size.width / DEF_X_OFFSET_DIVIDER;
-    
     _tapNoteLabel = [FieldUtils createLabel:@"Tap on any Area of the Photo!"];
     [_tapNoteLabel setFont:DEF_LG_VIEW_FONT];
     [_tapNoteLabel setTextColor:LIGHT_TEXT_COLOR];
