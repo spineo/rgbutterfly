@@ -149,14 +149,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set the background image
-    //
-    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
-
-    // Set the background image
-    //
-    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.colorTableView];
-    
     [self.colorTableView setBackgroundColor:DEF_DARK_COLOR];
     
     // NSManagedObject subclassing

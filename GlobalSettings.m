@@ -453,8 +453,6 @@ NSString * const DEF_IMAGE_NAME = @"My Color Matches";
 // Image Names
 //
 NSString * const BACKGROUND_IMAGE_TITLE = @"butterfly-background-title-2.png";
-//NSString * const BACKGROUND_IMAGE       = @"jgpineo_background.jpg";
-NSString * const BACKGROUND_IMAGE       = @"jgpineo_background_fade.jpg";
 NSString * const BG_IMAGE_PORTRAIT      = @"jgpineo_background_fade_portrait.jpg";
 NSString * const BG_IMAGE_LANDSCAPE     = @"jgpineo_background_fade_landscape.jpg";
 NSString * const BACKGROUND_IMAGE_2     = @"jgpineo_background_dark_fade.png";
@@ -485,7 +483,6 @@ NSString * const EXPLORE_PAT = @"Explore Colors";
 
 // Documentation Site/Share
 //
-NSString * const DOCS_IMAGE    = @"docs-image.png";
 NSString * const MAIN_IMAGE    = @"main-image.png";
 NSString * const DOCS_SYNOPSIS = @"The iPhone App to Suggest Matching Paint Colors";
 NSString * const DOCS_SITE_URL = @"http://rgbutterfly.com/";

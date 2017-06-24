@@ -469,7 +469,6 @@ extern NSString * const EXPLORE_PAT;
 
 // Documentation Site
 //
-extern NSString * const DOCS_IMAGE;
 extern NSString * const MAIN_IMAGE;
 extern NSString * const DOCS_SYNOPSIS;
 extern NSString * const DOCS_SITE_URL;

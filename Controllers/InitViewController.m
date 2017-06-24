@@ -57,11 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set the background image
-    //
-    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
-    
-    
     // Set the default font
     //
     [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
