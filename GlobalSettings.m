@@ -307,7 +307,7 @@ int const EXPLORE_LABEL_TAG   = 327;
 int const MATCHED_LABEL_TAG   = 328;
 int const GROUPS_LABEL_TAG    = 329;
 
-int const DISCLOSURE_BTN_TAG  = 331;
+int const ABOUT_BTN_TAG       = 331;
 int const SETTINGS2_BTN_TAG   = 332;
 
 int const MAX_TAG             = 1000;

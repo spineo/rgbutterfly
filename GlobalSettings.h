@@ -314,7 +314,7 @@ extern int const EXPLORE_LABEL_TAG;
 extern int const MATCHED_LABEL_TAG;
 extern int const GROUPS_LABEL_TAG;
 
-extern int const DISCLOSURE_BTN_TAG;
+extern int const ABOUT_BTN_TAG;
 extern int const SETTINGS2_BTN_TAG;
 
 // Max Tag used as reference to ensure all table view elements

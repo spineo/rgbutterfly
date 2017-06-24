@@ -28,7 +28,7 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *disclosureButton, *settingsButton;
+@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *aboutButton, *settingsButton;
 @property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
 @property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
 
@@ -91,10 +91,10 @@
     _groupsButton     = (UIButton *)[self.view viewWithTag:GROUPS_BTN_TAG];
     _groupsLabel      = (UILabel *)[self.view viewWithTag:GROUPS_LABEL_TAG];
     
-    // Disclosure/Settings
+    // About/Settings
     //
-    _disclosureButton = (UIButton *)[self.view viewWithTag:DISCLOSURE_BTN_TAG];
-    _settingsButton   = (UIButton *)[self.view viewWithTag:SETTINGS2_BTN_TAG];
+    _aboutButton     = (UIButton *)[self.view viewWithTag:ABOUT_BTN_TAG];
+    _settingsButton  = (UIButton *)[self.view viewWithTag:SETTINGS2_BTN_TAG];
     
 
     
@@ -269,14 +269,6 @@
 
 - (void)setOrientationLayout {
     
-    // Set the background image
-    //
-    if (_isLandscape == TRUE) {
-        [ColorUtils setBackgroundImage:BG_IMAGE_LANDSCAPE view:self.view];
-    } else {
-        [ColorUtils setBackgroundImage:BG_IMAGE_PORTRAIT view:self.view];
-    }
-    
     // Compute the view width
     //
     _viewWidth  = self.view.bounds.size.width;
@@ -284,19 +276,58 @@
     
     _width  = DEF_BUTTON_WIDTH;
     _height = DEF_BUTTON_WIDTH;
-    _xCenter = _viewWidth / 2.0;
+    _xCenter = _viewWidth / DEF_X_OFFSET_DIVIDER;
     
-    // Disclosure button
+    CGFloat aboutButtonXOffset, aboutButtonYOffset, settingsButtonXOffset, settingsButtonYOffset, exploreButtonsYOffset, collectButtonXOffset, collectButtonYOffset, groupsButtonXOffset, groupsButtonYOffset;
+    
+    // Set the background image
     //
-    _yOffset = _viewHeight * 0.08;
-    _xOffset = _viewWidth * 0.83;
-    _buttonWidth  = _disclosureButton.bounds.size.width;
-    _buttonHeight = _disclosureButton.bounds.size.height;
-    [_disclosureButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    if (_isLandscape == TRUE) {
+        [ColorUtils setBackgroundImage:BG_IMAGE_LANDSCAPE view:self.view];
+        
+        aboutButtonXOffset    = _viewWidth  * 0.88;
+        aboutButtonYOffset    = _viewHeight * 0.10;
+        
+        settingsButtonXOffset = _viewWidth  * 0.87;
+        settingsButtonYOffset = _viewHeight * 0.81;
+        
+        exploreButtonsYOffset = _viewHeight * 0.50;
+        
+        collectButtonYOffset  = exploreButtonsYOffset;
+        collectButtonXOffset  = _xCenter - (_width * 3.5);
+        
+        groupsButtonYOffset   = exploreButtonsYOffset;
+        groupsButtonXOffset   = _xCenter + (_width * 2.5);
+
+        
+    } else {
+        [ColorUtils setBackgroundImage:BG_IMAGE_PORTRAIT view:self.view];
+        
+        aboutButtonXOffset    = _viewWidth  * 0.83;
+        aboutButtonYOffset    = _viewHeight * 0.08;
+        
+        settingsButtonXOffset = _viewWidth  * 0.81;
+        settingsButtonYOffset = _viewHeight * 0.86;
+        
+        exploreButtonsYOffset = _viewHeight * 0.45;
+        
+        collectButtonYOffset  = _viewHeight * 0.67;
+        collectButtonXOffset  = _xCenter - (_width * 1.5);
+        
+        groupsButtonXOffset   = _xCenter + (_width * 0.33);
+        groupsButtonYOffset   = _viewHeight * 0.67;
+    }
+
+    
+    // About button
+    //
+    _buttonWidth  = _aboutButton.bounds.size.width;
+    _buttonHeight = _aboutButton.bounds.size.height;
+    [_aboutButton setFrame:CGRectMake(aboutButtonXOffset, aboutButtonYOffset, _buttonWidth, _buttonHeight)];
     
     // Match Colors
     //
-    _yOffset = _viewHeight * 0.20;
+    _yOffset = _viewHeight * 0.15;
     [_matchButton sizeToFit];
     _buttonWidth  = _matchButton.bounds.size.width;
     _buttonHeight = _matchButton.bounds.size.height;
@@ -323,38 +354,31 @@
     [_exploreButton setFrame:CGRectMake(_xOffset, _exploreYOffset, _buttonWidth, _buttonHeight)];
     _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_exploreYOffset+_buttonHeight width:_buttonWidth];
     
-    _yOffset = _viewHeight * 0.45;
     _xOffset = _xCenter - (_width * 2.0);
-    [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    [_topicsButton setFrame:CGRectMake(_xOffset, exploreButtonsYOffset, _width, _height)];
+    _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:exploreButtonsYOffset+_height width:_width];
     
     _xOffset = _xCenter - (_width * 0.5);
-    [_matchedButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _matchedLabel = [self resetLabel:_matchedLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    [_matchedButton setFrame:CGRectMake(_xOffset, exploreButtonsYOffset, _width, _height)];
+    _matchedLabel = [self resetLabel:_matchedLabel xOffset:_xOffset yOffset:exploreButtonsYOffset+_height width:_width];
     
     _xOffset = _xCenter + _width;
-    [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    [_listButton setFrame:CGRectMake(_xOffset, exploreButtonsYOffset, _width, _height)];
+    _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:exploreButtonsYOffset+_height width:_width];
     
     // Bottom buttons
     //
-    _yOffset = _viewHeight * 0.67;
+    [_collectButton setFrame:CGRectMake(collectButtonXOffset, collectButtonYOffset, _width, _height)];
+    _collectLabel = [self resetLabel:_collectLabel xOffset:collectButtonXOffset yOffset:collectButtonYOffset+_height width:_width];
     
-    _xOffset = _xCenter - (_width * 1.33);
-    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    _xOffset = _xCenter + (_width * 0.33);
-    [_groupsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _groupsLabel = [self resetLabel:_groupsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    [_groupsButton setFrame:CGRectMake(groupsButtonXOffset, groupsButtonYOffset, _width, _height)];
+    _groupsLabel = [self resetLabel:_groupsLabel xOffset:groupsButtonXOffset yOffset:groupsButtonYOffset+_height width:_width];
     
     // Settings button
     //
-    _yOffset = _viewHeight * 0.86;
-    _xOffset = _viewWidth * 0.80;
     _buttonWidth  = _settingsButton.bounds.size.width;
     _buttonHeight = _settingsButton.bounds.size.height;
-    [_settingsButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    [_settingsButton setFrame:CGRectMake(settingsButtonXOffset, settingsButtonYOffset, _buttonWidth, _buttonHeight)];
     
     self.view.hidden = NO;
 }
