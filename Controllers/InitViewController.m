@@ -40,6 +40,10 @@
 //
 @property (nonatomic, strong) UITapGestureRecognizer *tapRecognizer;
 
+// Orientation
+//
+@property (nonatomic) BOOL isLandscape;
+
 @end
 
 @implementation InitViewController
@@ -55,7 +59,7 @@
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
+    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE view:self.view];
     
     
     // Set the default font
@@ -127,92 +131,10 @@
     
     _photoContext      = FALSE;
     _mainViewHasLoaded = FALSE;
-    
-
 }
 
 - (void)viewWillLayoutSubviews {
-
-    // Compute the view width
-    //
-    _viewWidth  = self.view.bounds.size.width;
-    _viewHeight = self.view.bounds.size.height;
-    
-    _width  = DEF_BUTTON_WIDTH;
-    _height = DEF_BUTTON_WIDTH;
-    _xCenter = _viewWidth / 2.0;
-    
-    // Disclosure button
-    //
-    _yOffset = _viewHeight * 0.08;
-    _xOffset = _viewWidth * 0.83;
-    _buttonWidth  = _disclosureButton.bounds.size.width;
-    _buttonHeight = _disclosureButton.bounds.size.height;
-    [_disclosureButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
-    
-    // Match Colors
-    //
-    _yOffset = _viewHeight * 0.20;
-    [_matchButton sizeToFit];
-    _buttonWidth  = _matchButton.bounds.size.width;
-    _buttonHeight = _matchButton.bounds.size.height;
-    _xOffset     = _xCenter - (_buttonWidth / 2.0);
-    [_matchButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
-    _matchLabel = [self resetLabel:_matchLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
-
-    _xOffset = _xCenter - (_width * 1.33);
-    [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _takePhotoLabel = [self resetLabel:_takePhotoLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    _xOffset = _xCenter + (_width * 0.33);
-    [_myPhotosButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _myPhotosLabel = [self resetLabel:_myPhotosLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    
-    // Explore Colors
-    //
-    _exploreYOffset = _viewHeight * 0.55;
-    [_exploreButton sizeToFit];
-    _buttonWidth  = _exploreButton.bounds.size.width;
-    _buttonHeight = _exploreButton.bounds.size.height;
-    _xOffset     = _xCenter - (_buttonWidth / 2.0);
-    [_exploreButton setFrame:CGRectMake(_xOffset, _exploreYOffset, _buttonWidth, _buttonHeight)];
-    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_exploreYOffset+_buttonHeight width:_buttonWidth];
-    
-    _yOffset = _viewHeight * 0.45;
-    _xOffset = _xCenter - (_width * 2.0);
-    [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    _xOffset = _xCenter - (_width * 0.5);
-    [_matchedButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _matchedLabel = [self resetLabel:_matchedLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    _xOffset = _xCenter + _width;
-    [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    // Bottom buttons
-    //
-    _yOffset = _viewHeight * 0.67;
-    
-    _xOffset = _xCenter - (_width * 1.33);
-    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    _xOffset = _xCenter + (_width * 0.33);
-    [_groupsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
-    _groupsLabel = [self resetLabel:_groupsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
-    
-    // Settings button
-    //
-    _yOffset = _viewHeight * 0.86;
-    _xOffset = _viewWidth * 0.80;
-    _buttonWidth  = _settingsButton.bounds.size.width;
-    _buttonHeight = _settingsButton.bounds.size.height;
-    [_settingsButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
-    
-    self.view.hidden = NO;
+    [self setOrientationLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -330,6 +252,113 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if (orientation == 1) {
+            _isLandscape = FALSE;
+        } else {
+            _isLandscape = TRUE;
+        }
+        [self setOrientationLayout];
+        
+    } completion:nil];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
+- (void)setOrientationLayout {
+    
+    // Set the background image
+    //
+    if (_isLandscape == TRUE) {
+        [ColorUtils setBackgroundImage:BG_IMAGE_LANDSCAPE view:self.view];
+    } else {
+        [ColorUtils setBackgroundImage:BG_IMAGE_PORTRAIT view:self.view];
+    }
+    
+    // Compute the view width
+    //
+    _viewWidth  = self.view.bounds.size.width;
+    _viewHeight = self.view.bounds.size.height;
+    
+    _width  = DEF_BUTTON_WIDTH;
+    _height = DEF_BUTTON_WIDTH;
+    _xCenter = _viewWidth / 2.0;
+    
+    // Disclosure button
+    //
+    _yOffset = _viewHeight * 0.08;
+    _xOffset = _viewWidth * 0.83;
+    _buttonWidth  = _disclosureButton.bounds.size.width;
+    _buttonHeight = _disclosureButton.bounds.size.height;
+    [_disclosureButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    
+    // Match Colors
+    //
+    _yOffset = _viewHeight * 0.20;
+    [_matchButton sizeToFit];
+    _buttonWidth  = _matchButton.bounds.size.width;
+    _buttonHeight = _matchButton.bounds.size.height;
+    _xOffset     = _xCenter - (_buttonWidth / 2.0);
+    [_matchButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    _matchLabel = [self resetLabel:_matchLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
+    
+    _xOffset = _xCenter - (_width * 1.33);
+    [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _takePhotoLabel = [self resetLabel:_takePhotoLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + (_width * 0.33);
+    [_myPhotosButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _myPhotosLabel = [self resetLabel:_myPhotosLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    
+    // Explore Colors
+    //
+    _exploreYOffset = _viewHeight * 0.55;
+    [_exploreButton sizeToFit];
+    _buttonWidth  = _exploreButton.bounds.size.width;
+    _buttonHeight = _exploreButton.bounds.size.height;
+    _xOffset     = _xCenter - (_buttonWidth / 2.0);
+    [_exploreButton setFrame:CGRectMake(_xOffset, _exploreYOffset, _buttonWidth, _buttonHeight)];
+    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_exploreYOffset+_buttonHeight width:_buttonWidth];
+    
+    _yOffset = _viewHeight * 0.45;
+    _xOffset = _xCenter - (_width * 2.0);
+    [_topicsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _topicsLabel = [self resetLabel:_topicsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter - (_width * 0.5);
+    [_matchedButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _matchedLabel = [self resetLabel:_matchedLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + _width;
+    [_listButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _listLabel = [self resetLabel:_listLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    // Bottom buttons
+    //
+    _yOffset = _viewHeight * 0.67;
+    
+    _xOffset = _xCenter - (_width * 1.33);
+    [_collectButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _collectLabel = [self resetLabel:_collectLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    _xOffset = _xCenter + (_width * 0.33);
+    [_groupsButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
+    _groupsLabel = [self resetLabel:_groupsLabel xOffset:_xOffset yOffset:_yOffset+_height width:_width];
+    
+    // Settings button
+    //
+    _yOffset = _viewHeight * 0.86;
+    _xOffset = _viewWidth * 0.80;
+    _buttonWidth  = _settingsButton.bounds.size.width;
+    _buttonHeight = _settingsButton.bounds.size.height;
+    [_settingsButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
+    
+    self.view.hidden = NO;
+}
+
 - (void)startSpinner {
     _spinner = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -382,25 +411,12 @@
     [_groupsLabel setAlpha:0.0];
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Orientation Handling Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Orientation Handling Methods
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
-}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Label Methods
+// Label/Button Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#pragma mark - Label Methods
+#pragma mark - Label/Button Methods
 
 - (UILabel *)resetLabel:(UILabel *)label xOffset:(CGFloat)xOffset yOffset:(CGFloat)yOffset width:(CGFloat)width {
     [label sizeToFit];
@@ -411,12 +427,6 @@
     
     return label;
 }
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Button Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Button Methods
 
 - (IBAction)matchColors:(id)sender {
     [_matchButton setAlpha:0.0];

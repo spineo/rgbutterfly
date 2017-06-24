@@ -440,6 +440,8 @@ extern NSString * const NO_MIX_NAME;
 //
 extern NSString * const BACKGROUND_IMAGE_TITLE;
 extern NSString * const BACKGROUND_IMAGE;
+extern NSString * const BG_IMAGE_PORTRAIT;
+extern NSString * const BG_IMAGE_LANDSCAPE;
 extern NSString * const BACKGROUND_IMAGE_2;
 extern NSString * const DEF_IMAGE_NAME;
 extern NSString * const IMAGE_LIB_NAME;
