@@ -122,6 +122,8 @@
 		2192F5611DF3185500AAFE01 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2192F5601DF3185500AAFE01 /* README */; };
 		2194D8FC1E893BBB00960912 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2194D8FB1E893BBB00960912 /* CloudKit.framework */; };
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
+		21B55D1F1EFF02290041F624 /* AboutNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D1E1EFF02280041F624 /* AboutNavigationController.m */; };
+		21B55D221EFF02B00041F624 /* DisclaimerNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
@@ -339,6 +341,10 @@
 		21A197F51E4F832E00686E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21A263C51E4CB105004B075C /* RGButterflyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGButterflyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A263C91E4CB105004B075C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21B55D1D1EFF02280041F624 /* AboutNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutNavigationController.h; sourceTree = "<group>"; };
+		21B55D1E1EFF02280041F624 /* AboutNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutNavigationController.m; sourceTree = "<group>"; };
+		21B55D201EFF02B00041F624 /* DisclaimerNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclaimerNavigationController.h; sourceTree = "<group>"; };
+		21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclaimerNavigationController.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = "../ios-utilities/CoreDataUtils.h"; sourceTree = "<group>"; };
 		21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = "../ios-utilities/CoreDataUtils.m"; sourceTree = "<group>"; };
@@ -413,6 +419,8 @@
 				2109A0CF1DFDDD6F0076A095 /* AssocTableViewController.m */,
 				2109A0D01DFDDD6F0076A095 /* DisclaimerViewController.h */,
 				2109A0D11DFDDD6F0076A095 /* DisclaimerViewController.m */,
+				21B55D1D1EFF02280041F624 /* AboutNavigationController.h */,
+				21B55D1E1EFF02280041F624 /* AboutNavigationController.m */,
 				2109A0D21DFDDD6F0076A095 /* MatchTableViewController.h */,
 				2109A0D31DFDDD6F0076A095 /* MatchTableViewController.m */,
 				2109A0D41DFDDD6F0076A095 /* PickerViewController.h */,
@@ -429,6 +437,8 @@
 				2109A0C61DFDDC460076A095 /* MainViewController.m */,
 				2187D8A81EE78335004C9386 /* ColorViewController.h */,
 				2187D8A91EE78335004C9386 /* ColorViewController.m */,
+				21B55D201EFF02B00041F624 /* DisclaimerNavigationController.h */,
+				21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -938,6 +948,7 @@
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */,
+				21B55D221EFF02B00041F624 /* DisclaimerNavigationController.m in Sources */,
 				2109A1301DFDE4910076A095 /* MixAssocKeyword+CoreDataProperties.m in Sources */,
 				2109A0DF1DFDDD6F0076A095 /* AddMixTableViewController.m in Sources */,
 				212F25AE1E33FF13002466E7 /* NSData+Base64.m in Sources */,
@@ -958,6 +969,7 @@
 				21397E6B1C84833D001C3F05 /* main.m in Sources */,
 				2109A12F1DFDE4910076A095 /* MatchAssocKeyword+CoreDataProperties.m in Sources */,
 				2109A12E1DFDE4910076A095 /* MatchAssociations+CoreDataProperties.m in Sources */,
+				21B55D1F1EFF02290041F624 /* AboutNavigationController.m in Sources */,
 				21064FFC1DFEDD0A004B0830 /* CanvasCoverage+CoreDataClass.m in Sources */,
 				2109A0E11DFDDD6F0076A095 /* AssocTableViewController.m in Sources */,
 				21397E691C84832C001C3F05 /* AppDelegate.m in Sources */,

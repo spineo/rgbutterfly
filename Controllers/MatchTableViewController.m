@@ -91,10 +91,6 @@ const int IMAGE_TAG  = 6;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Set the background image
-    //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
 
     //[ColorUtils setNavBarGlaze:self.navigationController.navigationBar];
 

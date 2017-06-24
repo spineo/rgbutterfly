@@ -14,6 +14,8 @@
 
 @interface AboutViewController ()
 
+@property (strong, nonatomic) UITextView *aboutTextView;
+
 @end
 
 @implementation AboutViewController
@@ -29,14 +31,13 @@
 
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    [ColorUtils setBackgroundImage:BG_IMAGE_NB_PORTRAIT view:self.view];
     
     // Set the default font
     //
     [self setFontFamily:DEF_ATTRIBUTED_FONT forView:self.view andSubViews:YES];
 
-    
-    UITextView *aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_MD_FIELD_PADDING, DEF_Y_OFFSET, self.view.bounds.size.width - DEF_MD_FIELD_PADDING, self.view.bounds.size.height)];
+    _aboutTextView = [[UITextView alloc] initWithFrame:CGRectMake(DEF_MD_FIELD_PADDING, DEF_Y_OFFSET, self.view.bounds.size.width - DEF_MD_FIELD_PADDING, self.view.bounds.size.height)];
     
     NSMutableAttributedString *aboutText = [[NSMutableAttributedString alloc] initWithString:ABOUT_TEXT];
     int textLen = (int)aboutText.length;
@@ -73,16 +74,15 @@
     [aboutReleaseFeatures addAttribute:NSFontAttributeName value:DEF_LG_VIEW_FONT range:NSMakeRange(0, textLen)];
     [aboutReleaseFeatures addAttribute:NSForegroundColorAttributeName value:LIGHT_TEXT_COLOR range:NSMakeRange(0, textLen)];
     
-    
     [aboutText appendAttributedString:aboutReleaseFeatures];
 
-    [aboutTextView setAttributedText:aboutText];
-    [aboutTextView setBackgroundColor:CLEAR_COLOR];
-    [aboutTextView setScrollEnabled:TRUE];
-    [aboutTextView setEditable:FALSE];
-    [aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
+    [_aboutTextView setAttributedText:aboutText];
+    [_aboutTextView setBackgroundColor:CLEAR_COLOR];
+    [_aboutTextView setScrollEnabled:TRUE];
+    [_aboutTextView setEditable:FALSE];
+    [_aboutTextView setContentOffset:CGPointMake(DEF_X_OFFSET, DEF_FIELD_PADDING) animated:YES];
     
-    [self.view addSubview:aboutTextView];
+    [self.view addSubview:_aboutTextView];
 }
 
 // Share the App documentation
@@ -117,20 +117,6 @@
             [self setFontFamily:fontFamily forView:sview andSubViews:YES];
         }
     }
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Orientation Handling Methods
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#pragma mark - Orientation Handling Methods
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);//choose portrait or landscape
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
 }
 
 

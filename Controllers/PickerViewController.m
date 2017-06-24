@@ -30,11 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Set the background image
-    //
-    //[ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
-    
+       
     _picker = [[UIImagePickerController alloc] init];
 }
 

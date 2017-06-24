@@ -1111,23 +1111,25 @@
                 <viewController storyboardIdentifier="DisclaimerViewController" title="Disclaimer" id="u2b-ZP-TIC" customClass="DisclaimerViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Disclaimer" id="ieF-sc-5xX">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="cgf-RR-2dr">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="goBack:" destination="u2b-ZP-TIC" id="Quu-cR-SFz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEh-vD-EKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="740" y="1333"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--About Navigation Controller-->
         <scene sceneID="Wie-Pz-YjX">
             <objects>
-                <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" id="Hl2-Fv-ZhM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavAboutViewController" automaticallyAdjustsScrollViewInsets="NO" id="Hl2-Fv-ZhM" customClass="AboutNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="FoQ-BG-cJK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="FoQ-BG-cJK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1149,14 +1151,13 @@
             </objects>
             <point key="canvasLocation" x="-175" y="660"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Disclaimer Navigation Controller-->
         <scene sceneID="dxT-O4-cFy">
             <objects>
-                <navigationController storyboardIdentifier="NavDisclaimerViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="EIi-BM-RXv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavDisclaimerViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="EIi-BM-RXv" customClass="DisclaimerNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="CGl-5w-MNw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="CGl-5w-MNw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1169,6 +1170,7 @@
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="KJv-WI-xO4">
                         <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </toolbar>
                     <connections>
                         <segue destination="u2b-ZP-TIC" kind="relationship" relationship="rootViewController" id="Tid-Vw-sQV"/>
@@ -1260,12 +1262,12 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7OV-Go-gIV"/>
-        <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="clT-9D-BBI"/>
+        <segue reference="cln-aA-aih"/>
+        <segue reference="7T5-Hk-Hx3"/>
         <segue reference="TM9-cr-8aw"/>
-        <segue reference="xj5-pH-aLq"/>
-        <segue reference="Stq-UR-tQY"/>
+        <segue reference="clT-9D-BBI"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="Omc-kQ-4iW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

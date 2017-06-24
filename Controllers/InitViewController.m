@@ -275,10 +275,12 @@
     
     CGFloat aboutButtonXOffset, aboutButtonYOffset, settingsButtonXOffset, settingsButtonYOffset, exploreButtonsYOffset, collectButtonXOffset, collectButtonYOffset, groupsButtonXOffset, groupsButtonYOffset;
     
+    NSString *backgroundImage;
+    
     // Set the background image
     //
     if (_isLandscape == TRUE) {
-        [ColorUtils setBackgroundImage:BG_IMAGE_LANDSCAPE view:self.view];
+        backgroundImage       = BG_IMAGE_LANDSCAPE;
         
         aboutButtonXOffset    = _viewWidth  * 0.88;
         aboutButtonYOffset    = _viewHeight * 0.10;
@@ -296,7 +298,7 @@
 
         
     } else {
-        [ColorUtils setBackgroundImage:BG_IMAGE_PORTRAIT view:self.view];
+        backgroundImage       = BG_IMAGE_PORTRAIT;
         
         aboutButtonXOffset    = _viewWidth  * 0.83;
         aboutButtonYOffset    = _viewHeight * 0.08;
@@ -312,7 +314,10 @@
         groupsButtonXOffset   = _xCenter + (_width * 0.33);
         groupsButtonYOffset   = _viewHeight * 0.67;
     }
-
+    
+    // Background Image
+    //
+    [ColorUtils setBackgroundImage:backgroundImage view:self.view];
     
     // About button
     //

@@ -84,10 +84,6 @@ NSString *REUSE_CELL_IDENTIFIER = @"AddMixTableCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set the background image
-    //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
-    
     // NSManagedObject subclassing
     //
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

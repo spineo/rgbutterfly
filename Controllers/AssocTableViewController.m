@@ -97,10 +97,6 @@ const int ASSOC_SET_TAG        = 8;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set the background image
-    //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
-    
 
     //[ColorUtils setGlaze:self.navigationController.navigationBar];
 

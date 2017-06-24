@@ -1544,22 +1544,22 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    UINavigationController *navigationViewController = [segue destinationViewController];
+    //UINavigationController *navigationViewController = [segue destinationViewController];
 
     // About Segue
     //
     if ([[segue identifier] isEqualToString:@"AboutSegue"]) {
         
-        AboutViewController *aboutViewController = (AboutViewController *)([navigationViewController viewControllers][0]);
+        //AboutViewController *aboutViewController = (AboutViewController *)([navigationViewController viewControllers][0]);
         
-        [aboutViewController setShareController:_shareController];
+        //[aboutViewController setShareController:_shareController];
     
     // Disclaimer Segue
     //
     } else {
-        DisclaimerViewController *disclaimerViewController = (DisclaimerViewController *)([navigationViewController viewControllers][0]);
+        //DisclaimerViewController *disclaimerViewController = (DisclaimerViewController *)([navigationViewController viewControllers][0]);
         
-        [disclaimerViewController setShareController:_shareController];
+        //[disclaimerViewController setShareController:_shareController];
     }
 }
 
