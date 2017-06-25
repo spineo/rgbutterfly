@@ -365,13 +365,13 @@ NSString * const SPINNER_LABEL_LOAD  = @"Loading the View...";
 NSString * const ALERTS_FILTER_KEY   = @"AlertsFilter";
 NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
 NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
-NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
+//NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
 
 // Alerts Instructions
 //
 NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, click on either the 'Match Colors' or 'Explore Colors' titles";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it)";
-NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it) and click on any row to see the detail view";
+//NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
@@ -663,9 +663,9 @@ static NSDictionary *swatchTypes;
         [userDefaults setBool:TRUE forKey:IMAGE_INTERACT_KEY];
     }
 
-    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
-        [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
-    }
+//    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
+//        [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
+//    }
     
     if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
         [userDefaults setValue:MATCH_LIST_TYPE forKey:LISTING_TYPE];

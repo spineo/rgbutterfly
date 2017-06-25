@@ -28,6 +28,10 @@
 @property (nonatomic, strong) NSString *listingType;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+// Orientation
+//
+@property (nonatomic) BOOL isLandscape;
+
 - (void)loadData;
 - (IBAction)unwindToViewController:(UIStoryboardSegue *)segue;
 

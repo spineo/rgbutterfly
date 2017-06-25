@@ -595,6 +595,7 @@
         UINavigationController *navigationViewController = [segue destinationViewController];
         MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
         [mainViewController setListingType:_collectionType];
+        [mainViewController setIsLandscape:_isLandscape];
         _mainViewHasLoaded = TRUE;
     }
 }

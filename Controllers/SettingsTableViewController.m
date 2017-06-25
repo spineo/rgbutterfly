@@ -1311,7 +1311,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             //
             [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
-            [_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
+            //[_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
             
             // List type
             //

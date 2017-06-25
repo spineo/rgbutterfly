@@ -77,9 +77,6 @@
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) UILabel *updateLabel;
 
-// Orientation
-//
-@property (nonatomic) BOOL isLandscape;
 
 // Default/modified listing type
 //
@@ -806,8 +803,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
      UIViewAutoresizingFlexibleRightMargin];
 
     if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
-        headerHeight = DEF_SM_TABLE_CELL_HGT;
-        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, tableView.bounds.size.width, headerHeight)];
+        UILabel *letterLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, yOffset, tableView.bounds.size.width, headerHeight)];
         
         [letterLabel setBackgroundColor:DEF_DARK_COLOR];
         [letterLabel setTextColor:DEF_TEXT_COLOR];
@@ -823,13 +819,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
         NSString *mixAssocsListing = @"";
         [headerView addSubview:headerLabel];
         [headerLabel setText:mixAssocsListing];
-        [headerLabel setBackgroundColor:DEF_DARK_COLOR];
+        [headerLabel setBackgroundColor:CLEAR_COLOR];
         
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         NSString *matchAssocsListing = @"";
         [headerView addSubview:headerLabel];
         [headerLabel setText:matchAssocsListing];
-        [headerLabel setBackgroundColor:DEF_DARK_COLOR];
+        [headerLabel setBackgroundColor:CLEAR_COLOR];
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         if (section == 0) {
@@ -991,7 +987,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         
     } else if ([_listingType isEqualToString:COLORS_TYPE]) {
         headerHeight = DEF_LG_TABLE_HDR_HGT;
-
+        
     } else {
         headerHeight = DEF_SM_TABLE_CELL_HGT;
     }
@@ -1071,6 +1067,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     } else if ([_listingType isEqualToString:MATCH_LIST_TYPE]) {
         return DEF_CELL_HEIGHT + DEF_FIELD_PADDING + DEF_FIELD_INSET;
+
     } else {
         return DEF_CELL_HEIGHT;
     }
