@@ -209,9 +209,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     _imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
     if (_imageInteractAlert == TRUE && _newImage == TRUE) {
-        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Image Interaction" message:INTERACT_INSTRUCTIONS key:IMAGE_INTERACT_KEY];
+        UIAlertController *alert = [AlertUtils createOkAlert:@"What Now?" message:INTERACT_INSTRUCTIONS];
     
         [self presentViewController:alert animated:YES completion:nil];
+        
+        [_userDefaults setBool:FALSE forKey:IMAGE_INTERACT_KEY];
     }
 
     _defTableViewSize    = _imageTableView.bounds.size;
@@ -246,10 +248,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     UIBarButtonItem *editButton = self.navigationItem.rightBarButtonItem;
     CGFloat editButtonWidth = [editButton width];
     
-    // Estimate the width
-    //
-    _navBarAvailTitleWidth = _mainViewWidth - (backButtonWidth - editButtonWidth) * DEF_X_OFFSET_DIVIDER;
+    CGFloat buttonWidths  = editButtonWidth + backButtonWidth;
+    CGFloat buttonOffsets = buttonWidths / DEF_X_OFFSET_DIVIDER;
     
+    // Estimate the width with extra offset
+    //
+    _navBarAvailTitleWidth = _mainViewWidth - (buttonWidths + buttonOffsets);
     
     // Used in sortByClosestMatch
     //
@@ -952,16 +956,16 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self drawTouchShape];
     
     if ([_viewType isEqualToString:MATCH_TYPE]) {
-        if (_newImage == TRUE && _firstTap == TRUE) {
+        //if (_newImage == TRUE && _firstTap == TRUE) {
             // Tap Collection View
             //
-            _tapCollectAlert = [_userDefaults boolForKey:TAP_COLLECT_KEY];
-            if (_tapCollectAlert == TRUE) {
-                UIAlertController *alert = [AlertUtils createNoShowAlert:@"Tap First Row Element" message:TAP_COLLECT_INSTRUCTIONS key:TAP_COLLECT_KEY];
+        //    _tapCollectAlert = [_userDefaults boolForKey:TAP_COLLECT_KEY];
+        //    if (_tapCollectAlert == TRUE) {
+        //        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Tap First Row Element" message:TAP_COLLECT_INSTRUCTIONS key:TAP_COLLECT_KEY];
                 
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-        }
+        //        [self presentViewController:alert animated:YES completion:nil];
+        //    }
+        //}
         _firstTap = FALSE;
         [_matchSave setEnabled:TRUE];
     } else {
@@ -1163,7 +1167,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             
             if (_dragAreaEnabled == FALSE && [self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
-                UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please delete first the destination tap area."];
+                UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please Delete First the Destination Tap Area."];
                 [self presentViewController:myAlert animated:YES completion:nil];
                 
                 return FALSE;
@@ -1880,15 +1884,18 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)setNavTitle:(NSString *)title {
-    NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
        NSFontAttributeName:DEF_MD_ITALIC_FONT}];
     
     _titleLabel = [FieldUtils createLabel:title];
-    [_titleLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
     [_titleLabel setAttributedText:attrTitle];
+    
     [_titleLabel sizeToFit];
+    [_titleLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
+
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleLabel setBackgroundColor:DEF_DARK_COLOR];
+    [_titleLabel setBackgroundColor:CLEAR_COLOR];
+
     
     _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
     [_titleView addSubview:_titleLabel];
@@ -2048,7 +2055,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and relations save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and Relations Save" message:@"Error Saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {
@@ -2080,7 +2087,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and relations delete" message:@"Error saving"];
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"Association and Relations Delete" message:@"Error Saving"];
             [self presentViewController:myAlert animated:YES completion:nil];
             
         } else {
@@ -2102,7 +2109,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Run a series of checks first
     //
     if ([_assocName isEqualToString:@""]) {
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Match Name Missing" message:@"Setting a default value"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch Name Missing" message:@"Setting a Default Name"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
     } else if ([_assocName length] > MAX_NAME_LEN) {
@@ -2140,7 +2147,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        _assocName = [[NSString alloc] initWithFormat:@"+MyMatches %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
+        _assocName = [[NSString alloc] initWithFormat:@"+MyMatch %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
         ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
     }
 
@@ -2261,7 +2268,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch and Relations Save" message:@"Error Saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
     } else {
@@ -2399,7 +2406,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MatchAssociation and relations delete" message:@"Error saving"];
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch and Relations Delete" message:@"Error Saving"];
             [self presentViewController:myAlert animated:YES completion:nil];
             
         } else {

@@ -369,8 +369,8 @@ NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
 
 // Alerts Instructions
 //
-NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, take a photo or select one from your library by clicking on the top-left photo icon.";
-NSString * const INTERACT_INSTRUCTIONS = @"Single-tap on the image to select a new area or single-tap on a selected area to de-select it.";
+NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, click on either the 'Match Colors' or 'Explore Colors' titles";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it)";
 NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -649,6 +649,12 @@ static NSDictionary *swatchTypes;
     
     // Alerts (on by default)
     //
+    // Main alerts switch
+    //
+    if ([userDefaults objectForKey:ALERTS_FILTER_KEY] == nil) {
+        [userDefaults setBool:FALSE forKey:ALERTS_FILTER_KEY];
+    }
+    
     if ([userDefaults objectForKey:APP_INTRO_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:APP_INTRO_KEY];
     }
@@ -665,8 +671,6 @@ static NSDictionary *swatchTypes;
         [userDefaults setValue:MATCH_LIST_TYPE forKey:LISTING_TYPE];
     }
     
-    // Color Detail Tap Area note
-    //
     if ([userDefaults objectForKey:TAP_NOTE_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:TAP_NOTE_KEY];
     }

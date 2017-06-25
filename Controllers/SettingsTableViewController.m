@@ -613,19 +613,18 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _alertsNoneLabel = @"All Informational Alerts are Turned On";
     _alertsShowLabel = @"All Informational Alerts are Turned Off";
     
-    BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
-    BOOL tapCollectAlert    = [_userDefaults boolForKey:TAP_COLLECT_KEY];
-
-    _labelText = @"";
-    if (imageInteractAlert == TRUE && tapCollectAlert == TRUE) {
-        _alertsShow = TRUE;
-        _labelText  = _alertsNoneLabel;
-
-    } else {
+    if ([_userDefaults boolForKey:ALERTS_FILTER_KEY] == FALSE || ![_userDefaults stringForKey:_alertsFilterText]) {
         _alertsShow = FALSE;
-        _labelText  = _alertsShowLabel;
+        _labelText = _alertsNoneLabel;
+        
+        [_userDefaults setBool:_alertsShow forKey:ALERTS_FILTER_KEY];
+        [_userDefaults setValue:_labelText forKey:_alertsFilterText];
+        
+    } else {
+        _alertsShow = [_userDefaults boolForKey:ALERTS_FILTER_KEY];
+        _labelText = [_userDefaults stringForKey:_alertsFilterText];
     }
-
+    
     
     // Create the label and switch, set the last state or default values
     //

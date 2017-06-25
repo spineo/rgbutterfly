@@ -69,7 +69,7 @@
 // NSUserDefaults
 //
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
-@property (nonatomic) BOOL appIntroAlert, mixAssocUnfilter;
+@property (nonatomic) BOOL mixAssocUnfilter;
 @property (nonatomic) int minAssocSize, updateStat;
 
 // Activity Indicator
@@ -165,17 +165,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     //
     //_listingType    = [_userDefaults valueForKey:LISTING_TYPE];
     //_defListingType = _listingType;
-
-    
-    // Welcome alert
-    //
-    _appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
-    if (_appIntroAlert == TRUE) {
-        UIAlertController *alert = [AlertUtils createNoShowAlert:@"Welcome to the RGButterfly App" message:APP_INTRO_INSTRUCTIONS key:APP_INTRO_KEY];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-
-    [GlobalSettings init];
 
     
     // Subjective color data

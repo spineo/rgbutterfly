@@ -1150,7 +1150,7 @@ const int IMAGE_TAG  = 6;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"TapArea save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"TapArea Save" message:@"Error Saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
         
     } else {

@@ -1461,7 +1461,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
         
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Color Detail Save" message:@"Error saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Color Detail Save" message:@"Error Saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
     } else {
         NSLog(@"Color Detail Save Successful");

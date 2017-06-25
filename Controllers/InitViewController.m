@@ -57,6 +57,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [GlobalSettings init];
+
+    
     // Set the default font
     //
     [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
@@ -90,13 +93,10 @@
     //
     _aboutButton     = (UIButton *)[self.view viewWithTag:ABOUT_BTN_TAG];
     _settingsButton  = (UIButton *)[self.view viewWithTag:SETTINGS2_BTN_TAG];
-    
 
-    
     // Initialization
     //
     _userDefaults   = [NSUserDefaults standardUserDefaults];
-
     
     // Check for DB restore
     //
@@ -156,6 +156,16 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:TRUE];
+    
+    // Welcome alert
+    //
+    BOOL appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
+    if (appIntroAlert == TRUE) {
+        UIAlertController *alert = [AlertUtils createOkAlert:@"Welcome to RGButterfly" message:APP_INTRO_INSTRUCTIONS];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        [_userDefaults setBool:FALSE forKey:APP_INTRO_KEY];
+    }
     
     // Remove subviews
     //
