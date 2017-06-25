@@ -21,4 +21,8 @@
 @property (nonatomic) BOOL maManualOverride;
 @property (nonatomic, strong) MatchAssociations *matchAssociation;
 
+// Orientation
+//
+@property (nonatomic) BOOL isLandscape;
+
 @end

@@ -126,6 +126,7 @@
 		21B55D221EFF02B00041F624 /* DisclaimerNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */; };
 		21B55D251EFF3D870041F624 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D241EFF3D870041F624 /* SettingsNavigationController.m */; };
 		21B55D281EFF3DD10041F624 /* SwatchDetailNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D271EFF3DD10041F624 /* SwatchDetailNavigationController.m */; };
+		21B55D2B1F0052350041F624 /* MatchNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D2A1F0052350041F624 /* MatchNavigationController.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
@@ -351,6 +352,8 @@
 		21B55D241EFF3D870041F624 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
 		21B55D261EFF3DD10041F624 /* SwatchDetailNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchDetailNavigationController.h; sourceTree = "<group>"; };
 		21B55D271EFF3DD10041F624 /* SwatchDetailNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchDetailNavigationController.m; sourceTree = "<group>"; };
+		21B55D291F0052350041F624 /* MatchNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchNavigationController.h; sourceTree = "<group>"; };
+		21B55D2A1F0052350041F624 /* MatchNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchNavigationController.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = "../ios-utilities/CoreDataUtils.h"; sourceTree = "<group>"; };
 		21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = "../ios-utilities/CoreDataUtils.m"; sourceTree = "<group>"; };
@@ -449,6 +452,8 @@
 				21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */,
 				21B55D231EFF3D870041F624 /* SettingsNavigationController.h */,
 				21B55D241EFF3D870041F624 /* SettingsNavigationController.m */,
+				21B55D291F0052350041F624 /* MatchNavigationController.h */,
+				21B55D2A1F0052350041F624 /* MatchNavigationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -956,6 +961,7 @@
 				21064FFD1DFEDD0A004B0830 /* Keyword.m in Sources */,
 				210650191DFEDD5A004B0830 /* TapAreaKeyword.m in Sources */,
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
+				21B55D2B1F0052350041F624 /* MatchNavigationController.m in Sources */,
 				21B55D281EFF3DD10041F624 /* SwatchDetailNavigationController.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */,

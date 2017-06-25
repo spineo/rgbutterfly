@@ -320,7 +320,13 @@ const int IMAGE_TAG  = 6;
      UIViewAutoresizingFlexibleLeftMargin |
      UIViewAutoresizingFlexibleRightMargin];
     
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + 1.0, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
+    // Propagaged landscape?
+    //
+    CGFloat xOffset = 1.0;
+    //if (_isLandscape == TRUE)
+    //    xOffset = 5.0;
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + xOffset, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerLabel setBackgroundColor:DEF_BG_COLOR];
     [headerLabel setTextColor:LIGHT_TEXT_COLOR];
     [headerLabel setFont:TABLE_HEADER_FONT];
@@ -365,7 +371,7 @@ const int IMAGE_TAG  = 6;
             
             [refImageView setContentMode: UIViewContentModeScaleAspectFit];
             [refImageView setClipsToBounds: YES];
-            [refImageView setFrame:CGRectMake(_imageViewXOffset + 1.0, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
+            [refImageView setFrame:CGRectMake(_imageViewXOffset + xOffset, DEF_Y_OFFSET, _imageViewWidth, _imageViewHeight)];
             
             // Compute the xpt
             //

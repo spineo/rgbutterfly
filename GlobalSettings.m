@@ -370,7 +370,7 @@ NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
 // Alerts Instructions
 //
 NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, click on either the 'Match Colors' or 'Explore Colors' titles";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it) and click on any row to see the detail view";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it) and click on any row to view the details";
 //NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

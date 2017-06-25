@@ -209,7 +209,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     _imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
     if (_imageInteractAlert == TRUE && _newImage == TRUE) {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"What Now?" message:INTERACT_INSTRUCTIONS];
+        UIAlertController *alert = [AlertUtils createOkAlert:@"What's Next?" message:INTERACT_INSTRUCTIONS];
     
         [self presentViewController:alert animated:YES completion:nil];
         
@@ -221,23 +221,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Get widget widths
     //
     _mainViewWidth     = self.view.bounds.size.width;
-    //CGFloat xCenter    = _mainViewWidth / DEF_X_OFFSET_DIVIDER;
-
-    
-    // Create the tap note label
-    //
-    //_tapNoteLabel = [FieldUtils createLabel:@"Tap on any Area of the Photo!"];
-    //[_tapNoteLabel setFont:DEF_LG_VIEW_FONT];
-    //[_tapNoteLabel setTextColor:LIGHT_TEXT_COLOR];
-    //[_tapNoteLabel sizeToFit];
-    
-    //CGFloat xOffset = xCenter - (_tapNoteLabel.bounds.size.width / DEF_X_OFFSET_DIVIDER);
-    //CGFloat yOffset = self.view.bounds.size.height * 0.65;
-    
-    //[_tapNoteLabel setFrame:CGRectMake(xOffset, yOffset, _tapNoteLabel.bounds.size.width, _tapNoteLabel.bounds.size.height)];
-    //[self.view addSubview:_tapNoteLabel];
-    
-    //[_tapNoteLabel setHidden:TRUE];
     
     
     // Compute the max available size for the Nav bar title
@@ -337,10 +320,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _dragAreaEnabled = FALSE;
 
     
-    // Hide the "arrow" buttons by default
+    // Hide the "Match" and arrow buttons by default
     //
+    [self matchButtonHide];
+    [self matchButtonsHide];
+    
     if (_matchAssociation != nil) {
-        [self matchButtonsHide];
         _assocName = [_matchAssociation name];
     }
 
@@ -375,8 +360,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Match Edit Button Alert Controller
     //
-    _matchEditAlertController = [UIAlertController alertControllerWithTitle:@"Match Association Edit"
-                                                             message:@"Please select operation"
+    _matchEditAlertController = [UIAlertController alertControllerWithTitle:@"My Match  Edit"
+                                                             message:@"Please Select Operation Below"
                                                       preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *matchUpdate = [UIAlertAction actionWithTitle:@"Update" style:UIAlertActionStyleDefault                     handler:^(UIAlertAction * action) {
@@ -418,7 +403,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Match Update Edit button Alert Controller
     //
-    _updateAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
+    _updateAlertController = [UIAlertController alertControllerWithTitle:@"My Match"
                                                       message:@"Enter/Update Match Name, Keyword(s), and/or Comments:"
                                                preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *updateAlertController_ = _updateAlertController;
@@ -427,7 +412,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         if (_matchAssociation != nil) {
             [matchNameTextField setText:[_matchAssociation name]];
         } else {
-            [matchNameTextField setPlaceholder: NSLocalizedString(@"Match name.", nil)];
+            [matchNameTextField setPlaceholder: NSLocalizedString(@"Match Name.", nil)];
         }
         [matchNameTextField setTag:MATCH_NAME_TAG];
         [matchNameTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
@@ -445,10 +430,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             if ([keywords count] > 0) {
                 [matchKeywTextField setText:[keywords componentsJoinedByString:KEYW_DISP_SEPARATOR]];
             } else {
-                [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated keywords.", nil)];
+                [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated topics.", nil)];
             }
         } else {
-            [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated keywords.", nil)];
+            [matchKeywTextField setPlaceholder:NSLocalizedString(@"Semicolon-separated topics.", nil)];
         }
         [matchKeywTextField setTag:MATCH_KEYW_TAG];
         [matchKeywTextField setClearButtonMode: UITextFieldViewModeWhileEditing];
@@ -509,7 +494,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
                                                                   message:@"Please select from the match actions below:"
                                                            preferredStyle:UIAlertControllerStyleAlert];
     
-    _matchView   = [UIAlertAction actionWithTitle:@"Match View (default)" style:UIAlertActionStyleDefault
+    _matchView   = [UIAlertAction actionWithTitle:@"My Match View (default)" style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action) {
                                                 _viewType = MATCH_TYPE;
                                                 
@@ -580,10 +565,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
-        [self matchButtonHide];
-        if ([_viewType isEqualToString:MATCH_TYPE]) {
-            [self matchButtonsShow];
-        }
+        //[self matchButtonHide];
+        //if ([_viewType isEqualToString:MATCH_TYPE]) {
+        //    [self matchButtonsShow];
+        //}
 
     } else {
         _paintSwatches = [[NSMutableArray alloc] init];
@@ -795,7 +780,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
             [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height - TABLEVIEW_BOTTOM_OFFSET)];
             
-            [self matchButtonsShow];
+            //[self matchButtonsShow];
             
             [_scrollViewUp setEnabled:NO];
             [_scrollViewDown setEnabled:YES];
@@ -1109,7 +1094,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_paintSwatches addObject:_swatchObj];
         
         if ([_viewType isEqualToString:MATCH_TYPE]) {
-            [self matchButtonsShow];
+            //[self matchButtonsShow];
             
         } else {
             [self viewButtonShow];
@@ -1199,7 +1184,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [self deleteTapArea:swatchObj];
             
             if ([_viewType isEqualToString:MATCH_TYPE]) {
-                [self matchButtonsShow];
+                //[self matchButtonsShow];
                 
             } else {
                 [self viewButtonShow];
@@ -2109,7 +2094,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Run a series of checks first
     //
     if ([_assocName isEqualToString:@""]) {
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch Name Missing" message:@"Setting a Default Name"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"My Match Name Missing" message:@"Setting a Default Name"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
     } else if ([_assocName length] > MAX_NAME_LEN) {
@@ -2147,7 +2132,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Applies to both updates and new
     //
     if ([_assocName isEqualToString:@""] || _assocName == nil) {
-        _assocName = [[NSString alloc] initWithFormat:@"+MyMatch %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
+        _assocName = [[NSString alloc] initWithFormat:@"+My Match %@", [GenericUtils getCurrDateString:@"YYYY-MM-dd HH:mm:ss"]];
         ((UITextField *)[_updateAlertController.textFields objectAtIndex:0]).text = _assocName;
     }
 
@@ -2268,7 +2253,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     NSError *error = nil;
     if (![self.context save:&error]) {
         NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-        UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch and Relations Save" message:@"Error Saving"];
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"My Match and Relations Save" message:@"Error Saving"];
         [self presentViewController:myAlert animated:YES completion:nil];
 
     } else {
@@ -2406,7 +2391,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         NSError *error = nil;
         if (![self.context save:&error]) {
             NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
-            UIAlertController *myAlert = [AlertUtils createOkAlert:@"MyMatch and Relations Delete" message:@"Error Saving"];
+            UIAlertController *myAlert = [AlertUtils createOkAlert:@"My Match and Relations Delete" message:@"Error Saving"];
             [self presentViewController:myAlert animated:YES completion:nil];
             
         } else {
@@ -2484,6 +2469,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
         [matchTableViewController setDbPaintSwatches:_dbPaintSwatches];
         [matchTableViewController setMatchAssociation:_matchAssociation];
+        [matchTableViewController setIsLandscape:_isLandscape];
 
 
     } else if ([[segue identifier] isEqualToString:@"AssocToDetailSegue"]) {

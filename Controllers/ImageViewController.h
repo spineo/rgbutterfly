@@ -24,6 +24,10 @@
 @property (nonatomic, strong) NSMutableArray *paintSwatches;
 @property (nonatomic, strong) NSString *sourceViewContext, *viewType;
 
+// Orientation
+//
+@property (nonatomic) BOOL isLandscape;
+
 // Entities
 //
 @property (nonatomic, strong) MixAssociation *mixAssociation;

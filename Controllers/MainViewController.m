@@ -1722,6 +1722,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [imageViewController setPaintSwatches:[self.matchColorArray objectAtIndex:_collectViewSelRow]];
         [imageViewController setViewType:MATCH_TYPE];
         [imageViewController setMatchAssociation:_matchAssociation];
+        [imageViewController setIsLandscape:_isLandscape];
         
     // MainSwatchDetailSegue
     //
