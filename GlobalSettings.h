@@ -443,7 +443,6 @@ extern NSString * const BG_IMAGE_PORTRAIT;
 extern NSString * const BG_IMAGE_LANDSCAPE;
 extern NSString * const BACKGROUND_IMAGE_2;
 extern NSString * const BG_IMAGE_NB_PORTRAIT;
-extern NSString * const BG_IMAGE_NB_LANDSCAPE;
 extern NSString * const DEF_IMAGE_NAME;
 extern NSString * const IMAGE_LIB_NAME;
 extern NSString * const PALETTE_IMAGE_NAME;

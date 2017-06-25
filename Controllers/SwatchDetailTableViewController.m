@@ -163,7 +163,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    [ColorUtils setBackgroundImage:BG_IMAGE_NB_PORTRAIT view:self.view];
 
     //[self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageWithData:[_paintSwatch image_thumb]]]];
 

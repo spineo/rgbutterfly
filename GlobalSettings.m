@@ -454,9 +454,7 @@ NSString * const DEF_IMAGE_NAME = @"My Color Matches";
 //
 NSString * const BG_IMAGE_PORTRAIT      = @"jgpineo_background_fade_portrait.jpg";
 NSString * const BG_IMAGE_LANDSCAPE     = @"jgpineo_background_fade_landscape.jpg";
-NSString * const BACKGROUND_IMAGE_2     = @"jgpineo_background_dark_fade.png";
 NSString * const BG_IMAGE_NB_PORTRAIT   = @"jgpineo_background_noborder_fade_portrait.jpg";
-NSString * const BG_IMAGE_NB_LANDSCAPE  = @"jgpineo_background_noborder_fade_landscape.jpg";
 NSString * const IMAGE_LIB_NAME         = @"photo 2.png";
 NSString * const PALETTE_IMAGE_NAME     = @"Artist Palette.png";
 NSString * const RGB_IMAGE_NAME         = @"rgb.png";

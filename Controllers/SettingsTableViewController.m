@@ -123,7 +123,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     // Set the background image
     //
-    [ColorUtils setBackgroundImage:BACKGROUND_IMAGE_2 view:self.view];
+    [ColorUtils setBackgroundImage:BG_IMAGE_NB_PORTRAIT view:self.view];
     
     [self saveEnable:FALSE];
 
