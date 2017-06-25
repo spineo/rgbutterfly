@@ -644,14 +644,14 @@
             </objects>
             <point key="canvasLocation" x="7221.6000000000004" y="1108.6956521739132"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Swatch Detail Navigation Controller-->
         <scene sceneID="Y94-PZ-YFD">
             <objects>
-                <navigationController storyboardIdentifier="NavSwatchDetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LVy-Pe-LHL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavSwatchDetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="LVy-Pe-LHL" customClass="SwatchDetailNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="cJX-J3-cUN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="cJX-J3-cUN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -671,7 +671,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azh-oH-0RF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3609" y="-39"/>
+            <point key="canvasLocation" x="3825" y="-39"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j5B-pb-kY6">
@@ -1060,11 +1060,11 @@
         <!--Settings-->
         <scene sceneID="hvV-Wo-a3z">
             <objects>
-                <navigationController storyboardIdentifier="NavSettingsTableViewController" title="Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavSettingsTableViewController" title="Settings" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Asd-Pb-qDH" customClass="SettingsNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="tb4-x3-Jid">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="tb4-x3-Jid">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.09756912291" green="0.12688307460000001" blue="0.20403932029999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1262,12 +1262,12 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cln-aA-aih"/>
+        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="7T5-Hk-Hx3"/>
         <segue reference="TM9-cr-8aw"/>
-        <segue reference="clT-9D-BBI"/>
-        <segue reference="Szt-18-Btg"/>
-        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="dfY-1M-v1H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

@@ -124,6 +124,8 @@
 		219C477B1E22A93B00DADF0F /* InitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219C477A1E22A93B00DADF0F /* InitViewController.m */; };
 		21B55D1F1EFF02290041F624 /* AboutNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D1E1EFF02280041F624 /* AboutNavigationController.m */; };
 		21B55D221EFF02B00041F624 /* DisclaimerNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */; };
+		21B55D251EFF3D870041F624 /* SettingsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D241EFF3D870041F624 /* SettingsNavigationController.m */; };
+		21B55D281EFF3DD10041F624 /* SwatchDetailNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21B55D271EFF3DD10041F624 /* SwatchDetailNavigationController.m */; };
 		21CC4FAC1C0114DE0018E088 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 21CC4FAB1C0114DE0018E088 /* Settings.bundle */; };
 		21CDE4CD1E65BE1D00172D94 /* CoreDataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */; };
 		21E079DF1E46702E004B77C8 /* Authtoken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21E079DE1E46702E004B77C8 /* Authtoken.txt */; };
@@ -345,6 +347,10 @@
 		21B55D1E1EFF02280041F624 /* AboutNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutNavigationController.m; sourceTree = "<group>"; };
 		21B55D201EFF02B00041F624 /* DisclaimerNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclaimerNavigationController.h; sourceTree = "<group>"; };
 		21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclaimerNavigationController.m; sourceTree = "<group>"; };
+		21B55D231EFF3D870041F624 /* SettingsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNavigationController.h; sourceTree = "<group>"; };
+		21B55D241EFF3D870041F624 /* SettingsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNavigationController.m; sourceTree = "<group>"; };
+		21B55D261EFF3DD10041F624 /* SwatchDetailNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwatchDetailNavigationController.h; sourceTree = "<group>"; };
+		21B55D271EFF3DD10041F624 /* SwatchDetailNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwatchDetailNavigationController.m; sourceTree = "<group>"; };
 		21CC4FAB1C0114DE0018E088 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		21CDE4CB1E65BE1D00172D94 /* CoreDataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataUtils.h; path = "../ios-utilities/CoreDataUtils.h"; sourceTree = "<group>"; };
 		21CDE4CC1E65BE1D00172D94 /* CoreDataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataUtils.m; path = "../ios-utilities/CoreDataUtils.m"; sourceTree = "<group>"; };
@@ -429,6 +435,8 @@
 				2109A0D71DFDDD6F0076A095 /* SettingsTableViewController.m */,
 				2109A0D81DFDDD6F0076A095 /* SwatchDetailTableViewController.h */,
 				2109A0D91DFDDD6F0076A095 /* SwatchDetailTableViewController.m */,
+				21B55D261EFF3DD10041F624 /* SwatchDetailNavigationController.h */,
+				21B55D271EFF3DD10041F624 /* SwatchDetailNavigationController.m */,
 				2109A0DA1DFDDD6F0076A095 /* ImageViewController.h */,
 				2109A0DB1DFDDD6F0076A095 /* ImageViewController.m */,
 				2109A0DC1DFDDD6F0076A095 /* ImageViewNavigationController.h */,
@@ -439,6 +447,8 @@
 				2187D8A91EE78335004C9386 /* ColorViewController.m */,
 				21B55D201EFF02B00041F624 /* DisclaimerNavigationController.h */,
 				21B55D211EFF02B00041F624 /* DisclaimerNavigationController.m */,
+				21B55D231EFF3D870041F624 /* SettingsNavigationController.h */,
+				21B55D241EFF3D870041F624 /* SettingsNavigationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -946,6 +956,7 @@
 				21064FFD1DFEDD0A004B0830 /* Keyword.m in Sources */,
 				210650191DFEDD5A004B0830 /* TapAreaKeyword.m in Sources */,
 				2109A1351DFDE4910076A095 /* SubjectiveColor+CoreDataProperties.m in Sources */,
+				21B55D281EFF3DD10041F624 /* SwatchDetailNavigationController.m in Sources */,
 				2109A1341DFDE4910076A095 /* PigmentType+CoreDataProperties.m in Sources */,
 				2176DD161E3A338800812B19 /* ButtonUtils.m in Sources */,
 				21B55D221EFF02B00041F624 /* DisclaimerNavigationController.m in Sources */,
@@ -961,6 +972,7 @@
 				2109A12C1DFDE4910076A095 /* Keyword+CoreDataProperties.m in Sources */,
 				210650231DFEDDFF004B0830 /* PaintSwatchSelection.m in Sources */,
 				210650171DFEDD5A004B0830 /* SwatchKeyword.m in Sources */,
+				21B55D251EFF3D870041F624 /* SettingsNavigationController.m in Sources */,
 				2109A1331DFDE4910076A095 /* PaintSwatchType+CoreDataProperties.m in Sources */,
 				2109A1041DFDE32C0076A095 /* AppColorUtils.m in Sources */,
 				210650051DFEDD0A004B0830 /* PaintSwatches.m in Sources */,
