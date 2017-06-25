@@ -51,7 +51,7 @@
 
 @property (nonatomic) int tapAreaSeen, matchAlgIndex, maxRowLimit, imageViewSize;
 
-@property (nonatomic) CGFloat headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold, mainViewWidth, backButtonWidth, editButtonWidth;
+@property (nonatomic) CGFloat headerViewYOffset, headerViewHeight, hue, sat, bri, alpha, borderThreshold, mainViewWidth, navBarAvailTitleWidth;
 
 @property (nonatomic) CGSize defTableViewSize;
 
@@ -219,25 +219,38 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Get widget widths
     //
     _mainViewWidth     = self.view.bounds.size.width;
-    CGFloat xCenter    = _mainViewWidth / DEF_X_OFFSET_DIVIDER;
+    //CGFloat xCenter    = _mainViewWidth / DEF_X_OFFSET_DIVIDER;
 
     
     // Create the tap note label
     //
-    _tapNoteLabel = [FieldUtils createLabel:@"Tap on any Area of the Photo!"];
-    [_tapNoteLabel setFont:DEF_LG_VIEW_FONT];
-    [_tapNoteLabel setTextColor:LIGHT_TEXT_COLOR];
-    [_tapNoteLabel sizeToFit];
+    //_tapNoteLabel = [FieldUtils createLabel:@"Tap on any Area of the Photo!"];
+    //[_tapNoteLabel setFont:DEF_LG_VIEW_FONT];
+    //[_tapNoteLabel setTextColor:LIGHT_TEXT_COLOR];
+    //[_tapNoteLabel sizeToFit];
     
-    CGFloat xOffset = xCenter - (_tapNoteLabel.bounds.size.width / DEF_X_OFFSET_DIVIDER);
-    CGFloat yOffset = self.view.bounds.size.height * 0.65;
+    //CGFloat xOffset = xCenter - (_tapNoteLabel.bounds.size.width / DEF_X_OFFSET_DIVIDER);
+    //CGFloat yOffset = self.view.bounds.size.height * 0.65;
     
-    [_tapNoteLabel setFrame:CGRectMake(xOffset, yOffset, _tapNoteLabel.bounds.size.width, _tapNoteLabel.bounds.size.height)];
-    [self.view addSubview:_tapNoteLabel];
+    //[_tapNoteLabel setFrame:CGRectMake(xOffset, yOffset, _tapNoteLabel.bounds.size.width, _tapNoteLabel.bounds.size.height)];
+    //[self.view addSubview:_tapNoteLabel];
     
-    [_tapNoteLabel setHidden:TRUE];
+    //[_tapNoteLabel setHidden:TRUE];
     
-
+    
+    // Compute the max available size for the Nav bar title
+    //
+    UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
+    CGFloat backButtonWidth = [backButton width];
+    
+    UIBarButtonItem *editButton = self.navigationItem.rightBarButtonItem;
+    CGFloat editButtonWidth = [editButton width];
+    
+    // Estimate the width
+    //
+    _navBarAvailTitleWidth = _mainViewWidth - (backButtonWidth - editButtonWidth) * DEF_X_OFFSET_DIVIDER;
+    
+    
     // Used in sortByClosestMatch
     //
     _tapNumberArray = [[NSMutableArray alloc] init];
@@ -399,7 +412,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_matchSave setEnabled:FALSE];
     
 
-    
     // Match Update Edit button Alert Controller
     //
     _updateAlertController = [UIAlertController alertControllerWithTitle:@"Match Association"
@@ -1870,14 +1882,15 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 - (void)setNavTitle:(NSString *)title {
     NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
        NSFontAttributeName:DEF_MD_ITALIC_FONT}];
-
+    
     _titleLabel = [FieldUtils createLabel:title];
+    [_titleLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
     [_titleLabel setAttributedText:attrTitle];
     [_titleLabel sizeToFit];
-    [_titleLabel setTextAlignment: NSTextAlignmentCenter];
-    [_titleLabel setBackgroundColor:CLEAR_COLOR];
+    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleLabel setBackgroundColor:DEF_DARK_COLOR];
     
-    _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _titleLabel.bounds.size.width, _titleLabel.bounds.size.height)];
+    _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
     [_titleView addSubview:_titleLabel];
     self.navigationItem.titleView = _titleView;
 }

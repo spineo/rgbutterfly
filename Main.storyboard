@@ -208,7 +208,7 @@
                                 <action selector="goBack:" destination="6Nq-8K-N9m" id="Scg-Ua-ntJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="57" enabled="NO" title="Edit" id="pzx-mR-o6R">
+                        <barButtonItem key="rightBarButtonItem" tag="57" enabled="NO" title="Edit" width="40" id="pzx-mR-o6R">
                             <color key="tintColor" red="0.95347607050000005" green="1" blue="0.87532211059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="editAlertShow:" destination="6Nq-8K-N9m" id="VL5-np-z3f"/>
@@ -1245,13 +1245,13 @@
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
-        <image name="jgpineo_collect" width="856" height="890"/>
-        <image name="jgpineo_color_groups" width="1034" height="892"/>
-        <image name="jgpineo_list" width="798" height="664"/>
-        <image name="jgpineo_reference" width="884" height="888"/>
-        <image name="jgpineo_take_photo" width="530" height="514"/>
-        <image name="jgpineo_topics" width="824" height="624"/>
-        <image name="jgpineo_visit_photos" width="1374" height="1208"/>
+        <image name="jgpineo_collect" width="96" height="99"/>
+        <image name="jgpineo_color_groups" width="115" height="99"/>
+        <image name="jgpineo_list" width="89" height="74"/>
+        <image name="jgpineo_reference" width="98" height="99"/>
+        <image name="jgpineo_take_photo" width="74" height="72"/>
+        <image name="jgpineo_topics" width="92" height="69"/>
+        <image name="jgpineo_visit_photos" width="153" height="134"/>
         <image name="minus sign" width="20" height="20"/>
         <image name="plus sign-1" width="20" height="20"/>
         <image name="question-2-init" width="32" height="32"/>
@@ -1262,11 +1262,11 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="Stq-UR-tQY"/>
+        <segue reference="cln-aA-aih"/>
+        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="7bF-uJ-b3u"/>
         <segue reference="Szt-18-Btg"/>
-        <segue reference="7T5-Hk-Hx3"/>
-        <segue reference="TM9-cr-8aw"/>
+        <segue reference="Omc-kQ-4iW"/>
         <segue reference="dfY-1M-v1H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
