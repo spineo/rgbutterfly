@@ -200,6 +200,19 @@ const int IMAGE_TAG  = 6;
     [_save setEnabled:FALSE];
     
     [self matchButtonsHide];
+    
+    // Alerts
+    //
+    // Image Interaction
+    //
+    BOOL matchInteractAlert = [[NSUserDefaults standardUserDefaults] boolForKey:MATCH_INTERACT_KEY];
+    if (matchInteractAlert == TRUE) {
+        UIAlertController *alert = [AlertUtils createOkAlert:@"Tips for this View" message:MATCH_INSTRUCTIONS];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:MATCH_INTERACT_KEY];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -403,7 +403,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if([_userDefaults boolForKey:TAP_NOTE_KEY] == FALSE) {
+
+    if([_userDefaults boolForKey:TAP_NOTE_KEY] == TRUE) {
         _nameHeader = @"Thumbnail (Tap to Expand) and Name";
     } else {
         _nameHeader = _defNameHeader;
@@ -1389,7 +1390,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         // User should now be aware of this behavior so don't show any longer
         //
         _nameHeader = _defNameHeader;
-        [_userDefaults setBool:TRUE forKey:TAP_NOTE_KEY];
+        [_userDefaults setBool:FALSE forKey:TAP_NOTE_KEY];
 
     } else {
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);

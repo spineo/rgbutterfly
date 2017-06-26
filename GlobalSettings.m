@@ -353,7 +353,7 @@ NSString * const MIX_RATIOS_KEY      = @"PaintMixRatios";
 NSString * const MIX_ASSOC_COUNT_KEY = @"MixAssocCount";
 NSString * const ADD_BRANDS_KEY      = @"PaintBrand";
 NSString * const LISTING_TYPE        = @"ListingType";
-NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
+
 
 // Activity (i.e., spinner) label indicator
 //
@@ -366,12 +366,15 @@ NSString * const ALERTS_FILTER_KEY   = @"AlertsFilter";
 NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
 NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
 //NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
+NSString * const MATCH_INTERACT_KEY  = @"MatchInteractAlert";
+NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Alerts Instructions
 //
-NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, click on either the 'Match Colors' or 'Explore Colors' titles";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it) and click on any row to view the details";
+NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, tap on either the 'Match Colors' or 'Explore Colors' titles.";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it). Tap on any generated  row to view the details.";
 //NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
+NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables circling between match methods).";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
@@ -663,6 +666,10 @@ static NSDictionary *swatchTypes;
         [userDefaults setBool:TRUE forKey:IMAGE_INTERACT_KEY];
     }
 
+    if ([userDefaults objectForKey:MATCH_INTERACT_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:MATCH_INTERACT_KEY];
+    }
+
 //    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
 //        [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
 //    }
@@ -672,7 +679,7 @@ static NSDictionary *swatchTypes;
     }
     
     if ([userDefaults objectForKey:TAP_NOTE_KEY] == nil) {
-        [userDefaults setBool:FALSE forKey:TAP_NOTE_KEY];
+        [userDefaults setBool:TRUE forKey:TAP_NOTE_KEY];
     }
     
     [userDefaults synchronize];

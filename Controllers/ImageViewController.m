@@ -72,7 +72,7 @@
 @property (nonatomic, strong) TapAreaSwatch *tapAreaSwatch;
 @property (nonatomic) int matchAssocId;
 
-@property (nonatomic) BOOL saveFlag, imageInteractAlert, tapCollectAlert, isRGB, tapAreasChanged, matchNumChanged, dragAreaEnabled, firstTap;
+@property (nonatomic) BOOL saveFlag, tapCollectAlert, isRGB, tapAreasChanged, matchNumChanged, dragAreaEnabled, firstTap;
 @property (nonatomic, strong) NSString *reuseCellIdentifier;
 @property (nonatomic, strong) NSMutableArray *matchAlgorithms;
 
@@ -207,8 +207,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     // Image Interaction
     //
-    _imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
-    if (_imageInteractAlert == TRUE && _newImage == TRUE) {
+    BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
+    if (imageInteractAlert == TRUE && _newImage == TRUE) {
         UIAlertController *alert = [AlertUtils createOkAlert:@"What's Next?" message:INTERACT_INSTRUCTIONS];
     
         [self presentViewController:alert animated:YES completion:nil];

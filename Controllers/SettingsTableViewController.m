@@ -1307,11 +1307,13 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             //
             [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
             
-            // Add Mix Settings
+            // Alerts
             //
             [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
             //[_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
+            [_userDefaults setBool:_alertsShow forKey:MATCH_INTERACT_KEY];
+            [_userDefaults setBool:_alertsShow forKey:TAP_NOTE_KEY];
             
             // List type
             //
