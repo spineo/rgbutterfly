@@ -40,7 +40,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) UIBarButtonItem *isFavoriteButton;
+@property (nonatomic, strong) UIBarButtonItem *isFavoriteButton, *isFavoriteTextButton;
 
 @property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName, *isFavoriteText;
 
@@ -201,8 +201,9 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Is Favorite Button
     //
     _isFavorite = [[_paintSwatch is_favorite] boolValue];
-    _isFavoriteButton = [self.toolbarItems objectAtIndex:2];
-    [_isFavoriteButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    _isFavoriteButton = [self.toolbarItems objectAtIndex:0];
+    _isFavoriteTextButton = [self.toolbarItems objectAtIndex:1];
+    [_isFavoriteTextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
             DEF_MD_ITALIC_FONT, NSFontAttributeName,
             DEF_TEXT_COLOR, NSForegroundColorAttributeName,
             nil] forState:UIControlStateNormal];
@@ -1294,17 +1295,17 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         _isFavorite = TRUE;
     
     [self setIsFavoriteText];
-    [_save setEnabled:TRUE];
+    [self saveFavorite];
 }
 
 - (void)setIsFavoriteText {
     if (_isFavorite == TRUE) {
-        [_isFavoriteButton setTitle:@"Remove from Favorites"];
+        [_isFavoriteTextButton setTitle:@"Remove from Favorites"];
     } else {
         // Explicitly set in case nil
         //
         _isFavorite = FALSE;
-        [_isFavoriteButton setTitle:@"Add to Favorites"];
+        [_isFavoriteTextButton setTitle:@"Add to Favorites"];
     }
 }
 
@@ -1506,6 +1507,20 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
         NSLog(@"Color Detail Save Successful");
         
         [_save setEnabled:FALSE];
+    }
+}
+
+- (void)saveFavorite {
+    [_paintSwatch setIs_favorite:[NSNumber numberWithBool:_isFavorite]];
+    
+    NSError *error = nil;
+    if (![self.context save:&error]) {
+        NSLog(@"Error saving context: %@\n%@", [error localizedDescription], [error userInfo]);
+        
+        UIAlertController *myAlert = [AlertUtils createOkAlert:@"Add/Remove Favorite" message:@"Error Saving"];
+        [self presentViewController:myAlert animated:YES completion:nil];
+    } else {
+        NSLog(@"Add/Remove Favorite Successful");
     }
 }
 
