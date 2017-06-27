@@ -565,10 +565,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     if ([_sourceViewContext isEqualToString:@"CollectionViewController"]) {
         _currTapSection = (int)[_paintSwatches count];
-        //[self matchButtonHide];
-        //if ([_viewType isEqualToString:MATCH_TYPE]) {
-        //    [self matchButtonsShow];
-        //}
+        [self matchButtonHide];
+        if ([_viewType isEqualToString:MATCH_TYPE]) {
+            [self matchButtonsShow];
+        }
 
     } else {
         _paintSwatches = [[NSMutableArray alloc] init];
@@ -717,10 +717,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
 - (void)matchButtonsShow {
     [self editButtonEnable];
-    if (_matchAssociation == nil) {
-        [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
-        [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
-    }
+    //if (_matchAssociation == nil) {
+    //    [BarButtonUtils setButtonShow:self.toolbarItems refTag:DECR_ALG_BTN_TAG];
+    //    [BarButtonUtils setButtonShow:self.toolbarItems refTag:INCR_ALG_BTN_TAG];
+    //}
 }
 
 - (void)matchButtonsHide {
@@ -780,7 +780,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, DEF_NIL_WIDTH, DEF_NIL_HEIGHT)];
             [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height - TABLEVIEW_BOTTOM_OFFSET)];
             
-            //[self matchButtonsShow];
+            [self matchButtonsShow];
             
             [_scrollViewUp setEnabled:NO];
             [_scrollViewDown setEnabled:YES];
@@ -1094,7 +1094,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_paintSwatches addObject:_swatchObj];
         
         if ([_viewType isEqualToString:MATCH_TYPE]) {
-            //[self matchButtonsShow];
+            [self matchButtonsShow];
             
         } else {
             [self viewButtonShow];
@@ -1184,7 +1184,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [self deleteTapArea:swatchObj];
             
             if ([_viewType isEqualToString:MATCH_TYPE]) {
-                //[self matchButtonsShow];
+                [self matchButtonsShow];
                 
             } else {
                 [self viewButtonShow];
