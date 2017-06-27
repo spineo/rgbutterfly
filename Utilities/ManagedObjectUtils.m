@@ -570,6 +570,22 @@
     return count;
 }
 
++ (int)fetchIsFavoriteCount:(NSManagedObjectContext *)context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PaintSwatch" inManagedObjectContext:context];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
+    
+    [fetch setEntity:entity];
+    
+    [fetch setPredicate:[NSPredicate predicateWithFormat:@"is_favorite == 1"]];
+    
+    NSError *error      = nil;
+    int count = (int)[context countForFetchRequest:fetch error:&error];
+    
+    return count;
+}
+
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

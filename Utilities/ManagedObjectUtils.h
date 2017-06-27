@@ -38,6 +38,7 @@
 // Fetch methods
 //
 + (int)fetchCount:(NSString *)entityName;
++ (int)fetchIsFavoriteCount:(NSManagedObjectContext *)context;
 + (NSArray *)fetchEntity:(NSString *)entityName context:(NSManagedObjectContext *)context;
 + (NSArray *)fetchKeywords:(NSManagedObjectContext *)context;
 + (NSMutableArray *)fetchPaintSwatches:(NSManagedObjectContext *)context;

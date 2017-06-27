@@ -291,7 +291,10 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorsFilterController addAction:refAndMix];
     [_colorsFilterController addAction:refOnly];
     [_colorsFilterController addAction:genOnly];
-    [_colorsFilterController addAction:favorites];
+    
+    if ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)
+        [_colorsFilterController addAction:favorites];
+    
     [_colorsFilterController addAction:colorsAlertCancel];
     
     _colorsFilterButton  = [[UIBarButtonItem alloc] initWithTitle:@"Colors Filter: References/Mixes" style:UIBarButtonItemStylePlain target:self action:@selector(showColorsFilters)];

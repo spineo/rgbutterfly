@@ -895,10 +895,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="326" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBh-Vp-D65">
-                                <rect key="frame" x="257" y="439" width="69" height="61"/>
+                                <rect key="frame" x="257" y="439" width="88" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="List All Colors">
+                                    <fragment content="All Colors &amp; Favorites">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -1273,12 +1273,12 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KOJ-iO-fdK"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="7bF-uJ-b3u"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="xj5-pH-aLq"/>
+        <segue reference="TM9-cr-8aw"/>
+        <segue reference="clT-9D-BBI"/>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="ZPZ-Du-pkL"/>
-        <segue reference="dfY-1M-v1H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
