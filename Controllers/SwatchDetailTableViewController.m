@@ -40,7 +40,9 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName;
+@property (nonatomic, strong) UIBarButtonItem *isFavoriteButton;
+
+@property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName, *isFavoriteText;
 
 // Subjective color related
 //
@@ -62,7 +64,7 @@
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 
 
-@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, pigmentPickerFlag, bodyPickerFlag, coveragePickerFlag, isReadOnly, isShipped;
+@property (nonatomic) BOOL editFlag, colorPickerFlag, typesPickerFlag, brandPickerFlag, pigmentPickerFlag, bodyPickerFlag, coveragePickerFlag, isReadOnly, isShipped, isFavorite;
 
 
 // NSManagedObject subclassing
@@ -193,7 +195,18 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     // Other flags
     //
-    _isShipped = [[_paintSwatch is_shipped] boolValue];
+    _isShipped  = [[_paintSwatch is_shipped] boolValue];
+
+    
+    // Is Favorite Button
+    //
+    _isFavorite = [[_paintSwatch is_favorite] boolValue];
+    _isFavoriteButton = [self.toolbarItems objectAtIndex:2];
+    [_isFavoriteButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+            DEF_MD_ITALIC_FONT, NSFontAttributeName,
+            DEF_TEXT_COLOR, NSForegroundColorAttributeName,
+            nil] forState:UIControlStateNormal];
+    [self setIsFavoriteText];
 
     
     // NSUserDefaults
@@ -416,7 +429,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     _isReadOnly = FALSE;
 
     BOOL is_readonly = [[_paintSwatch is_readonly] boolValue];
-    
     _isReadOnly = _isShipped ? _isShipped : is_readonly;
     
     if (_isReadOnly == TRUE) {
@@ -905,11 +917,13 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     if (_editFlag == FALSE) {
         [self makeTextFieldsNonEditable];
+        [_isFavoriteButton setEnabled:FALSE];
         if (([_save isEnabled] == TRUE) || ([_delete isEnabled] == TRUE)) {
             [self presentViewController:_saveAlertController animated:YES completion:nil];
         }
     } else {
         [self makeTextFieldsEditable];
+        [_isFavoriteButton setEnabled:TRUE];
     }
     
     [self.tableView reloadData];
@@ -1271,6 +1285,29 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_pigmentTypeName resignFirstResponder];
 }
 
+// Is Favorite
+//
+- (IBAction)addFavorite:(id)sender {
+    if (_isFavorite == TRUE)
+        _isFavorite = FALSE;
+    else
+        _isFavorite = TRUE;
+    
+    [self setIsFavoriteText];
+    [_save setEnabled:TRUE];
+}
+
+- (void)setIsFavoriteText {
+    if (_isFavorite == TRUE) {
+        [_isFavoriteButton setTitle:@"Remove from Favorites"];
+    } else {
+        // Explicitly set in case nil
+        //
+        _isFavorite = FALSE;
+        [_isFavoriteButton setTitle:@"Add to Favorites"];
+    }
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // CollectionView and ScrollView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1447,6 +1484,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_paintSwatch setName:_nameEntered];
     [_paintSwatch setDesc:_descEntered];
     [_paintSwatch setVersion_tag:[NSNumber numberWithInt:VERSION_TAG]];
+    [_paintSwatch setIs_favorite:[NSNumber numberWithBool:_isFavorite]];
     
     if (_brandPickerSelRow == 0) {
         [_paintSwatch setPaint_brand_name:_otherName];

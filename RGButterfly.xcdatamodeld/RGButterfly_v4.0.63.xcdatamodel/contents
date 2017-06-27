@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D30" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16D30" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AssociationType" representedClassName="AssociationType" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -88,6 +88,7 @@
         <attribute name="green" attributeType="String" syncable="YES"/>
         <attribute name="hue" attributeType="String" syncable="YES"/>
         <attribute name="image_thumb" attributeType="Transformable" syncable="YES"/>
+        <attribute name="is_favorite" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="is_hidden" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="is_mix" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="is_readonly" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
@@ -167,7 +168,7 @@
         <element name="MixAssocKeyword" positionX="-756" positionY="477" width="128" height="90"/>
         <element name="MixAssocSwatch" positionX="-371" positionY="161" width="128" height="120"/>
         <element name="PaintBrand" positionX="18" positionY="36" width="128" height="73"/>
-        <element name="PaintSwatch" positionX="-128" positionY="-168" width="128" height="568"/>
+        <element name="PaintSwatch" positionX="-128" positionY="-168" width="128" height="583"/>
         <element name="PaintSwatchType" positionX="16" positionY="-180" width="128" height="73"/>
         <element name="PigmentType" positionX="16" positionY="243" width="128" height="73"/>
         <element name="SubjectiveColor" positionX="18" positionY="-79" width="128" height="88"/>

@@ -576,10 +576,22 @@
                             <outlet property="delegate" destination="DNO-fJ-sUQ" id="S2P-Kf-d3t"/>
                         </connections>
                     </tableView>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="flexibleSpace" id="YAt-Tn-hfp"/>
+                        <barButtonItem enabled="NO" systemItem="bookmarks" id="9wk-qA-8fI">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                        <barButtonItem tag="105" enabled="NO" title="Add to Favorites" id="I37-RA-ZZk">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="addFavorite:" destination="DNO-fJ-sUQ" id="LdY-fV-Zld"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="eWu-3v-vbH"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Color Detail" id="nY0-n4-QGf">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="hSo-RR-cfi">
-                            <color key="tintColor" red="0.94884074149999997" green="1" blue="0.87836773150000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="goBack:" destination="DNO-fJ-sUQ" id="HZ5-4m-RxG"/>
                             </connections>
@@ -1262,11 +1274,11 @@
         <image name="share" width="16" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cln-aA-aih"/>
-        <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="KOJ-iO-fdK"/>
+        <segue reference="Stq-UR-tQY"/>
+        <segue reference="hK8-5n-amq"/>
         <segue reference="7bF-uJ-b3u"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="Szt-18-Btg"/>
+        <segue reference="ZPZ-Du-pkL"/>
         <segue reference="dfY-1M-v1H"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

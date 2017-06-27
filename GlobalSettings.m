@@ -260,6 +260,7 @@ int const COVERAGE_FIELD_TAG   = 101;
 int const COVERAGE_PICKER_TAG  = 102;
 int const FLEXIBLE_SPACE_TAG   = 103;
 int const FIXED_SPACE_TAG      = 104;
+int const FAVORITES_TAG        = 105;
 
 // Views Tags
 //

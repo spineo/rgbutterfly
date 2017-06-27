@@ -26,6 +26,7 @@
 @dynamic green;
 @dynamic hue;
 @dynamic image_thumb;
+@dynamic is_favorite;
 @dynamic is_shipped;
 @dynamic is_hidden;
 @dynamic is_readonly;

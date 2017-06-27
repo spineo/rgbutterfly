@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSString *green;
 @property (nullable, nonatomic, retain) NSString *hue;
+@property (nullable, nonatomic, retain) NSNumber *is_favorite;
 @property (nullable, nonatomic, retain) NSNumber *is_shipped;
 @property (nullable, nonatomic, retain) NSNumber *is_hidden;
 @property (nullable, nonatomic, retain) NSNumber *is_readonly;
