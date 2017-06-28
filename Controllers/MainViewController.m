@@ -192,6 +192,49 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _upArrowImage        = [[UIImage imageNamed:ARROW_UP_IMAGE_NAME]    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _emptySquareImage    = [[UIImage imageNamed:EMPTY_SQ_IMAGE_NAME]    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _checkboxSquareImage = [[UIImage imageNamed:CHECKBOX_SQ_IMAGE_NAME] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Colors controller
+    //
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    _colorsFilterController = [UIAlertController alertControllerWithTitle:@"Colors Filter"
+        message:@"Please select a filter type"
+        preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"None: Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self showAllColors];
+    }];
+    
+    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByRefAndMix];
+    }];
+    
+    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByReference];
+    }];
+    
+    UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Show Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByGenerics];
+    }];
+    
+    UIAlertAction *favorites  = [UIAlertAction actionWithTitle:@"Show My Favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByFavorites];
+    }];
+    
+    UIAlertAction *colorsAlertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+        [_listingController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [_colorsFilterController addAction:allColors];
+    [_colorsFilterController addAction:refAndMix];
+    [_colorsFilterController addAction:refOnly];
+    [_colorsFilterController addAction:genOnly];
+    
+    if ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)
+        [_colorsFilterController addAction:favorites];
+    
+    [_colorsFilterController addAction:colorsAlertCancel];
 
     
     // Listing Controller
@@ -256,46 +299,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_photoSelectionController addAction:selTakePhotoAction];
     [_photoSelectionController addAction:selCancel];
 
-    
-    // Colors controller
-    //
-    _colorsFilterController = [UIAlertController alertControllerWithTitle:@"Colors Filter"
-                                                             message:@"Please select a filter type"
-                                                      preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"None: Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self showAllColors];
-    }];
-    
-    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self filterByRefAndMix];
-    }];
-    
-    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self filterByReference];
-    }];
-    
-    UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Show Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self filterByGenerics];
-    }];
-    
-    UIAlertAction *favorites  = [UIAlertAction actionWithTitle:@"Show My Favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self filterByFavorites];
-    }];
-    
-    UIAlertAction *colorsAlertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-        [_listingController dismissViewControllerAnimated:YES completion:nil];
-    }];
-    
-    [_colorsFilterController addAction:allColors];
-    [_colorsFilterController addAction:refAndMix];
-    [_colorsFilterController addAction:refOnly];
-    [_colorsFilterController addAction:genOnly];
-    
-    if ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)
-        [_colorsFilterController addAction:favorites];
-    
-    [_colorsFilterController addAction:colorsAlertCancel];
     
     _colorsFilterButton  = [[UIBarButtonItem alloc] initWithTitle:@"Colors Filter: References/Mixes" style:UIBarButtonItemStylePlain target:self action:@selector(showColorsFilters)];
     [_colorsFilterButton setTintColor:LIGHT_BORDER_COLOR];
@@ -372,6 +375,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _showRefAndMix = FALSE;
     _showRefOnly   = FALSE;
     _showGenOnly   = FALSE;
+    _showFavorites = FALSE;
     
     self.navigationItem.rightBarButtonItem = _searchButton;
 
@@ -412,8 +416,12 @@ int MIX_ASSOC_MIN_SIZE = 0;
 //        _listingType    = _modListingType;
 //        _defListingType = _modListingType;
 //    }
-
-    [self loadData];
+    
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (_showFavorites == TRUE) &&([ManagedObjectUtils fetchIsFavoriteCount:self.context] == 0)) {
+        [self showAllColors];
+    } else {
+        [self loadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -461,7 +469,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
         
-        [self setTitle:@"All Colors"];
+        [self setTitle:@"All Colors & Favorites"];
         
         [self loadFullColorsListing];
         _listingType = FULL_LISTING_TYPE;
@@ -915,6 +923,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             NSString *refAndMix  = @"Refs/Mixes";
             NSString *refListing = @"References";
             NSString *genListing = @"Generics";
+            NSString *favListing = @"Favorites";
             
             NSString *colorsFilter;
             if (_showRefOnly == TRUE) {
@@ -925,6 +934,9 @@ int MIX_ASSOC_MIN_SIZE = 0;
                 
             } else if (_showGenOnly == TRUE) {
                 colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", genListing, _numSwatches];
+                
+            } else if (_showFavorites == TRUE) {
+                colorsFilter = [[NSString alloc] initWithFormat:@"%@ (%i)", favListing, _numSwatches];
     
             } else {
                 int swatchCount;

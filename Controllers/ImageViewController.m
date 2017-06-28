@@ -1881,7 +1881,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setBackgroundColor:CLEAR_COLOR];
 
-    
     _titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _navBarAvailTitleWidth, _titleLabel.bounds.size.height)];
     [_titleView addSubview:_titleLabel];
     self.navigationItem.titleView = _titleView;

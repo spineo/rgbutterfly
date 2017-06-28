@@ -412,11 +412,11 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     //
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrameSizes)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
+        name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self setNavTitle];
 
     if([_userDefaults boolForKey:TAP_NOTE_KEY] == TRUE) {
         _nameHeader = @"Thumbnail (Tap to Expand) and Name";
@@ -1286,29 +1286,6 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [_pigmentTypeName resignFirstResponder];
 }
 
-// Is Favorite
-//
-- (IBAction)addFavorite:(id)sender {
-    if (_isFavorite == TRUE)
-        _isFavorite = FALSE;
-    else
-        _isFavorite = TRUE;
-    
-    [self setIsFavoriteText];
-    [self saveFavorite];
-}
-
-- (void)setIsFavoriteText {
-    if (_isFavorite == TRUE) {
-        [_isFavoriteTextButton setTitle:@"Remove from Favorites"];
-    } else {
-        // Explicitly set in case nil
-        //
-        _isFavorite = FALSE;
-        [_isFavoriteTextButton setTitle:@"Add to Favorites"];
-    }
-}
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // CollectionView and ScrollView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1586,5 +1563,83 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [FieldUtils makeTextFieldNonEditable:_pigmentTypeName content:@"" border:FALSE];
     [FieldUtils makeTextFieldNonEditable:_coverageName content:@"" border:FALSE];
 }
+
+// Is Favorite
+//
+- (IBAction)addFavorite:(id)sender {
+    if (_isFavorite == TRUE)
+        _isFavorite = FALSE;
+    else
+        _isFavorite = TRUE;
+    
+    [self setIsFavoriteText];
+    [self saveFavorite];
+}
+
+- (void)setIsFavoriteText {
+    if (_isFavorite == TRUE) {
+        [_isFavoriteTextButton setTitle:@"Remove from Favorites"];
+    } else {
+        // Explicitly set in case nil
+        //
+        _isFavorite = FALSE;
+        [_isFavoriteTextButton setTitle:@"Add to Favorites"];
+    }
+    [self setNavTitle];
+}
+
+- (void)setNavTitle {
+    NSString *modTitle;
+    if ([[_swatchTypeName text] isEqualToString:@"MixAssoc"]) {
+        modTitle = @"Mix";
+    } else if ([[_swatchTypeName text] isEqualToString:@"GenericPaint"]) {
+        modTitle = @"Generic Paint";
+    } else {
+        modTitle = [GenericUtils trimString:[_swatchTypeName text]];
+    }
+    
+    NSString *title = [[NSString alloc] initWithFormat:@" %@ Detail", modTitle];
+    
+    // Compute the max available size for the Nav bar title
+    //
+    CGFloat mainViewWidth     = self.view.bounds.size.width;
+    
+    CGFloat assumedButtonWidth = DEF_SM_BUTTON_WIDTH;
+    
+    CGFloat buttonWidths  = assumedButtonWidth * DEF_X_OFFSET_DIVIDER;
+    CGFloat buttonOffsets = buttonWidths / DEF_X_OFFSET_DIVIDER;
+    
+    // Estimate the width with extra offset
+    //
+    CGFloat navBarAvailTitleWidth = mainViewWidth - (buttonWidths + buttonOffsets);
+    
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
+        NSFontAttributeName:DEF_MD_ITALIC_FONT}];
+    
+    UILabel *titleLabel = [FieldUtils createLabel:title];
+    [titleLabel setAttributedText:attrTitle];
+    
+    [titleLabel sizeToFit];
+    [titleLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth, titleLabel.bounds.size.height)];
+    
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setBackgroundColor:CLEAR_COLOR];
+    
+    UIImageView *starImageView;
+    CGFloat starImageViewWidth = DEF_NIL_WIDTH;
+    
+    if (_isFavorite == TRUE) {
+        starImageViewWidth = titleLabel.bounds.size.height;
+        starImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"star-icon-1.png"]];
+        [starImageView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, starImageViewWidth, starImageViewWidth)];
+    }
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth - starImageViewWidth, titleLabel.bounds.size.height)];
+    [titleView addSubview:starImageView];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+}
+
+
 
 @end
