@@ -456,6 +456,7 @@ extern NSString * const ARROW_UP_IMAGE_NAME;
 extern NSString * const ARROW_DOWN_IMAGE_NAME;
 extern NSString * const EMPTY_SQ_IMAGE_NAME;
 extern NSString * const CHECKBOX_SQ_IMAGE_NAME;
+extern NSString * const STAR_ICON_NAME;
 
 // Default listing type
 //

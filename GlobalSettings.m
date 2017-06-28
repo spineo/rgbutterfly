@@ -468,6 +468,7 @@ NSString * const ARROW_UP_IMAGE_NAME    = @"arrow up.png";
 NSString * const ARROW_DOWN_IMAGE_NAME  = @"arrow down.png";
 NSString * const EMPTY_SQ_IMAGE_NAME    = @"square.png";
 NSString * const CHECKBOX_SQ_IMAGE_NAME = @"CheckBox-1.png";
+NSString * const STAR_ICON_NAME         = @"star-icon.png";
 
 
 // "About" section text (NSMutableAttributedString use for rich text)

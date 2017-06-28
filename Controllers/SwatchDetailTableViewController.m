@@ -1630,7 +1630,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     if (_isFavorite == TRUE) {
 
         starImageViewWidth = titleLabel.bounds.size.height;
-        starImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"star-icon-1.png"]];
+        starImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:STAR_ICON_NAME]];
         
         xOffset = xOffset - ((starImageViewWidth + DEF_FIELD_PADDING) / DEF_X_OFFSET_DIVIDER);
         
