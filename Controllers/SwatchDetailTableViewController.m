@@ -413,6 +413,17 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrameSizes)
         name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    // Alerts: Detail Interaction
+    //
+    BOOL detailInteractAlert = [[NSUserDefaults standardUserDefaults] boolForKey:DETAIL_INTERACT_KEY];
+    if (detailInteractAlert == TRUE) {
+        UIAlertController *alert = [AlertUtils createOkAlert:@"Customize Here!" message:DETAIL_INSTRUCTIONS];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:DETAIL_INTERACT_KEY];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

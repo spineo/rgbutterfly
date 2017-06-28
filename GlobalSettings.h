@@ -374,6 +374,7 @@ extern NSString * const APP_INTRO_KEY;
 extern NSString * const IMAGE_INTERACT_KEY;
 //extern NSString * const TAP_COLLECT_KEY;
 extern NSString * const MATCH_INTERACT_KEY;
+extern NSString * const DETAIL_INTERACT_KEY;
 
 // Alerts Instructions
 //
@@ -381,6 +382,7 @@ extern NSString * const APP_INTRO_INSTRUCTIONS;
 extern NSString * const INTERACT_INSTRUCTIONS;
 //extern NSString * const TAP_COLLECT_INSTRUCTIONS;
 extern NSString * const MATCH_INSTRUCTIONS;
+extern NSString * const DETAIL_INSTRUCTIONS;
 
 // Tap Note Key
 //

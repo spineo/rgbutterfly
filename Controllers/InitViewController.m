@@ -57,9 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[GlobalSettings init];
-
-    
     // Set the default font
     //
     [self setFontFamily:@"Baskerville-Italic" forView:self.view andSubViews:YES];
@@ -176,13 +173,13 @@
     
     // Welcome alert
     //
-    //BOOL appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
-    //if (appIntroAlert == TRUE) {
-    //   UIAlertController *alert = [AlertUtils createOkAlert:@"Welcome to RGButterfly" message:APP_INTRO_INSTRUCTIONS];
-    //   [self presentViewController:alert animated:YES completion:nil];
+    BOOL appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
+    if ([_userDefaults objectForKey:APP_INTRO_KEY] == nil || appIntroAlert == TRUE) {
+       UIAlertController *alert = [AlertUtils createOkAlert:@"Welcome to RGButterfly" message:APP_INTRO_INSTRUCTIONS];
+       [self presentViewController:alert animated:YES completion:nil];
     
-    //   [_userDefaults setBool:FALSE forKey:APP_INTRO_KEY];
-    //}
+       [_userDefaults setBool:FALSE forKey:APP_INTRO_KEY];
+    }
     
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
@@ -206,7 +203,7 @@
     //
     } else if (_dbRestoreFlag == TRUE) {
 
-        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"Database Restore Alert" message:@"Caution: You will lose any data added if you revert to the original snapshot. Do you wish to continue?"];
+        UIAlertController *updateConfirm = [AlertUtils createBlankAlert:@"Database Restore Alert" message:@"Caution: You will lose any data/favorites added if you revert to the original snapshot. Do you wish to continue?"];
         UIAlertAction* YesButton = [UIAlertAction
                                     actionWithTitle:@"Yes"
                                     style:UIAlertActionStyleDefault

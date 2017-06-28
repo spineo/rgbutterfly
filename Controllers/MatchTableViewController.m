@@ -201,9 +201,7 @@ const int IMAGE_TAG  = 6;
     
     [self matchButtonsHide];
     
-    // Alerts
-    //
-    // Image Interaction
+    // Alerts: Match Interaction
     //
     BOOL matchInteractAlert = [[NSUserDefaults standardUserDefaults] boolForKey:MATCH_INTERACT_KEY];
     if (matchInteractAlert == TRUE) {

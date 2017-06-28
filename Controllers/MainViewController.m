@@ -146,6 +146,8 @@ int MIX_ASSOC_MIN_SIZE = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [GlobalSettings init];
+    
     [self.colorTableView setBackgroundColor:DEF_DARK_COLOR];
     
     // NSManagedObject subclassing
@@ -199,40 +201,43 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     _colorsFilterController = [UIAlertController alertControllerWithTitle:@"Colors Filter"
-        message:@"Please select a filter type"
+        message:@"Please select a colors display filter"
         preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *favorites  = [UIAlertAction actionWithTitle:@"My Favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self filterByFavorites];
+    }];
     
     UIAlertAction *allColors = [UIAlertAction actionWithTitle:@"None: Show All Colors" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self showAllColors];
     }];
     
-    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@"Show References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *refAndMix = [UIAlertAction actionWithTitle:@" References and Mixes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self filterByRefAndMix];
     }];
     
-    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Show Paint References Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *refOnly   = [UIAlertAction actionWithTitle:@"Paint References Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self filterByReference];
     }];
     
-    UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Show Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+    UIAlertAction *genOnly   = [UIAlertAction actionWithTitle:@"Generic Colors Only" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
         [self filterByGenerics];
-    }];
-    
-    UIAlertAction *favorites  = [UIAlertAction actionWithTitle:@"Show My Favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [self filterByFavorites];
     }];
     
     UIAlertAction *colorsAlertCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
         [_listingController dismissViewControllerAnimated:YES completion:nil];
     }];
     
+    BOOL defFavorites = FALSE;
+    if ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0) {
+        [_colorsFilterController addAction:favorites];
+        defFavorites = TRUE;
+    }
+
     [_colorsFilterController addAction:allColors];
     [_colorsFilterController addAction:refAndMix];
     [_colorsFilterController addAction:refOnly];
     [_colorsFilterController addAction:genOnly];
-    
-    if ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)
-        [_colorsFilterController addAction:favorites];
     
     [_colorsFilterController addAction:colorsAlertCancel];
 
@@ -371,11 +376,17 @@ int MIX_ASSOC_MIN_SIZE = 0;
                                        TABLE_HEADER_FONT, NSFontAttributeName, nil]
                              forState:UIControlStateNormal];
 
+    if (defFavorites == TRUE)
+        _showAll = FALSE;
+    else
+        _showAll = TRUE;
+    
+    _showFavorites = defFavorites;
     _showAll       = TRUE;
     _showRefAndMix = FALSE;
     _showRefOnly   = FALSE;
     _showGenOnly   = FALSE;
-    _showFavorites = FALSE;
+
     
     self.navigationItem.rightBarButtonItem = _searchButton;
 
@@ -417,7 +428,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 //        _defListingType = _modListingType;
 //    }
     
-    if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (_showFavorites == TRUE) &&([ManagedObjectUtils fetchIsFavoriteCount:self.context] == 0)) {
+    if ([_listingType isEqualToString:FULL_LISTING_TYPE] && (_showFavorites == TRUE) && ([ManagedObjectUtils fetchIsFavoriteCount:self.context] == 0)) {
         [self showAllColors];
     } else {
         [self loadData];
@@ -923,7 +934,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
             NSString *refAndMix  = @"Refs/Mixes";
             NSString *refListing = @"References";
             NSString *genListing = @"Generics";
-            NSString *favListing = @"Favorites";
+            NSString *favListing = @"My Favorites";
             
             NSString *colorsFilter;
             if (_showRefOnly == TRUE) {

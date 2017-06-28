@@ -1106,7 +1106,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     
     if (_dbRestoreFlag == TRUE) {
         _dbRestoreLabel = [self createWidgetLabel:_dbRestoreOnText];
-        UIAlertController *restoreAlert = [AlertUtils createOkAlert:@"Database Restore Alert" message:@"Caution: You will lose any data added if you revert to the original snapshot (changes will take effect after turning off/on the phone)"];
+        UIAlertController *restoreAlert = [AlertUtils createOkAlert:@"Database Restore Alert" message:@"Caution: You will lose any data/favorites added if you revert to the original snapshot (changes will take effect after turning off/on the phone)"];
         [self presentViewController:restoreAlert animated:YES completion:nil];
         
     } else {
@@ -1313,6 +1313,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
             //[_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
             [_userDefaults setBool:_alertsShow forKey:MATCH_INTERACT_KEY];
+            [_userDefaults setBool:_alertsShow forKey:DETAIL_INTERACT_KEY];
             [_userDefaults setBool:_alertsShow forKey:TAP_NOTE_KEY];
             
             // List type

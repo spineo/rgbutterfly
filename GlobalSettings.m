@@ -368,14 +368,16 @@ NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
 NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
 //NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
 NSString * const MATCH_INTERACT_KEY  = @"MatchInteractAlert";
+NSString * const DETAIL_INTERACT_KEY = @"DetailInteractAlert";
 NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Alerts Instructions
 //
 NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, tap on either the 'Match Colors' or 'Explore Colors' titles.";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it). Tap on any generated  row to view the details.";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it). Tap on any generated row to view the details.";
 //NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
 NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables circling between match methods).";
+NSString * const DETAIL_INSTRUCTIONS = @"This view allows you to customize. Tap 'Add to Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics or add comments.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
@@ -670,6 +672,10 @@ static NSDictionary *swatchTypes;
 
     if ([userDefaults objectForKey:MATCH_INTERACT_KEY] == nil) {
         [userDefaults setBool:TRUE forKey:MATCH_INTERACT_KEY];
+    }
+    
+    if ([userDefaults objectForKey:DETAIL_INTERACT_KEY] == nil) {
+        [userDefaults setBool:TRUE forKey:DETAIL_INTERACT_KEY];
     }
 
 //    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
