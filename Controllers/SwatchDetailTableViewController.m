@@ -1595,10 +1595,10 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     } else if ([[_swatchTypeName text] isEqualToString:@"GenericPaint"]) {
         modTitle = @"Generic Paint";
     } else {
-        modTitle = [GenericUtils trimString:[_swatchTypeName text]];
+        modTitle = [_swatchTypeName text];
     }
     
-    NSString *title = [[NSString alloc] initWithFormat:@" %@ Detail", modTitle];
+    NSString *title = [GenericUtils trimString:[[NSString alloc] initWithFormat:@" %@ Detail", modTitle]];
     
     // Compute the max available size for the Nav bar title
     //
@@ -1618,23 +1618,29 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     
     UILabel *titleLabel = [FieldUtils createLabel:title];
     [titleLabel setAttributedText:attrTitle];
-    
     [titleLabel sizeToFit];
-    [titleLabel setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth, titleLabel.bounds.size.height)];
-    
-    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    //[titleLabel setTextAlignment:NSTextAlignmentCenter];
     [titleLabel setBackgroundColor:CLEAR_COLOR];
     
     UIImageView *starImageView;
     CGFloat starImageViewWidth = DEF_NIL_WIDTH;
     
+    CGFloat xOffset = ((navBarAvailTitleWidth - titleLabel.bounds.size.width) / DEF_X_OFFSET_DIVIDER) - DEF_VLG_FIELD_PADDING;
+    
     if (_isFavorite == TRUE) {
+
         starImageViewWidth = titleLabel.bounds.size.height;
         starImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"star-icon-1.png"]];
-        [starImageView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, starImageViewWidth, starImageViewWidth)];
+        
+        xOffset = xOffset - ((starImageViewWidth + DEF_FIELD_PADDING) / DEF_X_OFFSET_DIVIDER);
+        
+        [starImageView setFrame:CGRectMake(xOffset, DEF_Y_OFFSET, starImageViewWidth, starImageViewWidth)];
+        
+        xOffset = xOffset + starImageViewWidth + DEF_FIELD_PADDING;
     }
+    [titleLabel setFrame:CGRectMake(xOffset, DEF_Y_OFFSET, navBarAvailTitleWidth - xOffset, titleLabel.bounds.size.height)];
     
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth - starImageViewWidth, titleLabel.bounds.size.height)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth, titleLabel.bounds.size.height)];
     [titleView addSubview:starImageView];
     [titleView addSubview:titleLabel];
     self.navigationItem.titleView = titleView;
