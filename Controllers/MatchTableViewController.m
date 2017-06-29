@@ -83,6 +83,10 @@ const int ALG_TAG    = 2;
 const int TYPE_TAG   = 4;
 const int IMAGE_TAG  = 6;
 
+// Button index
+//
+const int MATCH_BTN_INDEX = 3;
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization/Cleanup Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +176,7 @@ const int IMAGE_TAG  = 6;
     // For initial release, this button is visible but disabled
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.editButtonItem setTintColor:DEF_TEXT_COLOR];
+    [self.editButtonItem setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
     [self.editButtonItem setEnabled:FALSE];
     
     
@@ -211,6 +215,11 @@ const int IMAGE_TAG  = 6;
         
         [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:MATCH_INTERACT_KEY];
     }
+    
+    // Set the Areas/Match button properties
+    //
+    UIBarButtonItem *matchButton = [self.toolbarItems objectAtIndex:MATCH_BTN_INDEX];
+    [matchButton setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

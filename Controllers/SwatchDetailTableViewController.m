@@ -90,7 +90,6 @@
 
 int NUM_TABLEVIEW_ROWS = 0;
 
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Implementation
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,6 +115,11 @@ int DETAIL_ASSOC_SECTION    = 11;
 const int DETAIL_MAX_SECTION      = 12;
 
 NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
+
+// Add to Favorites button
+//
+const int BOOKMARK_BTN_INDEX = 0;
+const int FAVORITE_BTN_INDEX = 1;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -201,8 +205,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Is Favorite Button
     //
     _isFavorite = [[_paintSwatch is_favorite] boolValue];
-    _isFavoriteButton = [self.toolbarItems objectAtIndex:0];
-    _isFavoriteTextButton = [self.toolbarItems objectAtIndex:1];
+    _isFavoriteButton = [self.toolbarItems objectAtIndex:BOOKMARK_BTN_INDEX];
+    _isFavoriteTextButton = [self.toolbarItems objectAtIndex:FAVORITE_BTN_INDEX];
     [_isFavoriteTextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
             DEF_MD_ITALIC_FONT, NSFontAttributeName,
             DEF_TEXT_COLOR, NSForegroundColorAttributeName,
@@ -342,7 +346,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Edit Mode Button
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor:DEF_TEXT_COLOR];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
 
     // All Features?
     //

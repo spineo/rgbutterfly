@@ -614,6 +614,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     if (ALL_FEATURES == 0)
         [BarButtonUtils setButtonEnabled:self.toolbarItems refTag:MATCH_BTN_TAG isEnabled:FALSE];
+    
+    // Set the 'Edit' button appearance
+    //
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
 };
 
 - (void)viewWillAppear:(BOOL)willAppear {

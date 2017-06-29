@@ -317,7 +317,7 @@ const int ASSOC_SET_TAG        = 8;
     
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor:DEF_TEXT_COLOR];
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
     
     // All Features?
     //

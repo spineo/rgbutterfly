@@ -691,6 +691,11 @@ const int SETTINGS_MAX_SECTIONS   = 9;
     _listTypeNames = [ManagedObjectUtils fetchDictNames:@"ListingType" context:self.context];
 
     _listTypesPicker = [self createPicker:LIST_TYPE_PICKER_TAG selectRow:_typesPickerSelRow action:@selector(listTypesSelection) textField:_listTypeName];
+    
+
+    // Save button appearance
+    //
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes: @{NSForegroundColorAttributeName:DEF_TEXT_COLOR, NSFontAttributeName:DEF_MD_ITALIC_FONT} forState:UIControlStateNormal];
 
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
