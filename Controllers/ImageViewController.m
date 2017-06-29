@@ -360,7 +360,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Match Edit Button Alert Controller
     //
-    _matchEditAlertController = [UIAlertController alertControllerWithTitle:@"My Match  Edit"
+    _matchEditAlertController = [UIAlertController alertControllerWithTitle:@"My Match Edit"
                                                              message:@"Please Select Operation Below"
                                                       preferredStyle:UIAlertControllerStyleAlert];
     

@@ -177,7 +177,7 @@
     if ([_userDefaults objectForKey:APP_INTRO_KEY] == nil || appIntroAlert == TRUE) {
        UIAlertController *alert = [AlertUtils createOkAlert:@"Welcome to RGButterfly" message:APP_INTRO_INSTRUCTIONS];
        [self presentViewController:alert animated:YES completion:nil];
-    
+
        [_userDefaults setBool:FALSE forKey:APP_INTRO_KEY];
     }
     
@@ -213,12 +213,12 @@
                                         
                                         UIAlertController *alert = [AlertUtils createBlankAlert:@"Restore Status" message:errStr];
                                         UIAlertAction* ok = [UIAlertAction
-                                                             actionWithTitle:@"OK"
-                                                             style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * action) {
-                                                                 [_updateLabel setText:SPINNER_LABEL_LOAD];
+                                            actionWithTitle:@"OK"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action) {
+                                                [_updateLabel setText:SPINNER_LABEL_LOAD];
                                                                  [self continue];
-                                                             }];
+                                                }];
                                         [alert addAction:ok];
                                         
                                         [self presentViewController:alert animated:YES completion:nil];

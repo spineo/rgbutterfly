@@ -1550,7 +1550,7 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 
     // About Segue
     //
-    if ([[segue identifier] isEqualToString:@"AboutSegue"]) {
+    if ([[segue identifier] isEqualToString:@"unwindToInitViewController"]) {
         
         //AboutViewController *aboutViewController = (AboutViewController *)([navigationViewController viewControllers][0]);
         
@@ -1571,21 +1571,25 @@ const int SETTINGS_MAX_SECTIONS   = 9;
 // goHome (home button)
 //
 - (IBAction)goBack:(id)sender {
-    [self exitAction];
+    [self exitAction:nil];
 }
 
 - (IBAction)goHome:(id)sender {
-    [self exitAction];
+    [self exitAction:@"unwindToInitViewController"];
 }
 
 // Check if a save is needed
 //
-- (void)exitAction {
+- (void)exitAction:(NSString *)segueIdentifier {
     if (_editFlag == TRUE) {
         [self presentViewController:_noSaveAlert animated:YES completion:nil];
         
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (segueIdentifier != nil) {
+            [self performSegueWithIdentifier:segueIdentifier sender:self];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
 }
 

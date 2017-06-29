@@ -374,10 +374,10 @@ NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 // Alerts Instructions
 //
 NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, tap on either the 'Match Colors' or 'Explore Colors' titles.";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match (tap on that same area to remove it). Tap on any generated row to view the details.";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match association (tap on that same area to remove it). Tap on any of the bottom  rows to view the details.";
 //NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
-NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables circling between match methods).";
-NSString * const DETAIL_INSTRUCTIONS = @"This view allows you to customize. Tap 'Add to Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics or add comments.";
+NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables changing matching method).";
+NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add to Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization

@@ -357,8 +357,9 @@ const int IMAGE_TAG  = 6;
         headerStr = _descHeader;
         
     } else if (section == MATCH_SECTION) {
-        int match_ct = (int)[_matchedSwatches count] - 1;
-        headerStr = [[NSString alloc] initWithFormat:@"%@ (Method: %@, Count: %i)", _matchesHeader, [_matchAlgorithms objectAtIndex:_matchAlgIndex], match_ct];
+        //int match_ct = (int)[_matchedSwatches count] - 1;
+        //headerStr = [[NSString alloc] initWithFormat:@"Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
+        //[self setNavTitle:headerStr];
 
         if (_scrollFlag == FALSE) {
             UIImage *refImage;
@@ -777,7 +778,7 @@ const int IMAGE_TAG  = 6;
 #pragma mark - BarButton Methods
 
 - (IBAction)decr:(id)sender {
-    
+    NSString *titleStr;
     if (_editFlag == FALSE) {
 
         if (_currTapSection > 1) {
@@ -787,6 +788,8 @@ const int IMAGE_TAG  = 6;
             _currTapSection = _numTapSections;
         }
         [self renderTapAreaData];
+        
+        titleStr = [[NSString alloc] initWithFormat:@"Tap Area %i", _currTapSection];
     
     } else {
     
@@ -803,14 +806,19 @@ const int IMAGE_TAG  = 6;
         [self initTappedSwatches:(int)[_matchedSwatches count]];
         
         [_save setEnabled:TRUE];
+        
+        titleStr = [[NSString alloc] initWithFormat:@"Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
+        
     }
+    [self setNavTitle:titleStr];
     
     [self.tableView reloadData];
 }
 
 
 - (IBAction)incr:(id)sender {
-        
+    
+    NSString *titleStr;
     if (_editFlag == FALSE) {
 
         if (_currTapSection < _numTapSections) {
@@ -820,6 +828,8 @@ const int IMAGE_TAG  = 6;
             _currTapSection = 1;
         }
         [self renderTapAreaData];
+        
+        titleStr = [[NSString alloc] initWithFormat:@"Tap Area %i", _currTapSection];
         
     } else {
 
@@ -836,7 +846,10 @@ const int IMAGE_TAG  = 6;
         [self initTappedSwatches:(int)[_matchedSwatches count]];
         
         [_save setEnabled:TRUE];
+        
+        titleStr = [[NSString alloc] initWithFormat:@"Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
     }
+    [self setNavTitle:titleStr];
 
     [self.tableView reloadData];
 }
@@ -1005,13 +1018,18 @@ const int IMAGE_TAG  = 6;
 // _editFlag used for the toggle even though no editing takes place
 //
 - (IBAction)toggleAction:(id)sender {
+    NSString *titleStr;
     if ([_actionTitle isEqualToString:@"Areas"]) {
         [self matchButtonsShow];
         _editFlag = TRUE;
+        titleStr = [[NSString alloc] initWithFormat:@"Method: %@", [_matchAlgorithms objectAtIndex:_matchAlgIndex]];
+        [self setNavTitle:titleStr];
         
     } else {
         [self matchButtonsHide];
         _editFlag = FALSE;
+        titleStr = [[NSString alloc] initWithFormat:@"Tap Area %i", _currTapSection];
+        [self setNavTitle:titleStr];
     }
 }
 
@@ -1028,6 +1046,40 @@ const int IMAGE_TAG  = 6;
         [_tappedSwatches addObject:[NSNumber numberWithBool:FALSE]];
     }
 }
+
+- (void)setNavTitle:(NSString *)title {
+
+    // Compute the max available size for the Nav bar title
+    //
+    CGFloat mainViewWidth     = self.view.bounds.size.width;
+    
+    CGFloat assumedButtonWidth = DEF_SM_BUTTON_WIDTH;
+    
+    CGFloat buttonWidths  = assumedButtonWidth * DEF_X_OFFSET_DIVIDER;
+    CGFloat buttonOffsets = buttonWidths / DEF_X_OFFSET_DIVIDER;
+    
+    // Estimate the width with extra offset
+    //
+    CGFloat navBarAvailTitleWidth = mainViewWidth - (buttonWidths + buttonOffsets);
+    
+    NSMutableAttributedString *attrTitle = [[NSMutableAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:DEF_TEXT_COLOR,
+                                                                                                                NSFontAttributeName:DEF_MD_ITALIC_FONT}];
+    
+    UILabel *titleLabel = [FieldUtils createLabel:title];
+    [titleLabel setAttributedText:attrTitle];
+    [titleLabel sizeToFit];
+    //[titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setBackgroundColor:CLEAR_COLOR];
+    
+    CGFloat xOffset = ((navBarAvailTitleWidth - titleLabel.bounds.size.width) / DEF_X_OFFSET_DIVIDER) - DEF_VLG_FIELD_PADDING;
+
+    [titleLabel setFrame:CGRectMake(xOffset, DEF_Y_OFFSET, navBarAvailTitleWidth - xOffset, titleLabel.bounds.size.height)];
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, navBarAvailTitleWidth, titleLabel.bounds.size.height)];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+}
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Navigation/Save Methods
