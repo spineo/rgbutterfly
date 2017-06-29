@@ -317,7 +317,7 @@ const int ASSOC_SET_TAG        = 8;
     
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor:LIGHT_TEXT_COLOR];
+    [self.navigationItem.rightBarButtonItem setTintColor:DEF_TEXT_COLOR];
     
     // All Features?
     //

@@ -172,7 +172,7 @@ const int IMAGE_TAG  = 6;
     // For initial release, this button is visible but disabled
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.editButtonItem setTintColor:LIGHT_TEXT_COLOR];
+    [self.editButtonItem setTintColor:DEF_TEXT_COLOR];
     [self.editButtonItem setEnabled:FALSE];
     
     

@@ -342,7 +342,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
     // Edit Mode Button
     //
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem setTintColor: LIGHT_TEXT_COLOR];
+    [self.navigationItem.rightBarButtonItem setTintColor:DEF_TEXT_COLOR];
 
     // All Features?
     //
