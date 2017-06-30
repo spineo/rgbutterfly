@@ -54,7 +54,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.StuartPineo.RGButterfly" in the application's documents directory.
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.rgbutterfly.RGButterfly" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

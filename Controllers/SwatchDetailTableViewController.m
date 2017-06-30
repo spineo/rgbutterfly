@@ -407,9 +407,7 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
     // Change the default blue
     //
     //[_saveAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
-    
 
-    
     
     // Check if delete should be disabled (i.e., if PaintSwatch is referenced by any association)
     //
@@ -454,6 +452,8 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
     } else {
         _nameHeader = _defNameHeader;
     }
+    NUM_TABLEVIEW_ROWS   = (int)[_mixAssocSwatches count];
+
     [self.tableView reloadData];
 }
 
@@ -500,17 +500,7 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
 #pragma mark - TableView Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
-    // Show all sections (i.e., Individual Listing to Detail context)
-    //
-    if (NUM_TABLEVIEW_ROWS > 0) {
-        return DETAIL_MAX_SECTION;
-
-    // Skip the References and Assoc Listing (i.e., Assoc Listing to Detail context)
-    //
-    } else {
-        return DETAIL_MAX_SECTION - 2;
-    }
+    return DETAIL_MAX_SECTION;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -931,7 +921,6 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
         }
         [self performSegueWithIdentifier:@"DetailToRefSegue" sender:self];
     }
-    
 }
 
 // Only the field contents can be edited
