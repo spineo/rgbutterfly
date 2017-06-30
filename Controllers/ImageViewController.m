@@ -331,8 +331,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Clear taps Alert Controller
     //
-    _deleteTapsAlertController = [UIAlertController alertControllerWithTitle:@"Delete Tapped Areas"
-                                                                     message:@"Are you sure you want to delete this association?"
+    _deleteTapsAlertController = [UIAlertController alertControllerWithTitle:@"Delete My Matches"
+                                                                     message:@"Are you sure that you want to delete this association?"
                                                               preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *deleteTapsAlertController_ = _deleteTapsAlertController;
     
@@ -400,7 +400,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Change the default blue
     //
-    [_matchEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    //[_matchEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
     
     [_matchSave setEnabled:FALSE];
     
@@ -408,7 +408,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Match Update Edit button Alert Controller
     //
     _updateAlertController = [UIAlertController alertControllerWithTitle:@"My Match"
-                                                      message:@"Enter/Update Match Name, Keyword(s), and/or Comments:"
+                                                      message:@"Enter/Update Match Name, Topic(s), and/or Comments:"
                                                preferredStyle:UIAlertControllerStyleAlert];
     __weak UIAlertController *updateAlertController_ = _updateAlertController;
     
@@ -491,7 +491,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Change the default blue
     //
-    [_assocEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    //[_assocEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
     
     [_assocSave setEnabled:FALSE];
 

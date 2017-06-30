@@ -406,7 +406,7 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
     
     // Change the default blue
     //
-    [_saveAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    //[_saveAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
     
 
     

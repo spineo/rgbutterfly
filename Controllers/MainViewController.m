@@ -244,7 +244,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
     // Change the default blue
     //
-    [_colorsFilterController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    //[_colorsFilterController.view setTintColor:DEF_ALERT_TEXT_COLOR];
 
 
     // Listing Controller
