@@ -60,7 +60,7 @@
                         <barButtonItem tag="62" image="home" id="oxW-w8-0ZM">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="goBack:" destination="BYZ-38-t0r" id="cUV-Do-I8l"/>
+                                <segue destination="Vrh-mA-QE7" kind="unwind" unwindAction="unwindToInitViewController:" id="I59-qT-3VT"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
@@ -90,6 +90,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="Vrh-mA-QE7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2148" y="-978.26086956521749"/>
         </scene>
@@ -577,12 +578,6 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem tag="105" systemItem="bookmarks" id="9wk-qA-8fI">
-                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <connections>
-                                <action selector="addFavorite:" destination="DNO-fJ-sUQ" id="AAr-26-MJe"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem tag="105" title="Add to Favorites" id="I37-RA-ZZk">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -590,6 +585,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="eWu-3v-vbH"/>
+                        <barButtonItem tag="106" title="My Favorites" id="2ib-wc-3fX">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="myFavorites:" destination="DNO-fJ-sUQ" id="nog-gL-ozn"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Color Detail" id="nY0-n4-QGf">
                         <barButtonItem key="leftBarButtonItem" tag="56" image="arrow" id="hSo-RR-cfi">
@@ -605,6 +606,7 @@
                         <segue destination="tpP-IS-lqc" kind="presentation" identifier="DetailToAssocSegue" id="Stq-UR-tQY"/>
                         <segue destination="LVy-Pe-LHL" kind="presentation" identifier="DetailToRefSegue" id="KOJ-iO-fdK"/>
                         <segue destination="Fjs-SV-2Bh" kind="presentation" identifier="ColorViewSegue" id="dCQ-vP-Vi0"/>
+                        <segue destination="3gJ-jJ-xoT" kind="presentation" identifier="DetailToFavoritesSegue" id="mRe-f7-5yG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HR0-As-h4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1279,11 +1281,12 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZPZ-Du-pkL"/>
+        <segue reference="mRe-f7-5yG"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="9H9-9R-KDD"/>
         <segue reference="7bF-uJ-b3u"/>
-        <segue reference="Szt-18-Btg"/>
+        <segue reference="hK8-5n-amq"/>
         <segue reference="dfY-1M-v1H"/>
-        <segue reference="Stq-UR-tQY"/>
-        <segue reference="KOJ-iO-fdK"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

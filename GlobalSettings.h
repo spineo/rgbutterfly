@@ -267,7 +267,8 @@ extern int const COVERAGE_FIELD_TAG;
 extern int const COVERAGE_PICKER_TAG;
 extern int const FLEXIBLE_SPACE_TAG;
 extern int const FIXED_SPACE_TAG;
-extern int const FAVORITES_TAG;
+extern int const FAVORITES_BTN_TAG;
+extern int const MY_FAVORITES_TAG;
 
 // Views Tags
 //

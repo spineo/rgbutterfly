@@ -17,6 +17,7 @@
 #import "GenericUtils.h"
 #import "AlertUtils.h"
 #import "PickerUtils.h"
+#import "MainViewController.h"
 
 #import "MixAssociation.h"
 #import "MixAssocSwatch.h"
@@ -40,7 +41,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) UIBarButtonItem *isFavoriteButton, *isFavoriteTextButton;
+@property (nonatomic, strong) UIBarButtonItem *isFavoriteTextButton, *myFavoriteTextButton;
 
 @property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName, *isFavoriteText;
 
@@ -118,8 +119,8 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 
 // Add to Favorites button
 //
-const int BOOKMARK_BTN_INDEX = 0;
-const int FAVORITE_BTN_INDEX = 1;
+const int ADD_FAVORITE_BTN_INDEX = 0;
+const int MY_FAVORITE_BTN_INDEX  = 2;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -205,12 +206,21 @@ const int FAVORITE_BTN_INDEX = 1;
     // Is Favorite Button
     //
     _isFavorite = [[_paintSwatch is_favorite] boolValue];
-    _isFavoriteButton = [self.toolbarItems objectAtIndex:BOOKMARK_BTN_INDEX];
-    _isFavoriteTextButton = [self.toolbarItems objectAtIndex:FAVORITE_BTN_INDEX];
+    _isFavoriteTextButton = [self.toolbarItems objectAtIndex:ADD_FAVORITE_BTN_INDEX];
     [_isFavoriteTextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
             DEF_MD_ITALIC_FONT, NSFontAttributeName,
             DEF_TEXT_COLOR, NSForegroundColorAttributeName,
             nil] forState:UIControlStateNormal];
+    
+    _myFavoriteTextButton = [self.toolbarItems objectAtIndex:MY_FAVORITE_BTN_INDEX];
+    [_myFavoriteTextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   DEF_MD_ITALIC_FONT, NSFontAttributeName,
+                                                   DEF_TEXT_COLOR, NSForegroundColorAttributeName,
+                                                   nil] forState:UIControlStateNormal];
+    
+    
+    //[_myFavoriteTextButton setWidth:HIDE_BUTTON_WIDTH];
+    
     [self setIsFavoriteText];
 
     
@@ -933,13 +943,11 @@ const int FAVORITE_BTN_INDEX = 1;
     
     if (_editFlag == FALSE) {
         [self makeTextFieldsNonEditable];
-        [_isFavoriteButton setEnabled:FALSE];
         if (([_save isEnabled] == TRUE) || ([_delete isEnabled] == TRUE)) {
             [self presentViewController:_saveAlertController animated:YES completion:nil];
         }
     } else {
         [self makeTextFieldsEditable];
-        [_isFavoriteButton setEnabled:TRUE];
     }
     
     [self.tableView reloadData];
@@ -1422,10 +1430,16 @@ const int FAVORITE_BTN_INDEX = 1;
         _nameHeader = _defNameHeader;
         [_userDefaults setBool:FALSE forKey:TAP_NOTE_KEY];
 
-    } else {
+    } else if ([[segue identifier] isEqualToString:@"DetailToRefSegue"]) {
         SwatchDetailTableViewController *swatchDetailTableViewController = (SwatchDetailTableViewController *)([navigationViewController viewControllers][0]);
         
         [swatchDetailTableViewController setPaintSwatch:_selPaintSwatch];
+        
+    } else if ([[segue identifier] isEqualToString:@"DetailToFavoritesSegue"]) {
+        UINavigationController *navigationViewController = [segue destinationViewController];
+        MainViewController *mainViewController = (MainViewController *)([navigationViewController viewControllers][0]);
+        [mainViewController setListingType:FULL_LISTING_TYPE];
+        [mainViewController setIsLandscape:FALSE];
     }
 }
 
@@ -1601,6 +1615,18 @@ const int FAVORITE_BTN_INDEX = 1;
         [_isFavoriteTextButton setTitle:@"Add to Favorites"];
     }
     [self setNavTitle];
+}
+
+// Go to My Favorites
+//
+- (IBAction)myFavorites:(id)sender {
+    if ((_isFavorite == TRUE) || ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)) {
+        [self performSegueWithIdentifier:@"DetailToFavoritesSegue" sender:self];
+    } else {
+        UIAlertController *alert = [AlertUtils createOkAlert:@"My Favorites Empty!" message:@"You currently don't have any favorites saved"];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+
 }
 
 - (void)setNavTitle {
