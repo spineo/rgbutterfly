@@ -397,6 +397,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_matchEditAlertController addAction:_matchSave];
     [_matchEditAlertController addAction:matchDelete];
     [_matchEditAlertController addAction:matchCancel];
+
+    // Change the default blue
+    //
+    [_matchEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
     
     [_matchSave setEnabled:FALSE];
     
@@ -484,6 +488,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [_assocEditAlertController addAction:_assocSave];
     [_assocEditAlertController addAction:assocDelete];
     [_assocEditAlertController addAction:assocCancel];
+    
+    // Change the default blue
+    //
+    [_assocEditAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
     
     [_assocSave setEnabled:FALSE];
 

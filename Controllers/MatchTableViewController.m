@@ -182,7 +182,7 @@ const int MATCH_BTN_INDEX = 3;
     
     // Match Edit Button Alert Controller
     //
-    _saveAlertController = [UIAlertController alertControllerWithTitle:@"Match Association Edit"
+    _saveAlertController = [UIAlertController alertControllerWithTitle:@"My Match Edit"
                                                                message:@"Please select operation"
                                                         preferredStyle:UIAlertControllerStyleAlert];
     

@@ -201,7 +201,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     _colorsFilterController = [UIAlertController alertControllerWithTitle:@"Colors Filter"
-        message:@"Please select a colors display filter"
+        message:@"Please select from options below"
         preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *favorites  = [UIAlertAction actionWithTitle:@"My Favorites" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -240,8 +240,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [_colorsFilterController addAction:genOnly];
     
     [_colorsFilterController addAction:colorsAlertCancel];
-
     
+
+    // Change the default blue
+    //
+    [_colorsFilterController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+
+
     // Listing Controller
     //
     _listingController = [UIAlertController alertControllerWithTitle:@"View Listing Types"

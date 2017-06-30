@@ -541,6 +541,13 @@ extern float const DEF_BORDER_THRESHOLD;
 #define DEF_BG_COLOR      [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
 #define DEF_TEXT_COLOR    [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:156.0/255.0 alpha:1.0]
 #define DEF_LIGHT_TEXT_COLOR [UIColor colorWithRed:255.0/255.0 green:250.0/255.0 blue:218.0/255.0 alpha:1.0]
+
+// Official blue first
+//
+#define DEF_ALERT_TEXT_COLOR [UIColor colorWithRed:35.0/255.0 green:126.0/255.0 blue:246.0/255.0 alpha:1.0]
+//#define DEF_ALERT_TEXT_COLOR [UIColor colorWithRed:35.0/255.0 green:63.0/255.0 blue:106.0/255.0 alpha:1.0]
+//#define DEF_ALERT_TEXT_COLOR [UIColor colorWithRed:37.0/255.0 green:78.0/255.0 blue:124.0/255.0 alpha:1.0]
+
 #define DEF_DARK_COLOR    [UIColor blackColor]
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

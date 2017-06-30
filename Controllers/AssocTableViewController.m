@@ -267,7 +267,11 @@ const int ASSOC_SET_TAG        = 8;
     [_saveAlertController addAction:_save];
     [_saveAlertController addAction:_delete];
     [_saveAlertController addAction:discard];
-   
+    
+    // Change the default blue
+    //
+    [_saveAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    
     
     // Set the Association type, Canvas coverage and Apply renaming button
     //

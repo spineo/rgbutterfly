@@ -404,6 +404,12 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
     
     [_saveAlertController addAction:discard];
     
+    // Change the default blue
+    //
+    [_saveAlertController.view setTintColor:DEF_ALERT_TEXT_COLOR];
+    
+
+    
     
     // Check if delete should be disabled (i.e., if PaintSwatch is referenced by any association)
     //
