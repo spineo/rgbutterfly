@@ -120,7 +120,7 @@ NSString *DETAIL_REUSE_CELL_IDENTIFIER = @"SwatchDetailCell";
 // Add to Favorites button
 //
 const int ADD_FAVORITE_BTN_INDEX = 0;
-const int MY_FAVORITE_BTN_INDEX  = 2;
+const int MY_FAVORITE_BTN_INDEX  = 3;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -1602,12 +1602,12 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
 
 - (void)setIsFavoriteText {
     if (_isFavorite == TRUE) {
-        [_isFavoriteTextButton setTitle:@"Remove from Favorites"];
+        [_isFavoriteTextButton setTitle:@"Remove Favorite"];
     } else {
         // Explicitly set in case nil
         //
         _isFavorite = FALSE;
-        [_isFavoriteTextButton setTitle:@"Add to Favorites"];
+        [_isFavoriteTextButton setTitle:@"Add Favorite"];
     }
     [self setNavTitle];
 }
@@ -1623,6 +1623,13 @@ const int MY_FAVORITE_BTN_INDEX  = 2;
     }
 
 }
+
+- (IBAction)help:(id)sender {
+    UIAlertController *alert = [AlertUtils createOkAlert:@"Customize Here!" message:DETAIL_INSTRUCTIONS];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 - (void)setNavTitle {
     NSString *modTitle;

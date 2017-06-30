@@ -195,6 +195,9 @@
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem tag="107" title=" ?" id="Cwc-Eu-neK">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
                         <barButtonItem tag="58" image="settings" id="Ok2-x2-peI">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -218,7 +221,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageScrollView" destination="yk1-Ym-ytt" id="k9H-pf-Nzf"/>
                         <outlet property="imageTableView" destination="ivh-h6-Oc5" id="OCR-Ho-kIU"/>
@@ -578,14 +581,20 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem tag="105" title="Add to Favorites" id="I37-RA-ZZk">
+                        <barButtonItem tag="105" title="Add Favorite" id="I37-RA-ZZk">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="addFavorite:" destination="DNO-fJ-sUQ" id="zFt-dF-rVV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="eWu-3v-vbH"/>
-                        <barButtonItem tag="106" title="My Favorites" id="2ib-wc-3fX">
+                        <barButtonItem tag="107" title=" ?" id="ykD-bx-Sfv">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="help:" destination="DNO-fJ-sUQ" id="eBe-jD-U1l"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem tag="106" image="StarAlt" id="2ib-wc-3fX">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="myFavorites:" destination="DNO-fJ-sUQ" id="nog-gL-ozn"/>
@@ -879,7 +888,7 @@
                                 <rect key="frame" x="147" y="439" width="80" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
-                                    <fragment content="Related Collections">
+                                    <fragment content="Mixes &amp; Collections">
                                         <attributes>
                                             <color key="NSColor" red="0.99478161330000003" green="0.95182326439999998" blue="0.70800691459999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <font key="NSFont" size="20" name="Baskerville-Italic"/>
@@ -1259,6 +1268,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="StarAlt" width="20" height="20"/>
         <image name="arrow" width="30" height="30"/>
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
@@ -1282,11 +1292,11 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="mRe-f7-5yG"/>
-        <segue reference="aqc-zq-dwj"/>
-        <segue reference="9H9-9R-KDD"/>
-        <segue reference="7bF-uJ-b3u"/>
-        <segue reference="hK8-5n-amq"/>
-        <segue reference="dfY-1M-v1H"/>
+        <segue reference="cln-aA-aih"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="Szt-18-Btg"/>
+        <segue reference="clT-9D-BBI"/>
+        <segue reference="TM9-cr-8aw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

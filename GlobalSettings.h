@@ -269,6 +269,7 @@ extern int const FLEXIBLE_SPACE_TAG;
 extern int const FIXED_SPACE_TAG;
 extern int const FAVORITES_BTN_TAG;
 extern int const MY_FAVORITES_TAG;
+extern int const HELP_BTN_TAG;
 
 // Views Tags
 //

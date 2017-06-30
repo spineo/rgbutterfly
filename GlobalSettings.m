@@ -262,6 +262,7 @@ int const FLEXIBLE_SPACE_TAG   = 103;
 int const FIXED_SPACE_TAG      = 104;
 int const FAVORITES_BTN_TAG    = 105;
 int const MY_FAVORITES_TAG     = 106;
+int const HELP_BTN_TAG         = 107;
 
 // Views Tags
 //
