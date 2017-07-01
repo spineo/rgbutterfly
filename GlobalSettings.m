@@ -366,20 +366,13 @@ NSString * const SPINNER_LABEL_LOAD  = @"Loading the View...";
 // Alerts related
 //
 NSString * const ALERTS_FILTER_KEY   = @"AlertsFilter";
-NSString * const APP_INTRO_KEY       = @"AppIntroAlert";
-NSString * const IMAGE_INTERACT_KEY  = @"ImageInteractAlert";
-//NSString * const TAP_COLLECT_KEY     = @"TapCollectAlert";
-NSString * const MATCH_INTERACT_KEY  = @"MatchInteractAlert";
-NSString * const DETAIL_INTERACT_KEY = @"DetailInteractAlert";
 NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Alerts Instructions
 //
-NSString * const APP_INTRO_INSTRUCTIONS = @"To get started, tap on either the 'Match Colors' or 'Explore Colors' titles.";
 NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match association (tap on that same area to remove it). Tap on any of the bottom  rows to view the details.";
-//NSString * const TAP_COLLECT_INSTRUCTIONS = @"Tap on the first element of any row to switch between RGB coloring and image thumbnails. Tap on any other row element to view the detailed association.";
 NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables changing matching method).";
-NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add to Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group.";
+NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
@@ -477,7 +470,7 @@ NSString * const STAR_ICON_NAME         = @"star-icon.png";
 
 // "About" section text (NSMutableAttributedString use for rich text)
 //
-NSString * const ABOUT_TEXT = @"\nThe main purpose of this App is to suggest matching paint colors for areas of a photo. Please visit the RGButterfly website for more information about this App.\n\nTo get started, click on either the Match Colors or Explore Colors titles on the main view.\n\n";
+NSString * const ABOUT_TEXT = @"\nThe main purpose of this App is to suggest matching paint colors for areas of a photo. Please visit the RGButterfly website for more information about this App.\n\nTo get started, click on either the Match Colors or Explore Colors titles on the main view.\n\nOn most views, a help button (bottom-right question icon) can be tapped to obtain usage tips.\n\n";
 
 NSString * const ABOUT_RELEASE_FEATURES = @"Note: This initial release comes with a number of features and much of the editing functionality disabled. This was done to hopefully make the App a tad more user friendly!\n\n";
 
@@ -663,26 +656,6 @@ static NSDictionary *swatchTypes;
     if ([userDefaults objectForKey:ALERTS_FILTER_KEY] == nil) {
         [userDefaults setBool:FALSE forKey:ALERTS_FILTER_KEY];
     }
-    
-    if ([userDefaults objectForKey:APP_INTRO_KEY] == nil) {
-        [userDefaults setBool:TRUE forKey:APP_INTRO_KEY];
-    }
-
-    if ([userDefaults objectForKey:IMAGE_INTERACT_KEY] == nil) {
-        [userDefaults setBool:TRUE forKey:IMAGE_INTERACT_KEY];
-    }
-
-    if ([userDefaults objectForKey:MATCH_INTERACT_KEY] == nil) {
-        [userDefaults setBool:TRUE forKey:MATCH_INTERACT_KEY];
-    }
-    
-    if ([userDefaults objectForKey:DETAIL_INTERACT_KEY] == nil) {
-        [userDefaults setBool:TRUE forKey:DETAIL_INTERACT_KEY];
-    }
-
-//    if ([userDefaults objectForKey:TAP_COLLECT_KEY] == nil) {
-//        [userDefaults setBool:TRUE forKey:TAP_COLLECT_KEY];
-//    }
     
     if ([userDefaults objectForKey:LISTING_TYPE] == nil) {
         [userDefaults setValue:MATCH_LIST_TYPE forKey:LISTING_TYPE];

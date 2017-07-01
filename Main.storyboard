@@ -195,8 +195,11 @@
                                 <action selector="addTableRows:" destination="6Nq-8K-N9m" id="oRw-rC-P7d"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="107" title=" ?" id="Cwc-Eu-neK">
+                        <barButtonItem tag="107" image="Help-25" id="Cwc-Eu-neK">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="help:" destination="6Nq-8K-N9m" id="Bv4-eQ-8Vf"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem tag="58" image="settings" id="Ok2-x2-peI">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -453,7 +456,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQG-fE-O9E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5170.3999999999996" y="1121.2893553223389"/>
+            <point key="canvasLocation" x="4703" y="855"/>
         </scene>
         <!--Match View-->
         <scene sceneID="IfU-Gf-ydV">
@@ -490,10 +493,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem tag="55" image="rgb" id="9d3-xP-5s1">
+                        <barButtonItem tag="62" image="home" id="9d3-xP-5s1">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="toggleRGB:" destination="kOh-IX-qcO" id="hZf-Hg-p0f"/>
+                                <segue destination="5mr-LJ-zgd" kind="unwind" unwindAction="unwindToInitViewController:" id="rlw-3j-73B"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="XTe-OD-4gI"/>
@@ -516,17 +520,17 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" style="plain" systemItem="flexibleSpace" id="bnl-v2-ffu"/>
-                        <barButtonItem tag="74" enabled="NO" image="minus sign" id="aDY-YU-la5">
+                        <barButtonItem tag="104" width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
+                        <barButtonItem tag="107" image="Help-25" id="ogB-kk-hlw">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="removeTableRows:" destination="kOh-IX-qcO" id="ekt-bm-B6c"/>
+                                <action selector="help:" destination="kOh-IX-qcO" id="Ad8-MA-qji"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="104" width="5" systemItem="fixedSpace" id="hh7-mD-umd"/>
-                        <barButtonItem tag="75" enabled="NO" image="plus sign-1" id="n1H-dj-YSh">
+                        <barButtonItem tag="58" image="settings" id="zGY-Q6-0uX">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="addTableRows:" destination="kOh-IX-qcO" id="E07-uw-3Cd"/>
+                                <segue destination="z8z-Q4-bZ9" kind="presentation" id="Hgd-pl-TnP"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -588,13 +592,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="eWu-3v-vbH"/>
-                        <barButtonItem tag="107" title=" ?" id="ykD-bx-Sfv">
+                        <barButtonItem tag="107" image="Help-25" id="ykD-bx-Sfv">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="help:" destination="DNO-fJ-sUQ" id="eBe-jD-U1l"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem tag="106" image="StarAlt" id="2ib-wc-3fX">
+                        <barButtonItem tag="106" image="Star-25" id="2ib-wc-3fX">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="myFavorites:" destination="DNO-fJ-sUQ" id="nog-gL-ozn"/>
@@ -1268,7 +1272,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="StarAlt" width="20" height="20"/>
+        <image name="Help-25" width="25" height="25"/>
+        <image name="Star-25" width="25" height="25"/>
         <image name="arrow" width="30" height="30"/>
         <image name="arrow fat left" width="30" height="30"/>
         <image name="arrow fat right" width="30" height="30"/>
@@ -1283,7 +1288,6 @@
         <image name="minus sign" width="20" height="20"/>
         <image name="plus sign-1" width="20" height="20"/>
         <image name="question-2-init" width="32" height="32"/>
-        <image name="rgb" width="30" height="30"/>
         <image name="search" width="32" height="32"/>
         <image name="settings" width="25" height="25"/>
         <image name="settings-2-init" width="32" height="32"/>
@@ -1295,6 +1299,7 @@
         <segue reference="cln-aA-aih"/>
         <segue reference="Omc-kQ-4iW"/>
         <segue reference="Szt-18-Btg"/>
+        <segue reference="Hgd-pl-TnP"/>
         <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
     </inferredMetricsTieBreakers>

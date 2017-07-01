@@ -202,19 +202,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
     [_userDefaults setInteger:_maxMatchNum forKey:MATCH_NUM_KEY];
     [_userDefaults synchronize];
-    
-    // Alerts
-    //
-    // Image Interaction
-    //
-    BOOL imageInteractAlert = [_userDefaults boolForKey:IMAGE_INTERACT_KEY];
-    if (imageInteractAlert == TRUE && _newImage == TRUE) {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"What's Next?" message:INTERACT_INSTRUCTIONS];
-    
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        [_userDefaults setBool:FALSE forKey:IMAGE_INTERACT_KEY];
-    }
+
 
     _defTableViewSize    = _imageTableView.bounds.size;
     
@@ -2531,6 +2519,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self drawTapAreas];
     [self refreshViews];
 }
+
+- (IBAction)help:(id)sender {
+    UIAlertController *alert = [AlertUtils createInfoAlert:@"Usage Tips:" message:INTERACT_INSTRUCTIONS];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 
 - (IBAction)goBack:(id)sender {
     [self.context rollback];

@@ -372,17 +372,10 @@ extern NSString * const SPINNER_LABEL_LOAD;
 // Alerts related
 //
 extern NSString * const ALERTS_FILTER_KEY;
-extern NSString * const APP_INTRO_KEY;
-extern NSString * const IMAGE_INTERACT_KEY;
-//extern NSString * const TAP_COLLECT_KEY;
-extern NSString * const MATCH_INTERACT_KEY;
-extern NSString * const DETAIL_INTERACT_KEY;
 
 // Alerts Instructions
 //
-extern NSString * const APP_INTRO_INSTRUCTIONS;
 extern NSString * const INTERACT_INSTRUCTIONS;
-//extern NSString * const TAP_COLLECT_INSTRUCTIONS;
 extern NSString * const MATCH_INSTRUCTIONS;
 extern NSString * const DETAIL_INSTRUCTIONS;
 
@@ -538,8 +531,12 @@ extern float const DEF_BORDER_THRESHOLD;
 // New Colors/Defaults
 //
 //#define DARK_BLUE_BG_COLOR [UIColor colorWithRed:21.0/255.0 green:44.0/255.0 blue:87.0/255.0 alpha:1.0]
+#define LIGHT_BLUE_BG_COLOR [UIColor colorWithRed:37.0/255.0 green:78.0/255.0 blue:124.0/255.0 alpha:1.0]
 
 #define DEF_BG_COLOR      [UIColor colorWithRed:18.0/255.0 green:22.0/255.0 blue:32.0/255.0 alpha:1.0]
+
+// Hex FFF19C
+//
 #define DEF_TEXT_COLOR    [UIColor colorWithRed:255.0/255.0 green:241.0/255.0 blue:156.0/255.0 alpha:1.0]
 #define DEF_LIGHT_TEXT_COLOR [UIColor colorWithRed:255.0/255.0 green:250.0/255.0 blue:218.0/255.0 alpha:1.0]
 

@@ -171,16 +171,6 @@
     //[self.view addSubview:_updateLabel];
     //[self startSpinner];
     
-    // Welcome alert
-    //
-    BOOL appIntroAlert = [_userDefaults boolForKey:APP_INTRO_KEY];
-    if ([_userDefaults objectForKey:APP_INTRO_KEY] == nil || appIntroAlert == TRUE) {
-       UIAlertController *alert = [AlertUtils createOkAlert:@"Welcome to RGButterfly" message:APP_INTRO_INSTRUCTIONS];
-       [self presentViewController:alert animated:YES completion:nil];
-
-       [_userDefaults setBool:FALSE forKey:APP_INTRO_KEY];
-    }
-    
     // Case 1: Starting with clean slate or reset content & settings, this can be done without user prompt
     //
     if ([_userDefaults objectForKey:DB_RESTORE_KEY] == nil) {

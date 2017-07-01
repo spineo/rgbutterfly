@@ -31,6 +31,25 @@
     return myAlertController;
 }
 
+// Replace with UIAlertController (see 'takePhoto' example in 'ViewController')
+//
++ (UIAlertController *)createInfoAlert:(NSString *)title message:(NSString *)message {
+
+    UIAlertController *myAlertController = [UIAlertController
+                        alertControllerWithTitle:title message:message
+                        preferredStyle:UIAlertControllerStyleAlert];
+
+    
+    UIAlertAction* dismissButton = [UIAlertAction
+                               actionWithTitle:@"Dismiss"
+                               style:UIAlertActionStyleDefault
+                               handler:nil];
+    
+    [myAlertController addAction:dismissButton];
+        
+    return myAlertController;
+}
+
 + (UIAlertController *)createNoShowAlert:(NSString *)title message:(NSString *)message key:(NSString *)key {
     
     UIAlertController *myAlertController = [UIAlertController alertControllerWithTitle:title

@@ -13,6 +13,8 @@
 
 + (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message;
 
++ (UIAlertController *)createInfoAlert:(NSString *)title message:(NSString *)message;
+
 + (UIAlertController *)createNoShowAlert:(NSString *)title message:(NSString *)message key:(NSString *)key;
 
 + (UIAlertController *)noValueAlert;

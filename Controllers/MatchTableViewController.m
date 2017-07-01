@@ -183,8 +183,8 @@ const int MATCH_BTN_INDEX = 3;
     // Match Edit Button Alert Controller
     //
     _saveAlertController = [UIAlertController alertControllerWithTitle:@"My Match Edit"
-                                                               message:@"Please select operation"
-                                                        preferredStyle:UIAlertControllerStyleAlert];
+        message:@"Please select operation"
+        preferredStyle:UIAlertControllerStyleAlert];
     
     // Modified globally (i.e., enable/disable)
     //
@@ -204,17 +204,6 @@ const int MATCH_BTN_INDEX = 3;
     [_save setEnabled:FALSE];
     
     [self matchButtonsHide];
-    
-    // Alerts: Match Interaction
-    //
-    BOOL matchInteractAlert = [[NSUserDefaults standardUserDefaults] boolForKey:MATCH_INTERACT_KEY];
-    if (matchInteractAlert == TRUE) {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"Tips for this View" message:MATCH_INSTRUCTIONS];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:MATCH_INTERACT_KEY];
-    }
     
     // Set the Areas/Match button properties
     //
@@ -1263,5 +1252,12 @@ const int MATCH_BTN_INDEX = 3;
     }
     
 }
+
+- (IBAction)help:(id)sender {
+    UIAlertController *alert = [AlertUtils createOkAlert:@"Usage Tips:" message:MATCH_INSTRUCTIONS];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 @end

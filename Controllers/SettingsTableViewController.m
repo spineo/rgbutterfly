@@ -110,7 +110,7 @@ const int ALERTS_ROWS             = 1;
 const int LIST_TYPE_SETTINGS      = 9;
 const int LIST_TYPE_ROWS          = 1;
 
-const int SETTINGS_MAX_SECTIONS   = 9;
+const int SETTINGS_MAX_SECTIONS   = 8;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Initialization Methods
@@ -1312,14 +1312,6 @@ const int SETTINGS_MAX_SECTIONS   = 9;
             //
             [_userDefaults setValue:_mixRatiosText forKey:MIX_RATIOS_KEY];
             
-            // Alerts
-            //
-            [_userDefaults setBool:_alertsShow forKey:APP_INTRO_KEY];
-            [_userDefaults setBool:_alertsShow forKey:IMAGE_INTERACT_KEY];
-            //[_userDefaults setBool:_alertsShow forKey:TAP_COLLECT_KEY];
-            [_userDefaults setBool:_alertsShow forKey:MATCH_INTERACT_KEY];
-            [_userDefaults setBool:_alertsShow forKey:DETAIL_INTERACT_KEY];
-            [_userDefaults setBool:_alertsShow forKey:TAP_NOTE_KEY];
             
             // List type
             //

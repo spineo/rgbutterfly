@@ -41,7 +41,7 @@
 //
 @property (nonatomic, strong) UITextField *swatchName, *swatchTypeName, *subjColorName, *paintBrandName, *otherNameField, *pigmentTypeName, *bodyTypeName, *coverageName, *swatchKeyw;
 
-@property (nonatomic, strong) UIBarButtonItem *isFavoriteTextButton, *myFavoriteTextButton;
+@property (nonatomic, strong) UIBarButtonItem *isFavoriteTextButton, *myFavoriteButton;
 
 @property (nonatomic, strong) NSString *nameEntered, *keywEntered, *descEntered, *colorSelected, *namePlaceholder, *keywPlaceholder, *descPlaceholder, *otherPlaceholder, *colorName, *defNameHeader, *nameHeader, *subjColorHeader, *propsHeader, *swatchTypeHeader, *paintBrandHeader, *pigmentTypeHeader,  *bodyTypeHeader, *canvasCoverageHeader, *keywHeader, *commentsHeader, *refsHeader, *mixAssocHeader, *matchAssocHeader, *otherName, *isFavoriteText;
 
@@ -212,14 +212,11 @@ const int MY_FAVORITE_BTN_INDEX  = 3;
             DEF_TEXT_COLOR, NSForegroundColorAttributeName,
             nil] forState:UIControlStateNormal];
     
-    _myFavoriteTextButton = [self.toolbarItems objectAtIndex:MY_FAVORITE_BTN_INDEX];
-    [_myFavoriteTextButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    _myFavoriteButton = [self.toolbarItems objectAtIndex:MY_FAVORITE_BTN_INDEX];
+    [_myFavoriteButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                    DEF_MD_ITALIC_FONT, NSFontAttributeName,
                                                    DEF_TEXT_COLOR, NSForegroundColorAttributeName,
                                                    nil] forState:UIControlStateNormal];
-    
-    
-    //[_myFavoriteTextButton setWidth:HIDE_BUTTON_WIDTH];
     
     [self setIsFavoriteText];
 
@@ -431,17 +428,6 @@ const int MY_FAVORITE_BTN_INDEX  = 3;
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setFrameSizes)
         name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    // Alerts: Detail Interaction
-    //
-    BOOL detailInteractAlert = [[NSUserDefaults standardUserDefaults] boolForKey:DETAIL_INTERACT_KEY];
-    if (detailInteractAlert == TRUE) {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"Customize Here!" message:DETAIL_INSTRUCTIONS];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:DETAIL_INTERACT_KEY];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1625,7 +1611,7 @@ const int MY_FAVORITE_BTN_INDEX  = 3;
 }
 
 - (IBAction)help:(id)sender {
-    UIAlertController *alert = [AlertUtils createOkAlert:@"Customize Here!" message:DETAIL_INSTRUCTIONS];
+    UIAlertController *alert = [AlertUtils createInfoAlert:@"Usage Tips:" message:DETAIL_INSTRUCTIONS];
     
     [self presentViewController:alert animated:YES completion:nil];
 }
