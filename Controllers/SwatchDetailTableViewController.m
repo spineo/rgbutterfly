@@ -718,6 +718,7 @@ const int MY_FAVORITE_BTN_INDEX  = 3;
                 
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
                 [cell.textLabel setFont:TABLE_CELL_FONT];
+                [cell.textLabel setTextAlignment:NSTextAlignmentLeft];
                 
                 if (indexPath.row == 0) {
                     [cell.imageView setImage:[AppColorUtils renderSwatch:_refPaintSwatch cellWidth:cell.bounds.size.height cellHeight:cell.bounds.size.height context:self.context isRGB:nil]];
