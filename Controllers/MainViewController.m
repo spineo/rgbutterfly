@@ -45,7 +45,7 @@
 @property (nonatomic) CGFloat imageViewWidth, imageViewHeight, imageViewXOffset;
 @property (nonatomic) BOOL initColors, isCollapsedAll, showAll, showRefAndMix, showRefOnly, showGenOnly, showFavorites;
 @property (nonatomic, strong) UIToolbar* filterToolbar;
-@property (nonatomic, strong) UIBarButtonItem *imageLibButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton, *colorsFilterButton;
+@property (nonatomic, strong) UIBarButtonItem *backButton, *searchButton, *allLabel, *refLabel, *genLabel, *allButton, *refButton, *genButton, *colorsFilterButton;
 
 
 // Resize UISearchBar when rotated
@@ -335,11 +335,13 @@ int MIX_ASSOC_MIN_SIZE = 0;
     
     // SearchBar related
     //
-    _imageLibButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:IMAGE_LIB_NAME]
+    _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:BACK_BUTTON_IMAGE_NAME]
                                                   style:UIBarButtonItemStylePlain
                                                   target:self
-                                                  action:@selector(showPhotoOptions:)];
-    [_imageLibButton setTag:IMAGELIB_BTN_TAG];
+                                                  action:@selector(goBack:)];
+    [_backButton setTag:BACK_BTN_TAG];
+    
+    
     
     _searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:SEARCH_IMAGE_NAME]
                                                     style:UIBarButtonItemStylePlain
@@ -1649,7 +1651,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)restoreNavItems {
     [self.navigationItem setTitleView:nil];
-    [self.navigationItem setLeftBarButtonItem:_imageLibButton];
+    [self.navigationItem setLeftBarButtonItem:_backButton];
     [self.navigationItem setRightBarButtonItem:_searchButton];
 }
 
