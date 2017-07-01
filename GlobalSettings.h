@@ -375,6 +375,10 @@ extern NSString * const ALERTS_FILTER_KEY;
 
 // Alerts Instructions
 //
+extern NSString * const MAIN_COLLECT_INSTRUCTIONS;
+extern NSString * const MAIN_TOPICS_INSTRUCTIONS;
+extern NSString * const MAIN_LIST_INSTRUCTIONS;
+extern NSString * const MAIN_GROUP_INSTRUCTIONS;
 extern NSString * const INTERACT_INSTRUCTIONS;
 extern NSString * const MATCH_INSTRUCTIONS;
 extern NSString * const DETAIL_INSTRUCTIONS;

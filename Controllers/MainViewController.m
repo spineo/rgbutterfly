@@ -332,7 +332,6 @@ int MIX_ASSOC_MIN_SIZE = 0;
     _genTypeId       = [[_paintSwatchTypes valueForKey:@"Generic"] intValue];
     _genPaintTypeId  = [[_paintSwatchTypes valueForKey:@"GenericPaint"] intValue];
 
-    
     // SearchBar related
     //
     _backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:BACK_BUTTON_IMAGE_NAME]
@@ -453,7 +452,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
 
 - (void)loadData {
     [_searchButton setAction:@selector(search)];
-
+ 
     if ([_listingType isEqualToString:MIX_LIST_TYPE]) {
         [_searchButton setImage:_searchImage];
         [_searchButton setEnabled:TRUE];
@@ -480,7 +479,7 @@ int MIX_ASSOC_MIN_SIZE = 0;
         [_searchButton setImage:_downArrowImage];
         [_searchButton setAction:@selector(expandAllSections)];
         
-        [self setTitle:@"Colors Groups"];
+        [self setTitle:@"Color Groups"];
         
         [self loadColorsData];
     } else {
@@ -1132,13 +1131,14 @@ int MIX_ASSOC_MIN_SIZE = 0;
         NSRegularExpression *regex = [NSRegularExpression
                                       regularExpressionWithPattern:@"^- Include Mix .*"
                                       options:NSRegularExpressionCaseInsensitive error:&error];
-        NSRange searchedRange = NSMakeRange(0, [mix_assoc_name length]);
-        
         if(error != nil) {
             NSLog(@"Error: %@", error);
             
         } else {
+            NSRange searchedRange = NSMakeRange(0, [mix_assoc_name length]);
             NSArray *matches = [regex matchesInString:mix_assoc_name options:NSMatchingAnchored range:searchedRange];
+
+            
             if ([matches count] > 0) {
                 PaintSwatches *ref = [[self.mixColorArray objectAtIndex:indexPath.row] objectAtIndex:0];
                 PaintSwatches *mix = [[self.mixColorArray objectAtIndex:indexPath.row] objectAtIndex:1];
@@ -1653,6 +1653,26 @@ int MIX_ASSOC_MIN_SIZE = 0;
     [self.navigationItem setTitleView:nil];
     [self.navigationItem setLeftBarButtonItem:_backButton];
     [self.navigationItem setRightBarButtonItem:_searchButton];
+}
+
+- (IBAction)help:(id)sender {
+    NSString *message;
+    if ([_listingType isEqualToString:MATCH_LIST_TYPE] || [_listingType isEqualToString:MIX_LIST_TYPE]) {
+        message = MAIN_COLLECT_INSTRUCTIONS;
+        
+    } else if ([_listingType isEqualToString:KEYWORDS_TYPE]) {
+        message = MAIN_TOPICS_INSTRUCTIONS;
+
+    } else if ([_listingType isEqualToString:FULL_LISTING_TYPE]) {
+        message = MAIN_LIST_INSTRUCTIONS;
+        
+    } else if ([_listingType isEqualToString:COLORS_TYPE]) {
+        message = MAIN_GROUP_INSTRUCTIONS;
+        
+    }
+    UIAlertController *alert = [AlertUtils createInfoAlert:@"Usage Tips:" message:message];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

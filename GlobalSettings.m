@@ -370,9 +370,13 @@ NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Alerts Instructions
 //
+NSString * const MAIN_COLLECT_INSTRUCTIONS = @"Click on any row to view the details. Note that search words assume start of the line so you might try adding the prefix '*' to expand the search.";
+NSString * const MAIN_TOPICS_INSTRUCTIONS = @"Topics that you add in the detailed view show up here. You can associate multiple topics with a color and a topic can be associated with multiple colors.";
+NSString * const MAIN_LIST_INSTRUCTIONS = @"This view provides the quickest access to the thousands of colors and your list of favorites. Use the filter, search, and/or alphabet index to narrow down the list!";
+NSString * const MAIN_GROUP_INSTRUCTIONS = @"This view provides a subjective color-wheel-like grouping of colors. The detailed view allows you to change the default selection associated with any of the colors.";
 NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match association (tap on that same area to remove it). Tap on any of the bottom  rows to view the details.";
 NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables changing matching method).";
-NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group.";
+NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group. The star icon bottom-right gets you to your favorites listing.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization

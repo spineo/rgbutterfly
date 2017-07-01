@@ -64,6 +64,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem tag="103" systemItem="flexibleSpace" id="Sqc-0s-vf4"/>
+                        <barButtonItem image="Help-25" id="1wQ-M7-LUy">
+                            <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="help:" destination="BYZ-38-t0r" id="EH5-wr-6eJ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem tag="58" image="settings" id="wxq-6u-GJ7">
                             <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -1296,12 +1302,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZPZ-Du-pkL"/>
         <segue reference="mRe-f7-5yG"/>
-        <segue reference="cln-aA-aih"/>
-        <segue reference="Omc-kQ-4iW"/>
-        <segue reference="Szt-18-Btg"/>
+        <segue reference="aqc-zq-dwj"/>
+        <segue reference="9H9-9R-KDD"/>
+        <segue reference="7bF-uJ-b3u"/>
+        <segue reference="hK8-5n-amq"/>
         <segue reference="Hgd-pl-TnP"/>
         <segue reference="clT-9D-BBI"/>
-        <segue reference="TM9-cr-8aw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

@@ -1604,7 +1604,7 @@ const int MY_FAVORITE_BTN_INDEX  = 3;
     if ((_isFavorite == TRUE) || ([ManagedObjectUtils fetchIsFavoriteCount:self.context] > 0)) {
         [self performSegueWithIdentifier:@"DetailToFavoritesSegue" sender:self];
     } else {
-        UIAlertController *alert = [AlertUtils createOkAlert:@"My Favorites Empty!" message:@"You currently don't have any favorites saved"];
+        UIAlertController *alert = [AlertUtils createOkAlert:@"My Favorites is Empty!" message:@"You currently don't have any favorites saved. Try adding this color."];
         [self presentViewController:alert animated:YES completion:nil];
     }
 
