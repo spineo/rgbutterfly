@@ -28,9 +28,9 @@
 
 // Buttons
 //
-@property (nonatomic, strong) UIButton *matchButton, *exploreButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *aboutButton, *settingsButton;
-@property (nonatomic, strong) UILabel *matchLabel, *exploreLabel, *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
-@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight;
+@property (nonatomic, strong) UIButton *matchButton, *matchSubButton, *exploreButton, *exploreSubButton, *takePhotoButton, *myPhotosButton, *topicsButton, *collectButton, *listButton, *matchedButton, *groupsButton, *aboutButton, *settingsButton;
+@property (nonatomic, strong) UILabel *takePhotoLabel, *myPhotosLabel, *topicsLabel, *collectLabel, *listLabel, *matchedLabel, *groupsLabel;
+@property (nonatomic) CGFloat viewWidth, viewHeight, xCenter, ythird, xOffset, yOffset, exploreYOffset, width, height, labelWidth, labelXOffset, buttonWidth, buttonHeight, subButtonWidth, subButtonXOffset;
 
 // Collection types
 //
@@ -65,7 +65,7 @@
     // Match Colors
     //
     _matchButton      = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
-    _matchLabel       = (UILabel *)[self.view viewWithTag:MATCH_LABEL_TAG];
+    _matchSubButton       = (UIButton *)[self.view viewWithTag:MATCH_LABEL_TAG];
     _takePhotoButton  = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
     _takePhotoLabel   = (UILabel *)[self.view viewWithTag:TAKE_LABEL_TAG];
     _myPhotosButton   = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];
@@ -74,7 +74,7 @@
     // Explore Colors
     //
     _exploreButton    = (UIButton *)[self.view viewWithTag:EXPLORE_BTN_TAG];
-    _exploreLabel     = (UILabel *)[self.view viewWithTag:EXPLORE_LABEL_TAG];
+    _exploreSubButton     = (UIButton *)[self.view viewWithTag:EXPLORE_LABEL_TAG];
     _topicsButton     = (UIButton *)[self.view viewWithTag:TOPICS_BTN_TAG];
     _topicsLabel      = (UILabel *)[self.view viewWithTag:TOPICS_LABEL_TAG];
     _collectButton    = (UIButton *)[self.view viewWithTag:COLLECT_BTN_TAG];
@@ -332,7 +332,10 @@
     _buttonHeight = _matchButton.bounds.size.height;
     _xOffset     = _xCenter - (_buttonWidth / 2.0);
     [_matchButton setFrame:CGRectMake(_xOffset, _yOffset, _buttonWidth, _buttonHeight)];
-    _matchLabel = [self resetLabel:_matchLabel xOffset:_xOffset yOffset:_yOffset+_buttonHeight width:_buttonWidth];
+    
+    _subButtonWidth = _matchSubButton.bounds.size.width;
+    _subButtonXOffset = _xCenter - (_subButtonWidth / 2.0);
+    [_matchSubButton setFrame:CGRectMake(_subButtonXOffset, _yOffset + _buttonHeight, _subButtonWidth, _matchSubButton.bounds.size.height)];
     
     _xOffset = _xCenter - (_width * 1.33);
     [_takePhotoButton setFrame:CGRectMake(_xOffset, _yOffset, _width, _height)];
@@ -351,7 +354,10 @@
     _buttonHeight = _exploreButton.bounds.size.height;
     _xOffset     = _xCenter - (_buttonWidth / 2.0);
     [_exploreButton setFrame:CGRectMake(_xOffset, _exploreYOffset, _buttonWidth, _buttonHeight)];
-    _exploreLabel = [self resetLabel:_exploreLabel xOffset:_xOffset yOffset:_exploreYOffset+_buttonHeight width:_buttonWidth];
+
+    _subButtonWidth = _exploreSubButton.bounds.size.width;
+    _subButtonXOffset = _xCenter - (_subButtonWidth / 2.0);
+    [_exploreSubButton setFrame:CGRectMake(_subButtonXOffset, _exploreYOffset + _buttonHeight, _subButtonWidth, _exploreSubButton.bounds.size.height)];
     
     _xOffset = _xCenter - (_width * 2.0);
     [_topicsButton setFrame:CGRectMake(_xOffset, exploreButtonsYOffset, _width, _height)];
@@ -410,7 +416,7 @@
     // Change  buttons visibility
     //
     [_matchButton setAlpha:1.0];
-    [_matchLabel setAlpha:1.0];
+    [_matchSubButton setAlpha:1.0];
     [_takePhotoButton setAlpha:0.0];
     [_takePhotoLabel setAlpha:0.0];
     [_myPhotosButton setAlpha:0.0];
@@ -421,7 +427,7 @@
     // Change buttons visibility
     //
     [_exploreButton setAlpha:1.0];
-    [_exploreLabel setAlpha:1.0];
+    [_exploreSubButton setAlpha:1.0];
     [_topicsButton setAlpha:0.0];
     [_topicsLabel setAlpha:0.0];
     [_collectButton setAlpha:0.0];
@@ -453,7 +459,7 @@
 
 - (IBAction)matchColors:(id)sender {
     [_matchButton setAlpha:0.0];
-    [_matchLabel setAlpha:0.0];
+    [_matchSubButton setAlpha:0.0];
     [_takePhotoButton setAlpha:1.0];
     [_takePhotoLabel setAlpha:1.0];
     [_myPhotosButton setAlpha:1.0];
@@ -481,7 +487,7 @@
 
 - (IBAction)exploreColors:(id)sender {
     [_exploreButton setAlpha:0.0];
-    [_exploreLabel setAlpha:0.0];
+    [_exploreSubButton setAlpha:0.0];
     [_topicsButton setAlpha:1.0];
     [_topicsLabel setAlpha:1.0];
     [_collectButton setAlpha:1.0];
