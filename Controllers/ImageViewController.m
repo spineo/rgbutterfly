@@ -1817,14 +1817,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     } else {
         _compPaintSwatches = [ManagedObjectUtils getManualOverrideSwatches:refObj tapIndex:tapIndex matchAssociation:_matchAssociation context:self.context];
     }
-    
-//    while ([_compPaintSwatches count] > _maxMatchNum) {
-//        [_compPaintSwatches removeLastObject];
-//    }
-
-//    while ([_compPaintSwatches count] < _maxMatchNum) {
-//        [self addTableRows];
-//    }
 
     while (tapSection < [_tapNumberArray count]) {
         [_tapNumberArray removeLastObject];
@@ -1838,23 +1830,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
     
 }
-
-//- (NSMutableArray *)getManualOverrideSwatches:(PaintSwatches *)refObj tapIndex:(int)tapIndex {
-//    NSArray *tapAreaObjects = [ManagedObjectUtils queryTapAreas:_matchAssociation.objectID context:self.context];
-//    TapArea *tapArea = [tapAreaObjects objectAtIndex:tapIndex];
-//    NSArray *tapAreaSwatches = [tapArea.tap_area_swatch allObjects];
-//    int maxMatchNum = (int)[tapAreaSwatches count];
-//    
-//    NSMutableArray *tmpSwatches = [[NSMutableArray alloc] init];
-//    [tmpSwatches addObject:refObj];
-//    for (int i=0; i<maxMatchNum; i++) {
-//        TapAreaSwatch *tapAreaSwatch = [tapAreaSwatches objectAtIndex:i];
-//        PaintSwatches *paintSwatch   = (PaintSwatches *)[tapAreaSwatch paint_swatch];
-//        [tmpSwatches addObject:paintSwatch];
-//    }
-//    
-//    return [tmpSwatches mutableCopy];
-//}
 
 -(NSString *)getTitle {
 
