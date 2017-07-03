@@ -40,6 +40,7 @@
 
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
+@property (nonatomic, strong) UIImageView *magnifyImageView;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) NSString *assocName, *matchKeyw, *matchDesc;
@@ -260,15 +261,58 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [self setRectLabel:SHAPE_RECT_VALUE];
     [self setCircleLabel:SHAPE_CIRCLE_VALUE];
 
+    // Temp
+    //
+    CGSize viewSize     = _imageView.bounds.size;
+    
+    CGFloat imageWidth  = _selectedImage.size.width;
+    CGFloat imageHeight = _selectedImage.size.height;
+    
+    CGFloat viewWidth  = _imageScrollView.bounds.size.width;
+    CGFloat viewHeight = _imageScrollView.bounds.size.height;
+    
+    CGFloat widthRatio  = viewWidth  / imageWidth;
+    CGFloat heightRatio = viewHeight / imageHeight;
+    
+    if (widthRatio >= heightRatio) {
+        viewWidth = imageWidth * heightRatio;
+    } else {
+        viewHeight = imageHeight * widthRatio;
+    }
+    
+    CGSize newViewSize = CGSizeMake(viewWidth, viewHeight);
+    
+    _selectedImage = [ColorUtils resizeImage:_selectedImage imageSize:newViewSize];
+    
+    imageWidth  = _selectedImage.size.width;
+    imageHeight = _selectedImage.size.height;
     
     // Add the selected image
     //
     [_imageView setImage:_selectedImage];
     [_imageView setUserInteractionEnabled:YES];
-    [_imageView setContentMode:UIViewContentModeScaleToFill];
-    [_imageScrollView setScrollEnabled:YES];
-    [_imageScrollView setClipsToBounds:YES];
-    [_imageScrollView setContentSize:_selectedImage.size];
+
+    //[_imageView setContentMode:UIViewContentModeScaleToFill];
+    //[_imageView setContentMode:UIViewContentModeScaleAspectFit];
+    
+    //[_imageScrollView setScrollEnabled:YES];
+    //[_imageScrollView setClipsToBounds:YES];
+    
+    //[_imageView setFrame:CGRectMake((scrollViewWidth - viewWidth) / DEF_X_OFFSET_DIVIDER, DEF_Y_OFFSET, viewWidth, viewHeight)];
+    
+    //[_imageScrollView setContentSize:_selectedImage.size];
+    //[_imageScrollView setContentSize:_imageView.bounds.size];
+
+    
+    //[_imageView setCenter:_imageScrollView.center];
+    
+    // Initialize the magnifier
+    //
+    _magnifyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _shapeLength * 2, _shapeLength * 2)];
+    [_magnifyImageView setUserInteractionEnabled:NO];
+    [_imageView addSubview:_magnifyImageView];
+
+    
     [_imageScrollView setDelegate:self];
 
     
@@ -304,8 +348,9 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     // Pan gesture recognizer
     //
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveTapArea:)];
-    //[_imageView addGestureRecognizer:_panGestureRecognizer];
-    _dragAreaEnabled = FALSE;
+    [_imageView addGestureRecognizer:_panGestureRecognizer];
+    //_dragAreaEnabled = FALSE;
+    _dragAreaEnabled = TRUE;
 
     
     // Hide the "Match" and arrow buttons by default
@@ -689,6 +734,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 #pragma mark - Scrolling and Action Selection Methods
 
 - (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    
     return _imageView;
 }
 
@@ -792,6 +838,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             [_imageTableView setHidden:NO];
             
             [_imageScrollView setFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, height / DEF_Y_OFFSET_DIVIDER)];
+            [_imageView setCenter:_imageScrollView.center];
             [_imageTableView setFrame:CGRectMake(DEF_X_OFFSET, height / DEF_Y_OFFSET_DIVIDER, width, (height / DEF_Y_OFFSET_DIVIDER)  - TABLEVIEW_BOTTOM_OFFSET)];
             
             [_imageScrollView setNeedsDisplay];
@@ -999,21 +1046,19 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (gesture.state == UIGestureRecognizerStateBegan) {
         _dragStartPoint  = touchPoint;
         _dragChangePoint = _dragStartPoint;
+        [_magnifyImageView setImage:nil];
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         _dragEndPoint = touchPoint;
-
-        [self setNavTitle:@""];
-        [self setViewBackgroundColor:_dragEndPoint view:self.navigationItem.titleView];
+        [self magnifyShape];
  
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        _dragAreaEnabled = FALSE;
+        //_dragAreaEnabled = FALSE;
         _dragEndPoint = touchPoint;
-        [self dragShape];
         
-        [_imageView removeGestureRecognizer:_panGestureRecognizer];
-        [self setNavTitle:[self getTitle]];
-        [self.navigationItem.titleView setBackgroundColor:CLEAR_COLOR];
+        [_magnifyImageView setImage:nil];
+        
+        [self dragShape];
     }
     
     if ([_viewType isEqualToString:MATCH_TYPE]) {
@@ -1151,9 +1196,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             
-            if (_dragAreaEnabled == FALSE && [self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
-                UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please Delete First the Destination Tap Area."];
-                [self presentViewController:myAlert animated:YES completion:nil];
+            //if (_dragAreaEnabled == FALSE && [self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
+            if ([self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
+                //UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please Delete First the Destination Tap Area."];
+                //[self presentViewController:myAlert animated:YES completion:nil];
                 
                 return FALSE;
             }
@@ -1166,7 +1212,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             
             [newSwatchObj setCoord_pt:NSStringFromCGPoint(_dragEndPoint)];
 
-            
             // Set the RGB and HSB valuetf
             //
             [self setColorValues:_dragEndPoint paintSwatch:newSwatchObj];
@@ -1198,6 +1243,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     
     return TRUE;
+}
+
+- (void)magnifyShape {
+    CGFloat xpt= _dragEndPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+    CGFloat ypt= _dragEndPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
+    
+    UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+
+    [_magnifyImageView setFrame:CGRectMake(xpt - 25.0, ypt - 110.0, 100.0, 100.0)];
+    
+    [_magnifyImageView setImage:imageThumb];
 }
 
 
@@ -1715,8 +1771,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [swatchImageView.layer setCornerRadius:DEF_CORNER_RADIUS];
     [swatchImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     
-    [swatchImageView setContentMode: UIViewContentModeScaleAspectFit];
-    [swatchImageView setClipsToBounds: YES];
+    [swatchImageView setContentMode:UIViewContentModeScaleAspectFit];
+    [swatchImageView setClipsToBounds:YES];
     [swatchImageView setFrame:CGRectMake(DEF_TABLE_X_OFFSET + DEF_FIELD_PADDING, DEF_Y_OFFSET, DEF_CELL_HEIGHT, DEF_CELL_HEIGHT)];
     
     cell.backgroundView = swatchImageView;

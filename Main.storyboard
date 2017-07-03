@@ -136,10 +136,10 @@
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="204" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yk1-Ym-ytt">
-                                <rect key="frame" x="0.0" y="78" width="360" height="286"/>
+                                <rect key="frame" x="6.1587301587319416" y="78" width="360.00000000000045" height="286"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" tag="205" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-jk-Bwe">
-                                        <rect key="frame" x="0.0" y="10" width="340" height="266"/>
+                                    <imageView userInteractionEnabled="NO" tag="205" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5BL-jk-Bwe">
+                                        <rect key="frame" x="9.6190476190495247" y="10" width="339.99999999999955" height="266"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
@@ -1392,9 +1392,9 @@
         <segue reference="9ia-sc-QgB"/>
         <segue reference="clT-9D-BBI"/>
         <segue reference="TM9-cr-8aw"/>
-        <segue reference="xj5-pH-aLq"/>
-        <segue reference="aqc-zq-dwj"/>
-        <segue reference="9H9-9R-KDD"/>
+        <segue reference="Omc-kQ-4iW"/>
+        <segue reference="cln-aA-aih"/>
+        <segue reference="Szt-18-Btg"/>
         <segue reference="Hgd-pl-TnP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.99829864499999998" green="0.91976481170000002" blue="0.75496561500000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
