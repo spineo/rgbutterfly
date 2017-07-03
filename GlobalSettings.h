@@ -208,6 +208,10 @@ extern CGFloat const HIDE_BUTTON_WIDTH;
 extern CGFloat const DECR_BUTTON_WIDTH;
 extern CGFloat const SHOW_BUTTON_WIDTH;
 
+// Magnifier width
+//
+extern CGFloat const MAGNIFIER_WIDTH;
+
 // Image Actions
 //
 extern int const TAKE_PHOTO_ACTION;

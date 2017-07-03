@@ -1246,12 +1246,43 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)magnifyShape {
-    CGFloat xpt= _dragEndPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
-    CGFloat ypt= _dragEndPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
+    CGFloat offset = _shapeLength / DEF_X_OFFSET_DIVIDER;
+    CGFloat xpt    = _dragEndPoint.x - offset;
+    CGFloat ypt    = _dragEndPoint.y - offset;
     
     UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+    
+    CGFloat xOffset = xpt - (MAGNIFIER_WIDTH * 0.25);
+    CGFloat yOffset = ypt - (MAGNIFIER_WIDTH * 1.1);
+    
+    CGFloat imageWidth  = _selectedImage.size.width;
+    CGFloat imageHeight = _selectedImage.size.height;
+    
+    CGFloat xLimit  = imageWidth  - MAGNIFIER_WIDTH;
+    CGFloat yOrigin = DEF_Y_OFFSET;
+    CGFloat xOrigin = DEF_X_OFFSET;
+    CGFloat yLimit  = imageHeight - MAGNIFIER_WIDTH;
+    
+    if ((xOffset > xLimit) && (yOffset < yOrigin)) {
+        xOffset = xOffset - MAGNIFIER_WIDTH;
+        yOffset = yOrigin;
+        
+    } else if (((xOffset - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER)) < xOrigin) && (yOffset < yOrigin)) {
+        xOffset = xOffset + (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER);
+        yOffset = yOrigin;
+        
+    } else if (xOffset > xLimit) {
+        xOffset = xLimit;
+        
+    } else if (yOffset < yOrigin) {
+        xOffset = xOffset - MAGNIFIER_WIDTH;
+        yOffset = yOrigin;
 
-    [_magnifyImageView setFrame:CGRectMake(xpt - 25.0, ypt - 110.0, 100.0, 100.0)];
+    } else if ((xOffset - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER)) < xOrigin) {
+        xOffset = xOffset + (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER);
+    }
+    
+    [_magnifyImageView setFrame:CGRectMake(xOffset, yOffset, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
     
     [_magnifyImageView setImage:imageThumb];
 }
