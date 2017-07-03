@@ -1256,19 +1256,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     CGFloat yOffset = ypt - (MAGNIFIER_WIDTH * 1.1);
     
     CGFloat imageWidth  = _selectedImage.size.width;
-    CGFloat imageHeight = _selectedImage.size.height;
     
     CGFloat xLimit  = imageWidth  - MAGNIFIER_WIDTH;
     CGFloat yOrigin = DEF_Y_OFFSET;
     CGFloat xOrigin = DEF_X_OFFSET;
-    CGFloat yLimit  = imageHeight - MAGNIFIER_WIDTH;
     
     if ((xOffset > xLimit) && (yOffset < yOrigin)) {
         xOffset = xOffset - MAGNIFIER_WIDTH;
         yOffset = yOrigin;
         
-    } else if (((xOffset - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER)) < xOrigin) && (yOffset < yOrigin)) {
-        xOffset = xOffset + (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER);
+    } else if (((xOffset - MAGNIFIER_WIDTH) < xOrigin) && (yOffset < yOrigin)) {
+        xOffset = xOffset + MAGNIFIER_WIDTH;
         yOffset = yOrigin;
         
     } else if (xOffset > xLimit) {
@@ -1278,8 +1276,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         xOffset = xOffset - MAGNIFIER_WIDTH;
         yOffset = yOrigin;
 
-    } else if ((xOffset - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER)) < xOrigin) {
-        xOffset = xOffset + (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER);
+    } else if ((xOffset - (MAGNIFIER_WIDTH * 0.25)) < xOrigin) {
+        xOffset = xOffset + (MAGNIFIER_WIDTH * 0.25);
     }
     
     [_magnifyImageView setFrame:CGRectMake(xOffset, yOffset, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
