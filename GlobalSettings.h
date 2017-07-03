@@ -211,6 +211,8 @@ extern CGFloat const SHOW_BUTTON_WIDTH;
 // Magnifier width
 //
 extern CGFloat const MAGNIFIER_WIDTH;
+extern CGFloat const MAGNIFIER_RADIUS;;
+extern CGFloat const MAGNIFIER_BORDER;
 
 // Image Actions
 //

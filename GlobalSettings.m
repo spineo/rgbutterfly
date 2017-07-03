@@ -205,6 +205,8 @@ CGFloat const SHOW_BUTTON_WIDTH     = 20.0;
 // Magnifier width
 //
 CGFloat const MAGNIFIER_WIDTH       = 100.0;
+CGFloat const MAGNIFIER_RADIUS      = 50.0;
+CGFloat const MAGNIFIER_BORDER      = 2.0;
 
 // Image Actions
 //

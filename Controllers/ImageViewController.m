@@ -40,7 +40,7 @@
 
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
-@property (nonatomic, strong) UIImageView *magnifyImageView;
+@property (nonatomic, strong) UIImageView *magnifierImageView;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) NSString *assocName, *matchKeyw, *matchDesc;
@@ -308,9 +308,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Initialize the magnifier
     //
-    _magnifyImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _shapeLength * 2, _shapeLength * 2)];
-    [_magnifyImageView setUserInteractionEnabled:NO];
-    [_imageView addSubview:_magnifyImageView];
+    _magnifierImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _shapeLength * 2, _shapeLength * 2)];
+    [_magnifierImageView setUserInteractionEnabled:NO];
+    [_magnifierImageView.layer setMasksToBounds:YES];
+    [_magnifierImageView.layer setCornerRadius:MAGNIFIER_RADIUS];
+    [_imageView addSubview:_magnifierImageView];
 
     
     [_imageScrollView setDelegate:self];
@@ -1046,7 +1048,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if (gesture.state == UIGestureRecognizerStateBegan) {
         _dragStartPoint  = touchPoint;
         _dragChangePoint = _dragStartPoint;
-        [_magnifyImageView setImage:nil];
+        [_magnifierImageView setImage:nil];
+        [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         _dragEndPoint = touchPoint;
@@ -1056,7 +1059,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         //_dragAreaEnabled = FALSE;
         _dragEndPoint = touchPoint;
         
-        [_magnifyImageView setImage:nil];
+        [_magnifierImageView setImage:nil];
+        [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
         
         [self dragShape];
     }
@@ -1246,11 +1250,15 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)magnifyShape {
+    [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
+    
     CGFloat offset = _shapeLength / DEF_X_OFFSET_DIVIDER;
     CGFloat xpt    = _dragEndPoint.x - offset;
     CGFloat ypt    = _dragEndPoint.y - offset;
     
-    UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+    UIImage *tempImage = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
+    
+    //UIImage *imageThumb = [self imageWithCrossHairs:tempImage rectSize:tempImage.size xPoint:_shapeLength / 2.0 yPoint:_shapeLength / 2.0];
     
     CGFloat xOffset = xpt - (MAGNIFIER_WIDTH * 0.25);
     CGFloat yOffset = ypt - (MAGNIFIER_WIDTH * 1.1);
@@ -1261,28 +1269,44 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     CGFloat yOrigin = DEF_Y_OFFSET;
     CGFloat xOrigin = DEF_X_OFFSET;
     
+    // Top-right corner
+    //
     if ((xOffset > xLimit) && (yOffset < yOrigin)) {
-        xOffset = xOffset - MAGNIFIER_WIDTH;
-        yOffset = yOrigin;
-        
+        xOffset = xOffset - (MAGNIFIER_WIDTH * 0.75);
+        yOffset = yOrigin - (MAGNIFIER_WIDTH * 0.25);
+    
+    // Top-left corner
+    //
     } else if (((xOffset - MAGNIFIER_WIDTH) < xOrigin) && (yOffset < yOrigin)) {
         xOffset = xOffset + MAGNIFIER_WIDTH;
         yOffset = yOrigin;
         
-    } else if (xOffset > xLimit) {
-        xOffset = xLimit;
-        
+    // Top edge
+    //
     } else if (yOffset < yOrigin) {
         xOffset = xOffset - MAGNIFIER_WIDTH;
-        yOffset = yOrigin;
+        yOffset = yOrigin - (MAGNIFIER_WIDTH * 0.25);
+    
+    // Right edge
+    //
+    } else if (xOffset > xLimit) {
+        xOffset = xLimit;
 
+    // Left edge
+    //
     } else if ((xOffset - (MAGNIFIER_WIDTH * 0.25)) < xOrigin) {
         xOffset = xOffset + (MAGNIFIER_WIDTH * 0.25);
     }
     
-    [_magnifyImageView setFrame:CGRectMake(xOffset, yOffset, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
+    [_magnifierImageView setFrame:CGRectMake(xOffset, yOffset, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
+    [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
+    [_magnifierImageView.layer setBorderWidth:MAGNIFIER_BORDER];
+
+    [_magnifierImageView setImage:tempImage];
     
-    [_magnifyImageView setImage:imageThumb];
+    //UIImage *imageThumb = [self imageWithCrossHairs:_magnifierImageView.image rectSize:_magnifierImageView.bounds.size xPoint:_magnifierImageView.center.x yPoint:_magnifierImageView.center.y];
+    
+    //[_magnifierImageView setImage:imageThumb];
 }
 
 
@@ -1574,6 +1598,50 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
     
     [view setBackgroundColor:backgroundColor];
+}
+
+// Draw cross-hairs
+//
+- (UIImage*)imageWithCrossHairs:(UIImage*)image rectSize:(CGSize)size xPoint:(CGFloat)xPoint yPoint:(CGFloat)yPoint {
+    
+    // Begin a graphics context of sufficient size
+    //
+    UIGraphicsBeginImageContext(size);
+    
+    
+    // draw original image into the context]
+    //
+    [image drawAtPoint:CGPointZero];
+    
+    // get the context for CoreGraphics
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(ctx, TAP_AREA_BORDER_WIDTH);
+    
+    int width  = MAGNIFIER_WIDTH * 0.2;
+    int height = MAGNIFIER_WIDTH * 0.2;
+    
+    [DARK_TEXT_COLOR setStroke];
+        
+    //CGFloat xpoint = xPoint - (_shapeLength / DEF_X_OFFSET_DIVIDER);
+    //CGFloat ypoint = yPoint - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
+    CGFloat xpoint = xPoint - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER) - width / 2.0;
+    CGFloat ypoint = yPoint - (MAGNIFIER_WIDTH / DEF_Y_OFFSET_DIVIDER) - height / 2.0;
+    
+    // make shape 5 px from border
+    //
+    CGRect rect = CGRectMake(xpoint, ypoint, width, height);
+    CGContextStrokeEllipseInRect(ctx, rect);
+    
+    // make image out of bitmap context
+    //
+    UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Free the context
+    //
+    UIGraphicsEndImageContext();
+    
+    
+    return retImage;
 }
 
 
