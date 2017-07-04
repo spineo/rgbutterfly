@@ -263,8 +263,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     // Temp
     //
-    CGSize viewSize     = _imageView.bounds.size;
-    
     CGFloat imageWidth  = _selectedImage.size.width;
     CGFloat imageHeight = _selectedImage.size.height;
     
@@ -1062,7 +1060,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         [_magnifierImageView setImage:nil];
         [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
         
-        [self dragShape];
+        // Ensure that touch points stay within bounds
+        //
+        CGFloat offset = _shapeLength * 0.15;
+        if ((_dragEndPoint.x >= offset) && (_dragEndPoint.x <= (_selectedImage.size.width - offset)) && (_dragEndPoint.y >= offset) && (_dragEndPoint.y <= (_selectedImage.size.height - offset))) {
+        
+            [self dragShape];
+        }
     }
     
     if ([_viewType isEqualToString:MATCH_TYPE]) {
@@ -1256,12 +1260,10 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     CGFloat xpt    = _dragEndPoint.x - offset;
     CGFloat ypt    = _dragEndPoint.y - offset;
     
-    UIImage *tempImage = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
-    
-    //UIImage *imageThumb = [self imageWithCrossHairs:tempImage rectSize:tempImage.size xPoint:_shapeLength / 2.0 yPoint:_shapeLength / 2.0];
+    UIImage *imageThumb = [ColorUtils cropImage:_selectedImage frame:CGRectMake(xpt, ypt, _shapeLength, _shapeLength)];
     
     CGFloat xOffset = xpt - (MAGNIFIER_WIDTH * 0.25);
-    CGFloat yOffset = ypt - (MAGNIFIER_WIDTH * 1.1);
+    CGFloat yOffset = ypt - MAGNIFIER_WIDTH;
     
     CGFloat imageWidth  = _selectedImage.size.width;
     
@@ -1299,12 +1301,26 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     }
     
     [_magnifierImageView setFrame:CGRectMake(xOffset, yOffset, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
-    [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
     [_magnifierImageView.layer setBorderWidth:MAGNIFIER_BORDER];
-
-    [_magnifierImageView setImage:tempImage];
     
-    //UIImage *imageThumb = [self imageWithCrossHairs:_magnifierImageView.image rectSize:_magnifierImageView.bounds.size xPoint:_magnifierImageView.center.x yPoint:_magnifierImageView.center.y];
+    CGSize size = CGSizeMake(MAGNIFIER_WIDTH, MAGNIFIER_WIDTH);
+    UIImage *resizedImage = [ColorUtils resizeImage:imageThumb imageSize:size];
+    
+    // Ensure that touch points stay within bounds
+    //
+    CGFloat borderOffset = _shapeLength * 0.15;
+    if ((_dragEndPoint.x >= borderOffset) && (_dragEndPoint.x <= (_selectedImage.size.width - borderOffset)) && (_dragEndPoint.y >= borderOffset) && (_dragEndPoint.y <= (_selectedImage.size.height - borderOffset))) {
+            [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
+    
+            // Add the cross hairs
+            //
+            resizedImage = [self imageWithCrossHairs:resizedImage rectSize:resizedImage.size xPoint:_magnifierImageView.center.x yPoint:_magnifierImageView.center.y];
+    } else {
+        [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
+        
+    }
+    
+    [_magnifierImageView setImage:resizedImage];
     
     //[_magnifierImageView setImage:imageThumb];
 }
@@ -1615,17 +1631,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // get the context for CoreGraphics
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, TAP_AREA_BORDER_WIDTH);
+    CGContextSetLineWidth(ctx, 2.0);
     
-    int width  = MAGNIFIER_WIDTH * 0.2;
-    int height = MAGNIFIER_WIDTH * 0.2;
+    int width  = MAGNIFIER_WIDTH * 0.08;
+    int height = MAGNIFIER_WIDTH * 0.08;
     
     [DARK_TEXT_COLOR setStroke];
         
     //CGFloat xpoint = xPoint - (_shapeLength / DEF_X_OFFSET_DIVIDER);
     //CGFloat ypoint = yPoint - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
-    CGFloat xpoint = xPoint - (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER) - width / 2.0;
-    CGFloat ypoint = yPoint - (MAGNIFIER_WIDTH / DEF_Y_OFFSET_DIVIDER) - height / 2.0;
+    CGFloat xpoint = (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER) - width / 2.0;
+    CGFloat ypoint = (MAGNIFIER_WIDTH / DEF_Y_OFFSET_DIVIDER) - height / 2.0;
     
     // make shape 5 px from border
     //
