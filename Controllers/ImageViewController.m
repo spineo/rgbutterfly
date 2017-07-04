@@ -36,11 +36,11 @@
 @interface ImageViewController ()
 
 @property (nonatomic, strong) UILabel *titleLabel, *tapNoteLabel;
-@property (nonatomic, strong) UIBarButtonItem *scrollViewUp, *scrollViewDown;
+@property (nonatomic, strong) UIBarButtonItem *editButton, *rgbImageViewButton, *scrollViewUp, *scrollViewDown;
 
 @property (nonatomic) int shapeLength, currTapSection, currSelectedSection, maxMatchNum, dbSwatchesCount, paintSwatchCount;
 @property (nonatomic, strong) UIImage *cgiImage, *upArrowImage, *downArrowImage, *referenceTappedImage;
-@property (nonatomic, strong) UIImageView *magnifierImageView;
+@property (nonatomic, strong) UIImageView *magnifierImageView, *rgbImageView;
 @property (nonatomic, strong) NSMutableArray *dbPaintSwatches, *compPaintSwatches, *collectionMatchArray, *tapNumberArray;
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) NSString *assocName, *matchKeyw, *matchDesc;
@@ -217,8 +217,8 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     UIBarButtonItem *backButton = self.navigationItem.leftBarButtonItem;
     CGFloat backButtonWidth = [backButton width];
     
-    UIBarButtonItem *editButton = self.navigationItem.rightBarButtonItem;
-    CGFloat editButtonWidth = [editButton width];
+    _editButton = self.navigationItem.rightBarButtonItem;
+    CGFloat editButtonWidth = [_editButton width];
     
     CGFloat buttonWidths  = editButtonWidth + backButtonWidth;
     CGFloat buttonOffsets = buttonWidths / DEF_X_OFFSET_DIVIDER;
@@ -306,12 +306,21 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Initialize the magnifier
     //
-    _magnifierImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, _shapeLength * 2, _shapeLength * 2)];
+    _magnifierImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, MAGNIFIER_WIDTH, MAGNIFIER_WIDTH)];
     [_magnifierImageView setUserInteractionEnabled:NO];
     [_magnifierImageView.layer setMasksToBounds:YES];
     [_magnifierImageView.layer setCornerRadius:MAGNIFIER_RADIUS];
     [_imageView addSubview:_magnifierImageView];
-
+    
+    // Initialize the RGB values view
+    //
+    CGFloat width = self.navigationItem.rightBarButtonItem.width;
+    _rgbImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, width)];
+    [_rgbImageView setUserInteractionEnabled:NO];
+    [_rgbImageView.layer setMasksToBounds:YES];
+    [_rgbImageView.layer setCornerRadius:width/2.0];
+    
+    _rgbImageViewButton = [[UIBarButtonItem alloc] initWithCustomView:_rgbImageView];
     
     [_imageScrollView setDelegate:self];
 
@@ -775,11 +784,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 }
 
 - (void)editButtonDisable {
-    [self.navigationItem.rightBarButtonItem setEnabled:FALSE];
+    [_editButton setEnabled:FALSE];
 }
 
 - (void)editButtonEnable {
-    [self.navigationItem.rightBarButtonItem setEnabled:TRUE];
+    [_editButton setEnabled:TRUE];
 }
 
 - (void)viewButtonShow {
@@ -1059,6 +1068,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         [_magnifierImageView setImage:nil];
         [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
+        [self.navigationItem setRightBarButtonItem:_editButton];
         
         // Ensure that touch points stay within bounds
         //
@@ -1067,6 +1077,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
             [self dragShape];
         }
+        
     }
     
     if ([_viewType isEqualToString:MATCH_TYPE]) {
@@ -1310,19 +1321,33 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     //
     CGFloat borderOffset = _shapeLength * 0.15;
     if ((_dragEndPoint.x >= borderOffset) && (_dragEndPoint.x <= (_selectedImage.size.width - borderOffset)) && (_dragEndPoint.y >= borderOffset) && (_dragEndPoint.y <= (_selectedImage.size.height - borderOffset))) {
-            [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
+
+        [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
     
-            // Add the cross hairs
-            //
-            resizedImage = [ColorUtils imageWithCrossHairs:resizedImage];
+        // Add the cross hairs
+        //
+        resizedImage = [ColorUtils imageWithCrossHairs:resizedImage];
+        
+        // Render the RGB values
+        //
+        [self.navigationItem setRightBarButtonItem:_rgbImageViewButton];
+        [self renderRGBValues];
+
     } else {
         [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
+        [self.navigationItem setRightBarButtonItem:_editButton];
         
     }
     
     [_magnifierImageView setImage:resizedImage];
+}
+
+- (void)renderRGBValues {
+    CGFloat width  = _rgbImageView.bounds.size.width;
+    CGFloat height = _rgbImageView.bounds.size.height;
     
-    //[_magnifierImageView setImage:imageThumb];
+    UIImage *rgbImage = [ColorUtils imageWithColor:[UIColor greenColor] objWidth:width objHeight:height];
+    [_rgbImageView setImage:rgbImage];
 }
 
 
