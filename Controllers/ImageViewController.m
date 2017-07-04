@@ -1314,7 +1314,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
             // Add the cross hairs
             //
-            resizedImage = [self imageWithCrossHairs:resizedImage rectSize:resizedImage.size xPoint:_magnifierImageView.center.x yPoint:_magnifierImageView.center.y];
+            resizedImage = [ColorUtils imageWithCrossHairs:resizedImage];
     } else {
         [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
         
@@ -1616,51 +1616,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     [view setBackgroundColor:backgroundColor];
 }
 
-// Draw cross-hairs
-//
-- (UIImage*)imageWithCrossHairs:(UIImage*)image rectSize:(CGSize)size xPoint:(CGFloat)xPoint yPoint:(CGFloat)yPoint {
-    
-    // Begin a graphics context of sufficient size
-    //
-    UIGraphicsBeginImageContext(size);
-    
-    
-    // draw original image into the context]
-    //
-    [image drawAtPoint:CGPointZero];
-    
-    // get the context for CoreGraphics
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, 2.0);
-    
-    int width  = MAGNIFIER_WIDTH * 0.08;
-    int height = MAGNIFIER_WIDTH * 0.08;
-    
-    [DARK_TEXT_COLOR setStroke];
-        
-    //CGFloat xpoint = xPoint - (_shapeLength / DEF_X_OFFSET_DIVIDER);
-    //CGFloat ypoint = yPoint - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
-    CGFloat xpoint = (MAGNIFIER_WIDTH / DEF_X_OFFSET_DIVIDER) - width / 2.0;
-    CGFloat ypoint = (MAGNIFIER_WIDTH / DEF_Y_OFFSET_DIVIDER) - height / 2.0;
-    
-    // make shape 5 px from border
-    //
-    CGRect rect = CGRectMake(xpoint, ypoint, width, height);
-    CGContextStrokeEllipseInRect(ctx, rect);
-    
-    // make image out of bitmap context
-    //
-    UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // Free the context
-    //
-    UIGraphicsEndImageContext();
-    
-    
-    return retImage;
-}
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // TableView Methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1728,10 +1683,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             if (swatch_ct != _maxMatchNum)
                 _matchNumChanged = TRUE;
         }
-
-        //NSString *match_algorithm_text = [[NSString alloc] initWithFormat:@"Method: %@, Count: %i", [_matchAlgorithms objectAtIndex:match_algorithm_id], _maxMatchNum];
-    
-        //[custCell addLabel:[FieldUtils createLabel:match_algorithm_text xOffset:DEF_TABLE_X_OFFSET yOffset:DEF_Y_OFFSET width:custCell.contentView.bounds.size.width height:DEF_LABEL_HEIGHT]];
         
         NSInteger index = custCell.collectionView.tag;
         
@@ -1746,7 +1697,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
         }
         
-        custCell.imageView.image = [ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET];
+        custCell.imageView.image = [ColorUtils imageWithCrossHairs:[ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET]];
 
         // Tag the first reference image
         //
@@ -1797,12 +1748,15 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 // Use to switch between RGB and Paint
 //
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_isRGB == FALSE) {
-        _isRGB = TRUE;
-    } else {
-        _isRGB = FALSE;
-    }
-    [_imageTableView reloadData];
+    [self performSegueWithIdentifier:@"MatchTableViewSegue" sender:self];
+// Disable this behavior (instead segue) since it's confusing
+//
+//    if (_isRGB == FALSE) {
+//        _isRGB = TRUE;
+//    } else {
+//        _isRGB = FALSE;
+//    }
+//    [_imageTableView reloadData];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
