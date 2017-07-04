@@ -401,18 +401,18 @@ NSString * const SHAPE_RECT_VALUE    = @"Rect";
 
 // Tap Area Length
 //
-const int TAP_AREA_LENGTH = 40;
+const int TAP_AREA_LENGTH = 36;
 
 // Tap Area Stepper
 //
 const int TAP_STEPPER_MIN = 32;
-const int TAP_STEPPER_MAX = 48;
+const int TAP_STEPPER_MAX = 40;
 const int TAP_STEPPER_INC = 4;
 
 // Match Num Stepper
 //
 const int MATCH_STEPPER_MIN = 5;
-const int MATCH_STEPPER_MAX = 80;
+const int MATCH_STEPPER_MAX = 60;
 const int MATCH_STEPPER_INC = 5;
 const int MATCH_STEPPER_DEF = 20;
 

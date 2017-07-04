@@ -1724,12 +1724,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
         PaintSwatches *paintSwatch = [[self.collectionMatchArray objectAtIndex:indexPath.row] objectAtIndex:0];
         
-        UIImage *image;
-        if (_isRGB == TRUE) {
-            image = [AppColorUtils renderRGB:paintSwatch cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
-        } else {
-            image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
-        }
+        UIImage *image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
         
         UIColor *lineColor;
         if ([paintSwatch.brightness floatValue] < _borderThreshold)
