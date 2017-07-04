@@ -1325,10 +1325,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     if ((_dragEndPoint.x >= borderOffset) && (_dragEndPoint.x <= (_selectedImage.size.width - borderOffset)) && (_dragEndPoint.y >= borderOffset) && (_dragEndPoint.y <= (_selectedImage.size.height - borderOffset))) {
 
         [_magnifierImageView.layer setBorderColor:[DEF_DARK_COLOR CGColor]];
-    
+        
+        UIColor *lineColor = [ColorUtils getSuggestedLineColor:_selectedImage touchPoint:(CGPoint)_dragEndPoint suggestedLightColor:LIGHT_TEXT_COLOR suggestedDarkColor:DARK_TEXT_COLOR borderThreshold:DEF_BORDER_THRESHOLD];
+        
         // Add the cross hairs
         //
-        resizedImage = [ColorUtils imageWithCrossHairs:resizedImage];
+        resizedImage = [ColorUtils imageWithCrossHairs:resizedImage sizeFraction:MAG_XHAIR_FRACTION lineColor:lineColor];
         
         // Render the RGB values
         //
@@ -1353,6 +1355,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:_dragEndPoint image:rgbCGImage];
     
     UIImage *rgbImage = [ColorUtils imageWithColor:rgbColor objWidth:width objHeight:height];
+
     [_rgbImageView setImage:rgbImage];
 }
 
@@ -1728,7 +1731,14 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
             image = [AppColorUtils renderPaint:paintSwatch.image_thumb cellWidth:DEF_CELL_HEIGHT cellHeight:DEF_CELL_HEIGHT];
         }
         
-        custCell.imageView.image = [ColorUtils imageWithCrossHairs:[ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET]];
+        UIColor *lineColor;
+        if ([paintSwatch.brightness floatValue] < _borderThreshold)
+            lineColor = LIGHT_TEXT_COLOR;
+        else
+            lineColor = DARK_TEXT_COLOR;
+            
+        
+        custCell.imageView.image = [ColorUtils imageWithCrossHairs:[ColorUtils drawTapAreaLabel:image count:tapNum attrs:nil inset:DEF_RECT_INSET] sizeFraction:MAG_THUMB_FRACTION lineColor:lineColor];
 
         // Tag the first reference image
         //

@@ -202,11 +202,13 @@ CGFloat const HIDE_BUTTON_WIDTH     = 1.0;
 CGFloat const DECR_BUTTON_WIDTH     = 20.0;
 CGFloat const SHOW_BUTTON_WIDTH     = 20.0;
 
-// Magnifier width
+// Magnifier/Crosshair width
 //
 CGFloat const MAGNIFIER_WIDTH       = 100.0;
 CGFloat const MAGNIFIER_RADIUS      = 50.0;
 CGFloat const MAGNIFIER_BORDER      = 2.0;
+CGFloat const MAG_XHAIR_FRACTION    = 0.08;
+CGFloat const MAG_THUMB_FRACTION    = 0.10;
 
 // Image Actions
 //

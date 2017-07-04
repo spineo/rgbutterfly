@@ -213,6 +213,8 @@ extern CGFloat const SHOW_BUTTON_WIDTH;
 extern CGFloat const MAGNIFIER_WIDTH;
 extern CGFloat const MAGNIFIER_RADIUS;;
 extern CGFloat const MAGNIFIER_BORDER;
+extern CGFloat const MAG_XHAIR_FRACTION;
+extern CGFloat const MAG_THUMB_FRACTION;
 
 // Image Actions
 //
