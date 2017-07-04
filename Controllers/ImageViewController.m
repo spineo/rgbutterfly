@@ -314,10 +314,12 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     
     // Initialize the RGB values view
     //
-    CGFloat width = self.navigationItem.rightBarButtonItem.width;
+    CGFloat width = self.navigationItem.rightBarButtonItem.width - DEF_BORDER_WIDTH;
     _rgbImageView = [[UIImageView alloc] initWithFrame:CGRectMake(DEF_X_OFFSET, DEF_Y_OFFSET, width, width)];
     [_rgbImageView setUserInteractionEnabled:NO];
     [_rgbImageView.layer setMasksToBounds:YES];
+    [_rgbImageView.layer setBorderWidth:DEF_BORDER_WIDTH];
+    [_rgbImageView.layer setBorderColor:[LIGHT_BORDER_COLOR CGColor]];
     [_rgbImageView.layer setCornerRadius:width/2.0];
     
     _rgbImageViewButton = [[UIBarButtonItem alloc] initWithCustomView:_rgbImageView];
@@ -1346,7 +1348,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     CGFloat width  = _rgbImageView.bounds.size.width;
     CGFloat height = _rgbImageView.bounds.size.height;
     
-    UIImage *rgbImage = [ColorUtils imageWithColor:[UIColor greenColor] objWidth:width objHeight:height];
+    UIImage *rgbCGImage = [UIImage imageWithCGImage:[_selectedImage CGImage]];
+    
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:_dragEndPoint image:rgbCGImage];
+    
+    UIImage *rgbImage = [ColorUtils imageWithColor:rgbColor objWidth:width objHeight:height];
     [_rgbImageView setImage:rgbImage];
 }
 
