@@ -216,6 +216,10 @@ extern CGFloat const MAGNIFIER_BORDER;
 extern CGFloat const MAG_XHAIR_FRACTION;
 extern CGFloat const MAG_THUMB_FRACTION;
 
+// iPhone Plus Width
+//
+extern CGFloat const IPHONE_PLUS_WIDTH;
+
 // Image Actions
 //
 extern int const TAKE_PHOTO_ACTION;

@@ -210,6 +210,10 @@ CGFloat const MAGNIFIER_BORDER      = 2.0;
 CGFloat const MAG_XHAIR_FRACTION    = 0.08;
 CGFloat const MAG_THUMB_FRACTION    = 0.10;
 
+// iPhone Plus Width
+//
+CGFloat const IPHONE_PLUS_WIDTH     = 414.0;
+
 // Image Actions
 //
 int const TAKE_PHOTO_ACTION   = 1;

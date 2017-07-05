@@ -65,7 +65,7 @@
     // Match Colors
     //
     _matchButton      = (UIButton *)[self.view viewWithTag:SUGGEST_BTN_TAG];
-    _matchSubButton       = (UIButton *)[self.view viewWithTag:MATCH_LABEL_TAG];
+    _matchSubButton   = (UIButton *)[self.view viewWithTag:MATCH_LABEL_TAG];
     _takePhotoButton  = (UIButton *)[self.view viewWithTag:TAKE_PHOTO_BTN_TAG];
     _takePhotoLabel   = (UILabel *)[self.view viewWithTag:TAKE_LABEL_TAG];
     _myPhotosButton   = (UIButton *)[self.view viewWithTag:MY_PHOTOS_BTN_TAG];

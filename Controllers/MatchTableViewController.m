@@ -332,8 +332,11 @@ const int MATCH_BTN_INDEX = 3;
     // Propagaged landscape?
     //
     CGFloat xOffset = 1.0;
-    //if (_isLandscape == TRUE)
-    //    xOffset = 5.0;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+
+    if (screenWidth >= IPHONE_PLUS_WIDTH)
+        xOffset = 5.0;
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEF_X_OFFSET + xOffset, DEF_Y_OFFSET, tableView.bounds.size.width, DEF_TABLE_HDR_HEIGHT)];
     [headerLabel setBackgroundColor:DEF_BG_COLOR];
