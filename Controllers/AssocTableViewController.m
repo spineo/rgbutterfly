@@ -392,7 +392,7 @@ const int ASSOC_SET_TAG        = 8;
 }
 
 - (void)recreateApplyButton {
-    SEL selector;
+    SEL selector = nil;
     if ([[_assocTypeName text] isEqualToString:MIX_TYPE]) {
         _applyRenameText = @"Apply Renaming with Ratios";
         selector = @selector(showMixRatiosPicker);

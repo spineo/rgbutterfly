@@ -130,7 +130,7 @@ CGFloat const DEF_LABEL_HEIGHT      = 24.0;
 
 // Tap Area
 //
-CGFloat const DEF_TAP_AREA_SIZE     = 40.0;
+CGFloat const DEF_TAP_AREA_SIZE     = 32.0;
 
 // UI TextField/TextView
 //
@@ -378,13 +378,13 @@ NSString * const TAP_NOTE_KEY        = @"TapNoteKey";
 
 // Alerts Instructions
 //
-NSString * const MAIN_COLLECT_INSTRUCTIONS = @"Click on any row to view the details. Note that search words assume start of the line so you might try adding the prefix '*' to expand the search.";
-NSString * const MAIN_TOPICS_INSTRUCTIONS = @"Topics that you add in the detailed view show up here. You can associate multiple topics with a color and a topic can be associated with multiple colors.";
-NSString * const MAIN_LIST_INSTRUCTIONS = @"This view provides the quickest access to the thousands of colors and your list of favorites. Use the filter, search, and/or alphabet index to narrow down the list!";
+NSString * const MAIN_COLLECT_INSTRUCTIONS = @"Click on any row to view the details. Note that search words assume start of the line so you might try adding the prefix '*' to broaden the results.";
+NSString * const MAIN_TOPICS_INSTRUCTIONS = @"Topics that you add in the detailed view show up here. You can associate multiple topics with a color and/or more than one color with a topic.";
+NSString * const MAIN_LIST_INSTRUCTIONS = @"This view provides the quickest access to the thousands of colors as well as your list of favorites. Use the filter, search, and/or alphabet index to narrow down the list!";
 NSString * const MAIN_GROUP_INSTRUCTIONS = @"This view provides a subjective color-wheel-like grouping of colors. The detailed view allows you to change the default selection associated with any of the colors.";
-NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match association (tap on that same area to remove it). Tap on any of the bottom  rows to view the details.";
+NSString * const INTERACT_INSTRUCTIONS = @"Tap on any area of the photo to create a match association (tap on that same area to remove it). Drag any area while using the magnifier to zero in on your color. Tap on any of the bottom rows to view the details.";
 NSString * const MATCH_INSTRUCTIONS = @"Press any row while scrolling to compare colors. Bottom arrows circle between tap areas (tapping the 'Areas' button switches to 'Match' mode which enables changing matching method).";
-NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, or change the color group. The star icon bottom-right gets you to your favorites listing.";
+NSString * const DETAIL_INSTRUCTIONS = @"Tap 'Add Favorites' to keep track of your favorite colors and 'Edit' to create/remove topics, add comments, and/or change the color group. The star icon bottom-right gets you to your favorites listing.";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Customization
@@ -401,12 +401,12 @@ NSString * const SHAPE_RECT_VALUE    = @"Rect";
 
 // Tap Area Length
 //
-const int TAP_AREA_LENGTH = 36;
+const int TAP_AREA_LENGTH = 32;
 
 // Tap Area Stepper
 //
-const int TAP_STEPPER_MIN = 32;
-const int TAP_STEPPER_MAX = 40;
+const int TAP_STEPPER_MIN = 24;
+const int TAP_STEPPER_MAX = 36;
 const int TAP_STEPPER_INC = 4;
 
 // Match Num Stepper
@@ -484,7 +484,7 @@ NSString * const STAR_ICON_NAME         = @"star-icon.png";
 //
 NSString * const ABOUT_TEXT = @"\nThe main purpose of this App is to suggest matching paint colors for areas of a photo. Please visit the RGButterfly website for more information about this App.\n\nTo get started, click on either the Match Colors or Explore Colors titles on the main view.\n\nOn most views, a help button (bottom-right question icon) can be tapped to obtain usage tips.\n\n";
 
-NSString * const ABOUT_RELEASE_FEATURES = @"Note: This initial release comes with a number of features and much of the editing functionality disabled. This was done to hopefully make the App a tad more user friendly!\n\n";
+NSString * const ABOUT_RELEASE_FEATURES = @"Note: This initial release comes with a number of features and much of the editing functionality disabled. This will hopefully help with the usability.\n\n";
 
 
 // URL is place on the 'About' Text (might want to compute the offset/length programmatically)

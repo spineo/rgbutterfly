@@ -361,7 +361,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveTapArea:)];
     [_imageView addGestureRecognizer:_panGestureRecognizer];
     //_dragAreaEnabled = FALSE;
-    _dragAreaEnabled = TRUE;
+    //_dragAreaEnabled = TRUE;
 
     
     // Hide the "Match" and arrow buttons by default
@@ -1059,13 +1059,13 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         _dragChangePoint = _dragStartPoint;
         [_magnifierImageView setImage:nil];
         [_magnifierImageView.layer setBorderColor:[CLEAR_COLOR CGColor]];
+        //_dragAreaEnabled = TRUE;
         
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         _dragEndPoint = touchPoint;
         [self magnifyShape];
  
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        //_dragAreaEnabled = FALSE;
         _dragEndPoint = touchPoint;
         
         [_magnifierImageView setImage:nil];
@@ -1079,6 +1079,7 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         
             [self dragShape];
         }
+        //_dragAreaEnabled = FALSE;
         
     }
     
@@ -1129,7 +1130,6 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
     int newCount = (int)[_paintSwatches count];
     
     if (_tapAreaSeen == 0) {
-        
         // Keep track of the tap section
         //
         _currTapSection++;
@@ -1215,12 +1215,11 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
         CGFloat xtpt= _dragStartPoint.x - (_shapeLength / DEF_X_OFFSET_DIVIDER);
         CGFloat ytpt= _dragStartPoint.y - (_shapeLength / DEF_Y_OFFSET_DIVIDER);
         
+        BOOL sameSwatch = [self isSameSwatch];
+        
         if ((abs((int)(xtpt - xpt)) <= _shapeLength) && (abs((int)(ytpt - ypt)) <= _shapeLength)) {
             
-            //if (_dragAreaEnabled == FALSE && [self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
-            if ([self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE) {
-                //UIAlertController *myAlert = [AlertUtils createOkAlert:@"Tap Area Overlap" message:@"Please Delete First the Destination Tap Area."];
-                //[self presentViewController:myAlert animated:YES completion:nil];
+            if ([self existsEndPoint:listCount paintSwatches:_paintSwatches] == TRUE && sameSwatch == FALSE) {
                 
                 return FALSE;
             }
@@ -1264,6 +1263,17 @@ CGFloat TABLEVIEW_BOTTOM_OFFSET = 100.0;
 
     
     return TRUE;
+}
+
+- (BOOL)isSameSwatch {
+    CGFloat xDiff = _dragEndPoint.x - _dragStartPoint.x;
+    CGFloat yDiff = _dragEndPoint.y - _dragStartPoint.y;
+    
+    if ((abs((int)(xDiff)) <= _shapeLength/2.0) && (abs((int)(yDiff)) <= _shapeLength/2.0))
+        return TRUE;
+    
+    return FALSE;
+    
 }
 
 - (void)magnifyShape {
